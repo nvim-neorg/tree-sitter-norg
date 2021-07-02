@@ -1,0 +1,26 @@
+==========
+Quote Test
+==========
+> This is a quote
+
+	> This is also a quote
+>Broken quote
+
+> A working quote
+> A quote that references the top quote
+
+> A quote~
+  that carries over
+
+> A~ more complex~
+  quote
+---
+
+(document
+	(quote (paragraph_segment (words)))
+	(quote (paragraph_segment (words)))
+	(paragraph_segment (words))
+	(quote (words) (quote (paragraph_segment (words))))
+	(quote (paragraph_segment (words) (trailing_modifier) (paragraph_segment (words))))
+	(quote (paragraph_segment (words) (trailing_modifier) (paragraph_segment (words))))
+)

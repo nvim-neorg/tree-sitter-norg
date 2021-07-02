@@ -1,0 +1,103 @@
+[
+  {
+    "type": "document",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "heading1",
+          "named": true
+        },
+        {
+          "type": "paragraph_segment",
+          "named": true
+        },
+        {
+          "type": "quote",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading1",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "paragraph_segment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "paragraph_segment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "paragraph_segment",
+          "named": true
+        },
+        {
+          "type": "trailing_modifier",
+          "named": true
+        },
+        {
+          "type": "words",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quote",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "paragraph_segment",
+          "named": true
+        },
+        {
+          "type": "quote",
+          "named": true
+        },
+        {
+          "type": "words",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "words",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\n\n",
+    "named": false
+  },
+  {
+    "type": "trailing_modifier",
+    "named": true
+  }
+]
