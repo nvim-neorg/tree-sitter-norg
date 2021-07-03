@@ -1,0 +1,28 @@
+========
+Headings
+========
+* This is a heading
+And some text for that heading.
+
+** Then I go into some more detail here
+   And talk about some really important things
+
+This is a new paragraph, one that has nothing bound to it.
+And this is a direct continuation~
+of that paragraph.
+
+Last paragraph
+---
+
+(document
+	(paragraph
+		(heading1 (paragraph_segment (words)))
+		(paragraph_segment (words)))
+	(paragraph
+		(heading2 (paragraph_segment (words)))
+		(paragraph_segment (words)))
+	(paragraph
+		(paragraph_segment (words))
+		(paragraph_segment (words) (trailing_modifier) (paragraph_segment (words))))
+	(paragraph (paragraph_segment (words)))
+)

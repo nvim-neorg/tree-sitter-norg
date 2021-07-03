@@ -1,6 +1,6 @@
-==========
-Quote Test
-==========
+======
+Quotes
+======
 > This is a quote
 
 	> This is also a quote
@@ -19,7 +19,7 @@ Quote Test
 (document
 	(quote (paragraph_segment (words)))
 	(quote (paragraph_segment (words)))
-	(paragraph_segment (words))
+	(paragraph (paragraph_segment (words)))
 	(quote (words) (quote (paragraph_segment (words))))
 	(quote (paragraph_segment (words) (trailing_modifier) (paragraph_segment (words))))
 	(quote (paragraph_segment (words) (trailing_modifier) (paragraph_segment (words))))

@@ -16,11 +16,11 @@
           },
           {
             "type": "SYMBOL",
-            "name": "paragraph_segment"
+            "name": "paragraph"
           },
           {
             "type": "SYMBOL",
-            "name": "heading1"
+            "name": "marker"
           }
         ]
       }
@@ -65,49 +65,207 @@
       ]
     },
     "heading1": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\*\\s+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
+    "heading2": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\*\\*\\s+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
+    "heading3": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\*\\*\\*\\s+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
+    "heading4": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\*\\*\\*\\*\\s+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
+    "unordered_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "-\\s+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
+    "marker": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\|\\s+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
+    "todo_item_done": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\-\\s+\\[\\s*x\\s*\\]\\s+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
+    "todo_item_pending": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\-\\s+\\[\\s*\\*\\s*\\]\\s+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
+    "todo_item_undone": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\-\\s+\\[\\s+\\]\\s+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
+    "paragraph": {
       "type": "PREC_LEFT",
       "value": 1,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "\\*\\s+"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "paragraph_segment"
+            "type": "REPEAT1",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "heading1"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "heading2"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "heading3"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "heading4"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "paragraph_segment"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "quote"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "marker"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "unordered_list"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "todo_item_done"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "todo_item_pending"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "todo_item_undone"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
           },
           {
             "type": "CHOICE",
             "members": [
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "paragraph_segment"
-                    }
-                  },
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "\n\n"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "_eof"
-                      }
-                    ]
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_eof"
               },
               {
-                "type": "BLANK"
+                "type": "SYMBOL",
+                "name": "_soft_paragraph_break"
               }
             ]
           }
