@@ -6,7 +6,8 @@
   	"scripts": {
 		"gen": "tree-sitter generate",
     	"test": "tree-sitter test",
-    	"parse": "tree-sitter parse"
+    	"parse": "tree-sitter parse",
+    	"clean": "rm -rf ./bindings; rm -rf ./src; rm ./binding.gyp"
   	},
   	"keywords": [
     	"neorg",
