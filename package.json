@@ -7,7 +7,7 @@
 		"gen": "tree-sitter generate",
     	"test": "tree-sitter test",
     	"parse": "tree-sitter parse",
-    	"clean": "rm -rf ./bindings; rm -rf ./src; rm ./binding.gyp"
+    	"clean": "rm -r bindings; rm -r src; rm binding.gyp"
   	},
   	"keywords": [
     	"neorg",
