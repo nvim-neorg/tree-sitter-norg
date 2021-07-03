@@ -268,7 +268,31 @@
     "named": false
   },
   {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "\\",
+    "named": false
+  },
+  {
+    "type": "^",
+    "named": false
+  },
+  {
+    "type": "_",
+    "named": false
+  },
+  {
+    "type": "`",
+    "named": false
+  },
+  {
     "type": "trailing_modifier",
     "named": true
+  },
+  {
+    "type": "|",
+    "named": false
   }
 ]

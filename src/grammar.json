@@ -7,8 +7,21 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "quote"
+            "type": "PREC",
+            "value": 2,
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "quote"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "marker"
+                }
+              ]
+            }
           },
           {
             "type": "SYMBOL",
@@ -17,10 +30,6 @@
           {
             "type": "SYMBOL",
             "name": "paragraph"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "marker"
           }
         ]
       }
@@ -272,6 +281,64 @@
         ]
       }
     },
+    "_eof": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "\u0000"
+      }
+    },
+    "_soft_paragraph_break": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "\n"
+      }
+    },
+    "_attached_modifiers": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "*"
+        },
+        {
+          "type": "STRING",
+          "value": "_"
+        },
+        {
+          "type": "STRING",
+          "value": "`"
+        },
+        {
+          "type": "STRING",
+          "value": "|"
+        },
+        {
+          "type": "STRING",
+          "value": "^"
+        }
+      ]
+    },
+    "escape_sequence": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "\\"
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "."
+          }
+        }
+      ]
+    },
     "words": {
       "type": "SEQ",
       "members": [
@@ -288,20 +355,6 @@
         }
       ]
     },
-    "_eof": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "\u0000"
-      }
-    },
-    "_soft_paragraph_break": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "\n"
-      }
-    },
     "paragraph_segment": {
       "type": "CHOICE",
       "members": [
@@ -313,50 +366,41 @@
               "name": "words"
             },
             {
-              "type": "SEQ",
+              "type": "SYMBOL",
+              "name": "trailing_modifier"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "\n"
+              }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "paragraph_segment"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "words"
+            },
+            {
+              "type": "CHOICE",
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "trailing_modifier"
-                },
-                {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "STRING",
-                    "value": "\n"
-                  }
+                  "name": "_soft_paragraph_break"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "paragraph_segment"
+                  "name": "_eof"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "words"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_soft_paragraph_break"
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "words"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_eof"
             }
           ]
         }
