@@ -6,7 +6,7 @@ module.exports = grammar({
 	],
 
   	rules: {
-    	document: $ => repeat(choice(prec(2, choice($.quote, $.marker, $.tag, $.carryover_tag)), $._soft_paragraph_break, $.paragraph)),
+    	document: $ => repeat(choice(prec(2, choice($.quote, $.marker, $.tag, $.carryover_tag, $.drawer)), $._soft_paragraph_break, $.paragraph)),
 
 		quote: $ => seq(/>\s+/, choice($.paragraph_segment, prec(1, seq($.words, $._soft_paragraph_break, $.quote)))),
 
@@ -29,7 +29,10 @@ module.exports = grammar({
 
 		carryover_tag: $ => seq(token('$'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(/\s+/, seq(choice($.tag_parameters, $._soft_paragraph_break), repeat(seq(/[\t ]+/, $.tag_parameters)), $._soft_paragraph_break)), $._soft_paragraph_break), repeat($._soft_paragraph_break), repeat1($.paragraph)), 
 
-		paragraph: $ => prec.left(1, seq(repeat1(seq(repeat(choice($.heading1, $.heading2, $.heading3, $.heading4)), prec(1, choice($.paragraph_segment, $.quote, $.marker, $.unordered_list, $.todo_item_done, $.todo_item_pending, $.todo_item_undone, $.tag)))), choice($._eof, $._soft_paragraph_break))),
+		drawer: $ => seq(/\|{2}\s+/, field("drawer_name", $.paragraph_segment), optional($.drawer_content), '||'),
+		drawer_content: $ => /.+/,
+
+		paragraph: $ => prec.left(1, seq(repeat1(seq(repeat(choice($.heading1, $.heading2, $.heading3, $.heading4)), prec(1, choice($.paragraph_segment, $.quote, $.marker, $.unordered_list, $.todo_item_done, $.todo_item_pending, $.todo_item_undone, $.tag, $.drawer)))), choice($._eof, $._soft_paragraph_break))),
 
 		_eof: $ => token.immediate('\0'),
 		_soft_paragraph_break: $ => token.immediate('\n'),
