@@ -28,7 +28,17 @@
       		"scope": "document.norg",
       		"file-types": [
         		"norg"
-      		]
+      		],
+      		"theme": {
+				"tag": "orange",
+				"error": "red",
+				"heading1": "purple",
+				"heading2": "blue",
+				"heading3": "yellow",
+				"heading4": "green",
+				"marker": "yellow",
+				"drawer": "grey"
+      		}
     	}
   	]
 }
