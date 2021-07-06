@@ -4,7 +4,7 @@
   	"description": "A TreeSitter Parser For The NFF",
   	"main": "bindings/node",
   	"scripts": {
-		"gen": "tree-sitter generate",
+		"gen": "tree-sitter generate && node-gyp build",
     	"test": "tree-sitter test",
     	"parse": "tree-sitter parse",
     	"clean": "rm -r bindings; rm -r src; rm binding.gyp"
@@ -25,12 +25,9 @@
   	},
 	"tree-sitter": [
     	{
-      		"scope": "source.js",
+      		"scope": "document.norg",
       		"file-types": [
         		"norg"
-      		],
-      		"highlights": [
-        		"queries/highlights.scm"
       		]
     	}
   	]
