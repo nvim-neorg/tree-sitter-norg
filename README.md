@@ -2,9 +2,6 @@
 
 <img src="https://raw.githubusercontent.com/vhyrro/neorg/main/res/neorg.svg" width="70" height="70">
 
-<br>
-<br>
-
 A TreeSitter grammar for [Neorg](https://github.com/vhyrro/neorg).
 
 ## Available Commands
