@@ -325,11 +325,6 @@
     "fields": {}
   },
   {
-    "type": "tag_parameters",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "todo_item_done",
     "named": true,
     "fields": {},
@@ -485,6 +480,10 @@
   {
     "type": "`",
     "named": false
+  },
+  {
+    "type": "tag_parameters",
+    "named": true
   },
   {
     "type": "todo_item_appendix",

@@ -425,8 +425,8 @@
               {
                 "type": "IMMEDIATE_TOKEN",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "\\."
+                  "type": "STRING",
+                  "value": "."
                 }
               },
               {
@@ -448,7 +448,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "[\\t ]"
+                      "value": "[\\t ]+"
                     }
                   }
                 },
@@ -456,34 +456,38 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "tag_parameters"
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "tag_parameters"
+                        },
+                        {
+                          "type": "REPEAT",
+                          "content": {
+                            "type": "SEQ",
+                            "members": [
+                              {
+                                "type": "IMMEDIATE_TOKEN",
+                                "content": {
+                                  "type": "PATTERN",
+                                  "value": "[\\t ]+"
+                                }
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "tag_parameters"
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     },
                     {
                       "type": "SYMBOL",
                       "name": "_soft_paragraph_break"
                     }
                   ]
-                },
-                {
-                  "type": "REPEAT",
-                  "content": {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "PATTERN",
-                        "value": "[\\t ]+"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "tag_parameters"
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_soft_paragraph_break"
                 }
               ]
             },
@@ -535,8 +539,11 @@
       }
     },
     "tag_parameters": {
-      "type": "PATTERN",
-      "value": "[^\\n]+"
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\n]+"
+      }
     },
     "carryover_tag": {
       "type": "SEQ",
@@ -554,7 +561,7 @@
           ]
         },
         {
-          "type": "TOKEN",
+          "type": "IMMEDIATE_TOKEN",
           "content": {
             "type": "STRING",
             "value": "$"
@@ -590,40 +597,45 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "PATTERN",
-                  "value": "\\s+"
+                  "type": "REPEAT1",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[\\t ]+"
+                    }
+                  }
                 },
                 {
-                  "type": "SEQ",
+                  "type": "CHOICE",
                   "members": [
                     {
-                      "type": "CHOICE",
+                      "type": "SEQ",
                       "members": [
                         {
                           "type": "SYMBOL",
                           "name": "tag_parameters"
                         },
                         {
-                          "type": "SYMBOL",
-                          "name": "_soft_paragraph_break"
+                          "type": "REPEAT",
+                          "content": {
+                            "type": "SEQ",
+                            "members": [
+                              {
+                                "type": "IMMEDIATE_TOKEN",
+                                "content": {
+                                  "type": "PATTERN",
+                                  "value": "[\\t ]+"
+                                }
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "tag_parameters"
+                              }
+                            ]
+                          }
                         }
                       ]
-                    },
-                    {
-                      "type": "REPEAT",
-                      "content": {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "PATTERN",
-                            "value": "[\\t ]+"
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "tag_parameters"
-                          }
-                        ]
-                      }
                     },
                     {
                       "type": "SYMBOL",

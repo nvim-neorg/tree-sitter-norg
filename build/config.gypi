@@ -76,21 +76,7 @@
     "v8_trace_maps": 0,
     "v8_use_siphash": 1,
     "want_separate_host_toolset": 0,
-    "nodedir": "/home/potato/.local/cache/node-gyp/16.4.1",
-    "standalone_static_library": 1,
-    "ignore_scripts": "",
-    "bin_links": "true",
-    "save_prefix": "^",
-    "version_git_tag": "true",
-    "init_license": "MIT",
-    "version_commit_hooks": "true",
-    "version_tag_prefix": "v",
-    "version_git_sign": "",
-    "version_git_message": "v%s",
-    "user_agent": "yarn/1.22.10 npm/? node/v16.4.1 linux x64",
-    "strict_ssl": "true",
-    "registry": "https://registry.yarnpkg.com",
-    "ignore_optional": "",
-    "init_version": "1.0.0"
+    "nodedir": "/home/vhyrro/.cache/node-gyp/16.4.1",
+    "standalone_static_library": 1
   }
 }
