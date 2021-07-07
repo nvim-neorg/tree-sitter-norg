@@ -21,16 +21,16 @@ module.exports = grammar({
 
 		// A bit of a mess, but required for precise syntax highlighting
 		todo_item_prefix: $ => token.immediate('['),
-		todo_item_appendix: $ => token.immediate(/\]\s+/),
+		todo_item_suffix: $ => token.immediate(/\]\s+/),
 		todo_item_done_mark: $ => token.immediate(/[\t ]*x[\t ]*/),
 		todo_item_pending_mark: $ => token.immediate(/[\t ]*\*[\t ]*/),
 		todo_item_undone_mark: $ => token.immediate(/\s+/), 
 
-		todo_item_done: $ => seq(optional($._leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_done_mark, $.todo_item_appendix, $.paragraph_segment),
-		todo_item_pending: $ => seq(optional($._leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_pending_mark, $.todo_item_appendix, $.paragraph_segment),
-		todo_item_undone: $ => seq(optional($._leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_undone_mark, $.todo_item_appendix, $.paragraph_segment),
+		todo_item_done: $ => seq(optional($._leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_done_mark, $.todo_item_suffix, $.paragraph_segment),
+		todo_item_pending: $ => seq(optional($._leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_pending_mark, $.todo_item_suffix, $.paragraph_segment),
+		todo_item_undone: $ => seq(optional($._leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_undone_mark, $.todo_item_suffix, $.paragraph_segment),
 
-		tag: $ => seq(optional($._leading_whitespace), token.immediate('@'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), optional($.tag_content), '@end'),
+		tag: $ => seq(optional($._leading_whitespace), token.immediate('@'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), optional($.tag_content), token.immediate('@end')),
 		tag_content: $ => repeat1(seq(/[^\n]+/, $._soft_paragraph_break)),
 		tag_name: $ => repeat1(/[a-z_]/),
 		tag_parameters: $ => token.immediate(/[^\n]+/),

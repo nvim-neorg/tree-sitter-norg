@@ -337,15 +337,15 @@
           "named": true
         },
         {
-          "type": "todo_item_appendix",
-          "named": true
-        },
-        {
           "type": "todo_item_done_mark",
           "named": true
         },
         {
           "type": "todo_item_prefix",
+          "named": true
+        },
+        {
+          "type": "todo_item_suffix",
           "named": true
         },
         {
@@ -368,15 +368,15 @@
           "named": true
         },
         {
-          "type": "todo_item_appendix",
-          "named": true
-        },
-        {
           "type": "todo_item_pending_mark",
           "named": true
         },
         {
           "type": "todo_item_prefix",
+          "named": true
+        },
+        {
+          "type": "todo_item_suffix",
           "named": true
         },
         {
@@ -399,11 +399,11 @@
           "named": true
         },
         {
-          "type": "todo_item_appendix",
+          "type": "todo_item_prefix",
           "named": true
         },
         {
-          "type": "todo_item_prefix",
+          "type": "todo_item_suffix",
           "named": true
         },
         {
@@ -486,10 +486,6 @@
     "named": true
   },
   {
-    "type": "todo_item_appendix",
-    "named": true
-  },
-  {
     "type": "todo_item_done_mark",
     "named": true
   },
@@ -499,6 +495,10 @@
   },
   {
     "type": "todo_item_prefix",
+    "named": true
+  },
+  {
+    "type": "todo_item_suffix",
     "named": true
   },
   {

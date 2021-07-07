@@ -252,7 +252,7 @@
         "value": "["
       }
     },
-    "todo_item_appendix": {
+    "todo_item_suffix": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
@@ -309,7 +309,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "todo_item_appendix"
+          "name": "todo_item_suffix"
         },
         {
           "type": "SYMBOL",
@@ -346,7 +346,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "todo_item_appendix"
+          "name": "todo_item_suffix"
         },
         {
           "type": "SYMBOL",
@@ -383,7 +383,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "todo_item_appendix"
+          "name": "todo_item_suffix"
         },
         {
           "type": "SYMBOL",
@@ -510,8 +510,11 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "@end"
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "@end"
+          }
         }
       ]
     },
