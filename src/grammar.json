@@ -246,20 +246,11 @@
       ]
     },
     "todo_item_prefix": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "unordered_list_prefix"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\["
-          }
-        }
-      ]
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "["
+      }
     },
     "todo_item_appendix": {
       "type": "IMMEDIATE_TOKEN",
@@ -268,18 +259,25 @@
         "value": "\\]\\s+"
       }
     },
-    "_todo_item_done_mark": {
+    "todo_item_done_mark": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
         "value": "[\\t ]*x[\\t ]*"
       }
     },
-    "_todo_item_pending_mark": {
+    "todo_item_pending_mark": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
         "value": "[\\t ]*\\*[\\t ]*"
+      }
+    },
+    "todo_item_undone_mark": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\s+"
       }
     },
     "todo_item_done": {
@@ -299,11 +297,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "unordered_list_prefix"
+        },
+        {
+          "type": "SYMBOL",
           "name": "todo_item_prefix"
         },
         {
           "type": "SYMBOL",
-          "name": "_todo_item_done_mark"
+          "name": "todo_item_done_mark"
         },
         {
           "type": "SYMBOL",
@@ -332,11 +334,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "unordered_list_prefix"
+        },
+        {
+          "type": "SYMBOL",
           "name": "todo_item_prefix"
         },
         {
           "type": "SYMBOL",
-          "name": "_todo_item_pending_mark"
+          "name": "todo_item_pending_mark"
         },
         {
           "type": "SYMBOL",
@@ -365,14 +371,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "unordered_list_prefix"
+        },
+        {
+          "type": "SYMBOL",
           "name": "todo_item_prefix"
         },
         {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\s+"
-          }
+          "type": "SYMBOL",
+          "name": "todo_item_undone_mark"
         },
         {
           "type": "SYMBOL",

@@ -346,7 +346,15 @@
           "named": true
         },
         {
+          "type": "todo_item_done_mark",
+          "named": true
+        },
+        {
           "type": "todo_item_prefix",
+          "named": true
+        },
+        {
+          "type": "unordered_list_prefix",
           "named": true
         }
       ]
@@ -369,20 +377,13 @@
           "named": true
         },
         {
+          "type": "todo_item_pending_mark",
+          "named": true
+        },
+        {
           "type": "todo_item_prefix",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "todo_item_prefix",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
+        },
         {
           "type": "unordered_list_prefix",
           "named": true
@@ -408,6 +409,14 @@
         },
         {
           "type": "todo_item_prefix",
+          "named": true
+        },
+        {
+          "type": "todo_item_undone_mark",
+          "named": true
+        },
+        {
+          "type": "unordered_list_prefix",
           "named": true
         }
       ]
@@ -479,6 +488,22 @@
   },
   {
     "type": "todo_item_appendix",
+    "named": true
+  },
+  {
+    "type": "todo_item_done_mark",
+    "named": true
+  },
+  {
+    "type": "todo_item_pending_mark",
+    "named": true
+  },
+  {
+    "type": "todo_item_prefix",
+    "named": true
+  },
+  {
+    "type": "todo_item_undone_mark",
     "named": true
   },
   {
