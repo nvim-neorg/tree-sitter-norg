@@ -188,6 +188,13 @@
         }
       ]
     },
+    "unordered_list_prefix": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\-\\s+"
+      }
+    },
     "unordered_list": {
       "type": "SEQ",
       "members": [
@@ -204,8 +211,8 @@
           ]
         },
         {
-          "type": "PATTERN",
-          "value": "-\\s+"
+          "type": "SYMBOL",
+          "name": "unordered_list_prefix"
         },
         {
           "type": "SYMBOL",
@@ -239,11 +246,20 @@
       ]
     },
     "todo_item_prefix": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "\\-\\s+\\["
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list_prefix"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\["
+          }
+        }
+      ]
     },
     "todo_item_appendix": {
       "type": "IMMEDIATE_TOKEN",

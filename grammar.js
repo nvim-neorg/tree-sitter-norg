@@ -15,10 +15,11 @@ module.exports = grammar({
 		heading3: $ => seq(optional($._leading_whitespace), /\*\*\*\s+/, $.paragraph_segment),
 		heading4: $ => seq(optional($._leading_whitespace), /\*\*\*\*\s+/, $.paragraph_segment),
 
-		unordered_list: $ => seq(optional($._leading_whitespace), /-\s+/, $.paragraph_segment),
+		unordered_list_prefix: $ => token.immediate(/\-\s+/),
+		unordered_list: $ => seq(optional($._leading_whitespace), $.unordered_list_prefix, $.paragraph_segment),
 		marker: $ => seq(optional($._leading_whitespace), /\|\s+/, $.paragraph_segment),
 
-		todo_item_prefix: $ => token.immediate(/\-\s+\[/),
+		todo_item_prefix: $ => seq($.unordered_list_prefix, token.immediate(/\[/)),
 		todo_item_appendix: $ => token.immediate(/\]\s+/),
 		_todo_item_done_mark: $ => token.immediate(/[\t ]*x[\t ]*/),
 		_todo_item_pending_mark: $ => token.immediate(/[\t ]*\*[\t ]*/),

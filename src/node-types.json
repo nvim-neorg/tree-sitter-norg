@@ -376,6 +376,21 @@
     }
   },
   {
+    "type": "todo_item_prefix",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "unordered_list_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "todo_item_undone",
     "named": true,
     "fields": {},
@@ -403,11 +418,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "paragraph_segment",
+          "named": true
+        },
+        {
+          "type": "unordered_list_prefix",
           "named": true
         }
       ]
@@ -463,11 +482,11 @@
     "named": true
   },
   {
-    "type": "todo_item_prefix",
+    "type": "trailing_modifier",
     "named": true
   },
   {
-    "type": "trailing_modifier",
+    "type": "unordered_list_prefix",
     "named": true
   },
   {
