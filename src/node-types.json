@@ -39,6 +39,22 @@
           "named": true
         },
         {
+          "type": "heading1",
+          "named": true
+        },
+        {
+          "type": "heading2",
+          "named": true
+        },
+        {
+          "type": "heading3",
+          "named": true
+        },
+        {
+          "type": "heading4",
+          "named": true
+        },
+        {
           "type": "marker",
           "named": true
         },
@@ -208,10 +224,6 @@
         },
         {
           "type": "heading4",
-          "named": true
-        },
-        {
-          "type": "marker",
           "named": true
         },
         {
