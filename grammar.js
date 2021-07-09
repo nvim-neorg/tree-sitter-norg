@@ -30,8 +30,8 @@ module.exports = grammar({
 		todo_item_pending: $ => seq(optional($._leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_pending_mark, $.todo_item_suffix, $.paragraph_segment),
 		todo_item_undone: $ => seq(optional($._leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_undone_mark, $.todo_item_suffix, $.paragraph_segment),
 
-		tag: $ => seq(optional($._leading_whitespace), token.immediate('@'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), optional($.tag_content), token.immediate('@end')),
-		tag_content: $ => repeat1(seq(/[^\n]+/, $._soft_paragraph_break)),
+		tag: $ => seq(optional($._leading_whitespace), token.immediate('@'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), $.tag_content, token.immediate('@end')),
+		tag_content: $ => repeat1(choice(/[^\n]+/, $._soft_paragraph_break)),
 		tag_name: $ => repeat1(/[a-z_]/),
 		tag_parameters: $ => token.immediate(/[^\n]+/),
 
