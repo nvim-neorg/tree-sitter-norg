@@ -7,40 +7,12 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "heading1"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "heading2"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "heading3"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "heading4"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "quote"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "marker"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "tag"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "carryover_tag"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "drawer"
+            "type": "PREC",
+            "value": 2,
+            "content": {
+              "type": "SYMBOL",
+              "name": "_detached_modifiers"
+            }
           },
           {
             "type": "SYMBOL",
@@ -766,55 +738,11 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "quote"
+                    "name": "_detached_modifiers"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "unordered_list"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "todo_item_done"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "todo_item_pending"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "todo_item_undone"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "tag"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "drawer"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "heading1"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "heading2"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "heading3"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "heading4"
-                  },
-                  {
-                    "type": "PREC",
-                    "value": 1,
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "escape_sequence"
-                    }
+                    "name": "escape_sequence"
                   }
                 ]
               }
@@ -1008,6 +936,63 @@
         "type": "STRING",
         "value": "~"
       }
+    },
+    "_detached_modifiers": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_done"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_pending"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_undone"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "heading1"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "heading2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "heading3"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "heading4"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quote"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "carryover_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "drawer"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list"
+        }
+      ]
     }
   },
   "extras": [

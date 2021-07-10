@@ -73,6 +73,22 @@
         {
           "type": "tag",
           "named": true
+        },
+        {
+          "type": "todo_item_done",
+          "named": true
+        },
+        {
+          "type": "todo_item_pending",
+          "named": true
+        },
+        {
+          "type": "todo_item_undone",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
+          "named": true
         }
       ]
     }
@@ -236,6 +252,10 @@
       "required": true,
       "types": [
         {
+          "type": "carryover_tag",
+          "named": true
+        },
+        {
           "type": "drawer",
           "named": true
         },
@@ -257,6 +277,10 @@
         },
         {
           "type": "heading4",
+          "named": true
+        },
+        {
+          "type": "marker",
           "named": true
         },
         {

@@ -6,7 +6,7 @@ module.exports = grammar({
 	],
 
   	rules: {
-    	document: $ => repeat(choice($.heading1, $.heading2, $.heading3, $.heading4, $.quote, $.marker, $.tag, $.carryover_tag, $.drawer, $._soft_paragraph_break, $.paragraph)),
+    	document: $ => repeat(choice(prec(2, $._detached_modifiers), $._soft_paragraph_break, $.paragraph)),
 
 		quote: $ => seq(optional($.leading_whitespace), />\s+/, choice($.paragraph_segment, prec(1, seq($.words, $._soft_paragraph_break, $.quote)))),
 
@@ -41,7 +41,7 @@ module.exports = grammar({
 		drawer: $ => seq(optional($.leading_whitespace), token(/\|{2}[\t ]+/), field("drawer_name", $.paragraph_segment), optional($.drawer_content), token('||')),
 		drawer_content: $ => repeat1(choice(/[^\\]/, $.escape_sequence)),
 
-		paragraph: $ => prec.left(1, seq(repeat1(prec(1, choice($.paragraph_segment, $.quote, $.unordered_list, $.todo_item_done, $.todo_item_pending, $.todo_item_undone, $.tag, $.drawer, $.heading1, $.heading2, $.heading3, $.heading4, prec(1, $.escape_sequence)))), choice($._soft_paragraph_break, $._eof))),
+		paragraph: $ => prec.left(1, seq(repeat1(prec(1, choice($.paragraph_segment, $._detached_modifiers, $.escape_sequence))), choice($._soft_paragraph_break, $._eof))),
 
 		_eof: $ => token.immediate('\0'),
 		_soft_paragraph_break: $ => token.immediate('\n'),
@@ -55,6 +55,7 @@ module.exports = grammar({
 		words: $ => seq(choice(/[^\s]/, $.leading_whitespace), repeat(/[^\n]/)),
 		paragraph_segment: $ => choice(seq($.words, $.trailing_modifier, token.immediate('\n'), $.paragraph_segment), seq($.words, choice($._soft_paragraph_break, $._eof))),
 		trailing_modifier: $ => token.immediate('~'),
+		_detached_modifiers: $ => choice($.todo_item_done, $.todo_item_pending, $.todo_item_undone, $.heading1, $.heading2, $.heading3, $.heading4, $.quote, $.marker, $.tag, $.carryover_tag, $.drawer, $.unordered_list),
 
   	}
 });
