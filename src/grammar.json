@@ -61,7 +61,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -112,7 +112,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -137,7 +137,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -162,7 +162,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -187,7 +187,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -219,7 +219,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -244,7 +244,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -304,7 +304,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -341,7 +341,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -378,7 +378,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -415,7 +415,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -518,11 +518,8 @@
           "name": "tag_content"
         },
         {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "@end"
-          }
+          "type": "SYMBOL",
+          "name": "tag_end"
         }
       ]
     },
@@ -556,6 +553,13 @@
         "value": "[^\\n]+"
       }
     },
+    "tag_end": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "@end"
+      }
+    },
     "carryover_tag": {
       "type": "SEQ",
       "members": [
@@ -564,7 +568,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -683,7 +687,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             },
             {
               "type": "BLANK"
@@ -846,7 +850,7 @@
         "value": "\n"
       }
     },
-    "_leading_whitespace": {
+    "leading_whitespace": {
       "type": "REPEAT1",
       "content": {
         "type": "IMMEDIATE_TOKEN",
@@ -934,7 +938,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "_leading_whitespace"
+              "name": "leading_whitespace"
             }
           ]
         },

@@ -8,6 +8,10 @@
       "required": true,
       "types": [
         {
+          "type": "leading_whitespace",
+          "named": true
+        },
+        {
           "type": "paragraph",
           "named": true
         },
@@ -89,11 +93,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "drawer_content",
+          "named": true
+        },
+        {
+          "type": "leading_whitespace",
           "named": true
         }
       ]
@@ -124,9 +132,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "leading_whitespace",
+          "named": true
+        },
         {
           "type": "paragraph_segment",
           "named": true
@@ -139,9 +151,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "leading_whitespace",
+          "named": true
+        },
         {
           "type": "paragraph_segment",
           "named": true
@@ -154,9 +170,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "leading_whitespace",
+          "named": true
+        },
         {
           "type": "paragraph_segment",
           "named": true
@@ -169,9 +189,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "leading_whitespace",
+          "named": true
+        },
         {
           "type": "paragraph_segment",
           "named": true
@@ -180,13 +204,22 @@
     }
   },
   {
+    "type": "leading_whitespace",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "marker",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "leading_whitespace",
+          "named": true
+        },
         {
           "type": "paragraph_segment",
           "named": true
@@ -289,6 +322,10 @@
       "required": true,
       "types": [
         {
+          "type": "leading_whitespace",
+          "named": true
+        },
+        {
           "type": "paragraph_segment",
           "named": true
         },
@@ -312,7 +349,15 @@
       "required": true,
       "types": [
         {
+          "type": "leading_whitespace",
+          "named": true
+        },
+        {
           "type": "tag_content",
+          "named": true
+        },
+        {
+          "type": "tag_end",
           "named": true
         },
         {
@@ -345,6 +390,10 @@
       "required": true,
       "types": [
         {
+          "type": "leading_whitespace",
+          "named": true
+        },
+        {
           "type": "paragraph_segment",
           "named": true
         },
@@ -375,6 +424,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "leading_whitespace",
+          "named": true
+        },
         {
           "type": "paragraph_segment",
           "named": true
@@ -407,6 +460,10 @@
       "required": true,
       "types": [
         {
+          "type": "leading_whitespace",
+          "named": true
+        },
+        {
           "type": "paragraph_segment",
           "named": true
         },
@@ -438,6 +495,10 @@
       "required": true,
       "types": [
         {
+          "type": "leading_whitespace",
+          "named": true
+        },
+        {
           "type": "paragraph_segment",
           "named": true
         },
@@ -451,7 +512,17 @@
   {
     "type": "words",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "leading_whitespace",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "\n",
@@ -474,10 +545,6 @@
     "named": false
   },
   {
-    "type": "@end",
-    "named": false
-  },
-  {
     "type": "\\",
     "named": false
   },
@@ -492,6 +559,10 @@
   {
     "type": "`",
     "named": false
+  },
+  {
+    "type": "tag_end",
+    "named": true
   },
   {
     "type": "tag_parameters",
