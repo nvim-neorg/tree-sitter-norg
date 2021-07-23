@@ -10,10 +10,15 @@ module.exports = grammar({
 
 		quote: $ => seq(optional($.leading_whitespace), />\s+/, choice($.paragraph_segment, prec(1, seq($.words, $._soft_paragraph_break, $.quote)))),
 
-		heading1: $ => seq(optional($.leading_whitespace), /\*\s+/, $.paragraph_segment),
-		heading2: $ => seq(optional($.leading_whitespace), /\*\*\s+/, $.paragraph_segment),
-		heading3: $ => seq(optional($.leading_whitespace), /\*\*\*\s+/, $.paragraph_segment),
-		heading4: $ => seq(optional($.leading_whitespace), /\*\*\*\*\s+/, $.paragraph_segment),
+		heading1_prefix: $ => /\*\s+/, 
+		heading2_prefix: $ => /\*\*\s+/, 
+		heading3_prefix: $ => /\*\*\*\s+/, 
+		heading4_prefix: $ => /\*\*\*\*\s+/, 
+
+		heading1: $ => seq(optional($.leading_whitespace), $.heading1_prefix, $.paragraph_segment),
+		heading2: $ => seq(optional($.leading_whitespace), $.heading2_prefix, $.paragraph_segment),
+		heading3: $ => seq(optional($.leading_whitespace), $.heading3_prefix, $.paragraph_segment),
+		heading4: $ => seq(optional($.leading_whitespace), $.heading4_prefix, $.paragraph_segment),
 
 		unordered_list_prefix: $ => token.immediate(/\-\s+/),
 		unordered_list: $ => seq(optional($.leading_whitespace), $.unordered_list_prefix, $.paragraph_segment),
@@ -41,7 +46,7 @@ module.exports = grammar({
 		drawer: $ => seq(optional($.leading_whitespace), token(/\|{2}[\t ]+/), field("drawer_name", $.paragraph_segment), optional($.drawer_content), token('||')),
 		drawer_content: $ => repeat1(choice(/[^\\]/, $.escape_sequence)),
 
-		paragraph: $ => prec.left(1, seq(repeat1(prec(1, choice($.paragraph_segment, $._detached_modifiers, $.escape_sequence))), choice($._soft_paragraph_break, $._eof))),
+		paragraph: $ => prec.left(1, seq(repeat1(prec(1, choice($.paragraph_segment, $.escape_sequence))), optional(choice($._soft_paragraph_break, $._eof)))),
 
 		_eof: $ => token.immediate('\0'),
 		_soft_paragraph_break: $ => token.immediate('\n'),
@@ -49,7 +54,7 @@ module.exports = grammar({
 
 		// Unused, I could not get them to properly get detected with the rules imposed by the Neorg specification
 		// If you know how to do this then please consider submitting a PR
-		_attached_modifiers: $ => choice(token.immediate('*'), token.immediate('_'), token.immediate('`'), token.immediate('|'), token.immediate('^'), token.immediate('$')),
+		// _attached_modifiers: $ => choice(token.immediate('*'), token.immediate('_'), token.immediate('`'), token.immediate('|'), token.immediate('^'), token.immediate('$')),
 
 		escape_sequence: $ => seq(token.immediate('\\'), token.immediate(/./)),
 		words: $ => seq(choice(/[^\s]/, $.leading_whitespace), repeat(/[^\n]/)),
