@@ -8,11 +8,19 @@
       "required": true,
       "types": [
         {
+          "type": "carryover_tag",
+          "named": true
+        },
+        {
           "type": "leading_whitespace",
           "named": true
         },
         {
           "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "tag",
           "named": true
         },
         {
@@ -336,10 +344,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "leading_whitespace",
-          "named": true
-        },
         {
           "type": "tag_content",
           "named": true

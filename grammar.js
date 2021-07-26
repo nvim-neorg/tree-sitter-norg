@@ -35,13 +35,13 @@ module.exports = grammar({
 		todo_item_pending: $ => seq(optional($.leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_pending_mark, $.todo_item_suffix, $.paragraph_segment),
 		todo_item_undone: $ => seq(optional($.leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_undone_mark, $.todo_item_suffix, $.paragraph_segment),
 
-		tag: $ => seq(optional($.leading_whitespace), token.immediate('@'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), $.tag_content, $.tag_end),
+		tag: $ => seq(token.immediate('@'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), $.tag_content, $.tag_end),
 		tag_content: $ => repeat1(choice(/[^\n]+/, $._soft_paragraph_break)),
 		tag_name: $ => repeat1(/[a-z_]/),
 		tag_parameters: $ => token.immediate(/[^\n]+/),
 		tag_end: $ => token('@end'),
 
-		carryover_tag: $ => seq(optional($.leading_whitespace), token.immediate('$'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), repeat($._soft_paragraph_break), $.paragraph),
+		carryover_tag: $ => seq(optional($.leading_whitespace), token.immediate('$'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), repeat($._soft_paragraph_break), choice($.paragraph, $.carryover_tag, $.tag)),
 
 		drawer: $ => seq(optional($.leading_whitespace), token(/\|{2}[\t ]+/), field("drawer_name", $.paragraph_segment), optional($.drawer_content), token('||')),
 		drawer_content: $ => repeat1(choice(/[^\\]/, $.escape_sequence)),

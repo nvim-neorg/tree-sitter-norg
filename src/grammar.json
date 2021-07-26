@@ -399,18 +399,6 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "leading_whitespace"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
           "type": "IMMEDIATE_TOKEN",
           "content": {
             "type": "STRING",
@@ -662,8 +650,21 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "paragraph"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "paragraph"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "carryover_tag"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "tag"
+            }
+          ]
         }
       ]
     },
