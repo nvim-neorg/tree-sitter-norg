@@ -224,6 +224,38 @@
         }
       ]
     },
+    "unordered_link_list_prefix": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\->\\s+"
+      }
+    },
+    "unordered_link_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "leading_whitespace"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_link_list_prefix"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph_segment"
+        }
+      ]
+    },
     "marker": {
       "type": "SEQ",
       "members": [
@@ -1021,12 +1053,12 @@
           "name": "drawer"
         },
         {
-          "type": "PREC",
-          "value": 3,
-          "content": {
-            "type": "SYMBOL",
-            "name": "unordered_list"
-          }
+          "type": "SYMBOL",
+          "name": "unordered_list"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_link_list"
         }
       ]
     }
@@ -1040,12 +1072,6 @@
   "conflicts": [
     [
       "carryover_tag"
-    ],
-    [
-      "unordered_list",
-      "todo_item_done",
-      "todo_item_undone",
-      "todo_item_pending"
     ]
   ],
   "precedences": [],

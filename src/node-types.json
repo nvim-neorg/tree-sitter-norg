@@ -72,6 +72,10 @@
           "named": true
         },
         {
+          "type": "unordered_link_list",
+          "named": true
+        },
+        {
           "type": "unordered_list",
           "named": true
         }
@@ -136,6 +140,10 @@
         },
         {
           "type": "todo_item_undone",
+          "named": true
+        },
+        {
+          "type": "unordered_link_list",
           "named": true
         },
         {
@@ -527,6 +535,29 @@
     }
   },
   {
+    "type": "unordered_link_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "leading_whitespace",
+          "named": true
+        },
+        {
+          "type": "paragraph_segment",
+          "named": true
+        },
+        {
+          "type": "unordered_link_list_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "unordered_list",
     "named": true,
     "fields": {},
@@ -646,6 +677,10 @@
   },
   {
     "type": "trailing_modifier",
+    "named": true
+  },
+  {
+    "type": "unordered_link_list_prefix",
     "named": true
   },
   {

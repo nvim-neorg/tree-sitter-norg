@@ -3,7 +3,6 @@ module.exports = grammar({
 
 	conflicts: $ => [
 		[$.carryover_tag],
-		[$.unordered_list,$.todo_item_done, $.todo_item_undone, $.todo_item_pending]
 	],
 
 	/* externals: $ => [
@@ -27,6 +26,10 @@ module.exports = grammar({
 
 		unordered_list_prefix: $ => token.immediate(/\-\s+/),
 		unordered_list: $ => seq(optional($.leading_whitespace), $.unordered_list_prefix, $.paragraph_segment),
+
+		unordered_link_list_prefix: $ => token.immediate(/\->\s+/),
+		unordered_link_list: $ => seq(optional($.leading_whitespace), $.unordered_link_list_prefix, $.paragraph_segment),
+
 		marker: $ => seq(optional($.leading_whitespace), /\|\s+/, $.paragraph_segment),
 
 		// A bit of a mess, but required for precise syntax highlighting
@@ -65,7 +68,7 @@ module.exports = grammar({
 		words: $ => seq(choice(/[^\s]/, $.leading_whitespace), repeat(/[^\n]/)),
 		paragraph_segment: $ => choice(seq($.words, $.trailing_modifier, token.immediate('\n'), $.paragraph_segment), seq($.words, choice($._soft_paragraph_break, $._eof))),
 		trailing_modifier: $ => token.immediate('~'),
-		_detached_modifiers: $ => choice($.todo_item_done, $.todo_item_pending, $.todo_item_undone, $.heading1, $.heading2, $.heading3, $.heading4, $.quote, $.marker, $.tag, $.carryover_tag, $.drawer, prec(3, $.unordered_list)),
+		_detached_modifiers: $ => choice($.todo_item_done, $.todo_item_pending, $.todo_item_undone, $.heading1, $.heading2, $.heading3, $.heading4, $.quote, $.marker, $.tag, $.carryover_tag, $.drawer, $.unordered_list, $.unordered_link_list),
 
   	}
 });
