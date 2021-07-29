@@ -2,8 +2,13 @@ module.exports = grammar({
   	name: 'norg',
 
 	conflicts: $ => [
-		[$.carryover_tag]
+		[$.carryover_tag],
+		[$.unordered_list,$.todo_item_done, $.todo_item_undone, $.todo_item_pending]
 	],
+
+	/* externals: $ => [
+    	$.bold
+  	], */
 
   	rules: {
     	document: $ => repeat(choice(prec(2, $._detached_modifiers), $._soft_paragraph_break, $.paragraph)),
@@ -35,13 +40,13 @@ module.exports = grammar({
 		todo_item_pending: $ => seq(optional($.leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_pending_mark, $.todo_item_suffix, $.paragraph_segment),
 		todo_item_undone: $ => seq(optional($.leading_whitespace), $.unordered_list_prefix, $.todo_item_prefix, $.todo_item_undone_mark, $.todo_item_suffix, $.paragraph_segment),
 
-		tag: $ => seq(token.immediate('@'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), $.tag_content, $.tag_end),
+		tag: $ => seq(optional($.leading_whitespace), token.immediate('@'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), $.tag_content, $.tag_end),
 		tag_content: $ => repeat1(choice(/[^\n]+/, $._soft_paragraph_break)),
 		tag_name: $ => repeat1(/[a-z_]/),
 		tag_parameters: $ => token.immediate(/[^\n]+/),
 		tag_end: $ => token('@end'),
 
-		carryover_tag: $ => seq(optional($.leading_whitespace), token.immediate('$'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), repeat($._soft_paragraph_break), choice($.paragraph, $.carryover_tag, $.tag)),
+		carryover_tag: $ => seq(optional($.leading_whitespace), token.immediate('$'), $.tag_name, repeat(seq(token.immediate('.'), $.tag_name)), choice(seq(repeat1(token(/[\t ]+/)), choice(seq($.tag_parameters, repeat(seq(token.immediate(/[\t ]+/), $.tag_parameters))), $._soft_paragraph_break)), $._soft_paragraph_break), repeat($._soft_paragraph_break), choice(repeat1($._detached_modifiers), $.paragraph)),
 
 		drawer: $ => seq(optional($.leading_whitespace), token(/\|{2}[\t ]+/), field("drawer_name", $.paragraph_segment), optional($.drawer_content), token('||')),
 		drawer_content: $ => repeat1(choice(/[^\\]/, $.escape_sequence)),
@@ -54,13 +59,13 @@ module.exports = grammar({
 
 		// Unused, I could not get them to properly get detected with the rules imposed by the Neorg specification
 		// If you know how to do this then please consider submitting a PR
-		// _attached_modifiers: $ => choice(token.immediate('*'), token.immediate('_'), token.immediate('`'), token.immediate('|'), token.immediate('^'), token.immediate('$')),
+		_attached_modifiers: $ => choice(token.immediate('*'), token.immediate('_'), token.immediate('`'), token.immediate('|'), token.immediate('^'), token.immediate('$')),
 
 		escape_sequence: $ => seq(token.immediate('\\'), token.immediate(/./)),
 		words: $ => seq(choice(/[^\s]/, $.leading_whitespace), repeat(/[^\n]/)),
 		paragraph_segment: $ => choice(seq($.words, $.trailing_modifier, token.immediate('\n'), $.paragraph_segment), seq($.words, choice($._soft_paragraph_break, $._eof))),
 		trailing_modifier: $ => token.immediate('~'),
-		_detached_modifiers: $ => choice($.todo_item_done, $.todo_item_pending, $.todo_item_undone, $.heading1, $.heading2, $.heading3, $.heading4, $.quote, $.marker, $.tag, $.carryover_tag, $.drawer, $.unordered_list),
+		_detached_modifiers: $ => choice($.todo_item_done, $.todo_item_pending, $.todo_item_undone, $.heading1, $.heading2, $.heading3, $.heading4, $.quote, $.marker, $.tag, $.carryover_tag, $.drawer, prec(3, $.unordered_list)),
 
   	}
 });

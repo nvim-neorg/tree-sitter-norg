@@ -6,8 +6,7 @@
   	"scripts": {
 		"gen": "tree-sitter generate && node-gyp build",
     	"test": "tree-sitter test",
-    	"parse": "tree-sitter parse",
-    	"clean": "rm -r bindings; rm -r src; rm binding.gyp"
+    	"parse": "tree-sitter parse"
   	},
   	"keywords": [
     	"neorg",
@@ -28,17 +27,7 @@
       		"scope": "document.norg",
       		"file-types": [
         		"norg"
-      		],
-      		"theme": {
-				"tag": "orange",
-				"error": "red",
-				"heading1": "purple",
-				"heading2": "blue",
-				"heading3": "yellow",
-				"heading4": "green",
-				"marker": "yellow",
-				"drawer": "grey"
-      		}
+      		]
     	}
   	]
 }

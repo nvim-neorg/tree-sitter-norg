@@ -12,11 +12,39 @@
           "named": true
         },
         {
+          "type": "drawer",
+          "named": true
+        },
+        {
+          "type": "heading1",
+          "named": true
+        },
+        {
+          "type": "heading2",
+          "named": true
+        },
+        {
+          "type": "heading3",
+          "named": true
+        },
+        {
+          "type": "heading4",
+          "named": true
+        },
+        {
           "type": "leading_whitespace",
           "named": true
         },
         {
+          "type": "marker",
+          "named": true
+        },
+        {
           "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "quote",
           "named": true
         },
         {
@@ -29,6 +57,22 @@
         },
         {
           "type": "tag_parameters",
+          "named": true
+        },
+        {
+          "type": "todo_item_done",
+          "named": true
+        },
+        {
+          "type": "todo_item_pending",
+          "named": true
+        },
+        {
+          "type": "todo_item_undone",
+          "named": true
+        },
+        {
+          "type": "unordered_list",
           "named": true
         }
       ]
@@ -345,6 +389,10 @@
       "required": true,
       "types": [
         {
+          "type": "leading_whitespace",
+          "named": true
+        },
+        {
           "type": "tag_content",
           "named": true
         },
@@ -525,6 +573,10 @@
     "named": false
   },
   {
+    "type": "*",
+    "named": false
+  },
+  {
     "type": ".",
     "named": false
   },
@@ -534,6 +586,18 @@
   },
   {
     "type": "\\",
+    "named": false
+  },
+  {
+    "type": "^",
+    "named": false
+  },
+  {
+    "type": "_",
+    "named": false
+  },
+  {
+    "type": "`",
     "named": false
   },
   {
@@ -587,6 +651,10 @@
   {
     "type": "unordered_list_prefix",
     "named": true
+  },
+  {
+    "type": "|",
+    "named": false
   },
   {
     "type": "||",
