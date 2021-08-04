@@ -2,10 +2,21 @@ module.exports = grammar({
   	name: 'norg',
 
 	externals: $ => [
-    	$.bold
+    	$.none,
+    	$.paragraph,
+    	$.paragraph_segment,
+        $.heading1,
+        $.heading2,
+        $.heading3,
+        $.heading4,
+        $.heading5,
+        $.heading6,
+        $.quote,
   	],
 
   	rules: {
+        document: $ => repeat1(choice($.paragraph, $.heading1, $.heading2, $.heading3, $.heading4, $.heading5, $.heading6, $.quote))
+
     	/*
         "document",
 		"quote",

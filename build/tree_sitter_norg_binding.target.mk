@@ -37,7 +37,8 @@ CFLAGS_C_Debug := \
 CFLAGS_CC_Debug := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++14
+	-std=gnu++14 \
+	-std=c++20
 
 INCS_Debug := \
 	-I/home/vhyrro/.cache/node-gyp/16.4.1/include/node \
@@ -82,7 +83,8 @@ CFLAGS_C_Release := \
 CFLAGS_CC_Release := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++14
+	-std=gnu++14 \
+	-std=c++20
 
 INCS_Release := \
 	-I/home/vhyrro/.cache/node-gyp/16.4.1/include/node \
@@ -96,8 +98,9 @@ INCS_Release := \
 	-I$(srcdir)/src
 
 OBJS := \
+	$(obj).target/$(TARGET)/bindings/node/binding.o \
 	$(obj).target/$(TARGET)/src/parser.o \
-	$(obj).target/$(TARGET)/bindings/node/binding.o
+	$(obj).target/$(TARGET)/src/scanner.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
