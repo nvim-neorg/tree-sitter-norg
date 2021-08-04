@@ -8,15 +8,21 @@
 enum TokenType
 {
     NONE,
-	PARAGRAPH,
+
 	PARAGRAPH_SEGMENT,
+	HARD_LINE_BREAK,
+
 	HEADING1,
 	HEADING2,
 	HEADING3,
 	HEADING4,
 	HEADING5,
 	HEADING6,
+
 	QUOTE,
+	UNORDERED_LIST,
+
+    PARAGRAPH_DELIMITER
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -78,6 +84,9 @@ public:
     {
         size_t i = 0;
 
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+            skip(lexer);
+
         for (auto detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead);
                 detached_modifier != s_DetachedModifiers.end();
                     detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead), i++)
@@ -94,8 +103,12 @@ public:
 
                 TokenType result = results[utils::clamp(i, 0UL, results.size() - 1)];
 
+                while (std::iswspace(lexer->lookahead) && lexer->lookahead)
+                    advance(lexer);
+
                 lexer->result_symbol = result;
                 lexer->mark_end(lexer);
+
                 return result;
             }
         }
@@ -103,15 +116,85 @@ public:
         return NONE;
     }
 
+    // Checks for the existence of a delimiting modifier set
+    template <TokenType Result>
+    TokenType check_delimiting(TSLexer* lexer, char c)
+    {
+        if (lexer->lookahead == c)
+        {
+            size_t count = 1;
+
+            while(lexer->lookahead == c)
+            {
+                ++count;
+                advance(lexer);
+            }
+
+            if (count < 3 || !std::iswspace(lexer->lookahead))
+                return NONE;
+
+            lexer->result_symbol = Result;
+            lexer->mark_end(lexer);
+
+            return Result;
+        }
+
+        return NONE;
+    }
+
 	bool scan(TSLexer* lexer, const bool* valid_symbols)
 	{
+	    if (lexer->eof(lexer))
+	        return false;
+
         if (check_detached<1>(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, { '*' }) != NONE)
             return true;
 
         if (check_detached<1>(lexer, QUOTE | NONE, { '>' }) != NONE)
             return true;
 
-		return false;
+        if (check_detached<1>(lexer, UNORDERED_LIST | NONE, { '-' }) != NONE)
+            return true;
+
+        if (check_delimiting<PARAGRAPH_DELIMITER>(lexer, '=') != NONE)
+            return true;
+
+        if (valid_symbols[HARD_LINE_BREAK] && m_Current == '\n' && (!lexer->lookahead || lexer->lookahead == '\n'))
+        {
+            advance(lexer);
+            lexer->result_symbol = HARD_LINE_BREAK;
+            lexer->mark_end(lexer);
+            return true;
+        }
+
+        if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
+        {
+            size_t consumed_chars = 0;
+
+            while (lexer->lookahead && lexer->lookahead != '\n')
+            {
+                advance(lexer);
+                ++consumed_chars;
+            }
+
+            if (consumed_chars == 0)
+            {
+                while (lexer->lookahead && lexer->lookahead == '\n')
+                    advance(lexer);
+                lexer->result_symbol = HARD_LINE_BREAK;
+                lexer->mark_end(lexer);
+                return true;
+            }
+
+            skip(lexer);
+
+            lexer->result_symbol = PARAGRAPH_SEGMENT;
+            lexer->mark_end(lexer);
+
+            return true;
+        }
+
+        return false;
 	}
 private:
 	unsigned char m_Current = 0;
@@ -127,7 +210,7 @@ extern "C"
 
 	void tree_sitter_norg_external_scanner_destroy(void* payload)
 	{
-  		delete (Scanner*)payload;
+  		delete static_cast<Scanner*>(payload);
 	}
 
 	bool tree_sitter_norg_external_scanner_scan(void* payload, TSLexer* lexer, const bool* valid_symbols)

@@ -2,20 +2,39 @@ module.exports = grammar({
   	name: 'norg',
 
 	externals: $ => [
-    	$.none,
-    	$.paragraph,
+    	$._,
+
     	$.paragraph_segment,
-        $.heading1,
-        $.heading2,
-        $.heading3,
-        $.heading4,
-        $.heading5,
-        $.heading6,
+    	$._hard_line_break,
+
+        $.heading1_prefix,
+        $.heading2_prefix,
+        $.heading3_prefix,
+        $.heading4_prefix,
+        $.heading5_prefix,
+        $.heading6_prefix,
+
         $.quote,
+        $.unordered_list,
+
+        $.paragraph_delimiter
   	],
 
   	rules: {
-        document: $ => repeat1(choice($.paragraph, $.heading1, $.heading2, $.heading3, $.heading4, $.heading5, $.heading6, $.quote))
+        document: $ => repeat1(choice($.paragraph, $._heading, $.quote, $.unordered_list, $.paragraph_delimiter, prec(1, $._standalone_break))),
+
+        paragraph: $ => prec.right(0, repeat1(alias($.paragraph_segment, "_segment"))),
+
+        _heading: $ => choice($.heading1, $.heading2, $.heading3, $.heading4, $.heading5, $.heading6),
+
+        heading1: $ => prec.right(0, seq($.heading1_prefix, field("title", $.paragraph_segment), field("content", repeat(choice($.paragraph, $._standalone_break, $._hard_line_break, $.heading2, $.heading3, $.heading4, $.heading5, $.heading6))))),
+        heading2: $ => prec.right(0, seq($.heading2_prefix, field("title", $.paragraph_segment), field("content", repeat(choice($.paragraph, $._standalone_break, $._hard_line_break, $.heading3, $.heading4, $.heading5, $.heading6))))),
+        heading3: $ => prec.right(0, seq($.heading3_prefix, field("title", $.paragraph_segment), field("content", repeat(choice($.paragraph, $._standalone_break, $._hard_line_break, $.heading4, $.heading5, $.heading6))))),
+        heading4: $ => prec.right(0, seq($.heading4_prefix, field("title", $.paragraph_segment), field("content", repeat(choice($.paragraph, $._standalone_break, $._hard_line_break, $.heading5, $.heading6))))),
+        heading5: $ => prec.right(0, seq($.heading5_prefix, field("title", $.paragraph_segment), field("content", repeat(choice($.paragraph, $._standalone_break, $._hard_line_break, $.heading6))))),
+        heading6: $ => prec.right(0, seq($.heading6_prefix, field("title", $.paragraph_segment), field("content", repeat($.paragraph)))),
+
+        _standalone_break: $ => token(/\n/),
 
     	/*
         "document",
