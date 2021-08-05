@@ -16,6 +16,7 @@ module.exports = grammar({
 
         $.quote_prefix,
         $.unordered_list_prefix,
+        $.marker_prefix,
 
         $.paragraph_delimiter
   	],
@@ -24,16 +25,17 @@ module.exports = grammar({
         document: $ => repeat1(
             choice(
                 prec(1,
-                    $._standalone_break
+                    choice(
+                        $._standalone_break,
+                        $._heading,
+                        $._detached_modifier,
+                    )
                 ),
 
                 $.escape_sequence,
 
                 $.paragraph,
                 $.paragraph_delimiter,
-
-                $._heading,
-                $._detached_modifier,
             )
         ),
 
@@ -251,6 +253,32 @@ module.exports = grammar({
                 )
             ),
 
+        marker: $ =>
+            prec.right(0,
+                seq(
+                    $.marker_prefix,
+
+                    field(
+                        "name",
+                        $.paragraph_segment
+                    ),
+
+                    field(
+                        "subtext",
+                        repeat(
+                            choice(
+                                $.paragraph,
+                                $.paragraph_delimiter,
+                                $._heading,
+                                $._detached_modifier,
+                                $.escape_sequence,
+                                $._standalone_break,
+                            ),
+                        ),
+                    )
+                )
+            ),
+
         _standalone_break: $ =>
             token(/\n/),
 
@@ -268,22 +296,12 @@ module.exports = grammar({
         _detached_modifier: $ =>
             choice(
                 $.quote,
-                $.unordered_list
+                $.unordered_list,
+                $.marker,
             ),
 
     	/*
-        "document",
-		"quote",
-		"heading1_prefix",
-		"heading2_prefix",
-		"heading3_prefix",
-		"heading4_prefix",
-		"heading1",
-		"heading2",
-		"heading3",
-		"heading4",
 		"unordered_list_prefix",
-		"unordered_list",
 		"unordered_link_list_prefix",
 		"unordered_link_list",
 		"marker",

@@ -21,8 +21,9 @@ enum TokenType
 
 	QUOTE,
 	UNORDERED_LIST,
+    MARKER,
 
-    PARAGRAPH_DELIMITER
+    PARAGRAPH_DELIMITER,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -67,7 +68,7 @@ public:
 	}
 
     template <size_t Size = 1>
-    inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<char, Size>& expected)
+    inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<unsigned char, Size>& expected)
     {
         return check_detached(lexer, std::vector<TokenType>(1, result), expected);
     }
@@ -80,7 +81,7 @@ public:
      */
     template <size_t Size = 1>
     [[nodiscard("You want to check whether we managed to match a detached token, not just let a function aimlessly run doofus")]]
-    TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<char, Size>& expected)
+    TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<unsigned char, Size>& expected)
     {
         static_assert(Size > 0, "check_detached Size template must be greater than 0");
 
@@ -180,6 +181,9 @@ public:
             return true;
         }
 
+        if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
+            return true;
+
         if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, { '*' }) != NONE)
             return true;
 
@@ -189,7 +193,7 @@ public:
         if (check_detached(lexer, UNORDERED_LIST | NONE, { '-' }) != NONE)
             return true;
 
-        if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
+        if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
             return true;
 
         // Match paragraphs
@@ -210,7 +214,7 @@ public:
 	}
 private:
 	unsigned char m_Current = 0;
-    constexpr static const std::array<unsigned char, 3> s_DetachedModifiers = { '*', '-', '>' };
+    constexpr static const std::array<unsigned char, 4> s_DetachedModifiers = { '*', '-', '>', '|' };
 };
 
 extern "C"

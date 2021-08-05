@@ -36,6 +36,10 @@
           "named": true
         },
         {
+          "type": "marker",
+          "named": true
+        },
+        {
           "type": "paragraph",
           "named": true
         },
@@ -109,6 +113,10 @@
             "named": true
           },
           {
+            "type": "marker",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -169,6 +177,10 @@
             "named": true
           },
           {
+            "type": "marker",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -225,6 +237,10 @@
             "named": true
           },
           {
+            "type": "marker",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -277,6 +293,10 @@
             "named": true
           },
           {
+            "type": "marker",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -325,6 +345,10 @@
             "named": true
           },
           {
+            "type": "marker",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -369,6 +393,10 @@
         "required": false,
         "types": [
           {
+            "type": "marker",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -399,6 +427,86 @@
       "types": [
         {
           "type": "heading6_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "marker",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      },
+      "subtext": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "heading1",
+            "named": true
+          },
+          {
+            "type": "heading2",
+            "named": true
+          },
+          {
+            "type": "heading3",
+            "named": true
+          },
+          {
+            "type": "heading4",
+            "named": true
+          },
+          {
+            "type": "heading5",
+            "named": true
+          },
+          {
+            "type": "heading6",
+            "named": true
+          },
+          {
+            "type": "marker",
+            "named": true
+          },
+          {
+            "type": "paragraph",
+            "named": true
+          },
+          {
+            "type": "paragraph_delimiter",
+            "named": true
+          },
+          {
+            "type": "quote",
+            "named": true
+          },
+          {
+            "type": "unordered_list",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "marker_prefix",
           "named": true
         }
       ]
@@ -495,6 +603,10 @@
   },
   {
     "type": "heading6_prefix",
+    "named": true
+  },
+  {
+    "type": "marker_prefix",
     "named": true
   },
   {
