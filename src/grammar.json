@@ -7,8 +7,24 @@
         "type": "CHOICE",
         "members": [
           {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "SYMBOL",
+              "name": "_standalone_break"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "escape_sequence"
+          },
+          {
             "type": "SYMBOL",
             "name": "paragraph"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "paragraph_delimiter"
           },
           {
             "type": "SYMBOL",
@@ -16,23 +32,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "quote"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "unordered_list"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "paragraph_delimiter"
-          },
-          {
-            "type": "PREC",
-            "value": 1,
-            "content": {
-              "type": "SYMBOL",
-              "name": "_standalone_break"
-            }
+            "name": "_detached_modifier"
           }
         ]
       }
@@ -53,32 +53,27 @@
         }
       }
     },
-    "_heading": {
-      "type": "CHOICE",
+    "any_char": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "."
+      }
+    },
+    "escape_sequence": {
+      "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "heading1"
+          "name": "escape_sequence_prefix"
         },
         {
-          "type": "SYMBOL",
-          "name": "heading2"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "heading3"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "heading4"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "heading5"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "heading6"
+          "type": "FIELD",
+          "name": "token",
+          "content": {
+            "type": "SYMBOL",
+            "name": "any_char"
+          }
         }
       ]
     },
@@ -118,7 +113,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_hard_line_break"
+                    "name": "_detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
@@ -183,7 +178,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_hard_line_break"
+                    "name": "_detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
@@ -244,7 +239,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_hard_line_break"
+                    "name": "_detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
@@ -301,7 +296,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_hard_line_break"
+                    "name": "_detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
@@ -354,7 +349,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_hard_line_break"
+                    "name": "_detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
@@ -391,13 +386,60 @@
             "content": {
               "type": "REPEAT",
               "content": {
-                "type": "SYMBOL",
-                "name": "paragraph"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "paragraph"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_standalone_break"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_detached_modifier"
+                  }
+                ]
               }
             }
           }
         ]
       }
+    },
+    "quote": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "quote_prefix"
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
+          }
+        }
+      ]
+    },
+    "unordered_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list_prefix"
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph"
+          }
+        }
+      ]
     },
     "_standalone_break": {
       "type": "TOKEN",
@@ -405,6 +447,48 @@
         "type": "PATTERN",
         "value": "\\n"
       }
+    },
+    "_heading": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "heading1"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "heading2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "heading3"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "heading4"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "heading5"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "heading6"
+        }
+      ]
+    },
+    "_detached_modifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "quote"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list"
+        }
+      ]
     }
   },
   "extras": [
@@ -426,7 +510,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_hard_line_break"
+      "name": "escape_sequence_prefix"
     },
     {
       "type": "SYMBOL",
@@ -454,11 +538,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "quote"
+      "name": "quote_prefix"
     },
     {
       "type": "SYMBOL",
-      "name": "unordered_list"
+      "name": "unordered_list_prefix"
     },
     {
       "type": "SYMBOL",
