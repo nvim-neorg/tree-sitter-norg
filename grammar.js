@@ -29,6 +29,7 @@ module.exports = grammar({
                         $._standalone_break,
                         $._heading,
                         $._detached_modifier,
+                        // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
                         $.marker,
                     )
                 ),
@@ -40,6 +41,7 @@ module.exports = grammar({
             )
         ),
 
+        // Any regular text
         paragraph: $ =>
             prec.right(0,
                 repeat1(
@@ -53,6 +55,7 @@ module.exports = grammar({
         any_char: $ =>
             token.immediate(/./),
 
+        // A backslash followed by the escape token (e.g. \*)
         escape_sequence: $ =>
             seq(
                 $.escape_sequence_prefix,
@@ -63,6 +66,8 @@ module.exports = grammar({
                 )
             ),
 
+        // A first-level heading:
+        // * Example
         heading1: $ =>
             prec.right(0,
                 seq(
@@ -94,6 +99,8 @@ module.exports = grammar({
                 )
             ),
 
+        // A second-level heading:
+        // ** Example
         heading2: $ =>
             prec.right(0,
                 seq(
@@ -124,6 +131,8 @@ module.exports = grammar({
                 )
             ),
 
+        // A third-level heading:
+        // *** Example
         heading3: $ =>
             prec.right(0,
                 seq(
@@ -153,6 +162,8 @@ module.exports = grammar({
                 )
             ),
 
+        // A fourth-level heading:
+        // **** Example
         heading4: $ =>
             prec.right(0,
                 seq(
@@ -181,6 +192,8 @@ module.exports = grammar({
                 )
             ),
 
+        // A fifth-level heading:
+        // ***** Example
         heading5: $ =>
             prec.right(0,
                 seq(
@@ -208,6 +221,8 @@ module.exports = grammar({
                 )
             ),
 
+        // A sixth-level heading:
+        // ******* Example
         heading6: $ =>
             prec.right(0,
                 seq(
@@ -233,7 +248,8 @@ module.exports = grammar({
                 )
             ),
 
-
+        // A quote:
+        // > That's what she said
         quote: $ =>
             seq(
                 $.quote_prefix,
@@ -244,6 +260,7 @@ module.exports = grammar({
                 )
             ),
 
+        // TODO: complete docs tomorrow
         unordered_list: $ =>
             seq(
                 $.unordered_list_prefix,
