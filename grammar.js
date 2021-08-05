@@ -29,6 +29,7 @@ module.exports = grammar({
                         $._standalone_break,
                         $._heading,
                         $._detached_modifier,
+                        $.marker,
                     )
                 ),
 
@@ -297,7 +298,6 @@ module.exports = grammar({
             choice(
                 $.quote,
                 $.unordered_list,
-                $.marker,
             ),
 
     	/*

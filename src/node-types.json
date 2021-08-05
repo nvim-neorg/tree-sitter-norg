@@ -113,10 +113,6 @@
             "named": true
           },
           {
-            "type": "marker",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -177,10 +173,6 @@
             "named": true
           },
           {
-            "type": "marker",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -237,10 +229,6 @@
             "named": true
           },
           {
-            "type": "marker",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -293,10 +281,6 @@
             "named": true
           },
           {
-            "type": "marker",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -345,10 +329,6 @@
             "named": true
           },
           {
-            "type": "marker",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -392,10 +372,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "marker",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -476,10 +452,6 @@
           },
           {
             "type": "heading6",
-            "named": true
-          },
-          {
-            "type": "marker",
             "named": true
           },
           {

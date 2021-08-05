@@ -23,6 +23,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "_detached_modifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "marker"
                 }
               ]
             }
@@ -549,10 +553,6 @@
         {
           "type": "SYMBOL",
           "name": "unordered_list"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "marker"
         }
       ]
     }
