@@ -19,11 +19,12 @@ module.exports = grammar({
         $.marker_prefix,
         $.todo_item_prefix,
 
-        $.paragraph_delimiter
+        $.generic_delimiter,
+        $.paragraph_delimiter,
   	],
 
   	rules: {
-        document: $ => repeat1(
+        document: $ => repeat(
             choice(
                 prec(1,
                     choice(
@@ -39,6 +40,7 @@ module.exports = grammar({
 
                 $.paragraph,
                 $.paragraph_delimiter,
+                $.generic_delimiter,
             )
         ),
 
@@ -298,7 +300,7 @@ module.exports = grammar({
                 )
             ),
 
-        // TODO ITEMS
+        // --------------------------------------------------
         todo_item_undone: $ =>
             token.immediate(/\s+/),
 
@@ -350,7 +352,7 @@ module.exports = grammar({
                 )
             ),
 
-        // END OF TODO ITEMS
+        // --------------------------------------------------
 
         _standalone_break: $ =>
             token(/\n/),

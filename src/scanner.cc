@@ -24,6 +24,7 @@ enum TokenType
     MARKER,
     TODO_ITEM,
 
+    GENERIC_DELIMITER,
     PARAGRAPH_DELIMITER,
 };
 
@@ -196,6 +197,9 @@ public:
         if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
             return true;
 
+        if (check_delimiting(lexer, '-', GENERIC_DELIMITER) != NONE)
+            return true;
+
         if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, { '*' }) != NONE)
             return true;
 
@@ -225,7 +229,7 @@ public:
                 advance(lexer);
             }
 
-            skip(lexer);
+            advance(lexer);
 
             lexer->result_symbol = PARAGRAPH_SEGMENT;
             lexer->mark_end(lexer);

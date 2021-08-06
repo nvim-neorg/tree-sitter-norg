@@ -2,7 +2,7 @@
   "name": "norg",
   "rules": {
     "document": {
-      "type": "REPEAT1",
+      "type": "REPEAT",
       "content": {
         "type": "CHOICE",
         "members": [
@@ -42,6 +42,10 @@
           {
             "type": "SYMBOL",
             "name": "paragraph_delimiter"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "generic_delimiter"
           }
         ]
       }
@@ -720,6 +724,10 @@
     {
       "type": "SYMBOL",
       "name": "todo_item_prefix"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "generic_delimiter"
     },
     {
       "type": "SYMBOL",
