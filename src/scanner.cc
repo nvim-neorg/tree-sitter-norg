@@ -219,7 +219,6 @@ public:
                     if (lexer->lookahead == '\n')
                     {
                         advance(lexer);
-                        advance(lexer);
                     }
                 }
 
