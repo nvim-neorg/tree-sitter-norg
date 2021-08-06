@@ -52,6 +52,10 @@
           "named": true
         },
         {
+          "type": "todo_item",
+          "named": true
+        },
+        {
           "type": "unordered_list",
           "named": true
         }
@@ -121,6 +125,10 @@
             "named": true
           },
           {
+            "type": "todo_item",
+            "named": true
+          },
+          {
             "type": "unordered_list",
             "named": true
           }
@@ -181,6 +189,10 @@
             "named": true
           },
           {
+            "type": "todo_item",
+            "named": true
+          },
+          {
             "type": "unordered_list",
             "named": true
           }
@@ -237,6 +249,10 @@
             "named": true
           },
           {
+            "type": "todo_item",
+            "named": true
+          },
+          {
             "type": "unordered_list",
             "named": true
           }
@@ -289,6 +305,10 @@
             "named": true
           },
           {
+            "type": "todo_item",
+            "named": true
+          },
+          {
             "type": "unordered_list",
             "named": true
           }
@@ -337,6 +357,10 @@
             "named": true
           },
           {
+            "type": "todo_item",
+            "named": true
+          },
+          {
             "type": "unordered_list",
             "named": true
           }
@@ -378,6 +402,10 @@
           },
           {
             "type": "quote",
+            "named": true
+          },
+          {
+            "type": "todo_item",
             "named": true
           },
           {
@@ -467,6 +495,10 @@
             "named": true
           },
           {
+            "type": "todo_item",
+            "named": true
+          },
+          {
             "type": "unordered_list",
             "named": true
           }
@@ -516,6 +548,62 @@
     }
   },
   {
+    "type": "todo_item",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      },
+      "done_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_done",
+            "named": true
+          }
+        ]
+      },
+      "pending_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_pending",
+            "named": true
+          }
+        ]
+      },
+      "undone_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_undone",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "unordered_list_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "unordered_list",
     "named": true,
     "fields": {
@@ -542,7 +630,15 @@
     }
   },
   {
+    "type": "_prefix",
+    "named": false
+  },
+  {
     "type": "_segment",
+    "named": false
+  },
+  {
+    "type": "_suffix",
     "named": false
   },
   {
@@ -591,6 +687,18 @@
   },
   {
     "type": "quote_prefix",
+    "named": true
+  },
+  {
+    "type": "todo_item_done",
+    "named": true
+  },
+  {
+    "type": "todo_item_pending",
+    "named": true
+  },
+  {
+    "type": "todo_item_undone",
     "named": true
   },
   {

@@ -507,6 +507,105 @@
         ]
       }
     },
+    "todo_item_undone": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\s+"
+      }
+    },
+    "todo_item_pending": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "*"
+      }
+    },
+    "todo_item_done": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "x"
+      }
+    },
+    "todo_item_suffix": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "]"
+      }
+    },
+    "todo_item": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list_prefix"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "todo_item_prefix"
+          },
+          "named": false,
+          "value": "_prefix"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "undone_token",
+              "content": {
+                "type": "SYMBOL",
+                "name": "todo_item_undone"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "pending_token",
+              "content": {
+                "type": "SYMBOL",
+                "name": "todo_item_pending"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "done_token",
+              "content": {
+                "type": "SYMBOL",
+                "name": "todo_item_done"
+              }
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "todo_item_suffix"
+          },
+          "named": false,
+          "value": "_suffix"
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\s+"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
+          }
+        }
+      ]
+    },
     "_standalone_break": {
       "type": "TOKEN",
       "content": {
@@ -553,6 +652,10 @@
         {
           "type": "SYMBOL",
           "name": "unordered_list"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item"
         }
       ]
     }
@@ -613,6 +716,10 @@
     {
       "type": "SYMBOL",
       "name": "marker_prefix"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "todo_item_prefix"
     },
     {
       "type": "SYMBOL",

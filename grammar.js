@@ -17,6 +17,7 @@ module.exports = grammar({
         $.quote_prefix,
         $.unordered_list_prefix,
         $.marker_prefix,
+        $.todo_item_prefix,
 
         $.paragraph_delimiter
   	],
@@ -297,6 +298,60 @@ module.exports = grammar({
                 )
             ),
 
+        // TODO ITEMS
+        todo_item_undone: $ =>
+            token.immediate(/\s+/),
+
+        todo_item_pending: $ =>
+            token("*"),
+
+        todo_item_done: $ =>
+            token("x"),
+
+        todo_item_suffix: $ =>
+            token.immediate(']'),
+
+        // THOUGHTS: If a user misspells a char here it becomes an error rather than falling back
+        // to becoming a paragraph - is this the behaviour we want?
+        todo_item: $ =>
+            seq(
+                $.unordered_list_prefix,
+
+                alias(
+                    $.todo_item_prefix,
+                    "_prefix",
+                ),
+
+                choice(
+                    field(
+                        "undone_token",
+                        $.todo_item_undone,
+                    ),
+                    field(
+                        "pending_token",
+                        $.todo_item_pending,
+                    ),
+                    field(
+                        "done_token",
+                        $.todo_item_done,
+                    )
+                ),
+
+                alias(
+                    $.todo_item_suffix,
+                    "_suffix",
+                ),
+
+                token(/\s+/),
+
+                field(
+                    "content",
+                    $.paragraph_segment
+                )
+            ),
+
+        // END OF TODO ITEMS
+
         _standalone_break: $ =>
             token(/\n/),
 
@@ -315,6 +370,7 @@ module.exports = grammar({
             choice(
                 $.quote,
                 $.unordered_list,
+                $.todo_item,
             ),
 
     	/*

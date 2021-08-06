@@ -22,6 +22,7 @@ enum TokenType
 	QUOTE,
 	UNORDERED_LIST,
     MARKER,
+    TODO_ITEM,
 
     PARAGRAPH_DELIMITER,
 };
@@ -85,6 +86,8 @@ public:
     {
         static_assert(Size > 0, "check_detached Size template must be greater than 0");
 
+        m_LastDetached = NONE;
+
         size_t i = 0;
 
         // Skip all trailing whitespace
@@ -121,6 +124,8 @@ public:
 
                 lexer->result_symbol = result;
                 lexer->mark_end(lexer);
+
+                m_LastDetached = result;
 
                 return result;
             }
@@ -181,6 +186,13 @@ public:
             return true;
         }
 
+        if (m_LastDetached == UNORDERED_LIST && lexer->lookahead == '[')
+        {
+            advance(lexer);
+            lexer->result_symbol = TODO_ITEM;
+            return true;
+        }
+
         if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
             return true;
 
@@ -214,6 +226,7 @@ public:
 	}
 private:
 	unsigned char m_Current = 0;
+	TokenType m_LastDetached = NONE;
     constexpr static const std::array<unsigned char, 4> s_DetachedModifiers = { '*', '-', '>', '|' };
 };
 
