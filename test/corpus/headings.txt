@@ -7,22 +7,41 @@ And some text for that heading.
 ** Then I go into some more detail here
    And talk about some really important things
 
-This is a new paragraph, one that has nothing bound to it.
-And this is a direct continuation~
-of that paragraph.
+*** I would like to continue~
+    this text here
 
-Last paragraph
+    And talk about that thing here too
+
+This is a new paragraph.
+This paragraph will belong to the subsubheading. The reason is
+Neorg doesn't care about indentation
+
+===
+
+Last paragraph here
 ---
 
 (document
-	(paragraph
-		(heading1 (paragraph_segment (words)))
-		(paragraph_segment (words)))
-	(paragraph
-		(heading2 (paragraph_segment (words)))
-		(paragraph_segment (words)))
-	(paragraph
-		(paragraph_segment (words))
-		(paragraph_segment (words) (trailing_modifier) (paragraph_segment (words))))
-	(paragraph (paragraph_segment (words)))
+	(heading1
+	    (heading1_prefix)
+	    title: (paragraph_segment)
+	    content: (paragraph)
+
+	    content:
+	        (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content: (paragraph)
+                content:
+                    (heading3
+                        (heading3_prefix)
+                        title: (paragraph_segment)
+                        content: (paragraph)
+                        content: (paragraph)
+                    )
+	        )
+	)
+
+	(paragraph_delimiter)
+	(paragraph)
 )

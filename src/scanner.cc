@@ -213,6 +213,15 @@ public:
         {
             while (lexer->lookahead)
             {
+                // If we have an escape sequence in the middle of the paragraph then terminate the paragraph
+                // to allow the escape sequence to get parsed
+                if (lexer->lookahead == '\\')
+                {
+                    lexer->result_symbol = PARAGRAPH_SEGMENT;
+                    lexer->mark_end(lexer);
+                    return true;
+                }
+
                 // Try and find an occurrence of a trailing modifier
                 if (!std::iswspace(m_Current) && lexer->lookahead == '~')
                 {
@@ -241,7 +250,11 @@ public:
         return false;
 	}
 private:
+	// Stores the current char rather than the next char
 	unsigned char m_Current = 0;
+
+	// The last matched token type (used to detect things like todo items
+	// which require an unordered list prefix beforehand)
 	TokenType m_LastDetached = NONE;
 
 private:
