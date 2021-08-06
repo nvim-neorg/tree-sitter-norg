@@ -193,7 +193,7 @@ public:
             return true;
         }
 
-        if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, { '*' }) != NONE)
+        if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6 | NONE, { '*' }) != NONE)
             return true;
 
         if (check_detached(lexer, QUOTE | NONE, { '>' }) != NONE)
@@ -211,8 +211,23 @@ public:
         // Match paragraphs
         if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
         {
-            while (lexer->lookahead && lexer->lookahead != '\n')
+            while (lexer->lookahead)
+            {
+                // Try and find an occurrence of a trailing modifier
+                if (!std::iswspace(m_Current) && lexer->lookahead == '~')
+                {
+                    advance(lexer);
+
+                    // If we've managed to find one then skip over the newline and continue parsing
+                    if (lexer->lookahead == '\n')
+                        continue;
+                }
+
                 advance(lexer);
+
+                if (lexer->lookahead == '\n')
+                    break;
+            }
 
             if (lexer->lookahead)
                 advance(lexer);
@@ -228,6 +243,8 @@ public:
 private:
 	unsigned char m_Current = 0;
 	TokenType m_LastDetached = NONE;
+
+private:
     constexpr static const std::array<unsigned char, 4> s_DetachedModifiers = { '*', '-', '>', '|' };
 };
 
