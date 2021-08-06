@@ -212,7 +212,19 @@ public:
         if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
         {
             while (lexer->lookahead && lexer->lookahead != '\n')
+            {
+                if (lexer->lookahead == '~' && !std::iswspace(m_Current))
+                {
+                    advance(lexer);
+                    if (lexer->lookahead == '\n')
+                    {
+                        advance(lexer);
+                        advance(lexer);
+                    }
+                }
+
                 advance(lexer);
+            }
 
             skip(lexer);
 
