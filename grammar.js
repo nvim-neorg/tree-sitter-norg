@@ -19,7 +19,6 @@ module.exports = grammar({
         $.marker_prefix,
         $.todo_item_prefix,
 
-        $.generic_delimiter,
         $.paragraph_delimiter,
   	],
 
@@ -40,7 +39,6 @@ module.exports = grammar({
 
                 $.paragraph,
                 $.paragraph_delimiter,
-                $.generic_delimiter,
             )
         ),
 
@@ -348,7 +346,7 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph_segment
+                    $.paragraph
                 )
             ),
 

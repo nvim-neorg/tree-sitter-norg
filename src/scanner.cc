@@ -24,7 +24,6 @@ enum TokenType
     MARKER,
     TODO_ITEM,
 
-    GENERIC_DELIMITER,
     PARAGRAPH_DELIMITER,
 };
 
@@ -194,12 +193,6 @@ public:
             return true;
         }
 
-        if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
-            return true;
-
-        if (check_delimiting(lexer, '-', GENERIC_DELIMITER) != NONE)
-            return true;
-
         if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, { '*' }) != NONE)
             return true;
 
@@ -212,24 +205,17 @@ public:
         if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
             return true;
 
+        if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
+            return true;
+
         // Match paragraphs
         if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
         {
             while (lexer->lookahead && lexer->lookahead != '\n')
-            {
-                if (lexer->lookahead == '~' && !std::iswspace(m_Current))
-                {
-                    advance(lexer);
-                    if (lexer->lookahead == '\n')
-                    {
-                        advance(lexer);
-                    }
-                }
-
                 advance(lexer);
-            }
 
-            advance(lexer);
+            if (lexer->lookahead)
+                advance(lexer);
 
             lexer->result_symbol = PARAGRAPH_SEGMENT;
             lexer->mark_end(lexer);

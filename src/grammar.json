@@ -42,10 +42,6 @@
           {
             "type": "SYMBOL",
             "name": "paragraph_delimiter"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "generic_delimiter"
           }
         ]
       }
@@ -605,7 +601,7 @@
           "name": "content",
           "content": {
             "type": "SYMBOL",
-            "name": "paragraph_segment"
+            "name": "paragraph"
           }
         }
       ]
@@ -724,10 +720,6 @@
     {
       "type": "SYMBOL",
       "name": "todo_item_prefix"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "generic_delimiter"
     },
     {
       "type": "SYMBOL",

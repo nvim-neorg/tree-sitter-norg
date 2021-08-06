@@ -12,10 +12,6 @@
           "named": true
         },
         {
-          "type": "generic_delimiter",
-          "named": true
-        },
-        {
           "type": "heading1",
           "named": true
         },
@@ -560,7 +556,7 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
@@ -651,10 +647,6 @@
   },
   {
     "type": "escape_sequence_prefix",
-    "named": true
-  },
-  {
-    "type": "generic_delimiter",
     "named": true
   },
   {
