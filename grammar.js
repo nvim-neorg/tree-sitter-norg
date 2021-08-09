@@ -53,6 +53,7 @@ module.exports = grammar({
                 )
             ),
 
+        // Well, any character
         any_char: $ =>
             token.immediate(/./),
 

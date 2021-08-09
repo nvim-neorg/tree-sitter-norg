@@ -42,20 +42,97 @@ namespace
     }
 }
 
-namespace utils
-{
-    // Generic clamp function, I'm aware of std::clamp but I haven't been bothered to set my compile_commands.json to use C++17/C++20 yet lol
-    template <typename T>
-    T clamp(const T& value, const T& min, const T& max)
-    {
-        return (value < min ? min : (value > max ? max : value));
-    }
-}
-
 class Scanner
 {
 public:
+    bool scan(TSLexer* lexer, const bool* valid_symbols)
+	{
+	    // Are we at the end of file? If so, bail
+	    if (lexer->eof(lexer))
+	        return false;
 
+        if (!m_Whitespace && (lexer->lookahead == '\n' || !lexer->lookahead))
+            m_Whitespace = false;
+        else if (lexer->lookahead != '\n')
+            m_Whitespace = true;
+
+        // Check for an escape seqence (e.g. "\*")
+        if (lexer->lookahead == '\\')
+        {
+            advance(lexer);
+
+            lexer->result_symbol = ESCAPE_SEQUENCE;
+            lexer->mark_end(lexer);
+            return true;
+        }
+
+        if (m_LastDetached == UNORDERED_LIST && lexer->lookahead == '[')
+        {
+            advance(lexer);
+            lexer->result_symbol = TODO_ITEM;
+            return true;
+        }
+
+        if (m_Whitespace)
+        {
+            if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6 | NONE, { '*' }) != NONE)
+                return true;
+
+            if (check_detached(lexer, QUOTE | NONE, { '>' }) != NONE)
+                return true;
+
+            if (check_detached(lexer, UNORDERED_LIST | NONE, { '-' }) != NONE)
+                return true;
+
+            if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
+                return true;
+
+            if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
+                return true;
+        }
+
+        // Match paragraphs
+        if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
+        {
+            while (lexer->lookahead)
+            {
+                // If we have an escape sequence in the middle of the paragraph then terminate the paragraph
+                // to allow the escape sequence to get parsed
+                if (lexer->lookahead == '\\')
+                {
+                    lexer->result_symbol = PARAGRAPH_SEGMENT;
+                    lexer->mark_end(lexer);
+                    return true;
+                }
+
+                // Try and find an occurrence of a trailing modifier
+                if (!std::iswspace(m_Current) && lexer->lookahead == '~')
+                {
+                    advance(lexer);
+
+                    // If we've managed to find one then skip over the newline and continue parsing
+                    if (lexer->lookahead == '\n')
+                        continue;
+                }
+
+                advance(lexer);
+
+                if (lexer->lookahead == '\n')
+                    break;
+            }
+
+            if (lexer->lookahead)
+                advance(lexer);
+
+            lexer->result_symbol = PARAGRAPH_SEGMENT;
+            lexer->mark_end(lexer);
+
+            return true;
+        }
+
+        return false;
+	}
+private:
 	void skip(TSLexer* lexer)
 	{
 	    m_Current = lexer->lookahead;
@@ -101,7 +178,7 @@ public:
         {
             // If the next character is not one we expect then break
             // We use clamp() here to prevent overflow and to make the last element of the expected array the fallback
-            if (lexer->lookahead != expected[utils::clamp(i, 0UL, Size - 1)])
+            if (lexer->lookahead != expected[std::clamp(i, 0UL, Size - 1)])
                 break;
 
             advance(lexer);
@@ -116,7 +193,7 @@ public:
 
                 // Retrieve the correct result from the list of provided results depending on how many characters were matched.
                 // If we've exceeded the number of results then the clamp function will fall back to the last element
-                TokenType result = results[utils::clamp(i, 0UL, results.size() - 1)];
+                TokenType result = results[std::clamp(i, 0UL, results.size() - 1)];
 
                 // Skip any other potential whitespace
                 while (lexer->lookahead && std::iswspace(lexer->lookahead))
@@ -170,88 +247,12 @@ public:
         return NONE;
     }
 
-	bool scan(TSLexer* lexer, const bool* valid_symbols)
-	{
-	    // Are we at the end of file? If so, bail
-	    if (lexer->eof(lexer))
-	        return false;
-
-        // Check for an escape seqence (e.g. "\*")
-        if (lexer->lookahead == '\\')
-        {
-            advance(lexer);
-
-            lexer->result_symbol = ESCAPE_SEQUENCE;
-            lexer->mark_end(lexer);
-            return true;
-        }
-
-        if (m_LastDetached == UNORDERED_LIST && lexer->lookahead == '[')
-        {
-            advance(lexer);
-            lexer->result_symbol = TODO_ITEM;
-            return true;
-        }
-
-        if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6 | NONE, { '*' }) != NONE)
-            return true;
-
-        if (check_detached(lexer, QUOTE | NONE, { '>' }) != NONE)
-            return true;
-
-        if (check_detached(lexer, UNORDERED_LIST | NONE, { '-' }) != NONE)
-            return true;
-
-        if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
-            return true;
-
-        if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
-            return true;
-
-        // Match paragraphs
-        if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
-        {
-            while (lexer->lookahead)
-            {
-                // If we have an escape sequence in the middle of the paragraph then terminate the paragraph
-                // to allow the escape sequence to get parsed
-                if (lexer->lookahead == '\\')
-                {
-                    lexer->result_symbol = PARAGRAPH_SEGMENT;
-                    lexer->mark_end(lexer);
-                    return true;
-                }
-
-                // Try and find an occurrence of a trailing modifier
-                if (!std::iswspace(m_Current) && lexer->lookahead == '~')
-                {
-                    advance(lexer);
-
-                    // If we've managed to find one then skip over the newline and continue parsing
-                    if (lexer->lookahead == '\n')
-                        continue;
-                }
-
-                advance(lexer);
-
-                if (lexer->lookahead == '\n')
-                    break;
-            }
-
-            if (lexer->lookahead)
-                advance(lexer);
-
-            lexer->result_symbol = PARAGRAPH_SEGMENT;
-            lexer->mark_end(lexer);
-
-            return true;
-        }
-
-        return false;
-	}
+	
 private:
 	// Stores the current char rather than the next char
 	unsigned char m_Current = 0;
+
+    bool m_Whitespace = false;
 
 	// The last matched token type (used to detect things like todo items
 	// which require an unordered list prefix beforehand)
