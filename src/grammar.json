@@ -33,10 +33,6 @@
           },
           {
             "type": "SYMBOL",
-            "name": "escape_sequence"
-          },
-          {
-            "type": "SYMBOL",
             "name": "paragraph"
           },
           {
@@ -52,13 +48,26 @@
       "content": {
         "type": "REPEAT1",
         "content": {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "paragraph_segment"
-          },
-          "named": false,
-          "value": "_segment"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "paragraph_segment"
+              },
+              "named": false,
+              "value": "_segment"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "link"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "escape_sequence"
+            }
+          ]
         }
       }
     },
@@ -82,6 +91,90 @@
           "content": {
             "type": "SYMBOL",
             "name": "any_char"
+          }
+        }
+      ]
+    },
+    "link": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "link_begin"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_generic"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_url"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_heading1_reference"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_heading2_reference"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_heading3_reference"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_heading4_reference"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_heading5_reference"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_heading6_reference"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_marker_reference"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "link_end_drawer_reference"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "unordered_link": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "unordered_link_prefix"
+          },
+          "named": false,
+          "value": "_prefix"
+        },
+        {
+          "type": "FIELD",
+          "name": "location",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link"
           }
         }
       ]
@@ -494,10 +587,6 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "escape_sequence"
-                  },
-                  {
-                    "type": "SYMBOL",
                     "name": "_standalone_break"
                   }
                 ]
@@ -651,6 +740,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "unordered_link"
+        },
+        {
+          "type": "SYMBOL",
           "name": "unordered_list"
         },
         {
@@ -723,7 +816,55 @@
     },
     {
       "type": "SYMBOL",
+      "name": "unordered_link_prefix"
+    },
+    {
+      "type": "SYMBOL",
       "name": "paragraph_delimiter"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_begin"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_generic"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_url"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_heading1_reference"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_heading2_reference"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_heading3_reference"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_heading4_reference"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_heading5_reference"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_heading6_reference"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_marker_reference"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end_drawer_reference"
     }
   ],
   "inline": [],

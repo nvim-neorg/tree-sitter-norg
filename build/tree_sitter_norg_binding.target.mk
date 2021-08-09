@@ -41,13 +41,13 @@ CFLAGS_CC_Debug := \
 	-std=c++20
 
 INCS_Debug := \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/include/node \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/src \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/openssl/config \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/openssl/openssl/include \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/uv/include \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/zlib \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/v8/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/include/node \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/src \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/openssl/config \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/openssl/openssl/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/uv/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/zlib \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/v8/include \
 	-I$(srcdir)/node_modules/nan \
 	-I$(srcdir)/src
 
@@ -87,13 +87,13 @@ CFLAGS_CC_Release := \
 	-std=c++20
 
 INCS_Release := \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/include/node \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/src \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/openssl/config \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/openssl/openssl/include \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/uv/include \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/zlib \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/v8/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/include/node \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/src \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/openssl/config \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/openssl/openssl/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/uv/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/zlib \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/v8/include \
 	-I$(srcdir)/node_modules/nan \
 	-I$(srcdir)/src
 

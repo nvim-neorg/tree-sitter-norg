@@ -18,8 +18,21 @@ module.exports = grammar({
         $.unordered_list_prefix,
         $.marker_prefix,
         $.todo_item_prefix,
+        $.unordered_link_prefix,
 
         $.paragraph_delimiter,
+
+        $.link_begin,
+        $.link_end_generic,
+        $.link_end_url,
+        $.link_end_heading1_reference,
+        $.link_end_heading2_reference,
+        $.link_end_heading3_reference,
+        $.link_end_heading4_reference,
+        $.link_end_heading5_reference,
+        $.link_end_heading6_reference,
+        $.link_end_marker_reference,
+        $.link_end_drawer_reference,
   	],
 
   	rules: {
@@ -35,8 +48,6 @@ module.exports = grammar({
                     )
                 ),
 
-                $.escape_sequence,
-
                 $.paragraph,
                 $.paragraph_delimiter,
             )
@@ -46,9 +57,14 @@ module.exports = grammar({
         paragraph: $ =>
             prec.right(0,
                 repeat1(
-                    alias(
-                        $.paragraph_segment,
-                        "_segment",
+                    choice(
+                        alias(
+                            $.paragraph_segment,
+                            "_segment",
+                        ),
+
+                        $.link,
+                        $.escape_sequence,
                     )
                 )
             ),
@@ -67,6 +83,10 @@ module.exports = grammar({
                     $.any_char,
                 )
             ),
+
+        link: $ => seq($.link_begin, optional(field("location", choice($.link_end_generic, $.link_end_url, $.link_end_heading1_reference, $.link_end_heading2_reference, $.link_end_heading3_reference, $.link_end_heading4_reference, $.link_end_heading5_reference, $.link_end_heading6_reference, $.link_end_marker_reference, $.link_end_drawer_reference)))),
+
+        unordered_link: $ => seq(alias($.unordered_link_prefix, "_prefix"), field("location", $.link)),
 
         // A first-level heading:
         // * Example
@@ -291,7 +311,6 @@ module.exports = grammar({
                                 $.paragraph_delimiter,
                                 $._heading,
                                 $._detached_modifier,
-                                $.escape_sequence,
                                 $._standalone_break,
                             ),
                         ),
@@ -370,6 +389,7 @@ module.exports = grammar({
         _detached_modifier: $ =>
             choice(
                 $.quote,
+                $.unordered_link,
                 $.unordered_list,
                 $.todo_item,
             ),
