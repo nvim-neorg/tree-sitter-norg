@@ -84,9 +84,40 @@ module.exports = grammar({
                 )
             ),
 
-        link: $ => seq($.link_begin, optional(field("location", choice($.link_end_generic, $.link_end_url, $.link_end_heading1_reference, $.link_end_heading2_reference, $.link_end_heading3_reference, $.link_end_heading4_reference, $.link_end_heading5_reference, $.link_end_heading6_reference, $.link_end_marker_reference, $.link_end_drawer_reference)))),
+        link: $ =>
+            seq(
+                $.link_begin,
+                optional(
+                    field(
+                        "location",
+                        choice(
+                            $.link_end_generic,
+                            $.link_end_url,
+                            $.link_end_heading1_reference,
+                            $.link_end_heading2_reference,
+                            $.link_end_heading3_reference,
+                            $.link_end_heading4_reference,
+                            $.link_end_heading5_reference,
+                            $.link_end_heading6_reference,
+                            $.link_end_marker_reference,
+                            $.link_end_drawer_reference,
+                        )
+                    )
+                )
+            ),
 
-        unordered_link: $ => seq(alias($.unordered_link_prefix, "_prefix"), field("location", $.link)),
+        unordered_link: $ =>
+            seq(
+                alias(
+                    $.unordered_link_prefix,
+                    "_prefix"
+                ),
+
+                field(
+                    "location",
+                    $.link
+                )
+            ),
 
         // A first-level heading:
         // * Example

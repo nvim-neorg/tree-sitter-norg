@@ -463,53 +463,60 @@
   {
     "type": "link",
     "named": true,
-    "fields": {},
+    "fields": {
+      "location": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "link_end_drawer_reference",
+            "named": true
+          },
+          {
+            "type": "link_end_generic",
+            "named": true
+          },
+          {
+            "type": "link_end_heading1_reference",
+            "named": true
+          },
+          {
+            "type": "link_end_heading2_reference",
+            "named": true
+          },
+          {
+            "type": "link_end_heading3_reference",
+            "named": true
+          },
+          {
+            "type": "link_end_heading4_reference",
+            "named": true
+          },
+          {
+            "type": "link_end_heading5_reference",
+            "named": true
+          },
+          {
+            "type": "link_end_heading6_reference",
+            "named": true
+          },
+          {
+            "type": "link_end_marker_reference",
+            "named": true
+          },
+          {
+            "type": "link_end_url",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "link_begin",
-          "named": true
-        },
-        {
-          "type": "link_end_drawer_reference",
-          "named": true
-        },
-        {
-          "type": "link_end_generic",
-          "named": true
-        },
-        {
-          "type": "link_end_heading1_reference",
-          "named": true
-        },
-        {
-          "type": "link_end_heading2_reference",
-          "named": true
-        },
-        {
-          "type": "link_end_heading3_reference",
-          "named": true
-        },
-        {
-          "type": "link_end_heading4_reference",
-          "named": true
-        },
-        {
-          "type": "link_end_heading5_reference",
-          "named": true
-        },
-        {
-          "type": "link_end_heading6_reference",
-          "named": true
-        },
-        {
-          "type": "link_end_marker_reference",
-          "named": true
-        },
-        {
-          "type": "link_end_url",
           "named": true
         }
       ]

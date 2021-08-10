@@ -368,6 +368,9 @@ private:
                 break;
         }
 
+        if (lexer->lookahead)
+            advance(lexer);
+
         m_LastToken = PARAGRAPH_SEGMENT;
         lexer->result_symbol = PARAGRAPH_SEGMENT;
 

@@ -106,49 +106,53 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_generic"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_url"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_heading1_reference"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_heading2_reference"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_heading3_reference"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_heading4_reference"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_heading5_reference"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_heading6_reference"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_marker_reference"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "link_end_drawer_reference"
-                }
-              ]
+              "type": "FIELD",
+              "name": "location",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_generic"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_url"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_heading1_reference"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_heading2_reference"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_heading3_reference"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_heading4_reference"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_heading5_reference"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_heading6_reference"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_marker_reference"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "link_end_drawer_reference"
+                  }
+                ]
+              }
             },
             {
               "type": "BLANK"

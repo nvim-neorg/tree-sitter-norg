@@ -2333,7 +2333,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [375] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_paragraph_repeat1, 2), SHIFT_REPEAT(22),
   [378] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_unordered_list, 2, .production_id = 4),
   [380] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_unordered_link, 2, .production_id = 6),
-  [382] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_link, 2),
+  [382] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_link, 2, .production_id = 6),
   [384] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_paragraph_repeat1, 1, .production_id = 1),
   [386] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_quote, 2, .production_id = 4),
   [388] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_escape_sequence, 2, .production_id = 2),
