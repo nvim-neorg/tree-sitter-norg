@@ -9,29 +9,29 @@ enum TokenType
 {
     NONE,
 
-	PARAGRAPH_SEGMENT,
-	ESCAPE_SEQUENCE,
+    PARAGRAPH_SEGMENT,
+    ESCAPE_SEQUENCE,
 
-	HEADING1,
-	HEADING2,
-	HEADING3,
-	HEADING4,
-	HEADING5,
-	HEADING6,
+    HEADING1,
+    HEADING2,
+    HEADING3,
+    HEADING4,
+    HEADING5,
+    HEADING6,
 
-	QUOTE1,
-	QUOTE2,
-	QUOTE3,
-	QUOTE4,
-	QUOTE5,
-	QUOTE6,
+    QUOTE1,
+    QUOTE2,
+    QUOTE3,
+    QUOTE4,
+    QUOTE5,
+    QUOTE6,
 
-	UNORDERED_LIST1,
-	UNORDERED_LIST2,
-	UNORDERED_LIST3,
-	UNORDERED_LIST4,
-	UNORDERED_LIST5,
-	UNORDERED_LIST6,
+    UNORDERED_LIST1,
+    UNORDERED_LIST2,
+    UNORDERED_LIST3,
+    UNORDERED_LIST4,
+    UNORDERED_LIST5,
+    UNORDERED_LIST6,
 
     MARKER,
     DRAWER,
@@ -73,10 +73,10 @@ class Scanner
 {
 public:
     bool scan(TSLexer* lexer, const bool* valid_symbols)
-	{
-	    // Are we at the end of file? If so, bail
-	    if (lexer->eof(lexer))
-	        return false;
+    {
+        // Are we at the end of file? If so, bail
+        if (lexer->eof(lexer))
+            return false;
 
         lexer->result_symbol = NONE;
 
@@ -108,16 +108,15 @@ public:
         // If we're at the beginning of a line check for all detached modifiers
         if (m_Whitespace)
         {
-
             if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6 | NONE, { '*' }) != NONE)
                 return true;
 
             if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6 | NONE, { '>' }) != NONE)
                 return true;
 
-            // TODO: Readd support for the unordered link
-            if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' }) != NONE)
-                return true;
+            // TODO: Add different unordered link levels
+            if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' }, { '>', UNORDERED_LINK | NONE }) != NONE)
+                    return true;
 
             if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
                 return true;
@@ -132,7 +131,6 @@ public:
 
             if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
                 return true;
-
         }
 
         // Match paragraphs
@@ -140,26 +138,26 @@ public:
             return parse_text(lexer);
 
         return false;
-	}
+    }
 private:
-	void skip(TSLexer* lexer)
-	{
-	    m_Previous = m_Current;
-	    m_Current = lexer->lookahead;
-		return lexer->advance(lexer, true);
-	}
+    void skip(TSLexer* lexer)
+    {
+        m_Previous = m_Current;
+        m_Current = lexer->lookahead;
+        return lexer->advance(lexer, true);
+    }
 
-	void advance(TSLexer* lexer)
-	{
-	    m_Previous = m_Current;
-	    m_Current = lexer->lookahead;
-		return lexer->advance(lexer, false);
-	}
+    void advance(TSLexer* lexer)
+    {
+        m_Previous = m_Current;
+        m_Current = lexer->lookahead;
+        return lexer->advance(lexer, false);
+    }
 
     template <size_t Size = 1>
-    inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<unsigned char, Size>& expected)
+    inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<unsigned char, Size>& expected, std::pair<char, TokenType> terminate_at = { 0, NONE })
     {
-        return check_detached(lexer, result | NONE, expected);
+        return check_detached(lexer, result | NONE, expected, { terminate_at.first, terminate_at.second | NONE });
     }
 
     /*
@@ -170,7 +168,7 @@ private:
      */
     template <size_t Size = 1>
     [[nodiscard("You want to check whether we managed to match a detached token, not just let a function aimlessly run doofus")]]
-    TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<unsigned char, Size>& expected)
+    TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<unsigned char, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
     {
         static_assert(Size > 0, "check_detached Size template must be greater than 0");
 
@@ -185,6 +183,22 @@ private:
                 detached_modifier != s_DetachedModifiers.end();
                     detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead), i++)
         {
+            // If we've specified a termination character and we match then the token lexing prematurely
+            if (lexer->lookahead == terminate_at.first)
+            {
+                advance(lexer);
+
+                // Skip other potential whitespace
+                while (lexer->lookahead && std::iswspace(lexer->lookahead))
+                    advance(lexer);
+
+                TokenType result = terminate_at.second[std::clamp(i, 0UL, terminate_at.second.size()) - 1];
+
+                lexer->result_symbol = result;
+
+                return result;
+            }
+
             // If the next character is not one we expect then break
             // We use clamp() here to prevent overflow and to make the last element of the expected array the fallback
             if (lexer->lookahead != expected[std::clamp(i, 0UL, Size - 1)])
@@ -361,10 +375,10 @@ private:
 
         return false;
     }
-	
-	/*
-	 * Simply parses any line (also called a paragraph segment)
-	 */
+    
+    /*
+     * Simply parses any line (also called a paragraph segment)
+     */
     bool parse_text(TSLexer* lexer)
     {
         while (lexer->lookahead)
@@ -412,16 +426,19 @@ private:
     }
 
 private:
-	// Stores the current char rather than the next char
-	unsigned char m_Previous = 0, m_Current = 0;
+    // Stores the current char rather than the next char
+    unsigned char m_Previous = 0, m_Current = 0;
 
     // If true then we are at the beginning of a line (i.e. no non-whitespace chars have been encountered
     // since the beginning of the line)
     bool m_Whitespace = false;
 
-	// The last matched token type (used to detect things like todo items
-	// which require an unordered list prefix beforehand)
-	TokenType m_LastToken = NONE;
+    // The last matched token type (used to detect things like todo items
+    // which require an unordered list prefix beforehand)
+    TokenType m_LastToken = NONE;
+
+    // Used for lookback
+    std::string m_Buffer;
 
 private:
     constexpr static const std::array<unsigned char, 4> s_DetachedModifiers = { '*', '-', '>', '|' };
@@ -429,25 +446,25 @@ private:
 
 extern "C"
 {
-	void* tree_sitter_norg_external_scanner_create()
-	{
-		return new Scanner();
-	}
+    void* tree_sitter_norg_external_scanner_create()
+    {
+        return new Scanner();
+    }
 
-	void tree_sitter_norg_external_scanner_destroy(void* payload)
-	{
-  		delete static_cast<Scanner*>(payload);
-	}
+    void tree_sitter_norg_external_scanner_destroy(void* payload)
+    {
+          delete static_cast<Scanner*>(payload);
+    }
 
-	bool tree_sitter_norg_external_scanner_scan(void* payload, TSLexer* lexer, const bool* valid_symbols)
-	{
-  		return static_cast<Scanner*>(payload)->scan(lexer, valid_symbols);
-	}
+    bool tree_sitter_norg_external_scanner_scan(void* payload, TSLexer* lexer, const bool* valid_symbols)
+    {
+          return static_cast<Scanner*>(payload)->scan(lexer, valid_symbols);
+    }
 
-	unsigned tree_sitter_norg_external_scanner_serialize(void* payload, char* buffer)
-	{
-  		return 0;
-	}
+    unsigned tree_sitter_norg_external_scanner_serialize(void* payload, char* buffer)
+    {
+          return 0;
+    }
 
-	void tree_sitter_norg_external_scanner_deserialize(void* payload, const char* buffer, unsigned length) {}
+    void tree_sitter_norg_external_scanner_deserialize(void* payload, const char* buffer, unsigned length) {}
 }
