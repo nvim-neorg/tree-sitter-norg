@@ -19,9 +19,23 @@ enum TokenType
 	HEADING5,
 	HEADING6,
 
-	QUOTE,
-	UNORDERED_LIST,
+	QUOTE1,
+	QUOTE2,
+	QUOTE3,
+	QUOTE4,
+	QUOTE5,
+	QUOTE6,
+
+	UNORDERED_LIST1,
+	UNORDERED_LIST2,
+	UNORDERED_LIST3,
+	UNORDERED_LIST4,
+	UNORDERED_LIST5,
+	UNORDERED_LIST6,
+
     MARKER,
+    DRAWER,
+    DRAWER_SUFFIX,
     TODO_ITEM,
     UNORDERED_LINK,
 
@@ -45,7 +59,7 @@ namespace
 {
     std::vector<TokenType> operator|(TokenType lhs, TokenType rhs)
     {
-        return std::vector<TokenType> { lhs, rhs };
+        return std::vector<TokenType> { lhs, static_cast<TokenType>(rhs) };
     }
 
     decltype(auto) operator|(std::vector<TokenType>&& lhs, TokenType rhs)
@@ -64,6 +78,8 @@ public:
 	    if (lexer->eof(lexer))
 	        return false;
 
+        lexer->result_symbol = NONE;
+
         if (!m_Whitespace && (lexer->lookahead == '\n' || !lexer->lookahead))
             m_Whitespace = false;
         else if (lexer->lookahead != '\n')
@@ -79,7 +95,7 @@ public:
         }
 
         // If the last matched token was an unordered list check whether we are dealing with a todo item
-        if (m_LastToken == UNORDERED_LIST && lexer->lookahead == '[')
+        if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 && lexer->lookahead == '[')
         {
             advance(lexer);
             lexer->result_symbol = TODO_ITEM;
@@ -92,20 +108,31 @@ public:
         // If we're at the beginning of a line check for all detached modifiers
         if (m_Whitespace)
         {
+
             if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6 | NONE, { '*' }) != NONE)
                 return true;
 
-            if (check_detached(lexer, QUOTE | NONE, { '>' }) != NONE)
+            if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6 | NONE, { '>' }) != NONE)
                 return true;
 
-            if (check_detached<2>(lexer, UNORDERED_LIST | UNORDERED_LINK | NONE, { '-', '>' }) != NONE)
+            // TODO: Readd support for the unordered link
+            if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' }) != NONE)
                 return true;
 
-            if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
+            if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
                 return true;
+
+            if (m_Current == '|' && (lexer->lookahead == '\n' || !lexer->lookahead))
+            {
+                advance(lexer);
+                lexer->result_symbol = DRAWER_SUFFIX;
+                lexer->mark_end(lexer);
+                return true;
+            }
 
             if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
                 return true;
+
         }
 
         // Match paragraphs
@@ -117,12 +144,14 @@ public:
 private:
 	void skip(TSLexer* lexer)
 	{
+	    m_Previous = m_Current;
 	    m_Current = lexer->lookahead;
 		return lexer->advance(lexer, true);
 	}
 
 	void advance(TSLexer* lexer)
 	{
+	    m_Previous = m_Current;
 	    m_Current = lexer->lookahead;
 		return lexer->advance(lexer, false);
 	}
@@ -130,7 +159,7 @@ private:
     template <size_t Size = 1>
     inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<unsigned char, Size>& expected)
     {
-        return check_detached(lexer, std::vector<TokenType>(1, result), expected);
+        return check_detached(lexer, result | NONE, expected);
     }
 
     /*
@@ -144,8 +173,6 @@ private:
     TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<unsigned char, Size>& expected)
     {
         static_assert(Size > 0, "check_detached Size template must be greater than 0");
-
-        m_LastToken = NONE;
 
         size_t i = 0;
 
@@ -166,7 +193,7 @@ private:
             advance(lexer);
 
             // If the next character is whitespace (which is the distinguishing factor between an attached/detached modifier)
-            if (std::iswspace(lexer->lookahead))
+            if (std::iswspace(lexer->lookahead) && (lexer->lookahead != '\n'))
             {
                 // Retrieve the correct result from the list of provided results depending on how many characters were matched.
                 // If we've exceeded the number of results then the clamp function will fall back to the last element
@@ -261,9 +288,16 @@ private:
         // This means we're dealing with a link location
         else if (lexer->lookahead == '(')
         {
-            TokenType result = NONE;
-
             advance(lexer);
+
+            if (lexer->lookahead == ':')
+            {
+                while (lexer->lookahead != '*' && lexer->lookahead != '#' && lexer->lookahead != '|' && lexer->lookahead != ')')
+                    advance(lexer);
+                if (m_Current != ':')
+                    return true;
+            }
+
             advance(lexer);
 
             // Is the current char an asterisk? We're dealing with a heading reference.
@@ -312,7 +346,7 @@ private:
                 }
                 // This is our method of checking for a URL
                 // If there's a :// in the string we just assume that it's a URL and that's it
-                else if (m_Current == ':' && lexer->lookahead == '/')
+                else if (m_Current == ':' && lexer->lookahead == '/' && lexer->result_symbol == NONE)
                 {
                     advance(lexer);
                     if (lexer->lookahead == '/')
@@ -379,7 +413,7 @@ private:
 
 private:
 	// Stores the current char rather than the next char
-	unsigned char m_Current = 0;
+	unsigned char m_Previous = 0, m_Current = 0;
 
     // If true then we are at the beginning of a line (i.e. no non-whitespace chars have been encountered
     // since the beginning of the line)

@@ -8,6 +8,14 @@
       "required": false,
       "types": [
         {
+          "type": "drawer",
+          "named": true
+        },
+        {
+          "type": "generic_list",
+          "named": true
+        },
+        {
           "type": "heading1",
           "named": true
         },
@@ -48,15 +56,37 @@
           "named": true
         },
         {
-          "type": "todo_item",
-          "named": true
-        },
-        {
           "type": "unordered_link",
           "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "drawer",
+    "named": true,
+    "fields": {
+      "title": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "drawer_suffix",
+          "named": true
         },
         {
-          "type": "unordered_list",
+          "type": "paragraph_segment",
           "named": true
         }
       ]
@@ -89,6 +119,45 @@
     }
   },
   {
+    "type": "generic_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item",
+          "named": true
+        },
+        {
+          "type": "unordered_list1",
+          "named": true
+        },
+        {
+          "type": "unordered_list2",
+          "named": true
+        },
+        {
+          "type": "unordered_list3",
+          "named": true
+        },
+        {
+          "type": "unordered_list4",
+          "named": true
+        },
+        {
+          "type": "unordered_list5",
+          "named": true
+        },
+        {
+          "type": "unordered_list6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "heading1",
     "named": true,
     "fields": {
@@ -96,6 +165,14 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "drawer",
+            "named": true
+          },
+          {
+            "type": "generic_list",
+            "named": true
+          },
           {
             "type": "heading2",
             "named": true
@@ -125,15 +202,7 @@
             "named": true
           },
           {
-            "type": "todo_item",
-            "named": true
-          },
-          {
             "type": "unordered_link",
-            "named": true
-          },
-          {
-            "type": "unordered_list",
             "named": true
           }
         ]
@@ -169,6 +238,14 @@
         "required": false,
         "types": [
           {
+            "type": "drawer",
+            "named": true
+          },
+          {
+            "type": "generic_list",
+            "named": true
+          },
+          {
             "type": "heading3",
             "named": true
           },
@@ -193,15 +270,7 @@
             "named": true
           },
           {
-            "type": "todo_item",
-            "named": true
-          },
-          {
             "type": "unordered_link",
-            "named": true
-          },
-          {
-            "type": "unordered_list",
             "named": true
           }
         ]
@@ -237,6 +306,14 @@
         "required": false,
         "types": [
           {
+            "type": "drawer",
+            "named": true
+          },
+          {
+            "type": "generic_list",
+            "named": true
+          },
+          {
             "type": "heading4",
             "named": true
           },
@@ -257,15 +334,7 @@
             "named": true
           },
           {
-            "type": "todo_item",
-            "named": true
-          },
-          {
             "type": "unordered_link",
-            "named": true
-          },
-          {
-            "type": "unordered_list",
             "named": true
           }
         ]
@@ -301,6 +370,14 @@
         "required": false,
         "types": [
           {
+            "type": "drawer",
+            "named": true
+          },
+          {
+            "type": "generic_list",
+            "named": true
+          },
+          {
             "type": "heading5",
             "named": true
           },
@@ -317,15 +394,7 @@
             "named": true
           },
           {
-            "type": "todo_item",
-            "named": true
-          },
-          {
             "type": "unordered_link",
-            "named": true
-          },
-          {
-            "type": "unordered_list",
             "named": true
           }
         ]
@@ -361,6 +430,14 @@
         "required": false,
         "types": [
           {
+            "type": "drawer",
+            "named": true
+          },
+          {
+            "type": "generic_list",
+            "named": true
+          },
+          {
             "type": "heading6",
             "named": true
           },
@@ -373,15 +450,7 @@
             "named": true
           },
           {
-            "type": "todo_item",
-            "named": true
-          },
-          {
             "type": "unordered_link",
-            "named": true
-          },
-          {
-            "type": "unordered_list",
             "named": true
           }
         ]
@@ -417,6 +486,14 @@
         "required": false,
         "types": [
           {
+            "type": "drawer",
+            "named": true
+          },
+          {
+            "type": "generic_list",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -425,15 +502,7 @@
             "named": true
           },
           {
-            "type": "todo_item",
-            "named": true
-          },
-          {
             "type": "unordered_link",
-            "named": true
-          },
-          {
-            "type": "unordered_list",
             "named": true
           }
         ]
@@ -541,6 +610,14 @@
         "required": false,
         "types": [
           {
+            "type": "drawer",
+            "named": true
+          },
+          {
+            "type": "generic_list",
+            "named": true
+          },
+          {
             "type": "heading1",
             "named": true
           },
@@ -577,15 +654,7 @@
             "named": true
           },
           {
-            "type": "todo_item",
-            "named": true
-          },
-          {
             "type": "unordered_link",
-            "named": true
-          },
-          {
-            "type": "unordered_list",
             "named": true
           }
         ]
@@ -624,6 +693,231 @@
   {
     "type": "quote",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "quote1",
+          "named": true
+        },
+        {
+          "type": "quote2",
+          "named": true
+        },
+        {
+          "type": "quote3",
+          "named": true
+        },
+        {
+          "type": "quote4",
+          "named": true
+        },
+        {
+          "type": "quote5",
+          "named": true
+        },
+        {
+          "type": "quote6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quote1",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "quote1_prefix",
+          "named": true
+        },
+        {
+          "type": "quote2",
+          "named": true
+        },
+        {
+          "type": "quote3",
+          "named": true
+        },
+        {
+          "type": "quote4",
+          "named": true
+        },
+        {
+          "type": "quote5",
+          "named": true
+        },
+        {
+          "type": "quote6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quote2",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "quote2_prefix",
+          "named": true
+        },
+        {
+          "type": "quote3",
+          "named": true
+        },
+        {
+          "type": "quote4",
+          "named": true
+        },
+        {
+          "type": "quote5",
+          "named": true
+        },
+        {
+          "type": "quote6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quote3",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "quote3_prefix",
+          "named": true
+        },
+        {
+          "type": "quote4",
+          "named": true
+        },
+        {
+          "type": "quote5",
+          "named": true
+        },
+        {
+          "type": "quote6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quote4",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "quote4_prefix",
+          "named": true
+        },
+        {
+          "type": "quote5",
+          "named": true
+        },
+        {
+          "type": "quote6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quote5",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "quote5_prefix",
+          "named": true
+        },
+        {
+          "type": "quote6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quote6",
+    "named": true,
     "fields": {
       "content": {
         "multiple": false,
@@ -641,7 +935,7 @@
       "required": true,
       "types": [
         {
-          "type": "quote_prefix",
+          "type": "quote6_prefix",
           "named": true
         }
       ]
@@ -649,6 +943,381 @@
   },
   {
     "type": "todo_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item1",
+          "named": true
+        },
+        {
+          "type": "todo_item2",
+          "named": true
+        },
+        {
+          "type": "todo_item3",
+          "named": true
+        },
+        {
+          "type": "todo_item4",
+          "named": true
+        },
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "todo_item1",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "done_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_done",
+            "named": true
+          }
+        ]
+      },
+      "pending_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_pending",
+            "named": true
+          }
+        ]
+      },
+      "undone_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_undone",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item2",
+          "named": true
+        },
+        {
+          "type": "todo_item3",
+          "named": true
+        },
+        {
+          "type": "todo_item4",
+          "named": true
+        },
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list1_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "todo_item2",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "done_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_done",
+            "named": true
+          }
+        ]
+      },
+      "pending_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_pending",
+            "named": true
+          }
+        ]
+      },
+      "undone_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_undone",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item3",
+          "named": true
+        },
+        {
+          "type": "todo_item4",
+          "named": true
+        },
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list2_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "todo_item3",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "done_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_done",
+            "named": true
+          }
+        ]
+      },
+      "pending_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_pending",
+            "named": true
+          }
+        ]
+      },
+      "undone_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_undone",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item4",
+          "named": true
+        },
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list3_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "todo_item4",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "done_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_done",
+            "named": true
+          }
+        ]
+      },
+      "pending_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_pending",
+            "named": true
+          }
+        ]
+      },
+      "undone_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_undone",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list4_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "todo_item5",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "done_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_done",
+            "named": true
+          }
+        ]
+      },
+      "pending_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_pending",
+            "named": true
+          }
+        ]
+      },
+      "undone_token": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_undone",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list5_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "todo_item6",
     "named": true,
     "fields": {
       "content": {
@@ -697,7 +1366,7 @@
       "required": true,
       "types": [
         {
-          "type": "unordered_list_prefix",
+          "type": "unordered_list6_prefix",
           "named": true
         }
       ]
@@ -720,7 +1389,257 @@
     }
   },
   {
-    "type": "unordered_list",
+    "type": "unordered_list1",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item2",
+          "named": true
+        },
+        {
+          "type": "todo_item3",
+          "named": true
+        },
+        {
+          "type": "todo_item4",
+          "named": true
+        },
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list1_prefix",
+          "named": true
+        },
+        {
+          "type": "unordered_list2",
+          "named": true
+        },
+        {
+          "type": "unordered_list3",
+          "named": true
+        },
+        {
+          "type": "unordered_list4",
+          "named": true
+        },
+        {
+          "type": "unordered_list5",
+          "named": true
+        },
+        {
+          "type": "unordered_list6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unordered_list2",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item3",
+          "named": true
+        },
+        {
+          "type": "todo_item4",
+          "named": true
+        },
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list2_prefix",
+          "named": true
+        },
+        {
+          "type": "unordered_list3",
+          "named": true
+        },
+        {
+          "type": "unordered_list4",
+          "named": true
+        },
+        {
+          "type": "unordered_list5",
+          "named": true
+        },
+        {
+          "type": "unordered_list6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unordered_list3",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item4",
+          "named": true
+        },
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list3_prefix",
+          "named": true
+        },
+        {
+          "type": "unordered_list4",
+          "named": true
+        },
+        {
+          "type": "unordered_list5",
+          "named": true
+        },
+        {
+          "type": "unordered_list6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unordered_list4",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list4_prefix",
+          "named": true
+        },
+        {
+          "type": "unordered_list5",
+          "named": true
+        },
+        {
+          "type": "unordered_list6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unordered_list5",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "todo_item6",
+          "named": true
+        },
+        {
+          "type": "unordered_list5_prefix",
+          "named": true
+        },
+        {
+          "type": "unordered_list6",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unordered_list6",
     "named": true,
     "fields": {
       "content": {
@@ -739,7 +1658,7 @@
       "required": true,
       "types": [
         {
-          "type": "unordered_list_prefix",
+          "type": "unordered_list6_prefix",
           "named": true
         }
       ]
@@ -758,7 +1677,15 @@
     "named": false
   },
   {
+    "type": "_title",
+    "named": false
+  },
+  {
     "type": "any_char",
+    "named": true
+  },
+  {
+    "type": "drawer_suffix",
     "named": true
   },
   {
@@ -846,7 +1773,27 @@
     "named": true
   },
   {
-    "type": "quote_prefix",
+    "type": "quote1_prefix",
+    "named": true
+  },
+  {
+    "type": "quote2_prefix",
+    "named": true
+  },
+  {
+    "type": "quote3_prefix",
+    "named": true
+  },
+  {
+    "type": "quote4_prefix",
+    "named": true
+  },
+  {
+    "type": "quote5_prefix",
+    "named": true
+  },
+  {
+    "type": "quote6_prefix",
     "named": true
   },
   {
@@ -862,7 +1809,27 @@
     "named": true
   },
   {
-    "type": "unordered_list_prefix",
+    "type": "unordered_list1_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_list2_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_list3_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_list4_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_list5_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_list6_prefix",
     "named": true
   }
 ]
