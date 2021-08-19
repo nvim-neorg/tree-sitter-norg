@@ -37,7 +37,13 @@ enum TokenType
     DRAWER,
     DRAWER_SUFFIX,
     TODO_ITEM,
-    UNORDERED_LINK,
+
+    UNORDERED_LINK1,
+    UNORDERED_LINK2,
+    UNORDERED_LINK3,
+    UNORDERED_LINK4,
+    UNORDERED_LINK5,
+    UNORDERED_LINK6,
 
     PARAGRAPH_DELIMITER,
 
@@ -115,7 +121,9 @@ public:
                 return true;
 
             // TODO: Add different unordered link levels
-            if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' }, { '>', UNORDERED_LINK | NONE }) != NONE)
+            // TODO: Add --- and = something <value>
+            if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' },
+            			{ '>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 | UNORDERED_LINK4 | UNORDERED_LINK5 | UNORDERED_LINK6 | NONE }) != NONE)
                     return true;
 
             if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)

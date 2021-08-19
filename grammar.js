@@ -34,7 +34,13 @@ module.exports = grammar({
         $.drawer_suffix,
 
         $.todo_item_prefix,
-        $.unordered_link_prefix,
+
+        $.unordered_link1_prefix,
+        $.unordered_link2_prefix,
+        $.unordered_link3_prefix,
+        $.unordered_link4_prefix,
+        $.unordered_link5_prefix,
+        $.unordered_link6_prefix,
 
         $.paragraph_delimiter,
 
@@ -124,18 +130,171 @@ module.exports = grammar({
                 )
             ),
 
-        unordered_link: $ =>
-            seq(
-                alias(
-                    $.unordered_link_prefix,
-                    "_prefix"
-                ),
+		unordered_link: $ =>
+			prec.right(0,
+				repeat1(
+					choice(
+						$.unordered_link1,
+						$.unordered_link2,
+						$.unordered_link3,
+						$.unordered_link4,
+						$.unordered_link5,
+						$.unordered_link6,
+					)
+				)
+			),
 
-                field(
-                    "location",
-                    $.link
-                )
-            ),
+        unordered_link1: $ =>
+            prec.right(0,
+            	seq(
+                	alias(
+                    	$.unordered_link1_prefix,
+                    	"_prefix"
+                	),
+
+                	field(
+                    	"location",
+                    	$.link
+                	),
+
+					optional(
+						$._standalone_break
+					),
+
+					repeat(
+						choice(
+							$.unordered_link2,
+							$.unordered_link3,
+							$.unordered_link4,
+							$.unordered_link5,
+							$.unordered_link6,
+						)
+					)
+            	)
+			),
+
+        unordered_link2: $ =>
+            prec.right(0,
+            	seq(
+                	alias(
+                    	$.unordered_link2_prefix,
+                    	"_prefix"
+                	),
+
+                	field(
+                    	"location",
+                    	$.link
+                	),
+
+					optional(
+						$._standalone_break
+					),
+
+					repeat(
+						choice(
+							$.unordered_link3,
+							$.unordered_link4,
+							$.unordered_link5,
+							$.unordered_link6,
+						)
+					)
+            	)
+			),
+
+        unordered_link3: $ =>
+            prec.right(0,
+            	seq(
+                	alias(
+                    	$.unordered_link3_prefix,
+                    	"_prefix"
+                	),
+
+                	field(
+                    	"location",
+                    	$.link
+                	),
+
+					optional(
+						$._standalone_break
+					),
+
+					repeat(
+						choice(
+							$.unordered_link4,
+							$.unordered_link5,
+							$.unordered_link6,
+						)
+					)
+            	)
+			),
+
+        unordered_link4: $ =>
+            prec.right(0,
+            	seq(
+                	alias(
+                    	$.unordered_link4_prefix,
+                    	"_prefix"
+                	),
+
+                	field(
+                    	"location",
+                    	$.link
+                	),
+
+					optional(
+						$._standalone_break
+					),
+
+					repeat(
+						choice(
+							$.unordered_link5,
+							$.unordered_link6,
+						)
+					)
+            	)
+			),
+
+        unordered_link5: $ =>
+            prec.right(0,
+            	seq(
+                	alias(
+                    	$.unordered_link5_prefix,
+                    	"_prefix"
+                	),
+
+                	field(
+                    	"location",
+                    	$.link
+                	),
+
+					optional(
+						$._standalone_break
+					),
+
+					repeat(
+						$.unordered_link6,
+					)
+            	)
+			),
+
+        unordered_link6: $ =>
+            prec.right(0,
+            	seq(
+                	alias(
+                    	$.unordered_link6_prefix,
+                    	"_prefix"
+                	),
+
+                	field(
+                    	"location",
+                    	$.link
+                	),
+
+					optional(
+						$._standalone_break
+					),
+            	)
+			),
 
         // A first-level heading:
         // * Example
@@ -457,6 +616,7 @@ module.exports = grammar({
                         $.unordered_list5,
                         $.unordered_list6,
                         $.todo_item,
+                        $.unordered_link,
                     )
                 )
             ),
@@ -954,7 +1114,6 @@ module.exports = grammar({
         _detached_modifier: $ =>
             choice(
                 $.quote,
-                $.unordered_link,
                 $.generic_list,
                 $.drawer,
             ),
