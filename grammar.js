@@ -1,11 +1,11 @@
 module.exports = grammar({
-  	name: 'norg',
+      name: 'norg',
 
-	externals: $ => [
-    	$._,
+    externals: $ => [
+        $._,
 
-    	$.paragraph_segment,
-    	$.escape_sequence_prefix,
+        $.paragraph_segment,
+        $.escape_sequence_prefix,
 
         $.heading1_prefix,
         $.heading2_prefix,
@@ -15,11 +15,11 @@ module.exports = grammar({
         $.heading6_prefix,
 
         $.quote1_prefix,
-		$.quote2_prefix,
-		$.quote3_prefix,
-		$.quote4_prefix,
-		$.quote5_prefix,
-		$.quote6_prefix,
+        $.quote2_prefix,
+        $.quote3_prefix,
+        $.quote4_prefix,
+        $.quote5_prefix,
+        $.quote6_prefix,
 
         $.unordered_list1_prefix,
         $.unordered_list2_prefix,
@@ -49,9 +49,9 @@ module.exports = grammar({
         $.link_end_heading6_reference,
         $.link_end_marker_reference,
         $.link_end_drawer_reference,
-  	],
+      ],
 
-  	rules: {
+      rules: {
         document: $ => repeat(
             choice(
                 prec(1,
@@ -321,276 +321,276 @@ module.exports = grammar({
 
         // A quote:
         // > That's what she said
-		quote: $ =>
-			prec.right(0,
-				repeat1(
-					choice(
-						$.quote1,
-						$.quote2,
-						$.quote3,
-						$.quote4,
-						$.quote5,
-						$.quote6
-					)
-				)
-			),
+        quote: $ =>
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.quote1,
+                        $.quote2,
+                        $.quote3,
+                        $.quote4,
+                        $.quote5,
+                        $.quote6
+                    )
+                )
+            ),
 
         quote1: $ =>
             prec.right(0,
-            	seq(
-                	$.quote1_prefix,
+                seq(
+                    $.quote1_prefix,
 
-                	field(
-                    	"content",
-        				$.paragraph_segment,
-                	),
+                    field(
+                        "content",
+                        $.paragraph_segment,
+                    ),
 
-					repeat(
-						choice(
-							$.quote2,
-							$.quote3,
-							$.quote4,
-							$.quote5,
-							$.quote6,
-						),
-					)
-            	)
+                    repeat(
+                        choice(
+                            $.quote2,
+                            $.quote3,
+                            $.quote4,
+                            $.quote5,
+                            $.quote6,
+                        ),
+                    )
+                )
             ),
 
         quote2: $ =>
             prec.right(0,
-            	seq(
-                	$.quote2_prefix,
+                seq(
+                    $.quote2_prefix,
 
-                	field(
-                    	"content",
-        				$.paragraph_segment,
-                	),
+                    field(
+                        "content",
+                        $.paragraph_segment,
+                    ),
 
-					repeat(
-						choice(
-							$.quote3,
-							$.quote4,
-							$.quote5,
-							$.quote6,
-						),
-					)
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.quote3,
+                            $.quote4,
+                            $.quote5,
+                            $.quote6,
+                        ),
+                    )
+                )
+            ),
 
         quote3: $ =>
             prec.right(0,
-            	seq(
-                	$.quote3_prefix,
+                seq(
+                    $.quote3_prefix,
 
-                	field(
-                    	"content",
-        				$.paragraph_segment,
-                	),
+                    field(
+                        "content",
+                        $.paragraph_segment,
+                    ),
 
-					repeat(
-						choice(
-							$.quote4,
-							$.quote5,
-							$.quote6,
-						),
-					)
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.quote4,
+                            $.quote5,
+                            $.quote6,
+                        ),
+                    )
+                )
+            ),
 
         quote4: $ =>
             prec.right(0,
-            	seq(
-                	$.quote4_prefix,
+                seq(
+                    $.quote4_prefix,
 
-                	field(
-                    	"content",
-        				$.paragraph_segment,
-                	),
+                    field(
+                        "content",
+                        $.paragraph_segment,
+                    ),
 
-					repeat(
-						choice(
-							$.quote5,
-							$.quote6,
-						),
-					)
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.quote5,
+                            $.quote6,
+                        ),
+                    )
+                )
+            ),
 
         quote5: $ =>
             prec.right(0,
-            	seq(
-                	$.quote5_prefix,
+                seq(
+                    $.quote5_prefix,
 
-                	field(
-                    	"content",
-        				$.paragraph_segment,
-                	),
+                    field(
+                        "content",
+                        $.paragraph_segment,
+                    ),
 
-					repeat(
-						$.quote6,
-					)
-            	)
-			),
+                    repeat(
+                        $.quote6,
+                    )
+                )
+            ),
 
         quote6: $ =>
             prec.right(0,
-            	seq(
-                	$.quote6_prefix,
+                seq(
+                    $.quote6_prefix,
 
-                	field(
-                    	"content",
-        				$.paragraph_segment,
-                	)
-            	)
-			),
+                    field(
+                        "content",
+                        $.paragraph_segment,
+                    )
+                )
+            ),
 
         // TODO: complete docs tomorrow
-		generic_list: $ =>
-			prec.right(0,
-				repeat1(
-					choice(
-						$.unordered_list1,
-						$.unordered_list2,
-						$.unordered_list3,
-						$.unordered_list4,
-						$.unordered_list5,
-						$.unordered_list6,
-						$.todo_item,
-					)
-				)
-			),
+        generic_list: $ =>
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.unordered_list1,
+                        $.unordered_list2,
+                        $.unordered_list3,
+                        $.unordered_list4,
+                        $.unordered_list5,
+                        $.unordered_list6,
+                        $.todo_item,
+                    )
+                )
+            ),
 
         unordered_list1: $ =>
             prec.right(0,
-            	seq(
-                	$.unordered_list1_prefix,
+                seq(
+                    $.unordered_list1_prefix,
 
-                	field(
-                    	"content",
-                    	$.paragraph,
-                	),
+                    field(
+                        "content",
+                        $.paragraph,
+                    ),
 
-					repeat(
-						choice(
-							$.todo_item2,
-							$.todo_item3,
-							$.todo_item4,
-							$.todo_item5,
-							$.todo_item6,
+                    repeat(
+                        choice(
+                            $.todo_item2,
+                            $.todo_item3,
+                            $.todo_item4,
+                            $.todo_item5,
+                            $.todo_item6,
 
-							$.unordered_list2,
-							$.unordered_list3,
-							$.unordered_list4,
-							$.unordered_list5,
-							$.unordered_list6,
-						)
-					)
-            	)
-			),
+                            $.unordered_list2,
+                            $.unordered_list3,
+                            $.unordered_list4,
+                            $.unordered_list5,
+                            $.unordered_list6,
+                        )
+                    )
+                )
+            ),
 
         unordered_list2: $ =>
             prec.right(0,
-            	seq(
-                	$.unordered_list2_prefix,
+                seq(
+                    $.unordered_list2_prefix,
 
-                	field(
-                    	"content",
-                    	$.paragraph,
-                	),
+                    field(
+                        "content",
+                        $.paragraph,
+                    ),
 
-					repeat(
-						choice(
-							$.todo_item3,
-							$.todo_item4,
-							$.todo_item5,
-							$.todo_item6,
+                    repeat(
+                        choice(
+                            $.todo_item3,
+                            $.todo_item4,
+                            $.todo_item5,
+                            $.todo_item6,
 
-							$.unordered_list3,
-							$.unordered_list4,
-							$.unordered_list5,
-							$.unordered_list6,
-						)
-					)
-            	)
-			),
+                            $.unordered_list3,
+                            $.unordered_list4,
+                            $.unordered_list5,
+                            $.unordered_list6,
+                        )
+                    )
+                )
+            ),
 
         unordered_list3: $ =>
             prec.right(0,
-            	seq(
-                	$.unordered_list3_prefix,
+                seq(
+                    $.unordered_list3_prefix,
 
-                	field(
-                    	"content",
-                    	$.paragraph,
-                	),
+                    field(
+                        "content",
+                        $.paragraph,
+                    ),
 
-					repeat(
-						choice(
-							$.todo_item4,
-							$.todo_item5,
-							$.todo_item6,
+                    repeat(
+                        choice(
+                            $.todo_item4,
+                            $.todo_item5,
+                            $.todo_item6,
 
-							$.unordered_list4,
-							$.unordered_list5,
-							$.unordered_list6,
-						)
-					)
-            	)
-			),
+                            $.unordered_list4,
+                            $.unordered_list5,
+                            $.unordered_list6,
+                        )
+                    )
+                )
+            ),
 
         unordered_list4: $ =>
             prec.right(0,
-            	seq(
-                	$.unordered_list4_prefix,
+                seq(
+                    $.unordered_list4_prefix,
 
-                	field(
-                    	"content",
-                    	$.paragraph,
-                	),
+                    field(
+                        "content",
+                        $.paragraph,
+                    ),
 
-					repeat(
-						choice(
-							$.todo_item5,
-							$.todo_item6,
+                    repeat(
+                        choice(
+                            $.todo_item5,
+                            $.todo_item6,
 
-							$.unordered_list5,
-							$.unordered_list6,
-						)
-					)
-            	)
-			),
+                            $.unordered_list5,
+                            $.unordered_list6,
+                        )
+                    )
+                )
+            ),
 
         unordered_list5: $ =>
             prec.right(0,
-            	seq(
-                	$.unordered_list5_prefix,
+                seq(
+                    $.unordered_list5_prefix,
 
-                	field(
-                    	"content",
-                    	$.paragraph,
-                	),
+                    field(
+                        "content",
+                        $.paragraph,
+                    ),
 
-					repeat(
-						choice(
-							$.todo_item6,
-							$.unordered_list6,
-						)
-					)
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.todo_item6,
+                            $.unordered_list6,
+                        )
+                    )
+                )
+            ),
 
         unordered_list6: $ =>
             prec.right(0,
-            	seq(
-                	$.unordered_list6_prefix,
+                seq(
+                    $.unordered_list6_prefix,
 
-                	field(
-                    	"content",
-                    	$.paragraph,
-                	),
-            	)
-			),
+                    field(
+                        "content",
+                        $.paragraph,
+                    ),
+                )
+            ),
 
         marker: $ =>
             prec.right(0,
@@ -645,291 +645,291 @@ module.exports = grammar({
         todo_item_suffix: $ =>
             token.immediate(']'),
 
-		todo_item: $ =>
-			prec.right(0,
-				repeat1(
-					choice(
-						$.todo_item1,
-						$.todo_item2,
-						$.todo_item3,
-						$.todo_item4,
-						$.todo_item5,
-						$.todo_item6,
-					)
-				)
-			),
+        todo_item: $ =>
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.todo_item1,
+                        $.todo_item2,
+                        $.todo_item3,
+                        $.todo_item4,
+                        $.todo_item5,
+                        $.todo_item6,
+                    )
+                )
+            ),
 
         todo_item1: $ =>
             prec.right(0,
-            	seq(
-            		$.unordered_list1_prefix,
+                seq(
+                    $.unordered_list1_prefix,
 
-                	alias(
-                    	$.todo_item_prefix,
-                    	"_prefix",
-                	),
+                    alias(
+                        $.todo_item_prefix,
+                        "_prefix",
+                    ),
 
-                	choice(
-                    	field(
-                        	"undone_token",
-                        	$.todo_item_undone,
-                    	),
-                    	field(
-                        	"pending_token",
-                        	$.todo_item_pending,
-                    	),
-                    	field(
-                        	"done_token",
-                        	$.todo_item_done,
-                    	)
-                	),
+                    choice(
+                        field(
+                            "undone_token",
+                            $.todo_item_undone,
+                        ),
+                        field(
+                            "pending_token",
+                            $.todo_item_pending,
+                        ),
+                        field(
+                            "done_token",
+                            $.todo_item_done,
+                        )
+                    ),
 
-                	alias(
-                    	$.todo_item_suffix,
-                    	"_suffix",
-                	),
+                    alias(
+                        $.todo_item_suffix,
+                        "_suffix",
+                    ),
 
-                	token(/\s+/),
+                    token(/\s+/),
 
-                	field(
-                    	"content",
-                    	$.paragraph
-                	),
+                    field(
+                        "content",
+                        $.paragraph
+                    ),
 
-                	repeat(
-						choice(
-							$.todo_item2,
-							$.todo_item3,
-							$.todo_item4,
-							$.todo_item5,
-							$.todo_item6,
-						),
-            		),
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.todo_item2,
+                            $.todo_item3,
+                            $.todo_item4,
+                            $.todo_item5,
+                            $.todo_item6,
+                        ),
+                    ),
+                )
+            ),
 
         todo_item2: $ =>
             prec.right(0,
-            	seq(
-            		$.unordered_list2_prefix,
+                seq(
+                    $.unordered_list2_prefix,
 
-                	alias(
-                    	$.todo_item_prefix,
-                    	"_prefix",
-                	),
+                    alias(
+                        $.todo_item_prefix,
+                        "_prefix",
+                    ),
 
-                	choice(
-                    	field(
-                        	"undone_token",
-                        	$.todo_item_undone,
-                    	),
-                    	field(
-                        	"pending_token",
-                        	$.todo_item_pending,
-                    	),
-                    	field(
-                        	"done_token",
-                        	$.todo_item_done,
-                    	)
-                	),
+                    choice(
+                        field(
+                            "undone_token",
+                            $.todo_item_undone,
+                        ),
+                        field(
+                            "pending_token",
+                            $.todo_item_pending,
+                        ),
+                        field(
+                            "done_token",
+                            $.todo_item_done,
+                        )
+                    ),
 
-                	alias(
-                    	$.todo_item_suffix,
-                    	"_suffix",
-                	),
+                    alias(
+                        $.todo_item_suffix,
+                        "_suffix",
+                    ),
 
-                	token(/\s+/),
+                    token(/\s+/),
 
-                	field(
-                    	"content",
-                    	$.paragraph
-                	),
+                    field(
+                        "content",
+                        $.paragraph
+                    ),
 
-                	repeat(
-						choice(
-							$.todo_item3,
-							$.todo_item4,
-							$.todo_item5,
-							$.todo_item6,
-						),
-            		),
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.todo_item3,
+                            $.todo_item4,
+                            $.todo_item5,
+                            $.todo_item6,
+                        ),
+                    ),
+                )
+            ),
 
         todo_item3: $ =>
             prec.right(0,
-            	seq(
-            		$.unordered_list3_prefix,
+                seq(
+                    $.unordered_list3_prefix,
 
-                	alias(
-                    	$.todo_item_prefix,
-                    	"_prefix",
-                	),
+                    alias(
+                        $.todo_item_prefix,
+                        "_prefix",
+                    ),
 
-                	choice(
-                    	field(
-                        	"undone_token",
-                        	$.todo_item_undone,
-                    	),
-                    	field(
-                        	"pending_token",
-                        	$.todo_item_pending,
-                    	),
-                    	field(
-                        	"done_token",
-                        	$.todo_item_done,
-                    	)
-                	),
+                    choice(
+                        field(
+                            "undone_token",
+                            $.todo_item_undone,
+                        ),
+                        field(
+                            "pending_token",
+                            $.todo_item_pending,
+                        ),
+                        field(
+                            "done_token",
+                            $.todo_item_done,
+                        )
+                    ),
 
-                	alias(
-                    	$.todo_item_suffix,
-                    	"_suffix",
-                	),
+                    alias(
+                        $.todo_item_suffix,
+                        "_suffix",
+                    ),
 
-                	token(/\s+/),
+                    token(/\s+/),
 
-                	field(
-                    	"content",
-                    	$.paragraph
-                	),
+                    field(
+                        "content",
+                        $.paragraph
+                    ),
 
-                	repeat(
-						choice(
-							$.todo_item4,
-							$.todo_item5,
-							$.todo_item6,
-						),
-            		),
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.todo_item4,
+                            $.todo_item5,
+                            $.todo_item6,
+                        ),
+                    ),
+                )
+            ),
 
         todo_item4: $ =>
             prec.right(0,
-            	seq(
-            		$.unordered_list4_prefix,
+                seq(
+                    $.unordered_list4_prefix,
 
-                	alias(
-                    	$.todo_item_prefix,
-                    	"_prefix",
-                	),
+                    alias(
+                        $.todo_item_prefix,
+                        "_prefix",
+                    ),
 
-                	choice(
-                    	field(
-                        	"undone_token",
-                        	$.todo_item_undone,
-                    	),
-                    	field(
-                        	"pending_token",
-                        	$.todo_item_pending,
-                    	),
-                    	field(
-                        	"done_token",
-                        	$.todo_item_done,
-                    	)
-                	),
+                    choice(
+                        field(
+                            "undone_token",
+                            $.todo_item_undone,
+                        ),
+                        field(
+                            "pending_token",
+                            $.todo_item_pending,
+                        ),
+                        field(
+                            "done_token",
+                            $.todo_item_done,
+                        )
+                    ),
 
-                	alias(
-                    	$.todo_item_suffix,
-                    	"_suffix",
-                	),
+                    alias(
+                        $.todo_item_suffix,
+                        "_suffix",
+                    ),
 
-                	token(/\s+/),
+                    token(/\s+/),
 
-                	field(
-                    	"content",
-                    	$.paragraph
-                	),
+                    field(
+                        "content",
+                        $.paragraph
+                    ),
 
-                	repeat(
-                		choice(
-							$.todo_item5,
-							$.todo_item6,
-                		)
-            		),
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.todo_item5,
+                            $.todo_item6,
+                        )
+                    ),
+                )
+            ),
 
         todo_item5: $ =>
             prec.right(0,
-            	seq(
-            		$.unordered_list5_prefix,
+                seq(
+                    $.unordered_list5_prefix,
 
-                	alias(
-                    	$.todo_item_prefix,
-                    	"_prefix",
-                	),
+                    alias(
+                        $.todo_item_prefix,
+                        "_prefix",
+                    ),
 
-                	choice(
-                    	field(
-                        	"undone_token",
-                        	$.todo_item_undone,
-                    	),
-                    	field(
-                        	"pending_token",
-                        	$.todo_item_pending,
-                    	),
-                    	field(
-                        	"done_token",
-                        	$.todo_item_done,
-                    	)
-                	),
+                    choice(
+                        field(
+                            "undone_token",
+                            $.todo_item_undone,
+                        ),
+                        field(
+                            "pending_token",
+                            $.todo_item_pending,
+                        ),
+                        field(
+                            "done_token",
+                            $.todo_item_done,
+                        )
+                    ),
 
-                	alias(
-                    	$.todo_item_suffix,
-                    	"_suffix",
-                	),
+                    alias(
+                        $.todo_item_suffix,
+                        "_suffix",
+                    ),
 
-                	token(/\s+/),
+                    token(/\s+/),
 
-                	field(
-                    	"content",
-                    	$.paragraph
-                	),
+                    field(
+                        "content",
+                        $.paragraph
+                    ),
 
-                	repeat(
-						$.todo_item6,
-            		),
-            	)
-			),
+                    repeat(
+                        $.todo_item6,
+                    ),
+                )
+            ),
 
         todo_item6: $ =>
             prec.right(0,
-            	seq(
-            		$.unordered_list6_prefix,
+                seq(
+                    $.unordered_list6_prefix,
 
-                	alias(
-                    	$.todo_item_prefix,
-                    	"_prefix",
-                	),
+                    alias(
+                        $.todo_item_prefix,
+                        "_prefix",
+                    ),
 
-                	choice(
-                    	field(
-                        	"undone_token",
-                        	$.todo_item_undone,
-                    	),
-                    	field(
-                        	"pending_token",
-                        	$.todo_item_pending,
-                    	),
-                    	field(
-                        	"done_token",
-                        	$.todo_item_done,
-                    	)
-                	),
+                    choice(
+                        field(
+                            "undone_token",
+                            $.todo_item_undone,
+                        ),
+                        field(
+                            "pending_token",
+                            $.todo_item_pending,
+                        ),
+                        field(
+                            "done_token",
+                            $.todo_item_done,
+                        )
+                    ),
 
-                	alias(
-                    	$.todo_item_suffix,
-                    	"_suffix",
-                	),
+                    alias(
+                        $.todo_item_suffix,
+                        "_suffix",
+                    ),
 
-                	token(/\s+/),
+                    token(/\s+/),
 
-                	field(
-                    	"content",
-                    	$.paragraph
-                	)
-            	)
-			),
+                    field(
+                        "content",
+                        $.paragraph
+                    )
+                )
+            ),
 
         // --------------------------------------------------
 
@@ -959,18 +959,18 @@ module.exports = grammar({
                 $.drawer,
             ),
 
-    	/*
-		"unordered_link_list_prefix",
-		"unordered_link_list",
-		"tag",
-		"tag_content",
-		"tag_name",
-		"tag_parameters",
-		"tag_end",
-		"carryover_tag",
-		"drawer",
-		"drawer_content",
-		"escape_sequence", ??
-		*/
-  	}
+        /*
+        "unordered_link_list_prefix",
+        "unordered_link_list",
+        "tag",
+        "tag_content",
+        "tag_name",
+        "tag_parameters",
+        "tag_end",
+        "carryover_tag",
+        "drawer",
+        "drawer_content",
+        "escape_sequence", ??
+        */
+      }
 });
