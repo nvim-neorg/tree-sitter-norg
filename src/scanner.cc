@@ -10,6 +10,7 @@ enum TokenType
     NONE,
 
     PARAGRAPH_SEGMENT,
+    STANDALONE_BREAK,
     ESCAPE_SEQUENCE,
 
     HEADING1,
@@ -37,6 +38,7 @@ enum TokenType
     DRAWER,
     DRAWER_SUFFIX,
     TODO_ITEM,
+    INSERTION,
 
     UNORDERED_LINK1,
     UNORDERED_LINK2,
@@ -82,8 +84,8 @@ public:
     bool scan(TSLexer* lexer, const bool* valid_symbols)
     {
         // Are we at the end of file? If so, bail
-        if (lexer->eof(lexer))
-            return false;
+		if (lexer->eof(lexer))
+			return false;
 
         lexer->result_symbol = NONE;
 
@@ -110,7 +112,13 @@ public:
         }
         // Otherwise make sure to check for the existence of links
         else if (lexer->lookahead == '[' || lexer->lookahead == '(')
-            return check_link(lexer);
+        	return true;
+        else if (m_LastToken == PARAGRAPH_SEGMENT && lexer->lookahead == '\n')
+        {
+        	advance(lexer);
+			lexer->result_symbol = STANDALONE_BREAK;
+			return true;
+        }
 
         // If we're at the beginning of a line check for all detached modifiers
         if (m_Whitespace)
@@ -135,17 +143,28 @@ public:
 
             if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
                 return true;
-
-            if (m_Current == '|' && (lexer->lookahead == '\n' || !lexer->lookahead))
+            else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
             {
-                advance(lexer);
-                lexer->result_symbol = DRAWER_SUFFIX;
-                lexer->mark_end(lexer);
-                return true;
+				lexer->result_symbol = DRAWER_SUFFIX;
+				return true;
             }
 
-            if (check_delimiting(lexer, '=', STRONG_PARAGRAPH_DELIMITER) != NONE)
+            if (check_detached(lexer, INSERTION, { '=' }) != NONE)
                 return true;
+            else if (lexer->lookahead == '\n')
+            {
+            	if (m_ParsedChars >= 3)
+            	{
+					lexer->result_symbol = STRONG_PARAGRAPH_DELIMITER;
+					return true;
+            	}
+            	else
+            	{
+            		advance(lexer);
+            		lexer->result_symbol = PARAGRAPH_SEGMENT;
+            		return true;
+            	}
+            }
         }
 
         // Match paragraphs
@@ -189,7 +208,7 @@ private:
 
         size_t i = m_ParsedChars = 0;
 
-        // Skip all trailing whitespace
+        // Skip all leading whitespace
         while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
             skip(lexer);
 
@@ -199,12 +218,12 @@ private:
                     detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead), i++, m_ParsedChars++)
         {
             // If we've specified a termination character and we match then the token lexing prematurely
-            if (lexer->lookahead == terminate_at.first)
+            if (terminate_at.first != 0 && lexer->lookahead == terminate_at.first)
             {
                 advance(lexer);
 
                 // Skip other potential whitespace
-                while (lexer->lookahead && std::iswspace(lexer->lookahead))
+                while (lexer->lookahead && lexer->lookahead == ' ' || lexer->lookahead == '\t')
                     advance(lexer);
 
                 TokenType result = terminate_at.second[clamp(i, 0UL, terminate_at.second.size()) - 1];
@@ -229,7 +248,7 @@ private:
                 TokenType result = results[clamp(i, 0UL, results.size() - 1)];
 
                 // Skip any other potential whitespace
-                while (lexer->lookahead && std::iswspace(lexer->lookahead))
+                while (lexer->lookahead && lexer->lookahead == ' ' || lexer->lookahead == '\t')
                     advance(lexer);
 
                 lexer->result_symbol = result;
@@ -238,41 +257,6 @@ private:
 
                 return result;
             }
-        }
-
-        return NONE;
-    }
-
-    /* Checks for the existence of a delimiting modifier set
-     * @param lexer - the treesitter lexer
-     * @param c - the delimiting character to check for
-     * @param result - the result to return if a match was successful
-     * Delimiting modifiers sets consist of the same token being repeated 3 or more times.
-     */
-    TokenType check_delimiting(TSLexer* lexer, char c, TokenType result)
-    {
-        // If the next character is the one we're looking for continue
-        if (lexer->lookahead == c)
-        {
-            advance(lexer);
-
-            size_t count = 1;
-
-            // Read the next token as long as it is the one we're looking for
-            // We also keep track of the amount of tokens read
-            while(lexer->lookahead == c)
-            {
-                ++count;
-                advance(lexer);
-            }
-
-            // If we haven't read at least 3 tokens or if there's some trailing stuff after the last token then bail
-            if (count < 3 || lexer->lookahead != '\n')
-                return NONE;
-
-            lexer->result_symbol = result;
-
-            return result;
         }
 
         return NONE;
@@ -462,7 +446,7 @@ private:
     size_t m_ParsedChars = 0;
 
 private:
-    const std::array<unsigned char, 4> s_DetachedModifiers = { '*', '-', '>', '|' };
+    const std::array<unsigned char, 5> s_DetachedModifiers = { '*', '-', '>', '|', '=' };
 };
 
 extern "C"

@@ -1,10 +1,11 @@
 module.exports = grammar({
-      name: 'norg',
+    name: 'norg',
 
     externals: $ => [
         $._,
 
         $.paragraph_segment,
+        $._standalone_break,
         $.escape_sequence_prefix,
 
         $.heading1_prefix,
@@ -34,6 +35,8 @@ module.exports = grammar({
         $.drawer_suffix,
 
         $.todo_item_prefix,
+
+		$.insertion_prefix,
 
         $.unordered_link1_prefix,
         $.unordered_link2_prefix,
@@ -71,26 +74,37 @@ module.exports = grammar({
                     )
                 ),
 
-                $.paragraph,
+                $._paragraph,
                 $.strong_paragraph_delimiter,
             )
         ),
+
+		_paragraph: $ =>
+			prec.right(0,
+				seq(
+					$.paragraph,
+
+					optional(
+						$._standalone_break,
+					)
+				)
+			),
 
         // Any regular text
         paragraph: $ =>
             prec.right(0,
                 seq(
-                    repeat1(
-                        choice(
-                            alias(
-                                $.paragraph_segment,
-                                "_segment",
-                            ),
+                	repeat1(
+                    	choice(
+                        	alias(
+                            	$.paragraph_segment,
+                            	"_segment",
+                        	),
 
-                            $.link,
-                            $.escape_sequence,
-                        )
-                    )
+                        	$.link,
+                        	$.escape_sequence,
+                    	)
+                	)
                 )
             ),
 
@@ -131,171 +145,171 @@ module.exports = grammar({
                 )
             ),
 
-		unordered_link: $ =>
-			prec.right(0,
-				repeat1(
-					choice(
-						$.unordered_link1,
-						$.unordered_link2,
-						$.unordered_link3,
-						$.unordered_link4,
-						$.unordered_link5,
-						$.unordered_link6,
-					)
-				)
-			),
+        unordered_link: $ =>
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.unordered_link1,
+                        $.unordered_link2,
+                        $.unordered_link3,
+                        $.unordered_link4,
+                        $.unordered_link5,
+                        $.unordered_link6,
+                    )
+                )
+            ),
 
         unordered_link1: $ =>
             prec.right(0,
-            	seq(
-                	alias(
-                    	$.unordered_link1_prefix,
-                    	"_prefix"
-                	),
+                seq(
+                    alias(
+                        $.unordered_link1_prefix,
+                        "_prefix"
+                    ),
 
-                	field(
-                    	"location",
-                    	$.link
-                	),
+                    field(
+                        "location",
+                        $.link
+                    ),
 
-					optional(
-						$._standalone_break
-					),
+                    optional(
+                        $._standalone_break
+                    ),
 
-					repeat(
-						choice(
-							$.unordered_link2,
-							$.unordered_link3,
-							$.unordered_link4,
-							$.unordered_link5,
-							$.unordered_link6,
-						)
-					)
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.unordered_link2,
+                            $.unordered_link3,
+                            $.unordered_link4,
+                            $.unordered_link5,
+                            $.unordered_link6,
+                        )
+                    )
+                )
+            ),
 
         unordered_link2: $ =>
             prec.right(0,
-            	seq(
-                	alias(
-                    	$.unordered_link2_prefix,
-                    	"_prefix"
-                	),
+                seq(
+                    alias(
+                        $.unordered_link2_prefix,
+                        "_prefix"
+                    ),
 
-                	field(
-                    	"location",
-                    	$.link
-                	),
+                    field(
+                        "location",
+                        $.link
+                    ),
 
-					optional(
-						$._standalone_break
-					),
+                    optional(
+                        $._standalone_break
+                    ),
 
-					repeat(
-						choice(
-							$.unordered_link3,
-							$.unordered_link4,
-							$.unordered_link5,
-							$.unordered_link6,
-						)
-					)
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.unordered_link3,
+                            $.unordered_link4,
+                            $.unordered_link5,
+                            $.unordered_link6,
+                        )
+                    )
+                )
+            ),
 
         unordered_link3: $ =>
             prec.right(0,
-            	seq(
-                	alias(
-                    	$.unordered_link3_prefix,
-                    	"_prefix"
-                	),
+                seq(
+                    alias(
+                        $.unordered_link3_prefix,
+                        "_prefix"
+                    ),
 
-                	field(
-                    	"location",
-                    	$.link
-                	),
+                    field(
+                        "location",
+                        $.link
+                    ),
 
-					optional(
-						$._standalone_break
-					),
+                    optional(
+                        $._standalone_break
+                    ),
 
-					repeat(
-						choice(
-							$.unordered_link4,
-							$.unordered_link5,
-							$.unordered_link6,
-						)
-					)
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.unordered_link4,
+                            $.unordered_link5,
+                            $.unordered_link6,
+                        )
+                    )
+                )
+            ),
 
         unordered_link4: $ =>
             prec.right(0,
-            	seq(
-                	alias(
-                    	$.unordered_link4_prefix,
-                    	"_prefix"
-                	),
+                seq(
+                    alias(
+                        $.unordered_link4_prefix,
+                        "_prefix"
+                    ),
 
-                	field(
-                    	"location",
-                    	$.link
-                	),
+                    field(
+                        "location",
+                        $.link
+                    ),
 
-					optional(
-						$._standalone_break
-					),
+                    optional(
+                        $._standalone_break
+                    ),
 
-					repeat(
-						choice(
-							$.unordered_link5,
-							$.unordered_link6,
-						)
-					)
-            	)
-			),
+                    repeat(
+                        choice(
+                            $.unordered_link5,
+                            $.unordered_link6,
+                        )
+                    )
+                )
+            ),
 
         unordered_link5: $ =>
             prec.right(0,
-            	seq(
-                	alias(
-                    	$.unordered_link5_prefix,
-                    	"_prefix"
-                	),
+                seq(
+                    alias(
+                        $.unordered_link5_prefix,
+                        "_prefix"
+                    ),
 
-                	field(
-                    	"location",
-                    	$.link
-                	),
+                    field(
+                        "location",
+                        $.link
+                    ),
 
-					optional(
-						$._standalone_break
-					),
+                    optional(
+                        $._standalone_break
+                    ),
 
-					repeat(
-						$.unordered_link6,
-					)
-            	)
-			),
+                    repeat(
+                        $.unordered_link6,
+                    )
+                )
+            ),
 
         unordered_link6: $ =>
             prec.right(0,
-            	seq(
-                	alias(
-                    	$.unordered_link6_prefix,
-                    	"_prefix"
-                	),
+                seq(
+                    alias(
+                        $.unordered_link6_prefix,
+                        "_prefix"
+                    ),
 
-                	field(
-                    	"location",
-                    	$.link
-                	),
+                    field(
+                        "location",
+                        $.link
+                    ),
 
-					optional(
-						$._standalone_break
-					),
-            	)
-			),
+                    optional(
+                        $._standalone_break
+                    ),
+                )
+            ),
 
         // A first-level heading:
         // * Example
@@ -314,7 +328,7 @@ module.exports = grammar({
 
                         repeat(
                             choice(
-                                $.paragraph,
+                                $._paragraph,
 
                                 $._standalone_break,
                                 $._detached_modifier,
@@ -328,9 +342,9 @@ module.exports = grammar({
                         )
                     ),
 
-                	optional(
-						$.weak_paragraph_delimiter,
-                	)
+                    optional(
+                        $.weak_paragraph_delimiter,
+                    )
                 )
             ),
 
@@ -351,7 +365,7 @@ module.exports = grammar({
 
                         repeat(
                             choice(
-                                $.paragraph,
+                                $._paragraph,
 
                                 $._standalone_break,
                                 $._detached_modifier,
@@ -364,9 +378,9 @@ module.exports = grammar({
                         )
                     ),
 
-                	optional(
-						$.weak_paragraph_delimiter,
-                	)
+                    optional(
+                        $.weak_paragraph_delimiter,
+                    )
                 )
             ),
 
@@ -387,7 +401,7 @@ module.exports = grammar({
 
                         repeat(
                             choice(
-                                $.paragraph,
+                                $._paragraph,
 
                                 $._standalone_break,
                                 $._detached_modifier,
@@ -399,9 +413,9 @@ module.exports = grammar({
                         )
                     ),
 
-                	optional(
-						$.weak_paragraph_delimiter,
-                	)
+                    optional(
+                        $.weak_paragraph_delimiter,
+                    )
                 )
             ),
 
@@ -422,7 +436,7 @@ module.exports = grammar({
 
                         repeat(
                             choice(
-                                $.paragraph,
+                                $._paragraph,
 
                                 $._standalone_break,
                                 $._detached_modifier,
@@ -433,9 +447,9 @@ module.exports = grammar({
                         )
                     ),
 
-                	optional(
-						$.weak_paragraph_delimiter,
-                	)
+                    optional(
+                        $.weak_paragraph_delimiter,
+                    )
                 )
             ),
 
@@ -456,7 +470,7 @@ module.exports = grammar({
 
                         repeat(
                             choice(
-                                $.paragraph,
+                                $._paragraph,
 
                                 $._standalone_break,
                                 $._detached_modifier,
@@ -466,9 +480,9 @@ module.exports = grammar({
                         )
                     ),
 
-                	optional(
-						$.weak_paragraph_delimiter,
-                	)
+                    optional(
+                        $.weak_paragraph_delimiter,
+                    )
                 )
             ),
 
@@ -489,7 +503,7 @@ module.exports = grammar({
 
                         repeat(
                             choice(
-                                $.paragraph,
+                                $._paragraph,
 
                                 $._standalone_break,
                                 $._detached_modifier,
@@ -497,9 +511,9 @@ module.exports = grammar({
                         )
                     ),
 
-                	optional(
-						$.weak_paragraph_delimiter,
-                	)
+                    optional(
+                        $.weak_paragraph_delimiter,
+                    )
                 )
             ),
 
@@ -653,7 +667,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph,
+                        $._paragraph,
                     ),
 
                     repeat(
@@ -681,7 +695,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph,
+                        $._paragraph,
                     ),
 
                     repeat(
@@ -707,7 +721,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph,
+                        $._paragraph,
                     ),
 
                     repeat(
@@ -731,7 +745,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph,
+                        $._paragraph,
                     ),
 
                     repeat(
@@ -753,7 +767,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph,
+                        $._paragraph,
                     ),
 
                     repeat(
@@ -772,7 +786,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph,
+                        $._paragraph,
                     ),
                 )
             ),
@@ -791,7 +805,7 @@ module.exports = grammar({
                         "subtext",
                         repeat(
                             choice(
-                                $.paragraph,
+                                $._paragraph,
                                 $.strong_paragraph_delimiter,
                                 $._heading,
                                 $._detached_modifier,
@@ -802,20 +816,41 @@ module.exports = grammar({
                 )
             ),
 
-        // TODO:
         drawer: $ =>
-            prec.left(0, seq(
-                alias($.drawer_prefix, "_title"),
+            choice(
+                seq(
+                    alias(
+                        $.drawer_prefix,
+                        "_title",
+                    ),
 
-                field(
-                    "title",
-                    $.paragraph_segment,
+                    field(
+                        "title",
+                        $.paragraph_segment,
+                    ),
+
+                    field(
+                        "content",
+                        repeat(
+                            choice(
+                                $._paragraph,
+                                $._standalone_break,
+                            )
+                        )
+                    ),
+
+                    field(
+                        "end",
+                        $.drawer_suffix
+                    ),
                 ),
 
-                repeat($.paragraph_segment),
-
-                optional($.drawer_suffix),
-            )),
+                // Used for preventing annoying errors with incomplete marker definitions
+                alias(
+                    $.drawer_suffix,
+                    "_suffix"
+                )
+            ),
 
         // --------------------------------------------------
         todo_item_undone: $ =>
@@ -1116,14 +1151,45 @@ module.exports = grammar({
                 )
             ),
 
+		word: $ =>
+			token.immediate(/[a-zA-Z_1-9\-\.]+/),
+
+		insertion: $ =>
+			prec.right(0,
+				seq(
+					alias(
+						$.insertion_prefix,
+						"_prefix",
+					),
+
+					field(
+						"item",
+						$.word,
+					),
+
+					choice(
+						seq(
+							token.immediate(
+								/[\t\v ]+/
+							),
+							field(
+								"parameters",
+								$.paragraph_segment
+							)
+						),
+
+						token.immediate(
+							/[\t\v ]+\n/
+						),
+					),
+				)
+			),
+
         // --------------------------------------------------
 
         // tag: $ => seq(token('@'), )
 
         // --------------------------------------------------
-
-        _standalone_break: $ =>
-            token(/\n/),
 
         _heading: $ =>
             choice(
@@ -1141,6 +1207,7 @@ module.exports = grammar({
                 $.quote,
                 $.generic_list,
                 $.drawer,
+                $.insertion,
             ),
 
         /*

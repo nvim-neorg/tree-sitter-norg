@@ -40,6 +40,10 @@
           "named": true
         },
         {
+          "type": "insertion",
+          "named": true
+        },
+        {
           "type": "marker",
           "named": true
         },
@@ -62,9 +66,29 @@
     "type": "drawer",
     "named": true,
     "fields": {
+      "content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "end": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "drawer_suffix",
+            "named": true
+          }
+        ]
+      },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -72,20 +96,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "drawer_suffix",
-          "named": true
-        },
-        {
-          "type": "paragraph_segment",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -194,6 +204,10 @@
             "named": true
           },
           {
+            "type": "insertion",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -262,6 +276,10 @@
             "named": true
           },
           {
+            "type": "insertion",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -326,6 +344,10 @@
             "named": true
           },
           {
+            "type": "insertion",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -386,6 +408,10 @@
             "named": true
           },
           {
+            "type": "insertion",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -442,6 +468,10 @@
             "named": true
           },
           {
+            "type": "insertion",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -494,6 +524,10 @@
             "named": true
           },
           {
+            "type": "insertion",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -527,6 +561,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "insertion",
+    "named": true,
+    "fields": {
+      "item": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -639,6 +699,10 @@
           },
           {
             "type": "heading6",
+            "named": true
+          },
+          {
+            "type": "insertion",
             "named": true
           },
           {
@@ -2035,6 +2099,10 @@
   },
   {
     "type": "weak_paragraph_delimiter",
+    "named": true
+  },
+  {
+    "type": "word",
     "named": true
   }
 ]
