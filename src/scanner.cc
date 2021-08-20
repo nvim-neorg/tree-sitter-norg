@@ -462,7 +462,7 @@ private:
     size_t m_ParsedChars = 0;
 
 private:
-    constexpr static const std::array<unsigned char, 4> s_DetachedModifiers = { '*', '-', '>', '|' };
+    const std::array<unsigned char, 4> s_DetachedModifiers = { '*', '-', '>', '|' };
 };
 
 extern "C"
