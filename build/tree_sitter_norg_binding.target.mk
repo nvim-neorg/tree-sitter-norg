@@ -37,8 +37,7 @@ CFLAGS_C_Debug := \
 CFLAGS_CC_Debug := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++14 \
-	-std=c++20
+	-std=gnu++14
 
 INCS_Debug := \
 	-I/home/vhyrro/.cache/node-gyp/16.6.1/include/node \
@@ -83,8 +82,7 @@ CFLAGS_C_Release := \
 CFLAGS_CC_Release := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++14 \
-	-std=c++20
+	-std=gnu++14
 
 INCS_Release := \
 	-I/home/vhyrro/.cache/node-gyp/16.6.1/include/node \
