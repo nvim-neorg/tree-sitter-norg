@@ -61,6 +61,10 @@ enum TokenType
     LINK_END_HEADING6_REFERENCE,
     LINK_END_MARKER_REFERENCE,
     LINK_END_DRAWER_REFERENCE,
+
+	RANGED_TAG,
+	RANGED_TAG_NAME,
+	RANGED_TAG_END,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -123,13 +127,90 @@ public:
         // If we're at the beginning of a line check for all detached modifiers
         if (m_Whitespace)
         {
+        	m_IndentationLevel = 0;
+
+        	// Skip all leading whitespace
+        	while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+            {
+            	if (lexer->lookahead == '\t')
+            		m_IndentationLevel += 4;
+            	else
+					++m_IndentationLevel;
+
+            	skip(lexer);
+            }
+
+			if (lexer->lookahead == '@')
+			{
+				advance(lexer);
+
+				lexer->mark_end(lexer);
+
+				if (lexer->lookahead == 'e')
+				{
+					advance(lexer);
+					if (lexer->lookahead == 'n')
+					{
+						advance(lexer);
+						if (lexer->lookahead == 'd')
+						{
+							advance(lexer);
+							if (std::iswspace(lexer->lookahead))
+							{
+								do
+									advance(lexer);
+								while (lexer->lookahead != '\n' && lexer->lookahead);
+
+								if (m_TagStack.size() > 0)
+								{
+									if (m_IndentationLevel != m_TagStack.back())
+									{
+										m_LastToken = PARAGRAPH_SEGMENT;
+										lexer->result_symbol = PARAGRAPH_SEGMENT;
+										return true;
+									}
+									else
+									{
+										// We set the last token to PARAGRAPH_SEGMENT so things like standalone line breaks can be
+										// parsed. It also makes recovery from this node easy
+										m_LastToken = PARAGRAPH_SEGMENT;
+
+										lexer->result_symbol = RANGED_TAG_END;
+
+										m_TagStack.pop_back();
+										return true;
+									}
+								}
+								else
+								{
+									m_LastToken = PARAGRAPH_SEGMENT;
+									lexer->result_symbol = PARAGRAPH_SEGMENT;
+									return true;
+								}
+							}
+						}
+					}
+
+					while (lexer->lookahead != '.' && !std::iswspace(lexer->lookahead))
+						advance(lexer);
+
+					m_LastToken = NONE;
+					lexer->result_symbol = RANGED_TAG_NAME;
+					lexer->mark_end(lexer);
+					return true;
+				}
+
+				lexer->result_symbol = m_LastToken = RANGED_TAG;
+				m_TagStack.push_back(m_IndentationLevel);
+				return true;
+			}
+
             if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6 | NONE, { '*' }) != NONE)
                 return true;
 
             if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6 | NONE, { '>' }) != NONE)
                 return true;
 
-            // TODO: Add = something <value>
             if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' },
             			{ '>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 | UNORDERED_LINK4 | UNORDERED_LINK5 | UNORDERED_LINK6 | NONE }) != NONE)
             {
@@ -208,10 +289,6 @@ private:
 
         size_t i = m_ParsedChars = 0;
 
-        // Skip all leading whitespace
-        while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
-            skip(lexer);
-
         // Loop as long as the next character is a valid detached modifier
         for (auto detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead);
                 detached_modifier != s_DetachedModifiers.end();
@@ -223,7 +300,7 @@ private:
                 advance(lexer);
 
                 // Skip other potential whitespace
-                while (lexer->lookahead && lexer->lookahead == ' ' || lexer->lookahead == '\t')
+                while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
                     advance(lexer);
 
                 TokenType result = terminate_at.second[clamp(i, 0UL, terminate_at.second.size()) - 1];
@@ -248,7 +325,7 @@ private:
                 TokenType result = results[clamp(i, 0UL, results.size() - 1)];
 
                 // Skip any other potential whitespace
-                while (lexer->lookahead && lexer->lookahead == ' ' || lexer->lookahead == '\t')
+                while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
                     advance(lexer);
 
                 lexer->result_symbol = result;
@@ -382,6 +459,12 @@ private:
     {
         while (lexer->lookahead)
         {
+			if (m_TagStack.size() > 0 && m_IndentationLevel < m_TagStack.back())
+			{
+				lexer->result_symbol = RANGED_TAG_END;
+				return true;
+			}
+
             // If we have an escape sequence in the middle of the paragraph then terminate the paragraph
             // to allow the escape sequence to get parsed
             if (lexer->lookahead == '\\')
@@ -443,7 +526,10 @@ private:
     TokenType m_LastToken = NONE;
 
     // Used for lookback
-    size_t m_ParsedChars = 0;
+    size_t m_ParsedChars = 0, m_IndentationLevel = 0;
+    
+    // Used for tags
+	std::vector<size_t> m_TagStack;
 
 private:
     const std::array<unsigned char, 5> s_DetachedModifiers = { '*', '-', '>', '|', '=' };

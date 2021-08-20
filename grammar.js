@@ -59,6 +59,10 @@ module.exports = grammar({
         $.link_end_heading6_reference,
         $.link_end_marker_reference,
         $.link_end_drawer_reference,
+
+		$.ranged_tag_prefix,
+		$.ranged_tag_name_fallback,
+		$.ranged_tag_end_prefix,
       ],
 
       rules: {
@@ -1152,7 +1156,7 @@ module.exports = grammar({
             ),
 
 		word: $ =>
-			token.immediate(/[a-zA-Z_1-9\-\.]+/),
+			token.immediate(/[a-zA-Z_1-9\-]+/),
 
 		insertion: $ =>
 			prec.right(0,
@@ -1185,6 +1189,113 @@ module.exports = grammar({
 				)
 			),
 
+		// TODO: Carryover tags
+		// TODO: Comment scanner code
+		ranged_tag_content: $ =>
+			repeat1(
+				alias(
+					choice(
+						$.paragraph_segment,
+						$._standalone_break,
+					),
+					"_segment",
+				),
+			),
+
+		ranged_tag_end: $ =>
+			seq(
+				alias(
+					$.ranged_tag_end_prefix,
+					"_prefix",
+				),
+
+				alias(
+					token.immediate("end"),
+					"_name",
+				),
+			),
+
+		ranged_tag: $ =>
+			prec.right(0,
+				seq(
+					alias(
+						$.ranged_tag_prefix,
+						"_prefix"
+					),
+
+					field(
+						"name",
+						$.tag_name,
+					),
+
+					choice(
+						token.immediate(
+							/[\t\v ]*\n/,
+						),
+
+						seq(
+							token.immediate(
+								/[\t\v ]+/,
+							),
+
+							$.tag_parameters,
+
+							token.immediate(
+								'\n'
+							),
+						),
+					),
+
+					field(
+						"content",
+						optional(
+							$.ranged_tag_content,
+						),
+					),
+
+					// alias(
+						$.ranged_tag_end,
+						// "_end",
+					// ),
+				)
+			),
+
+		tag_name: $ =>
+			seq(
+				choice(
+					$.word,
+					$.ranged_tag_name_fallback,
+				),
+
+				repeat(
+					seq(
+						alias(
+							token.immediate("."),
+							"_delimiter",
+						),
+
+						$.word,
+					)
+				)
+			),
+
+		tag_parameters: $ =>
+			seq(
+				field("parameter", $.word),
+
+				repeat(
+					seq(
+						token.immediate(/[\t\v ]+/),
+						field("parameter", $.word)
+					)
+				),
+			),
+
+		_tag: $ =>
+			choice(
+				$.ranged_tag
+			),
+
         // --------------------------------------------------
 
         // tag: $ => seq(token('@'), )
@@ -1208,6 +1319,7 @@ module.exports = grammar({
                 $.generic_list,
                 $.drawer,
                 $.insertion,
+                $._tag,
             ),
 
         /*

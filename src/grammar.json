@@ -2269,7 +2269,7 @@
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[a-zA-Z_1-9\\-\\.]+"
+        "value": "[a-zA-Z_1-9\\-]+"
       }
     },
     "insertion": {
@@ -2330,6 +2330,221 @@
         ]
       }
     },
+    "ranged_tag_content": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "ALIAS",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "paragraph_segment"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_standalone_break"
+            }
+          ]
+        },
+        "named": false,
+        "value": "_segment"
+      }
+    },
+    "ranged_tag_end": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_tag_end_prefix"
+          },
+          "named": false,
+          "value": "_prefix"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "end"
+            }
+          },
+          "named": false,
+          "value": "_name"
+        }
+      ]
+    },
+    "ranged_tag": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "ranged_tag_prefix"
+            },
+            "named": false,
+            "value": "_prefix"
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "tag_name"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[\\t\\v ]*\\n"
+                }
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[\\t\\v ]+"
+                    }
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "tag_parameters"
+                  },
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "STRING",
+                      "value": "\n"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "content",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "ranged_tag_content"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "ranged_tag_end"
+          }
+        ]
+      }
+    },
+    "tag_name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "word"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "ranged_tag_name_fallback"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "STRING",
+                    "value": "."
+                  }
+                },
+                "named": false,
+                "value": "_delimiter"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "word"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "tag_parameters": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "parameter",
+          "content": {
+            "type": "SYMBOL",
+            "name": "word"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[\\t\\v ]+"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "parameter",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "word"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_tag": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "ranged_tag"
+        }
+      ]
+    },
     "_heading": {
       "type": "CHOICE",
       "members": [
@@ -2377,6 +2592,10 @@
         {
           "type": "SYMBOL",
           "name": "insertion"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_tag"
         }
       ]
     }
@@ -2573,6 +2792,18 @@
     {
       "type": "SYMBOL",
       "name": "link_end_drawer_reference"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "ranged_tag_prefix"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "ranged_tag_name_fallback"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "ranged_tag_end_prefix"
     }
   ],
   "inline": [],
