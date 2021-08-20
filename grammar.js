@@ -42,7 +42,8 @@ module.exports = grammar({
         $.unordered_link5_prefix,
         $.unordered_link6_prefix,
 
-        $.paragraph_delimiter,
+        $.strong_paragraph_delimiter,
+        $.weak_paragraph_delimiter,
 
         $.link_begin,
         $.link_end_generic,
@@ -71,7 +72,7 @@ module.exports = grammar({
                 ),
 
                 $.paragraph,
-                $.paragraph_delimiter,
+                $.strong_paragraph_delimiter,
             )
         ),
 
@@ -325,7 +326,11 @@ module.exports = grammar({
                                 $.heading6,
                             )
                         )
-                    )
+                    ),
+
+                	optional(
+						$.weak_paragraph_delimiter,
+                	)
                 )
             ),
 
@@ -357,7 +362,11 @@ module.exports = grammar({
                                 $.heading6,
                             )
                         )
-                    )
+                    ),
+
+                	optional(
+						$.weak_paragraph_delimiter,
+                	)
                 )
             ),
 
@@ -388,7 +397,11 @@ module.exports = grammar({
                                 $.heading6,
                             )
                         )
-                    )
+                    ),
+
+                	optional(
+						$.weak_paragraph_delimiter,
+                	)
                 )
             ),
 
@@ -418,7 +431,11 @@ module.exports = grammar({
                                 $.heading6,
                             )
                         )
-                    )
+                    ),
+
+                	optional(
+						$.weak_paragraph_delimiter,
+                	)
                 )
             ),
 
@@ -447,7 +464,11 @@ module.exports = grammar({
                                 $.heading6,
                             )
                         )
-                    )
+                    ),
+
+                	optional(
+						$.weak_paragraph_delimiter,
+                	)
                 )
             ),
 
@@ -474,7 +495,11 @@ module.exports = grammar({
                                 $._detached_modifier,
                             )
                         )
-                    )
+                    ),
+
+                	optional(
+						$.weak_paragraph_delimiter,
+                	)
                 )
             ),
 
@@ -767,7 +792,7 @@ module.exports = grammar({
                         repeat(
                             choice(
                                 $.paragraph,
-                                $.paragraph_delimiter,
+                                $.strong_paragraph_delimiter,
                                 $._heading,
                                 $._detached_modifier,
                                 $._standalone_break,

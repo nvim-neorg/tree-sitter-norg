@@ -45,7 +45,8 @@ enum TokenType
     UNORDERED_LINK5,
     UNORDERED_LINK6,
 
-    PARAGRAPH_DELIMITER,
+    STRONG_PARAGRAPH_DELIMITER,
+    WEAK_PARAGRAPH_DELIMITER,
 
     LINK_BEGIN,
     LINK_END_GENERIC,
@@ -124,7 +125,14 @@ public:
             // TODO: Add --- and = something <value>
             if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' },
             			{ '>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 | UNORDERED_LINK4 | UNORDERED_LINK5 | UNORDERED_LINK6 | NONE }) != NONE)
+            {
                     return true;
+            }
+            else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
+			{
+				lexer->result_symbol = WEAK_PARAGRAPH_DELIMITER;
+				return true;
+			}
 
             if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
                 return true;
@@ -137,7 +145,7 @@ public:
                 return true;
             }
 
-            if (check_delimiting(lexer, '=', PARAGRAPH_DELIMITER) != NONE)
+            if (check_delimiting(lexer, '=', STRONG_PARAGRAPH_DELIMITER) != NONE)
                 return true;
         }
 
@@ -180,7 +188,7 @@ private:
     {
         static_assert(Size > 0, "check_detached Size template must be greater than 0");
 
-        size_t i = 0;
+        size_t i = m_ParsedChars = 0;
 
         // Skip all trailing whitespace
         while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
@@ -189,7 +197,7 @@ private:
         // Loop as long as the next character is a valid detached modifier
         for (auto detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead);
                 detached_modifier != s_DetachedModifiers.end();
-                    detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead), i++)
+                    detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead), i++, m_ParsedChars++)
         {
             // If we've specified a termination character and we match then the token lexing prematurely
             if (lexer->lookahead == terminate_at.first)
@@ -446,7 +454,7 @@ private:
     TokenType m_LastToken = NONE;
 
     // Used for lookback
-    std::string m_Buffer;
+    size_t m_ParsedChars = 0;
 
 private:
     constexpr static const std::array<unsigned char, 4> s_DetachedModifiers = { '*', '-', '>', '|' };
