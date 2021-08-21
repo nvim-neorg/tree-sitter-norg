@@ -1,5 +1,138 @@
 [
   {
+    "type": "_end",
+    "named": false,
+    "fields": {}
+  },
+  {
+    "type": "_segment",
+    "named": false,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "ranged_tag_content",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "tag_parameters",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "carryover_tag",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "tag_parameters",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "carryover_tag_set",
+    "named": true,
+    "fields": {
+      "target": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "drawer",
+            "named": true
+          },
+          {
+            "type": "generic_list",
+            "named": true
+          },
+          {
+            "type": "heading1",
+            "named": true
+          },
+          {
+            "type": "heading2",
+            "named": true
+          },
+          {
+            "type": "heading3",
+            "named": true
+          },
+          {
+            "type": "heading4",
+            "named": true
+          },
+          {
+            "type": "heading5",
+            "named": true
+          },
+          {
+            "type": "heading6",
+            "named": true
+          },
+          {
+            "type": "insertion",
+            "named": true
+          },
+          {
+            "type": "paragraph",
+            "named": true
+          },
+          {
+            "type": "quote",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "carryover_tag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "document",
     "named": true,
     "fields": {},
@@ -7,6 +140,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "carryover_tag_set",
+          "named": true
+        },
         {
           "type": "drawer",
           "named": true
@@ -180,6 +317,10 @@
         "required": false,
         "types": [
           {
+            "type": "carryover_tag_set",
+            "named": true
+          },
+          {
             "type": "drawer",
             "named": true
           },
@@ -260,6 +401,10 @@
         "required": false,
         "types": [
           {
+            "type": "carryover_tag_set",
+            "named": true
+          },
+          {
             "type": "drawer",
             "named": true
           },
@@ -336,6 +481,10 @@
         "required": false,
         "types": [
           {
+            "type": "carryover_tag_set",
+            "named": true
+          },
+          {
             "type": "drawer",
             "named": true
           },
@@ -408,6 +557,10 @@
         "required": false,
         "types": [
           {
+            "type": "carryover_tag_set",
+            "named": true
+          },
+          {
             "type": "drawer",
             "named": true
           },
@@ -476,6 +629,10 @@
         "required": false,
         "types": [
           {
+            "type": "carryover_tag_set",
+            "named": true
+          },
+          {
             "type": "drawer",
             "named": true
           },
@@ -539,6 +696,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "carryover_tag_set",
+            "named": true
+          },
           {
             "type": "drawer",
             "named": true
@@ -697,6 +858,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "carryover_tag_set",
+            "named": true
+          },
           {
             "type": "drawer",
             "named": true
@@ -1059,13 +1224,9 @@
       }
     },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "ranged_tag_end",
-          "named": true
-        },
         {
           "type": "tag_parameters",
           "named": true
@@ -1075,11 +1236,6 @@
   },
   {
     "type": "ranged_tag_content",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "ranged_tag_end",
     "named": true,
     "fields": {}
   },

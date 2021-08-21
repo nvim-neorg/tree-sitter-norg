@@ -65,6 +65,8 @@ enum TokenType
 	RANGED_TAG,
 	RANGED_TAG_NAME,
 	RANGED_TAG_END,
+
+	CARRYOVER_TAG,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -116,8 +118,8 @@ public:
         }
         // Otherwise make sure to check for the existence of links
         else if (lexer->lookahead == '[' || lexer->lookahead == '(')
-        	return true;
-        else if (m_LastToken == PARAGRAPH_SEGMENT && lexer->lookahead == '\n')
+        	return check_link(lexer);
+        else if (lexer->lookahead == '\n')
         {
         	advance(lexer);
 			lexer->result_symbol = STANDALONE_BREAK;
@@ -165,17 +167,12 @@ public:
 								{
 									if (m_IndentationLevel != m_TagStack.back())
 									{
-										m_LastToken = PARAGRAPH_SEGMENT;
-										lexer->result_symbol = PARAGRAPH_SEGMENT;
+										lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
 										return true;
 									}
 									else
 									{
-										// We set the last token to PARAGRAPH_SEGMENT so things like standalone line breaks can be
-										// parsed. It also makes recovery from this node easy
-										m_LastToken = PARAGRAPH_SEGMENT;
-
-										lexer->result_symbol = RANGED_TAG_END;
+										lexer->result_symbol = m_LastToken = RANGED_TAG_END;
 
 										m_TagStack.pop_back();
 										return true;
@@ -183,8 +180,7 @@ public:
 								}
 								else
 								{
-									m_LastToken = PARAGRAPH_SEGMENT;
-									lexer->result_symbol = PARAGRAPH_SEGMENT;
+									lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
 									return true;
 								}
 							}
@@ -194,14 +190,19 @@ public:
 					while (lexer->lookahead != '.' && !std::iswspace(lexer->lookahead))
 						advance(lexer);
 
-					m_LastToken = NONE;
-					lexer->result_symbol = RANGED_TAG_NAME;
+					lexer->result_symbol = m_LastToken = RANGED_TAG_NAME;
 					lexer->mark_end(lexer);
 					return true;
 				}
 
 				lexer->result_symbol = m_LastToken = RANGED_TAG;
 				m_TagStack.push_back(m_IndentationLevel);
+				return true;
+			}
+			else if (lexer->lookahead == '$')
+			{
+				advance(lexer);
+				lexer->result_symbol = CARRYOVER_TAG;
 				return true;
 			}
 
@@ -422,7 +423,7 @@ private:
             {
                 if (lexer->lookahead == '\n' || !lexer->lookahead)
                 {
-                    lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
+                    lexer->result_symbol = LINK_END_GENERIC;
                     break;
                 }
 

@@ -63,6 +63,8 @@ module.exports = grammar({
 		$.ranged_tag_prefix,
 		$.ranged_tag_name_fallback,
 		$.ranged_tag_end_prefix,
+
+		$.carryover_tag_prefix,
       ],
 
       rules: {
@@ -73,6 +75,7 @@ module.exports = grammar({
                         $._standalone_break,
                         $._heading,
                         $._detached_modifier,
+                        $._tag,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
                         $.marker,
                     )
@@ -83,6 +86,7 @@ module.exports = grammar({
             )
         ),
 
+        // Any regular text
 		_paragraph: $ =>
 			prec.right(0,
 				seq(
@@ -94,21 +98,18 @@ module.exports = grammar({
 				)
 			),
 
-        // Any regular text
         paragraph: $ =>
             prec.right(0,
-                seq(
-                	repeat1(
-                    	choice(
-                        	alias(
-                            	$.paragraph_segment,
-                            	"_segment",
-                        	),
+                repeat1(
+                    choice(
+                        alias(
+                            $.paragraph_segment,
+                            "_segment",
+                        ),
 
-                        	$.link,
-                        	$.escape_sequence,
-                    	)
-                	)
+                        $.link,
+                        $.escape_sequence,
+                    )
                 )
             ),
 
@@ -336,6 +337,7 @@ module.exports = grammar({
 
                                 $._standalone_break,
                                 $._detached_modifier,
+                                $._tag,
 
                                 $.heading2,
                                 $.heading3,
@@ -373,6 +375,7 @@ module.exports = grammar({
 
                                 $._standalone_break,
                                 $._detached_modifier,
+                                $._tag,
 
                                 $.heading3,
                                 $.heading4,
@@ -409,6 +412,7 @@ module.exports = grammar({
 
                                 $._standalone_break,
                                 $._detached_modifier,
+                                $._tag,
 
                                 $.heading4,
                                 $.heading5,
@@ -444,6 +448,7 @@ module.exports = grammar({
 
                                 $._standalone_break,
                                 $._detached_modifier,
+                                $._tag,
 
                                 $.heading5,
                                 $.heading6,
@@ -478,6 +483,7 @@ module.exports = grammar({
 
                                 $._standalone_break,
                                 $._detached_modifier,
+                                $._tag,
 
                                 $.heading6,
                             )
@@ -511,6 +517,7 @@ module.exports = grammar({
 
                                 $._standalone_break,
                                 $._detached_modifier,
+                                $._tag,
                             )
                         )
                     ),
@@ -813,6 +820,7 @@ module.exports = grammar({
                                 $.strong_paragraph_delimiter,
                                 $._heading,
                                 $._detached_modifier,
+                                $._tag,
                                 $._standalone_break,
                             ),
                         ),
@@ -917,7 +925,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph
+                        $._paragraph
                     ),
 
                     repeat(
@@ -966,7 +974,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph
+                        $._paragraph
                     ),
 
                     repeat(
@@ -1014,7 +1022,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph
+                        $._paragraph
                     ),
 
                     repeat(
@@ -1061,7 +1069,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph
+                        $._paragraph
                     ),
 
                     repeat(
@@ -1107,7 +1115,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph
+                        $._paragraph
                     ),
 
                     repeat(
@@ -1150,7 +1158,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $.paragraph
+                        $._paragraph
                     )
                 )
             ),
@@ -1197,6 +1205,7 @@ module.exports = grammar({
 					choice(
 						$.paragraph_segment,
 						$._standalone_break,
+						$.ranged_tag,
 					),
 					"_segment",
 				),
@@ -1253,11 +1262,69 @@ module.exports = grammar({
 						),
 					),
 
-					// alias(
+					alias(
 						$.ranged_tag_end,
-						// "_end",
-					// ),
+						"_end",
+					),
 				)
+			),
+
+		carryover_tag_set: $ =>
+			prec.left(0,
+				seq(
+					repeat1(
+						$.carryover_tag,
+					),
+
+					field(
+						"target",
+
+						choice(
+							$._paragraph,
+							repeat1(
+								choice(
+									$._detached_modifier,
+									$._heading,
+								),
+							),
+						),
+					),
+				)
+			),
+
+		carryover_tag: $ =>
+			seq(
+				alias(
+					$.carryover_tag_prefix,
+					"_prefix",
+				),
+
+				field(
+					"name",
+					$.tag_name,
+				),
+
+				choice(
+					token.immediate(
+						/[\t\v ]*\n/,
+					),
+
+					seq(
+						token.immediate(
+							/[\t\v ]+/,
+						),
+
+						$.tag_parameters,
+
+						token.immediate(
+							'\n'
+						),
+					),
+				),
+
+				repeat(
+					$._standalone_break,
+				),
 			),
 
 		tag_name: $ =>
@@ -1293,12 +1360,9 @@ module.exports = grammar({
 
 		_tag: $ =>
 			choice(
-				$.ranged_tag
+				$.ranged_tag,
+				$.carryover_tag_set,
 			),
-
-        // --------------------------------------------------
-
-        // tag: $ => seq(token('@'), )
 
         // --------------------------------------------------
 
@@ -1319,21 +1383,6 @@ module.exports = grammar({
                 $.generic_list,
                 $.drawer,
                 $.insertion,
-                $._tag,
             ),
-
-        /*
-        "unordered_link_list_prefix",
-        "unordered_link_list",
-        "tag",
-        "tag_content",
-        "tag_name",
-        "tag_parameters",
-        "tag_end",
-        "carryover_tag",
-        "drawer",
-        "drawer_content",
-        "escape_sequence", ??
-        */
       }
 });
