@@ -2349,7 +2349,7 @@
                 "type": "IMMEDIATE_TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[\\t\\v ]+\\n"
+                  "value": "[\\t\\v ]*\\n"
                 }
               }
             ]
@@ -2360,26 +2360,35 @@
     "ranged_tag_content": {
       "type": "REPEAT1",
       "content": {
-        "type": "ALIAS",
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "paragraph_segment"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "paragraph_segment"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_standalone_break"
+                }
+              ]
             },
-            {
-              "type": "SYMBOL",
-              "name": "_standalone_break"
-            },
-            {
+            "named": false,
+            "value": "_segment"
+          },
+          {
+            "type": "FIELD",
+            "name": "nested_tag",
+            "content": {
               "type": "SYMBOL",
               "name": "ranged_tag"
             }
-          ]
-        },
-        "named": false,
-        "value": "_segment"
+          }
+        ]
       }
     },
     "ranged_tag_end": {
@@ -2483,13 +2492,8 @@
             }
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_tag_end"
-            },
-            "named": false,
-            "value": "_end"
+            "type": "SYMBOL",
+            "name": "ranged_tag_end"
           }
         ]
       }

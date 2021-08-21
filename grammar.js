@@ -1191,7 +1191,7 @@ module.exports = grammar({
 						),
 
 						token.immediate(
-							/[\t\v ]+\n/
+							/[\t\v ]*\n/
 						),
 					),
 				)
@@ -1201,13 +1201,19 @@ module.exports = grammar({
 		// TODO: Comment scanner code
 		ranged_tag_content: $ =>
 			repeat1(
-				alias(
-					choice(
-						$.paragraph_segment,
-						$._standalone_break,
-						$.ranged_tag,
+				choice(
+					alias(
+						choice(
+							$.paragraph_segment,
+							$._standalone_break,
+						),
+						"_segment",
 					),
-					"_segment",
+
+					field(
+						"nested_tag",
+						$.ranged_tag
+					),
 				),
 			),
 
@@ -1262,10 +1268,10 @@ module.exports = grammar({
 						),
 					),
 
-					alias(
+					// alias(
 						$.ranged_tag_end,
-						"_end",
-					),
+						// "_end",
+					// ),
 				)
 			),
 

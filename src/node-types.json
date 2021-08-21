@@ -1,46 +1,5 @@
 [
   {
-    "type": "_end",
-    "named": false,
-    "fields": {}
-  },
-  {
-    "type": "_segment",
-    "named": false,
-    "fields": {
-      "content": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "ranged_tag_content",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "tag_name",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "tag_parameters",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "carryover_tag",
     "named": true,
     "fields": {
@@ -1224,9 +1183,13 @@
       }
     },
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
+        {
+          "type": "ranged_tag_end",
+          "named": true
+        },
         {
           "type": "tag_parameters",
           "named": true
@@ -1236,6 +1199,22 @@
   },
   {
     "type": "ranged_tag_content",
+    "named": true,
+    "fields": {
+      "nested_tag": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "ranged_tag",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "ranged_tag_end",
     "named": true,
     "fields": {}
   },
