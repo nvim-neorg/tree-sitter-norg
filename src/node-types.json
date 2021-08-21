@@ -76,6 +76,10 @@
           {
             "type": "quote",
             "named": true
+          },
+          {
+            "type": "ranged_tag",
+            "named": true
           }
         ]
       }
@@ -1302,30 +1306,18 @@
           }
         ]
       },
-      "done_token": {
+      "state": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "todo_item_done",
             "named": true
-          }
-        ]
-      },
-      "pending_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_pending",
             "named": true
-          }
-        ]
-      },
-      "undone_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_undone",
             "named": true
@@ -1378,30 +1370,18 @@
           }
         ]
       },
-      "done_token": {
+      "state": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "todo_item_done",
             "named": true
-          }
-        ]
-      },
-      "pending_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_pending",
             "named": true
-          }
-        ]
-      },
-      "undone_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_undone",
             "named": true
@@ -1450,30 +1430,18 @@
           }
         ]
       },
-      "done_token": {
+      "state": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "todo_item_done",
             "named": true
-          }
-        ]
-      },
-      "pending_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_pending",
             "named": true
-          }
-        ]
-      },
-      "undone_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_undone",
             "named": true
@@ -1518,30 +1486,18 @@
           }
         ]
       },
-      "done_token": {
+      "state": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "todo_item_done",
             "named": true
-          }
-        ]
-      },
-      "pending_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_pending",
             "named": true
-          }
-        ]
-      },
-      "undone_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_undone",
             "named": true
@@ -1582,30 +1538,18 @@
           }
         ]
       },
-      "done_token": {
+      "state": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "todo_item_done",
             "named": true
-          }
-        ]
-      },
-      "pending_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_pending",
             "named": true
-          }
-        ]
-      },
-      "undone_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_undone",
             "named": true
@@ -1642,30 +1586,18 @@
           }
         ]
       },
-      "done_token": {
+      "state": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "todo_item_done",
             "named": true
-          }
-        ]
-      },
-      "pending_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_pending",
             "named": true
-          }
-        ]
-      },
-      "undone_token": {
-        "multiple": false,
-        "required": false,
-        "types": [
+          },
           {
             "type": "todo_item_undone",
             "named": true
@@ -2203,10 +2135,6 @@
   },
   {
     "type": "_suffix",
-    "named": false
-  },
-  {
-    "type": "_title",
     "named": false
   },
   {

@@ -113,11 +113,14 @@ public:
         if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 && lexer->lookahead == '[')
         {
             advance(lexer);
-            lexer->result_symbol = TODO_ITEM;
-            return true;
+			if (lexer->lookahead == ' ' || lexer->lookahead == 'x' || lexer->lookahead == '*')
+			{
+            	lexer->result_symbol = TODO_ITEM;
+            	return true;
+			}
         }
         // Otherwise make sure to check for the existence of links
-        else if (m_TagStack.size() == 0 && lexer->lookahead == '[' || lexer->lookahead == '(')
+        else if (m_TagStack.size() == 0 && (lexer->lookahead == '[' || lexer->lookahead == '('))
         	return check_link(lexer);
         else if (lexer->lookahead == '\n')
         {
@@ -159,11 +162,10 @@ public:
 							advance(lexer);
 							if (std::iswspace(lexer->lookahead))
 							{
-								do
+								while (std::iswspace(lexer->lookahead) && lexer->lookahead != '\n' && lexer->lookahead)
 									advance(lexer);
-								while (lexer->lookahead != '\n' && lexer->lookahead);
 
-								if (m_TagStack.size() > 0)
+								if (std::iswspace(lexer->lookahead) && m_TagStack.size() > 0)
 								{
 									if (m_IndentationLevel != m_TagStack.back())
 									{
@@ -178,11 +180,9 @@ public:
 										return true;
 									}
 								}
-								else
-								{
-									lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
-									return true;
-								}
+
+								lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+								return true;
 							}
 						}
 					}
@@ -276,10 +276,10 @@ private:
     }
 
     template <size_t Size = 1>
-    	inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<unsigned char, Size>& expected, std::pair<char, TokenType> terminate_at = { 0, NONE })
-    	{
-        	return check_detached(lexer, result | NONE, expected, { terminate_at.first, terminate_at.second | NONE });
-    	}
+    inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<unsigned char, Size>& expected, std::pair<char, TokenType> terminate_at = { 0, NONE })
+    {
+        return check_detached(lexer, result | NONE, expected, { terminate_at.first, terminate_at.second | NONE });
+    }
 
     /*
      * Checks for the existence of a detached modifier
@@ -376,8 +376,7 @@ private:
             // Make sure to capture the closing ] too!
             advance(lexer);
 
-            m_LastToken = LINK_BEGIN;
-            lexer->result_symbol = LINK_BEGIN;
+            lexer->result_symbol = m_LastToken = LINK_BEGIN;
 
             return true;
         }

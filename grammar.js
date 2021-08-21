@@ -1,3 +1,8 @@
+/*
+* Known bugs:
+* Error when placing an unordered list item directly under a todo item
+*/
+
 module.exports = grammar({
     name: 'norg',
 
@@ -665,6 +670,7 @@ module.exports = grammar({
                         $.unordered_list4,
                         $.unordered_list5,
                         $.unordered_list6,
+
                         $.todo_item,
                         $.unordered_link,
                     )
@@ -678,7 +684,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph,
+                        $.paragraph,
                     ),
 
                     repeat(
@@ -706,7 +712,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph,
+                        $.paragraph,
                     ),
 
                     repeat(
@@ -732,7 +738,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph,
+                        $.paragraph,
                     ),
 
                     repeat(
@@ -756,7 +762,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph,
+                        $.paragraph,
                     ),
 
                     repeat(
@@ -778,7 +784,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph,
+                        $.paragraph,
                     ),
 
                     repeat(
@@ -797,7 +803,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph,
+                        $.paragraph,
                     ),
                 )
             ),
@@ -833,7 +839,7 @@ module.exports = grammar({
                 seq(
                     alias(
                         $.drawer_prefix,
-                        "_title",
+                        "_prefix",
                     ),
 
                     field(
@@ -901,20 +907,15 @@ module.exports = grammar({
                         "_prefix",
                     ),
 
-                    choice(
-                        field(
-                            "undone_token",
+                    field(
+						"state",
+
+                    	choice(
                             $.todo_item_undone,
-                        ),
-                        field(
-                            "pending_token",
                             $.todo_item_pending,
-                        ),
-                        field(
-                            "done_token",
                             $.todo_item_done,
-                        )
-                    ),
+                    	),
+                	),
 
                     alias(
                         $.todo_item_suffix,
@@ -925,7 +926,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph
+                        $.paragraph
                     ),
 
                     repeat(
@@ -950,18 +951,13 @@ module.exports = grammar({
                         "_prefix",
                     ),
 
-                    choice(
-                        field(
-                            "undone_token",
-                            $.todo_item_undone,
-                        ),
-                        field(
-                            "pending_token",
-                            $.todo_item_pending,
-                        ),
-                        field(
-                            "done_token",
-                            $.todo_item_done,
+                    field(
+                    	"state",
+
+                    	choice(
+                        	$.todo_item_undone,
+                        	$.todo_item_pending,
+                        	$.todo_item_done,
                         )
                     ),
 
@@ -974,7 +970,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph
+                        $.paragraph
                     ),
 
                     repeat(
@@ -998,18 +994,13 @@ module.exports = grammar({
                         "_prefix",
                     ),
 
-                    choice(
-                        field(
-                            "undone_token",
-                            $.todo_item_undone,
-                        ),
-                        field(
-                            "pending_token",
-                            $.todo_item_pending,
-                        ),
-                        field(
-                            "done_token",
-                            $.todo_item_done,
+                    field(
+                    	"state",
+
+                    	choice(
+                        	$.todo_item_undone,
+                        	$.todo_item_pending,
+                        	$.todo_item_done,
                         )
                     ),
 
@@ -1022,7 +1013,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph
+                        $.paragraph
                     ),
 
                     repeat(
@@ -1045,18 +1036,13 @@ module.exports = grammar({
                         "_prefix",
                     ),
 
-                    choice(
-                        field(
-                            "undone_token",
-                            $.todo_item_undone,
-                        ),
-                        field(
-                            "pending_token",
-                            $.todo_item_pending,
-                        ),
-                        field(
-                            "done_token",
-                            $.todo_item_done,
+                    field(
+                    	"state",
+
+                    	choice(
+                        	$.todo_item_undone,
+                        	$.todo_item_pending,
+                        	$.todo_item_done,
                         )
                     ),
 
@@ -1069,7 +1055,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph
+                        $.paragraph
                     ),
 
                     repeat(
@@ -1091,18 +1077,13 @@ module.exports = grammar({
                         "_prefix",
                     ),
 
-                    choice(
-                        field(
-                            "undone_token",
-                            $.todo_item_undone,
-                        ),
-                        field(
-                            "pending_token",
-                            $.todo_item_pending,
-                        ),
-                        field(
-                            "done_token",
-                            $.todo_item_done,
+                    field(
+                    	"state",
+
+                    	choice(
+                        	$.todo_item_undone,
+                        	$.todo_item_pending,
+                        	$.todo_item_done,
                         )
                     ),
 
@@ -1115,7 +1096,7 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph
+                        $.paragraph
                     ),
 
                     repeat(
@@ -1134,18 +1115,13 @@ module.exports = grammar({
                         "_prefix",
                     ),
 
-                    choice(
-                        field(
-                            "undone_token",
-                            $.todo_item_undone,
-                        ),
-                        field(
-                            "pending_token",
-                            $.todo_item_pending,
-                        ),
-                        field(
-                            "done_token",
-                            $.todo_item_done,
+                    field(
+                    	"state",
+
+                    	choice(
+                        	$.todo_item_undone,
+                        	$.todo_item_pending,
+                        	$.todo_item_done,
                         )
                     ),
 
@@ -1158,13 +1134,13 @@ module.exports = grammar({
 
                     field(
                         "content",
-                        $._paragraph
+                        $.paragraph
                     )
                 )
             ),
 
 		word: $ =>
-			token.immediate(/[a-zA-Z_1-9\-]+/),
+			token.immediate(/[a-zA-Z1-9_\-\+]+/),
 
 		insertion: $ =>
 			prec.right(0,
@@ -1197,7 +1173,6 @@ module.exports = grammar({
 				)
 			),
 
-		// TODO: Carryover tags
 		// TODO: Comment scanner code
 		ranged_tag_content: $ =>
 			repeat1(
@@ -1291,6 +1266,7 @@ module.exports = grammar({
 								choice(
 									$._detached_modifier,
 									$._heading,
+									$.ranged_tag,
 								),
 							),
 						),
@@ -1354,12 +1330,21 @@ module.exports = grammar({
 
 		tag_parameters: $ =>
 			seq(
-				field("parameter", $.word),
+				field(
+					"parameter",
+					$.word
+				),
 
 				repeat(
 					seq(
 						token.immediate(/[\t\v ]+/),
-						field("parameter", $.word)
+
+						field(
+							"parameter",
+							optional(
+								$.word
+							),
+						),
 					)
 				),
 			),
