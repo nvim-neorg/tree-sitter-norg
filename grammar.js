@@ -1267,6 +1267,7 @@ module.exports = grammar({
 									$._detached_modifier,
 									$._heading,
 									$.ranged_tag,
+									$.marker,
 								),
 							),
 						),

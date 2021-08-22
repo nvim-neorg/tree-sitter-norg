@@ -70,6 +70,10 @@
             "named": true
           },
           {
+            "type": "marker",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },

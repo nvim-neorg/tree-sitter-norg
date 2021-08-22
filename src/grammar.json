@@ -2489,6 +2489,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "ranged_tag"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "marker"
                       }
                     ]
                   }
