@@ -172,10 +172,7 @@ module.exports = grammar({
         unordered_link1: $ =>
             prec.right(0,
                 seq(
-                    alias(
-                        $.unordered_link1_prefix,
-                        "_prefix"
-                    ),
+                	$.unordered_link1_prefix,
 
                     field(
                         "location",
@@ -201,10 +198,7 @@ module.exports = grammar({
         unordered_link2: $ =>
             prec.right(0,
                 seq(
-                    alias(
-                        $.unordered_link2_prefix,
-                        "_prefix"
-                    ),
+                    $.unordered_link2_prefix,
 
                     field(
                         "location",
@@ -229,10 +223,7 @@ module.exports = grammar({
         unordered_link3: $ =>
             prec.right(0,
                 seq(
-                    alias(
-                        $.unordered_link3_prefix,
-                        "_prefix"
-                    ),
+                    $.unordered_link3_prefix,
 
                     field(
                         "location",
@@ -256,10 +247,7 @@ module.exports = grammar({
         unordered_link4: $ =>
             prec.right(0,
                 seq(
-                    alias(
-                        $.unordered_link4_prefix,
-                        "_prefix"
-                    ),
+                    $.unordered_link4_prefix,
 
                     field(
                         "location",
@@ -282,10 +270,7 @@ module.exports = grammar({
         unordered_link5: $ =>
             prec.right(0,
                 seq(
-                    alias(
-                        $.unordered_link5_prefix,
-                        "_prefix"
-                    ),
+                    $.unordered_link5_prefix,
 
                     field(
                         "location",
@@ -305,10 +290,7 @@ module.exports = grammar({
         unordered_link6: $ =>
             prec.right(0,
                 seq(
-                    alias(
-                        $.unordered_link6_prefix,
-                        "_prefix"
-                    ),
+                    $.unordered_link6_prefix,
 
                     field(
                         "location",
@@ -837,10 +819,7 @@ module.exports = grammar({
         drawer: $ =>
             choice(
                 seq(
-                    alias(
-                        $.drawer_prefix,
-                        "_prefix",
-                    ),
+                    $.drawer_prefix,
 
                     field(
                         "title",
@@ -1145,10 +1124,7 @@ module.exports = grammar({
 		insertion: $ =>
 			prec.right(0,
 				seq(
-					alias(
-						$.insertion_prefix,
-						"_prefix",
-					),
+					$.insertion_prefix,
 
 					field(
 						"item",

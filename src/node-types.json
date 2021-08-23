@@ -204,6 +204,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "drawer_prefix",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -743,6 +753,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "insertion_prefix",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1672,8 +1692,12 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "unordered_link1_prefix",
+          "named": true
+        },
         {
           "type": "unordered_link2",
           "named": true
@@ -1714,8 +1738,12 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "unordered_link2_prefix",
+          "named": true
+        },
         {
           "type": "unordered_link3",
           "named": true
@@ -1752,8 +1780,12 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "unordered_link3_prefix",
+          "named": true
+        },
         {
           "type": "unordered_link4",
           "named": true
@@ -1786,8 +1818,12 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "unordered_link4_prefix",
+          "named": true
+        },
         {
           "type": "unordered_link5",
           "named": true
@@ -1816,8 +1852,12 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "unordered_link5_prefix",
+          "named": true
+        },
         {
           "type": "unordered_link6",
           "named": true
@@ -1839,6 +1879,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "unordered_link6_prefix",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2146,6 +2196,10 @@
     "named": true
   },
   {
+    "type": "drawer_prefix",
+    "named": true
+  },
+  {
     "type": "drawer_suffix",
     "named": true
   },
@@ -2175,6 +2229,10 @@
   },
   {
     "type": "heading6_prefix",
+    "named": true
+  },
+  {
+    "type": "insertion_prefix",
     "named": true
   },
   {
@@ -2271,6 +2329,30 @@
   },
   {
     "type": "todo_item_undone",
+    "named": true
+  },
+  {
+    "type": "unordered_link1_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_link2_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_link3_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_link4_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_link5_prefix",
+    "named": true
+  },
+  {
+    "type": "unordered_link6_prefix",
     "named": true
   },
   {
