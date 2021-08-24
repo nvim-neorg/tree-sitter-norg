@@ -75,11 +75,11 @@ module.exports = grammar({
       rules: {
 		document: $ =>
 			seq(
-				optional($.prologue),
+				optional($.foreplay),
 				optional($.document_content),
 			),
 
-		prologue: $ =>
+		foreplay: $ =>
 			prec.right(0,
 				repeat1(
 					prec(2,

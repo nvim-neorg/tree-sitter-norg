@@ -9,7 +9,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "prologue"
+              "name": "foreplay"
             },
             {
               "type": "BLANK"
@@ -30,7 +30,7 @@
         }
       ]
     },
-    "prologue": {
+    "foreplay": {
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {

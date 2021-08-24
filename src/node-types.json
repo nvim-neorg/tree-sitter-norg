@@ -112,7 +112,7 @@
           "named": true
         },
         {
-          "type": "prologue",
+          "type": "foreplay",
           "named": true
         }
       ]
@@ -256,6 +256,25 @@
       "types": [
         {
           "type": "escape_sequence_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "foreplay",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "insertion",
+          "named": true
+        },
+        {
+          "type": "ranged_tag",
           "named": true
         }
       ]
@@ -948,25 +967,6 @@
         },
         {
           "type": "link",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "prologue",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "insertion",
-          "named": true
-        },
-        {
-          "type": "ranged_tag",
           "named": true
         }
       ]
