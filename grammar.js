@@ -73,7 +73,26 @@ module.exports = grammar({
       ],
 
       rules: {
-        document: $ => repeat(
+		document: $ =>
+			seq(
+				optional($.prologue),
+				optional($.document_content),
+			),
+
+		prologue: $ =>
+			prec.right(0,
+				repeat1(
+					prec(2,
+						choice(
+							$._standalone_break,
+							$.ranged_tag,
+							$.insertion,
+						)
+					),
+				)
+			),
+
+        document_content: $ => repeat1(
             choice(
                 prec(1,
                     choice(

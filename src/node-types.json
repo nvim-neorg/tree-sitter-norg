@@ -108,6 +108,25 @@
       "required": false,
       "types": [
         {
+          "type": "document_content",
+          "named": true
+        },
+        {
+          "type": "prologue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "document_content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
           "type": "carryover_tag_set",
           "named": true
         },
@@ -929,6 +948,25 @@
         },
         {
           "type": "link",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "prologue",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "insertion",
+          "named": true
+        },
+        {
+          "type": "ranged_tag",
           "named": true
         }
       ]
