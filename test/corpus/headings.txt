@@ -7,6 +7,9 @@ And some text for that heading.
 ** Then I go into some more detail here
    And talk about some really important things
 
+---
+This bit of text is part of the first-level heading
+
 *** I would like to continue~
     this text here
 
@@ -22,26 +25,30 @@ Last paragraph here
 ---
 
 (document
-	(heading1
-	    (heading1_prefix)
-	    title: (paragraph_segment)
-	    content: (paragraph)
+	(document_content
+		(heading1
+	    	(heading1_prefix)
+	    	title: (paragraph_segment)
+	    	content: (paragraph)
 
-	    content:
-	        (heading2
-                (heading2_prefix)
-                title: (paragraph_segment)
-                content: (paragraph)
-                content:
-                    (heading3
-                        (heading3_prefix)
-                        title: (paragraph_segment)
-                        content: (paragraph)
-                        content: (paragraph)
-                    )
-	        )
+	    	content:
+	        	(heading2
+                	(heading2_prefix)
+                	title: (paragraph_segment)
+                	content: (paragraph)
+	        		(weak_paragraph_delimiter)
+	        	)
+	        content: (paragraph)
+            content:
+                (heading3
+                    (heading3_prefix)
+                    title: (paragraph_segment)
+                    content: (paragraph)
+                    content: (paragraph)
+                )
+		)
+
+		(strong_paragraph_delimiter)
+		(paragraph)
 	)
-
-	(paragraph_delimiter)
-	(paragraph)
 )

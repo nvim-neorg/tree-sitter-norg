@@ -1,6 +1,6 @@
 /*
 * Known bugs:
-* Error when placing an unordered list item directly under a todo item
+* Placing a link description at the end of an unordered list element breaks the generic_list
 */
 
 module.exports = grammar({
