@@ -115,7 +115,7 @@ public:
         }
 
         // If the last matched token was an unordered list check whether we are dealing with a todo item
-        if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 && lexer->lookahead == '[')
+        if (m_TagStack.size() == 0 && lexer->lookahead == '[')
         {
             advance(lexer);
 
@@ -140,33 +140,29 @@ public:
 				case 'x':
 					lexer->result_symbol = TODO_ITEM_DONE;
 					break;
-				default:
-					lexer->result_symbol = PARAGRAPH_SEGMENT;
-					return true;
 			}
 
 			advance(lexer);
 
 			while (lexer->lookahead)
 			{
-				if (lexer->lookahead == ']')
+				if (lexer->lookahead == ']' && m_Current != '\\')
 				{
 					advance(lexer);
 					return true;
 				}
 				else if (!std::iswspace(lexer->lookahead) || lexer->lookahead == '\n')
 				{
-					lexer->result_symbol = PARAGRAPH_SEGMENT;
-					return true;
+            		lexer->result_symbol = m_LastToken = LINK_BEGIN;
 				}
 
 				advance(lexer);
 			}
 
-			return false;
+			return true;
         }
         // Otherwise make sure to check for the existence of links
-        else if (m_TagStack.size() == 0 && (lexer->lookahead == '[' || lexer->lookahead == '('))
+        else if (m_TagStack.size() == 0 && lexer->lookahead == '(')
         	return check_link(lexer);
         else if (lexer->lookahead == '\n')
         {
@@ -396,111 +392,75 @@ private:
      */
     bool check_link(TSLexer* lexer)
     {
-        // Are we dealing with the first segment of a link?
-        if (lexer->lookahead == '[')
+        advance(lexer);
+
+        if (lexer->lookahead == ':')
         {
-            advance(lexer);
-
-            // Until we don't reach the end keep parsing
-            while (lexer->lookahead != ']')
-            {
+            while (lexer->lookahead != '*' && lexer->lookahead != '#' && lexer->lookahead != '|' && lexer->lookahead != ')')
                 advance(lexer);
-
-                // If we've reached an EOL then bail
-                if (lexer->lookahead == '\n' || !lexer->lookahead)
-                    break;
-
-                // Account for escaped chars
-                if (m_Current == '\\')
-                {
-                    advance(lexer);
-                    advance(lexer);
-                    continue;
-                }
-            }
-
-            // Make sure to capture the closing ] too!
-            advance(lexer);
-
-            lexer->result_symbol = m_LastToken = LINK_BEGIN;
-
-            return true;
-        }
-        // This means we're dealing with a link location
-        else if (lexer->lookahead == '(')
-        {
-            advance(lexer);
-
-            if (lexer->lookahead == ':')
-            {
-                while (lexer->lookahead != '*' && lexer->lookahead != '#' && lexer->lookahead != '|' && lexer->lookahead != ')')
-                    advance(lexer);
-                if (m_Current != ':')
-                    return true;
-            }
-
-            advance(lexer);
-
-            // Is the current char an asterisk? We're dealing with a heading reference.
-            if (m_Current == '*')
-            {
-                size_t heading_level = 0;
-
-                // Keep capturing asterisks and increment the heading level accordingly
-                while (lexer->lookahead == '*')
-                {
-                    advance(lexer);
-                    ++heading_level;
-                }
-
-                // We use the clamp() here to make sure we don't overflow!
-                lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(heading_level, 0UL, 5UL));
-            }
-            // We're dealing with one of two things: a marker reference or a drawer reference
-            else if (m_Current == '|')
-            {
-                if (lexer->lookahead == '|')
-                    lexer->result_symbol = m_LastToken = LINK_END_DRAWER_REFERENCE;
-                else
-                    lexer->result_symbol = m_LastToken = LINK_END_MARKER_REFERENCE;
-            }
-            // We're dealing with a generic (loose) link
-            else if (m_Current == '#')
-                lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
-
-            // Until we don't hit the end of the link location keep advancing
-            while (lexer->lookahead != ')')
-            {
-                if (lexer->lookahead == '\n' || !lexer->lookahead)
-                {
-                    lexer->result_symbol = LINK_END_GENERIC;
-                    break;
-                }
-
-                advance(lexer);
-
-                if (m_Current == '\\')
-                {
-                    advance(lexer);
-                    advance(lexer);
-                    continue;
-                }
-                // This is our method of checking for a URL
-                // If there's a :// in the string we just assume that it's a URL and that's it
-                else if (m_Current == ':' && lexer->lookahead == '/' && lexer->result_symbol == NONE)
-                {
-                    advance(lexer);
-                    if (lexer->lookahead == '/')
-                        lexer->result_symbol = m_LastToken = LINK_END_URL;
-                }
-            }
-
-            advance(lexer);
-
-            return true;
+            if (m_Current != ':')
+                return true;
         }
 
-        return false;
+        advance(lexer);
+
+        // Is the current char an asterisk? We're dealing with a heading reference.
+        if (m_Current == '*')
+        {
+            size_t heading_level = 0;
+
+            // Keep capturing asterisks and increment the heading level accordingly
+            while (lexer->lookahead == '*')
+            {
+                advance(lexer);
+                ++heading_level;
+            }
+
+            // We use the clamp() here to make sure we don't overflow!
+            lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(heading_level, 0UL, 5UL));
+        }
+        // We're dealing with one of two things: a marker reference or a drawer reference
+        else if (m_Current == '|')
+        {
+            if (lexer->lookahead == '|')
+                lexer->result_symbol = m_LastToken = LINK_END_DRAWER_REFERENCE;
+            else
+                lexer->result_symbol = m_LastToken = LINK_END_MARKER_REFERENCE;
+        }
+        // We're dealing with a generic (loose) link
+        else if (m_Current == '#')
+            lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
+
+        // Until we don't hit the end of the link location keep advancing
+        while (lexer->lookahead != ')')
+        {
+            if (lexer->lookahead == '\n' || !lexer->lookahead)
+            {
+                lexer->result_symbol = LINK_END_GENERIC;
+                break;
+            }
+
+            advance(lexer);
+
+            if (m_Current == '\\')
+            {
+                advance(lexer);
+                advance(lexer);
+                continue;
+            }
+            // This is our method of checking for a URL
+            // If there's a :// in the string we just assume that it's a URL and that's it
+            else if (m_Current == ':' && lexer->lookahead == '/' && lexer->result_symbol == NONE)
+            {
+                advance(lexer);
+                if (lexer->lookahead == '/')
+                    lexer->result_symbol = m_LastToken = LINK_END_URL;
+            }
+        }
+
+        advance(lexer);
+
+        return true;
     }
 
     /*
