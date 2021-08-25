@@ -1,4 +1,5 @@
 #include "tree_sitter/parser.h"
+#include <array>
 #include <algorithm>
 #include <locale>
 #include <iostream>
