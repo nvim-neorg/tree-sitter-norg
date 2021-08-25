@@ -1293,7 +1293,27 @@
             },
             {
               "type": "SYMBOL",
-              "name": "todo_item"
+              "name": "todo_item1"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item2"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item3"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item4"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item5"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item6"
             },
             {
               "type": "SYMBOL",
@@ -1705,70 +1725,6 @@
         }
       ]
     },
-    "todo_item_undone": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "\\s+"
-      }
-    },
-    "todo_item_pending": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "*"
-      }
-    },
-    "todo_item_done": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "x"
-      }
-    },
-    "todo_item_suffix": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "]"
-      }
-    },
-    "todo_item": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "todo_item1"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item2"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item3"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item4"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item5"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item6"
-            }
-          ]
-        }
-      }
-    },
     "todo_item1": {
       "type": "PREC_RIGHT",
       "value": 0,
@@ -1778,15 +1734,6 @@
           {
             "type": "SYMBOL",
             "name": "unordered_list1_prefix"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_prefix"
-            },
-            "named": false,
-            "value": "_prefix"
           },
           {
             "type": "FIELD",
@@ -1810,16 +1757,7 @@
             }
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_suffix"
-            },
-            "named": false,
-            "value": "_suffix"
-          },
-          {
-            "type": "TOKEN",
+            "type": "IMMEDIATE_TOKEN",
             "content": {
               "type": "PATTERN",
               "value": "\\s+"
@@ -1875,15 +1813,6 @@
             "name": "unordered_list2_prefix"
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_prefix"
-            },
-            "named": false,
-            "value": "_prefix"
-          },
-          {
             "type": "FIELD",
             "name": "state",
             "content": {
@@ -1903,15 +1832,6 @@
                 }
               ]
             }
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_suffix"
-            },
-            "named": false,
-            "value": "_suffix"
           },
           {
             "type": "TOKEN",
@@ -1966,15 +1886,6 @@
             "name": "unordered_list3_prefix"
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_prefix"
-            },
-            "named": false,
-            "value": "_prefix"
-          },
-          {
             "type": "FIELD",
             "name": "state",
             "content": {
@@ -1994,15 +1905,6 @@
                 }
               ]
             }
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_suffix"
-            },
-            "named": false,
-            "value": "_suffix"
           },
           {
             "type": "TOKEN",
@@ -2053,15 +1955,6 @@
             "name": "unordered_list4_prefix"
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_prefix"
-            },
-            "named": false,
-            "value": "_prefix"
-          },
-          {
             "type": "FIELD",
             "name": "state",
             "content": {
@@ -2081,15 +1974,6 @@
                 }
               ]
             }
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_suffix"
-            },
-            "named": false,
-            "value": "_suffix"
           },
           {
             "type": "TOKEN",
@@ -2136,15 +2020,6 @@
             "name": "unordered_list5_prefix"
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_prefix"
-            },
-            "named": false,
-            "value": "_prefix"
-          },
-          {
             "type": "FIELD",
             "name": "state",
             "content": {
@@ -2164,15 +2039,6 @@
                 }
               ]
             }
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_suffix"
-            },
-            "named": false,
-            "value": "_suffix"
           },
           {
             "type": "TOKEN",
@@ -2210,15 +2076,6 @@
             "name": "unordered_list6_prefix"
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_prefix"
-            },
-            "named": false,
-            "value": "_prefix"
-          },
-          {
             "type": "FIELD",
             "name": "state",
             "content": {
@@ -2238,15 +2095,6 @@
                 }
               ]
             }
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "todo_item_suffix"
-            },
-            "named": false,
-            "value": "_suffix"
           },
           {
             "type": "TOKEN",
@@ -2845,7 +2693,15 @@
     },
     {
       "type": "SYMBOL",
-      "name": "todo_item_prefix"
+      "name": "todo_item_undone"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "todo_item_pending"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "todo_item_done"
     },
     {
       "type": "SYMBOL",

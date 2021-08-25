@@ -37,7 +37,11 @@ enum TokenType
     MARKER,
     DRAWER,
     DRAWER_SUFFIX,
-    TODO_ITEM,
+
+    TODO_ITEM_UNDONE,
+    TODO_ITEM_PENDING,
+    TODO_ITEM_DONE,
+
     INSERTION,
 
     UNORDERED_LINK1,
@@ -113,11 +117,52 @@ public:
         if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 && lexer->lookahead == '[')
         {
             advance(lexer);
-			if (lexer->lookahead == ' ' || lexer->lookahead == 'x' || lexer->lookahead == '*')
+
+			if (lexer->lookahead == ']')
 			{
-            	lexer->result_symbol = TODO_ITEM;
-            	return true;
+				lexer->result_symbol = PARAGRAPH_SEGMENT;
+				return true;
 			}
+
+			while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+				advance(lexer);
+
+			switch (lexer->lookahead)
+			{
+				case ']':
+					advance(lexer);
+					lexer->result_symbol = TODO_ITEM_UNDONE;
+					return true;
+				case '*':
+					lexer->result_symbol = TODO_ITEM_PENDING;
+					break;
+				case 'x':
+					lexer->result_symbol = TODO_ITEM_DONE;
+					break;
+				default:
+					lexer->result_symbol = PARAGRAPH_SEGMENT;
+					return true;
+			}
+
+			advance(lexer);
+
+			while (lexer->lookahead)
+			{
+				if (lexer->lookahead == ']')
+				{
+					advance(lexer);
+					return true;
+				}
+				else if (!std::iswspace(lexer->lookahead) || lexer->lookahead == '\n')
+				{
+					lexer->result_symbol = PARAGRAPH_SEGMENT;
+					return true;
+				}
+
+				advance(lexer);
+			}
+
+			return false;
         }
         // Otherwise make sure to check for the existence of links
         else if (m_TagStack.size() == 0 && (lexer->lookahead == '[' || lexer->lookahead == '('))

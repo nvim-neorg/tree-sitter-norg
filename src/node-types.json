@@ -289,7 +289,27 @@
       "required": true,
       "types": [
         {
-          "type": "todo_item",
+          "type": "todo_item1",
+          "named": true
+        },
+        {
+          "type": "todo_item2",
+          "named": true
+        },
+        {
+          "type": "todo_item3",
+          "named": true
+        },
+        {
+          "type": "todo_item4",
+          "named": true
+        },
+        {
+          "type": "todo_item5",
+          "named": true
+        },
+        {
+          "type": "todo_item6",
           "named": true
         },
         {
@@ -1317,41 +1337,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "todo_item",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "todo_item1",
-          "named": true
-        },
-        {
-          "type": "todo_item2",
-          "named": true
-        },
-        {
-          "type": "todo_item3",
-          "named": true
-        },
-        {
-          "type": "todo_item4",
-          "named": true
-        },
-        {
-          "type": "todo_item5",
-          "named": true
-        },
-        {
-          "type": "todo_item6",
-          "named": true
-        }
-      ]
     }
   },
   {

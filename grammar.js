@@ -39,9 +39,11 @@ module.exports = grammar({
         $.drawer_prefix,
         $.drawer_suffix,
 
-        $.todo_item_prefix,
+        $.todo_item_undone,
+        $.todo_item_pending,
+        $.todo_item_done,
 
-		$.insertion_prefix,
+        $.insertion_prefix,
 
         $.unordered_link1_prefix,
         $.unordered_link2_prefix,
@@ -65,32 +67,32 @@ module.exports = grammar({
         $.link_end_marker_reference,
         $.link_end_drawer_reference,
 
-		$.ranged_tag_prefix,
-		$.ranged_tag_name_fallback,
-		$.ranged_tag_end_prefix,
+        $.ranged_tag_prefix,
+        $.ranged_tag_name_fallback,
+        $.ranged_tag_end_prefix,
 
-		$.carryover_tag_prefix,
+        $.carryover_tag_prefix,
       ],
 
       rules: {
-		document: $ =>
-			seq(
-				optional($.foreplay),
-				optional($.document_content),
-			),
+        document: $ =>
+            seq(
+                optional($.foreplay),
+                optional($.document_content),
+            ),
 
-		foreplay: $ =>
-			prec.right(0,
-				repeat1(
-					prec(2,
-						choice(
-							$._standalone_break,
-							$.ranged_tag,
-							$.insertion,
-						)
-					),
-				)
-			),
+        foreplay: $ =>
+            prec.right(0,
+                repeat1(
+                    prec(2,
+                        choice(
+                            $._standalone_break,
+                            $.ranged_tag,
+                            $.insertion,
+                        )
+                    ),
+                )
+            ),
 
         document_content: $ => repeat1(
             choice(
@@ -111,16 +113,16 @@ module.exports = grammar({
         ),
 
         // Any regular text
-		_paragraph: $ =>
-			prec.right(0,
-				seq(
-					$.paragraph,
+        _paragraph: $ =>
+            prec.right(0,
+                seq(
+                    $.paragraph,
 
-					optional(
-						$._standalone_break,
-					)
-				)
-			),
+                    optional(
+                        $._standalone_break,
+                    )
+                )
+            ),
 
         paragraph: $ =>
             prec.right(0,
@@ -191,7 +193,7 @@ module.exports = grammar({
         unordered_link1: $ =>
             prec.right(0,
                 seq(
-                	$.unordered_link1_prefix,
+                    $.unordered_link1_prefix,
 
                     field(
                         "location",
@@ -672,7 +674,13 @@ module.exports = grammar({
                         $.unordered_list5,
                         $.unordered_list6,
 
-                        $.todo_item,
+                        $.todo_item1,
+                        $.todo_item2,
+                        $.todo_item3,
+                        $.todo_item4,
+                        $.todo_item5,
+                        $.todo_item6,
+
                         $.unordered_link,
                     )
                 )
@@ -869,58 +877,22 @@ module.exports = grammar({
             ),
 
         // --------------------------------------------------
-        todo_item_undone: $ =>
-            token.immediate(/\s+/),
-
-        todo_item_pending: $ =>
-            token("*"),
-
-        todo_item_done: $ =>
-            token("x"),
-
-        todo_item_suffix: $ =>
-            token.immediate(']'),
-
-        todo_item: $ =>
-            prec.right(0,
-                repeat1(
-                    choice(
-                        $.todo_item1,
-                        $.todo_item2,
-                        $.todo_item3,
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-                    )
-                )
-            ),
-
         todo_item1: $ =>
             prec.right(0,
                 seq(
                     $.unordered_list1_prefix,
 
-                    alias(
-                        $.todo_item_prefix,
-                        "_prefix",
-                    ),
-
                     field(
-						"state",
+                        "state",
 
-                    	choice(
+                        choice(
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
-                    	),
-                	),
-
-                    alias(
-                        $.todo_item_suffix,
-                        "_suffix",
+                        ),
                     ),
 
-                    token(/\s+/),
+                    token.immediate(/\s+/),
 
                     field(
                         "content",
@@ -944,24 +916,14 @@ module.exports = grammar({
                 seq(
                     $.unordered_list2_prefix,
 
-                    alias(
-                        $.todo_item_prefix,
-                        "_prefix",
-                    ),
-
                     field(
-                    	"state",
+                        "state",
 
-                    	choice(
-                        	$.todo_item_undone,
-                        	$.todo_item_pending,
-                        	$.todo_item_done,
+                        choice(
+                            $.todo_item_undone,
+                            $.todo_item_pending,
+                            $.todo_item_done,
                         )
-                    ),
-
-                    alias(
-                        $.todo_item_suffix,
-                        "_suffix",
                     ),
 
                     token(/\s+/),
@@ -987,24 +949,14 @@ module.exports = grammar({
                 seq(
                     $.unordered_list3_prefix,
 
-                    alias(
-                        $.todo_item_prefix,
-                        "_prefix",
-                    ),
-
                     field(
-                    	"state",
+                        "state",
 
-                    	choice(
-                        	$.todo_item_undone,
-                        	$.todo_item_pending,
-                        	$.todo_item_done,
+                        choice(
+                            $.todo_item_undone,
+                            $.todo_item_pending,
+                            $.todo_item_done,
                         )
-                    ),
-
-                    alias(
-                        $.todo_item_suffix,
-                        "_suffix",
                     ),
 
                     token(/\s+/),
@@ -1029,24 +981,14 @@ module.exports = grammar({
                 seq(
                     $.unordered_list4_prefix,
 
-                    alias(
-                        $.todo_item_prefix,
-                        "_prefix",
-                    ),
-
                     field(
-                    	"state",
+                        "state",
 
-                    	choice(
-                        	$.todo_item_undone,
-                        	$.todo_item_pending,
-                        	$.todo_item_done,
+                        choice(
+                            $.todo_item_undone,
+                            $.todo_item_pending,
+                            $.todo_item_done,
                         )
-                    ),
-
-                    alias(
-                        $.todo_item_suffix,
-                        "_suffix",
                     ),
 
                     token(/\s+/),
@@ -1070,24 +1012,14 @@ module.exports = grammar({
                 seq(
                     $.unordered_list5_prefix,
 
-                    alias(
-                        $.todo_item_prefix,
-                        "_prefix",
-                    ),
-
                     field(
-                    	"state",
+                        "state",
 
-                    	choice(
-                        	$.todo_item_undone,
-                        	$.todo_item_pending,
-                        	$.todo_item_done,
+                        choice(
+                            $.todo_item_undone,
+                            $.todo_item_pending,
+                            $.todo_item_done,
                         )
-                    ),
-
-                    alias(
-                        $.todo_item_suffix,
-                        "_suffix",
                     ),
 
                     token(/\s+/),
@@ -1108,24 +1040,14 @@ module.exports = grammar({
                 seq(
                     $.unordered_list6_prefix,
 
-                    alias(
-                        $.todo_item_prefix,
-                        "_prefix",
-                    ),
-
                     field(
-                    	"state",
+                        "state",
 
-                    	choice(
-                        	$.todo_item_undone,
-                        	$.todo_item_pending,
-                        	$.todo_item_done,
+                        choice(
+                            $.todo_item_undone,
+                            $.todo_item_pending,
+                            $.todo_item_done,
                         )
-                    ),
-
-                    alias(
-                        $.todo_item_suffix,
-                        "_suffix",
                     ),
 
                     token(/\s+/),
@@ -1137,219 +1059,219 @@ module.exports = grammar({
                 )
             ),
 
-		word: $ =>
-			token.immediate(/[a-zA-Z1-9_\-\+]+/),
+        word: $ =>
+            token.immediate(/[a-zA-Z1-9_\-\+]+/),
 
-		insertion: $ =>
-			prec.right(0,
-				seq(
-					$.insertion_prefix,
+        insertion: $ =>
+            prec.right(0,
+                seq(
+                    $.insertion_prefix,
 
-					field(
-						"item",
-						$.word,
-					),
+                    field(
+                        "item",
+                        $.word,
+                    ),
 
-					choice(
-						seq(
-							token.immediate(
-								/[\t\v ]+/
-							),
-							field(
-								"parameters",
-								$.paragraph_segment
-							)
-						),
+                    choice(
+                        seq(
+                            token.immediate(
+                                /[\t\v ]+/
+                            ),
+                            field(
+                                "parameters",
+                                $.paragraph_segment
+                            )
+                        ),
 
-						token.immediate(
-							/[\t\v ]*\n/
-						),
-					),
-				)
-			),
+                        token.immediate(
+                            /[\t\v ]*\n/
+                        ),
+                    ),
+                )
+            ),
 
-		// TODO: Comment scanner code
-		ranged_tag_content: $ =>
-			repeat1(
-				choice(
-					alias(
-						choice(
-							$.paragraph_segment,
-							$._standalone_break,
-						),
-						"_segment",
-					),
+        // TODO: Comment scanner code
+        ranged_tag_content: $ =>
+            repeat1(
+                choice(
+                    alias(
+                        choice(
+                            $.paragraph_segment,
+                            $._standalone_break,
+                        ),
+                        "_segment",
+                    ),
 
-					field(
-						"nested_tag",
-						$.ranged_tag
-					),
-				),
-			),
+                    field(
+                        "nested_tag",
+                        $.ranged_tag
+                    ),
+                ),
+            ),
 
-		ranged_tag_end: $ =>
-			seq(
-				alias(
-					$.ranged_tag_end_prefix,
-					"_prefix",
-				),
+        ranged_tag_end: $ =>
+            seq(
+                alias(
+                    $.ranged_tag_end_prefix,
+                    "_prefix",
+                ),
 
-				alias(
-					token.immediate("end"),
-					"_name",
-				),
-			),
+                alias(
+                    token.immediate("end"),
+                    "_name",
+                ),
+            ),
 
-		ranged_tag: $ =>
-			prec.right(0,
-				seq(
-					alias(
-						$.ranged_tag_prefix,
-						"_prefix"
-					),
+        ranged_tag: $ =>
+            prec.right(0,
+                seq(
+                    alias(
+                        $.ranged_tag_prefix,
+                        "_prefix"
+                    ),
 
-					field(
-						"name",
-						$.tag_name,
-					),
+                    field(
+                        "name",
+                        $.tag_name,
+                    ),
 
-					choice(
-						token.immediate(
-							/[\t\v ]*\n/,
-						),
+                    choice(
+                        token.immediate(
+                            /[\t\v ]*\n/,
+                        ),
 
-						seq(
-							token.immediate(
-								/[\t\v ]+/,
-							),
+                        seq(
+                            token.immediate(
+                                /[\t\v ]+/,
+                            ),
 
-							$.tag_parameters,
+                            $.tag_parameters,
 
-							token.immediate(
-								'\n'
-							),
-						),
-					),
+                            token.immediate(
+                                '\n'
+                            ),
+                        ),
+                    ),
 
-					field(
-						"content",
-						optional(
-							$.ranged_tag_content,
-						),
-					),
+                    field(
+                        "content",
+                        optional(
+                            $.ranged_tag_content,
+                        ),
+                    ),
 
-					// alias(
-						$.ranged_tag_end,
-						// "_end",
-					// ),
-				)
-			),
+                    // alias(
+                        $.ranged_tag_end,
+                        // "_end",
+                    // ),
+                )
+            ),
 
-		carryover_tag_set: $ =>
-			prec.left(0,
-				seq(
-					repeat1(
-						$.carryover_tag,
-					),
+        carryover_tag_set: $ =>
+            prec.left(0,
+                seq(
+                    repeat1(
+                        $.carryover_tag,
+                    ),
 
-					field(
-						"target",
+                    field(
+                        "target",
 
-						choice(
-							$._paragraph,
-							repeat1(
-								choice(
-									$._detached_modifier,
-									$._heading,
-									$.ranged_tag,
-									$.marker,
-								),
-							),
-						),
-					),
-				)
-			),
+                        choice(
+                            $._paragraph,
+                            repeat1(
+                                choice(
+                                    $._detached_modifier,
+                                    $._heading,
+                                    $.ranged_tag,
+                                    $.marker,
+                                ),
+                            ),
+                        ),
+                    ),
+                )
+            ),
 
-		carryover_tag: $ =>
-			seq(
-				alias(
-					$.carryover_tag_prefix,
-					"_prefix",
-				),
+        carryover_tag: $ =>
+            seq(
+                alias(
+                    $.carryover_tag_prefix,
+                    "_prefix",
+                ),
 
-				field(
-					"name",
-					$.tag_name,
-				),
+                field(
+                    "name",
+                    $.tag_name,
+                ),
 
-				choice(
-					token.immediate(
-						/[\t\v ]*\n/,
-					),
+                choice(
+                    token.immediate(
+                        /[\t\v ]*\n/,
+                    ),
 
-					seq(
-						token.immediate(
-							/[\t\v ]+/,
-						),
+                    seq(
+                        token.immediate(
+                            /[\t\v ]+/,
+                        ),
 
-						$.tag_parameters,
+                        $.tag_parameters,
 
-						token.immediate(
-							'\n'
-						),
-					),
-				),
+                        token.immediate(
+                            '\n'
+                        ),
+                    ),
+                ),
 
-				repeat(
-					$._standalone_break,
-				),
-			),
+                repeat(
+                    $._standalone_break,
+                ),
+            ),
 
-		tag_name: $ =>
-			seq(
-				choice(
-					$.word,
-					$.ranged_tag_name_fallback,
-				),
+        tag_name: $ =>
+            seq(
+                choice(
+                    $.word,
+                    $.ranged_tag_name_fallback,
+                ),
 
-				repeat(
-					seq(
-						alias(
-							token.immediate("."),
-							"_delimiter",
-						),
+                repeat(
+                    seq(
+                        alias(
+                            token.immediate("."),
+                            "_delimiter",
+                        ),
 
-						$.word,
-					)
-				)
-			),
+                        $.word,
+                    )
+                )
+            ),
 
-		tag_parameters: $ =>
-			seq(
-				field(
-					"parameter",
-					$.word
-				),
+        tag_parameters: $ =>
+            seq(
+                field(
+                    "parameter",
+                    $.word
+                ),
 
-				repeat(
-					seq(
-						token.immediate(/[\t\v ]+/),
+                repeat(
+                    seq(
+                        token.immediate(/[\t\v ]+/),
 
-						field(
-							"parameter",
-							optional(
-								$.word
-							),
-						),
-					)
-				),
-			),
+                        field(
+                            "parameter",
+                            optional(
+                                $.word
+                            ),
+                        ),
+                    )
+                ),
+            ),
 
-		_tag: $ =>
-			choice(
-				$.ranged_tag,
-				$.carryover_tag_set,
-			),
+        _tag: $ =>
+            choice(
+                $.ranged_tag,
+                $.carryover_tag_set,
+            ),
 
         // --------------------------------------------------
 
