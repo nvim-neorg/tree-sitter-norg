@@ -40,13 +40,13 @@ CFLAGS_CC_Debug := \
 	-std=gnu++14
 
 INCS_Debug := \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/include/node \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/src \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/openssl/config \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/openssl/openssl/include \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/uv/include \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/zlib \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/v8/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/include/node \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/src \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/openssl/config \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/openssl/openssl/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/uv/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/zlib \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/v8/include \
 	-I$(srcdir)/node_modules/nan \
 	-I$(srcdir)/src
 
@@ -85,19 +85,20 @@ CFLAGS_CC_Release := \
 	-std=gnu++14
 
 INCS_Release := \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/include/node \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/src \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/openssl/config \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/openssl/openssl/include \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/uv/include \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/zlib \
-	-I/home/vhyrro/.cache/node-gyp/16.4.1/deps/v8/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/include/node \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/src \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/openssl/config \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/openssl/openssl/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/uv/include \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/zlib \
+	-I/home/vhyrro/.cache/node-gyp/16.6.1/deps/v8/include \
 	-I$(srcdir)/node_modules/nan \
 	-I$(srcdir)/src
 
 OBJS := \
+	$(obj).target/$(TARGET)/bindings/node/binding.o \
 	$(obj).target/$(TARGET)/src/parser.o \
-	$(obj).target/$(TARGET)/bindings/node/binding.o
+	$(obj).target/$(TARGET)/src/scanner.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
