@@ -35,6 +35,13 @@ enum TokenType
     UNORDERED_LIST5,
     UNORDERED_LIST6,
 
+    ORDERED_LIST1,
+    ORDERED_LIST2,
+    ORDERED_LIST3,
+    ORDERED_LIST4,
+    ORDERED_LIST5,
+    ORDERED_LIST6,
+
     MARKER,
     DRAWER,
     DRAWER_SUFFIX,
@@ -51,6 +58,13 @@ enum TokenType
     UNORDERED_LINK4,
     UNORDERED_LINK5,
     UNORDERED_LINK6,
+
+    ORDERED_LINK1,
+    ORDERED_LINK2,
+    ORDERED_LINK3,
+    ORDERED_LINK4,
+    ORDERED_LINK5,
+    ORDERED_LINK6,
 
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
@@ -266,6 +280,10 @@ public:
 					lexer->result_symbol = WEAK_PARAGRAPH_DELIMITER;
 					return true;
 				}
+
+            	if (check_detached(lexer, ORDERED_LIST1 | ORDERED_LIST2 | ORDERED_LIST3 | ORDERED_LIST4 | ORDERED_LIST5 | ORDERED_LIST6 | NONE, { '~' },
+            				{ '>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 | ORDERED_LINK5 | ORDERED_LINK6 | NONE }) != NONE)
+                    return true;
 
             	if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
                 	return true;
@@ -543,7 +561,7 @@ private:
 	std::vector<size_t> m_TagStack;
 
 private:
-    const std::array<unsigned char, 5> s_DetachedModifiers = { '*', '-', '>', '|', '=' };
+    const std::array<unsigned char, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
 };
 
 extern "C"

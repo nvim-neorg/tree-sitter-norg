@@ -34,6 +34,13 @@ module.exports = grammar({
         $.unordered_list5_prefix,
         $.unordered_list6_prefix,
 
+        $.ordered_list1_prefix,
+        $.ordered_list2_prefix,
+        $.ordered_list3_prefix,
+        $.ordered_list4_prefix,
+        $.ordered_list5_prefix,
+        $.ordered_list6_prefix,
+
         $.marker_prefix,
 
         $.drawer_prefix,
@@ -51,6 +58,13 @@ module.exports = grammar({
         $.unordered_link4_prefix,
         $.unordered_link5_prefix,
         $.unordered_link6_prefix,
+
+        $.ordered_link1_prefix,
+        $.ordered_link2_prefix,
+        $.ordered_link3_prefix,
+        $.ordered_link4_prefix,
+        $.ordered_link5_prefix,
+        $.ordered_link6_prefix,
 
         $.strong_paragraph_delimiter,
         $.weak_paragraph_delimiter,
@@ -176,20 +190,6 @@ module.exports = grammar({
                 )
             ),
 
-        unordered_link: $ =>
-            prec.right(0,
-                repeat1(
-                    choice(
-                        $.unordered_link1,
-                        $.unordered_link2,
-                        $.unordered_link3,
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-                    )
-                )
-            ),
-
         unordered_link1: $ =>
             prec.right(0,
                 seq(
@@ -211,6 +211,12 @@ module.exports = grammar({
                             $.unordered_link4,
                             $.unordered_link5,
                             $.unordered_link6,
+
+                            $.ordered_link2,
+                            $.ordered_link3,
+                            $.ordered_link4,
+                            $.ordered_link5,
+                            $.ordered_link6,
                         )
                     )
                 )
@@ -236,6 +242,11 @@ module.exports = grammar({
                             $.unordered_link4,
                             $.unordered_link5,
                             $.unordered_link6,
+
+                            $.ordered_link3,
+                            $.ordered_link4,
+                            $.ordered_link5,
+                            $.ordered_link6,
                         )
                     )
                 )
@@ -260,6 +271,10 @@ module.exports = grammar({
                             $.unordered_link4,
                             $.unordered_link5,
                             $.unordered_link6,
+
+                            $.ordered_link4,
+                            $.ordered_link5,
+                            $.ordered_link6,
                         )
                     )
                 )
@@ -283,6 +298,9 @@ module.exports = grammar({
                         choice(
                             $.unordered_link5,
                             $.unordered_link6,
+
+                            $.ordered_link5,
+                            $.ordered_link6,
                         )
                     )
                 )
@@ -303,7 +321,10 @@ module.exports = grammar({
                     ),
 
                     repeat(
-                        $.unordered_link6,
+                    	choice(
+                        	$.unordered_link6,
+                        	$.ordered_link6,
+                    	)
                     )
                 )
             ),
@@ -312,6 +333,161 @@ module.exports = grammar({
             prec.right(0,
                 seq(
                     $.unordered_link6_prefix,
+
+                    field(
+                        "location",
+                        $.link
+                    ),
+
+                    optional(
+                        $._standalone_break
+                    ),
+                )
+            ),
+
+        ordered_link1: $ =>
+            prec.right(0,
+                seq(
+                    $.ordered_link1_prefix,
+
+                    field(
+                        "location",
+                        $.link
+                    ),
+
+                    optional(
+                        $._standalone_break
+                    ),
+
+                    repeat(
+                        choice(
+                            $.unordered_link2,
+                            $.unordered_link3,
+                            $.unordered_link4,
+                            $.unordered_link5,
+                            $.unordered_link6,
+
+                            $.ordered_link2,
+                            $.ordered_link3,
+                            $.ordered_link4,
+                            $.ordered_link5,
+                            $.ordered_link6,
+                        )
+                    )
+                )
+            ),
+
+        ordered_link2: $ =>
+            prec.right(0,
+                seq(
+                    $.ordered_link2_prefix,
+
+                    field(
+                        "location",
+                        $.link
+                    ),
+
+                    optional(
+                        $._standalone_break
+                    ),
+
+                    repeat(
+                        choice(
+                            $.unordered_link3,
+                            $.unordered_link4,
+                            $.unordered_link5,
+                            $.unordered_link6,
+
+                            $.ordered_link3,
+                            $.ordered_link4,
+                            $.ordered_link5,
+                            $.ordered_link6,
+                        )
+                    )
+                )
+            ),
+
+        ordered_link3: $ =>
+            prec.right(0,
+                seq(
+                    $.ordered_link3_prefix,
+
+                    field(
+                        "location",
+                        $.link
+                    ),
+
+                    optional(
+                        $._standalone_break
+                    ),
+
+                    repeat(
+                        choice(
+                            $.unordered_link4,
+                            $.unordered_link5,
+                            $.unordered_link6,
+
+                            $.ordered_link4,
+                            $.ordered_link5,
+                            $.ordered_link6,
+                        )
+                    )
+                )
+            ),
+
+        ordered_link4: $ =>
+            prec.right(0,
+                seq(
+                    $.ordered_link4_prefix,
+
+                    field(
+                        "location",
+                        $.link
+                    ),
+
+                    optional(
+                        $._standalone_break
+                    ),
+
+                    repeat(
+                        choice(
+                            $.unordered_link5,
+                            $.unordered_link6,
+
+                            $.ordered_link5,
+                            $.ordered_link6,
+                        )
+                    )
+                )
+            ),
+
+        ordered_link5: $ =>
+            prec.right(0,
+                seq(
+                    $.ordered_link5_prefix,
+
+                    field(
+                        "location",
+                        $.link
+                    ),
+
+                    optional(
+                        $._standalone_break
+                    ),
+
+                    repeat(
+                        choice(
+                        	$.unordered_link6,
+                        	$.ordered_link6,
+                    	)
+                    )
+                )
+            ),
+
+        ordered_link6: $ =>
+            prec.right(0,
+                seq(
+                    $.ordered_link6_prefix,
 
                     field(
                         "location",
@@ -674,6 +850,13 @@ module.exports = grammar({
                         $.unordered_list5,
                         $.unordered_list6,
 
+                        $.ordered_list1,
+                        $.ordered_list2,
+                        $.ordered_list3,
+                        $.ordered_list4,
+                        $.ordered_list5,
+                        $.ordered_list6,
+
                         $.todo_item1,
                         $.todo_item2,
                         $.todo_item3,
@@ -681,7 +864,19 @@ module.exports = grammar({
                         $.todo_item5,
                         $.todo_item6,
 
-                        $.unordered_link,
+						$.unordered_link1,
+						$.unordered_link2,
+						$.unordered_link3,
+						$.unordered_link4,
+						$.unordered_link5,
+						$.unordered_link6,
+
+						$.ordered_link1,
+						$.ordered_link2,
+						$.ordered_link3,
+						$.ordered_link4,
+						$.ordered_link5,
+						$.ordered_link6,
                     )
                 )
             ),
@@ -709,6 +904,12 @@ module.exports = grammar({
                             $.unordered_list4,
                             $.unordered_list5,
                             $.unordered_list6,
+
+                            $.ordered_list2,
+                            $.ordered_list3,
+                            $.ordered_list4,
+                            $.ordered_list5,
+                            $.ordered_list6,
                         )
                     )
                 )
@@ -735,6 +936,11 @@ module.exports = grammar({
                             $.unordered_list4,
                             $.unordered_list5,
                             $.unordered_list6,
+
+                            $.ordered_list3,
+                            $.ordered_list4,
+                            $.ordered_list5,
+                            $.ordered_list6,
                         )
                     )
                 )
@@ -759,6 +965,10 @@ module.exports = grammar({
                             $.unordered_list4,
                             $.unordered_list5,
                             $.unordered_list6,
+
+                            $.ordered_list4,
+                            $.ordered_list5,
+                            $.ordered_list6,
                         )
                     )
                 )
@@ -781,6 +991,9 @@ module.exports = grammar({
 
                             $.unordered_list5,
                             $.unordered_list6,
+
+                            $.ordered_list5,
+                            $.ordered_list6,
                         )
                     )
                 )
@@ -800,6 +1013,7 @@ module.exports = grammar({
                         choice(
                             $.todo_item6,
                             $.unordered_list6,
+                            $.ordered_list6,
                         )
                     )
                 )
@@ -809,6 +1023,156 @@ module.exports = grammar({
             prec.right(0,
                 seq(
                     $.unordered_list6_prefix,
+
+                    field(
+                        "content",
+                        $.paragraph,
+                    ),
+                )
+            ),
+
+        ordered_list1: $ =>
+            prec.right(0,
+              seq(
+                  $.ordered_list1_prefix,
+
+                  field(
+                      "content",
+                      $.paragraph,
+                  ),
+
+                  repeat(
+                      choice(
+                          $.todo_item2,
+                          $.todo_item3,
+                          $.todo_item4,
+                          $.todo_item5,
+                          $.todo_item6,
+
+                          $.unordered_list2,
+                          $.unordered_list3,
+                          $.unordered_list4,
+                          $.unordered_list5,
+                          $.unordered_list6,
+
+                          $.ordered_list2,
+                          $.ordered_list3,
+                          $.ordered_list4,
+                          $.ordered_list5,
+                          $.ordered_list6,
+                      )
+                  )
+              )
+          ),
+
+        ordered_list2: $ =>
+            prec.right(0,
+              seq(
+                  $.ordered_list2_prefix,
+
+                  field(
+                      "content",
+                      $.paragraph,
+                  ),
+
+                  repeat(
+                      choice(
+                          $.todo_item3,
+                          $.todo_item4,
+                          $.todo_item5,
+                          $.todo_item6,
+
+                          $.unordered_list3,
+                          $.unordered_list4,
+                          $.unordered_list5,
+                          $.unordered_list6,
+
+                          $.ordered_list3,
+                          $.ordered_list4,
+                          $.ordered_list5,
+                          $.ordered_list6,
+                      )
+                  )
+              )
+          ),
+
+        ordered_list3: $ =>
+            prec.right(0,
+              seq(
+                  $.ordered_list3_prefix,
+
+                  field(
+                      "content",
+                      $.paragraph,
+                  ),
+
+                  repeat(
+                      choice(
+                          $.todo_item4,
+                          $.todo_item5,
+                          $.todo_item6,
+
+                          $.unordered_list4,
+                          $.unordered_list5,
+                          $.unordered_list6,
+
+                          $.ordered_list4,
+                          $.ordered_list5,
+                          $.ordered_list6,
+                      )
+                  )
+              )
+          ),
+
+        ordered_list4: $ =>
+            prec.right(0,
+              seq(
+                  $.ordered_list4_prefix,
+
+                  field(
+                      "content",
+                      $.paragraph,
+                  ),
+
+                  repeat(
+                      choice(
+                          $.todo_item5,
+                          $.todo_item6,
+
+                          $.unordered_list5,
+                          $.unordered_list6,
+
+                          $.ordered_list5,
+                          $.ordered_list6,
+                      )
+                  )
+              )
+          ),
+
+        ordered_list5: $ =>
+            prec.right(0,
+              seq(
+                  $.ordered_list5_prefix,
+
+                  field(
+                      "content",
+                      $.paragraph,
+                  ),
+
+                  repeat(
+                      choice(
+                          $.todo_item6,
+                          $.unordered_list6,
+                          $.ordered_list6,
+                      )
+                  )
+              )
+          ),
+
+        ordered_list6: $ =>
+            prec.right(0,
+                seq(
+                    $.ordered_list6_prefix,
 
                     field(
                         "content",
