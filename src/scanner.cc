@@ -81,16 +81,16 @@ enum TokenType
     LINK_END_MARKER_REFERENCE,
     LINK_END_DRAWER_REFERENCE,
 
-	RANGED_TAG,
-	RANGED_TAG_NAME,
-	RANGED_TAG_END,
+    RANGED_TAG,
+    RANGED_TAG_NAME,
+    RANGED_TAG_END,
 
-	CARRYOVER_TAG,
+    CARRYOVER_TAG,
 
-	BOLD,
-	ITALIC,
-	STRIKETHROUGH,
-	UNDERLINE,
+    BOLD,
+    ITALIC,
+    STRIKETHROUGH,
+    UNDERLINE,
     SPOILER,
     INLINE_CODE,
     SUPERSCRIPT,
@@ -105,7 +105,7 @@ namespace
         return std::vector<TokenType> { lhs, static_cast<TokenType>(rhs) };
     }
 
-	std::vector<TokenType>&& operator|(std::vector<TokenType>&& lhs, TokenType rhs)
+    std::vector<TokenType>&& operator|(std::vector<TokenType>&& lhs, TokenType rhs)
     {
         lhs.push_back(rhs);
         return std::move(lhs);
@@ -118,8 +118,8 @@ public:
     bool scan(TSLexer* lexer, const bool* valid_symbols)
     {
         // Are we at the end of file? If so, bail
-		if (lexer->eof(lexer))
-			return false;
+        if (lexer->eof(lexer))
+            return false;
 
         lexer->result_symbol = NONE;
 
@@ -137,187 +137,187 @@ public:
         {
             advance(lexer);
 
-			if (lexer->lookahead == ']')
-			{
-				lexer->result_symbol = PARAGRAPH_SEGMENT;
-				return true;
-			}
+            if (lexer->lookahead == ']')
+            {
+                lexer->result_symbol = PARAGRAPH_SEGMENT;
+                return true;
+            }
 
-			while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
-				advance(lexer);
+            while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+                advance(lexer);
 
-			switch (lexer->lookahead)
-			{
-				case ']':
-					advance(lexer);
-					lexer->result_symbol = TODO_ITEM_UNDONE;
-					return true;
-				case '*':
-					lexer->result_symbol = TODO_ITEM_PENDING;
-					break;
-				case 'x':
-					lexer->result_symbol = TODO_ITEM_DONE;
-					break;
-			}
+            switch (lexer->lookahead)
+            {
+                case ']':
+                    advance(lexer);
+                    lexer->result_symbol = TODO_ITEM_UNDONE;
+                    return true;
+                case '*':
+                    lexer->result_symbol = TODO_ITEM_PENDING;
+                    break;
+                case 'x':
+                    lexer->result_symbol = TODO_ITEM_DONE;
+                    break;
+            }
 
-			advance(lexer);
+            advance(lexer);
 
-			while (lexer->lookahead)
-			{
-				if (lexer->lookahead == ']' && m_Current != '\\')
-				{
-					advance(lexer);
-					return true;
-				}
-				else if (!std::iswspace(lexer->lookahead) || lexer->lookahead == '\n')
-				{
-            		lexer->result_symbol = m_LastToken = LINK_BEGIN;
-				}
+            while (lexer->lookahead)
+            {
+                if (lexer->lookahead == ']' && m_Current != '\\')
+                {
+                    advance(lexer);
+                    return true;
+                }
+                else if (!std::iswspace(lexer->lookahead) || lexer->lookahead == '\n')
+                {
+                    lexer->result_symbol = m_LastToken = LINK_BEGIN;
+                }
 
-				advance(lexer);
-			}
+                advance(lexer);
+            }
 
-			return true;
+            return true;
         }
         // Otherwise make sure to check for the existence of links
         else if (m_TagStack.size() == 0 && lexer->lookahead == '(')
-        	return check_link(lexer);
+            return check_link(lexer);
         else if (lexer->lookahead == '\n')
         {
-        	advance(lexer);
-			lexer->result_symbol = STANDALONE_BREAK;
-			return true;
+            advance(lexer);
+            lexer->result_symbol = STANDALONE_BREAK;
+            return true;
         }
 
         // If we're at the beginning of a line check for all detached modifiers
         if (lexer->get_column(lexer) == 0)
         {
-        	m_IndentationLevel = 0;
+            m_IndentationLevel = 0;
 
-        	// Skip all leading whitespace
-        	while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
-        	{
-            	if (lexer->lookahead == '\t')
-            		++m_IndentationLevel;
+            // Skip all leading whitespace
+            while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+            {
+                if (lexer->lookahead == '\t')
+                    ++m_IndentationLevel;
 
-				++m_IndentationLevel;
+                ++m_IndentationLevel;
 
-            	skip(lexer);
-        	}
+                skip(lexer);
+            }
 
-			if (lexer->lookahead == '@')
-			{
-				advance(lexer);
+            if (lexer->lookahead == '@')
+            {
+                advance(lexer);
 
-				lexer->mark_end(lexer);
+                lexer->mark_end(lexer);
 
-				if (lexer->lookahead == 'e')
-				{
-					advance(lexer);
-					if (lexer->lookahead == 'n')
-					{
-						advance(lexer);
-						if (lexer->lookahead == 'd')
-						{
-							advance(lexer);
-							if (std::iswspace(lexer->lookahead))
-							{
-								while (std::iswspace(lexer->lookahead) && lexer->lookahead != '\n' && lexer->lookahead)
-									advance(lexer);
+                if (lexer->lookahead == 'e')
+                {
+                    advance(lexer);
+                    if (lexer->lookahead == 'n')
+                    {
+                        advance(lexer);
+                        if (lexer->lookahead == 'd')
+                        {
+                            advance(lexer);
+                            if (std::iswspace(lexer->lookahead))
+                            {
+                                while (std::iswspace(lexer->lookahead) && lexer->lookahead != '\n' && lexer->lookahead)
+                                    advance(lexer);
 
-								if (std::iswspace(lexer->lookahead) && m_TagStack.size() > 0)
-								{
-									if (m_IndentationLevel != m_TagStack.back())
-									{
-										lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
-										return true;
-									}
-									else
-									{
-										lexer->result_symbol = m_LastToken = RANGED_TAG_END;
+                                if (std::iswspace(lexer->lookahead) && m_TagStack.size() > 0)
+                                {
+                                    if (m_IndentationLevel != m_TagStack.back())
+                                    {
+                                        lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        lexer->result_symbol = m_LastToken = RANGED_TAG_END;
 
-										m_TagStack.pop_back();
-										return true;
-									}
-								}
+                                        m_TagStack.pop_back();
+                                        return true;
+                                    }
+                                }
 
-								lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
-								return true;
-							}
-						}
-					}
+                                lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                                return true;
+                            }
+                        }
+                    }
 
-					while (lexer->lookahead != '.' && !std::iswspace(lexer->lookahead))
-						advance(lexer);
+                    while (lexer->lookahead != '.' && !std::iswspace(lexer->lookahead))
+                        advance(lexer);
 
-					lexer->result_symbol = m_LastToken = RANGED_TAG_NAME;
-					lexer->mark_end(lexer);
-					return true;
-				}
-
-				lexer->result_symbol = m_LastToken = RANGED_TAG;
-				m_TagStack.push_back(m_IndentationLevel);
-				return true;
-			}
-			else if (lexer->lookahead == '$')
-			{
-				advance(lexer);
-				lexer->result_symbol = CARRYOVER_TAG;
-				return true;
-			}
-
-			if (m_TagStack.size() == 0)
-			{
-            	if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, { '*' }) != NONE)
-                	return true;
-
-            	if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6 | NONE, { '>' }) != NONE)
-                	return true;
-
-            	if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' },
-            				{ '>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 | UNORDERED_LINK4 | UNORDERED_LINK5 | UNORDERED_LINK6 | NONE }) != NONE)
-            	{
+                    lexer->result_symbol = m_LastToken = RANGED_TAG_NAME;
+                    lexer->mark_end(lexer);
                     return true;
-            	}
-            	else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
-				{
-					lexer->result_symbol = WEAK_PARAGRAPH_DELIMITER;
-					return true;
-				}
+                }
 
-            	if (check_detached(lexer, ORDERED_LIST1 | ORDERED_LIST2 | ORDERED_LIST3 | ORDERED_LIST4 | ORDERED_LIST5 | ORDERED_LIST6 | NONE, { '~' },
-            				{ '>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 | ORDERED_LINK5 | ORDERED_LINK6 | NONE }) != NONE)
+                lexer->result_symbol = m_LastToken = RANGED_TAG;
+                m_TagStack.push_back(m_IndentationLevel);
+                return true;
+            }
+            else if (lexer->lookahead == '$')
+            {
+                advance(lexer);
+                lexer->result_symbol = CARRYOVER_TAG;
+                return true;
+            }
+
+            if (m_TagStack.size() == 0)
+            {
+                if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, { '*' }) != NONE)
                     return true;
 
-            	if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
-                	return true;
-            	else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
-            	{
-					lexer->result_symbol = DRAWER_SUFFIX;
-					return true;
-            	}
+                if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6 | NONE, { '>' }) != NONE)
+                    return true;
 
-            	if (check_detached(lexer, INSERTION, { '=' }) != NONE)
-                	return true;
-            	else if (lexer->lookahead == '\n')
-            	{
-            		if (m_ParsedChars >= 3)
-            		{
-						lexer->result_symbol = STRONG_PARAGRAPH_DELIMITER;
-						return true;
-            		}
-            		else
-            		{
-            			advance(lexer);
-            			lexer->result_symbol = PARAGRAPH_SEGMENT;
-            			return true;
-            		}
-            	}
-			}
+                if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' },
+                            { '>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 | UNORDERED_LINK4 | UNORDERED_LINK5 | UNORDERED_LINK6 | NONE }) != NONE)
+                {
+                    return true;
+                }
+                else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
+                {
+                    lexer->result_symbol = WEAK_PARAGRAPH_DELIMITER;
+                    return true;
+                }
+
+                if (check_detached(lexer, ORDERED_LIST1 | ORDERED_LIST2 | ORDERED_LIST3 | ORDERED_LIST4 | ORDERED_LIST5 | ORDERED_LIST6 | NONE, { '~' },
+                            { '>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 | ORDERED_LINK5 | ORDERED_LINK6 | NONE }) != NONE)
+                    return true;
+
+                if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
+                    return true;
+                else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+                {
+                    lexer->result_symbol = DRAWER_SUFFIX;
+                    return true;
+                }
+
+                if (check_detached(lexer, INSERTION, { '=' }) != NONE)
+                    return true;
+                else if (lexer->lookahead == '\n')
+                {
+                    if (m_ParsedChars >= 3)
+                    {
+                        lexer->result_symbol = STRONG_PARAGRAPH_DELIMITER;
+                        return true;
+                    }
+                    else
+                    {
+                        advance(lexer);
+                        lexer->result_symbol = PARAGRAPH_SEGMENT;
+                        return true;
+                    }
+                }
+            }
         }
 
         if (check_attached(lexer, lexer->lookahead) != NONE)
-        	return true;
+            return true;
 
         // Match paragraphs
         if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
@@ -326,7 +326,7 @@ public:
         return false;
     }
 
-	std::vector<uint16_t>& get_tag_stack() noexcept { return m_TagStack; }
+    std::vector<uint16_t>& get_tag_stack() noexcept { return m_TagStack; }
 private:
     void skip(TSLexer* lexer)
     {
@@ -412,50 +412,50 @@ private:
         return NONE;
     }
 
-	TokenType check_attached(TSLexer* lexer, const unsigned char search)
-	{
-		auto attached_modifier = std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(), [&](const std::pair<unsigned char, TokenType>& pair) { return pair.first == search; });
+    TokenType check_attached(TSLexer* lexer, const unsigned char search)
+    {
+        auto attached_modifier = std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(), [&](const std::pair<unsigned char, TokenType>& pair) { return pair.first == search; });
 
-		if (attached_modifier != s_AttachedModifiers.end())
-		{
-			advance(lexer);
+        if (attached_modifier != s_AttachedModifiers.end())
+        {
+            advance(lexer);
 
-			while (lexer->lookahead != attached_modifier->first)
-			{
-				if (!lexer->lookahead)
-				{
-					lexer->result_symbol = PARAGRAPH_SEGMENT;
-					return attached_modifier->second;
-				} else if (lexer->lookahead == '\n')
-				{
-					advance(lexer);
-					if (lexer->lookahead == '\n')
-					{
-						lexer->result_symbol = PARAGRAPH_SEGMENT;
-						return attached_modifier->second;
-					}
-				}
+            while (lexer->lookahead != attached_modifier->first)
+            {
+                if (!lexer->lookahead)
+                {
+                    lexer->result_symbol = PARAGRAPH_SEGMENT;
+                    return attached_modifier->second;
+                } else if (lexer->lookahead == '\n')
+                {
+                    advance(lexer);
+                    if (lexer->lookahead == '\n')
+                    {
+                        lexer->result_symbol = PARAGRAPH_SEGMENT;
+                        return attached_modifier->second;
+                    }
+                }
 
-				advance(lexer);
-			}
+                advance(lexer);
+            }
 
-			if (std::isalnum(m_Current) || std::ispunct(m_Current))
-			{
-				advance(lexer);
+            if (std::isalnum(m_Current) || std::ispunct(m_Current))
+            {
+                advance(lexer);
 
-				if (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead))
-				{
-					if (lexer->lookahead == '\n')
-						advance(lexer);
+                if (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead))
+                {
+                    if (lexer->lookahead == '\n')
+                        advance(lexer);
 
-					lexer->result_symbol = attached_modifier->second;
-					return attached_modifier->second;
-				}
-			}
-		}
+                    lexer->result_symbol = attached_modifier->second;
+                    return attached_modifier->second;
+                }
+            }
+        }
 
-		return NONE;
-	}
+        return NONE;
+    }
 
     /*
      * Attempts to parse a link ([like](#this))
@@ -540,8 +540,8 @@ private:
     {
         while (lexer->lookahead)
         {
-			if (m_TagStack.size() > 0 && m_IndentationLevel < m_TagStack.back())
-				return false;
+            if (m_TagStack.size() > 0 && m_IndentationLevel < m_TagStack.back())
+                return false;
 
             // If we have an escape sequence in the middle of the paragraph then terminate the paragraph
             // to allow the escape sequence to get parsed
@@ -552,18 +552,18 @@ private:
                 return true;
             }
 
-			if (lexer->lookahead == ' ' || lexer->lookahead == '\t' /*|| std::ispunct(lexer->lookahead)*/)
-			{
-				advance(lexer);
-				if (std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(),
-					[&](const std::pair<unsigned char, TokenType>& pair)
-						{ return pair.first == lexer->lookahead; })
-							!= s_AttachedModifiers.end())
-				{
-					lexer->result_symbol = PARAGRAPH_SEGMENT;
-					return true;
-				}
-			}
+            if (lexer->lookahead == ' ' || lexer->lookahead == '\t' /*|| std::ispunct(lexer->lookahead)*/)
+            {
+                advance(lexer);
+                if (std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(),
+                    [&](const std::pair<unsigned char, TokenType>& pair)
+                        { return pair.first == lexer->lookahead; })
+                            != s_AttachedModifiers.end())
+                {
+                    lexer->result_symbol = PARAGRAPH_SEGMENT;
+                    return true;
+                }
+            }
 
             // Try and find an occurrence of a trailing modifier
             if (!std::iswspace(m_Current) && lexer->lookahead == '~')
@@ -598,11 +598,11 @@ private:
         return true;
     }
 
-	template<typename T, typename Comp>
-	T clamp(T value, Comp min, Comp max)
-	{
-		return value < min ? min : (value > max ? max : value);
-	}
+    template<typename T, typename Comp>
+    T clamp(T value, Comp min, Comp max)
+    {
+        return value < min ? min : (value > max ? max : value);
+    }
 
 private:
     // Stores the current char rather than the next char
@@ -616,7 +616,7 @@ private:
     size_t m_ParsedChars = 0, m_IndentationLevel = 0;
 
     // Used for tags
-	std::vector<uint16_t> m_TagStack;
+    std::vector<uint16_t> m_TagStack;
 
 private:
     const std::array<unsigned char, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
@@ -642,30 +642,30 @@ extern "C"
 
     unsigned tree_sitter_norg_external_scanner_serialize(void* payload, char* buffer)
     {
-		Scanner* scanner = static_cast<Scanner*>(payload);
+        Scanner* scanner = static_cast<Scanner*>(payload);
 
-		auto& tag_stack = scanner->get_tag_stack();
+        auto& tag_stack = scanner->get_tag_stack();
 
-		if (tag_stack.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
-			return 0;
+        if (tag_stack.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+            return 0;
 
-		std::copy(tag_stack.begin(), tag_stack.end(), buffer);
-		// buffer[tag_stack.size() + 1] = scanner->get_whitespace();
+        std::copy(tag_stack.begin(), tag_stack.end(), buffer);
+        // buffer[tag_stack.size() + 1] = scanner->get_whitespace();
 
-		return tag_stack.size();
+        return tag_stack.size();
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload, const char* buffer, unsigned length)
     {
-		if (length == 0)
-			return;
+        if (length == 0)
+            return;
 
-		Scanner* scanner = static_cast<Scanner*>(payload);
+        Scanner* scanner = static_cast<Scanner*>(payload);
 
-		auto& tag_stack = scanner->get_tag_stack();
+        auto& tag_stack = scanner->get_tag_stack();
 
-		tag_stack.resize(length);
+        tag_stack.resize(length);
 
-		std::copy_n(buffer, length - 1, tag_stack.begin());
+        std::copy_n(buffer, length - 1, tag_stack.begin());
     }
 }
