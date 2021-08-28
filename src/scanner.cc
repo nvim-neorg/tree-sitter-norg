@@ -650,7 +650,6 @@ extern "C"
             return 0;
 
         std::copy(tag_stack.begin(), tag_stack.end(), buffer);
-        // buffer[tag_stack.size() + 1] = scanner->get_whitespace();
 
         return tag_stack.size();
     }
@@ -666,6 +665,6 @@ extern "C"
 
         tag_stack.resize(length);
 
-        std::copy_n(buffer, length - 1, tag_stack.begin());
+        std::copy_n(buffer, length, tag_stack.begin());
     }
 }
