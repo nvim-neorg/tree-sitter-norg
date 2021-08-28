@@ -1,6 +1,8 @@
 /*
 * Known bugs:
 * Placing a link description at the end of an unordered list element breaks the generic_list
+* m_Whitespace is not preserved properly and does not fully function, causing errors
+* Forgot to add support for ` inline code blocks
 */
 
 module.exports = grammar({
@@ -86,6 +88,15 @@ module.exports = grammar({
         $.ranged_tag_end_prefix,
 
         $.carryover_tag_prefix,
+
+		$.bold,
+		$.italic,
+		$.strikethrough,
+		$.underline,
+    	$.spoiler,
+    	$.inline_code,
+    	$.superscript,
+    	$.subscript,
       ],
 
       rules: {
@@ -149,6 +160,15 @@ module.exports = grammar({
 
                         $.link,
                         $.escape_sequence,
+
+						$.bold,
+						$.italic,
+						$.strikethrough,
+						$.underline,
+    					$.spoiler,
+    					$.inline_code,
+    					$.superscript,
+    					$.subscript,
                     )
                 )
             ),

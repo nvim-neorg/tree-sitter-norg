@@ -1662,11 +1662,43 @@
       "required": false,
       "types": [
         {
+          "type": "bold",
+          "named": true
+        },
+        {
           "type": "escape_sequence",
           "named": true
         },
         {
+          "type": "inline_code",
+          "named": true
+        },
+        {
+          "type": "italic",
+          "named": true
+        },
+        {
           "type": "link",
+          "named": true
+        },
+        {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript",
+          "named": true
+        },
+        {
+          "type": "underline",
           "named": true
         }
       ]
@@ -2984,6 +3016,10 @@
     "named": true
   },
   {
+    "type": "bold",
+    "named": true
+  },
+  {
     "type": "drawer_prefix",
     "named": true
   },
@@ -3020,7 +3056,15 @@
     "named": true
   },
   {
+    "type": "inline_code",
+    "named": true
+  },
+  {
     "type": "insertion_prefix",
+    "named": true
+  },
+  {
+    "type": "italic",
     "named": true
   },
   {
@@ -3152,7 +3196,23 @@
     "named": true
   },
   {
+    "type": "spoiler",
+    "named": true
+  },
+  {
+    "type": "strikethrough",
+    "named": true
+  },
+  {
     "type": "strong_paragraph_delimiter",
+    "named": true
+  },
+  {
+    "type": "subscript",
+    "named": true
+  },
+  {
+    "type": "superscript",
     "named": true
   },
   {
@@ -3165,6 +3225,10 @@
   },
   {
     "type": "todo_item_undone",
+    "named": true
+  },
+  {
+    "type": "underline",
     "named": true
   },
   {
