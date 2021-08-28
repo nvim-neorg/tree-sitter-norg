@@ -348,7 +348,7 @@ private:
      * @param expected - a list of expected modifiers to appear in the sequence
      */
     template <size_t Size = 1>
-    	[[nodiscard("You want to check whether we managed to match a detached token, not just let a function aimlessly run doofus")]]
+    	[[nodiscard]]
     	TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<unsigned char, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
     	{
         	static_assert(Size > 0, "check_detached Size template must be greater than 0");
