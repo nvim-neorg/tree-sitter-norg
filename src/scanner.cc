@@ -96,7 +96,7 @@ namespace
         return std::vector<TokenType> { lhs, static_cast<TokenType>(rhs) };
     }
 
-    decltype(auto) operator|(std::vector<TokenType>&& lhs, TokenType rhs)
+	std::vector<TokenType>&& operator|(std::vector<TokenType>&& lhs, TokenType rhs)
     {
         lhs.push_back(rhs);
         return std::move(lhs);
@@ -319,7 +319,7 @@ public:
         return false;
     }
 
-	auto& get_tag_stack() noexcept { return m_TagStack; }
+	std::vector<size_t>& get_tag_stack() noexcept { return m_TagStack; }
 private:
     void skip(TSLexer* lexer)
     {
