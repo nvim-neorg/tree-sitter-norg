@@ -279,7 +279,7 @@ public:
                 {
                     return true;
                 }
-                else if (m_ParsedChars >= 3)
+                else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
                 {
                     lexer->result_symbol = WEAK_PARAGRAPH_DELIMITER;
                     return true;
@@ -291,7 +291,7 @@ public:
 
                 if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
                     return true;
-                else if (m_ParsedChars == 2)
+                else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
                 {
                     lexer->result_symbol = DRAWER_SUFFIX;
                     return true;
