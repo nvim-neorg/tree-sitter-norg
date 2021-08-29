@@ -279,7 +279,7 @@ public:
                 {
                     return true;
                 }
-                else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
+                else if (m_ParsedChars >= 3)
                 {
                     lexer->result_symbol = WEAK_PARAGRAPH_DELIMITER;
                     return true;
@@ -291,7 +291,7 @@ public:
 
                 if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
                     return true;
-                else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+                else if (m_ParsedChars == 2)
                 {
                     lexer->result_symbol = DRAWER_SUFFIX;
                     return true;
@@ -316,7 +316,7 @@ public:
             }
         }
 
-        if (check_attached(lexer, lexer->lookahead) != NONE)
+        if (m_TagStack.size() == 0 && (check_attached(lexer, false) != NONE))
             return true;
 
         // Match paragraphs
@@ -409,27 +409,46 @@ private:
             }
         }
 
-        return NONE;
+        if (m_ParsedChars == 1)
+            return check_attached(lexer, true);
+        else
+            return NONE;
     }
 
-    TokenType check_attached(TSLexer* lexer, const unsigned char search)
+    TokenType check_attached(TSLexer* lexer, bool behind)
     {
-        auto attached_modifier = std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(), [&](const std::pair<unsigned char, TokenType>& pair) { return pair.first == search; });
+        unsigned char& lookahead = behind ? m_Current : (unsigned char&)lexer->lookahead;
+        unsigned char& current = behind ? m_Previous : m_Current;
+
+        const auto attached_modifier = std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(), [&](const std::pair<unsigned char, TokenType>& pair) { return pair.first == lookahead; });
+
+        auto conditional_advance = [&](TSLexer* lx) {
+            if (!behind)
+            {
+                advance(lx);
+                ++m_ParsedChars;
+            }
+        };
 
         if (attached_modifier != s_AttachedModifiers.end())
         {
             advance(lexer);
 
-            while (lexer->lookahead != attached_modifier->first)
+            if (lookahead == attached_modifier->first)
             {
-                if (!lexer->lookahead)
+                conditional_advance(lexer);
+                return NONE;
+            }
+
+            while (lookahead != attached_modifier->first)
+            {
+                if (!lookahead)
                 {
-                    lexer->result_symbol = PARAGRAPH_SEGMENT;
-                    return attached_modifier->second;
-                } else if (lexer->lookahead == '\n')
+                    return NONE;
+                } else if (lookahead == '\n')
                 {
-                    advance(lexer);
-                    if (lexer->lookahead == '\n')
+                    conditional_advance(lexer);
+                    if (lookahead == '\n')
                     {
                         lexer->result_symbol = PARAGRAPH_SEGMENT;
                         return attached_modifier->second;
@@ -439,11 +458,11 @@ private:
                 advance(lexer);
             }
 
-            if (std::isalnum(m_Current) || std::ispunct(m_Current))
+            if (!current || std::isalnum(current) || std::ispunct(current))
             {
-                advance(lexer);
+                conditional_advance(lexer);
 
-                if (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead))
+                if (std::iswspace(lookahead) || std::ispunct(lookahead))
                 {
                     if (lexer->lookahead == '\n')
                         advance(lexer);
@@ -552,7 +571,7 @@ private:
                 return true;
             }
 
-            if (lexer->lookahead == ' ' || lexer->lookahead == '\t' /*|| std::ispunct(lexer->lookahead)*/)
+            if (lexer->lookahead == ' ' || lexer->lookahead == '\t')
             {
                 advance(lexer);
                 if (std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(),
@@ -620,7 +639,7 @@ private:
 
 private:
     const std::array<unsigned char, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
-    const std::array<std::pair<unsigned char, TokenType>, 7> s_AttachedModifiers = { std::pair<unsigned char, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT } };
+    const std::array<std::pair<unsigned char, TokenType>, 8> s_AttachedModifiers = { std::pair<unsigned char, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', INLINE_CODE } };
 };
 
 extern "C"
@@ -656,9 +675,6 @@ extern "C"
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload, const char* buffer, unsigned length)
     {
-        if (length == 0)
-            return;
-
         Scanner* scanner = static_cast<Scanner*>(payload);
 
         auto& tag_stack = scanner->get_tag_stack();
