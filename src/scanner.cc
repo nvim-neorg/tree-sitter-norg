@@ -370,7 +370,7 @@ private:
                 	while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
                     	advance(lexer);
 
-                	TokenType result = terminate_at.second[clamp(i, 0UL, terminate_at.second.size()) - 1];
+                	TokenType result = terminate_at.second[clamp(i, size_t{}, terminate_at.second.size()) - 1];
 
                 	lexer->result_symbol = result;
 
@@ -379,7 +379,7 @@ private:
 
             	// If the next character is not one we expect then break
             	// We use clamp() here to prevent overflow and to make the last element of the expected array the fallback
-            	if (lexer->lookahead != expected[clamp(i, 0UL, Size - 1)])
+            	if (lexer->lookahead != expected[clamp(i, size_t{}, Size - 1)])
                 	break;
 
             	advance(lexer);
@@ -389,7 +389,7 @@ private:
             	{
                 	// Retrieve the correct result from the list of provided results depending on how many characters were matched.
                 	// If we've exceeded the number of results then the clamp function will fall back to the last element
-                	TokenType result = results[clamp(i, 0UL, results.size() - 1)];
+                	TokenType result = results[clamp(i, size_t{}, results.size() - 1)];
 
                 	// Skip any other potential whitespace
                 	while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
@@ -436,7 +436,7 @@ private:
             }
 
             // We use the clamp() here to make sure we don't overflow!
-            lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(heading_level, 0UL, 5UL));
+            lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(heading_level, size_t{}, size_t{5}));
         }
         // We're dealing with one of two things: a marker reference or a drawer reference
         else if (m_Current == '|')
