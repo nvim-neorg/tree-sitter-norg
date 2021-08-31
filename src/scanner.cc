@@ -110,7 +110,7 @@ public:
     bool scan(TSLexer* lexer, const bool* valid_symbols)
     {
         // Are we at the end of file? If so, bail
-        if (lexer->eof(lexer))
+        if (!lexer->lookahead || lexer->eof(lexer))
             return false;
 
         lexer->result_symbol = NONE;
