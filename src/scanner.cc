@@ -94,7 +94,7 @@ namespace
 {
     std::vector<TokenType> operator|(TokenType lhs, TokenType rhs)
     {
-        return std::vector<TokenType> { lhs, static_cast<TokenType>(rhs) };
+        return std::vector<TokenType>({ lhs, static_cast<TokenType>(rhs) });
     }
 
     std::vector<TokenType>&& operator|(std::vector<TokenType>&& lhs, TokenType rhs)
@@ -168,7 +168,7 @@ public:
 
             while (lexer->lookahead)
             {
-		        // If we've encountered an `]` check whether it has been escaped with a backslash
+                // If we've encountered an `]` check whether it has been escaped with a backslash
                 if (lexer->lookahead == ']' && m_Current != '\\')
                 {
                     advance(lexer);
@@ -187,7 +187,7 @@ public:
         // Otherwise make sure to check for the existence of an opening link location
         else if (m_TagStack.size() == 0 && lexer->lookahead == '(')
             return check_link(lexer);
-	    // Otherwise just check whether or not we're dealing with a newline and return STANDALONE_BREAK if we are
+        // Otherwise just check whether or not we're dealing with a newline and return STANDALONE_BREAK if we are
         else if (lexer->lookahead == '\n')
         {
             advance(lexer);
@@ -346,7 +346,7 @@ private:
     }
 
     template <size_t Size = 1>
-    inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<unsigned char, Size>& expected, std::pair<char, TokenType> terminate_at = { 0, NONE })
+    inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<int32_t, Size>& expected, std::pair<char, TokenType> terminate_at = { 0, NONE })
     {
         return check_detached(lexer, result | NONE, expected, { terminate_at.first, terminate_at.second | NONE });
     }
@@ -359,7 +359,7 @@ private:
      */
     template <size_t Size = 1>
         [[nodiscard]]
-        TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<unsigned char, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
+        TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<int32_t, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
         {
             static_assert(Size > 0, "check_detached Size template must be greater than 0");
 
@@ -379,26 +379,26 @@ private:
                     while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
                         advance(lexer);
 
-                	TokenType result = terminate_at.second[clamp(i, size_t{}, terminate_at.second.size()) - 1];
+                    TokenType result = terminate_at.second[clamp(i, size_t{}, terminate_at.second.size()) - 1];
 
                     lexer->result_symbol = result;
 
                     return result;
                 }
 
-            	// If the next character is not one we expect then break
-            	// We use clamp() here to prevent overflow and to make the last element of the expected array the fallback
-            	if (lexer->lookahead != expected[clamp(i, size_t{}, Size - 1)])
-                	break;
+                // If the next character is not one we expect then break
+                // We use clamp() here to prevent overflow and to make the last element of the expected array the fallback
+                if (lexer->lookahead != expected[clamp(i, size_t{}, Size - 1)])
+                    break;
 
                 advance(lexer);
 
-            	// If the next character is whitespace (which is the distinguishing factor between an attached/detached modifier)
-            	if (std::iswspace(lexer->lookahead) && (lexer->lookahead != '\n'))
-            	{
-                	// Retrieve the correct result from the list of provided results depending on how many characters were matched.
-                	// If we've exceeded the number of results then the clamp function will fall back to the last element
-                	TokenType result = results[clamp(i, size_t{}, results.size() - 1)];
+                // If the next character is whitespace (which is the distinguishing factor between an attached/detached modifier)
+                if (std::iswspace(lexer->lookahead) && (lexer->lookahead != '\n'))
+                {
+                    // Retrieve the correct result from the list of provided results depending on how many characters were matched.
+                    // If we've exceeded the number of results then the clamp function will fall back to the last element
+                    TokenType result = results[clamp(i, size_t{}, results.size() - 1)];
 
                     // Skip any other potential whitespace
                     while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
@@ -554,7 +554,7 @@ private:
 
 private:
     // Stores the current char rather than the next char
-    unsigned char m_Previous = 0, m_Current = 0;
+    int32_t m_Previous = 0, m_Current = 0;
 
     // If true then we are at the beginning of a line (i.e. no non-whitespace chars have been encountered
     // since the beginning of the line)
@@ -571,7 +571,7 @@ private:
     std::vector<size_t> m_TagStack;
 
 private:
-    const std::array<unsigned char, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
+    const std::array<int32_t, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
 };
 
 extern "C"
