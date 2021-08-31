@@ -253,7 +253,7 @@ public:
                         }
                     }
 
-                    while (lexer->lookahead != '.' && !std::iswspace(lexer->lookahead))
+                    while (lexer->lookahead && lexer->lookahead != '.' && !std::iswspace(lexer->lookahead))
                         advance(lexer);
 
                     lexer->result_symbol = m_LastToken = RANGED_TAG_NAME;
@@ -424,7 +424,7 @@ private:
 
         if (lexer->lookahead == ':')
         {
-            while (lexer->lookahead != '*' && lexer->lookahead != '#' && lexer->lookahead != '|' && lexer->lookahead != ')')
+            while (lexer->lookahead && lexer->lookahead != '*' && lexer->lookahead != '#' && lexer->lookahead != '|' && lexer->lookahead != ')')
                 advance(lexer);
             if (m_Current != ':')
                 return true;
@@ -438,7 +438,7 @@ private:
             size_t heading_level = 0;
 
             // Keep capturing asterisks and increment the heading level accordingly
-            while (lexer->lookahead == '*')
+            while (lexer->lookahead && lexer->lookahead == '*')
             {
                 advance(lexer);
                 ++heading_level;
@@ -460,7 +460,7 @@ private:
             lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
 
         // Until we don't hit the end of the link location keep advancing
-        while (lexer->lookahead != ')')
+        while (lexer->lookahead && lexer->lookahead != ')')
         {
             if (lexer->lookahead == '\n' || !lexer->lookahead)
             {
