@@ -115,11 +115,6 @@ public:
 
         lexer->result_symbol = NONE;
 
-        if (!m_Whitespace && (lexer->lookahead == '\n' || !lexer->lookahead))
-            m_Whitespace = false;
-        else if (lexer->lookahead != '\n')
-            m_Whitespace = true;
-
         // Check for an escape seqence (e.g. "\*")
         if (lexer->lookahead == '\\')
         {
@@ -196,7 +191,7 @@ public:
         }
 
         // If we're at the beginning of a line check for all detached modifiers
-        if (m_Whitespace)
+        if (lexer->get_column(lexer) == 0)
         {
             m_IndentationLevel = 0;
 
@@ -555,10 +550,6 @@ private:
 private:
     // Stores the current char rather than the next char
     int32_t m_Previous = 0, m_Current = 0;
-
-    // If true then we are at the beginning of a line (i.e. no non-whitespace chars have been encountered
-    // since the beginning of the line)
-    bool m_Whitespace = false;
 
     // The last matched token type (used to detect things like todo items
     // which require an unordered list prefix beforehand)
