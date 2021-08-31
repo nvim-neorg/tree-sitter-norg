@@ -1,0 +1,52 @@
+name: Parser fuzzing
+
+on: [ push, pull_request ]
+
+jobs:
+  fuzz_parser:
+    strategy:
+      fail-fast: false
+    name: Fuzzing
+    runs-on: ubuntu-latest
+    env:
+      CC: clang
+    steps:
+      - name: Install fuzzer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y 2to3 libfuzzer-12-dev
+
+      - name: Prepare tree-sitter
+        uses: actions/checkout@v2
+        with:
+          repository: tree-sitter/tree-sitter
+
+      - name: Prepare tree-sitter-norg
+        uses: actions/checkout@v2
+        with:
+          path: test/fixtures/grammars/norg
+
+      - name: Make python fuzzer v3
+        run: |
+          2to3 -w test/fuzz/gen-dict.py
+          sed 's/ord(b)/b/' -i test/fuzz/gen-dict.py
+
+      - name: Build fuzzer
+        run: |
+          export LIB_FUZZER_PATH=/usr/lib/llvm-12/lib/libFuzzer.a
+          mkdir out
+          ./script/build-fuzzers norg
+
+      - name: Run fuzzer
+        run: |
+          mkdir out/results
+          cd out/results
+          ../../out/norg_fuzzer -rss_limit_mb=256
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: fuzzing_results
+          path: out/results/*
+
+
