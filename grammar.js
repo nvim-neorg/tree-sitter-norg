@@ -10,7 +10,7 @@ module.exports = grammar({
         $._,
 
         $.paragraph_segment,
-        $._standalone_break,
+        $._paragraph_break,
         $.escape_sequence_prefix,
 
         $.heading1_prefix,
@@ -100,7 +100,7 @@ module.exports = grammar({
                 repeat1(
                     prec(2,
                         choice(
-                            $._standalone_break,
+                            $._paragraph_break,
                             $.ranged_tag,
                             $.insertion,
                         )
@@ -112,7 +112,7 @@ module.exports = grammar({
             choice(
                 prec(1,
                     choice(
-                        $._standalone_break,
+                        $._paragraph_break,
                         $._heading,
                         $._detached_modifier,
                         $._tag,
@@ -133,7 +133,7 @@ module.exports = grammar({
                     $.paragraph,
 
                     optional(
-                        $._standalone_break,
+                        $._paragraph_break,
                     )
                 )
             ),
@@ -201,7 +201,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -233,7 +233,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -263,7 +263,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -291,7 +291,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -317,7 +317,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -340,7 +340,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
                 )
             ),
@@ -356,7 +356,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -388,7 +388,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -418,7 +418,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -446,7 +446,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -472,7 +472,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -495,7 +495,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
                 )
             ),
@@ -519,7 +519,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -557,7 +557,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -594,7 +594,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -630,7 +630,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -665,7 +665,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -699,7 +699,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
                             )
@@ -1200,7 +1200,7 @@ module.exports = grammar({
                                 $._heading,
                                 $._detached_modifier,
                                 $._tag,
-                                $._standalone_break,
+                                $._paragraph_break,
                             ),
                         ),
                     )
@@ -1222,7 +1222,7 @@ module.exports = grammar({
                         repeat(
                             choice(
                                 $._paragraph,
-                                $._standalone_break,
+                                $._paragraph_break,
                             )
                         )
                     ),
@@ -1461,7 +1461,7 @@ module.exports = grammar({
                     alias(
                         choice(
                             $.paragraph_segment,
-                            $._standalone_break,
+                            $._paragraph_break,
                         ),
                         "_segment",
                     ),
@@ -1587,7 +1587,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    $._standalone_break,
+                    $._paragraph_break,
                 ),
             ),
 

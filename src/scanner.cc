@@ -12,7 +12,7 @@ enum TokenType
     NONE,
 
     PARAGRAPH_SEGMENT,
-    STANDALONE_BREAK,
+    PARAGRAPH_BREAK,
     ESCAPE_SEQUENCE,
 
     HEADING1,
@@ -186,7 +186,7 @@ public:
         else if (lexer->lookahead == '\n')
         {
             advance(lexer);
-            lexer->result_symbol = STANDALONE_BREAK;
+            lexer->result_symbol = PARAGRAPH_BREAK;
             return true;
         }
 
@@ -532,8 +532,18 @@ private:
                 break;
         }
 
+        // Mark the end of the token so any subsequent calls to advance() don't get
+        // appended to the result
+        lexer->mark_end(lexer);
+
+        // If the next char is valid then advance again
         if (lexer->lookahead)
             advance(lexer);
+
+        // If we haven't reached EOF then treat the last call to advance() as part of the result too.
+        // We do this because otherwise the parser would read one char past EOF which would mess things up
+        if (!lexer->eof(lexer))
+            lexer->mark_end(lexer);
 
         m_LastToken = PARAGRAPH_SEGMENT;
         lexer->result_symbol = PARAGRAPH_SEGMENT;
