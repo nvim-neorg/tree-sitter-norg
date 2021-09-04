@@ -1424,7 +1424,7 @@ module.exports = grammar({
             ),
 
         word: $ =>
-            token.immediate(/[a-zA-Z1-9_\-\+]+/),
+            token.immediate(/[a-zA-Z0-9_\-\+]+/),
 
         insertion: $ =>
             prec.right(0,
