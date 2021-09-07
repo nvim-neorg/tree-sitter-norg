@@ -247,13 +247,6 @@ public:
                             }
                         }
                     }
-
-                    while (lexer->lookahead && lexer->lookahead != '.' && !std::iswspace(lexer->lookahead))
-                        advance(lexer);
-
-                    lexer->result_symbol = m_LastToken = RANGED_TAG_NAME;
-                    lexer->mark_end(lexer);
-                    return true;
                 }
 
                 lexer->result_symbol = m_LastToken = RANGED_TAG;
