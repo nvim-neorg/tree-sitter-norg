@@ -247,13 +247,6 @@ public:
                             }
                         }
                     }
-
-                    while (lexer->lookahead && lexer->lookahead != '.' && !std::iswspace(lexer->lookahead))
-                        advance(lexer);
-
-                    lexer->result_symbol = m_LastToken = RANGED_TAG_NAME;
-                    lexer->mark_end(lexer);
-                    return true;
                 }
 
                 lexer->result_symbol = m_LastToken = RANGED_TAG;
@@ -511,7 +504,7 @@ private:
             }
             // A [ is a special symbol - it can both mean a todo item and a link
             // Halt the parsing of the paragraph segment if such a thing is encountered
-            else if (m_TagStack.size() == 0 && std::iswspace(m_Current) && lexer->lookahead == '[')
+            else if (m_TagStack.size() == 0 && (std::iswspace(m_Current) || std::ispunct(m_Current)) && lexer->lookahead == '[')
             {
                 m_LastToken = PARAGRAPH_SEGMENT;
                 lexer->result_symbol = PARAGRAPH_SEGMENT;
