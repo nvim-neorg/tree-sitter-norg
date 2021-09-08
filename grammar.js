@@ -43,9 +43,6 @@ module.exports = grammar({
 
         $.marker_prefix,
 
-        $.drawer_prefix,
-        $.drawer_suffix,
-
         $.todo_item_undone,
         $.todo_item_pending,
         $.todo_item_done,
@@ -79,7 +76,6 @@ module.exports = grammar({
         $.link_end_heading5_reference,
         $.link_end_heading6_reference,
         $.link_end_marker_reference,
-        $.link_end_drawer_reference,
 
         $.ranged_tag_prefix,
         $.ranged_tag_name_fallback,
@@ -184,7 +180,6 @@ module.exports = grammar({
                             $.link_end_heading5_reference,
                             $.link_end_heading6_reference,
                             $.link_end_marker_reference,
-                            $.link_end_drawer_reference,
                         )
                     )
                 )
@@ -1207,39 +1202,6 @@ module.exports = grammar({
                 )
             ),
 
-        drawer: $ =>
-            choice(
-                seq(
-                    $.drawer_prefix,
-
-                    field(
-                        "title",
-                        $.paragraph_segment,
-                    ),
-
-                    field(
-                        "content",
-                        repeat(
-                            choice(
-                                $._paragraph,
-                                $._paragraph_break,
-                            )
-                        )
-                    ),
-
-                    field(
-                        "end",
-                        $.drawer_suffix
-                    ),
-                ),
-
-                // Used for preventing annoying errors with incomplete marker definitions
-                alias(
-                    $.drawer_suffix,
-                    "_suffix"
-                )
-            ),
-
         // --------------------------------------------------
         todo_item1: $ =>
             prec.right(0,
@@ -1524,10 +1486,7 @@ module.exports = grammar({
                         ),
                     ),
 
-                    // alias(
-                        $.ranged_tag_end,
-                        // "_end",
-                    // ),
+                    $.ranged_tag_end,
                 )
             ),
 
@@ -1654,7 +1613,6 @@ module.exports = grammar({
             choice(
                 $.quote,
                 $.generic_list,
-                $.drawer,
                 $.insertion,
             ),
       }

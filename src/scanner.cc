@@ -44,8 +44,6 @@ enum TokenType
     ORDERED_LIST6,
 
     MARKER,
-    DRAWER,
-    DRAWER_SUFFIX,
 
     TODO_ITEM_UNDONE,
     TODO_ITEM_PENDING,
@@ -80,7 +78,6 @@ enum TokenType
     LINK_END_HEADING5_REFERENCE,
     LINK_END_HEADING6_REFERENCE,
     LINK_END_MARKER_REFERENCE,
-    LINK_END_DRAWER_REFERENCE,
 
     RANGED_TAG,
     RANGED_TAG_NAME,
@@ -120,8 +117,11 @@ public:
         {
             advance(lexer);
 
-            lexer->result_symbol = ESCAPE_SEQUENCE;
-            return true;
+            if (m_TagStack.empty())
+            {
+                lexer->result_symbol = ESCAPE_SEQUENCE;
+                return true;
+            }
         }
 
         // If we are not in a tag and we have a square bracket opening then try matching
@@ -290,13 +290,8 @@ public:
                             { '>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 | ORDERED_LINK5 | ORDERED_LINK6 | NONE }) != NONE)
                     return true;
 
-                if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
+                if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
                     return true;
-                else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
-                {
-                    lexer->result_symbol = DRAWER_SUFFIX;
-                    return true;
-                }
 
                 if (check_detached(lexer, INSERTION, { '=' }) != NONE)
                     return true;
@@ -442,13 +437,10 @@ private:
             // We use the clamp() here to make sure we don't overflow!
             lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(heading_level, size_t{}, size_t{5}));
         }
-        // We're dealing with one of two things: a marker reference or a drawer reference
+        // We're dealing with a marker reference
         else if (m_Current == '|')
         {
-            if (lexer->lookahead == '|')
-                lexer->result_symbol = m_LastToken = LINK_END_DRAWER_REFERENCE;
-            else
-                lexer->result_symbol = m_LastToken = LINK_END_MARKER_REFERENCE;
+            lexer->result_symbol = m_LastToken = LINK_END_MARKER_REFERENCE;
         }
         // We're dealing with a generic (loose) link
         else if (m_Current == '#')

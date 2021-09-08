@@ -34,10 +34,6 @@
         "required": true,
         "types": [
           {
-            "type": "drawer",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -131,10 +127,6 @@
           "named": true
         },
         {
-          "type": "drawer",
-          "named": true
-        },
-        {
           "type": "generic_list",
           "named": true
         },
@@ -184,52 +176,6 @@
         },
         {
           "type": "strong_paragraph_delimiter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "drawer",
-    "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph",
-            "named": true
-          }
-        ]
-      },
-      "end": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "drawer_suffix",
-            "named": true
-          }
-        ]
-      },
-      "title": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "drawer_prefix",
           "named": true
         }
       ]
@@ -424,10 +370,6 @@
             "named": true
           },
           {
-            "type": "drawer",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -508,10 +450,6 @@
             "named": true
           },
           {
-            "type": "drawer",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -588,10 +526,6 @@
             "named": true
           },
           {
-            "type": "drawer",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -664,10 +598,6 @@
             "named": true
           },
           {
-            "type": "drawer",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -736,10 +666,6 @@
             "named": true
           },
           {
-            "type": "drawer",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -801,10 +727,6 @@
         "types": [
           {
             "type": "carryover_tag_set",
-            "named": true
-          },
-          {
-            "type": "drawer",
             "named": true
           },
           {
@@ -900,10 +822,6 @@
         "required": false,
         "types": [
           {
-            "type": "link_end_drawer_reference",
-            "named": true
-          },
-          {
             "type": "link_end_generic",
             "named": true
           },
@@ -973,10 +891,6 @@
         "types": [
           {
             "type": "carryover_tag_set",
-            "named": true
-          },
-          {
-            "type": "drawer",
             "named": true
           },
           {
@@ -2976,19 +2890,7 @@
     "named": false
   },
   {
-    "type": "_suffix",
-    "named": false
-  },
-  {
     "type": "any_char",
-    "named": true
-  },
-  {
-    "type": "drawer_prefix",
-    "named": true
-  },
-  {
-    "type": "drawer_suffix",
     "named": true
   },
   {
@@ -3025,10 +2927,6 @@
   },
   {
     "type": "link_begin",
-    "named": true
-  },
-  {
-    "type": "link_end_drawer_reference",
     "named": true
   },
   {
