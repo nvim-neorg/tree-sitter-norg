@@ -3234,17 +3234,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "word"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ranged_tag_name_fallback"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "word"
         },
         {
           "type": "REPEAT",
@@ -3616,10 +3607,6 @@
     {
       "type": "SYMBOL",
       "name": "ranged_tag_prefix"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "ranged_tag_name_fallback"
     },
     {
       "type": "SYMBOL",

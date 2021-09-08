@@ -78,7 +78,6 @@ module.exports = grammar({
         $.link_end_marker_reference,
 
         $.ranged_tag_prefix,
-        $.ranged_tag_name_fallback,
         $.ranged_tag_end_prefix,
 
         $.carryover_tag_prefix,
@@ -1552,10 +1551,7 @@ module.exports = grammar({
 
         tag_name: $ =>
             seq(
-                choice(
-                    $.word,
-                    $.ranged_tag_name_fallback,
-                ),
+                $.word,
 
                 repeat(
                     seq(

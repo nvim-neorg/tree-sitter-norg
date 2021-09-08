@@ -1907,10 +1907,6 @@
       "required": true,
       "types": [
         {
-          "type": "ranged_tag_name_fallback",
-          "named": true
-        },
-        {
           "type": "word",
           "named": true
         }
@@ -3043,10 +3039,6 @@
   },
   {
     "type": "quote6_prefix",
-    "named": true
-  },
-  {
-    "type": "ranged_tag_name_fallback",
     "named": true
   },
   {
