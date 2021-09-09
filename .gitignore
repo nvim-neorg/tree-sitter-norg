@@ -1,2 +1,7 @@
 node_modules
 bindings
+binding.gyp
+build
+Cargo.toml
+yarn.lock
+package-lock.json
