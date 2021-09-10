@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-norg",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "norg grammar for tree-sitter",
   "main": "bindings/node",
   "keywords": [
