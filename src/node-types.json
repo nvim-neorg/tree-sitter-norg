@@ -1,5 +1,10 @@
 [
   {
+    "type": "capitalized_word",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "carryover_tag",
     "named": true,
     "fields": {
@@ -785,6 +790,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "capitalized_word",
+            "named": true
+          },
           {
             "type": "word",
             "named": true
@@ -2870,6 +2879,11 @@
     }
   },
   {
+    "type": "word",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\n",
     "named": false
   },
@@ -3115,10 +3129,6 @@
   },
   {
     "type": "weak_paragraph_delimiter",
-    "named": true
-  },
-  {
-    "type": "word",
     "named": true
   }
 ]
