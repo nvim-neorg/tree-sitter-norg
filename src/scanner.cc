@@ -5,13 +5,14 @@
 #include <iostream>
 #include <regex>
 #include <string>
+#include <cwctype>
 
 enum TokenType
 {
     NONE,
 
     PARAGRAPH_SEGMENT,
-    STANDALONE_BREAK,
+    PARAGRAPH_BREAK,
     ESCAPE_SEQUENCE,
 
     HEADING1,
@@ -43,8 +44,6 @@ enum TokenType
     ORDERED_LIST6,
 
     MARKER,
-    DRAWER,
-    DRAWER_SUFFIX,
 
     TODO_ITEM_UNDONE,
     TODO_ITEM_PENDING,
@@ -79,7 +78,6 @@ enum TokenType
     LINK_END_HEADING5_REFERENCE,
     LINK_END_HEADING6_REFERENCE,
     LINK_END_MARKER_REFERENCE,
-    LINK_END_DRAWER_REFERENCE,
 
     RANGED_TAG,
     RANGED_TAG_NAME,
@@ -102,7 +100,7 @@ namespace
 {
     std::vector<TokenType> operator|(TokenType lhs, TokenType rhs)
     {
-        return std::vector<TokenType> { lhs, static_cast<TokenType>(rhs) };
+        return std::vector<TokenType>({ lhs, static_cast<TokenType>(rhs) });
     }
 
     std::vector<TokenType>&& operator|(std::vector<TokenType>&& lhs, TokenType rhs)
@@ -118,7 +116,7 @@ public:
     bool scan(TSLexer* lexer, const bool* valid_symbols)
     {
         // Are we at the end of file? If so, bail
-        if (lexer->eof(lexer))
+        if (!lexer->lookahead || lexer->eof(lexer))
             return false;
 
         lexer->result_symbol = NONE;
@@ -128,12 +126,16 @@ public:
         {
             advance(lexer);
 
+            if (m_TagStack.empty())
+            {
             lexer->result_symbol = ESCAPE_SEQUENCE;
             return true;
         }
+        }
 
-        // If the last matched token was an unordered list check whether we are dealing with a todo item
-        if (m_TagStack.size() == 0 && lexer->lookahead == '[')
+        // If we are not in a tag and we have a square bracket opening then try matching
+        // either a todo item or beginning of a list
+        if (m_TagStack.empty() && lexer->lookahead == '[')
         {
             advance(lexer);
 
@@ -143,27 +145,34 @@ public:
                 return true;
             }
 
+            // Move over any whitespace
             while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
                 advance(lexer);
 
             switch (lexer->lookahead)
             {
+                // Did we encounter the end bracket? We've just dealt with an undone todo item
+                // ([ ])
                 case ']':
                     advance(lexer);
                     lexer->result_symbol = TODO_ITEM_UNDONE;
                     return true;
+                // We're dealing with a pending item ([*])
                 case '*':
                     lexer->result_symbol = TODO_ITEM_PENDING;
                     break;
+                // We're dealing with a done item ([x])
                 case 'x':
                     lexer->result_symbol = TODO_ITEM_DONE;
                     break;
             }
 
+            // Move past the closing ] character
             advance(lexer);
 
             while (lexer->lookahead)
             {
+                // If we've encountered an `]` check whether it has been escaped with a backslash
                 if (lexer->lookahead == ']' && m_Current != '\\')
                 {
                     advance(lexer);
@@ -179,13 +188,14 @@ public:
 
             return true;
         }
-        // Otherwise make sure to check for the existence of links
+        // Otherwise make sure to check for the existence of an opening link location
         else if (m_TagStack.size() == 0 && lexer->lookahead == '(')
             return check_link(lexer);
+        // Otherwise just check whether or not we're dealing with a newline and return STANDALONE_BREAK if we are
         else if (lexer->lookahead == '\n')
         {
             advance(lexer);
-            lexer->result_symbol = STANDALONE_BREAK;
+            lexer->result_symbol = PARAGRAPH_BREAK;
             return true;
         }
 
@@ -246,13 +256,6 @@ public:
                             }
                         }
                     }
-
-                    while (lexer->lookahead != '.' && !std::iswspace(lexer->lookahead))
-                        advance(lexer);
-
-                    lexer->result_symbol = m_LastToken = RANGED_TAG_NAME;
-                    lexer->mark_end(lexer);
-                    return true;
                 }
 
                 lexer->result_symbol = m_LastToken = RANGED_TAG;
@@ -289,13 +292,8 @@ public:
                             { '>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 | ORDERED_LINK5 | ORDERED_LINK6 | NONE }) != NONE)
                     return true;
 
-                if (check_detached(lexer, MARKER | DRAWER | NONE, { '|' }) != NONE)
+                if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
                     return true;
-                else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
-                {
-                    lexer->result_symbol = DRAWER_SUFFIX;
-                    return true;
-                }
 
                 if (check_detached(lexer, INSERTION, { '=' }) != NONE)
                     return true;
@@ -343,7 +341,7 @@ private:
     }
 
     template <size_t Size = 1>
-    inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<unsigned char, Size>& expected, std::pair<char, TokenType> terminate_at = { 0, NONE })
+    inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<int32_t, Size>& expected, std::pair<char, TokenType> terminate_at = { 0, NONE })
     {
         return check_detached(lexer, result | NONE, expected, { terminate_at.first, terminate_at.second | NONE });
     }
@@ -356,7 +354,7 @@ private:
      */
     template <size_t Size = 1>
     [[nodiscard]]
-    TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<unsigned char, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
+        TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<int32_t, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
     {
         static_assert(Size > 0, "check_detached Size template must be greater than 0");
 
@@ -376,7 +374,7 @@ private:
                 while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
                     advance(lexer);
 
-                TokenType result = terminate_at.second[clamp(i, 0UL, terminate_at.second.size()) - 1];
+                    TokenType result = terminate_at.second[clamp(i, size_t{}, terminate_at.second.size()) - 1];
 
                 lexer->result_symbol = result;
 
@@ -385,7 +383,7 @@ private:
 
             // If the next character is not one we expect then break
             // We use clamp() here to prevent overflow and to make the last element of the expected array the fallback
-            if (lexer->lookahead != expected[clamp(i, 0UL, Size - 1)])
+                if (lexer->lookahead != expected[clamp(i, size_t{}, Size - 1)])
                 break;
 
             advance(lexer);
@@ -395,7 +393,7 @@ private:
             {
                 // Retrieve the correct result from the list of provided results depending on how many characters were matched.
                 // If we've exceeded the number of results then the clamp function will fall back to the last element
-                TokenType result = results[clamp(i, 0UL, results.size() - 1)];
+                    TokenType result = results[clamp(i, size_t{}, results.size() - 1)];
 
                 // Skip any other potential whitespace
                 while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
@@ -485,7 +483,7 @@ private:
 
         if (lexer->lookahead == ':')
         {
-            while (lexer->lookahead != '*' && lexer->lookahead != '#' && lexer->lookahead != '|' && lexer->lookahead != ')')
+            while (lexer->lookahead && lexer->lookahead != '*' && lexer->lookahead != '#' && lexer->lookahead != '|' && lexer->lookahead != ')')
                 advance(lexer);
             if (m_Current != ':')
                 return true;
@@ -499,21 +497,18 @@ private:
             size_t heading_level = 0;
 
             // Keep capturing asterisks and increment the heading level accordingly
-            while (lexer->lookahead == '*')
+            while (lexer->lookahead && lexer->lookahead == '*')
             {
                 advance(lexer);
                 ++heading_level;
             }
 
             // We use the clamp() here to make sure we don't overflow!
-            lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(heading_level, 0UL, 5UL));
+            lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(heading_level, size_t{}, size_t{5}));
         }
-        // We're dealing with one of two things: a marker reference or a drawer reference
+        // We're dealing with a marker reference
         else if (m_Current == '|')
         {
-            if (lexer->lookahead == '|')
-                lexer->result_symbol = m_LastToken = LINK_END_DRAWER_REFERENCE;
-            else
                 lexer->result_symbol = m_LastToken = LINK_END_MARKER_REFERENCE;
         }
         // We're dealing with a generic (loose) link
@@ -521,7 +516,7 @@ private:
             lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
 
         // Until we don't hit the end of the link location keep advancing
-        while (lexer->lookahead != ')')
+        while (lexer->lookahead && lexer->lookahead != ')')
         {
             if (lexer->lookahead == '\n' || !lexer->lookahead)
             {
@@ -595,7 +590,7 @@ private:
             }
             // A [ is a special symbol - it can both mean a todo item and a link
             // Halt the parsing of the paragraph segment if such a thing is encountered
-            else if (m_TagStack.size() == 0 && std::iswspace(m_Current) && lexer->lookahead == '[')
+            else if (m_TagStack.size() == 0 && (std::iswspace(m_Current) || std::iswpunct(m_Current)) && lexer->lookahead == '[')
             {
                 m_LastToken = PARAGRAPH_SEGMENT;
                 lexer->result_symbol = PARAGRAPH_SEGMENT;
@@ -608,8 +603,18 @@ private:
                 break;
         }
 
+        // Mark the end of the token so any subsequent calls to advance() don't get
+        // appended to the result
+        lexer->mark_end(lexer);
+
+        // If the next char is valid then advance again
         if (lexer->lookahead)
             advance(lexer);
+
+        // If we haven't reached EOF then treat the last call to advance() as part of the result too.
+        // We do this because otherwise the parser would read one char past EOF which would mess things up
+        if (!lexer->eof(lexer))
+            lexer->mark_end(lexer);
 
         m_LastToken = PARAGRAPH_SEGMENT;
         lexer->result_symbol = PARAGRAPH_SEGMENT;
@@ -625,7 +630,7 @@ private:
 
 private:
     // Stores the current char rather than the next char
-    unsigned char m_Previous = 0, m_Current = 0;
+    int32_t m_Previous = 0, m_Current = 0;
 
     // The last matched token type (used to detect things like todo items
     // which require an unordered list prefix beforehand)
@@ -638,7 +643,7 @@ private:
     std::vector<uint16_t> m_TagStack;
 
 private:
-    const std::array<unsigned char, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
+    const std::array<int32_t, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
     const std::array<std::pair<unsigned char, TokenType>, 8> s_AttachedModifiers = { std::pair<unsigned char, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', INLINE_CODE } };
 };
 
@@ -679,6 +684,7 @@ extern "C"
 
         auto& tag_stack = scanner->get_tag_stack();
 
+        tag_stack.clear();
         tag_stack.resize(length);
 
         std::copy_n(buffer, length, tag_stack.begin());

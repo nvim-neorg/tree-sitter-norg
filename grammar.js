@@ -12,7 +12,7 @@ module.exports = grammar({
         $._,
 
         $.paragraph_segment,
-        $._standalone_break,
+        $._paragraph_break,
         $.escape_sequence_prefix,
 
         $.heading1_prefix,
@@ -44,9 +44,6 @@ module.exports = grammar({
         $.ordered_list6_prefix,
 
         $.marker_prefix,
-
-        $.drawer_prefix,
-        $.drawer_suffix,
 
         $.todo_item_undone,
         $.todo_item_pending,
@@ -81,7 +78,6 @@ module.exports = grammar({
         $.link_end_heading5_reference,
         $.link_end_heading6_reference,
         $.link_end_marker_reference,
-        $.link_end_drawer_reference,
 
         $.ranged_tag_prefix,
         $.ranged_tag_name_fallback,
@@ -111,7 +107,7 @@ module.exports = grammar({
                 repeat1(
                     prec(2,
                         choice(
-                            $._standalone_break,
+                            $._paragraph_break,
                             $.ranged_tag,
                             $.insertion,
                         )
@@ -123,7 +119,7 @@ module.exports = grammar({
             choice(
                 prec(1,
                     choice(
-                        $._standalone_break,
+                        $._paragraph_break,
                         $._heading,
                         $._detached_modifier,
                         $._tag,
@@ -144,7 +140,7 @@ module.exports = grammar({
                     $.paragraph,
 
                     optional(
-                        $._standalone_break,
+                        $._paragraph_break,
                     )
                 )
             ),
@@ -204,7 +200,6 @@ module.exports = grammar({
                             $.link_end_heading5_reference,
                             $.link_end_heading6_reference,
                             $.link_end_marker_reference,
-                            $.link_end_drawer_reference,
                         )
                     )
                 )
@@ -221,7 +216,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -253,7 +248,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -283,7 +278,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -311,7 +306,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -337,7 +332,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -360,7 +355,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
                 )
             ),
@@ -376,7 +371,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -408,7 +403,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -438,7 +433,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -466,7 +461,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -492,7 +487,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
 
                     repeat(
@@ -515,7 +510,7 @@ module.exports = grammar({
                     ),
 
                     optional(
-                        $._standalone_break
+                        $._paragraph_break
                     ),
                 )
             ),
@@ -539,7 +534,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -577,7 +572,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -614,7 +609,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -650,7 +645,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -685,7 +680,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
 
@@ -719,7 +714,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
 
-                                $._standalone_break,
+                                $._paragraph_break,
                                 $._detached_modifier,
                                 $._tag,
                             )
@@ -1220,45 +1215,12 @@ module.exports = grammar({
                                 $._heading,
                                 $._detached_modifier,
                                 $._tag,
-                                $._standalone_break,
-                            ),
-                        ),
-                    )
-                )
+                                $._paragraph_break,
             ),
-
-        drawer: $ =>
-            choice(
-                seq(
-                    $.drawer_prefix,
-
-                    field(
-                        "title",
-                        $.paragraph_segment,
                     ),
-
-                    field(
-                        "content",
-                        repeat(
-                            choice(
-                                $._paragraph,
-                                $._standalone_break,
                             )
                         )
                     ),
-
-                    field(
-                        "end",
-                        $.drawer_suffix
-                    ),
-                ),
-
-                // Used for preventing annoying errors with incomplete marker definitions
-                alias(
-                    $.drawer_suffix,
-                    "_suffix"
-                )
-            ),
 
         // --------------------------------------------------
         todo_item1: $ =>
@@ -1444,7 +1406,16 @@ module.exports = grammar({
             ),
 
         word: $ =>
-            token.immediate(/[a-zA-Z1-9_\-\+]+/),
+            seq(
+                token(/[a-z0-9_\-\+]+/),
+                token(/[a-zA-Z0-9_\-\+]*/),
+            ),
+
+        capitalized_word: $ =>
+            seq(
+                token(/[A-Z0-9_\-\+]+/),
+                token(/[a-zA-Z0-9_\-\+]*/),
+            ),
 
         insertion: $ =>
             prec.right(0,
@@ -1453,7 +1424,10 @@ module.exports = grammar({
 
                     field(
                         "item",
-                        $.word,
+                        choice(
+                            $.capitalized_word,
+                            $.word
+                        )
                     ),
 
                     choice(
@@ -1481,7 +1455,7 @@ module.exports = grammar({
                     alias(
                         choice(
                             $.paragraph_segment,
-                            $._standalone_break,
+                            $._paragraph_break,
                         ),
                         "_segment",
                     ),
@@ -1544,10 +1518,7 @@ module.exports = grammar({
                         ),
                     ),
 
-                    // alias(
                         $.ranged_tag_end,
-                        // "_end",
-                    // ),
                 )
             ),
 
@@ -1607,7 +1578,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    $._standalone_break,
+                    $._paragraph_break,
                 ),
             ),
 
@@ -1674,7 +1645,6 @@ module.exports = grammar({
             choice(
                 $.quote,
                 $.generic_list,
-                $.drawer,
                 $.insertion,
             ),
       }

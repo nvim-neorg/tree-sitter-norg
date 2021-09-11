@@ -1,0 +1,68 @@
+name: Parser fuzzing
+
+on: [ push, pull_request ]
+
+jobs:
+  fuzz_parser:
+    strategy:
+      fail-fast: false
+    name: Fuzzing
+    runs-on: ubuntu-latest
+    env:
+      CC: clang
+    steps:
+      - name: Install fuzzer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y 2to3 libfuzzer-12-dev
+
+      - name: Prepare tree-sitter
+        uses: actions/checkout@v2
+        with:
+          repository: tree-sitter/tree-sitter
+
+      - name: Prepare tree-sitter-norg
+        uses: actions/checkout@v2
+        with:
+          path: test/fixtures/grammars/norg
+
+      - name: Prepare corpuses
+        uses: actions/checkout@v2
+        with:
+          path: out/results/corpus
+          ref: fuzz_corpuses
+
+      - name: Make python fuzzer v3
+        run: |
+          2to3 -w test/fuzz/gen-dict.py
+          sed 's/ord(b)/b/' -i test/fuzz/gen-dict.py
+
+      - name: Build fuzzer
+        run: |
+          export LIB_FUZZER_PATH=/usr/lib/llvm-12/lib/libFuzzer.a
+          ./script/build-fuzzers norg
+
+      - name: Run fuzzer
+        run: |
+          cd out/results
+          ../norg_fuzzer -dict=../norg.dict -max_total_time=7200 -timeout=1 -rss_limit_mb=256 ./corpus
+
+      - name: Check corpuses
+        run: |
+          cd out/results/corpus
+          git config user.name "Github Actions bot"
+          git config user.email "<>"
+          git add .
+          git commit -m "[Action] Add new corpuses"
+          git push origin fuzz_corpuses
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: fuzzing_results
+          path: |
+            out/results/*
+            !out/results/*.log
+            !out/results/corpus/*
+
+
