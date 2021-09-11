@@ -1386,7 +1386,16 @@ module.exports = grammar({
             ),
 
         word: $ =>
-            token.immediate(/[a-zA-Z0-9_\-\+]+/),
+            seq(
+                token(/[a-z0-9_\-\+]+/),
+                token(/[a-zA-Z0-9_\-\+]*/),
+            ),
+
+        capitalized_word: $ =>
+            seq(
+                token(/[A-Z0-9_\-\+]+/),
+                token(/[a-zA-Z0-9_\-\+]*/),
+            ),
 
         insertion: $ =>
             prec.right(0,
@@ -1395,7 +1404,10 @@ module.exports = grammar({
 
                     field(
                         "item",
-                        $.word,
+                        choice(
+                            $.capitalized_word,
+                            $.word
+                        )
                     ),
 
                     choice(
