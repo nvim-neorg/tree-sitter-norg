@@ -1,33 +1,33 @@
 {
-  	"name": "tree-sitter-norg",
-  	"version": "0.1.0",
-  	"description": "A TreeSitter Parser For The NFF",
-  	"main": "bindings/node",
-  	"scripts": {
-		"gen": "tree-sitter generate && node-gyp build",
-    	"test": "tree-sitter test",
-    	"parse": "tree-sitter parse"
-  	},
-  	"keywords": [
-    	"neorg",
-    	"norg",
-    	"treesitter",
-    	"tree-sitter"
-  	],
-  	"author": "Vhyrro",
-  	"license": "MIT",
-  	"dependencies": {
-    	"nan": "^2.14.2"
-  	},
-  	"devDependencies": {
-    	"tree-sitter-cli": "^0.20.0"
-  	},
-	"tree-sitter": [
-    	{
-      		"scope": "document.norg",
-      		"file-types": [
-        		"norg"
-      		]
-    	}
-  	]
+    "name": "tree-sitter-norg",
+    "version": "0.1.0",
+    "description": "A TreeSitter Parser For The NFF",
+    "main": "bindings/node",
+    "scripts": {
+        "gen": "tree-sitter generate && node-gyp build",
+        "test": "tree-sitter test",
+        "parse": "tree-sitter parse"
+    },
+    "keywords": [
+        "neorg",
+        "norg",
+        "treesitter",
+        "tree-sitter"
+    ],
+    "author": "Vhyrro",
+    "license": "MIT",
+    "dependencies": {
+        "nan": "^2.14.2"
+    },
+    "devDependencies": {
+        "tree-sitter-cli": "^0.20.0"
+    },
+    "tree-sitter": [
+        {
+            "scope": "document.norg",
+            "file-types": [
+                "norg"
+            ]
+        }
+    ]
 }

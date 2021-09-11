@@ -1,2 +1,6 @@
 node_modules
-bindings
+build
+Cargo.lock
+package-lock.json
+yarn.lock
+*.log
