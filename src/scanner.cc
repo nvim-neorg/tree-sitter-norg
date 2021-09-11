@@ -128,9 +128,9 @@ public:
 
             if (m_TagStack.empty())
             {
-            lexer->result_symbol = ESCAPE_SEQUENCE;
-            return true;
-        }
+                lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
+                return true;
+            }
         }
 
         // If we are not in a tag and we have a square bracket opening then try matching
@@ -141,7 +141,7 @@ public:
 
             if (lexer->lookahead == ']')
             {
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
+                lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
                 return true;
             }
 
@@ -155,15 +155,15 @@ public:
                 // ([ ])
                 case ']':
                     advance(lexer);
-                    lexer->result_symbol = TODO_ITEM_UNDONE;
+                    lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
                     return true;
                 // We're dealing with a pending item ([*])
                 case '*':
-                    lexer->result_symbol = TODO_ITEM_PENDING;
+                    lexer->result_symbol = m_LastToken = TODO_ITEM_PENDING;
                     break;
                 // We're dealing with a done item ([x])
                 case 'x':
-                    lexer->result_symbol = TODO_ITEM_DONE;
+                    lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
                     break;
             }
 
@@ -195,7 +195,7 @@ public:
         else if (lexer->lookahead == '\n')
         {
             advance(lexer);
-            lexer->result_symbol = PARAGRAPH_BREAK;
+            lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
             return true;
         }
 
@@ -265,7 +265,7 @@ public:
             else if (lexer->lookahead == '$')
             {
                 advance(lexer);
-                lexer->result_symbol = CARRYOVER_TAG;
+                lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
                 return true;
             }
 
@@ -284,7 +284,7 @@ public:
                 }
                 else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
                 {
-                    lexer->result_symbol = WEAK_PARAGRAPH_DELIMITER;
+                    lexer->result_symbol = m_LastToken = WEAK_PARAGRAPH_DELIMITER;
                     return true;
                 }
 
@@ -301,13 +301,13 @@ public:
                 {
                     if (m_ParsedChars >= 3)
                     {
-                        lexer->result_symbol = STRONG_PARAGRAPH_DELIMITER;
+                        lexer->result_symbol = m_LastToken = STRONG_PARAGRAPH_DELIMITER;
                         return true;
                     }
                     else
                     {
                         advance(lexer);
-                        lexer->result_symbol = PARAGRAPH_SEGMENT;
+                        lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
                         return true;
                     }
                 }
@@ -374,9 +374,9 @@ private:
                 while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
                     advance(lexer);
 
-                    TokenType result = terminate_at.second[clamp(i, size_t{}, terminate_at.second.size()) - 1];
+                TokenType result = terminate_at.second[clamp(i, size_t{}, terminate_at.second.size()) - 1];
 
-                lexer->result_symbol = result;
+                lexer->result_symbol = m_LastToken = result;
 
                 return result;
             }
@@ -399,7 +399,7 @@ private:
                 while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
                     advance(lexer);
 
-                lexer->result_symbol = result;
+                lexer->result_symbol = m_LastToken = result;
 
                 m_LastToken = result;
 
@@ -415,10 +415,10 @@ private:
 
     TokenType check_attached(TSLexer* lexer, bool behind)
     {
-        unsigned char& lookahead = behind ? m_Current : (unsigned char&)lexer->lookahead;
-        unsigned char& current = behind ? m_Previous : m_Current;
+        int32_t& lookahead = behind ? m_Current : lexer->lookahead;
+        int32_t& current = behind ? m_Previous : m_Current;
 
-        const auto attached_modifier = std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(), [&](const std::pair<unsigned char, TokenType>& pair) { return pair.first == lookahead; });
+        const auto attached_modifier = std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(), [&](const std::pair<int32_t, TokenType>& pair) { return pair.first == lookahead; });
 
         auto conditional_advance = [&](TSLexer* lx) {
             if (!behind)
@@ -431,6 +431,9 @@ private:
         if (attached_modifier != s_AttachedModifiers.end())
         {
             advance(lexer);
+
+            if (std::iswspace(lookahead))
+                return NONE;
 
             if (lookahead == attached_modifier->first)
             {
@@ -448,7 +451,7 @@ private:
                     conditional_advance(lexer);
                     if (lookahead == '\n')
                     {
-                        lexer->result_symbol = PARAGRAPH_SEGMENT;
+                        lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
                         return attached_modifier->second;
                     }
                 }
@@ -465,7 +468,7 @@ private:
                     if (lexer->lookahead == '\n')
                         advance(lexer);
 
-                    lexer->result_symbol = attached_modifier->second;
+                    lexer->result_symbol = m_LastToken = attached_modifier->second;
                     return attached_modifier->second;
                 }
             }
@@ -520,7 +523,7 @@ private:
         {
             if (lexer->lookahead == '\n' || !lexer->lookahead)
             {
-                lexer->result_symbol = LINK_END_GENERIC;
+                lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
                 break;
             }
 
@@ -561,8 +564,7 @@ private:
             // to allow the escape sequence to get parsed
             if (lexer->lookahead == '\\')
             {
-                m_LastToken = PARAGRAPH_SEGMENT;
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
+                lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
                 return true;
             }
 
@@ -570,11 +572,11 @@ private:
             {
                 advance(lexer);
                 if (std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(),
-                    [&](const std::pair<unsigned char, TokenType>& pair)
+                    [&](const std::pair<int32_t, TokenType>& pair)
                         { return pair.first == lexer->lookahead; })
                             != s_AttachedModifiers.end())
                 {
-                    lexer->result_symbol = PARAGRAPH_SEGMENT;
+                    lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
                     return true;
                 }
             }
@@ -592,8 +594,7 @@ private:
             // Halt the parsing of the paragraph segment if such a thing is encountered
             else if (m_TagStack.size() == 0 && (std::iswspace(m_Current) || std::iswpunct(m_Current)) && lexer->lookahead == '[')
             {
-                m_LastToken = PARAGRAPH_SEGMENT;
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
+                lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
                 return true;
             }
 
@@ -616,8 +617,7 @@ private:
         if (!lexer->eof(lexer))
             lexer->mark_end(lexer);
 
-        m_LastToken = PARAGRAPH_SEGMENT;
-        lexer->result_symbol = PARAGRAPH_SEGMENT;
+        lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
 
         return true;
     }
@@ -644,7 +644,7 @@ private:
 
 private:
     const std::array<int32_t, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
-    const std::array<std::pair<unsigned char, TokenType>, 8> s_AttachedModifiers = { std::pair<unsigned char, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', INLINE_CODE } };
+    const std::array<std::pair<int32_t, TokenType>, 8> s_AttachedModifiers = { std::pair<int32_t, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', INLINE_CODE } };
 };
 
 extern "C"
