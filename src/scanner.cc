@@ -119,7 +119,7 @@ public:
         if (!lexer->lookahead || lexer->eof(lexer))
             return false;
 
-        lexer->result_symbol = NONE;
+        lexer->result_symbol = m_LastToken = NONE;
 
         // Check for an escape seqence (e.g. "\*")
         if (lexer->lookahead == '\\')
@@ -400,8 +400,6 @@ private:
                     advance(lexer);
 
                 lexer->result_symbol = m_LastToken = result;
-
-                m_LastToken = result;
 
                 return result;
             }
