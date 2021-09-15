@@ -134,12 +134,12 @@ public:
         }
 
         // If we are not in a tag and we have a square bracket opening then try matching
-        // either a todo item or beginning of a list
+        // either a todo item or beginning of a link
         if (m_TagStack.empty() && lexer->lookahead == '[')
         {
             advance(lexer);
 
-            // If we instantly close the braket (i.e. the )
+            // If we instantly close the bracket (i.e. "[]") then treat it as an empty link beginning
             if (lexer->lookahead == ']')
             {
                 advance(lexer);
@@ -194,7 +194,7 @@ public:
             return true;
         }
         // Otherwise make sure to check for the existence of an opening link location
-        else if (m_TagStack.size() == 0 && lexer->lookahead == '(')
+        else if (m_TagStack.empty() && lexer->lookahead == '(')
             return check_link(lexer);
         // Otherwise just check whether or not we're dealing with a newline and return PARAGRAPH_BREAK if we are
         else if (lexer->lookahead == '\n')
@@ -283,7 +283,7 @@ public:
             }
 
             // Check for these only if we are not inside of a tag ("@example")
-            if (m_TagStack.size() == 0)
+            if (m_TagStack.empty())
             {
                 // The idea of the check_detached function is as follows:
                 // We check for the '*' character and depending on how many we encounter we return a different token
@@ -352,7 +352,7 @@ public:
         }
 
         // If we are not in a ranged tag then we should also check for potential attached modifiers, like *this*.
-        if (m_TagStack.size() == 0 && (check_attached(lexer, false) != NONE))
+        if (m_TagStack.empty() && (check_attached(lexer, false) != NONE))
             return true;
 
         // If we haven't been able to match anything then we'll just casually return a paragraph instead
@@ -636,9 +636,19 @@ private:
      */
     bool parse_text(TSLexer* lexer)
     {
+        // If we are in a tag then don't do any special parsing - simply read until a newline is encountered
+        if (!m_TagStack.empty())
+        {
+            while (lexer->lookahead && lexer->lookahead != '\n')
+                advance(lexer);
+            
+            lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+            return true;
+        }
+
         while (lexer->lookahead)
         {
-            if (m_TagStack.size() > 0 && m_IndentationLevel < m_TagStack.back())
+            if (m_IndentationLevel < m_TagStack.back())
                 return false;
 
             // If we have an escape sequence in the middle of the paragraph then terminate the paragraph
@@ -673,7 +683,7 @@ private:
             }
             // A [ is a special symbol - it can both mean a todo item and a link
             // Halt the parsing of the paragraph segment if such a thing is encountered
-            else if (m_TagStack.size() == 0 && (std::iswspace(m_Current) || std::iswpunct(m_Current)) && lexer->lookahead == '[')
+            else if ((std::iswspace(m_Current) || std::iswpunct(m_Current)) && lexer->lookahead == '[')
             {
                 lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
                 return true;
