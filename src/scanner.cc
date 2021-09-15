@@ -463,11 +463,15 @@ private:
      */
     TokenType check_attached(TSLexer* lexer, bool behind)
     {
+        // Bind the `lookahead` and `current` values
         int32_t& lookahead = behind ? m_Current : lexer->lookahead;
         int32_t& current = behind ? m_Previous : m_Current;
 
+        // Return an iterator to an attached modifier if one can be found
         const auto attached_modifier = std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(), [&](const std::pair<int32_t, TokenType>& pair) { return pair.first == lookahead; });
 
+        // This will advance the lexer forward only if `behind` is false
+        // If it's true then we may end up accidentally advancing too far
         auto conditional_advance = [&](TSLexer* lx) {
             if (!behind)
             {
@@ -476,30 +480,42 @@ private:
             }
         };
 
+        // Is our iterator valid? If it is then that means we've found an opening attached modifier
         if (attached_modifier != s_AttachedModifiers.end())
         {
             advance(lexer);
 
+            // If the next char is a whitespace character then it doesn't count 
             if (std::iswspace(lookahead))
                 return NONE;
 
+            // If we have another attached modifier of the same type right after then do not count it
+            // e.g. if our input is "**" it'll get discarded and treated as a PARAGRAPH_SEGMENT instead
             if (lookahead == attached_modifier->first)
             {
                 conditional_advance(lexer);
                 return NONE;
             }
 
+            lexer->mark_end(lexer);
+
+            // While our lookahead is not equal to a potential closing modifier
             while (lookahead != attached_modifier->first)
             {
+                // If we've encounted the end of our file then bail
                 if (!lookahead)
                 {
                     return NONE;
                 } else if (lookahead == '\n')
                 {
                     conditional_advance(lexer);
+
+                    // If this check succeeds then we've encountered a \n\n sequence
+                    // and as a consequence should terminate the attached modifier
                     if (lookahead == '\n')
                     {
                         lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                        lexer->mark_end(lexer);
                         return attached_modifier->second;
                     }
                 }
@@ -507,14 +523,31 @@ private:
                 advance(lexer);
             }
 
+            // If the previous char before the closing modifier is not whitespace
+            // then
             if (!current || std::isalnum(current) || std::ispunct(current))
             {
                 conditional_advance(lexer);
 
+                // If the next char is whitespace then we've successfully matched our modifier!
                 if (std::iswspace(lookahead) || std::ispunct(lookahead))
                 {
+                    // Mark the end of this sequence
+                    // We do this as to not accidentally read past EOF
+                    lexer->mark_end(lexer);
+
+                    // If the next character is a newline then
+                    // read the newline. We do this because otherwise
+                    // the parser bugs out and starts a new paragraph
                     if (lexer->lookahead == '\n')
+                    {
                         advance(lexer);
+
+                        // If the next char is not EOF then
+                        // expand the token to include the newline too
+                        if (lexer->lookahead)
+                            lexer->mark_end(lexer);
+                    }
 
                     lexer->result_symbol = m_LastToken = attached_modifier->second;
                     return attached_modifier->second;
@@ -616,9 +649,9 @@ private:
                 return true;
             }
 
-            if (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+            if (m_Current == ' ' || m_Current == '\t')
             {
-                advance(lexer);
+                // advance(lexer);
                 if (std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(),
                     [&](const std::pair<int32_t, TokenType>& pair)
                         { return pair.first == lexer->lookahead; })
