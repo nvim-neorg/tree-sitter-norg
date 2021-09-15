@@ -1,8 +1,9 @@
 /*
 * Known bugs:
 * Placing a link description at the end of an unordered list element breaks the generic_list
-* m_Whitespace is not preserved properly and does not fully function, causing errors
-* Forgot to add support for ` inline code blocks
+* TODO:
+* Instead of having a paragraph_segment be the smallest unit of text divide everything up into words
+* instead. Expose paragraph_break vs line_break. Allow for more granular control.
 */
 
 module.exports = grammar({

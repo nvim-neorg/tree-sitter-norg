@@ -139,9 +139,11 @@ public:
         {
             advance(lexer);
 
+            // If we instantly close the braket (i.e. the )
             if (lexer->lookahead == ']')
             {
-                lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                advance(lexer);
+                lexer->result_symbol = m_LastToken = LINK_BEGIN;
                 return true;
             }
 
@@ -165,9 +167,12 @@ public:
                 case 'x':
                     lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
                     break;
+                // We are simply dealing with a link beginning ([something])
+                default:
+                    lexer->result_symbol = m_LastToken = LINK_BEGIN;
+                    break;
             }
 
-            // Move past the closing ] character
             advance(lexer);
 
             while (lexer->lookahead)
@@ -191,7 +196,7 @@ public:
         // Otherwise make sure to check for the existence of an opening link location
         else if (m_TagStack.size() == 0 && lexer->lookahead == '(')
             return check_link(lexer);
-        // Otherwise just check whether or not we're dealing with a newline and return STANDALONE_BREAK if we are
+        // Otherwise just check whether or not we're dealing with a newline and return PARAGRAPH_BREAK if we are
         else if (lexer->lookahead == '\n')
         {
             advance(lexer);
@@ -204,9 +209,10 @@ public:
         {
             m_IndentationLevel = 0;
 
-            // Skip all leading whitespace
+            // Skip all leading whitespace and measure the indentation level
             while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
             {
+                // If we are dealing with a tab then add an extra level of indentation
                 if (lexer->lookahead == '\t')
                     ++m_IndentationLevel;
 
@@ -215,12 +221,17 @@ public:
                 skip(lexer);
             }
 
+            // We are dealing with a ranged tag (@something)
             if (lexer->lookahead == '@')
             {
                 advance(lexer);
 
+                // Mark the end of the token here
+                // We do this because we only want the returned token to be part of
+                // the `@` symbol, not the symbol + the name
                 lexer->mark_end(lexer);
 
+                // These sets of checks check whether the tag is `@end`
                 if (lexer->lookahead == 'e')
                 {
                     advance(lexer);
@@ -258,6 +269,8 @@ public:
                     }
                 }
 
+                // This is a fallback. If the tag ends up not being `@end`
+                // then just push back the indentation level and return
                 lexer->result_symbol = m_LastToken = RANGED_TAG;
                 m_TagStack.push_back(m_IndentationLevel);
                 return true;
@@ -269,19 +282,42 @@ public:
                 return true;
             }
 
+            // Check for these only if we are not inside of a tag ("@example")
             if (m_TagStack.size() == 0)
             {
+                // The idea of the check_detached function is as follows:
+                // We check for the '*' character and depending on how many we encounter we return a different token
+                // If we encounter 1 '*' char then return heading1, if we encounter two in a row then return heading2, you get the idea.
+                // If we encounter more than the given amount of fallbacks then the last fallback will always be chosen. This means
+                // that if we have 7 consecutive '*' chars then we will still fall back to the HEADING6 token
                 if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, { '*' }) != NONE)
                     return true;
 
+                // Check for the existence of quotes
                 if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6 | NONE, { '>' }) != NONE)
                     return true;
 
+                // Check for the existence of an unordered list element.
+                // The last parameter tells the neorg parser "hey parse as many '-' chars as possible BUT if you encounter a '>' char at the end of the parsed string then
+                // return an UNORDERED_LINK instead".
                 if (check_detached(lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE, { '-' },
                             { '>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 | UNORDERED_LINK4 | UNORDERED_LINK5 | UNORDERED_LINK6 | NONE }) != NONE)
                 {
                     return true;
                 }
+                // If we end up failing to parse an unordered modifier not all hope is lost.
+                // We also have a weak paragraph delimiter which looks like this:
+                // ---
+                // Detached modifiers are valid only if there is at least one bit of whitespace after themselves.
+                // A delimiting modifier strictly does not allow whitespace after itself. That's how we differentiate
+                // between the two. m_ParsedChars is incremented every time `check_detached` successfully parses a character.
+                // We can use this to our advantage! The parser will encounter 3 consecutive '-' chars and will parse all the way up until
+                // the end. It will then try to return UNORDERED_LIST3 but will fail because there won't be any whitespace after the 3 chars.
+                // It will then return NONE. Even though it may have failed the m_ParsedChars value has still been modified! If m_ParsedChars is 3
+                // then that means we have parsed '---' and hence we return a WEAK_PARAGRAPH_DELIMITER. This check is even further enforced by checking
+                // if the next char is a newline, which makes sense considering the parser head:
+                // ---
+                //   ^ will be here, and lexer->lookahead will return '\n'
                 else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
                 {
                     lexer->result_symbol = m_LastToken = WEAK_PARAGRAPH_DELIMITER;
@@ -297,6 +333,7 @@ public:
 
                 if (check_detached(lexer, INSERTION, { '=' }) != NONE)
                     return true;
+                // TODO: Comment
                 else if (lexer->lookahead == '\n')
                 {
                     if (m_ParsedChars >= 3)
@@ -314,18 +351,22 @@ public:
             }
         }
 
+        // If we are not in a ranged tag then we should also check for potential attached modifiers, like *this*.
         if (m_TagStack.size() == 0 && (check_attached(lexer, false) != NONE))
             return true;
 
-        // Match paragraphs
+        // If we haven't been able to match anything then we'll just casually return a paragraph instead
         if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
             return parse_text(lexer);
 
+        // This bit shouldn't realistically happen but we need to make sure that all control paths
+        // return some value
         return false;
     }
 
     std::vector<uint16_t>& get_tag_stack() noexcept { return m_TagStack; }
 private:
+    // Skips the next character without including it in the final result
     void skip(TSLexer* lexer)
     {
         m_Previous = m_Current;
@@ -333,6 +374,7 @@ private:
         return lexer->advance(lexer, true);
     }
 
+    // Advances the lexer forward. The char that was advanced will be returned in the final result
     void advance(TSLexer* lexer)
     {
         m_Previous = m_Current;
@@ -340,6 +382,7 @@ private:
         return lexer->advance(lexer, false);
     }
 
+    // An alternate implementation for `check_detached` in case you don't have a bunch of chained results
     template <size_t Size = 1>
     inline TokenType check_detached(TSLexer* lexer, TokenType result, const std::array<int32_t, Size>& expected, std::pair<char, TokenType> terminate_at = { 0, NONE })
     {
@@ -354,7 +397,7 @@ private:
      */
     template <size_t Size = 1>
     [[nodiscard]]
-        TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<int32_t, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
+    TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<int32_t, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
     {
         static_assert(Size > 0, "check_detached Size template must be greater than 0");
 
@@ -383,7 +426,7 @@ private:
 
             // If the next character is not one we expect then break
             // We use clamp() here to prevent overflow and to make the last element of the expected array the fallback
-                if (lexer->lookahead != expected[clamp(i, size_t{}, Size - 1)])
+            if (lexer->lookahead != expected[clamp(i, size_t{}, Size - 1)])
                 break;
 
             advance(lexer);
@@ -405,12 +448,19 @@ private:
             }
         }
 
+        // If we've only parsed one character and instantly failed then we might be dealing with
+        // an attached modifier!
         if (m_ParsedChars == 1)
             return check_attached(lexer, true);
         else
             return NONE;
     }
 
+    /*
+     * Checks for the existence of an attached modifier
+     * @param lexer - a pointer to the treesitter lexer
+     * @param behind - if true the parser will use m_Current instead of lexer->lookahead as its main lookahead source
+     */
     TokenType check_attached(TSLexer* lexer, bool behind)
     {
         int32_t& lookahead = behind ? m_Current : lexer->lookahead;
