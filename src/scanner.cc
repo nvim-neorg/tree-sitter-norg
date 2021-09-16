@@ -648,7 +648,7 @@ private:
 
         while (lexer->lookahead)
         {
-            if (m_IndentationLevel < m_TagStack.back())
+            if (!m_TagStack.empty() && m_IndentationLevel < m_TagStack.back())
                 return false;
 
             // If we have an escape sequence in the middle of the paragraph then terminate the paragraph
@@ -661,7 +661,6 @@ private:
 
             if (m_Current == ' ' || m_Current == '\t')
             {
-                // advance(lexer);
                 if (std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(),
                     [&](const std::pair<int32_t, TokenType>& pair)
                         { return pair.first == lexer->lookahead; })
