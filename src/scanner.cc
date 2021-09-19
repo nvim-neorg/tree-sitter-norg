@@ -85,7 +85,9 @@ enum TokenType
 
     CARRYOVER_TAG,
 
-    DEFINITION,
+    SINGLE_DEFINITION,
+    MULTI_DEFINITION,
+    MULTI_DEFINITION_SUFFIX,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -288,8 +290,13 @@ public:
                 if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
                     return true;
 
-                if (check_detached(lexer, DEFINITION, { ':' }) != NONE)
+                if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, { ':' }) != NONE)
                     return true;
+                else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+                {
+                    lexer->result_symbol = MULTI_DEFINITION_SUFFIX;
+                    return true;
+                }
 
                 if (check_detached(lexer, INSERTION, { '=' }) != NONE)
                     return true;

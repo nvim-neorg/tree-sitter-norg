@@ -83,7 +83,9 @@ module.exports = grammar({
 
         $.carryover_tag_prefix,
 
-        $.definition_prefix,
+        $.single_definition_prefix,
+        $.multi_definition_prefix,
+        $.multi_definition_suffix,
       ],
 
       rules: {
@@ -113,6 +115,7 @@ module.exports = grammar({
                         $._paragraph_break,
                         $._heading,
                         $._detached_modifier,
+                        $._definition,
                         $._tag,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
                         $.marker,
@@ -518,6 +521,7 @@ module.exports = grammar({
 
                                 $._paragraph_break,
                                 $._detached_modifier,
+                                $._definition,
                                 $._tag,
 
                                 $.heading2,
@@ -556,6 +560,7 @@ module.exports = grammar({
 
                                 $._paragraph_break,
                                 $._detached_modifier,
+                                $._definition,
                                 $._tag,
 
                                 $.heading3,
@@ -593,6 +598,7 @@ module.exports = grammar({
 
                                 $._paragraph_break,
                                 $._detached_modifier,
+                                $._definition,
                                 $._tag,
 
                                 $.heading4,
@@ -629,6 +635,7 @@ module.exports = grammar({
 
                                 $._paragraph_break,
                                 $._detached_modifier,
+                                $._definition,
                                 $._tag,
 
                                 $.heading5,
@@ -664,6 +671,7 @@ module.exports = grammar({
 
                                 $._paragraph_break,
                                 $._detached_modifier,
+                                $._definition,
                                 $._tag,
 
                                 $.heading6,
@@ -698,6 +706,7 @@ module.exports = grammar({
 
                                 $._paragraph_break,
                                 $._detached_modifier,
+                                $._definition,
                                 $._tag,
                             )
                         )
@@ -1196,6 +1205,7 @@ module.exports = grammar({
                                 $.strong_paragraph_delimiter,
                                 $._heading,
                                 $._detached_modifier,
+                                $._definition,
                                 $._tag,
                                 $._paragraph_break,
                             ),
@@ -1430,9 +1440,9 @@ module.exports = grammar({
                 )
             ),
 
-        definition: $ =>
+        single_definition: $ =>
             seq(
-                $.definition_prefix,
+                $.single_definition_prefix,
 
                 field(
                     "title",
@@ -1443,6 +1453,42 @@ module.exports = grammar({
                     "definition",
                     $.paragraph
                 ),
+            ),
+
+        multi_definition: $ =>
+            choice(
+                seq(
+                    $.multi_definition_prefix,
+
+                    field(
+                        "title",
+                        $.paragraph_segment,
+                    ),
+
+                    field(
+                        "content",
+                        repeat(
+                            choice(
+                                $._paragraph,
+                                $._paragraph_break,
+
+                                $._detached_modifier,
+                                $._tag,
+                            )
+                        )
+                    ),
+
+                    // Used for preventing annoying errors with incomplete marker definitions
+                    field(
+                        "end",
+                        $.multi_definition_suffix
+                    ),
+                ),
+
+                alias(
+                    $.multi_definition_suffix,
+                    "_suffix"
+                )
             ),
 
         // TODO: Comment scanner code
@@ -1534,6 +1580,7 @@ module.exports = grammar({
                             repeat1(
                                 choice(
                                     $._detached_modifier,
+                                    $._definition,
                                     $._heading,
                                     $.ranged_tag,
                                     $.marker,
@@ -1637,13 +1684,21 @@ module.exports = grammar({
                 $.heading6,
             ),
 
-        // A list of detached modifiers (excluding headings, those belong in the $._heading group)
+        // definitions are in a separate group and not part of _detached_modifier
+        // because this allows us to nest the _detached_modifier group within
+        // multi-paragraph definitions (but not nest definitions themselves)
+        _definition: $ =>
+            choice(
+                $.single_definition,
+                $.multi_definition,
+            ),
+
+        // A list of detached modifiers (excluding headings and definitons)
         _detached_modifier: $ =>
             choice(
                 $.quote,
                 $.generic_list,
                 $.insertion,
-                $.definition,
             ),
       }
 });
