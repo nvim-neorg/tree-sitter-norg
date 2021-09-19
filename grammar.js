@@ -82,6 +82,8 @@ module.exports = grammar({
         $.ranged_tag_end_prefix,
 
         $.carryover_tag_prefix,
+
+        $.definition_prefix,
       ],
 
       rules: {
@@ -1428,6 +1430,21 @@ module.exports = grammar({
                 )
             ),
 
+        definition: $ =>
+            seq(
+                $.definition_prefix,
+
+                field(
+                    "title",
+                    $.paragraph_segment
+                ),
+
+                field(
+                    "definition",
+                    $.paragraph
+                ),
+            ),
+
         // TODO: Comment scanner code
         ranged_tag_content: $ =>
             repeat1(
@@ -1626,6 +1643,7 @@ module.exports = grammar({
                 $.quote,
                 $.generic_list,
                 $.insertion,
+                $.definition,
             ),
       }
 });

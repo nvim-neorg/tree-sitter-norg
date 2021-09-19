@@ -3012,6 +3012,31 @@
         ]
       }
     },
+    "definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "definition_prefix"
+        },
+        {
+          "type": "FIELD",
+          "name": "title",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "definition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph"
+          }
+        }
+      ]
+    },
     "ranged_tag_content": {
       "type": "REPEAT1",
       "content": {
@@ -3412,6 +3437,10 @@
         {
           "type": "SYMBOL",
           "name": "insertion"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "definition"
         }
       ]
     }
@@ -3668,6 +3697,10 @@
     {
       "type": "SYMBOL",
       "name": "carryover_tag_prefix"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "definition_prefix"
     }
   ],
   "inline": [],

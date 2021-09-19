@@ -84,6 +84,8 @@ enum TokenType
     RANGED_TAG_END,
 
     CARRYOVER_TAG,
+
+    DEFINITION,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -284,6 +286,9 @@ public:
                     return true;
 
                 if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
+                    return true;
+
+                if (check_detached(lexer, DEFINITION, { ':' }) != NONE)
                     return true;
 
                 if (check_detached(lexer, INSERTION, { '=' }) != NONE)
@@ -557,7 +562,7 @@ private:
     std::vector<size_t> m_TagStack;
 
 private:
-    const std::array<int32_t, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
+    const std::array<int32_t, 7> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':' };
 };
 
 extern "C"

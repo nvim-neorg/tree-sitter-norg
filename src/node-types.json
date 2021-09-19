@@ -39,6 +39,10 @@
         "required": true,
         "types": [
           {
+            "type": "definition",
+            "named": true
+          },
+          {
             "type": "generic_list",
             "named": true
           },
@@ -101,6 +105,42 @@
     }
   },
   {
+    "type": "definition",
+    "named": true,
+    "fields": {
+      "definition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "title": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "definition_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "document",
     "named": true,
     "fields": {},
@@ -129,6 +169,10 @@
       "types": [
         {
           "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "definition",
           "named": true
         },
         {
@@ -375,6 +419,10 @@
             "named": true
           },
           {
+            "type": "definition",
+            "named": true
+          },
+          {
             "type": "generic_list",
             "named": true
           },
@@ -455,6 +503,10 @@
             "named": true
           },
           {
+            "type": "definition",
+            "named": true
+          },
+          {
             "type": "generic_list",
             "named": true
           },
@@ -531,6 +583,10 @@
             "named": true
           },
           {
+            "type": "definition",
+            "named": true
+          },
+          {
             "type": "generic_list",
             "named": true
           },
@@ -603,6 +659,10 @@
             "named": true
           },
           {
+            "type": "definition",
+            "named": true
+          },
+          {
             "type": "generic_list",
             "named": true
           },
@@ -671,6 +731,10 @@
             "named": true
           },
           {
+            "type": "definition",
+            "named": true
+          },
+          {
             "type": "generic_list",
             "named": true
           },
@@ -732,6 +796,10 @@
         "types": [
           {
             "type": "carryover_tag_set",
+            "named": true
+          },
+          {
+            "type": "definition",
             "named": true
           },
           {
@@ -900,6 +968,10 @@
         "types": [
           {
             "type": "carryover_tag_set",
+            "named": true
+          },
+          {
+            "type": "definition",
             "named": true
           },
           {
@@ -2905,6 +2977,10 @@
   },
   {
     "type": "any_char",
+    "named": true
+  },
+  {
+    "type": "definition_prefix",
     "named": true
   },
   {
