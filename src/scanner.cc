@@ -189,7 +189,7 @@ public:
                 advance(lexer);
             }
 
-            return true;
+            return lexer->lookahead != 0;
         }
         // Otherwise make sure to check for the existence of an opening link location
         else if (m_TagStack.size() == 0 && lexer->lookahead == '(')
