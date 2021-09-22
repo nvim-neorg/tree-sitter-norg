@@ -115,7 +115,7 @@ public:
         // Are we at the end of file? If so, bail
         if (!lexer->lookahead || lexer->eof(lexer))
         {
-            skip(lexer);
+            advance(lexer);
             return false;
         }
 
@@ -165,6 +165,9 @@ public:
                 case 'x':
                     lexer->result_symbol = TODO_ITEM_DONE;
                     break;
+                case '\0':
+                    advance(lexer);
+                    return false;
             }
 
             // Move past the closing ] character
