@@ -508,6 +508,13 @@ private:
             // to allow the escape sequence to get parsed
             if (lexer->lookahead == '\\')
             {
+                lexer->mark_end(lexer);
+
+                advance(lexer);
+
+                if (!lexer->lookahead)
+                    continue;
+
                 m_LastToken = PARAGRAPH_SEGMENT;
                 lexer->result_symbol = PARAGRAPH_SEGMENT;
                 return true;
