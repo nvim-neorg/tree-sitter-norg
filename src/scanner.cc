@@ -110,6 +110,8 @@ class Scanner
 public:
     bool scan(TSLexer* lexer, const bool* valid_symbols)
     {
+        lexer->result_symbol = NONE;
+
         // Are we at the end of file? If so, bail
         if (!lexer->lookahead || lexer->eof(lexer))
         {
@@ -117,18 +119,18 @@ public:
             return false;
         }
 
-        lexer->result_symbol = NONE;
-
         // Check for an escape seqence (e.g. "\*")
         if (lexer->lookahead == '\\')
         {
             advance(lexer);
 
-            if (m_TagStack.empty())
+            if (m_TagStack.empty() && lexer->lookahead)
             {
                 lexer->result_symbol = ESCAPE_SEQUENCE;
                 return true;
             }
+            else
+                return false;
         }
 
         // If we are not in a tag and we have a square bracket opening then try matching
