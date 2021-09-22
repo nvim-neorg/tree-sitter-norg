@@ -112,7 +112,10 @@ public:
     {
         // Are we at the end of file? If so, bail
         if (!lexer->lookahead || lexer->eof(lexer))
+        {
+            skip(lexer);
             return false;
+        }
 
         lexer->result_symbol = NONE;
 
