@@ -85,6 +85,10 @@ enum TokenType
 
     CARRYOVER_TAG,
 
+    SINGLE_DEFINITION,
+    MULTI_DEFINITION,
+    MULTI_DEFINITION_SUFFIX,
+
     BOLD,
     ITALIC,
     STRIKETHROUGH,
@@ -115,22 +119,27 @@ class Scanner
 public:
     bool scan(TSLexer* lexer, const bool* valid_symbols)
     {
+        lexer->result_symbol = NONE;
+
         // Are we at the end of file? If so, bail
         if (!lexer->lookahead || lexer->eof(lexer))
+        {
+            advance(lexer);
             return false;
-
-        lexer->result_symbol = m_LastToken = NONE;
+        }
 
         // Check for an escape seqence (e.g. "\*")
         if (lexer->lookahead == '\\')
         {
             advance(lexer);
 
-            if (m_TagStack.empty())
+            if (m_TagStack.empty() && lexer->lookahead)
             {
                 lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
                 return true;
             }
+            else
+                return false;
         }
 
         // If we are not in a tag and we have a square bracket opening then try matching
@@ -171,6 +180,9 @@ public:
                 default:
                     lexer->result_symbol = m_LastToken = LINK_BEGIN;
                     break;
+                case '\0':
+                    advance(lexer);
+                    return false;
             }
 
             advance(lexer);
@@ -191,7 +203,7 @@ public:
                 advance(lexer);
             }
 
-            return true;
+            return lexer->lookahead != 0;
         }
         // Otherwise make sure to check for the existence of an opening link location
         else if (m_TagStack.empty() && lexer->lookahead == '(')
@@ -330,6 +342,14 @@ public:
 
                 if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
                     return true;
+
+                if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, { ':' }) != NONE)
+                    return true;
+                else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+                {
+                    lexer->result_symbol = MULTI_DEFINITION_SUFFIX;
+                    return true;
+                }
 
                 if (check_detached(lexer, INSERTION, { '=' }) != NONE)
                     return true;
@@ -655,7 +675,15 @@ private:
             // to allow the escape sequence to get parsed
             if (lexer->lookahead == '\\')
             {
-                lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                lexer->mark_end(lexer);
+
+                advance(lexer);
+
+                if (!lexer->lookahead)
+                    continue;
+
+                m_LastToken = PARAGRAPH_SEGMENT;
+                lexer->result_symbol = PARAGRAPH_SEGMENT;
                 return true;
             }
 
@@ -733,7 +761,7 @@ private:
     std::vector<uint16_t> m_TagStack;
 
 private:
-    const std::array<int32_t, 6> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~' };
+    const std::array<int32_t, 7> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':' };
     const std::array<std::pair<int32_t, TokenType>, 8> s_AttachedModifiers = { std::pair<int32_t, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', INLINE_CODE } };
 };
 
