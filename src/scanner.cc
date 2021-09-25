@@ -67,6 +67,7 @@ enum TokenType
 
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
+    HORIZONTAL_LINE,
 
     LINK_BEGIN,
     LINK_END_GENERIC,
@@ -321,6 +322,14 @@ public:
                         lexer->result_symbol = PARAGRAPH_SEGMENT;
                         return true;
                     }
+                }
+
+                if (check_detached(lexer, NONE, { '_' }) != NONE)
+                    return true;
+                else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
+                {
+                    lexer->result_symbol = HORIZONTAL_LINE;
+                    return true;
                 }
             }
         }
@@ -584,7 +593,7 @@ private:
     std::vector<size_t> m_TagStack;
 
 private:
-    const std::array<int32_t, 7> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':' };
+    const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':', '_' };
 };
 
 extern "C"

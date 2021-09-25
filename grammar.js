@@ -65,6 +65,7 @@ module.exports = grammar({
 
         $.strong_paragraph_delimiter,
         $.weak_paragraph_delimiter,
+        $.horizontal_line,
 
         $.link_begin,
         $.link_end_generic,
@@ -117,6 +118,7 @@ module.exports = grammar({
                         $._detached_modifier,
                         $._definition,
                         $._tag,
+                        $.horizontal_line,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
                         $.marker,
                     )
@@ -134,7 +136,10 @@ module.exports = grammar({
                     $.paragraph,
 
                     optional(
-                        $._paragraph_break,
+                        choice(
+                            $._paragraph_break,
+                            $.horizontal_line,
+                        )
                     )
                 )
             ),
@@ -523,6 +528,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading2,
                                 $.heading3,
@@ -562,6 +568,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading3,
                                 $.heading4,
@@ -600,6 +607,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading4,
                                 $.heading5,
@@ -637,6 +645,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading5,
                                 $.heading6,
@@ -673,6 +682,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading6,
                             )
@@ -708,6 +718,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
                             )
                         )
                     ),
@@ -1203,6 +1214,7 @@ module.exports = grammar({
                             choice(
                                 $._paragraph,
                                 $.strong_paragraph_delimiter,
+                                $.horizontal_line,
                                 $._heading,
                                 $._detached_modifier,
                                 $._definition,

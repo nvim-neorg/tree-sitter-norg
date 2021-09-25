@@ -91,6 +91,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "horizontal_line"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "marker"
                 }
               ]
@@ -121,8 +125,17 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_paragraph_break"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "horizontal_line"
+                  }
+                ]
               },
               {
                 "type": "BLANK"
@@ -1011,6 +1024,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "horizontal_line"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "heading2"
                   },
                   {
@@ -1096,6 +1113,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "horizontal_line"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "heading3"
                   },
                   {
@@ -1177,6 +1198,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "horizontal_line"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "heading4"
                   },
                   {
@@ -1254,6 +1279,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "horizontal_line"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "heading5"
                   },
                   {
@@ -1327,6 +1356,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "horizontal_line"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "heading6"
                   }
                 ]
@@ -1393,6 +1426,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "_tag"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "horizontal_line"
                   }
                 ]
               }
@@ -2527,6 +2564,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "strong_paragraph_delimiter"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "horizontal_line"
                   },
                   {
                     "type": "SYMBOL",
@@ -3753,6 +3794,10 @@
     {
       "type": "SYMBOL",
       "name": "weak_paragraph_delimiter"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "horizontal_line"
     },
     {
       "type": "SYMBOL",
