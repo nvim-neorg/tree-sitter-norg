@@ -1,7 +1,7 @@
 [
   {
-    "type": "capitalized_word",
-    "named": true,
+    "type": "_segment",
+    "named": false,
     "fields": {}
   },
   {
@@ -64,10 +64,6 @@
           },
           {
             "type": "heading6",
-            "named": true
-          },
-          {
-            "type": "horizontal_line",
             "named": true
           },
           {
@@ -882,20 +878,6 @@
     "type": "insertion",
     "named": true,
     "fields": {
-      "item": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "capitalized_word",
-            "named": true
-          },
-          {
-            "type": "word",
-            "named": true
-          }
-        ]
-      },
       "parameters": {
         "multiple": false,
         "required": false,
@@ -1086,10 +1068,6 @@
           },
           {
             "type": "generic_list",
-            "named": true
-          },
-          {
-            "type": "horizontal_line",
             "named": true
           },
           {
@@ -1769,9 +1747,18 @@
         {
           "type": "link",
           "named": true
+        },
+        {
+          "type": "paragraph_segment",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "paragraph_segment",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "quote",
@@ -2126,15 +2113,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "ranged_tag_name_fallback",
-          "named": true
-        },
-        {
-          "type": "word",
           "named": true
         }
       ]
@@ -2143,18 +2126,7 @@
   {
     "type": "tag_parameters",
     "named": true,
-    "fields": {
-      "parameter": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "word",
-            "named": true
-          }
-        ]
-      }
-    }
+    "fields": {}
   },
   {
     "type": "todo_item1",
@@ -3093,11 +3065,6 @@
     }
   },
   {
-    "type": "word",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "\n",
     "named": false
   },
@@ -3259,10 +3226,6 @@
   },
   {
     "type": "ordered_list6_prefix",
-    "named": true
-  },
-  {
-    "type": "paragraph_segment",
     "named": true
   },
   {

@@ -11,8 +11,14 @@ enum TokenType
 {
     NONE,
 
-    PARAGRAPH_SEGMENT,
+    SPACE,
+
+    WORD,
+    CAPITALIZED_WORD,
+
+    LINE_BREAK,
     PARAGRAPH_BREAK,
+
     ESCAPE_SEQUENCE,
 
     HEADING1,
@@ -142,7 +148,7 @@ public:
 
             if (lexer->lookahead == ']')
             {
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
+                lexer->result_symbol = WORD;
                 return true;
             }
 
@@ -199,7 +205,18 @@ public:
         else if (lexer->lookahead == '\n')
         {
             advance(lexer);
-            lexer->result_symbol = PARAGRAPH_BREAK;
+
+            if (lexer->eof(lexer))
+                return false;
+
+            lexer->result_symbol = LINE_BREAK;
+
+            if (lexer->lookahead == '\n')
+            {
+                advance(lexer);
+                lexer->result_symbol = PARAGRAPH_BREAK;
+            }
+
             return true;
         }
 
@@ -243,7 +260,7 @@ public:
                                 {
                                     if (m_IndentationLevel != m_TagStack.back())
                                     {
-                                        lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                                        lexer->result_symbol = m_LastToken = WORD;
                                         return true;
                                     }
                                     else
@@ -255,7 +272,7 @@ public:
                                     }
                                 }
 
-                                lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                                lexer->result_symbol = m_LastToken = WORD;
                                 return true;
                             }
                         }
@@ -319,7 +336,7 @@ public:
                     else
                     {
                         advance(lexer);
-                        lexer->result_symbol = PARAGRAPH_SEGMENT;
+                        lexer->result_symbol = WORD;
                         return true;
                     }
                 }
@@ -335,10 +352,7 @@ public:
         }
 
         // Match paragraphs
-        if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
-            return parse_text(lexer);
-
-        return false;
+        return parse_text(lexer);
     }
 
     std::vector<size_t>& get_tag_stack() noexcept { return m_TagStack; }
@@ -505,70 +519,21 @@ private:
      */
     bool parse_text(TSLexer* lexer)
     {
-        while (lexer->lookahead)
+        if (lexer->lookahead == 2 || std::iswspace(lexer->lookahead))
         {
-            if (m_TagStack.size() > 0 && m_IndentationLevel < m_TagStack.back())
-            {
-                lexer->result_symbol = RANGED_TAG_END;
-                return true;
-            }
-
-            // If we have an escape sequence in the middle of the paragraph then terminate the paragraph
-            // to allow the escape sequence to get parsed
-            if (lexer->lookahead == '\\')
-            {
-                lexer->mark_end(lexer);
-
+            while (lexer->lookahead && std::iswspace(lexer->lookahead))
                 advance(lexer);
 
-                if (!lexer->lookahead)
-                    continue;
-
-                m_LastToken = PARAGRAPH_SEGMENT;
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
-                return true;
-            }
-
-            // Try and find an occurrence of a trailing modifier
-            if (!std::iswspace(m_Current) && lexer->lookahead == '~')
-            {
-                advance(lexer);
-
-                // If we've managed to find one then skip over the newline and continue parsing
-                if (lexer->lookahead == '\n')
-                    continue;
-            }
-            // A [ is a special symbol - it can both mean a todo item and a link
-            // Halt the parsing of the paragraph segment if such a thing is encountered
-            else if (m_TagStack.size() == 0 && (std::iswspace(m_Current) || std::iswpunct(m_Current)) && lexer->lookahead == '[')
-            {
-                m_LastToken = PARAGRAPH_SEGMENT;
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
-                return true;
-            }
-
-            advance(lexer);
-
-            if (lexer->lookahead == '\n')
-                break;
+            lexer->result_symbol = m_LastToken = SPACE;
+            return true;
         }
 
-        // Mark the end of the token so any subsequent calls to advance() don't get
-        // appended to the result
-        lexer->mark_end(lexer);
+        TokenType resulting_symbol = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
 
-        // If the next char is valid then advance again
-        if (lexer->lookahead)
+        while (lexer->lookahead && lexer->lookahead != '\n' && !std::iswspace(lexer->lookahead)) // TODO: Perform specific checks for attached modifiers
             advance(lexer);
 
-        // If we haven't reached EOF then treat the last call to advance() as part of the result too.
-        // We do this because otherwise the parser would read one char past EOF which would mess things up
-        if (!lexer->eof(lexer))
-            lexer->mark_end(lexer);
-
-        m_LastToken = PARAGRAPH_SEGMENT;
-        lexer->result_symbol = PARAGRAPH_SEGMENT;
-
+        lexer->result_symbol = m_LastToken = resulting_symbol;
         return true;
     }
 

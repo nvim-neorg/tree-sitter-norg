@@ -9,8 +9,12 @@ module.exports = grammar({
     externals: $ => [
         $._,
 
-        $.paragraph_segment,
+        $._space,
+        $._lowercase_word,
+        $._capitalized_word,
+        $._line_break,
         $._paragraph_break,
+
         $.escape_sequence_prefix,
 
         $.heading1_prefix,
@@ -114,6 +118,7 @@ module.exports = grammar({
                 prec(1,
                     choice(
                         $._paragraph_break,
+                        $._line_break,
                         $._heading,
                         $._detached_modifier,
                         $._definition,
@@ -124,10 +129,16 @@ module.exports = grammar({
                     )
                 ),
 
-                $._paragraph,
+                $.paragraph,
                 $.strong_paragraph_delimiter,
             )
         ),
+
+        _word: $ =>
+            choice(
+                $._lowercase_word,
+                $._capitalized_word,
+            ),
 
         // Any regular text
         _paragraph: $ =>
@@ -136,10 +147,21 @@ module.exports = grammar({
                     $.paragraph,
 
                     optional(
+                        $._paragraph_break,
+                    )
+                )
+            ),
+
+        paragraph_segment: $ =>
+            prec.right(0,
+                seq(
+                    $._word,
+
+                    repeat(
                         choice(
-                            $._paragraph_break,
-                            $.horizontal_line,
-                        )
+                            $._word,
+                            $._space
+                        ),
                     )
                 )
             ),
@@ -148,10 +170,8 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        alias(
-                            $.paragraph_segment,
-                            "_segment",
-                        ),
+                        $.paragraph_segment,
+                        $._line_break,
 
                         $.link,
                         $.escape_sequence,
@@ -1409,18 +1429,6 @@ module.exports = grammar({
                 )
             ),
 
-        word: $ =>
-            seq(
-                token(/[a-z0-9_\-\+]+/),
-                token(/[a-zA-Z0-9_\-\+]*/),
-            ),
-
-        capitalized_word: $ =>
-            seq(
-                token(/[A-Z0-9_\-\+]+/),
-                token(/[a-zA-Z0-9_\-\+]*/),
-            ),
-
         insertion: $ =>
             prec.right(0,
                 seq(
@@ -1429,8 +1437,8 @@ module.exports = grammar({
                     field(
                         "item",
                         choice(
-                            $.capitalized_word,
-                            $.word
+                            $._capitalized_word,
+                            $._lowercase_word
                         )
                     ),
 
@@ -1510,6 +1518,7 @@ module.exports = grammar({
                     alias(
                         choice(
                             $.paragraph_segment,
+                            $._line_break,
                             $._paragraph_break,
                         ),
                         "_segment",
@@ -1638,10 +1647,16 @@ module.exports = grammar({
                 ),
             ),
 
+        tag_name_element: $ =>
+            seq(
+                token(/[a-z0-9_\-\+]+/),
+                token(/[a-zA-Z0-9_\-\+]*/),
+            ),
+
         tag_name: $ =>
             seq(
                 choice(
-                    $.word,
+                    $._word,
                     $.ranged_tag_name_fallback,
                 ),
 
@@ -1652,7 +1667,7 @@ module.exports = grammar({
                             "_delimiter",
                         ),
 
-                        $.word,
+                        $._word,
                     )
                 )
             ),
@@ -1661,7 +1676,7 @@ module.exports = grammar({
             seq(
                 field(
                     "parameter",
-                    $.word
+                    $._word
                 ),
 
                 repeat(
@@ -1671,7 +1686,7 @@ module.exports = grammar({
                         field(
                             "parameter",
                             optional(
-                                $.word
+                                $._word
                             ),
                         ),
                     )

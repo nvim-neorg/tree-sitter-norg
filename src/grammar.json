@@ -75,6 +75,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "_line_break"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "_heading"
                 },
                 {
@@ -102,7 +106,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_paragraph"
+            "name": "paragraph"
           },
           {
             "type": "SYMBOL",
@@ -110,6 +114,19 @@
           }
         ]
       }
+    },
+    "_word": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_lowercase_word"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_capitalized_word"
+        }
+      ]
     },
     "_paragraph": {
       "type": "PREC_RIGHT",
@@ -125,22 +142,42 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_paragraph_break"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "horizontal_line"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_paragraph_break"
               },
               {
                 "type": "BLANK"
               }
             ]
+          }
+        ]
+      }
+    },
+    "paragraph_segment": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_word"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_word"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_space"
+                }
+              ]
+            }
           }
         ]
       }
@@ -154,13 +191,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "paragraph_segment"
-              },
-              "named": false,
-              "value": "_segment"
+              "type": "SYMBOL",
+              "name": "paragraph_segment"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_line_break"
             },
             {
               "type": "SYMBOL",
@@ -2985,44 +3021,6 @@
         ]
       }
     },
-    "word": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[a-z0-9_\\-\\+]+"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[a-zA-Z0-9_\\-\\+]*"
-          }
-        }
-      ]
-    },
-    "capitalized_word": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[A-Z0-9_\\-\\+]+"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[a-zA-Z0-9_\\-\\+]*"
-          }
-        }
-      ]
-    },
     "insertion": {
       "type": "PREC_RIGHT",
       "value": 0,
@@ -3041,11 +3039,11 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "capitalized_word"
+                  "name": "_capitalized_word"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "word"
+                  "name": "_lowercase_word"
                 }
               ]
             }
@@ -3190,6 +3188,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "paragraph_segment"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_line_break"
                 },
                 {
                   "type": "SYMBOL",
@@ -3439,6 +3441,25 @@
         }
       ]
     },
+    "tag_name_element": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "[a-z0-9_\\-\\+]+"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "[a-zA-Z0-9_\\-\\+]*"
+          }
+        }
+      ]
+    },
     "tag_name": {
       "type": "SEQ",
       "members": [
@@ -3447,7 +3468,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "word"
+              "name": "_word"
             },
             {
               "type": "SYMBOL",
@@ -3474,7 +3495,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "word"
+                "name": "_word"
               }
             ]
           }
@@ -3489,7 +3510,7 @@
           "name": "parameter",
           "content": {
             "type": "SYMBOL",
-            "name": "word"
+            "name": "_word"
           }
         },
         {
@@ -3512,7 +3533,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "word"
+                      "name": "_word"
                     },
                     {
                       "type": "BLANK"
@@ -3613,7 +3634,19 @@
     },
     {
       "type": "SYMBOL",
-      "name": "paragraph_segment"
+      "name": "_space"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_lowercase_word"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_capitalized_word"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_line_break"
     },
     {
       "type": "SYMBOL",
