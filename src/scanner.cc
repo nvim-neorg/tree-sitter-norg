@@ -514,6 +514,7 @@ private:
         return true;
     }
 
+
     /*
      * Simply parses any line (also called a paragraph segment)
      */
@@ -524,14 +525,20 @@ private:
             while (lexer->lookahead && std::iswspace(lexer->lookahead))
                 advance(lexer);
 
+            if (lexer->eof(lexer))
+                return false;
+
             lexer->result_symbol = m_LastToken = SPACE;
             return true;
         }
 
         TokenType resulting_symbol = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
 
-        while (lexer->lookahead && lexer->lookahead != '\n' && !std::iswspace(lexer->lookahead)) // TODO: Perform specific checks for attached modifiers
+        while (lexer->lookahead && lexer->lookahead != '\n' && lexer->lookahead != ' ' && lexer->lookahead != '\t') // TODO: Perform specific checks for attached modifiers
             advance(lexer);
+
+        if (lexer->eof(lexer))
+            return false;
 
         lexer->result_symbol = m_LastToken = resulting_symbol;
         return true;
