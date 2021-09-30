@@ -1,6 +1,6 @@
 /*
-* Known bugs:
-* Placing a link description at the end of an unordered list element breaks the generic_list
+* Known bugs
+* jk there are no bugs
 */
 
 module.exports = grammar({
@@ -10,8 +10,10 @@ module.exports = grammar({
         $._,
 
         $._space,
-        $._lowercase_word,
-        $._capitalized_word,
+
+        $.lowercase_word,
+        $.capitalized_word,
+
         $._line_break,
         $._paragraph_break,
 
@@ -106,6 +108,7 @@ module.exports = grammar({
                     prec(2,
                         choice(
                             $._paragraph_break,
+                            $._line_break,
                             $.ranged_tag,
                             $.insertion,
                         )
@@ -136,8 +139,8 @@ module.exports = grammar({
 
         _word: $ =>
             choice(
-                $._lowercase_word,
-                $._capitalized_word,
+                alias($.lowercase_word, "_lowercase"),
+                alias($.capitalized_word, "_uppercase"),
             ),
 
         // Any regular text
@@ -177,7 +180,7 @@ module.exports = grammar({
 
                         $._line_break,
                         $.link,
-                        $.escape_sequence,
+                        $.escape_sequence
                     )
                 )
             ),
@@ -204,6 +207,7 @@ module.exports = grammar({
                     field(
                         "location",
                         choice(
+                            $._space,
                             $.link_end_generic,
                             $.link_end_url,
                             $.link_end_heading1_reference,
@@ -1454,8 +1458,8 @@ module.exports = grammar({
                     field(
                         "item",
                         choice(
-                            $._capitalized_word,
-                            $._lowercase_word
+                            $.capitalized_word,
+                            $.lowercase_word
                         )
                     ),
 

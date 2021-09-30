@@ -878,6 +878,20 @@
     "type": "insertion",
     "named": true,
     "fields": {
+      "item": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "capitalized_word",
+            "named": true
+          },
+          {
+            "type": "lowercase_word",
+            "named": true
+          }
+        ]
+      },
       "parameters": {
         "multiple": false,
         "required": false,
@@ -2122,7 +2136,22 @@
   {
     "type": "tag_parameters",
     "named": true,
-    "fields": {}
+    "fields": {
+      "parameter": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "_lowercase",
+            "named": false
+          },
+          {
+            "type": "_uppercase",
+            "named": false
+          }
+        ]
+      }
+    }
   },
   {
     "type": "todo_item1",
@@ -3069,6 +3098,10 @@
     "named": false
   },
   {
+    "type": "_lowercase",
+    "named": false
+  },
+  {
     "type": "_name",
     "named": false
   },
@@ -3085,7 +3118,15 @@
     "named": false
   },
   {
+    "type": "_uppercase",
+    "named": false
+  },
+  {
     "type": "any_char",
+    "named": true
+  },
+  {
+    "type": "capitalized_word",
     "named": true
   },
   {
@@ -3162,6 +3203,10 @@
   },
   {
     "type": "link_end_url",
+    "named": true
+  },
+  {
+    "type": "lowercase_word",
     "named": true
   },
   {

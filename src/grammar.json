@@ -47,6 +47,10 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "_line_break"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "ranged_tag"
               },
               {
@@ -119,12 +123,22 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_lowercase_word"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "lowercase_word"
+          },
+          "named": false,
+          "value": "_lowercase"
         },
         {
-          "type": "SYMBOL",
-          "name": "_capitalized_word"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "capitalized_word"
+          },
+          "named": false,
+          "value": "_uppercase"
         }
       ]
     },
@@ -255,6 +269,10 @@
               "content": {
                 "type": "CHOICE",
                 "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_space"
+                  },
                   {
                     "type": "SYMBOL",
                     "name": "link_end_generic"
@@ -3121,11 +3139,11 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_capitalized_word"
+                  "name": "capitalized_word"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_lowercase_word"
+                  "name": "lowercase_word"
                 }
               ]
             }
@@ -3720,11 +3738,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_lowercase_word"
+      "name": "lowercase_word"
     },
     {
       "type": "SYMBOL",
-      "name": "_capitalized_word"
+      "name": "capitalized_word"
     },
     {
       "type": "SYMBOL",

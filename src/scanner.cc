@@ -542,7 +542,22 @@ private:
         TokenType resulting_symbol = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
 
         do
-            advance(lexer);
+        {
+            if (lexer->lookahead == '~')
+            {
+                advance(lexer);
+
+                if (lexer->lookahead == '\n')
+                {
+                    advance(lexer);
+
+                    if (!lexer->lookahead || lexer->eof(lexer))
+                        return false;
+                }
+            }
+            else
+                advance(lexer);
+        }
         while (lexer->lookahead && (lexer->lookahead != '\n' && lexer->lookahead != ' ' && lexer->lookahead != '\t')); // TODO: Perform specific checks for attached modifiers
 
         lexer->result_symbol = m_LastToken = resulting_symbol;
