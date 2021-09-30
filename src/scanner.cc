@@ -206,9 +206,6 @@ public:
         {
             advance(lexer);
 
-            if (lexer->eof(lexer))
-                return false;
-
             lexer->result_symbol = LINE_BREAK;
 
             if (lexer->lookahead == '\n')
@@ -531,10 +528,9 @@ private:
 
         if (lexer->lookahead == ' ' || lexer->lookahead == '\t')
         {
-            advance(lexer);
-
-            while (lexer->lookahead && lexer->lookahead != ' ' && lexer->lookahead != '\t')
+            do
                 advance(lexer);
+            while (lexer->lookahead && lexer->lookahead == ' ' && lexer->lookahead == '\t');
 
             lexer->result_symbol = m_LastToken = SPACE;
             return true;
@@ -542,8 +538,9 @@ private:
 
         TokenType resulting_symbol = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
 
-        while (lexer->lookahead && lexer->lookahead != '\n' && lexer->lookahead != ' ' && lexer->lookahead != '\t') // TODO: Perform specific checks for attached modifiers
+        do
             advance(lexer);
+        while (lexer->lookahead && (lexer->lookahead != '\n' && lexer->lookahead != ' ' && lexer->lookahead != '\t')); // TODO: Perform specific checks for attached modifiers
 
         lexer->result_symbol = m_LastToken = resulting_symbol;
         return true;
