@@ -214,6 +214,7 @@ public:
             if (lexer->lookahead == '\n')
             {
                 advance(lexer);
+
                 lexer->result_symbol = PARAGRAPH_BREAK;
             }
 
@@ -514,19 +515,26 @@ private:
         return true;
     }
 
-
     /*
      * Simply parses any line (also called a paragraph segment)
      */
     bool parse_text(TSLexer* lexer)
     {
-        if (lexer->lookahead == 2 || std::iswspace(lexer->lookahead))
+        if (!m_TagStack.empty())
         {
-            while (lexer->lookahead && std::iswspace(lexer->lookahead))
+            while (lexer->lookahead && lexer->lookahead != '\n')
                 advance(lexer);
 
-            if (lexer->eof(lexer))
-                return false;
+            lexer->result_symbol = m_LastToken = WORD;
+            return true;
+        }
+
+        if (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+        {
+            advance(lexer);
+
+            while (lexer->lookahead && lexer->lookahead != ' ' && lexer->lookahead != '\t')
+                advance(lexer);
 
             lexer->result_symbol = m_LastToken = SPACE;
             return true;
@@ -536,9 +544,6 @@ private:
 
         while (lexer->lookahead && lexer->lookahead != '\n' && lexer->lookahead != ' ' && lexer->lookahead != '\t') // TODO: Perform specific checks for attached modifiers
             advance(lexer);
-
-        if (lexer->eof(lexer))
-            return false;
 
         lexer->result_symbol = m_LastToken = resulting_symbol;
         return true;
