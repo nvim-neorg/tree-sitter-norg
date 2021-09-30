@@ -170,9 +170,12 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        $.paragraph_segment,
-                        $._line_break,
+                        alias(
+                            $.paragraph_segment,
+                            "_segment"
+                        ),
 
+                        $._line_break,
                         $.link,
                         $.escape_sequence,
                     )
@@ -537,6 +540,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -577,6 +582,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -616,6 +623,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -654,6 +663,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -691,6 +702,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -726,6 +739,8 @@ module.exports = grammar({
                         "title",
                         $.paragraph_segment,
                     ),
+
+                    repeat(prec(1, $._line_break)),
 
                     field(
                         "content",
@@ -1227,6 +1242,8 @@ module.exports = grammar({
                         "name",
                         $.paragraph_segment
                     ),
+
+                    repeat(prec(1, $._line_break)),
 
                     field(
                         "subtext",
