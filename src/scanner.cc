@@ -208,6 +208,9 @@ public:
 
             lexer->result_symbol = LINE_BREAK;
 
+            if (!lexer->lookahead || lexer->eof(lexer))
+                return false;
+
             if (lexer->lookahead == '\n')
             {
                 advance(lexer);
