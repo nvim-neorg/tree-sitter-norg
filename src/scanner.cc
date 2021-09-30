@@ -530,7 +530,7 @@ private:
         {
             do
                 advance(lexer);
-            while (lexer->lookahead && lexer->lookahead == ' ' && lexer->lookahead == '\t');
+            while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'));
 
             lexer->result_symbol = m_LastToken = SPACE;
             return true;
