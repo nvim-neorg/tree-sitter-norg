@@ -119,7 +119,7 @@
         ]
       }
     },
-    "_word": {
+    "word": {
       "type": "CHOICE",
       "members": [
         {
@@ -174,8 +174,13 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "_word"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "word"
+            },
+            "named": false,
+            "value": "_word"
           },
           {
             "type": "REPEAT",
@@ -183,8 +188,13 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "_word"
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "word"
+                  },
+                  "named": false,
+                  "value": "_word"
                 },
                 {
                   "type": "SYMBOL",
@@ -3568,11 +3578,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_word"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ranged_tag_name_fallback"
+              "name": "tag_name_element"
             }
           ]
         },
@@ -3595,7 +3601,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "_word"
+                "name": "tag_name_element"
               }
             ]
           }
@@ -3610,7 +3616,7 @@
           "name": "parameter",
           "content": {
             "type": "SYMBOL",
-            "name": "_word"
+            "name": "word"
           }
         },
         {
@@ -3633,7 +3639,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "_word"
+                      "name": "word"
                     },
                     {
                       "type": "BLANK"
@@ -3975,10 +3981,6 @@
     {
       "type": "SYMBOL",
       "name": "ranged_tag_prefix"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "ranged_tag_name_fallback"
     },
     {
       "type": "SYMBOL",

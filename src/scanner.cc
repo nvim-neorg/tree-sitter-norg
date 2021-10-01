@@ -87,7 +87,6 @@ enum TokenType
     LINK_END_MARKER_REFERENCE,
 
     RANGED_TAG,
-    RANGED_TAG_NAME,
     RANGED_TAG_END,
 
     CARRYOVER_TAG,
@@ -612,7 +611,7 @@ extern "C"
         if (tag_stack.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
-        buffer = std::copy(tag_stack.begin(), tag_stack.end(), buffer);
+        std::copy(tag_stack.begin(), tag_stack.end(), buffer);
 
         return tag_stack.size();
     }

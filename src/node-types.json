@@ -5,6 +5,11 @@
     "fields": {}
   },
   {
+    "type": "_word",
+    "named": false,
+    "fields": {}
+  },
+  {
     "type": "carryover_tag",
     "named": true,
     "fields": {
@@ -2123,15 +2128,20 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
         {
-          "type": "ranged_tag_name_fallback",
+          "type": "tag_name_element",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "tag_name_element",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "tag_parameters",
@@ -2142,12 +2152,8 @@
         "required": true,
         "types": [
           {
-            "type": "_lowercase",
-            "named": false
-          },
-          {
-            "type": "_uppercase",
-            "named": false
+            "type": "word",
+            "named": true
           }
         ]
       }
@@ -3090,6 +3096,11 @@
     }
   },
   {
+    "type": "word",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\n",
     "named": false
   },
@@ -3291,10 +3302,6 @@
   },
   {
     "type": "quote6_prefix",
-    "named": true
-  },
-  {
-    "type": "ranged_tag_name_fallback",
     "named": true
   },
   {

@@ -7,8 +7,8 @@ module.exports = grammar({
     name: 'norg',
 
     externals: $ => [
+ 
         $._,
-
         $._space,
 
         $.lowercase_word,
@@ -85,7 +85,6 @@ module.exports = grammar({
         $.link_end_marker_reference,
 
         $.ranged_tag_prefix,
-        $.ranged_tag_name_fallback,
         $.ranged_tag_end_prefix,
 
         $.carryover_tag_prefix,
@@ -137,7 +136,7 @@ module.exports = grammar({
             )
         ),
 
-        _word: $ =>
+        word: $ =>
             choice(
                 alias($.lowercase_word, "_lowercase"),
                 alias($.capitalized_word, "_uppercase"),
@@ -158,11 +157,11 @@ module.exports = grammar({
         paragraph_segment: $ =>
             prec.right(0,
                 seq(
-                    $._word,
+                    alias($.word, "_word"), // TODO: Change to $.word and alias($.word, "_something") it
 
                     repeat(
                         choice(
-                            $._word,
+                            alias($.word, "_word"),
                             $._space
                         ),
                     )
@@ -1677,8 +1676,7 @@ module.exports = grammar({
         tag_name: $ =>
             seq(
                 choice(
-                    $._word,
-                    $.ranged_tag_name_fallback,
+                    $.tag_name_element,
                 ),
 
                 repeat(
@@ -1688,7 +1686,7 @@ module.exports = grammar({
                             "_delimiter",
                         ),
 
-                        $._word,
+                        $.tag_name_element,
                     )
                 )
             ),
@@ -1697,7 +1695,7 @@ module.exports = grammar({
             seq(
                 field(
                     "parameter",
-                    $._word
+                    $.word
                 ),
 
                 repeat(
@@ -1707,7 +1705,7 @@ module.exports = grammar({
                         field(
                             "parameter",
                             optional(
-                                $._word
+                                $.word
                             ),
                         ),
                     )
