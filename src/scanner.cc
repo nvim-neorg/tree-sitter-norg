@@ -16,6 +16,8 @@ enum TokenType
     WORD,
     CAPITALIZED_WORD,
 
+    PARENTHESIZED_TEXT,
+
     LINE_BREAK,
     PARAGRAPH_BREAK,
 
@@ -511,6 +513,9 @@ private:
 
         advance(lexer);
 
+        if (lexer->result_symbol == NONE)
+            lexer->result_symbol = m_LastToken = PARENTHESIZED_TEXT;
+
         return true;
     }
 
@@ -538,7 +543,7 @@ private:
             return true;
         }
 
-        TokenType resulting_symbol = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
+        const TokenType resulting_symbol = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
 
         do
         {

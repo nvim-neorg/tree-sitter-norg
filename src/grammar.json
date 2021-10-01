@@ -174,13 +174,22 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "word"
-            },
-            "named": false,
-            "value": "_word"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "word"
+                },
+                "named": false,
+                "value": "_word"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_parenthesized_text"
+              }
+            ]
           },
           {
             "type": "REPEAT",
@@ -195,6 +204,10 @@
                   },
                   "named": false,
                   "value": "_word"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_parenthesized_text"
                 },
                 {
                   "type": "SYMBOL",
@@ -3749,6 +3762,10 @@
     {
       "type": "SYMBOL",
       "name": "capitalized_word"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_parenthesized_text"
     },
     {
       "type": "SYMBOL",

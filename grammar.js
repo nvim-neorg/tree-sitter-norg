@@ -14,6 +14,8 @@ module.exports = grammar({
         $.lowercase_word,
         $.capitalized_word,
 
+        $._parenthesized_text,
+
         $._line_break,
         $._paragraph_break,
 
@@ -157,11 +159,15 @@ module.exports = grammar({
         paragraph_segment: $ =>
             prec.right(0,
                 seq(
-                    alias($.word, "_word"), // TODO: Change to $.word and alias($.word, "_something") it
+                    choice(
+                        alias($.word, "_word"),
+                        $._parenthesized_text
+                    ),
 
                     repeat(
                         choice(
                             alias($.word, "_word"),
+                            $._parenthesized_text,
                             $._space
                         ),
                     )
