@@ -168,7 +168,14 @@ module.exports = grammar({
                         choice(
                             alias($.word, "_word"),
                             $._parenthesized_text,
-                            $._space
+                            $._space,
+                            alias(
+                                choice(
+                                    $.todo_item_done,
+                                    $.todo_item_undone,
+                                    $.todo_item_pending
+                                ),
+                            "_erroneous")
                         ),
                     )
                 )

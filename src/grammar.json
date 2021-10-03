@@ -212,6 +212,28 @@
                 {
                   "type": "SYMBOL",
                   "name": "_space"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "todo_item_done"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "todo_item_undone"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "todo_item_pending"
+                      }
+                    ]
+                  },
+                  "named": false,
+                  "value": "_erroneous"
                 }
               ]
             }
