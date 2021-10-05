@@ -121,7 +121,7 @@ public:
         lexer->result_symbol = NONE;
 
         // Are we at the end of file? If so, bail
-        if (!lexer->lookahead || lexer->eof(lexer))
+        if (lexer->eof(lexer))
         {
             advance(lexer);
             return false;
@@ -209,7 +209,7 @@ public:
 
             lexer->result_symbol = LINE_BREAK;
 
-            if (!lexer->lookahead || lexer->eof(lexer))
+            if (lexer->eof(lexer))
                 return false;
 
             if (lexer->lookahead == '\n')
@@ -537,7 +537,7 @@ private:
         {
             do
                 advance(lexer);
-            while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'));
+            while (lexer->lookahead && std::iswblank(lexer->lookahead));
 
             lexer->result_symbol = m_LastToken = SPACE;
             return true;
@@ -555,14 +555,14 @@ private:
                 {
                     advance(lexer);
 
-                    if (!lexer->lookahead || lexer->eof(lexer))
+                    if (lexer->eof(lexer))
                         return false;
                 }
             }
             else
                 advance(lexer);
         }
-        while (lexer->lookahead && (lexer->lookahead != '\n' && lexer->lookahead != ' ' && lexer->lookahead != '\t')); // TODO: Perform specific checks for attached modifiers
+        while (lexer->lookahead && !std::iswspace(lexer->lookahead)); // TODO: Perform specific checks for attached modifiers
 
         lexer->result_symbol = m_LastToken = resulting_symbol;
         return true;
