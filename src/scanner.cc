@@ -128,7 +128,7 @@ public:
         }
 
         // Check for an escape seqence (e.g. "\*")
-        if (lexer->lookahead == '\\')
+        if (m_TagStack.empty() && lexer->lookahead == '\\')
         {
             advance(lexer);
 
