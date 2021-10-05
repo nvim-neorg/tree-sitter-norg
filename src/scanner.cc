@@ -121,7 +121,7 @@ public:
         lexer->result_symbol = NONE;
 
         // Are we at the end of file? If so, bail
-        if (lexer->eof(lexer))
+        if (lexer->eof(lexer) || !lexer->lookahead)
         {
             advance(lexer);
             return false;
@@ -209,7 +209,7 @@ public:
 
             lexer->result_symbol = LINE_BREAK;
 
-            if (lexer->eof(lexer))
+            if (lexer->eof(lexer) || !lexer->lookahead)
                 return false;
 
             if (lexer->lookahead == '\n')
@@ -555,7 +555,7 @@ private:
                 {
                     advance(lexer);
 
-                    if (lexer->eof(lexer))
+                    if (lexer->eof(lexer) || !lexer->lookahead)
                         return false;
                 }
             }
