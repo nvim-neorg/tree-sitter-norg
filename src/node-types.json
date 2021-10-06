@@ -1,7 +1,12 @@
 [
   {
-    "type": "capitalized_word",
-    "named": true,
+    "type": "_segment",
+    "named": false,
+    "fields": {}
+  },
+  {
+    "type": "_word",
+    "named": false,
     "fields": {}
   },
   {
@@ -64,10 +69,6 @@
           },
           {
             "type": "heading6",
-            "named": true
-          },
-          {
-            "type": "horizontal_line",
             "named": true
           },
           {
@@ -891,7 +892,7 @@
             "named": true
           },
           {
-            "type": "word",
+            "type": "lowercase_word",
             "named": true
           }
         ]
@@ -1086,10 +1087,6 @@
           },
           {
             "type": "generic_list",
-            "named": true
-          },
-          {
-            "type": "horizontal_line",
             "named": true
           },
           {
@@ -1774,6 +1771,11 @@
     }
   },
   {
+    "type": "paragraph_segment",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "quote",
     "named": true,
     "fields": {},
@@ -2130,15 +2132,16 @@
       "required": true,
       "types": [
         {
-          "type": "ranged_tag_name_fallback",
-          "named": true
-        },
-        {
-          "type": "word",
+          "type": "tag_name_element",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "tag_name_element",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "tag_parameters",
@@ -3106,6 +3109,14 @@
     "named": false
   },
   {
+    "type": "_erroneous",
+    "named": false
+  },
+  {
+    "type": "_lowercase",
+    "named": false
+  },
+  {
     "type": "_name",
     "named": false
   },
@@ -3122,7 +3133,15 @@
     "named": false
   },
   {
+    "type": "_uppercase",
+    "named": false
+  },
+  {
     "type": "any_char",
+    "named": true
+  },
+  {
+    "type": "capitalized_word",
     "named": true
   },
   {
@@ -3202,6 +3221,10 @@
     "named": true
   },
   {
+    "type": "lowercase_word",
+    "named": true
+  },
+  {
     "type": "marker_prefix",
     "named": true
   },
@@ -3262,10 +3285,6 @@
     "named": true
   },
   {
-    "type": "paragraph_segment",
-    "named": true
-  },
-  {
     "type": "quote1_prefix",
     "named": true
   },
@@ -3287,10 +3306,6 @@
   },
   {
     "type": "quote6_prefix",
-    "named": true
-  },
-  {
-    "type": "ranged_tag_name_fallback",
     "named": true
   },
   {

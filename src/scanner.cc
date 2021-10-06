@@ -11,8 +11,16 @@ enum TokenType
 {
     NONE,
 
-    PARAGRAPH_SEGMENT,
+    SPACE,
+
+    WORD,
+    CAPITALIZED_WORD,
+
+    PARENTHESIZED_TEXT,
+
+    LINE_BREAK,
     PARAGRAPH_BREAK,
+
     ESCAPE_SEQUENCE,
 
     HEADING1,
@@ -81,7 +89,6 @@ enum TokenType
     LINK_END_MARKER_REFERENCE,
 
     RANGED_TAG,
-    RANGED_TAG_NAME,
     RANGED_TAG_END,
 
     CARRYOVER_TAG,
@@ -114,18 +121,18 @@ public:
         lexer->result_symbol = NONE;
 
         // Are we at the end of file? If so, bail
-        if (!lexer->lookahead || lexer->eof(lexer))
+        if (lexer->eof(lexer) || !lexer->lookahead)
         {
             advance(lexer);
             return false;
         }
 
         // Check for an escape seqence (e.g. "\*")
-        if (lexer->lookahead == '\\')
+        if (m_TagStack.empty() && lexer->lookahead == '\\')
         {
             advance(lexer);
 
-            if (m_TagStack.empty() && lexer->lookahead)
+            if (lexer->lookahead)
             {
                 lexer->result_symbol = ESCAPE_SEQUENCE;
                 return true;
@@ -142,7 +149,7 @@ public:
 
             if (lexer->lookahead == ']')
             {
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
+                lexer->result_symbol = WORD;
                 return true;
             }
 
@@ -193,13 +200,25 @@ public:
             return lexer->lookahead != 0;
         }
         // Otherwise make sure to check for the existence of an opening link location
-        else if (m_TagStack.size() == 0 && lexer->lookahead == '(')
+        else if (m_TagStack.empty() && lexer->lookahead == '(' && m_Current == ']')
             return check_link(lexer);
         // Otherwise just check whether or not we're dealing with a newline and return STANDALONE_BREAK if we are
         else if (lexer->lookahead == '\n')
         {
             advance(lexer);
-            lexer->result_symbol = PARAGRAPH_BREAK;
+
+            lexer->result_symbol = LINE_BREAK;
+
+            if (lexer->eof(lexer) || !lexer->lookahead)
+                return false;
+
+            if (lexer->lookahead == '\n')
+            {
+                advance(lexer);
+
+                lexer->result_symbol = PARAGRAPH_BREAK;
+            }
+
             return true;
         }
 
@@ -239,11 +258,11 @@ public:
                                 while (std::iswspace(lexer->lookahead) && lexer->lookahead != '\n' && lexer->lookahead)
                                     advance(lexer);
 
-                                if (std::iswspace(lexer->lookahead) && m_TagStack.size() > 0)
+                                if (std::iswspace(lexer->lookahead) && !m_TagStack.empty())
                                 {
                                     if (m_IndentationLevel != m_TagStack.back())
                                     {
-                                        lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                                        lexer->result_symbol = m_LastToken = WORD;
                                         return true;
                                     }
                                     else
@@ -255,7 +274,7 @@ public:
                                     }
                                 }
 
-                                lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                                lexer->result_symbol = m_LastToken = WORD;
                                 return true;
                             }
                         }
@@ -273,7 +292,7 @@ public:
                 return true;
             }
 
-            if (m_TagStack.size() == 0)
+            if (m_TagStack.empty())
             {
                 if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, { '*' }) != NONE)
                     return true;
@@ -319,7 +338,7 @@ public:
                     else
                     {
                         advance(lexer);
-                        lexer->result_symbol = PARAGRAPH_SEGMENT;
+                        lexer->result_symbol = WORD;
                         return true;
                     }
                 }
@@ -335,10 +354,7 @@ public:
         }
 
         // Match paragraphs
-        if (valid_symbols[PARAGRAPH_SEGMENT] && lexer->lookahead != '\n')
-            return parse_text(lexer);
-
-        return false;
+        return parse_text(lexer);
     }
 
     std::vector<size_t>& get_tag_stack() noexcept { return m_TagStack; }
@@ -370,62 +386,62 @@ private:
      * @param expected - a list of expected modifiers to appear in the sequence
      */
     template <size_t Size = 1>
-        [[nodiscard]]
-        TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<int32_t, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
+    [[nodiscard]]
+    TokenType check_detached(TSLexer* lexer, const std::vector<TokenType>& results, const std::array<int32_t, Size>& expected, std::pair<char, std::vector<TokenType>> terminate_at = { 0, NONE | NONE })
+    {
+        static_assert(Size > 0, "check_detached Size template must be greater than 0");
+
+        size_t i = m_ParsedChars = 0;
+
+        // Loop as long as the next character is a valid detached modifier
+        for (auto detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead);
+                detached_modifier != s_DetachedModifiers.end();
+                detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead), i++, m_ParsedChars++)
         {
-            static_assert(Size > 0, "check_detached Size template must be greater than 0");
-
-            size_t i = m_ParsedChars = 0;
-
-            // Loop as long as the next character is a valid detached modifier
-            for (auto detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead);
-                    detached_modifier != s_DetachedModifiers.end();
-                    detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead), i++, m_ParsedChars++)
+            // If we've specified a termination character and we match then the token lexing prematurely
+            if (terminate_at.first != 0 && lexer->lookahead == terminate_at.first)
             {
-                // If we've specified a termination character and we match then the token lexing prematurely
-                if (terminate_at.first != 0 && lexer->lookahead == terminate_at.first)
-                {
-                    advance(lexer);
-
-                    // Skip other potential whitespace
-                    while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
-                        advance(lexer);
-
-                    TokenType result = terminate_at.second[clamp(i, size_t{}, terminate_at.second.size()) - 1];
-
-                    lexer->result_symbol = result;
-
-                    return result;
-                }
-
-                // If the next character is not one we expect then break
-                // We use clamp() here to prevent overflow and to make the last element of the expected array the fallback
-                if (lexer->lookahead != expected[clamp(i, size_t{}, Size - 1)])
-                    break;
-
                 advance(lexer);
 
-                // If the next character is whitespace (which is the distinguishing factor between an attached/detached modifier)
-                if (std::iswspace(lexer->lookahead) && (lexer->lookahead != '\n'))
-                {
-                    // Retrieve the correct result from the list of provided results depending on how many characters were matched.
-                    // If we've exceeded the number of results then the clamp function will fall back to the last element
-                    TokenType result = results[clamp(i, size_t{}, results.size() - 1)];
+                // Skip other potential whitespace
+                while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
+                    advance(lexer);
 
-                    // Skip any other potential whitespace
-                    while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
-                        advance(lexer);
+                TokenType result = terminate_at.second[clamp(i, size_t{}, terminate_at.second.size()) - 1];
 
-                    lexer->result_symbol = result;
+                lexer->result_symbol = result;
 
-                    m_LastToken = result;
-
-                    return result;
-                }
+                return result;
             }
 
-            return NONE;
+            // If the next character is not one we expect then break
+            // We use clamp() here to prevent overflow and to make the last element of the expected array the fallback
+            if (lexer->lookahead != expected[clamp(i, size_t{}, Size - 1)])
+                break;
+
+            advance(lexer);
+
+            // If the next character is whitespace (which is the distinguishing factor between an attached/detached modifier)
+            if (std::iswspace(lexer->lookahead) && (lexer->lookahead != '\n'))
+            {
+                // Retrieve the correct result from the list of provided results depending on how many characters were matched.
+                // If we've exceeded the number of results then the clamp function will fall back to the last element
+                TokenType result = results[clamp(i, size_t{}, results.size() - 1)];
+
+                // Skip any other potential whitespace
+                while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
+                    advance(lexer);
+
+                lexer->result_symbol = result;
+
+                m_LastToken = result;
+
+                return result;
+            }
         }
+
+        return NONE;
+    }
 
     /*
      * Attempts to parse a link ([like](#this))
@@ -497,6 +513,9 @@ private:
 
         advance(lexer);
 
+        if (lexer->result_symbol == NONE)
+            lexer->result_symbol = m_LastToken = PARENTHESIZED_TEXT;
+
         return true;
     }
 
@@ -505,70 +524,47 @@ private:
      */
     bool parse_text(TSLexer* lexer)
     {
-        while (lexer->lookahead)
+        if (!m_TagStack.empty())
         {
-            if (m_TagStack.size() > 0 && m_IndentationLevel < m_TagStack.back())
-            {
-                lexer->result_symbol = RANGED_TAG_END;
-                return true;
-            }
-
-            // If we have an escape sequence in the middle of the paragraph then terminate the paragraph
-            // to allow the escape sequence to get parsed
-            if (lexer->lookahead == '\\')
-            {
-                lexer->mark_end(lexer);
-
+            while (lexer->lookahead && lexer->lookahead != '\n')
                 advance(lexer);
 
-                if (!lexer->lookahead)
-                    continue;
-
-                m_LastToken = PARAGRAPH_SEGMENT;
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
-                return true;
-            }
-
-            // Try and find an occurrence of a trailing modifier
-            if (!std::iswspace(m_Current) && lexer->lookahead == '~')
-            {
-                advance(lexer);
-
-                // If we've managed to find one then skip over the newline and continue parsing
-                if (lexer->lookahead == '\n')
-                    continue;
-            }
-            // A [ is a special symbol - it can both mean a todo item and a link
-            // Halt the parsing of the paragraph segment if such a thing is encountered
-            else if (m_TagStack.size() == 0 && (std::iswspace(m_Current) || std::iswpunct(m_Current)) && lexer->lookahead == '[')
-            {
-                m_LastToken = PARAGRAPH_SEGMENT;
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
-                return true;
-            }
-
-            advance(lexer);
-
-            if (lexer->lookahead == '\n')
-                break;
+            lexer->result_symbol = m_LastToken = WORD;
+            return true;
         }
 
-        // Mark the end of the token so any subsequent calls to advance() don't get
-        // appended to the result
-        lexer->mark_end(lexer);
+        if (lexer->lookahead == ' ' || lexer->lookahead == '\t')
+        {
+            do
+                advance(lexer);
+            while (lexer->lookahead && std::iswblank(lexer->lookahead));
 
-        // If the next char is valid then advance again
-        if (lexer->lookahead)
-            advance(lexer);
+            lexer->result_symbol = m_LastToken = SPACE;
+            return true;
+        }
 
-        // If we haven't reached EOF then treat the last call to advance() as part of the result too.
-        // We do this because otherwise the parser would read one char past EOF which would mess things up
-        if (!lexer->eof(lexer))
-            lexer->mark_end(lexer);
+        const TokenType resulting_symbol = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
 
-        m_LastToken = PARAGRAPH_SEGMENT;
-        lexer->result_symbol = PARAGRAPH_SEGMENT;
+        do
+        {
+            if (lexer->lookahead == '~')
+            {
+                advance(lexer);
 
+                if (lexer->lookahead == '\n')
+                {
+                    advance(lexer);
+
+                    if (lexer->eof(lexer) || !lexer->lookahead)
+                        return false;
+                }
+            }
+            else
+                advance(lexer);
+        }
+        while (lexer->lookahead && !std::iswspace(lexer->lookahead) && lexer->lookahead != '\\'); // TODO: Perform specific checks for attached modifiers
+
+        lexer->result_symbol = m_LastToken = resulting_symbol;
         return true;
     }
 
@@ -620,7 +616,7 @@ extern "C"
         if (tag_stack.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
-        buffer = std::copy(tag_stack.begin(), tag_stack.end(), buffer);
+        std::copy(tag_stack.begin(), tag_stack.end(), buffer);
 
         return tag_stack.size();
     }
