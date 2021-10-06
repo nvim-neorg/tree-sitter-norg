@@ -11,8 +11,16 @@ enum TokenType
 {
     NONE,
 
-    PARAGRAPH_SEGMENT,
+    SPACE,
+
+    WORD,
+    CAPITALIZED_WORD,
+
+    PARENTHESIZED_TEXT,
+
+    LINE_BREAK,
     PARAGRAPH_BREAK,
+
     ESCAPE_SEQUENCE,
 
     HEADING1,
@@ -67,6 +75,7 @@ enum TokenType
 
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
+    HORIZONTAL_LINE,
 
     LINK_BEGIN,
     LINK_END_GENERIC,
@@ -80,7 +89,6 @@ enum TokenType
     LINK_END_MARKER_REFERENCE,
 
     RANGED_TAG,
-    RANGED_TAG_NAME,
     RANGED_TAG_END,
 
     CARRYOVER_TAG,
@@ -122,18 +130,18 @@ public:
         lexer->result_symbol = NONE;
 
         // Are we at the end of file? If so, bail
-        if (!lexer->lookahead || lexer->eof(lexer))
+        if (lexer->eof(lexer) || !lexer->lookahead)
         {
             advance(lexer);
             return false;
         }
 
         // Check for an escape seqence (e.g. "\*")
-        if (lexer->lookahead == '\\')
+        if (m_TagStack.empty() && lexer->lookahead == '\\')
         {
             advance(lexer);
 
-            if (m_TagStack.empty() && lexer->lookahead)
+            if (lexer->lookahead)
             {
                 lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
                 return true;
@@ -151,8 +159,7 @@ public:
             // If we instantly close the bracket (i.e. "[]") then treat it as an empty link beginning
             if (lexer->lookahead == ']')
             {
-                advance(lexer);
-                lexer->result_symbol = m_LastToken = LINK_BEGIN;
+                lexer->result_symbol = m_LastToken = WORD;
                 return true;
             }
 
@@ -206,13 +213,25 @@ public:
             return lexer->lookahead != 0;
         }
         // Otherwise make sure to check for the existence of an opening link location
-        else if (m_TagStack.empty() && lexer->lookahead == '(')
+        else if (m_TagStack.empty() && lexer->lookahead == '(' && m_Current == ']')
             return check_link(lexer);
         // Otherwise just check whether or not we're dealing with a newline and return PARAGRAPH_BREAK if we are
         else if (lexer->lookahead == '\n')
         {
             advance(lexer);
-            lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
+
+            lexer->result_symbol = m_LastToken = LINE_BREAK;
+
+            if (lexer->eof(lexer) || !lexer->lookahead)
+                return false;
+
+            if (lexer->lookahead == '\n')
+            {
+                advance(lexer);
+
+                lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
+            }
+
             return true;
         }
 
@@ -258,11 +277,11 @@ public:
                                 while (std::iswspace(lexer->lookahead) && lexer->lookahead != '\n' && lexer->lookahead)
                                     advance(lexer);
 
-                                if (std::iswspace(lexer->lookahead) && m_TagStack.size() > 0)
+                                if (std::iswspace(lexer->lookahead) && !m_TagStack.empty())
                                 {
                                     if (m_IndentationLevel != m_TagStack.back())
                                     {
-                                        lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                                        lexer->result_symbol = m_LastToken = WORD;
                                         return true;
                                     }
                                     else
@@ -274,7 +293,7 @@ public:
                                     }
                                 }
 
-                                lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                                lexer->result_symbol = m_LastToken = WORD;
                                 return true;
                             }
                         }
@@ -364,9 +383,17 @@ public:
                     else
                     {
                         advance(lexer);
-                        lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
+                        lexer->result_symbol = m_LastToken = WORD;
                         return true;
                     }
+                }
+
+                if (check_detached(lexer, NONE, { '_' }) != NONE)
+                    return true;
+                else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
+                {
+                    lexer->result_symbol = HORIZONTAL_LINE;
+                    return true;
                 }
             }
         }
@@ -648,6 +675,9 @@ private:
 
         advance(lexer);
 
+        if (lexer->result_symbol == NONE)
+            lexer->result_symbol = m_LastToken = PARENTHESIZED_TEXT;
+
         return true;
     }
 
@@ -661,7 +691,7 @@ private:
         {
             while (lexer->lookahead && lexer->lookahead != '\n')
                 advance(lexer);
-            
+
             lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
             return true;
         }
@@ -675,20 +705,18 @@ private:
             // to allow the escape sequence to get parsed
             if (lexer->lookahead == '\\')
             {
-                lexer->mark_end(lexer);
-
+            do
                 advance(lexer);
+            while (lexer->lookahead && std::iswblank(lexer->lookahead));
 
-                if (!lexer->lookahead)
-                    continue;
-
-                m_LastToken = PARAGRAPH_SEGMENT;
-                lexer->result_symbol = PARAGRAPH_SEGMENT;
+            lexer->result_symbol = m_LastToken = SPACE;
                 return true;
             }
 
             if (m_Current == ' ' || m_Current == '\t')
             {
+                const TokenType resulting_symbol = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
+
                 if (std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(),
                     [&](const std::pair<int32_t, TokenType>& pair)
                         { return pair.first == lexer->lookahead; })
@@ -704,7 +732,6 @@ private:
             {
                 advance(lexer);
 
-                // If we've managed to find one then skip over the newline and continue parsing
                 if (lexer->lookahead == '\n')
                     continue;
             }
@@ -718,25 +745,21 @@ private:
 
             advance(lexer);
 
-            if (lexer->lookahead == '\n')
-                break;
+                    if (lexer->eof(lexer) || !lexer->lookahead)
+                        return false;
         }
-
-        // Mark the end of the token so any subsequent calls to advance() don't get
-        // appended to the result
-        lexer->mark_end(lexer);
-
-        // If the next char is valid then advance again
-        if (lexer->lookahead)
+            }
+            else
             advance(lexer);
+        }
+        while (lexer->lookahead && !std::iswspace(lexer->lookahead) && lexer->lookahead != '\\'); // TODO: Perform specific checks for attached modifiers
 
         // If we haven't reached EOF then treat the last call to advance() as part of the result too.
         // We do this because otherwise the parser would read one char past EOF which would mess things up
         if (!lexer->eof(lexer))
             lexer->mark_end(lexer);
 
-        lexer->result_symbol = m_LastToken = PARAGRAPH_SEGMENT;
-
+        lexer->result_symbol = m_LastToken = resulting_symbol;
         return true;
     }
 
@@ -761,7 +784,7 @@ private:
     std::vector<uint16_t> m_TagStack;
 
 private:
-    const std::array<int32_t, 7> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':' };
+    const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':', '_' };
     const std::array<std::pair<int32_t, TokenType>, 8> s_AttachedModifiers = { std::pair<int32_t, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', INLINE_CODE } };
 };
 

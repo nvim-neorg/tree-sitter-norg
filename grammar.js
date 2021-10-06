@@ -1,10 +1,9 @@
 /*
 * Known bugs:
-* Placing a link description at the end of an unordered list element breaks the generic_list
+* TODO: check if the following bugs are indeed still present
 * Having an unclosed attached modifier at the end of the file will cause the lexer to read one
 * char past EOF
 * For some reason creating a carryover tag at the top of the document literally crashes neovim (tf?)
-* TODO:
 * Instead of having a paragraph_segment be the smallest unit of text divide everything up into words
 * instead. Expose paragraph_break vs line_break. Allow for more granular control.
 */
@@ -13,10 +12,18 @@ module.exports = grammar({
     name: 'norg',
 
     externals: $ => [
+ 
         $._,
+        $._space,
 
-        $.paragraph_segment,
+        $.lowercase_word,
+        $.capitalized_word,
+
+        $._parenthesized_text,
+
+        $._line_break,
         $._paragraph_break,
+
         $.escape_sequence_prefix,
 
         $.heading1_prefix,
@@ -71,6 +78,7 @@ module.exports = grammar({
 
         $.strong_paragraph_delimiter,
         $.weak_paragraph_delimiter,
+        $.horizontal_line,
 
         $.link_begin,
         $.link_end_generic,
@@ -84,7 +92,6 @@ module.exports = grammar({
         $.link_end_marker_reference,
 
         $.ranged_tag_prefix,
-        $.ranged_tag_name_fallback,
         $.ranged_tag_end_prefix,
 
         $.carryover_tag_prefix,
@@ -116,6 +123,7 @@ module.exports = grammar({
                     prec(2,
                         choice(
                             $._paragraph_break,
+                            $._line_break,
                             $.ranged_tag,
                             $.insertion,
                         )
@@ -128,19 +136,27 @@ module.exports = grammar({
                 prec(1,
                     choice(
                         $._paragraph_break,
+                        $._line_break,
                         $._heading,
                         $._detached_modifier,
                         $._definition,
                         $._tag,
+                        $.horizontal_line,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
                         $.marker,
                     )
                 ),
 
-                $._paragraph,
+                $.paragraph,
                 $.strong_paragraph_delimiter,
             )
         ),
+
+        word: $ =>
+            choice(
+                alias($.lowercase_word, "_lowercase"),
+                alias($.capitalized_word, "_uppercase"),
+            ),
 
         // Any regular text
         _paragraph: $ =>
@@ -154,26 +170,59 @@ module.exports = grammar({
                 )
             ),
 
+        paragraph_segment: $ =>
+            prec.right(0,
+                seq(
+                    choice(
+                        alias($.word, "_word"),
+                        $._parenthesized_text
+                    ),
+
+                    repeat(
+                        choice(
+                            alias($.word, "_word"),
+                            $._parenthesized_text,
+                            $._space,
+                            alias(
+                                choice(
+                                    $.todo_item_done,
+                                    $.todo_item_undone,
+                                    $.todo_item_pending
+                                ),
+                            "_erroneous")
+                        ),
+                    )
+                )
+            ),
+
         paragraph: $ =>
             prec.right(0,
                 repeat1(
                     choice(
                         alias(
                             $.paragraph_segment,
-                            "_segment",
+                            "_segment"
                         ),
 
-                        $.link,
-                        $.escape_sequence,
+                        $._line_break,
+                        seq(
+                            choice(
+                                $.link,
+                                $.escape_sequence,
+                                $.bold,
+                                $.italic,
+                                $.strikethrough,
+                                $.underline,
+                                $.spoiler,
+                                $.inline_code,
+                                $.superscript,
+                                $.subscript,
+                            ),
 
-						$.bold,
-						$.italic,
-						$.strikethrough,
-						$.underline,
-    					$.spoiler,
-    					$.inline_code,
-    					$.superscript,
-    					$.subscript,
+                            optional(
+                                $._space,
+                            ),
+                        ),
                     )
                 )
             ),
@@ -536,6 +585,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -547,6 +598,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading2,
                                 $.heading3,
@@ -575,6 +627,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -586,6 +640,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading3,
                                 $.heading4,
@@ -613,6 +668,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -624,6 +681,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading4,
                                 $.heading5,
@@ -650,6 +708,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -661,6 +721,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading5,
                                 $.heading6,
@@ -686,6 +747,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -697,6 +760,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
 
                                 $.heading6,
                             )
@@ -721,6 +785,8 @@ module.exports = grammar({
                         $.paragraph_segment,
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "content",
 
@@ -732,6 +798,7 @@ module.exports = grammar({
                                 $._detached_modifier,
                                 $._definition,
                                 $._tag,
+                                $.horizontal_line,
                             )
                         )
                     ),
@@ -1221,12 +1288,15 @@ module.exports = grammar({
                         $.paragraph_segment
                     ),
 
+                    repeat(prec(1, $._line_break)),
+
                     field(
                         "subtext",
                         repeat(
                             choice(
                                 $._paragraph,
                                 $.strong_paragraph_delimiter,
+                                $.horizontal_line,
                                 $._heading,
                                 $._detached_modifier,
                                 $._definition,
@@ -1421,18 +1491,6 @@ module.exports = grammar({
                 )
             ),
 
-        word: $ =>
-            seq(
-                token(/[a-z0-9_\-\+]+/),
-                token(/[a-zA-Z0-9_\-\+]*/),
-            ),
-
-        capitalized_word: $ =>
-            seq(
-                token(/[A-Z0-9_\-\+]+/),
-                token(/[a-zA-Z0-9_\-\+]*/),
-            ),
-
         insertion: $ =>
             prec.right(0,
                 seq(
@@ -1442,7 +1500,7 @@ module.exports = grammar({
                         "item",
                         choice(
                             $.capitalized_word,
-                            $.word
+                            $.lowercase_word
                         )
                     ),
 
@@ -1522,6 +1580,7 @@ module.exports = grammar({
                     alias(
                         choice(
                             $.paragraph_segment,
+                            $._line_break,
                             $._paragraph_break,
                         ),
                         "_segment",
@@ -1650,11 +1709,16 @@ module.exports = grammar({
                 ),
             ),
 
+        tag_name_element: $ =>
+            seq(
+                token(/[a-z0-9_\-\+]+/),
+                token(/[a-zA-Z0-9_\-\+]*/),
+            ),
+
         tag_name: $ =>
             seq(
                 choice(
-                    $.word,
-                    $.ranged_tag_name_fallback,
+                    $.tag_name_element,
                 ),
 
                 repeat(
@@ -1664,7 +1728,7 @@ module.exports = grammar({
                             "_delimiter",
                         ),
 
-                        $.word,
+                        $.tag_name_element,
                     )
                 )
             ),

@@ -1,6 +1,10 @@
 name: Parser fuzzing
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      main
+  pull_request:
 
 jobs:
   fuzz_parser:
@@ -45,7 +49,7 @@ jobs:
       - name: Run fuzzer
         run: |
           cd out/results
-          ../norg_fuzzer -dict=../norg.dict -max_total_time=7200 -timeout=1 -rss_limit_mb=256 ./corpus
+          ../norg_fuzzer -dict=../norg.dict -max_total_time=7200 -timeout=1 ./corpus
 
       - name: Check corpuses
         run: |
