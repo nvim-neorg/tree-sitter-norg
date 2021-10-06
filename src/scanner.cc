@@ -562,7 +562,7 @@ private:
             else
                 advance(lexer);
         }
-        while (lexer->lookahead && !std::iswspace(lexer->lookahead)); // TODO: Perform specific checks for attached modifiers
+        while (lexer->lookahead && !std::iswspace(lexer->lookahead) && lexer->lookahead != '\\'); // TODO: Perform specific checks for attached modifiers
 
         lexer->result_symbol = m_LastToken = resulting_symbol;
         return true;
