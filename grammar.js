@@ -191,8 +191,16 @@ module.exports = grammar({
                         ),
 
                         $._line_break,
-                        $.link,
-                        $.escape_sequence
+                        seq(
+                            choice(
+                                $.link,
+                                $.escape_sequence
+                            ),
+
+                            optional(
+                                $._space,
+                            ),
+                        ),
                     )
                 )
             ),
@@ -219,7 +227,6 @@ module.exports = grammar({
                     field(
                         "location",
                         choice(
-                            $._space,
                             $.link_end_generic,
                             $.link_end_url,
                             $.link_end_heading1_reference,

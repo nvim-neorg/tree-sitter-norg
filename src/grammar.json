@@ -263,12 +263,34 @@
               "name": "_line_break"
             },
             {
-              "type": "SYMBOL",
-              "name": "link"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "escape_sequence"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "link"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "escape_sequence"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_space"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -314,10 +336,6 @@
               "content": {
                 "type": "CHOICE",
                 "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_space"
-                  },
                   {
                     "type": "SYMBOL",
                     "name": "link_end_generic"

@@ -132,7 +132,7 @@ public:
         {
             advance(lexer);
 
-            if (m_TagStack.empty() && lexer->lookahead)
+            if (lexer->lookahead)
             {
                 lexer->result_symbol = ESCAPE_SEQUENCE;
                 return true;
