@@ -211,6 +211,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "_attached_modifier"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "_space"
                 },
                 {
@@ -278,35 +282,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "bold"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "italic"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "strikethrough"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "underline"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "spoiler"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "inline_code"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "superscript"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "subscript"
+                      "name": "_attached_modifier"
                     }
                   ]
                 },
@@ -3806,6 +3782,43 @@
         {
           "type": "SYMBOL",
           "name": "insertion"
+        }
+      ]
+    },
+    "_attached_modifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "bold"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "italic"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "strikethrough"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "underline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "spoiler"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inline_code"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "superscript"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "subscript"
         }
       ]
     }

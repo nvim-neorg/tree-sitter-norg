@@ -182,6 +182,7 @@ module.exports = grammar({
                         choice(
                             alias($.word, "_word"),
                             $._parenthesized_text,
+                            $._attached_modifier,
                             $._space,
                             alias(
                                 choice(
@@ -209,14 +210,7 @@ module.exports = grammar({
                             choice(
                                 $.link,
                                 $.escape_sequence,
-                                $.bold,
-                                $.italic,
-                                $.strikethrough,
-                                $.underline,
-                                $.spoiler,
-                                $.inline_code,
-                                $.superscript,
-                                $.subscript,
+                                $._attached_modifier,
                             ),
 
                             optional(
@@ -1787,6 +1781,18 @@ module.exports = grammar({
                 $.quote,
                 $.generic_list,
                 $.insertion,
+            ),
+
+        _attached_modifier: $ =>
+            choice(
+                $.bold,
+                $.italic,
+                $.strikethrough,
+                $.underline,
+                $.spoiler,
+                $.inline_code,
+                $.superscript,
+                $.subscript,
             ),
       }
 });
