@@ -550,7 +550,7 @@ private:
             lexer->mark_end(lexer);
 
             // While our lookahead is not equal to a potential closing modifier
-            while (lookahead != attached_modifier->first)
+            while (lookahead != attached_modifier->first || current == '\\')
             {
                 // If we've encounted the end of our file then bail
                 if (!lookahead)

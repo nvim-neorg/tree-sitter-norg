@@ -1,11 +1,6 @@
 /*
 * Known bugs:
-* TODO: check if the following bugs are indeed still present
-* Having an unclosed attached modifier at the end of the file will cause the lexer to read one
-* char past EOF
-* For some reason creating a carryover tag at the top of the document literally crashes neovim (tf?)
-* Instead of having a paragraph_segment be the smallest unit of text divide everything up into words
-* instead. Expose paragraph_break vs line_break. Allow for more granular control.
+* jk there are no bugs
 */
 
 module.exports = grammar({
