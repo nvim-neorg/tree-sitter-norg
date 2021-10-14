@@ -181,9 +181,11 @@ module.exports = grammar({
                     repeat(
                         choice(
                             alias($.word, "_word"),
+
                             $._parenthesized_text,
                             $._attached_modifier,
                             $._space,
+
                             alias(
                                 choice(
                                     $.todo_item_done,

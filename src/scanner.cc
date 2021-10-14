@@ -136,6 +136,9 @@ public:
             return false;
         }
 
+        // TODO: Remove the insane amount of m_TagStack.empty() checks and put it all
+        // in one if check
+
         // Check for an escape seqence (e.g. "\*")
         if (m_TagStack.empty() && lexer->lookahead == '\\')
         {
@@ -498,6 +501,11 @@ private:
             return NONE;
     }
 
+    auto find_attached(int32_t c)
+    {
+        return std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(), [&](const std::pair<int32_t, TokenType>& pair) { return pair.first == c; });
+    }
+
     /*
      * Checks for the existence of an attached modifier
      * @param lexer - a pointer to the treesitter lexer
@@ -510,7 +518,7 @@ private:
         int32_t& current = behind ? m_Previous : m_Current;
 
         // Return an iterator to an attached modifier if one can be found
-        const auto attached_modifier = std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(), [&](const std::pair<int32_t, TokenType>& pair) { return pair.first == lookahead; });
+        const auto attached_modifier = find_attached(lookahead);
 
         // This will advance the lexer forward only if `behind` is false
         // If it's true then we may end up accidentally advancing too far
@@ -742,8 +750,8 @@ private:
     // Used for lookback
     size_t m_ParsedChars = 0, m_IndentationLevel = 0;
 
-    // Used for tags
-    std::vector<uint16_t> m_TagStack;
+    // Used for tags and things like *bold*
+    std::vector<uint16_t> m_TagStack, m_AttachedModifierStack;
 
 private:
     const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':', '_' };

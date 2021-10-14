@@ -116,11 +116,17 @@ Really malformed TODO Items
 			(unordered_list1
 				(unordered_list1_prefix)
 				content:
-					(paragraph)
+				    (paragraph
+				        (escape_sequence
+				            (escape_sequence_prefix)
+				            token: (any_char)
+				        )
+				    )
 			)
 			(unordered_list1
 				(unordered_list1_prefix)
-				content: (paragraph)
+				content:
+				    (paragraph)
 			)
 			(todo_item1
 				(unordered_list1_prefix)
