@@ -9,7 +9,7 @@ module.exports = grammar({
     externals: $ => [
  
         $._,
-        $._space,
+        $.space,
 
         $.lowercase_word,
         $.capitalized_word,
@@ -168,7 +168,7 @@ module.exports = grammar({
                         choice(
                             alias($.word, "_word"),
                             $._parenthesized_text,
-                            $._space,
+                            alias($.space, "_space"),
                             alias(
                                 choice(
                                     $.todo_item_done,
@@ -198,7 +198,7 @@ module.exports = grammar({
                             ),
 
                             optional(
-                                $._space,
+                                alias($.space, "_space"),
                             ),
                         ),
                     )

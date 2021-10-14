@@ -3129,6 +3129,10 @@
     "named": false
   },
   {
+    "type": "_space",
+    "named": false
+  },
+  {
     "type": "_suffix",
     "named": false
   },

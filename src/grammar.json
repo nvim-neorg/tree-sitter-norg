@@ -210,8 +210,13 @@
                   "name": "_parenthesized_text"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "_space"
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "space"
+                  },
+                  "named": false,
+                  "value": "_space"
                 },
                 {
                   "type": "ALIAS",
@@ -282,8 +287,13 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "_space"
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "space"
+                      },
+                      "named": false,
+                      "value": "_space"
                     },
                     {
                       "type": "BLANK"
@@ -3793,7 +3803,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_space"
+      "name": "space"
     },
     {
       "type": "SYMBOL",
