@@ -520,6 +520,8 @@ private:
         // Return an iterator to an attached modifier if one can be found
         const auto attached_modifier = find_attached(lookahead);
 
+        // std::cout << (char)current << ", " << (char)lookahead << ", " << char(!m_AttachedModifierStack.empty() ? m_AttachedModifierStack.back().first : 0) << std::endl;
+
         // This will advance the lexer forward only if `behind` is false
         // If it's true then we may end up accidentally advancing too far
         auto conditional_advance = [&](TSLexer* lx) {
@@ -529,6 +531,12 @@ private:
                 ++m_ParsedChars;
             }
         };
+
+        if (!m_AttachedModifierStack.empty())
+        {
+            advance(lexer);
+            goto parse_until_end;
+        }
 
         // Is our iterator valid? If it is then that means we've found an opening attached modifier
         if (attached_modifier != s_AttachedModifiers.end())
@@ -547,16 +555,26 @@ private:
                 return NONE;
             }
 
+        parse_until_end:
+
+            m_AttachedModifierStack.push_back(*attached_modifier);
             lexer->mark_end(lexer);
 
             // While our lookahead is not equal to a potential closing modifier
             while (lookahead != attached_modifier->first || current == '\\')
             {
+                if ((std::iswspace(current) || std::ispunct(current)) && find_attached(lookahead) != s_AttachedModifiers.end())
+                {
+                    lexer->mark_end(lexer);
+
+                    lexer->result_symbol = m_LastToken = m_AttachedModifierStack.back().second;
+                    return m_AttachedModifierStack.back().second;
+                }
+
                 // If we've encounted the end of our file then bail
                 if (!lookahead)
-                {
                     return NONE;
-                } else if (lookahead == '\n')
+                else if (lookahead == '\n')
                 {
                     conditional_advance(lexer);
 
@@ -564,9 +582,12 @@ private:
                     // and as a consequence should terminate the attached modifier
                     if (lookahead == '\n')
                     {
+                        auto ret = m_AttachedModifierStack.back().second;
+                        m_AttachedModifierStack.pop_back();
+
                         lexer->result_symbol = m_LastToken = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
                         lexer->mark_end(lexer);
-                        return attached_modifier->second;
+                        return ret;
                     }
                 }
 
@@ -599,8 +620,11 @@ private:
                             lexer->mark_end(lexer);
                     }
 
-                    lexer->result_symbol = m_LastToken = attached_modifier->second;
-                    return attached_modifier->second;
+                    auto ret = m_AttachedModifierStack.back().second;
+                    m_AttachedModifierStack.pop_back();
+
+                    lexer->result_symbol = m_LastToken = ret;
+                    return ret;
                 }
             }
         }
@@ -751,7 +775,8 @@ private:
     size_t m_ParsedChars = 0, m_IndentationLevel = 0;
 
     // Used for tags and things like *bold*
-    std::vector<uint16_t> m_TagStack, m_AttachedModifierStack;
+    std::vector<uint16_t> m_TagStack;
+    std::vector<std::pair<int32_t, TokenType>> m_AttachedModifierStack;
 
 private:
     const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':', '_' };
