@@ -518,7 +518,7 @@ private:
         int32_t& current = behind ? m_Previous : m_Current;
 
         // Return an iterator to an attached modifier if one can be found
-        const auto attached_modifier = find_attached(lookahead);
+        const auto attached_modifier = m_AttachedModifierStack.empty() ? find_attached(lookahead) : &m_AttachedModifierStack.back();
 
         // std::cout << (char)current << ", " << (char)lookahead << ", " << char(!m_AttachedModifierStack.empty() ? m_AttachedModifierStack.back().first : 0) << std::endl;
 
@@ -535,6 +535,14 @@ private:
         if (!m_AttachedModifierStack.empty())
         {
             advance(lexer);
+
+            if (find_attached(m_Current) != s_AttachedModifiers.end() && (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
+            {
+                m_AttachedModifierStack.pop_back();
+                lexer->result_symbol = m_LastToken = attached_modifier->second;
+                return m_LastToken;
+            }
+
             goto parse_until_end;
         }
 
@@ -555,20 +563,24 @@ private:
                 return NONE;
             }
 
-        parse_until_end:
-
             m_AttachedModifierStack.push_back(*attached_modifier);
+
+        parse_until_end:
             lexer->mark_end(lexer);
 
             // While our lookahead is not equal to a potential closing modifier
             while (lookahead != attached_modifier->first || current == '\\')
             {
-                if ((std::iswspace(current) || std::ispunct(current)) && find_attached(lookahead) != s_AttachedModifiers.end())
+                auto attached = find_attached(lookahead);
+
+                if ((std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
                 {
                     lexer->mark_end(lexer);
 
                     lexer->result_symbol = m_LastToken = m_AttachedModifierStack.back().second;
-                    return m_AttachedModifierStack.back().second;
+
+                    m_AttachedModifierStack.push_back(*attached);
+                    return m_LastToken;
                 }
 
                 // If we've encounted the end of our file then bail
@@ -582,12 +594,11 @@ private:
                     // and as a consequence should terminate the attached modifier
                     if (lookahead == '\n')
                     {
-                        auto ret = m_AttachedModifierStack.back().second;
                         m_AttachedModifierStack.pop_back();
 
                         lexer->result_symbol = m_LastToken = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
                         lexer->mark_end(lexer);
-                        return ret;
+                        return attached_modifier->second;
                     }
                 }
 
@@ -620,11 +631,10 @@ private:
                             lexer->mark_end(lexer);
                     }
 
-                    auto ret = m_AttachedModifierStack.back().second;
                     m_AttachedModifierStack.pop_back();
 
-                    lexer->result_symbol = m_LastToken = ret;
-                    return ret;
+                    lexer->result_symbol = m_LastToken = attached_modifier->second;
+                    return attached_modifier->second;
                 }
             }
         }

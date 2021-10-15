@@ -1,6 +1,6 @@
 /*
 * Known bugs:
-* jk there are no bugs
+* - Headings aren't detected properly and carry over too far
 */
 
 module.exports = grammar({
