@@ -105,6 +105,17 @@ enum TokenType
     INLINE_CODE,
     SUPERSCRIPT,
     SUBSCRIPT,
+
+    BOLD_WITH_NEST,
+    ITALIC_WITH_NEST,
+    STRIKETHROUGH_WITH_NEST,
+    UNDERLINE_WITH_NEST,
+    SPOILER_WITH_NEST,
+    INLINE_CODE_WITH_NEST,
+    SUPERSCRIPT_WITH_NEST,
+    SUBSCRIPT_WITH_NEST,
+
+    MARKUP_END,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -539,6 +550,14 @@ private:
             if (find_attached(m_Current) != s_AttachedModifiers.end() && (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
             {
                 m_AttachedModifierStack.pop_back();
+
+                if (m_AttachedModifierStack.empty() && m_NestedModifiers)
+                {
+                    m_NestedModifiers = false;
+                    lexer->result_symbol = m_LastToken = MARKUP_END;
+                    return m_LastToken;
+                }
+
                 lexer->result_symbol = m_LastToken = attached_modifier->second;
                 return m_LastToken;
             }
@@ -562,7 +581,6 @@ private:
                 conditional_advance(lexer);
                 return NONE;
             }
-
             m_AttachedModifierStack.push_back(*attached_modifier);
 
         parse_until_end:
@@ -573,12 +591,13 @@ private:
             {
                 auto attached = find_attached(lookahead);
 
-                if ((std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
+                if (attached_modifier->second != INLINE_CODE && (std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
                 {
+                    m_NestedModifiers = true;
+
                     lexer->mark_end(lexer);
 
-                    lexer->result_symbol = m_LastToken = m_AttachedModifierStack.back().second;
-
+                    lexer->result_symbol = m_LastToken = static_cast<TokenType>(attached_modifier->second + 8);
                     m_AttachedModifierStack.push_back(*attached);
                     return m_LastToken;
                 }
@@ -594,7 +613,7 @@ private:
                     // and as a consequence should terminate the attached modifier
                     if (lookahead == '\n')
                     {
-                        m_AttachedModifierStack.pop_back();
+                        m_AttachedModifierStack.clear();
 
                         lexer->result_symbol = m_LastToken = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
                         lexer->mark_end(lexer);
@@ -632,6 +651,13 @@ private:
                     }
 
                     m_AttachedModifierStack.pop_back();
+
+                    if (m_AttachedModifierStack.empty() && m_NestedModifiers)
+                    {
+                        m_NestedModifiers = false;
+                        lexer->result_symbol = m_LastToken = MARKUP_END;
+                        return m_LastToken;
+                    }
 
                     lexer->result_symbol = m_LastToken = attached_modifier->second;
                     return attached_modifier->second;
@@ -787,6 +813,7 @@ private:
     // Used for tags and things like *bold*
     std::vector<uint16_t> m_TagStack;
     std::vector<std::pair<int32_t, TokenType>> m_AttachedModifierStack;
+    bool m_NestedModifiers = false;
 
 private:
     const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':', '_' };

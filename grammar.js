@@ -95,14 +95,25 @@ module.exports = grammar({
         $.multi_definition_prefix,
         $.multi_definition_suffix,
 
-        $.bold,
-        $.italic,
-        $.strikethrough,
-        $.underline,
-        $.spoiler,
+        $.bold_segment,
+        $.italic_segment,
+        $.strikethrough_segment,
+        $.underline_segment,
+        $.spoiler_segment,
         $.inline_code,
-        $.superscript,
-        $.subscript,
+        $.superscript_segment,
+        $.subscript_segment,
+
+        $.bold_segment_with_nest,
+        $.italic_segment_with_nest,
+        $.strikethrough_segment_with_nest,
+        $.underline_segment_with_nest,
+        $.spoiler_segment_with_nest,
+        $.inline_code_with_nest,
+        $.superscript_segment_with_nest,
+        $.subscript_segment_with_nest,
+
+        $.markup_end,
       ],
 
       rules: {
@@ -216,6 +227,64 @@ module.exports = grammar({
                         ),
                     )
                 )
+            ),
+
+        // ---- ATTACHED MODIFIERS ----
+        bold: $ =>
+            prec.left(0,
+                choice(
+                    $.bold_segment,
+                    seq(
+                        $.bold_segment_with_nest,
+                        seq(
+                            repeat1(
+                                choice(
+                                    $.italic,
+                                    $.underline,
+                                ),
+                            ),
+                            $.markup_end,
+                        )
+                    ),
+                ),
+            ),
+
+        italic: $ =>
+            prec.left(1,
+                choice(
+                    $.italic_segment,
+                    seq(
+                        $.italic_segment_with_nest,
+                        seq(
+                            repeat1(
+                                choice(
+                                    $.bold,
+                                    $.underline,
+                                ),
+                            ),
+                            $.markup_end,
+                        )
+                    ),
+                ),
+            ),
+
+        underline: $ =>
+            prec.left(1,
+                choice(
+                    $.underline_segment,
+                    seq(
+                        $.underline_segment_with_nest,
+                        seq(
+                            repeat1(
+                                choice(
+                                    $.bold,
+                                    $.italic,
+                                ),
+                            ),
+                            $.markup_end,
+                        )
+                    ),
+                ),
             ),
 
         // Well, any character
@@ -1780,16 +1849,25 @@ module.exports = grammar({
                 $.insertion,
             ),
 
+        _attached_modifier_segment: $ =>
+            choice(
+                $.bold_segment,
+                $.italic_segment,
+                $.strikethrough_segment,
+                $.underline_segment,
+                $.spoiler_segment,
+                $.inline_code,
+                $.superscript_segment,
+                $.subscript_segment,
+                $.markup_end,
+            ),
+
         _attached_modifier: $ =>
             choice(
                 $.bold,
                 $.italic,
-                $.strikethrough,
-                $.underline,
-                $.spoiler,
-                $.inline_code,
-                $.superscript,
-                $.subscript,
+                /* $.strikethrough,
+                $.underline, */
             ),
       }
 });
