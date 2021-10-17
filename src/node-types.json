@@ -12,7 +12,31 @@
           "named": true
         },
         {
+          "type": "inline_code",
+          "named": true
+        },
+        {
           "type": "italic",
+          "named": true
+        },
+        {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript",
+          "named": true
+        },
+        {
+          "type": "underline",
           "named": true
         }
       ]
@@ -45,6 +69,22 @@
         },
         {
           "type": "markup_end",
+          "named": true
+        },
+        {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript",
           "named": true
         },
         {
@@ -989,6 +1029,22 @@
           "named": true
         },
         {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript",
+          "named": true
+        },
+        {
           "type": "underline",
           "named": true
         }
@@ -1844,11 +1900,35 @@
           "named": true
         },
         {
+          "type": "inline_code",
+          "named": true
+        },
+        {
           "type": "italic",
           "named": true
         },
         {
           "type": "link",
+          "named": true
+        },
+        {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript",
+          "named": true
+        },
+        {
+          "type": "underline",
           "named": true
         }
       ]
@@ -1867,7 +1947,31 @@
           "named": true
         },
         {
+          "type": "inline_code",
+          "named": true
+        },
+        {
           "type": "italic",
+          "named": true
+        },
+        {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript",
+          "named": true
+        },
+        {
+          "type": "underline",
           "named": true
         }
       ]
@@ -2216,6 +2320,194 @@
       "types": [
         {
           "type": "single_definition_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spoiler",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bold",
+          "named": true
+        },
+        {
+          "type": "italic",
+          "named": true
+        },
+        {
+          "type": "markup_end",
+          "named": true
+        },
+        {
+          "type": "spoiler_segment",
+          "named": true
+        },
+        {
+          "type": "spoiler_segment_with_nest",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript",
+          "named": true
+        },
+        {
+          "type": "underline",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "strikethrough",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bold",
+          "named": true
+        },
+        {
+          "type": "italic",
+          "named": true
+        },
+        {
+          "type": "markup_end",
+          "named": true
+        },
+        {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough_segment",
+          "named": true
+        },
+        {
+          "type": "strikethrough_segment_with_nest",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript",
+          "named": true
+        },
+        {
+          "type": "underline",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subscript",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bold",
+          "named": true
+        },
+        {
+          "type": "italic",
+          "named": true
+        },
+        {
+          "type": "markup_end",
+          "named": true
+        },
+        {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript_segment",
+          "named": true
+        },
+        {
+          "type": "subscript_segment_with_nest",
+          "named": true
+        },
+        {
+          "type": "superscript",
+          "named": true
+        },
+        {
+          "type": "underline",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "superscript",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bold",
+          "named": true
+        },
+        {
+          "type": "italic",
+          "named": true
+        },
+        {
+          "type": "markup_end",
+          "named": true
+        },
+        {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript_segment",
+          "named": true
+        },
+        {
+          "type": "superscript_segment_with_nest",
+          "named": true
+        },
+        {
+          "type": "underline",
           "named": true
         }
       ]
@@ -2599,6 +2891,22 @@
         },
         {
           "type": "markup_end",
+          "named": true
+        },
+        {
+          "type": "spoiler",
+          "named": true
+        },
+        {
+          "type": "strikethrough",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        },
+        {
+          "type": "superscript",
           "named": true
         },
         {
@@ -3470,7 +3778,15 @@
     "named": true
   },
   {
+    "type": "spoiler_segment_with_nest",
+    "named": true
+  },
+  {
     "type": "strikethrough_segment",
+    "named": true
+  },
+  {
+    "type": "strikethrough_segment_with_nest",
     "named": true
   },
   {
@@ -3482,7 +3798,15 @@
     "named": true
   },
   {
+    "type": "subscript_segment_with_nest",
+    "named": true
+  },
+  {
     "type": "superscript_segment",
+    "named": true
+  },
+  {
+    "type": "superscript_segment_with_nest",
     "named": true
   },
   {
