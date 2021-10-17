@@ -353,7 +353,7 @@
     },
     "italic": {
       "type": "PREC_LEFT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "CHOICE",
         "members": [

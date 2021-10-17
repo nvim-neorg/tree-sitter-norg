@@ -1,6 +1,7 @@
 /*
 * Known bugs:
 * - Headings aren't detected properly and carry over too far
+* - markup_end doesn't get placed where necessary
 */
 
 module.exports = grammar({
@@ -236,6 +237,7 @@ module.exports = grammar({
                     $.bold_segment,
                     seq(
                         $.bold_segment_with_nest,
+
                         seq(
                             repeat1(
                                 choice(
@@ -250,7 +252,7 @@ module.exports = grammar({
             ),
 
         italic: $ =>
-            prec.left(1,
+            prec.left(0,
                 choice(
                     $.italic_segment,
                     seq(
@@ -272,6 +274,7 @@ module.exports = grammar({
             prec.left(1,
                 choice(
                     $.underline_segment,
+
                     seq(
                         $.underline_segment_with_nest,
                         seq(

@@ -7,6 +7,8 @@
 #include <string>
 #include <cwctype>
 
+#define NESTED_MASK 8
+
 enum TokenType
 {
     NONE,
@@ -162,6 +164,13 @@ public:
             }
             else
                 return false;
+        }
+
+        if (!m_AttachedModifierStack.empty() && m_AttachedModifierStack.back().second == MARKUP_END)
+        {
+            m_AttachedModifierStack.pop_back();
+            lexer->result_symbol = m_LastToken = MARKUP_END;
+            return m_LastToken;
         }
 
         // If we are not in a tag and we have a square bracket opening then try matching
@@ -545,7 +554,7 @@ private:
 
         if (!m_AttachedModifierStack.empty())
         {
-            advance(lexer);
+            conditional_advance(lexer);
 
             if (find_attached(m_Current) != s_AttachedModifiers.end() && (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
             {
@@ -577,10 +586,11 @@ private:
             // If we have another attached modifier of the same type right after then do not count it
             // e.g. if our input is "**" it'll get discarded and treated as a PARAGRAPH_SEGMENT instead
             if (lookahead == attached_modifier->first)
-            {
+            { 
                 conditional_advance(lexer);
                 return NONE;
             }
+
             m_AttachedModifierStack.push_back(*attached_modifier);
 
         parse_until_end:
@@ -596,9 +606,11 @@ private:
                     m_NestedModifiers = true;
 
                     lexer->mark_end(lexer);
+                    lexer->result_symbol = m_LastToken = static_cast<TokenType>(attached_modifier->second + NESTED_MASK);
 
-                    lexer->result_symbol = m_LastToken = static_cast<TokenType>(attached_modifier->second + 8);
+                    m_AttachedModifierStack.push_back({ ' ', MARKUP_END });
                     m_AttachedModifierStack.push_back(*attached);
+
                     return m_LastToken;
                 }
 
@@ -652,7 +664,7 @@ private:
 
                     m_AttachedModifierStack.pop_back();
 
-                    if (m_AttachedModifierStack.empty() && m_NestedModifiers)
+                    if (!m_AttachedModifierStack.empty() && m_NestedModifiers)
                     {
                         m_NestedModifiers = false;
                         lexer->result_symbol = m_LastToken = MARKUP_END;
@@ -745,7 +757,8 @@ private:
     }
 
     /*
-     * Simply parses any line (also called a paragraph segment)
+     * Simply parses any word (segment containing consecutive non-whitespace characters)
+     * If in a tag (m_TagStack.empty() == false) parse_text parses till a newline is encountered
      */
     bool parse_text(TSLexer* lexer)
     {
@@ -787,7 +800,7 @@ private:
             else
                 advance(lexer);
         }
-        while (lexer->lookahead && !std::iswspace(lexer->lookahead) && lexer->lookahead != '\\'); // TODO: Perform specific checks for attached modifiers
+        while (lexer->lookahead && !std::iswspace(lexer->lookahead) && lexer->lookahead != '\\');
 
         lexer->result_symbol = m_LastToken = resulting_symbol;
         return true;
