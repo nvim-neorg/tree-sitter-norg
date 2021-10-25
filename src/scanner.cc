@@ -522,6 +522,9 @@ private:
                         lexer->result_symbol = m_LastToken = LINK_FILE_BEGIN;
                         break;
                     default:
+                        if (m_LastToken == LINK_FILE_END)
+                            return false;
+
                         lexer->result_symbol = m_LastToken = LINK_END_URL;
                         return true;
                 }
