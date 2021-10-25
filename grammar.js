@@ -1,6 +1,7 @@
 /*
 * Known bugs
-* jk there are no bugs
+* Consecutive unordered links get stored as separate generic lists
+* Items like `[this]` get parsed as a link and error out
 */
 
 module.exports = grammar({
@@ -165,26 +166,13 @@ module.exports = grammar({
 
         paragraph_segment: $ =>
             prec.right(0,
-                seq(
+                repeat1(
                     choice(
                         alias($.word, "_word"),
+                        alias($.space, "_space"),
+                        $.link,
+                        $.escape_sequence,
                     ),
-
-                    repeat(
-                        choice(
-                            alias($.word, "_word"),
-                            alias($.space, "_space"),
-                            $.link,
-                            $.escape_sequence,
-                            alias(
-                                choice(
-                                    $.todo_item_done,
-                                    $.todo_item_undone,
-                                    $.todo_item_pending
-                                ),
-                            "_erroneous")
-                        ),
-                    )
                 )
             ),
 
@@ -216,7 +204,7 @@ module.exports = grammar({
         link_text: $ =>
             seq(
                 $.link_text_prefix,
-                field("link_text", $.text),
+                field("link_text", optional($.text)),
                 $.link_text_suffix,
             ),
 

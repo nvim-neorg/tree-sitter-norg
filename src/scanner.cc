@@ -150,34 +150,22 @@ public:
 
         if (m_LastToken >= LINK_TEXT_PREFIX && m_LastToken < LINK_LOCATION_SUFFIX)
             return parse_link(lexer);
-
         // If we are not in a tag and we have a square bracket opening then try matching
         // either a todo item or beginning of a list
-        if (m_TagStack.empty() && lexer->lookahead == '[')
+        else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 && lexer->lookahead == '[')
         {
             advance(lexer);
 
             if (lexer->lookahead == ']')
             {
-                lexer->result_symbol = m_LastToken = WORD;
+                lexer->result_symbol = m_LastToken = LINK_TEXT_PREFIX;
                 return true;
             }
 
             lexer->mark_end(lexer);
 
-            // Move over any whitespace
-            while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
-                advance(lexer);
-
             switch (lexer->lookahead)
             {
-                // Did we encounter the end bracket? We've just dealt with an undone todo item
-                // ([ ])
-                case ']':
-                    advance(lexer);
-                    lexer->mark_end(lexer);
-                    lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
-                    return true;
                 // We're dealing with a pending item ([*])
                 case '*':
                     lexer->result_symbol = m_LastToken = TODO_ITEM_PENDING;
@@ -186,27 +174,27 @@ public:
                 case 'x':
                     lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
                     break;
+                case ' ':
+                    lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
+                    break;
                 case '\0':
                     advance(lexer);
                     return false;
             }
 
-            while (lexer->lookahead && std::iswspace(lexer->lookahead))
-                advance(lexer);
+            advance(lexer); // Move past the matched element (*/x/ )
 
             if (lexer->lookahead == ']')
             {
-                // Move past the closing ] character
                 advance(lexer);
                 lexer->mark_end(lexer);
+                return true;
             }
             else
             {
-                lexer->result_symbol = m_LastToken = LINK_TEXT_PREFIX;
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_PREFIX;
                 return true;
             }
-
-            return lexer->lookahead != 0;
         }
         // Otherwise make sure to check for the existence of an opening link location
         else if (m_TagStack.empty() && (lexer->lookahead == '[' || (m_LastToken >= LINK_TEXT_PREFIX && m_LastToken < LINK_LOCATION_SUFFIX)))
@@ -502,8 +490,6 @@ private:
                 advance(lexer);
                 return true;
             case LINK_TEXT_SUFFIX:
-                if (!lexer->lookahead || lexer->lookahead != '(')
-                    return false;
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_PREFIX;
                 return true;
@@ -535,8 +521,9 @@ private:
                         advance(lexer);
                         lexer->result_symbol = m_LastToken = LINK_FILE_BEGIN;
                         break;
-                    default: // TODO: Implement hyperlink parsing
-                        return false;
+                    default:
+                        lexer->result_symbol = m_LastToken = LINK_END_URL;
+                        return true;
                 }
 
                 return true;
@@ -562,6 +549,9 @@ private:
             default:
                 if (m_LastToken >= LINK_END_GENERIC && m_LastToken <= LINK_END_MARKER_REFERENCE)
                 {
+                    if (lexer->lookahead == ')' && m_Current != '\\')
+                        return false;
+
                     while (lexer->lookahead)
                     {
                         if (lexer->lookahead == ')' && m_Current != '\\')
@@ -571,7 +561,7 @@ private:
                         {
                             advance(lexer);
                             if (!lexer->lookahead || lexer->lookahead == '\n')
-                                break;
+                            break;
                         }
 
                         advance(lexer);

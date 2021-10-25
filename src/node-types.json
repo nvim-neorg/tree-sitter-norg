@@ -1073,7 +1073,7 @@
     "fields": {
       "link_text": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "text",
@@ -3236,10 +3236,6 @@
   },
   {
     "type": "_delimiter",
-    "named": false
-  },
-  {
-    "type": "_erroneous",
     "named": false
   },
   {
