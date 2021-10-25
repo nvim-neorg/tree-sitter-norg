@@ -14,8 +14,6 @@ module.exports = grammar({
         $.lowercase_word,
         $.capitalized_word,
 
-        $._parenthesized_text,
-
         $._line_break,
         $._paragraph_break,
 
@@ -75,7 +73,15 @@ module.exports = grammar({
         $.weak_paragraph_delimiter,
         $.horizontal_line,
 
-        $.link_begin,
+        $.link_text_prefix,
+        $.text,
+        $.link_text_suffix,
+
+        $.link_location_prefix,
+        $.link_file_begin,
+        $.link_file_location,
+        $.link_file_end,
+
         $.link_end_generic,
         $.link_end_url,
         $.link_end_heading1_reference,
@@ -85,6 +91,7 @@ module.exports = grammar({
         $.link_end_heading5_reference,
         $.link_end_heading6_reference,
         $.link_end_marker_reference,
+        $.link_location_suffix,
 
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
@@ -161,14 +168,14 @@ module.exports = grammar({
                 seq(
                     choice(
                         alias($.word, "_word"),
-                        $._parenthesized_text
                     ),
 
                     repeat(
                         choice(
                             alias($.word, "_word"),
-                            $._parenthesized_text,
                             alias($.space, "_space"),
+                            $.link,
+                            $.escape_sequence,
                             alias(
                                 choice(
                                     $.todo_item_done,
@@ -185,22 +192,8 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        alias(
-                            $.paragraph_segment,
-                            "_segment"
-                        ),
-
+                        $.paragraph_segment,
                         $._line_break,
-                        seq(
-                            choice(
-                                $.link,
-                                $.escape_sequence
-                            ),
-
-                            optional(
-                                alias($.space, "_space"),
-                            ),
-                        ),
                     )
                 )
             ),
@@ -220,25 +213,48 @@ module.exports = grammar({
                 )
             ),
 
+        link_text: $ =>
+            seq(
+                $.link_text_prefix,
+                field("link_text", $.text),
+                $.link_text_suffix,
+            ),
+
+        link_file: $ =>
+            seq(
+                $.link_file_begin,
+                field("location", $.link_file_location),
+                $.link_file_end,
+            ),
+        
+        link_end: $ =>
+            seq(
+                field("type", choice(
+                    $.link_end_url,
+                    $.link_end_generic,
+                    $.link_end_marker_reference,
+                    $.link_end_heading1_reference,
+                    $.link_end_heading2_reference,
+                    $.link_end_heading3_reference,
+                    $.link_end_heading4_reference,
+                    $.link_end_heading5_reference,
+                    $.link_end_heading6_reference,
+                )),
+                $.text,
+            ),
+
+        link_location: $ =>
+            seq(
+                $.link_location_prefix,
+                optional($.link_file),
+                $.link_end,
+                $.link_location_suffix,
+            ),
+
         link: $ =>
             seq(
-                $.link_begin,
-                optional(
-                    field(
-                        "location",
-                        choice(
-                            $.link_end_generic,
-                            $.link_end_url,
-                            $.link_end_heading1_reference,
-                            $.link_end_heading2_reference,
-                            $.link_end_heading3_reference,
-                            $.link_end_heading4_reference,
-                            $.link_end_heading5_reference,
-                            $.link_end_heading6_reference,
-                            $.link_end_marker_reference,
-                        )
-                    )
-                )
+                $.link_text,
+                $.link_location,
             ),
 
         unordered_link1: $ =>
@@ -1553,20 +1569,22 @@ module.exports = grammar({
 
         // TODO: Comment scanner code
         ranged_tag_content: $ =>
-            repeat1(
-                choice(
-                    alias(
-                        choice(
-                            $.paragraph_segment,
-                            $._line_break,
-                            $._paragraph_break,
+            prec.right(0, 
+                repeat1(
+                    choice(
+                        alias(
+                            choice(
+                                $.paragraph_segment,
+                                $._line_break,
+                                $._paragraph_break,
+                            ),
+                            "_segment",
                         ),
-                        "_segment",
-                    ),
 
-                    field(
-                        "nested_tag",
-                        $.ranged_tag
+                        field(
+                            "nested_tag",
+                            $.ranged_tag
+                        ),
                     ),
                 ),
             ),
@@ -1622,8 +1640,8 @@ module.exports = grammar({
                         ),
                     ),
 
-                    $.ranged_tag_end,
-                )
+                    optional($.ranged_tag_end),
+                ),
             ),
 
         carryover_tag_set: $ =>

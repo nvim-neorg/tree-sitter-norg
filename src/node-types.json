@@ -2,7 +2,21 @@
   {
     "type": "_segment",
     "named": false,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "_word",
@@ -922,10 +936,29 @@
   {
     "type": "link",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "link_location",
+          "named": true
+        },
+        {
+          "type": "link_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "link_end",
+    "named": true,
     "fields": {
-      "location": {
+      "type": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "link_end_generic",
@@ -971,7 +1004,94 @@
       "required": true,
       "types": [
         {
-          "type": "link_begin",
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "link_file",
+    "named": true,
+    "fields": {
+      "location": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "link_file_location",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "link_file_begin",
+          "named": true
+        },
+        {
+          "type": "link_file_end",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "link_location",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "link_end",
+          "named": true
+        },
+        {
+          "type": "link_file",
+          "named": true
+        },
+        {
+          "type": "link_location_prefix",
+          "named": true
+        },
+        {
+          "type": "link_location_suffix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "link_text",
+    "named": true,
+    "fields": {
+      "link_text": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "text",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "link_text_prefix",
+          "named": true
+        },
+        {
+          "type": "link_text_suffix",
           "named": true
         }
       ]
@@ -1760,6 +1880,21 @@
       "required": false,
       "types": [
         {
+          "type": "paragraph_segment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "paragraph_segment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
           "type": "escape_sequence",
           "named": true
         },
@@ -1769,11 +1904,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "paragraph_segment",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "quote",
@@ -2053,7 +2183,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "ranged_tag_end",
@@ -3185,10 +3315,6 @@
     "named": true
   },
   {
-    "type": "link_begin",
-    "named": true
-  },
-  {
     "type": "link_end_generic",
     "named": true
   },
@@ -3222,6 +3348,34 @@
   },
   {
     "type": "link_end_url",
+    "named": true
+  },
+  {
+    "type": "link_file_begin",
+    "named": true
+  },
+  {
+    "type": "link_file_end",
+    "named": true
+  },
+  {
+    "type": "link_file_location",
+    "named": true
+  },
+  {
+    "type": "link_location_prefix",
+    "named": true
+  },
+  {
+    "type": "link_location_suffix",
+    "named": true
+  },
+  {
+    "type": "link_text_prefix",
+    "named": true
+  },
+  {
+    "type": "link_text_suffix",
     "named": true
   },
   {
@@ -3318,6 +3472,10 @@
   },
   {
     "type": "strong_paragraph_delimiter",
+    "named": true
+  },
+  {
+    "type": "text",
     "named": true
   },
   {
