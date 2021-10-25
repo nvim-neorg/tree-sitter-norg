@@ -203,16 +203,16 @@ module.exports = grammar({
 
         link_text: $ =>
             seq(
-                $.link_text_prefix,
+                alias($.link_text_prefix, "_prefix"),
                 field("link_text", optional($.text)),
-                $.link_text_suffix,
+                alias($.link_text_suffix, "_suffix"),
             ),
 
         link_file: $ =>
             seq(
-                $.link_file_begin,
+                alias($.link_file_begin, "_prefix"),
                 field("location", $.link_file_location),
-                $.link_file_end,
+                alias($.link_file_end, "_suffix"),
             ),
         
         link_end: $ =>
@@ -233,10 +233,10 @@ module.exports = grammar({
 
         link_location: $ =>
             seq(
-                $.link_location_prefix,
+                alias($.link_location_prefix, "_prefix"),
                 optional($.link_file),
                 $.link_end,
-                $.link_location_suffix,
+                alias($.link_location_suffix, "_suffix"),
             ),
 
         link: $ =>

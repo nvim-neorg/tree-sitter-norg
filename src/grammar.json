@@ -253,8 +253,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "link_text_prefix"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_text_prefix"
+          },
+          "named": false,
+          "value": "_prefix"
         },
         {
           "type": "FIELD",
@@ -273,8 +278,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "link_text_suffix"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_text_suffix"
+          },
+          "named": false,
+          "value": "_suffix"
         }
       ]
     },
@@ -282,8 +292,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "link_file_begin"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_file_begin"
+          },
+          "named": false,
+          "value": "_prefix"
         },
         {
           "type": "FIELD",
@@ -294,8 +309,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "link_file_end"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_file_end"
+          },
+          "named": false,
+          "value": "_suffix"
         }
       ]
     },
@@ -357,8 +377,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "link_location_prefix"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_location_prefix"
+          },
+          "named": false,
+          "value": "_prefix"
         },
         {
           "type": "CHOICE",
@@ -377,8 +402,13 @@
           "name": "link_end"
         },
         {
-          "type": "SYMBOL",
-          "name": "link_location_suffix"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_location_suffix"
+          },
+          "named": false,
+          "value": "_suffix"
         }
       ]
     },

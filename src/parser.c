@@ -9,7 +9,7 @@
 #define STATE_COUNT 1502
 #define LARGE_STATE_COUNT 202
 #define SYMBOL_COUNT 199
-#define ALIAS_COUNT 5
+#define ALIAS_COUNT 4
 #define TOKEN_COUNT 85
 #define EXTERNAL_TOKEN_COUNT 74
 #define FIELD_COUNT 16
@@ -217,9 +217,8 @@ enum {
   aux_sym_tag_parameters_repeat1 = 198,
   anon_alias_sym__lowercase = 199,
   anon_alias_sym__segment = 200,
-  anon_alias_sym__suffix = 201,
-  anon_alias_sym__uppercase = 202,
-  anon_alias_sym__word = 203,
+  anon_alias_sym__uppercase = 201,
+  anon_alias_sym__word = 202,
 };
 
 static const char * const ts_symbol_names[] = {
@@ -285,13 +284,13 @@ static const char * const ts_symbol_names[] = {
   [sym_strong_paragraph_delimiter] = "strong_paragraph_delimiter",
   [sym_weak_paragraph_delimiter] = "weak_paragraph_delimiter",
   [sym_horizontal_line] = "horizontal_line",
-  [sym_link_text_prefix] = "link_text_prefix",
+  [sym_link_text_prefix] = "_prefix",
   [sym_text] = "text",
-  [sym_link_text_suffix] = "link_text_suffix",
-  [sym_link_location_prefix] = "link_location_prefix",
-  [sym_link_file_begin] = "link_file_begin",
+  [sym_link_text_suffix] = "_suffix",
+  [sym_link_location_prefix] = "_prefix",
+  [sym_link_file_begin] = "_prefix",
   [sym_link_file_location] = "link_file_location",
-  [sym_link_file_end] = "link_file_end",
+  [sym_link_file_end] = "_suffix",
   [sym_link_end_generic] = "link_end_generic",
   [sym_link_end_url] = "link_end_url",
   [sym_link_end_heading1_reference] = "link_end_heading1_reference",
@@ -301,7 +300,7 @@ static const char * const ts_symbol_names[] = {
   [sym_link_end_heading5_reference] = "link_end_heading5_reference",
   [sym_link_end_heading6_reference] = "link_end_heading6_reference",
   [sym_link_end_marker_reference] = "link_end_marker_reference",
-  [sym_link_location_suffix] = "link_location_suffix",
+  [sym_link_location_suffix] = "_suffix",
   [sym_ranged_tag_prefix] = "_prefix",
   [sym_ranged_tag_end_prefix] = "_prefix",
   [sym_carryover_tag_prefix] = "_prefix",
@@ -424,7 +423,6 @@ static const char * const ts_symbol_names[] = {
   [aux_sym_tag_parameters_repeat1] = "tag_parameters_repeat1",
   [anon_alias_sym__lowercase] = "_lowercase",
   [anon_alias_sym__segment] = "_segment",
-  [anon_alias_sym__suffix] = "_suffix",
   [anon_alias_sym__uppercase] = "_uppercase",
   [anon_alias_sym__word] = "_word",
 };
@@ -495,10 +493,10 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_link_text_prefix] = sym_link_text_prefix,
   [sym_text] = sym_text,
   [sym_link_text_suffix] = sym_link_text_suffix,
-  [sym_link_location_prefix] = sym_link_location_prefix,
-  [sym_link_file_begin] = sym_link_file_begin,
+  [sym_link_location_prefix] = sym_link_text_prefix,
+  [sym_link_file_begin] = sym_link_text_prefix,
   [sym_link_file_location] = sym_link_file_location,
-  [sym_link_file_end] = sym_link_file_end,
+  [sym_link_file_end] = sym_link_text_suffix,
   [sym_link_end_generic] = sym_link_end_generic,
   [sym_link_end_url] = sym_link_end_url,
   [sym_link_end_heading1_reference] = sym_link_end_heading1_reference,
@@ -508,10 +506,10 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_link_end_heading5_reference] = sym_link_end_heading5_reference,
   [sym_link_end_heading6_reference] = sym_link_end_heading6_reference,
   [sym_link_end_marker_reference] = sym_link_end_marker_reference,
-  [sym_link_location_suffix] = sym_link_location_suffix,
-  [sym_ranged_tag_prefix] = sym_ranged_tag_prefix,
-  [sym_ranged_tag_end_prefix] = sym_ranged_tag_prefix,
-  [sym_carryover_tag_prefix] = sym_ranged_tag_prefix,
+  [sym_link_location_suffix] = sym_link_text_suffix,
+  [sym_ranged_tag_prefix] = sym_link_text_prefix,
+  [sym_ranged_tag_end_prefix] = sym_link_text_prefix,
+  [sym_carryover_tag_prefix] = sym_link_text_prefix,
   [sym_single_definition_prefix] = sym_single_definition_prefix,
   [sym_multi_definition_prefix] = sym_multi_definition_prefix,
   [sym_multi_definition_suffix] = sym_multi_definition_suffix,
@@ -631,7 +629,6 @@ static const TSSymbol ts_symbol_map[] = {
   [aux_sym_tag_parameters_repeat1] = aux_sym_tag_parameters_repeat1,
   [anon_alias_sym__lowercase] = anon_alias_sym__lowercase,
   [anon_alias_sym__segment] = anon_alias_sym__segment,
-  [anon_alias_sym__suffix] = anon_alias_sym__suffix,
   [anon_alias_sym__uppercase] = anon_alias_sym__uppercase,
   [anon_alias_sym__word] = anon_alias_sym__word,
 };
@@ -887,7 +884,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
   [sym_link_text_prefix] = {
     .visible = true,
-    .named = true,
+    .named = false,
   },
   [sym_text] = {
     .visible = true,
@@ -895,15 +892,15 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
   [sym_link_text_suffix] = {
     .visible = true,
-    .named = true,
+    .named = false,
   },
   [sym_link_location_prefix] = {
     .visible = true,
-    .named = true,
+    .named = false,
   },
   [sym_link_file_begin] = {
     .visible = true,
-    .named = true,
+    .named = false,
   },
   [sym_link_file_location] = {
     .visible = true,
@@ -911,7 +908,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
   [sym_link_file_end] = {
     .visible = true,
-    .named = true,
+    .named = false,
   },
   [sym_link_end_generic] = {
     .visible = true,
@@ -951,7 +948,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
   [sym_link_location_suffix] = {
     .visible = true,
-    .named = true,
+    .named = false,
   },
   [sym_ranged_tag_prefix] = {
     .visible = true,
@@ -1441,10 +1438,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
-  [anon_alias_sym__suffix] = {
-    .visible = true,
-    .named = false,
-  },
   [anon_alias_sym__uppercase] = {
     .visible = true,
     .named = false,
@@ -1605,7 +1598,7 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
     [0] = anon_alias_sym__uppercase,
   },
   [3] = {
-    [0] = anon_alias_sym__suffix,
+    [0] = sym_link_text_suffix,
   },
   [4] = {
     [0] = anon_alias_sym__word,
