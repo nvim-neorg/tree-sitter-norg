@@ -318,7 +318,7 @@ public:
                 if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
                     return true;
 
-                if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, { ':' }) != NONE)
+                if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, { '$' }) != NONE)
                     return true;
                 else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
                 {
@@ -589,7 +589,7 @@ private:
     std::vector<size_t> m_TagStack;
 
 private:
-    const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':', '_' };
+    const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', '$', '_' };
 };
 
 extern "C"
