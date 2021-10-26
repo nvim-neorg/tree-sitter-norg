@@ -438,6 +438,27 @@
           "name": "link_text"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "link_location"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "strict_link": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "link_text"
+        },
+        {
           "type": "SYMBOL",
           "name": "link_location"
         }
@@ -458,7 +479,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -466,7 +487,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -539,7 +560,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -547,7 +568,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -612,7 +633,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -620,7 +641,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -677,7 +698,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -685,7 +706,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -734,7 +755,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -742,7 +763,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -783,7 +804,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -791,7 +812,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -816,7 +837,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -824,7 +845,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -897,7 +918,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -905,7 +926,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -970,7 +991,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -978,7 +999,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -1035,7 +1056,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -1043,7 +1064,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -1092,7 +1113,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -1100,7 +1121,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"
@@ -1141,7 +1162,7 @@
             "name": "location",
             "content": {
               "type": "SYMBOL",
-              "name": "link"
+              "name": "strict_link"
             }
           },
           {
@@ -1149,7 +1170,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_paragraph_break"
+                "name": "_line_break"
               },
               {
                 "type": "BLANK"

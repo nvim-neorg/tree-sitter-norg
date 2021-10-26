@@ -1236,7 +1236,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -1302,7 +1302,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -1360,7 +1360,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -1410,7 +1410,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -1452,7 +1452,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -1486,7 +1486,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -2222,6 +2222,25 @@
     }
   },
   {
+    "type": "strict_link",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "link_location",
+          "named": true
+        },
+        {
+          "type": "link_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "tag_name",
     "named": true,
     "fields": {},
@@ -2590,7 +2609,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -2656,7 +2675,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -2714,7 +2733,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -2764,7 +2783,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -2806,7 +2825,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]
@@ -2840,7 +2859,7 @@
         "required": true,
         "types": [
           {
-            "type": "link",
+            "type": "strict_link",
             "named": true
           }
         ]

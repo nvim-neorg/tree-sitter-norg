@@ -1,7 +1,6 @@
 /*
 * Known bugs
-* Consecutive unordered links get stored as separate generic lists
-* Items like `[this]` get parsed as a link and error out
+* jk there are no bugs
 */
 
 module.exports = grammar({
@@ -251,6 +250,12 @@ module.exports = grammar({
         link: $ =>
             seq(
                 $.link_text,
+                optional($.link_location),
+            ),
+
+        strict_link: $ =>
+            seq(
+                $.link_text,
                 $.link_location,
             ),
 
@@ -261,11 +266,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break
                     ),
 
                     repeat(
@@ -293,12 +298,13 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break
                     ),
+
 
                     repeat(
                         choice(
@@ -323,12 +329,12 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
+                    ),
+                    optional(
+                        $._line_break
                     ),
 
-                    optional(
-                        $._paragraph_break
-                    ),
 
                     repeat(
                         choice(
@@ -351,12 +357,12 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
+                    ),
+                    optional(
+                        $._line_break
                     ),
 
-                    optional(
-                        $._paragraph_break
-                    ),
 
                     repeat(
                         choice(
@@ -377,12 +383,12 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
+                    ),
+                    optional(
+                        $._line_break
                     ),
 
-                    optional(
-                        $._paragraph_break
-                    ),
 
                     repeat(
                     	choice(
@@ -400,13 +406,13 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break
                     ),
-                )
+                ),
             ),
 
         ordered_link1: $ =>
@@ -416,11 +422,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -448,11 +454,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -478,11 +484,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -506,11 +512,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -532,11 +538,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -555,11 +561,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
                 )
             ),

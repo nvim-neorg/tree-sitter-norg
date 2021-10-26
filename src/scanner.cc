@@ -492,7 +492,7 @@ private:
                 return true;
             case LINK_TEXT_SUFFIX:
                 if (lexer->lookahead != '(')
-                    return false;
+                    return parse_text(lexer);
 
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_PREFIX;
