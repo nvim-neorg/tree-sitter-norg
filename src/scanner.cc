@@ -285,7 +285,7 @@ public:
                 m_TagStack.push_back(m_IndentationLevel);
                 return true;
             }
-            else if (lexer->lookahead == '$')
+            else if (lexer->lookahead == '#')
             {
                 advance(lexer);
                 lexer->result_symbol = CARRYOVER_TAG;
