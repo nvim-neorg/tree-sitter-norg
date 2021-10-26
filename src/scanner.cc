@@ -86,6 +86,7 @@ enum TokenType : char
 
     LINK_END_GENERIC,
     LINK_END_URL,
+    LINK_END_EXTERNAL_FILE,
     LINK_END_HEADING1_REFERENCE,
     LINK_END_HEADING2_REFERENCE,
     LINK_END_HEADING3_REFERENCE,
@@ -510,17 +511,29 @@ private:
 
                         lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(count - 1, 0, 5));
                         break;
+                    case '@':
+                        advance(lexer);
+
+                        if (m_LastToken == LINK_FILE_END)
+                            return false;
+
+                        lexer->result_symbol = m_LastToken = LINK_END_EXTERNAL_FILE;
+                        break;
                     case '|':
                         advance(lexer);
                         lexer->result_symbol = m_LastToken = LINK_END_MARKER_REFERENCE;
                         break;
-                    case 0:
-                        advance(lexer);
-                        return false;
                     case ':':
                         advance(lexer);
                         lexer->result_symbol = m_LastToken = LINK_FILE_BEGIN;
                         break;
+                    case ')':
+                        advance(lexer);
+                        lexer->result_symbol = m_LastToken = LINK_LOCATION_SUFFIX;
+                        break;
+                    case 0:
+                        advance(lexer);
+                        return false;
                     default:
                         if (m_LastToken == LINK_FILE_END)
                             return false;

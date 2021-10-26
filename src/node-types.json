@@ -961,6 +961,10 @@
         "required": true,
         "types": [
           {
+            "type": "link_end_external_file",
+            "named": true
+          },
+          {
             "type": "link_end_generic",
             "named": true
           },
@@ -3272,6 +3276,10 @@
   },
   {
     "type": "insertion_prefix",
+    "named": true
+  },
+  {
+    "type": "link_end_external_file",
     "named": true
   },
   {
