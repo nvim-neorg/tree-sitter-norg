@@ -10,12 +10,10 @@ module.exports = grammar({
     externals: $ => [
  
         $._,
-        $._space,
+        $.space,
 
         $.lowercase_word,
         $.capitalized_word,
-
-        $._parenthesized_text,
 
         $._line_break,
         $._paragraph_break,
@@ -76,9 +74,18 @@ module.exports = grammar({
         $.weak_paragraph_delimiter,
         $.horizontal_line,
 
-        $.link_begin,
+        $.link_text_prefix,
+        $.text,
+        $.link_text_suffix,
+
+        $.link_location_prefix,
+        $.link_file_begin,
+        $.link_file_location,
+        $.link_file_end,
+
         $.link_end_generic,
         $.link_end_url,
+        $.link_end_external_file,
         $.link_end_heading1_reference,
         $.link_end_heading2_reference,
         $.link_end_heading3_reference,
@@ -86,6 +93,7 @@ module.exports = grammar({
         $.link_end_heading5_reference,
         $.link_end_heading6_reference,
         $.link_end_marker_reference,
+        $.link_location_suffix,
 
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
@@ -179,29 +187,13 @@ module.exports = grammar({
 
         paragraph_segment: $ =>
             prec.right(0,
-                seq(
+                repeat1(
                     choice(
                         alias($.word, "_word"),
-                        $._parenthesized_text
+                        alias($.space, "_space"),
+                        $.link,
+                        $.escape_sequence,
                     ),
-
-                    repeat(
-                        choice(
-                            alias($.word, "_word"),
-
-                            $._parenthesized_text,
-                            $._attached_modifier,
-                            $._space,
-
-                            alias(
-                                choice(
-                                    $.todo_item_done,
-                                    $.todo_item_undone,
-                                    $.todo_item_pending
-                                ),
-                            "_erroneous")
-                        ),
-                    )
                 )
             ),
 
@@ -209,23 +201,10 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        alias(
-                            $.paragraph_segment,
-                            "_segment"
-                        ),
-
+                        $.paragraph_segment,
                         $._line_break,
-                        seq(
-                            choice(
-                                $.link,
-                                $.escape_sequence,
-                                $._attached_modifier,
-                            ),
 
-                            optional(
-                                $._space,
-                            ),
-                        ),
+                        $._attached_modifier,
                     )
                 )
             ),
@@ -305,25 +284,62 @@ module.exports = grammar({
                 )
             ),
 
+        link_text: $ =>
+            seq(
+                alias($.link_text_prefix, "_prefix"),
+                field("link_text", optional($.text)),
+                alias($.link_text_suffix, "_suffix"),
+            ),
+
+        link_file: $ =>
+            seq(
+                alias($.link_file_begin, "_prefix"),
+                field("location", $.link_file_location),
+                alias($.link_file_end, "_suffix"),
+            ),
+        
+        link_end: $ =>
+            seq(
+                field("type", choice(
+                    $.link_end_url,
+                    $.link_end_generic,
+                    $.link_end_external_file,
+                    $.link_end_marker_reference,
+                    $.link_end_heading1_reference,
+                    $.link_end_heading2_reference,
+                    $.link_end_heading3_reference,
+                    $.link_end_heading4_reference,
+                    $.link_end_heading5_reference,
+                    $.link_end_heading6_reference,
+                )),
+                $.text,
+            ),
+
+        link_location: $ =>
+            seq(
+                alias($.link_location_prefix, "_prefix"),
+                choice(
+                    seq(
+                        $.link_file,
+                        optional(
+                            $.link_end,
+                        ),
+                    ),
+                    $.link_end,
+                ),
+                alias($.link_location_suffix, "_suffix"),
+            ),
+
         link: $ =>
             seq(
-                $.link_begin,
-                optional(
-                    field(
-                        "location",
-                        choice(
-                            $.link_end_generic,
-                            $.link_end_url,
-                            $.link_end_heading1_reference,
-                            $.link_end_heading2_reference,
-                            $.link_end_heading3_reference,
-                            $.link_end_heading4_reference,
-                            $.link_end_heading5_reference,
-                            $.link_end_heading6_reference,
-                            $.link_end_marker_reference,
-                        )
-                    )
-                )
+                $.link_text,
+                optional($.link_location),
+            ),
+
+        strict_link: $ =>
+            seq(
+                $.link_text,
+                $.link_location,
             ),
 
         unordered_link1: $ =>
@@ -333,11 +349,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break
                     ),
 
                     repeat(
@@ -365,12 +381,13 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break
                     ),
+
 
                     repeat(
                         choice(
@@ -395,12 +412,12 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
+                    ),
+                    optional(
+                        $._line_break
                     ),
 
-                    optional(
-                        $._paragraph_break
-                    ),
 
                     repeat(
                         choice(
@@ -423,12 +440,12 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
+                    ),
+                    optional(
+                        $._line_break
                     ),
 
-                    optional(
-                        $._paragraph_break
-                    ),
 
                     repeat(
                         choice(
@@ -449,12 +466,12 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
+                    ),
+                    optional(
+                        $._line_break
                     ),
 
-                    optional(
-                        $._paragraph_break
-                    ),
 
                     repeat(
                     	choice(
@@ -472,13 +489,13 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break
                     ),
-                )
+                ),
             ),
 
         ordered_link1: $ =>
@@ -488,11 +505,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -520,11 +537,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -550,11 +567,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -578,11 +595,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -604,11 +621,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
 
                     repeat(
@@ -627,11 +644,11 @@ module.exports = grammar({
 
                     field(
                         "location",
-                        $.link
+                        $.strict_link,
                     ),
 
                     optional(
-                        $._paragraph_break
+                        $._line_break,
                     ),
                 )
             ),
@@ -1638,20 +1655,22 @@ module.exports = grammar({
 
         // TODO: Comment scanner code
         ranged_tag_content: $ =>
-            repeat1(
-                choice(
-                    alias(
-                        choice(
-                            $.paragraph_segment,
-                            $._line_break,
-                            $._paragraph_break,
+            prec.right(0, 
+                repeat1(
+                    choice(
+                        alias(
+                            choice(
+                                $.paragraph_segment,
+                                $._line_break,
+                                $._paragraph_break,
+                            ),
+                            "_segment",
                         ),
-                        "_segment",
-                    ),
 
-                    field(
-                        "nested_tag",
-                        $.ranged_tag
+                        field(
+                            "nested_tag",
+                            $.ranged_tag
+                        ),
                     ),
                 ),
             ),
@@ -1707,8 +1726,8 @@ module.exports = grammar({
                         ),
                     ),
 
-                        $.ranged_tag_end,
-                )
+                    optional($.ranged_tag_end),
+                ),
             ),
 
         carryover_tag_set: $ =>

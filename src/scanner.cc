@@ -9,7 +9,7 @@
 
 #define NESTED_MASK 8
 
-enum TokenType
+enum TokenType : char
 {
     NONE,
 
@@ -17,8 +17,6 @@ enum TokenType
 
     WORD,
     CAPITALIZED_WORD,
-
-    PARENTHESIZED_TEXT,
 
     LINE_BREAK,
     PARAGRAPH_BREAK,
@@ -79,9 +77,18 @@ enum TokenType
     WEAK_PARAGRAPH_DELIMITER,
     HORIZONTAL_LINE,
 
-    LINK_BEGIN,
+    LINK_TEXT_PREFIX,
+    TEXT,
+    LINK_TEXT_SUFFIX,
+
+    LINK_LOCATION_PREFIX,
+    LINK_FILE_BEGIN,
+    LINK_FILE_LOCATION,
+    LINK_FILE_END,
+
     LINK_END_GENERIC,
     LINK_END_URL,
+    LINK_END_EXTERNAL_FILE,
     LINK_END_HEADING1_REFERENCE,
     LINK_END_HEADING2_REFERENCE,
     LINK_END_HEADING3_REFERENCE,
@@ -89,6 +96,7 @@ enum TokenType
     LINK_END_HEADING5_REFERENCE,
     LINK_END_HEADING6_REFERENCE,
     LINK_END_MARKER_REFERENCE,
+    LINK_LOCATION_SUFFIX,
 
     RANGED_TAG,
     RANGED_TAG_END,
@@ -172,32 +180,25 @@ public:
             lexer->result_symbol = m_LastToken = MARKUP_END;
             return m_LastToken;
         }
-
+        else if (m_LastToken >= LINK_TEXT_PREFIX && m_LastToken < LINK_LOCATION_SUFFIX)
+            return parse_link(lexer);
         // If we are not in a tag and we have a square bracket opening then try matching
-        // either a todo item or beginning of a link
-        if (m_TagStack.empty() && lexer->lookahead == '[')
+        // either a todo item or beginning of a list
+        else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 && lexer->lookahead == '[')
         {
             advance(lexer);
 
             // If we instantly close the bracket (i.e. "[]") then treat it as an empty link beginning
             if (lexer->lookahead == ']')
             {
-                lexer->result_symbol = m_LastToken = WORD;
+                lexer->result_symbol = m_LastToken = LINK_TEXT_PREFIX;
                 return true;
             }
 
-            // Move over any whitespace
-            while (lexer->lookahead == ' ' || lexer->lookahead == '\t')
-                advance(lexer);
+            lexer->mark_end(lexer);
 
             switch (lexer->lookahead)
             {
-                // Did we encounter the end bracket? We've just dealt with an undone todo item
-                // ([ ])
-                case ']':
-                    advance(lexer);
-                    lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
-                    return true;
                 // We're dealing with a pending item ([*])
                 case '*':
                     lexer->result_symbol = m_LastToken = TODO_ITEM_PENDING;
@@ -206,39 +207,33 @@ public:
                 case 'x':
                     lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
                     break;
-                // We are simply dealing with a link beginning ([something])
-                default:
-                    lexer->result_symbol = m_LastToken = LINK_BEGIN;
+                // We're dealing with an undone item ([ ])
+                case ' ':
+                    lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
                     break;
                 case '\0':
                     advance(lexer);
                     return false;
             }
 
-            advance(lexer);
+            advance(lexer); // Move past the matched element (*/x/ )
 
-            while (lexer->lookahead)
+            if (lexer->lookahead == ']')
             {
-                // If we've encountered an `]` check whether it has been escaped with a backslash
-                if (lexer->lookahead == ']' && m_Current != '\\')
-                {
-                    advance(lexer);
-                    return true;
-                }
-                else if (!std::iswspace(lexer->lookahead) || lexer->lookahead == '\n')
-                {
-                    lexer->result_symbol = m_LastToken = LINK_BEGIN;
-                }
-
                 advance(lexer);
+                lexer->mark_end(lexer);
+                return true;
             }
-
-            return lexer->lookahead != 0;
+            else
+            {
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_PREFIX;
+                return true;
+            }
         }
         // Otherwise make sure to check for the existence of an opening link location
-        else if (m_TagStack.empty() && lexer->lookahead == '(' && m_Current == ']')
-            return check_link(lexer);
-        // Otherwise just check whether or not we're dealing with a newline and return PARAGRAPH_BREAK if we are
+        else if (m_TagStack.empty() && (lexer->lookahead == '[' || (m_LastToken >= LINK_TEXT_PREFIX && m_LastToken < LINK_LOCATION_SUFFIX)))
+            return parse_link(lexer);
+        // Otherwise just check whether or not we're dealing with a newline and return STANDALONE_BREAK if we are
         else if (lexer->lookahead == '\n')
         {
             advance(lexer);
@@ -329,7 +324,7 @@ public:
                 m_TagStack.push_back(m_IndentationLevel);
                 return true;
             }
-            else if (lexer->lookahead == '$')
+            else if (m_TagStack.empty() && lexer->lookahead == '$')
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
@@ -415,7 +410,7 @@ public:
                     return true;
                 else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
                 {
-                    lexer->result_symbol = HORIZONTAL_LINE;
+                    lexer->result_symbol = m_LastToken = HORIZONTAL_LINE;
                     return true;
                 }
             }
@@ -429,7 +424,8 @@ public:
         return parse_text(lexer);
     }
 
-    std::vector<uint16_t>& get_tag_stack() noexcept { return m_TagStack; }
+    std::vector<size_t>& get_tag_stack() noexcept { return m_TagStack; }
+    TokenType& get_last_token() noexcept { return m_LastToken; }
 private:
     // Skips the next character without including it in the final result
     void skip(TSLexer* lexer)
@@ -683,77 +679,155 @@ private:
     /*
      * Attempts to parse a link ([like](#this))
      */
-    bool check_link(TSLexer* lexer)
+    bool parse_link(TSLexer* lexer)
     {
-        advance(lexer);
-
-        if (lexer->lookahead == ':')
+        if (lexer->lookahead == '[')
         {
-            while (lexer->lookahead && lexer->lookahead != '*' && lexer->lookahead != '#' && lexer->lookahead != '|' && lexer->lookahead != ')')
-                advance(lexer);
-            if (m_Current != ':')
-                return true;
-        }
-
-        advance(lexer);
-
-        // Is the current char an asterisk? We're dealing with a heading reference.
-        if (m_Current == '*')
-        {
-            size_t heading_level = 0;
-
-            // Keep capturing asterisks and increment the heading level accordingly
-            while (lexer->lookahead && lexer->lookahead == '*')
-            {
-                advance(lexer);
-                ++heading_level;
-            }
-
-            // We use the clamp() here to make sure we don't overflow!
-            lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(heading_level, size_t{}, size_t{5}));
-        }
-        // We're dealing with a marker reference
-        else if (m_Current == '|')
-        {
-                lexer->result_symbol = m_LastToken = LINK_END_MARKER_REFERENCE;
-        }
-        // We're dealing with a generic (loose) link
-        else if (m_Current == '#')
-            lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
-
-        // Until we don't hit the end of the link location keep advancing
-        while (lexer->lookahead && lexer->lookahead != ')')
-        {
-            if (lexer->lookahead == '\n' || !lexer->lookahead)
-            {
-                lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
-                break;
-            }
-
             advance(lexer);
-
-            if (m_Current == '\\')
-            {
-                advance(lexer);
-                advance(lexer);
-                continue;
-            }
-            // This is our method of checking for a URL
-            // If there's a :// in the string we just assume that it's a URL and that's it
-            else if (m_Current == ':' && lexer->lookahead == '/' && lexer->result_symbol == NONE)
-            {
-                advance(lexer);
-                if (lexer->lookahead == '/')
-                    lexer->result_symbol = m_LastToken = LINK_END_URL;
-            }
+            lexer->result_symbol = m_LastToken = LINK_TEXT_PREFIX;
+            return true;
         }
 
-        advance(lexer);
+        size_t count = 0;
 
-        if (lexer->result_symbol == NONE)
-            lexer->result_symbol = m_LastToken = PARENTHESIZED_TEXT;
+        switch (m_LastToken)
+        {
+            case LINK_TEXT_PREFIX:
+                while (lexer->lookahead)
+                {
+                    if (lexer->lookahead == ']' && m_Current != '\\')
+                        break;
 
-        return true;
+                    if (lexer->lookahead == '\n')
+                    {
+                        advance(lexer);
+                        if (!lexer->lookahead || lexer->lookahead == '\n')
+                            break;
+                    }
+
+                    advance(lexer);
+                }
+
+                lexer->result_symbol = m_LastToken = TEXT;
+                return true;
+            case TEXT:
+                switch (lexer->lookahead)
+                {
+                    case ']':
+                        lexer->result_symbol = m_LastToken = LINK_TEXT_SUFFIX;
+                        break;
+                    case ')':
+                        lexer->result_symbol = m_LastToken = LINK_LOCATION_SUFFIX;
+                        break;
+                    default:
+                        advance(lexer);
+                        return false;
+                }
+
+                advance(lexer);
+                return true;
+            case LINK_TEXT_SUFFIX:
+                if (lexer->lookahead != '(')
+                    return parse_text(lexer);
+
+                advance(lexer);
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_PREFIX;
+                return true;
+            case LINK_LOCATION_PREFIX:
+            case LINK_FILE_END:
+                switch (lexer->lookahead)
+                {
+                    case '#':
+                        advance(lexer);
+                        lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
+                        break;
+                    case '*':
+                        while (lexer->lookahead == '*')
+                        {
+                            ++count;
+                            advance(lexer);
+                        }
+
+                        lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(count - 1, 0, 5));
+                        break;
+                    case '@':
+                        advance(lexer);
+
+                        if (m_LastToken == LINK_FILE_END)
+                            return false;
+
+                        lexer->result_symbol = m_LastToken = LINK_END_EXTERNAL_FILE;
+                        break;
+                    case '|':
+                        advance(lexer);
+                        lexer->result_symbol = m_LastToken = LINK_END_MARKER_REFERENCE;
+                        break;
+                    case ':':
+                        advance(lexer);
+                        lexer->result_symbol = m_LastToken = LINK_FILE_BEGIN;
+                        break;
+                    case ')':
+                        advance(lexer);
+                        lexer->result_symbol = m_LastToken = LINK_LOCATION_SUFFIX;
+                        break;
+                    case 0:
+                        advance(lexer);
+                        return false;
+                    default:
+                        if (m_LastToken == LINK_FILE_END)
+                            return false;
+
+                        lexer->result_symbol = m_LastToken = LINK_END_URL;
+                        return true;
+                }
+
+                return true;
+            case LINK_FILE_BEGIN:
+                while (lexer->lookahead)
+                {
+                    if (lexer->lookahead == ':' && m_Current != '\\')
+                        break;
+
+                    advance(lexer);
+                }
+
+                lexer->result_symbol = m_LastToken = LINK_FILE_LOCATION;
+                return true;
+            case LINK_FILE_LOCATION:
+                advance(lexer);
+
+                if (m_Current != ':')
+                    return false;
+
+                lexer->result_symbol = m_LastToken = LINK_FILE_END;
+                return true;
+            default:
+                if (m_LastToken >= LINK_END_GENERIC && m_LastToken <= LINK_END_MARKER_REFERENCE)
+                {
+                    if (lexer->lookahead == ')' && m_Current != '\\')
+                        return false;
+
+                    while (lexer->lookahead)
+                    {
+                        if (lexer->lookahead == ')' && m_Current != '\\')
+                            break;
+
+                        if (lexer->lookahead == '\n')
+                        {
+                            advance(lexer);
+                            if (!lexer->lookahead || lexer->lookahead == '\n')
+                            break;
+                        }
+
+                        advance(lexer);
+                    }
+
+                    lexer->result_symbol = m_LastToken = TEXT;
+                    return true;
+                }
+        }
+
+        return false;
     }
 
     /*
@@ -824,7 +898,7 @@ private:
     size_t m_ParsedChars = 0, m_IndentationLevel = 0;
 
     // Used for tags and things like *bold*
-    std::vector<uint16_t> m_TagStack;
+    std::vector<size_t> m_TagStack;
     std::vector<std::pair<int32_t, TokenType>> m_AttachedModifierStack;
     bool m_NestedModifiers = false;
 
@@ -852,27 +926,30 @@ extern "C"
 
     unsigned tree_sitter_norg_external_scanner_serialize(void* payload, char* buffer)
     {
-        Scanner* scanner = static_cast<Scanner*>(payload);
+        auto& tag_stack = static_cast<Scanner*>(payload)->get_tag_stack();
+        auto& last_token = static_cast<Scanner*>(payload)->get_last_token();
 
-        auto& tag_stack = scanner->get_tag_stack();
-
-        if (tag_stack.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (tag_stack.size() + 1 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
-        std::copy(tag_stack.begin(), tag_stack.end(), buffer);
+        buffer[0] = last_token;
+        std::copy(tag_stack.begin(), tag_stack.end(), &buffer[1]);
 
-        return tag_stack.size();
+        return tag_stack.size() + 1;
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload, const char* buffer, unsigned length)
     {
-        Scanner* scanner = static_cast<Scanner*>(payload);
-
-        auto& tag_stack = scanner->get_tag_stack();
+        auto& tag_stack = static_cast<Scanner*>(payload)->get_tag_stack();
+        auto& last_token = static_cast<Scanner*>(payload)->get_last_token();
 
         tag_stack.clear();
-        tag_stack.resize(length);
 
-        std::copy_n(buffer, length, tag_stack.begin());
+        if (length > 0)
+        {
+            tag_stack.resize(length - 1);
+            last_token = (TokenType)buffer[0];
+            std::copy_n(&buffer[1], length - 1, tag_stack.begin());
+        }
     }
 }
