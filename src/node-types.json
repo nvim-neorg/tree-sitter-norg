@@ -2005,6 +2005,10 @@
           "named": true
         },
         {
+          "type": "inline_comment",
+          "named": true
+        },
+        {
           "type": "italic",
           "named": true
         },

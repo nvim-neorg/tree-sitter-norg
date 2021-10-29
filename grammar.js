@@ -7,7 +7,7 @@ module.exports = grammar({
     name: 'norg',
 
     externals: $ => [
- 
+
         $._,
         $.space,
 
@@ -212,7 +212,7 @@ module.exports = grammar({
 
         // ---- ATTACHED MODIFIERS ----
         bold: $ =>
-            prec.right(0, 
+            prec.right(0,
                 repeat1(
                     choice(
                         $.bold_segment,
@@ -447,7 +447,7 @@ module.exports = grammar({
                 field("location", $.link_file_location),
                 alias($.link_file_end, "_suffix"),
             ),
-        
+
         link_end: $ =>
             seq(
                 field("type", choice(
@@ -1805,7 +1805,7 @@ module.exports = grammar({
 
         // TODO: Comment scanner code
         ranged_tag_content: $ =>
-            prec.right(0, 
+            prec.right(0,
                 repeat1(
                     choice(
                         alias(
@@ -2030,6 +2030,7 @@ module.exports = grammar({
                 $.spoiler_segment,
                 $.superscript_segment,
                 $.subscript_segment,
+                $.inline_comment_segment,
                 $.markup_end,
             ),
 
@@ -2043,6 +2044,7 @@ module.exports = grammar({
                 $.spoiler,
                 $.superscript,
                 $.subscript,
+                $.inline_comment,
             ),
       }
 });

@@ -4468,6 +4468,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "inline_comment_segment"
+        },
+        {
+          "type": "SYMBOL",
           "name": "markup_end"
         }
       ]
@@ -4506,6 +4510,10 @@
         {
           "type": "SYMBOL",
           "name": "subscript"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inline_comment"
         }
       ]
     }
