@@ -2580,10 +2580,6 @@
           "named": true
         },
         {
-          "type": "superscript",
-          "named": true
-        },
-        {
           "type": "underline",
           "named": true
         }
@@ -2620,10 +2616,6 @@
         },
         {
           "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "subscript",
           "named": true
         },
         {

@@ -555,30 +555,14 @@ private:
      */
     TokenType check_attached(TSLexer* lexer, bool behind)
     {
-        // Bind the `lookahead` and `current` values
-        int32_t& lookahead = behind ? m_Current : lexer->lookahead;
-        int32_t& current = behind ? m_Previous : m_Current;
-
         // Return an iterator to an attached modifier if one can be found
-        const auto attached_modifier = m_AttachedModifierStack.empty() ? find_attached(lookahead) : &m_AttachedModifierStack.back();
-
-        // std::cout << (char)current << ", " << (char)lookahead << ", " << char(!m_AttachedModifierStack.empty() ? m_AttachedModifierStack.back().first : 0) << std::endl;
-
-        // This will advance the lexer forward only if `behind` is false
-        // If it's true then we may end up accidentally advancing too far
-        auto conditional_advance = [&](TSLexer* lx) {
-            if (!behind)
-            {
-                advance(lx);
-                ++m_ParsedChars;
-            }
-        };
+        const auto attached_modifier = m_AttachedModifierStack.empty() ? find_attached(behind ? m_Current : lexer->lookahead) : &m_AttachedModifierStack.back();
 
         if (!m_AttachedModifierStack.empty())
         {
-            conditional_advance(lexer);
+            advance(lexer);
 
-            if (find_attached(current) != s_AttachedModifiers.end() && (std::iswspace(lookahead) || std::ispunct(lookahead)))
+            if (find_attached(m_Current) != s_AttachedModifiers.end() && (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
             {
                 m_AttachedModifierStack.pop_back();
 
@@ -595,14 +579,14 @@ private:
             advance(lexer);
 
             // If the next char is a whitespace character then it doesn't count 
-            if (std::iswspace(lookahead))
+            if (std::iswspace(lexer->lookahead))
                 return NONE;
 
             // If we have another attached modifier of the same type right after then do not count it
             // e.g. if our input is "**" it'll get discarded and treated as a PARAGRAPH_SEGMENT instead
-            if (lookahead == attached_modifier->first)
+            if (lexer->lookahead == attached_modifier->first)
             { 
-                conditional_advance(lexer);
+                advance(lexer);
                 return NONE;
             }
 
@@ -612,39 +596,37 @@ private:
             lexer->mark_end(lexer);
 
             // While our lookahead is not equal to a potential closing modifier
-            while (lookahead != attached_modifier->first || current == '\\')
+            while (lexer->lookahead)
             {
-                auto attached = find_attached(lookahead);
+                if (lexer->lookahead == attached_modifier->first || m_Current == '\\')
+                    break;
 
-                if (attached_modifier->second != VERBATIM && attached_modifier->second != INLINE_MATH && attached_modifier->second != VARIABLE && (std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
+                auto attached = find_attached(lexer->lookahead);
+
+                if (attached_modifier->second != VERBATIM && attached_modifier->second != INLINE_MATH && attached_modifier->second != VARIABLE && (std::iswspace(m_Current) || std::ispunct(m_Current)) && attached != s_AttachedModifiers.end())
                 {
-                    // We need to advance the lexer conditionally one last time
-                    // to ensure that the beginning of the nested modifier
-                    // starts at the correct location (otherwise a difference of
-                    // one char arises between those attached modifiers whose
-                    // symbol is also a detached one, and those for which this
-                    // is not the case)
-                    conditional_advance(lexer);
-
                     lexer->mark_end(lexer);
+
+                    // TODO: Prevent two of the same markup types from coexisting in the same modifier stack
+
                     lexer->result_symbol = m_LastToken = static_cast<TokenType>(attached_modifier->second + NESTED_MASK);
 
-                    m_AttachedModifierStack.push_back({ ' ', MARKUP_END }); // THIS CAUSES ISSUES
+                    m_AttachedModifierStack.push_back({ ' ', MARKUP_END });
                     m_AttachedModifierStack.push_back(*attached);
 
                     return m_LastToken;
                 }
 
                 // If we've encounted the end of our file then bail
-                if (!lookahead)
+                if (!lexer->lookahead)
                     return NONE;
-                else if (lookahead == '\n')
+                else if (lexer->lookahead == '\n')
                 {
-                    conditional_advance(lexer);
+                    advance(lexer);
 
                     // If this check succeeds then we've encountered a \n\n sequence
                     // and as a consequence should terminate the attached modifier
-                    if (lookahead == '\n')
+                    if (lexer->lookahead == '\n')
                     {
                         m_AttachedModifierStack.clear();
 
@@ -659,32 +641,16 @@ private:
 
             // If the previous char before the closing modifier is not whitespace
             // then
-            if (!current || std::isalnum(current) || std::ispunct(current))
+            if (!m_Current || std::isalnum(m_Current) || std::ispunct(m_Current))
             {
-                conditional_advance(lexer);
+                advance(lexer);
 
                 // If the next char is whitespace then we've successfully matched our modifier!
-                if (std::iswspace(lookahead) || std::ispunct(lookahead))
+                if (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead))
                 {
-                    // Mark the end of this sequence
-                    // We do this as to not accidentally read past EOF
-                    lexer->mark_end(lexer);
-
-                    // If the next character is a newline then
-                    // read the newline. We do this because otherwise
-                    // the parser bugs out and starts a new paragraph
-                    if (lexer->lookahead == '\n')
-                    {
-                        advance(lexer);
-
-                        // If the next char is not EOF then
-                        // expand the token to include the newline too
-                        if (lexer->lookahead)
-                            lexer->mark_end(lexer);
-                    }
-
                     m_AttachedModifierStack.pop_back();
 
+                    lexer->mark_end(lexer);
                     lexer->result_symbol = m_LastToken = attached_modifier->second;
                     return attached_modifier->second;
                 }

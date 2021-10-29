@@ -1,5 +1,6 @@
 /*
 * Known bugs:
+* Attempting to escape a nested attached modifier fails miserably
 */
 
 module.exports = grammar({
@@ -359,7 +360,6 @@ module.exports = grammar({
                                         $.strikethrough,
                                         $.underline,
                                         $.spoiler,
-                                        $.subscript,
                                         $.inline_comment,
                                     ),
                                 ),
@@ -385,7 +385,6 @@ module.exports = grammar({
                                         $.strikethrough,
                                         $.underline,
                                         $.spoiler,
-                                        $.superscript,
                                         $.inline_comment,
                                     ),
                                 ),

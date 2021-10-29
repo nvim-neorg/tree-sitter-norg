@@ -628,10 +628,6 @@
                           },
                           {
                             "type": "SYMBOL",
-                            "name": "subscript"
-                          },
-                          {
-                            "type": "SYMBOL",
                             "name": "inline_comment"
                           }
                         ]
@@ -695,10 +691,6 @@
                           {
                             "type": "SYMBOL",
                             "name": "spoiler"
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "superscript"
                           },
                           {
                             "type": "SYMBOL",
