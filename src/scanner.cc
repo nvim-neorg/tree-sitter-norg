@@ -7,7 +7,7 @@
 #include <string>
 #include <cwctype>
 
-#define NESTED_MASK 8
+#define NESTED_MASK 9
 
 enum TokenType : char
 {
@@ -112,18 +112,20 @@ enum TokenType : char
     STRIKETHROUGH,
     UNDERLINE,
     SPOILER,
-    INLINE_CODE,
+    VERBATIM,
     SUPERSCRIPT,
     SUBSCRIPT,
+    INLINE_COMMENT,
 
     BOLD_WITH_NEST,
     ITALIC_WITH_NEST,
     STRIKETHROUGH_WITH_NEST,
     UNDERLINE_WITH_NEST,
     SPOILER_WITH_NEST,
-    INLINE_CODE_WITH_NEST,
+    VERBATIM_WITH_NEST,
     SUPERSCRIPT_WITH_NEST,
     SUBSCRIPT_WITH_NEST,
+    INLINE_COMMENT_WITH_NEST,
 
     MARKUP_END,
 };
@@ -576,12 +578,6 @@ private:
             {
                 m_AttachedModifierStack.pop_back();
 
-                if (m_AttachedModifierStack.empty() && m_LastToken >= BOLD && m_LastToken <= SUBSCRIPT_WITH_NEST)
-                {
-                    lexer->result_symbol = m_LastToken = MARKUP_END;
-                    return m_LastToken;
-                }
-
                 lexer->result_symbol = m_LastToken = attached_modifier->second;
                 return m_LastToken;
             }
@@ -616,7 +612,7 @@ private:
             {
                 auto attached = find_attached(lookahead);
 
-                if (attached_modifier->second != INLINE_CODE && (std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
+                if (attached_modifier->second != VERBATIM && (std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
                 {
                     lexer->mark_end(lexer);
                     lexer->result_symbol = m_LastToken = static_cast<TokenType>(attached_modifier->second + NESTED_MASK);
@@ -913,7 +909,7 @@ private:
 
 private:
     const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':', '_' };
-    const std::array<std::pair<int32_t, TokenType>, 8> s_AttachedModifiers = { std::pair<int32_t, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', INLINE_CODE } };
+    const std::array<std::pair<int32_t, TokenType>, NESTED_MASK> s_AttachedModifiers = { std::pair<int32_t, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', VERBATIM }, { '+', INLINE_COMMENT } };
 };
 
 extern "C"

@@ -230,444 +230,563 @@
       }
     },
     "bold": {
-      "type": "PREC_LEFT",
-      "value": 1,
+      "type": "PREC_RIGHT",
+      "value": 0,
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "bold_segment"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "bold_segment_with_nest"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "italic"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "strikethrough"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "underline"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "spoiler"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "superscript"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "subscript"
-                        }
-                      ]
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "bold_segment"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bold_segment_with_nest"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "italic"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "strikethrough"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "underline"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "spoiler"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "superscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "subscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "inline_comment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "markup_end"
                     }
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "markup_end"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     "italic": {
-      "type": "PREC_LEFT",
-      "value": 1,
+      "type": "PREC_RIGHT",
+      "value": 0,
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "italic_segment"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "italic_segment_with_nest"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "bold"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "strikethrough"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "underline"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "spoiler"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "superscript"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "subscript"
-                        }
-                      ]
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "italic_segment"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "italic_segment_with_nest"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "bold"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "strikethrough"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "underline"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "spoiler"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "superscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "subscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "inline_comment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "markup_end"
                     }
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "markup_end"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     "strikethrough": {
-      "type": "PREC_LEFT",
-      "value": 1,
+      "type": "PREC_RIGHT",
+      "value": 0,
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "strikethrough_segment"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "strikethrough_segment_with_nest"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "bold"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "italic"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "underline"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "spoiler"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "superscript"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "subscript"
-                        }
-                      ]
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "strikethrough_segment"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "strikethrough_segment_with_nest"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "bold"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "italic"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "underline"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "spoiler"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "superscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "subscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "inline_comment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "markup_end"
                     }
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "markup_end"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     "underline": {
-      "type": "PREC_LEFT",
-      "value": 1,
+      "type": "PREC_RIGHT",
+      "value": 0,
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "underline_segment"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "underline_segment_with_nest"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "bold"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "italic"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "strikethrough"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "spoiler"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "superscript"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "subscript"
-                        }
-                      ]
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "underline_segment"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "underline_segment_with_nest"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "bold"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "italic"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "strikethrough"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "spoiler"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "superscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "subscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "inline_comment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "markup_end"
                     }
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "markup_end"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     "spoiler": {
-      "type": "PREC_LEFT",
-      "value": 1,
+      "type": "PREC_RIGHT",
+      "value": 0,
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "spoiler_segment"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "spoiler_segment_with_nest"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "bold"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "italic"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "strikethrough"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "underline"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "superscript"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "subscript"
-                        }
-                      ]
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "spoiler_segment"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "spoiler_segment_with_nest"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "bold"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "italic"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "strikethrough"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "underline"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "superscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "subscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "inline_comment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "markup_end"
                     }
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "markup_end"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     "superscript": {
-      "type": "PREC_LEFT",
-      "value": 1,
+      "type": "PREC_RIGHT",
+      "value": 0,
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "superscript_segment"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "superscript_segment_with_nest"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "bold"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "italic"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "strikethrough"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "underline"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "spoiler"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "subscript"
-                        }
-                      ]
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "superscript_segment"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "superscript_segment_with_nest"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "bold"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "italic"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "strikethrough"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "underline"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "spoiler"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "subscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "inline_comment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "markup_end"
                     }
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "markup_end"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     "subscript": {
-      "type": "PREC_LEFT",
-      "value": 1,
+      "type": "PREC_RIGHT",
+      "value": 0,
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "subscript_segment"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "subscript_segment_with_nest"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "bold"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "italic"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "strikethrough"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "underline"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "spoiler"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "superscript"
-                        }
-                      ]
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "subscript_segment"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "subscript_segment_with_nest"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "bold"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "italic"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "strikethrough"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "underline"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "spoiler"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "superscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "inline_comment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "markup_end"
                     }
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "markup_end"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "inline_comment": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "inline_comment_segment"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "inline_comment_segment_with_nest"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "REPEAT1",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "bold"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "italic"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "strikethrough"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "underline"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "spoiler"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "superscript"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "subscript"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "markup_end"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     "any_char": {
@@ -4734,6 +4853,10 @@
     },
     {
       "type": "SYMBOL",
+      "name": "inline_comment_segment"
+    },
+    {
+      "type": "SYMBOL",
       "name": "bold_segment_with_nest"
     },
     {
@@ -4763,6 +4886,10 @@
     {
       "type": "SYMBOL",
       "name": "subscript_segment_with_nest"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "inline_comment_segment_with_nest"
     },
     {
       "type": "SYMBOL",

@@ -1,7 +1,6 @@
 /*
 * Known bugs:
-* - Headings aren't detected properly and carry over too far
-* - markup_end doesn't get placed where necessary
+* INLINE_CODE isn't being placed properly idk why
 */
 
 module.exports = grammar({
@@ -112,6 +111,7 @@ module.exports = grammar({
         $.verbatim,
         $.superscript_segment,
         $.subscript_segment,
+        $.inline_comment_segment,
 
         $.bold_segment_with_nest,
         $.italic_segment_with_nest,
@@ -121,6 +121,7 @@ module.exports = grammar({
         $.verbatim_with_nest,
         $.superscript_segment_with_nest,
         $.subscript_segment_with_nest,
+        $.inline_comment_segment_with_nest,
 
         $.markup_end,
       ],
@@ -211,162 +212,209 @@ module.exports = grammar({
 
         // ---- ATTACHED MODIFIERS ----
         bold: $ =>
-            prec.left(1,
-                choice(
-                    $.bold_segment,
-                    seq(
-                        $.bold_segment_with_nest,
+            prec.right(0, 
+                repeat1(
+                    choice(
+                        $.bold_segment,
                         seq(
-                            repeat1(
-                                choice(
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.superscript,
-                                    $.subscript,
+                            $.bold_segment_with_nest,
+                            seq(
+                                repeat1(
+                                    choice(
+                                        $.italic,
+                                        $.strikethrough,
+                                        $.underline,
+                                        $.spoiler,
+                                        $.superscript,
+                                        $.subscript,
+                                        $.inline_comment,
+                                    ),
                                 ),
-                            ),
-                            $.markup_end,
-                        )
+                                $.markup_end,
+                            )
+                        ),
                     ),
                 ),
             ),
 
         italic: $ =>
-            prec.left(1,
-                choice(
-                    $.italic_segment,
-                    seq(
-                        $.italic_segment_with_nest,
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.italic_segment,
                         seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.superscript,
-                                    $.subscript,
+                            $.italic_segment_with_nest,
+                            seq(
+                                repeat1(
+                                    choice(
+                                        $.bold,
+                                        $.strikethrough,
+                                        $.underline,
+                                        $.spoiler,
+                                        $.superscript,
+                                        $.subscript,
+                                        $.inline_comment,
+                                    ),
                                 ),
-                            ),
-                            $.markup_end,
-                        )
+                                $.markup_end,
+                            )
+                        ),
                     ),
                 ),
             ),
 
         strikethrough: $ =>
-            prec.left(1,
-                choice(
-                    $.strikethrough_segment,
-                    seq(
-                        $.strikethrough_segment_with_nest,
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.strikethrough_segment,
                         seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.superscript,
-                                    $.subscript,
+                            $.strikethrough_segment_with_nest,
+                            seq(
+                                repeat1(
+                                    choice(
+                                        $.bold,
+                                        $.italic,
+                                        $.underline,
+                                        $.spoiler,
+                                        $.superscript,
+                                        $.subscript,
+                                        $.inline_comment,
+                                    ),
                                 ),
-                            ),
-                            $.markup_end,
-                        )
+                                $.markup_end,
+                            )
+                        ),
                     ),
                 ),
             ),
 
         underline: $ =>
-            prec.left(1,
-                choice(
-                    $.underline_segment,
-                    seq(
-                        $.underline_segment_with_nest,
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.underline_segment,
                         seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.spoiler,
-                                    $.superscript,
-                                    $.subscript,
+                            $.underline_segment_with_nest,
+                            seq(
+                                repeat1(
+                                    choice(
+                                        $.bold,
+                                        $.italic,
+                                        $.strikethrough,
+                                        $.spoiler,
+                                        $.superscript,
+                                        $.subscript,
+                                        $.inline_comment,
+                                    ),
                                 ),
-                            ),
-                            $.markup_end,
-                        )
+                                $.markup_end,
+                            )
+                        ),
                     ),
                 ),
             ),
 
         spoiler: $ =>
-            prec.left(1,
-                choice(
-                    $.spoiler_segment,
-                    seq(
-                        $.spoiler_segment_with_nest,
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.spoiler_segment,
                         seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.superscript,
-                                    $.subscript,
+                            $.spoiler_segment_with_nest,
+                            seq(
+                                repeat1(
+                                    choice(
+                                        $.bold,
+                                        $.italic,
+                                        $.strikethrough,
+                                        $.underline,
+                                        $.superscript,
+                                        $.subscript,
+                                        $.inline_comment,
+                                    ),
                                 ),
-                            ),
-                            $.markup_end,
-                        )
+                                $.markup_end,
+                            )
+                        ),
                     ),
                 ),
             ),
 
         superscript: $ =>
-            prec.left(1,
-                choice(
-                    $.superscript_segment,
-                    seq(
-                        $.superscript_segment_with_nest,
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.superscript_segment,
                         seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.subscript,
+                            $.superscript_segment_with_nest,
+                            seq(
+                                repeat1(
+                                    choice(
+                                        $.bold,
+                                        $.italic,
+                                        $.strikethrough,
+                                        $.underline,
+                                        $.spoiler,
+                                        $.subscript,
+                                        $.inline_comment,
+                                    ),
                                 ),
-                            ),
-                            $.markup_end,
-                        )
+                                $.markup_end,
+                            )
+                        ),
                     ),
                 ),
             ),
 
         subscript: $ =>
-            prec.left(1,
-                choice(
-                    $.subscript_segment,
-                    seq(
-                        $.subscript_segment_with_nest,
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.subscript_segment,
                         seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.superscript,
+                            $.subscript_segment_with_nest,
+                            seq(
+                                repeat1(
+                                    choice(
+                                        $.bold,
+                                        $.italic,
+                                        $.strikethrough,
+                                        $.underline,
+                                        $.spoiler,
+                                        $.superscript,
+                                        $.inline_comment,
+                                    ),
                                 ),
-                            ),
-                            $.markup_end,
-                        )
+                                $.markup_end,
+                            )
+                        ),
+                    ),
+                ),
+            ),
+
+        inline_comment: $ =>
+            prec.right(0,
+                repeat1(
+                    choice(
+                        $.inline_comment_segment,
+                        seq(
+                            $.inline_comment_segment_with_nest,
+                            seq(
+                                repeat1(
+                                    choice(
+                                        $.bold,
+                                        $.italic,
+                                        $.strikethrough,
+                                        $.underline,
+                                        $.spoiler,
+                                        $.superscript,
+                                        $.subscript,
+                                    ),
+                                ),
+                                $.markup_end,
+                            )
+                        ),
                     ),
                 ),
             ),
