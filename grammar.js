@@ -1,6 +1,6 @@
 /*
 * Known bugs:
-* INLINE_CODE isn't being placed properly idk why
+* INLINE_COMMENT isn't being placed properly idk why
 */
 
 module.exports = grammar({
