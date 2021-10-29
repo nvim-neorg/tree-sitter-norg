@@ -2009,6 +2009,10 @@
           "named": true
         },
         {
+          "type": "inline_math",
+          "named": true
+        },
+        {
           "type": "italic",
           "named": true
         },
@@ -2034,6 +2038,10 @@
         },
         {
           "type": "underline",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         },
         {
@@ -3754,6 +3762,10 @@
     "named": true
   },
   {
+    "type": "inline_math",
+    "named": true
+  },
+  {
     "type": "insertion_prefix",
     "named": true
   },
@@ -4011,6 +4023,10 @@
   },
   {
     "type": "unordered_list6_prefix",
+    "named": true
+  },
+  {
+    "type": "variable",
     "named": true
   },
   {

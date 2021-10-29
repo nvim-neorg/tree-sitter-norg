@@ -7,7 +7,7 @@
 #include <string>
 #include <cwctype>
 
-#define NESTED_MASK 9
+#define NESTED_MASK 11
 
 enum TokenType : char
 {
@@ -116,16 +116,20 @@ enum TokenType : char
     SUPERSCRIPT,
     SUBSCRIPT,
     INLINE_COMMENT,
+    INLINE_MATH,
+    VARIABLE,
 
     BOLD_WITH_NEST,
     ITALIC_WITH_NEST,
     STRIKETHROUGH_WITH_NEST,
     UNDERLINE_WITH_NEST,
     SPOILER_WITH_NEST,
-    VERBATIM_WITH_NEST,
+    VERBATIM_WITH_NEST,  // should never occur!
     SUPERSCRIPT_WITH_NEST,
     SUBSCRIPT_WITH_NEST,
     INLINE_COMMENT_WITH_NEST,
+    INLINE_MATH_WITH_NEST,  // should never occur!
+    VARIABLE_WITH_NEST,  // should never occur!
 
     MARKUP_END,
 };
@@ -612,7 +616,7 @@ private:
             {
                 auto attached = find_attached(lookahead);
 
-                if (attached_modifier->second != VERBATIM && (std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
+                if (attached_modifier->second != VERBATIM && attached_modifier->second != INLINE_MATH && attached_modifier->second != VARIABLE && (std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
                 {
                     // We need to advance the lexer conditionally one last time
                     // to ensure that the beginning of the nested modifier
@@ -917,7 +921,7 @@ private:
 
 private:
     const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', '$', '_' };
-    const std::array<std::pair<int32_t, TokenType>, NESTED_MASK> s_AttachedModifiers = { std::pair<int32_t, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', VERBATIM }, { '+', INLINE_COMMENT } };
+    const std::array<std::pair<int32_t, TokenType>, NESTED_MASK> s_AttachedModifiers = { std::pair<int32_t, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', VERBATIM }, { '+', INLINE_COMMENT }, { '$', INLINE_MATH }, { '=', VARIABLE } };
 };
 
 extern "C"

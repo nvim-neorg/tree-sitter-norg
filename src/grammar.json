@@ -4514,6 +4514,14 @@
         {
           "type": "SYMBOL",
           "name": "inline_comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inline_math"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variable"
         }
       ]
     }
@@ -4865,6 +4873,14 @@
     },
     {
       "type": "SYMBOL",
+      "name": "inline_math"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "variable"
+    },
+    {
+      "type": "SYMBOL",
       "name": "bold_segment_with_nest"
     },
     {
@@ -4898,6 +4914,14 @@
     {
       "type": "SYMBOL",
       "name": "inline_comment_segment_with_nest"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "inline_math_with_nest"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "variable_with_nest"
     },
     {
       "type": "SYMBOL",

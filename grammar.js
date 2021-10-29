@@ -112,6 +112,8 @@ module.exports = grammar({
         $.superscript_segment,
         $.subscript_segment,
         $.inline_comment_segment,
+        $.inline_math,
+        $.variable,
 
         $.bold_segment_with_nest,
         $.italic_segment_with_nest,
@@ -122,6 +124,8 @@ module.exports = grammar({
         $.superscript_segment_with_nest,
         $.subscript_segment_with_nest,
         $.inline_comment_segment_with_nest,
+        $.inline_math_with_nest,
+        $.variable_with_nest,
 
         $.markup_end,
       ],
@@ -2045,6 +2049,8 @@ module.exports = grammar({
                 $.superscript,
                 $.subscript,
                 $.inline_comment,
+                $.inline_math,
+                $.variable,
             ),
       }
 });
