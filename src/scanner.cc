@@ -143,6 +143,26 @@ namespace
     }
 }
 
+
+template <typename Type>
+std::ostream& operator<<(std::ostream& stream, const std::vector<Type>& vec)
+{
+    stream << '{';
+
+    for(auto& elem : vec)
+    {
+        stream << elem << ",";
+    }
+
+    return stream << '}';
+}
+
+template <typename First, typename Second>
+std::ostream& operator<<(std::ostream& stream, const std::pair<First, Second>& pair)
+{
+    return stream << '(' << (char)pair.first << ", " << (int)pair.second << ')';
+}
+
 class Scanner
 {
 public:
@@ -552,13 +572,12 @@ private:
         {
             conditional_advance(lexer);
 
-            if (find_attached(m_Current) != s_AttachedModifiers.end() && (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
+            if (find_attached(current) != s_AttachedModifiers.end() && (std::iswspace(lookahead) || std::ispunct(lookahead)))
             {
                 m_AttachedModifierStack.pop_back();
 
-                if (m_AttachedModifierStack.empty() && m_NestedModifiers)
+                if (m_AttachedModifierStack.empty() && m_LastToken >= BOLD && m_LastToken <= SUBSCRIPT_WITH_NEST)
                 {
-                    m_NestedModifiers = false;
                     lexer->result_symbol = m_LastToken = MARKUP_END;
                     return m_LastToken;
                 }
@@ -599,12 +618,10 @@ private:
 
                 if (attached_modifier->second != INLINE_CODE && (std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
                 {
-                    m_NestedModifiers = true;
-
                     lexer->mark_end(lexer);
                     lexer->result_symbol = m_LastToken = static_cast<TokenType>(attached_modifier->second + NESTED_MASK);
 
-                    m_AttachedModifierStack.push_back({ ' ', MARKUP_END });
+                    m_AttachedModifierStack.push_back({ ' ', MARKUP_END }); // THIS CAUSES ISSUES
                     m_AttachedModifierStack.push_back(*attached);
 
                     return m_LastToken;
@@ -659,13 +676,6 @@ private:
                     }
 
                     m_AttachedModifierStack.pop_back();
-
-                    if (!m_AttachedModifierStack.empty() && m_NestedModifiers)
-                    {
-                        m_NestedModifiers = false;
-                        lexer->result_symbol = m_LastToken = MARKUP_END;
-                        return m_LastToken;
-                    }
 
                     lexer->result_symbol = m_LastToken = attached_modifier->second;
                     return attached_modifier->second;
@@ -900,7 +910,6 @@ private:
     // Used for tags and things like *bold*
     std::vector<size_t> m_TagStack;
     std::vector<std::pair<int32_t, TokenType>> m_AttachedModifierStack;
-    bool m_NestedModifiers = false;
 
 private:
     const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':', '_' };
