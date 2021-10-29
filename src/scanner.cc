@@ -346,7 +346,7 @@ public:
                 m_TagStack.push_back(m_IndentationLevel);
                 return true;
             }
-            else if (m_TagStack.empty() && lexer->lookahead == '$')
+            else if (m_TagStack.empty() && lexer->lookahead == '#')
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
@@ -402,7 +402,7 @@ public:
                 if (check_detached(lexer, MARKER | NONE, { '|' }) != NONE)
                     return true;
 
-                if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, { ':' }) != NONE)
+                if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, { '$' }) != NONE)
                     return true;
                 else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
                 {
@@ -908,7 +908,7 @@ private:
     std::vector<std::pair<int32_t, TokenType>> m_AttachedModifierStack;
 
 private:
-    const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', ':', '_' };
+    const std::array<int32_t, 8> s_DetachedModifiers = { '*', '-', '>', '|', '=', '~', '$', '_' };
     const std::array<std::pair<int32_t, TokenType>, NESTED_MASK> s_AttachedModifiers = { std::pair<int32_t, TokenType> { '*', BOLD }, { '-', STRIKETHROUGH }, { '_', UNDERLINE }, { '/', ITALIC }, { '|', SPOILER }, { '^', SUPERSCRIPT }, { ',', SUBSCRIPT }, { '`', VERBATIM }, { '+', INLINE_COMMENT } };
 };
 
