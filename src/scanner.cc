@@ -614,6 +614,14 @@ private:
 
                 if (attached_modifier->second != VERBATIM && (std::iswspace(current) || std::ispunct(current)) && attached != s_AttachedModifiers.end())
                 {
+                    // We need to advance the lexer conditionally one last time
+                    // to ensure that the beginning of the nested modifier
+                    // starts at the correct location (otherwise a difference of
+                    // one char arises between those attached modifiers whose
+                    // symbol is also a detached one, and those for which this
+                    // is not the case)
+                    conditional_advance(lexer);
+
                     lexer->mark_end(lexer);
                     lexer->result_symbol = m_LastToken = static_cast<TokenType>(attached_modifier->second + NESTED_MASK);
 
