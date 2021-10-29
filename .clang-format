@@ -1,0 +1,12 @@
+BasedOnStyle: Chromium
+
+UseTab: Never
+IndentWidth: 4
+IndentCaseLabels: false
+ColumnLimit: 150
+
+BreakBeforeBraces: Allman
+AllowShortIfStatementsOnASingleLine: Never
+SortIncludes: true
+
+SpaceBeforeCpp11BracedList: true
