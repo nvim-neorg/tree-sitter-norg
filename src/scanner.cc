@@ -599,14 +599,14 @@ class Scanner
 
         if (!m_AttachedModifierStack.empty())
         {
-            // TODO: There's an issue here related to the parsing of consecutive chars
-            // if we give an input like `*test /-text-/*` you'll find that the strikethrough
-            // doesn't get parsed at all - it is simply skipped. It's cause of this advance() call
-            // right here which skips over it :(
             advance(lexer);
 
+            // TODO: Fix bug where `*/test/*` doesn't detect the italic
             if (find_attached(m_Current) != s_AttachedModifiers.end() && (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
             {
+                if (find_attached(lexer->lookahead) != s_AttachedModifiers.end())
+                    goto parse_until_end;
+
                 m_AttachedModifierStack.pop_back();
 
                 lexer->result_symbol = m_LastToken = attached_modifier->second;
