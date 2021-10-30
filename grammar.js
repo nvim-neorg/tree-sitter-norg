@@ -1,6 +1,7 @@
 /*
 * Known bugs:
-* Segments get displayed, we should hide them from the grammar
+* Fairly incomplete errors related to incomplete modifiers (ones that do not form a pair)
+* Idk whether the above issue is even fixable with TreeSitter's limitations
 */
 
 module.exports = grammar({
@@ -198,6 +199,7 @@ module.exports = grammar({
                         alias($.space, "_space"),
                         $.link,
                         $.escape_sequence,
+                        $._attached_modifier,
                     ),
                 )
             ),
@@ -208,8 +210,6 @@ module.exports = grammar({
                     choice(
                         $.paragraph_segment,
                         $._line_break,
-
-                        $._attached_modifier,
                     )
                 )
             ),
@@ -219,9 +219,9 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        $.bold_segment,
+                        alias($.bold_segment, "_segment"),
                         seq(
-                            $.bold_segment_with_nest,
+                            alias($.bold_segment_with_nest, "_segment"),
                             seq(
                                 repeat1(
                                     choice(
@@ -234,7 +234,7 @@ module.exports = grammar({
                                         $.inline_comment,
                                     ),
                                 ),
-                                $.markup_end,
+                                alias($.markup_end, "_end"),
                             )
                         ),
                     ),
@@ -245,9 +245,9 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        $.italic_segment,
+                        alias($.italic_segment, "_segment"),
                         seq(
-                            $.italic_segment_with_nest,
+                            alias($.italic_segment_with_nest, "_segment"),
                             seq(
                                 repeat1(
                                     choice(
@@ -260,7 +260,7 @@ module.exports = grammar({
                                         $.inline_comment,
                                     ),
                                 ),
-                                $.markup_end,
+                                alias($.markup_end, "_end"),
                             )
                         ),
                     ),
@@ -271,9 +271,9 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        $.strikethrough_segment,
+                        alias($.strikethrough_segment, "_segment"),
                         seq(
-                            $.strikethrough_segment_with_nest,
+                            alias($.strikethrough_segment_with_nest, "_segment"),
                             seq(
                                 repeat1(
                                     choice(
@@ -286,7 +286,7 @@ module.exports = grammar({
                                         $.inline_comment,
                                     ),
                                 ),
-                                $.markup_end,
+                                alias($.markup_end, "_end"),
                             )
                         ),
                     ),
@@ -297,9 +297,9 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        $.underline_segment,
+                        alias($.underline_segment, "_segment"),
                         seq(
-                            $.underline_segment_with_nest,
+                            alias($.underline_segment_with_nest, "_segment"),
                             seq(
                                 repeat1(
                                     choice(
@@ -312,7 +312,7 @@ module.exports = grammar({
                                         $.inline_comment,
                                     ),
                                 ),
-                                $.markup_end,
+                                alias($.markup_end, "_end"),
                             )
                         ),
                     ),
@@ -323,9 +323,9 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        $.spoiler_segment,
+                        alias($.spoiler_segment, "_segment"),
                         seq(
-                            $.spoiler_segment_with_nest,
+                            alias($.spoiler_segment_with_nest, "_segment"),
                             seq(
                                 repeat1(
                                     choice(
@@ -338,7 +338,7 @@ module.exports = grammar({
                                         $.inline_comment,
                                     ),
                                 ),
-                                $.markup_end,
+                                alias($.markup_end, "_end"),
                             )
                         ),
                     ),
@@ -349,9 +349,9 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        $.superscript_segment,
+                        alias($.superscript_segment, "_segment"),
                         seq(
-                            $.superscript_segment_with_nest,
+                            alias($.superscript_segment_with_nest, "_segment"),
                             seq(
                                 repeat1(
                                     choice(
@@ -363,7 +363,7 @@ module.exports = grammar({
                                         $.inline_comment,
                                     ),
                                 ),
-                                $.markup_end,
+                                alias($.markup_end, "_end"),
                             )
                         ),
                     ),
@@ -374,9 +374,9 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        $.subscript_segment,
+                        alias($.subscript_segment, "_segment"),
                         seq(
-                            $.subscript_segment_with_nest,
+                            alias($.subscript_segment_with_nest, "_segment"),
                             seq(
                                 repeat1(
                                     choice(
@@ -388,7 +388,7 @@ module.exports = grammar({
                                         $.inline_comment,
                                     ),
                                 ),
-                                $.markup_end,
+                                alias($.markup_end, "_end"),
                             )
                         ),
                     ),
@@ -399,9 +399,9 @@ module.exports = grammar({
             prec.right(0,
                 repeat1(
                     choice(
-                        $.inline_comment_segment,
+                        alias($.inline_comment_segment, "_segment"),
                         seq(
-                            $.inline_comment_segment_with_nest,
+                            alias($.inline_comment_segment_with_nest, "_segment"),
                             seq(
                                 repeat1(
                                     choice(
@@ -414,7 +414,7 @@ module.exports = grammar({
                                         $.subscript,
                                     ),
                                 ),
-                                $.markup_end,
+                                alias($.markup_end, "_end"),
                             )
                         ),
                     ),

@@ -3,7 +3,7 @@ BasedOnStyle: Chromium
 UseTab: Never
 IndentWidth: 4
 IndentCaseLabels: false
-ColumnLimit: 150
+ColumnLimit: 100
 
 BreakBeforeBraces: Allman
 AllowShortIfStatementsOnASingleLine: Never

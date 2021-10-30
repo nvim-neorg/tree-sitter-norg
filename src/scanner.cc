@@ -210,7 +210,8 @@ class Scanner
             return parse_link(lexer);
         // If we are not in a tag and we have a square bracket opening then try
         // matching either a todo item or beginning of a list
-        else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 && lexer->lookahead == '[')
+        else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 &&
+                 lexer->lookahead == '[')
         {
             advance(lexer);
 
@@ -259,7 +260,8 @@ class Scanner
         }
         // Otherwise make sure to check for the existence of an opening link
         // location
-        else if (!m_TagLevel && (lexer->lookahead == '[' || (m_LastToken >= LINK_TEXT_PREFIX && m_LastToken < LINK_LOCATION_SUFFIX)))
+        else if (!m_TagLevel && (lexer->lookahead == '[' || (m_LastToken >= LINK_TEXT_PREFIX &&
+                                                             m_LastToken < LINK_LOCATION_SUFFIX)))
             return parse_link(lexer);
         // Otherwise just check whether or not we're dealing with a newline and
         // return STANDALONE_BREAK if we are
@@ -322,7 +324,8 @@ class Scanner
                             advance(lexer);
                             if (std::iswspace(lexer->lookahead))
                             {
-                                while (std::iswspace(lexer->lookahead) && lexer->lookahead != '\n' && lexer->lookahead)
+                                while (std::iswspace(lexer->lookahead) &&
+                                       lexer->lookahead != '\n' && lexer->lookahead)
                                     advance(lexer);
 
                                 if (std::iswspace(lexer->lookahead) && m_TagLevel)
@@ -364,11 +367,15 @@ class Scanner
                 // the given amount of fallbacks then the last fallback will
                 // always be chosen. This means that if we have 7 consecutive
                 // '*' chars then we will still fall back to the HEADING6 token
-                if (check_detached(lexer, HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6, {'*'}) != NONE)
+                if (check_detached(lexer,
+                                   HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6,
+                                   {'*'}) != NONE)
                     return true;
 
                 // Check for the existence of quotes
-                if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6 | NONE, {'>'}) != NONE)
+                if (check_detached(lexer,
+                                   QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6 | NONE,
+                                   {'>'}) != NONE)
                     return true;
 
                 // Check for the existence of an unordered list element.
@@ -376,11 +383,13 @@ class Scanner
                 // '-' chars as possible BUT if you encounter a '>' char at the
                 // end of the parsed string then return an UNORDERED_LINK
                 // instead".
-                if (check_detached(
-                        lexer, UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE,
-                        {'-'},
-                        {'>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 | UNORDERED_LINK4 | UNORDERED_LINK5 | UNORDERED_LINK6 | NONE}) !=
-                    NONE)
+                if (check_detached(lexer,
+                                   UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 |
+                                       UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6 | NONE,
+                                   {'-'},
+                                   {'>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 |
+                                             UNORDERED_LINK4 | UNORDERED_LINK5 | UNORDERED_LINK6 |
+                                             NONE}) != NONE)
                 {
                     return true;
                 }
@@ -411,15 +420,20 @@ class Scanner
                     return true;
                 }
 
-                if (check_detached(lexer, ORDERED_LIST1 | ORDERED_LIST2 | ORDERED_LIST3 | ORDERED_LIST4 | ORDERED_LIST5 | ORDERED_LIST6 | NONE, {'~'},
-                                   {'>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 | ORDERED_LINK5 | ORDERED_LINK6 | NONE}) !=
-                    NONE)
+                if (check_detached(
+                        lexer,
+                        ORDERED_LIST1 | ORDERED_LIST2 | ORDERED_LIST3 | ORDERED_LIST4 |
+                            ORDERED_LIST5 | ORDERED_LIST6 | NONE,
+                        {'~'},
+                        {'>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 |
+                                  ORDERED_LINK5 | ORDERED_LINK6 | NONE}) != NONE)
                     return true;
 
                 if (check_detached(lexer, MARKER | NONE, {'|'}) != NONE)
                     return true;
 
-                if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, {'$'}) != NONE)
+                if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, {'$'}) !=
+                    NONE)
                     return true;
                 else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
                 {
@@ -466,7 +480,10 @@ class Scanner
 
     size_t& get_tag_level() noexcept { return m_TagLevel; }
     TokenType& get_last_token() noexcept { return m_LastToken; }
-    std::vector<std::pair<char, TokenType>>& get_attached_modifier_stack() noexcept { return m_AttachedModifierStack; }
+    std::vector<std::pair<char, TokenType>>& get_attached_modifier_stack() noexcept
+    {
+        return m_AttachedModifierStack;
+    }
 
    private:
     // Skips the next character without including it in the final result
@@ -494,7 +511,8 @@ class Scanner
                                     const std::array<int32_t, Size>& expected,
                                     std::pair<char, TokenType> terminate_at = {0, NONE})
     {
-        return check_detached(lexer, result | NONE, expected, {terminate_at.first, terminate_at.second | NONE});
+        return check_detached(lexer, result | NONE, expected,
+                              {terminate_at.first, terminate_at.second | NONE});
     }
 
     /*
@@ -508,16 +526,20 @@ class Scanner
     [[nodiscard]] TokenType check_detached(TSLexer* lexer,
                                            const std::vector<TokenType>& results,
                                            const std::array<int32_t, Size>& expected,
-                                           std::pair<char, std::vector<TokenType>> terminate_at = {0, NONE | NONE})
+                                           std::pair<char, std::vector<TokenType>> terminate_at = {
+                                               0, NONE | NONE})
     {
         static_assert(Size > 0, "check_detached Size template must be greater than 0");
 
         size_t i = m_ParsedChars = 0;
 
         // Loop as long as the next character is a valid detached modifier
-        for (auto detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead);
+        for (auto detached_modifier = std::find(s_DetachedModifiers.begin(),
+                                                s_DetachedModifiers.end(), lexer->lookahead);
              detached_modifier != s_DetachedModifiers.end();
-             detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(), lexer->lookahead), i++, m_ParsedChars++)
+             detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(),
+                                           lexer->lookahead),
+                  i++, m_ParsedChars++)
         {
             // If we've specified a termination character and we match then the
             // token lexing prematurely
@@ -529,7 +551,8 @@ class Scanner
                 while (lexer->lookahead && (lexer->lookahead == ' ' || lexer->lookahead == '\t'))
                     advance(lexer);
 
-                TokenType result = terminate_at.second[clamp(i, size_t {}, terminate_at.second.size()) - 1];
+                TokenType result =
+                    terminate_at.second[clamp(i, size_t {}, terminate_at.second.size()) - 1];
 
                 lexer->result_symbol = m_LastToken = result;
 
@@ -575,7 +598,8 @@ class Scanner
     auto find_attached(int32_t c)
     {
         return std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(),
-                            [&](const std::pair<int32_t, TokenType>& pair) { return pair.first == c; });
+                            [&](const std::pair<int32_t, TokenType>& pair)
+                            { return pair.first == c; });
     }
 
     /*
@@ -587,14 +611,16 @@ class Scanner
     TokenType check_attached(TSLexer* lexer, bool behind)
     {
         // Return an iterator to an attached modifier if one can be found
-        const auto attached_modifier =
-            m_AttachedModifierStack.empty() ? find_attached(behind ? m_Current : lexer->lookahead) : &m_AttachedModifierStack.back();
+        const auto attached_modifier = m_AttachedModifierStack.empty()
+                                           ? find_attached(behind ? m_Current : lexer->lookahead)
+                                           : &m_AttachedModifierStack.back();
 
         if (!m_AttachedModifierStack.empty())
         {
             advance(lexer);
 
-            if (find_attached(m_Current) != s_AttachedModifiers.end() && (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
+            if (find_attached(m_Current) != s_AttachedModifiers.end() &&
+                (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
             {
                 if (find_attached(lexer->lookahead) != s_AttachedModifiers.end())
                     goto parse_until_end;
@@ -644,11 +670,15 @@ class Scanner
 
                 auto attached = find_attached(lexer->lookahead);
 
-                if (attached_modifier->second != VERBATIM && attached_modifier->second != INLINE_MATH && attached_modifier->second != VARIABLE &&
-                    (std::iswspace(m_Current) || std::ispunct(m_Current)) && attached != s_AttachedModifiers.end())
+                if (attached_modifier->second != VERBATIM &&
+                    attached_modifier->second != INLINE_MATH &&
+                    attached_modifier->second != VARIABLE &&
+                    (std::iswspace(m_Current) || std::ispunct(m_Current)) &&
+                    attached != s_AttachedModifiers.end())
                 {
                     lexer->mark_end(lexer);
-                    lexer->result_symbol = m_LastToken = static_cast<TokenType>(attached_modifier->second + NESTED_MASK);
+                    lexer->result_symbol = m_LastToken =
+                        static_cast<TokenType>(attached_modifier->second + NESTED_MASK);
 
                     for (const auto& item : m_AttachedModifierStack)
                     {
@@ -679,7 +709,8 @@ class Scanner
                     {
                         m_AttachedModifierStack.clear();
 
-                        lexer->result_symbol = m_LastToken = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
+                        lexer->result_symbol = m_LastToken =
+                            (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
                         lexer->mark_end(lexer);
                         return attached_modifier->second;
                     }
@@ -782,7 +813,8 @@ class Scanner
                     advance(lexer);
                 }
 
-                lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(count - 1, 0, 5));
+                lexer->result_symbol = m_LastToken =
+                    static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(count - 1, 0, 5));
                 break;
             case '@':
                 advance(lexer);
@@ -890,7 +922,8 @@ class Scanner
             return true;
         }
 
-        const TokenType resulting_symbol = (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
+        const TokenType resulting_symbol =
+            (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
 
         do
         {
@@ -938,26 +971,32 @@ class Scanner
 
    private:
     const std::array<int32_t, 8> s_DetachedModifiers = {'*', '-', '>', '|', '=', '~', '$', '_'};
-    const std::array<std::pair<char, TokenType>, NESTED_MASK> s_AttachedModifiers = {std::pair<int32_t, TokenType> {'*', BOLD},
-                                                                                        {'-', STRIKETHROUGH},
-                                                                                        {'_', UNDERLINE},
-                                                                                        {'/', ITALIC},
-                                                                                        {'|', SPOILER},
-                                                                                        {'^', SUPERSCRIPT},
-                                                                                        {',', SUBSCRIPT},
-                                                                                        {'`', VERBATIM},
-                                                                                        {'+', INLINE_COMMENT},
-                                                                                        {'$', INLINE_MATH},
-                                                                                        {'=', VARIABLE}};
+    const std::array<std::pair<char, TokenType>, NESTED_MASK> s_AttachedModifiers = {
+        std::pair<int32_t, TokenType> {'*', BOLD},
+        {'-', STRIKETHROUGH},
+        {'_', UNDERLINE},
+        {'/', ITALIC},
+        {'|', SPOILER},
+        {'^', SUPERSCRIPT},
+        {',', SUBSCRIPT},
+        {'`', VERBATIM},
+        {'+', INLINE_COMMENT},
+        {'$', INLINE_MATH},
+        {'=', VARIABLE}};
 };
 
 extern "C"
 {
     void* tree_sitter_norg_external_scanner_create() { return new Scanner(); }
 
-    void tree_sitter_norg_external_scanner_destroy(void* payload) { delete static_cast<Scanner*>(payload); }
+    void tree_sitter_norg_external_scanner_destroy(void* payload)
+    {
+        delete static_cast<Scanner*>(payload);
+    }
 
-    bool tree_sitter_norg_external_scanner_scan(void* payload, TSLexer* lexer, const bool* valid_symbols)
+    bool tree_sitter_norg_external_scanner_scan(void* payload,
+                                                TSLexer* lexer,
+                                                const bool* valid_symbols)
     {
         return static_cast<Scanner*>(payload)->scan(lexer, valid_symbols);
     }
@@ -986,7 +1025,9 @@ extern "C"
         return 2 + (attached_modifier_stack.size() * 2);
     }
 
-    void tree_sitter_norg_external_scanner_deserialize(void* payload, const char* buffer, unsigned length)
+    void tree_sitter_norg_external_scanner_deserialize(void* payload,
+                                                       const char* buffer,
+                                                       unsigned length)
     {
         auto* scanner = static_cast<Scanner*>(payload);
 
