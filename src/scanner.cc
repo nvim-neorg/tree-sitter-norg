@@ -183,11 +183,11 @@ class Scanner
             return false;
         }
 
-        // TODO: Remove the insane amount of m_TagStack.empty() checks and put
+        // TODO: Remove the insane amount of !m_TagLevel checks and put
         // it all in one if check
 
         // Check for an escape seqence (e.g. "\*")
-        if (m_TagStack.empty() && lexer->lookahead == '\\')
+        if (!m_TagLevel && lexer->lookahead == '\\')
         {
             advance(lexer);
 
@@ -259,7 +259,7 @@ class Scanner
         }
         // Otherwise make sure to check for the existence of an opening link
         // location
-        else if (m_TagStack.empty() && (lexer->lookahead == '[' || (m_LastToken >= LINK_TEXT_PREFIX && m_LastToken < LINK_LOCATION_SUFFIX)))
+        else if (!m_TagLevel && (lexer->lookahead == '[' || (m_LastToken >= LINK_TEXT_PREFIX && m_LastToken < LINK_LOCATION_SUFFIX)))
             return parse_link(lexer);
         // Otherwise just check whether or not we're dealing with a newline and
         // return STANDALONE_BREAK if we are
@@ -325,20 +325,12 @@ class Scanner
                                 while (std::iswspace(lexer->lookahead) && lexer->lookahead != '\n' && lexer->lookahead)
                                     advance(lexer);
 
-                                if (std::iswspace(lexer->lookahead) && !m_TagStack.empty())
+                                if (std::iswspace(lexer->lookahead) && m_TagLevel)
                                 {
-                                    if (m_IndentationLevel != m_TagStack.back())
-                                    {
-                                        lexer->result_symbol = m_LastToken = WORD;
-                                        return true;
-                                    }
-                                    else
-                                    {
-                                        lexer->result_symbol = m_LastToken = RANGED_TAG_END;
+                                    lexer->result_symbol = m_LastToken = RANGED_TAG_END;
 
-                                        m_TagStack.pop_back();
-                                        return true;
-                                    }
+                                    --m_TagLevel;
+                                    return true;
                                 }
 
                                 lexer->result_symbol = m_LastToken = WORD;
@@ -351,10 +343,10 @@ class Scanner
                 // This is a fallback. If the tag ends up not being `@end`
                 // then just push back the indentation level and return
                 lexer->result_symbol = m_LastToken = RANGED_TAG;
-                m_TagStack.push_back(m_IndentationLevel);
+                ++m_TagLevel;
                 return true;
             }
-            else if (m_TagStack.empty() && lexer->lookahead == '#')
+            else if (!m_TagLevel && lexer->lookahead == '#')
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
@@ -362,7 +354,7 @@ class Scanner
             }
 
             // Check for these only if we are not inside of a tag ("@example")
-            if (m_TagStack.empty())
+            if (!m_TagLevel)
             {
                 // The idea of the check_detached function is as follows:
                 // We check for the '*' character and depending on how many we
@@ -465,15 +457,16 @@ class Scanner
 
         // If we are not in a ranged tag then we should also check for potential
         // attached modifiers, like *this*.
-        if (m_TagStack.empty() && (check_attached(lexer, false) != NONE))
+        if (!m_TagLevel && (check_attached(lexer, false) != NONE))
             return true;
 
         // Match paragraphs
         return parse_text(lexer);
     }
 
-    std::vector<size_t>& get_tag_stack() noexcept { return m_TagStack; }
+    size_t& get_tag_level() noexcept { return m_TagLevel; }
     TokenType& get_last_token() noexcept { return m_LastToken; }
+    std::vector<std::pair<char, TokenType>>& get_attached_modifier_stack() noexcept { return m_AttachedModifierStack; }
 
    private:
     // Skips the next character without including it in the final result
@@ -643,7 +636,10 @@ class Scanner
             // While our lookahead is not equal to a potential closing modifier
             while (lexer->lookahead)
             {
-                if (lexer->lookahead == attached_modifier->first || m_Current == '\\')
+                if (m_Current == '\\')
+                    advance(lexer);
+
+                if (lexer->lookahead == attached_modifier->first)
                     break;
 
                 auto attached = find_attached(lexer->lookahead);
@@ -870,12 +866,12 @@ class Scanner
 
     /*
      * Simply parses any word (segment containing consecutive non-whitespace
-     * characters) If in a tag (m_TagStack.empty() == false) parse_text parses
+     * characters). If in a tag (m_TagLevel) parse_text parses
      * till a newline is encountered
      */
     bool parse_text(TSLexer* lexer)
     {
-        if (!m_TagStack.empty())
+        if (m_TagLevel)
         {
             while (lexer->lookahead && lexer->lookahead != '\n')
                 advance(lexer);
@@ -928,6 +924,8 @@ class Scanner
     // Stores the current char rather than the next char
     int32_t m_Previous = 0, m_Current = 0;
 
+    size_t m_TagLevel = 0;
+
     // The last matched token type (used to detect things like todo items
     // which require an unordered list prefix beforehand)
     TokenType m_LastToken = NONE;
@@ -935,13 +933,12 @@ class Scanner
     // Used for lookback
     size_t m_ParsedChars = 0, m_IndentationLevel = 0;
 
-    // Used for tags and things like *bold*
-    std::vector<size_t> m_TagStack;
-    std::vector<std::pair<int32_t, TokenType>> m_AttachedModifierStack;
+    // Used for things like *bold*
+    std::vector<std::pair<char, TokenType>> m_AttachedModifierStack;
 
    private:
     const std::array<int32_t, 8> s_DetachedModifiers = {'*', '-', '>', '|', '=', '~', '$', '_'};
-    const std::array<std::pair<int32_t, TokenType>, NESTED_MASK> s_AttachedModifiers = {std::pair<int32_t, TokenType> {'*', BOLD},
+    const std::array<std::pair<char, TokenType>, NESTED_MASK> s_AttachedModifiers = {std::pair<int32_t, TokenType> {'*', BOLD},
                                                                                         {'-', STRIKETHROUGH},
                                                                                         {'_', UNDERLINE},
                                                                                         {'/', ITALIC},
@@ -967,30 +964,47 @@ extern "C"
 
     unsigned tree_sitter_norg_external_scanner_serialize(void* payload, char* buffer)
     {
-        auto& tag_stack = static_cast<Scanner*>(payload)->get_tag_stack();
-        auto& last_token = static_cast<Scanner*>(payload)->get_last_token();
+        auto* scanner = static_cast<Scanner*>(payload);
 
-        if (tag_stack.size() + 1 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        auto& tag_level = scanner->get_tag_level();
+        auto& last_token = scanner->get_last_token();
+        auto& attached_modifier_stack = scanner->get_attached_modifier_stack();
+
+        if (2 + (attached_modifier_stack.size() * 2) >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
-        std::copy(tag_stack.begin(), tag_stack.end(), &buffer[1]);
+        buffer[1] = tag_level;
 
-        return tag_stack.size() + 1;
+        for (size_t i = 0; i < attached_modifier_stack.size(); ++i)
+        {
+            const auto& pair = attached_modifier_stack[i];
+            buffer[(i * 2) + 2] = pair.first;
+            buffer[(i * 2) + 1 + 2] = pair.second;
+        }
+
+        return 2 + (attached_modifier_stack.size() * 2);
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload, const char* buffer, unsigned length)
     {
-        auto& tag_stack = static_cast<Scanner*>(payload)->get_tag_stack();
-        auto& last_token = static_cast<Scanner*>(payload)->get_last_token();
+        auto* scanner = static_cast<Scanner*>(payload);
 
-        tag_stack.clear();
+        auto& tag_level = scanner->get_tag_level();
+        auto& last_token = scanner->get_last_token();
+        auto& attached_modifier_stack = scanner->get_attached_modifier_stack();
+
+        attached_modifier_stack.clear();
 
         if (length > 0)
         {
-            tag_stack.resize(length - 1);
             last_token = (TokenType)buffer[0];
-            std::copy_n(&buffer[1], length - 1, tag_stack.begin());
+            tag_level = (size_t)buffer[1];
+
+            for (size_t i = 0; i < length - 2; i += 2)
+                attached_modifier_stack.emplace_back(buffer[i + 2], (TokenType)buffer[i + 1 + 2]);
         }
+        else
+            tag_level = 0;
     }
 }

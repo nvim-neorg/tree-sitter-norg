@@ -1,6 +1,6 @@
 /*
 * Known bugs:
-* Attempting to escape a nested attached modifier fails miserably
+* Segments get displayed, we should hide them from the grammar
 */
 
 module.exports = grammar({
