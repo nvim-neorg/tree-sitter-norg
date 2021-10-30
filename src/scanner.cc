@@ -601,7 +601,6 @@ class Scanner
         {
             advance(lexer);
 
-            // TODO: Fix bug where `*/test/*` doesn't detect the italic
             if (find_attached(m_Current) != s_AttachedModifiers.end() && (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
             {
                 if (find_attached(lexer->lookahead) != s_AttachedModifiers.end())
@@ -620,7 +619,8 @@ class Scanner
         // opening attached modifier
         if (attached_modifier != s_AttachedModifiers.end())
         {
-            advance(lexer);
+            if (!behind)
+                advance(lexer);
 
             // If the next char is a whitespace character then it doesn't count
             if (std::iswspace(lexer->lookahead))
