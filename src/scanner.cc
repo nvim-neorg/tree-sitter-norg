@@ -672,8 +672,7 @@ class Scanner
 
                 if (attached_modifier->second != VERBATIM &&
                     attached_modifier->second != INLINE_MATH &&
-                    attached_modifier->second != VARIABLE &&
-                    (std::iswspace(m_Current) || std::ispunct(m_Current)) &&
+                    attached_modifier->second != VARIABLE && !std::isalnum(m_Current) &&
                     attached != s_AttachedModifiers.end())
                 {
                     lexer->mark_end(lexer);
@@ -721,7 +720,7 @@ class Scanner
 
             // If the previous char before the closing modifier is not
             // whitespace then
-            if (!m_Current || std::isalnum(m_Current) || std::ispunct(m_Current))
+            if (!m_Current || !std::iswspace(m_Current))
             {
                 advance(lexer);
 
@@ -939,6 +938,9 @@ class Scanner
                         return false;
                 }
             }
+            else if (!std::isalnum(m_Current) &&
+                     find_attached(lexer->lookahead) != s_AttachedModifiers.end())
+                break;
             else
                 advance(lexer);
         } while (lexer->lookahead && !std::iswspace(lexer->lookahead) && lexer->lookahead != '\\');
