@@ -56,6 +56,8 @@ module.exports = grammar({
         $.todo_item_on_hold,
         $.todo_item_cancelled,
         $.todo_item_urgent,
+        $.todo_item_uncertain,
+        $.todo_item_recurring,
 
         $.insertion_prefix,
 
@@ -1559,6 +1561,8 @@ module.exports = grammar({
                             $.todo_item_on_hold,
                             $.todo_item_cancelled,
                             $.todo_item_urgent,
+                            $.todo_item_uncertain,
+                            $.todo_item_recurring,
                         ),
                     ),
 
@@ -1596,6 +1600,8 @@ module.exports = grammar({
                             $.todo_item_on_hold,
                             $.todo_item_cancelled,
                             $.todo_item_urgent,
+                            $.todo_item_uncertain,
+                            $.todo_item_recurring,
                         )
                     ),
 
@@ -1632,6 +1638,8 @@ module.exports = grammar({
                             $.todo_item_on_hold,
                             $.todo_item_cancelled,
                             $.todo_item_urgent,
+                            $.todo_item_uncertain,
+                            $.todo_item_recurring,
                         )
                     ),
 
@@ -1667,6 +1675,8 @@ module.exports = grammar({
                             $.todo_item_on_hold,
                             $.todo_item_cancelled,
                             $.todo_item_urgent,
+                            $.todo_item_uncertain,
+                            $.todo_item_recurring,
                         )
                     ),
 
@@ -1701,6 +1711,8 @@ module.exports = grammar({
                             $.todo_item_on_hold,
                             $.todo_item_cancelled,
                             $.todo_item_urgent,
+                            $.todo_item_uncertain,
+                            $.todo_item_recurring,
                         )
                     ),
 
@@ -1732,6 +1744,8 @@ module.exports = grammar({
                             $.todo_item_on_hold,
                             $.todo_item_cancelled,
                             $.todo_item_urgent,
+                            $.todo_item_uncertain,
+                            $.todo_item_recurring,
                         )
                     ),
 

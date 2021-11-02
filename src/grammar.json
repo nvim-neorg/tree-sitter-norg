@@ -3592,6 +3592,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "todo_item_urgent"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_uncertain"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_recurring"
                 }
               ]
             }
@@ -3681,6 +3689,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "todo_item_urgent"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_uncertain"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_recurring"
                 }
               ]
             }
@@ -3766,6 +3782,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "todo_item_urgent"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_uncertain"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_recurring"
                 }
               ]
             }
@@ -3847,6 +3871,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "todo_item_urgent"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_uncertain"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_recurring"
                 }
               ]
             }
@@ -3924,6 +3956,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "todo_item_urgent"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_uncertain"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_recurring"
                 }
               ]
             }
@@ -3992,6 +4032,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "todo_item_urgent"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_uncertain"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "todo_item_recurring"
                 }
               ]
             }
@@ -4870,6 +4918,14 @@
     {
       "type": "SYMBOL",
       "name": "todo_item_urgent"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "todo_item_uncertain"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "todo_item_recurring"
     },
     {
       "type": "SYMBOL",

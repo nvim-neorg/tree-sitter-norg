@@ -2664,6 +2664,14 @@
             "named": true
           },
           {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
+            "named": true
+          },
+          {
             "type": "todo_item_undone",
             "named": true
           },
@@ -2740,6 +2748,14 @@
             "named": true
           },
           {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
+            "named": true
+          },
+          {
             "type": "todo_item_undone",
             "named": true
           },
@@ -2812,6 +2828,14 @@
             "named": true
           },
           {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
+            "named": true
+          },
+          {
             "type": "todo_item_undone",
             "named": true
           },
@@ -2880,6 +2904,14 @@
             "named": true
           },
           {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
+            "named": true
+          },
+          {
             "type": "todo_item_undone",
             "named": true
           },
@@ -2944,6 +2976,14 @@
             "named": true
           },
           {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
+            "named": true
+          },
+          {
             "type": "todo_item_undone",
             "named": true
           },
@@ -3001,6 +3041,14 @@
           },
           {
             "type": "todo_item_pending",
+            "named": true
+          },
+          {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
             "named": true
           },
           {
@@ -3959,6 +4007,14 @@
   },
   {
     "type": "todo_item_pending",
+    "named": true
+  },
+  {
+    "type": "todo_item_recurring",
+    "named": true
+  },
+  {
+    "type": "todo_item_uncertain",
     "named": true
   },
   {
