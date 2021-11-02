@@ -53,7 +53,9 @@ module.exports = grammar({
         $.todo_item_undone,
         $.todo_item_pending,
         $.todo_item_done,
-        $.todo_item_wont_complete,
+        $.todo_item_on_hold,
+        $.todo_item_cancelled,
+        $.todo_item_urgent,
 
         $.insertion_prefix,
 
@@ -1554,7 +1556,9 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
-                            $.todo_item_wont_complete,
+                            $.todo_item_on_hold,
+                            $.todo_item_cancelled,
+                            $.todo_item_urgent,
                         ),
                     ),
 
@@ -1589,7 +1593,9 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
-                            $.todo_item_wont_complete,
+                            $.todo_item_on_hold,
+                            $.todo_item_cancelled,
+                            $.todo_item_urgent,
                         )
                     ),
 
@@ -1623,7 +1629,9 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
-                            $.todo_item_wont_complete,
+                            $.todo_item_on_hold,
+                            $.todo_item_cancelled,
+                            $.todo_item_urgent,
                         )
                     ),
 
@@ -1656,7 +1664,9 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
-                            $.todo_item_wont_complete,
+                            $.todo_item_on_hold,
+                            $.todo_item_cancelled,
+                            $.todo_item_urgent,
                         )
                     ),
 
@@ -1688,7 +1698,9 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
-                            $.todo_item_wont_complete,
+                            $.todo_item_on_hold,
+                            $.todo_item_cancelled,
+                            $.todo_item_urgent,
                         )
                     ),
 
@@ -1717,7 +1729,9 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
-                            $.todo_item_wont_complete,
+                            $.todo_item_on_hold,
+                            $.todo_item_cancelled,
+                            $.todo_item_urgent,
                         )
                     ),
 

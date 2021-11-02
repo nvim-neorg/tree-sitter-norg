@@ -57,7 +57,9 @@ enum TokenType : char
     TODO_ITEM_UNDONE,
     TODO_ITEM_PENDING,
     TODO_ITEM_DONE,
-    TODO_ITEM_WONT_COMPLETE,
+    TODO_ITEM_ON_HOLD,
+    TODO_ITEM_CANCELLED,
+    TODO_ITEM_URGENT,
 
     INSERTION,
 
@@ -240,8 +242,17 @@ class Scanner
             case 'x':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
                 break;
+            // We're dealing with an item that has been put on hold ([-])
             case '-':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_WONT_COMPLETE;
+                lexer->result_symbol = m_LastToken = TODO_ITEM_ON_HOLD;
+                break;
+            // We're dealing with an item that has been cancelled ([=])
+            case '=':
+                lexer->result_symbol = m_LastToken = TODO_ITEM_CANCELLED;
+                break;
+            // We're dealing with an item that is urgent ([!])
+            case '!':
+                lexer->result_symbol = m_LastToken = TODO_ITEM_URGENT;
                 break;
             case '\0':
                 advance(lexer);
