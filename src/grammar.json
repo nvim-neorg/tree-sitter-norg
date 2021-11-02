@@ -111,10 +111,6 @@
           {
             "type": "SYMBOL",
             "name": "paragraph"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "strong_paragraph_delimiter"
           }
         ]
       }
@@ -2101,8 +2097,17 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "weak_paragraph_delimiter"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "weak_paragraph_delimiter"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "strong_paragraph_delimiter"
+                  }
+                ]
               },
               {
                 "type": "BLANK"

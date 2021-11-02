@@ -2,6 +2,7 @@
 * Known bugs:
 * Fairly incomplete errors related to incomplete modifiers (ones that do not form a pair)
 * Idk whether the above issue is even fixable with TreeSitter's limitations
+* Placing a detached modifier below a paragraph messes it up
 */
 
 module.exports = grammar({
@@ -174,7 +175,6 @@ module.exports = grammar({
                 ),
 
                 $.paragraph,
-                $.strong_paragraph_delimiter,
             )
         ),
 
@@ -883,7 +883,10 @@ module.exports = grammar({
                 ),
 
                 optional(
-                    $.weak_paragraph_delimiter,
+                    choice(
+                        $.weak_paragraph_delimiter,
+                        $.strong_paragraph_delimiter,
+                    )
                 )
             )
         ),
