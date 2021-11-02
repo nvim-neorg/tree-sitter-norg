@@ -53,6 +53,7 @@ module.exports = grammar({
         $.todo_item_undone,
         $.todo_item_pending,
         $.todo_item_done,
+        $.todo_item_wont_complete,
 
         $.insertion_prefix,
 
@@ -1553,6 +1554,7 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
+                            $.todo_item_wont_complete,
                         ),
                     ),
 
@@ -1587,6 +1589,7 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
+                            $.todo_item_wont_complete,
                         )
                     ),
 
@@ -1620,6 +1623,7 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
+                            $.todo_item_wont_complete,
                         )
                     ),
 
@@ -1652,6 +1656,7 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
+                            $.todo_item_wont_complete,
                         )
                     ),
 
@@ -1683,6 +1688,7 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
+                            $.todo_item_wont_complete,
                         )
                     ),
 
@@ -1711,6 +1717,7 @@ module.exports = grammar({
                             $.todo_item_undone,
                             $.todo_item_pending,
                             $.todo_item_done,
+                            $.todo_item_wont_complete,
                         )
                     ),
 

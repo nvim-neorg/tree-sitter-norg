@@ -2658,6 +2658,10 @@
           {
             "type": "todo_item_undone",
             "named": true
+          },
+          {
+            "type": "todo_item_wont_complete",
+            "named": true
           }
         ]
       }
@@ -2722,6 +2726,10 @@
           {
             "type": "todo_item_undone",
             "named": true
+          },
+          {
+            "type": "todo_item_wont_complete",
+            "named": true
           }
         ]
       }
@@ -2782,6 +2790,10 @@
           {
             "type": "todo_item_undone",
             "named": true
+          },
+          {
+            "type": "todo_item_wont_complete",
+            "named": true
           }
         ]
       }
@@ -2838,6 +2850,10 @@
           {
             "type": "todo_item_undone",
             "named": true
+          },
+          {
+            "type": "todo_item_wont_complete",
+            "named": true
           }
         ]
       }
@@ -2890,6 +2906,10 @@
           {
             "type": "todo_item_undone",
             "named": true
+          },
+          {
+            "type": "todo_item_wont_complete",
+            "named": true
           }
         ]
       }
@@ -2937,6 +2957,10 @@
           },
           {
             "type": "todo_item_undone",
+            "named": true
+          },
+          {
+            "type": "todo_item_wont_complete",
             "named": true
           }
         ]
@@ -3883,6 +3907,10 @@
   },
   {
     "type": "todo_item_undone",
+    "named": true
+  },
+  {
+    "type": "todo_item_wont_complete",
     "named": true
   },
   {

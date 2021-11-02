@@ -57,6 +57,7 @@ enum TokenType : char
     TODO_ITEM_UNDONE,
     TODO_ITEM_PENDING,
     TODO_ITEM_DONE,
+    TODO_ITEM_WONT_COMPLETE,
 
     INSERTION,
 
@@ -227,6 +228,10 @@ class Scanner
 
             switch (lexer->lookahead)
             {
+            // We're dealing with an undone item ([ ])
+            case ' ':
+                lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
+                break;
             // We're dealing with a pending item ([*])
             case '*':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_PENDING;
@@ -235,9 +240,8 @@ class Scanner
             case 'x':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
                 break;
-            // We're dealing with an undone item ([ ])
-            case ' ':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
+            case '-':
+                lexer->result_symbol = m_LastToken = TODO_ITEM_WONT_COMPLETE;
                 break;
             case '\0':
                 advance(lexer);
