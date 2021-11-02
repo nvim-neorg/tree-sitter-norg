@@ -1392,6 +1392,16 @@
     "type": "ordered_link1",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -1458,6 +1468,16 @@
     "type": "ordered_link2",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -1516,6 +1536,16 @@
     "type": "ordered_link3",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -1566,6 +1596,16 @@
     "type": "ordered_link4",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -1608,6 +1648,16 @@
     "type": "ordered_link5",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -1642,6 +1692,16 @@
     "type": "ordered_link6",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -3116,6 +3176,16 @@
     "type": "unordered_link1",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -3182,6 +3252,16 @@
     "type": "unordered_link2",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -3240,6 +3320,16 @@
     "type": "unordered_link3",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -3290,6 +3380,16 @@
     "type": "unordered_link4",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -3332,6 +3432,16 @@
     "type": "unordered_link5",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
@@ -3366,6 +3476,16 @@
     "type": "unordered_link6",
     "named": true,
     "fields": {
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
       "location": {
         "multiple": false,
         "required": true,
