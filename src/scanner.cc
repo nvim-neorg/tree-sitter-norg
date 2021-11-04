@@ -236,7 +236,7 @@ class Scanner
             case ' ':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
                 break;
-            // We're dealing with a pending item ([*])
+            // We're dealing with a pending item ([-])
             case '-':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_PENDING;
                 break;
@@ -244,11 +244,11 @@ class Scanner
             case 'x':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
                 break;
-            // We're dealing with an item that has been put on hold ([-])
+            // We're dealing with an item that has been put on hold ([=])
             case '=':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_ON_HOLD;
                 break;
-            // We're dealing with an item that has been cancelled ([=])
+            // We're dealing with an item that has been cancelled ([_])
             case '_':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_CANCELLED;
                 break;
@@ -256,9 +256,11 @@ class Scanner
             case '!':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_URGENT;
                 break;
+            // We're dealing with an item that is recurring ([+])
             case '+':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_RECURRING;
                 break;
+            // We're dealing with an item that needs further elaboration ([?])
             case '?':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_UNCERTAIN;
                 break;
