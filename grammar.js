@@ -535,6 +535,18 @@ module.exports = grammar({
                         $.ordered_link4,
                         $.ordered_link5,
                         $.ordered_link6,
+
+                        $.unordered_list2,
+                        $.unordered_list3,
+                        $.unordered_list4,
+                        $.unordered_list5,
+                        $.unordered_list6,
+
+                        $.ordered_list2,
+                        $.ordered_list3,
+                        $.ordered_list4,
+                        $.ordered_list5,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -568,6 +580,16 @@ module.exports = grammar({
                         $.ordered_link4,
                         $.ordered_link5,
                         $.ordered_link6,
+
+                        $.unordered_list3,
+                        $.unordered_list4,
+                        $.unordered_list5,
+                        $.unordered_list6,
+
+                        $.ordered_list3,
+                        $.ordered_list4,
+                        $.ordered_list5,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -599,6 +621,14 @@ module.exports = grammar({
                         $.ordered_link4,
                         $.ordered_link5,
                         $.ordered_link6,
+
+                        $.unordered_list4,
+                        $.unordered_list5,
+                        $.unordered_list6,
+
+                        $.ordered_list4,
+                        $.ordered_list5,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -628,6 +658,12 @@ module.exports = grammar({
 
                         $.ordered_link5,
                         $.ordered_link6,
+
+                        $.unordered_list5,
+                        $.unordered_list6,
+
+                        $.ordered_list5,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -654,6 +690,9 @@ module.exports = grammar({
                     choice(
                         $.unordered_link6,
                         $.ordered_link6,
+
+                        $.unordered_list6,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -708,6 +747,18 @@ module.exports = grammar({
                         $.ordered_link4,
                         $.ordered_link5,
                         $.ordered_link6,
+
+                        $.unordered_list2,
+                        $.unordered_list3,
+                        $.unordered_list4,
+                        $.unordered_list5,
+                        $.unordered_list6,
+
+                        $.ordered_list2,
+                        $.ordered_list3,
+                        $.ordered_list4,
+                        $.ordered_list5,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -741,6 +792,16 @@ module.exports = grammar({
                         $.ordered_link4,
                         $.ordered_link5,
                         $.ordered_link6,
+
+                        $.unordered_list3,
+                        $.unordered_list4,
+                        $.unordered_list5,
+                        $.unordered_list6,
+
+                        $.ordered_list3,
+                        $.ordered_list4,
+                        $.ordered_list5,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -772,6 +833,14 @@ module.exports = grammar({
                         $.ordered_link4,
                         $.ordered_link5,
                         $.ordered_link6,
+
+                        $.unordered_list4,
+                        $.unordered_list5,
+                        $.unordered_list6,
+
+                        $.ordered_list4,
+                        $.ordered_list5,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -801,6 +870,12 @@ module.exports = grammar({
 
                         $.ordered_link5,
                         $.ordered_link6,
+
+                        $.unordered_list5,
+                        $.unordered_list6,
+
+                        $.ordered_list5,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -827,6 +902,9 @@ module.exports = grammar({
                     choice(
                         $.unordered_link6,
                         $.ordered_link6,
+
+                        $.unordered_list6,
+                        $.ordered_list6,
                     )
                 )
             )
@@ -1248,19 +1326,19 @@ module.exports = grammar({
                     $.todo_item5,
                     $.todo_item6,
 
-					$.unordered_link1,
-					$.unordered_link2,
-					$.unordered_link3,
-					$.unordered_link4,
-					$.unordered_link5,
-					$.unordered_link6,
+                    $.unordered_link1,
+                    $.unordered_link2,
+                    $.unordered_link3,
+                    $.unordered_link4,
+                    $.unordered_link5,
+                    $.unordered_link6,
 
-					$.ordered_link1,
-					$.ordered_link2,
-					$.ordered_link3,
-					$.ordered_link4,
-					$.ordered_link5,
-					$.ordered_link6,
+                    $.ordered_link1,
+                    $.ordered_link2,
+                    $.ordered_link3,
+                    $.ordered_link4,
+                    $.ordered_link5,
+                    $.ordered_link6,
                 )
             )
         ),
@@ -1294,6 +1372,18 @@ module.exports = grammar({
                         $.ordered_list4,
                         $.ordered_list5,
                         $.ordered_list6,
+
+                        $.unordered_link2,
+                        $.unordered_link3,
+                        $.unordered_link4,
+                        $.unordered_link5,
+                        $.unordered_link6,
+
+                        $.ordered_link2,
+                        $.ordered_link3,
+                        $.ordered_link4,
+                        $.ordered_link5,
+                        $.ordered_link6,
                     )
                 )
             )
@@ -1325,6 +1415,16 @@ module.exports = grammar({
                         $.ordered_list4,
                         $.ordered_list5,
                         $.ordered_list6,
+
+                        $.unordered_link3,
+                        $.unordered_link4,
+                        $.unordered_link5,
+                        $.unordered_link6,
+
+                        $.ordered_link3,
+                        $.ordered_link4,
+                        $.ordered_link5,
+                        $.ordered_link6,
                     )
                 )
             )
@@ -1353,6 +1453,14 @@ module.exports = grammar({
                         $.ordered_list4,
                         $.ordered_list5,
                         $.ordered_list6,
+
+                        $.unordered_link4,
+                        $.unordered_link5,
+                        $.unordered_link6,
+
+                        $.ordered_link4,
+                        $.ordered_link5,
+                        $.ordered_link6,
                     )
                 )
             )
@@ -1378,6 +1486,12 @@ module.exports = grammar({
 
                         $.ordered_list5,
                         $.ordered_list6,
+
+                        $.unordered_link5,
+                        $.unordered_link6,
+
+                        $.ordered_link5,
+                        $.ordered_link6,
                     )
                 )
             )
@@ -1398,6 +1512,8 @@ module.exports = grammar({
                         $.todo_item6,
                         $.unordered_list6,
                         $.ordered_list6,
+                        $.unordered_link6,
+                        $.ordered_link6,
                     )
                 )
             )
@@ -1444,6 +1560,18 @@ module.exports = grammar({
                         $.ordered_list4,
                         $.ordered_list5,
                         $.ordered_list6,
+
+                        $.unordered_link2,
+                        $.unordered_link3,
+                        $.unordered_link4,
+                        $.unordered_link5,
+                        $.unordered_link6,
+
+                        $.ordered_link2,
+                        $.ordered_link3,
+                        $.ordered_link4,
+                        $.ordered_link5,
+                        $.ordered_link6,
                     )
                 )
             )
@@ -1475,6 +1603,16 @@ module.exports = grammar({
                         $.ordered_list4,
                         $.ordered_list5,
                         $.ordered_list6,
+
+                        $.unordered_link3,
+                        $.unordered_link4,
+                        $.unordered_link5,
+                        $.unordered_link6,
+
+                        $.ordered_link3,
+                        $.ordered_link4,
+                        $.ordered_link5,
+                        $.ordered_link6,
                     )
                 )
             )
@@ -1503,6 +1641,14 @@ module.exports = grammar({
                         $.ordered_list4,
                         $.ordered_list5,
                         $.ordered_list6,
+
+                        $.unordered_link4,
+                        $.unordered_link5,
+                        $.unordered_link6,
+
+                        $.ordered_link4,
+                        $.ordered_link5,
+                        $.ordered_link6,
                     )
                 )
             )
@@ -1528,6 +1674,12 @@ module.exports = grammar({
 
                         $.ordered_list5,
                         $.ordered_list6,
+
+                        $.unordered_link5,
+                        $.unordered_link6,
+
+                        $.ordered_link5,
+                        $.ordered_link6,
                     )
                 )
             )
@@ -1548,6 +1700,8 @@ module.exports = grammar({
                         $.todo_item6,
                         $.unordered_list6,
                         $.ordered_list6,
+                        $.unordered_link6,
+                        $.ordered_link6,
                     )
                 )
             )
