@@ -113,7 +113,9 @@ enum TokenType : char
     MULTI_DEFINITION,
     MULTI_DEFINITION_SUFFIX,
 
-    // FOOTNOTE,
+    FOOTNOTE,
+    MULTI_FOOTNOTE,
+    MULTI_FOOTNOTE_SUFFIX,
 
     BOLD,
     ITALIC,
@@ -465,6 +467,14 @@ class Scanner
                 else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
                 {
                     lexer->result_symbol = MULTI_DEFINITION_SUFFIX;
+                    return true;
+                }
+
+                if (check_detached(lexer, FOOTNOTE | MULTI_FOOTNOTE, {'^'}) != NONE)
+                    return true;
+                else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+                {
+                    lexer->result_symbol = MULTI_FOOTNOTE_SUFFIX;
                     return true;
                 }
 
@@ -999,7 +1009,7 @@ class Scanner
     std::vector<std::pair<char, TokenType>> m_AttachedModifierStack;
 
    private:
-    const std::array<int32_t, 8> s_DetachedModifiers = {'*', '-', '>', '|', '=', '~', '$', '_'};
+    const std::array<int32_t, 9> s_DetachedModifiers = {'*', '-', '>', '|', '=', '~', '$', '_', '^'};
     const std::array<std::pair<char, TokenType>, NESTED_MASK> s_AttachedModifiers = {
         std::pair<int32_t, TokenType> {'*', BOLD},
         {'-', STRIKETHROUGH},

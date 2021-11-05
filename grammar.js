@@ -110,6 +110,10 @@ module.exports = grammar({
         $.multi_definition_prefix,
         $.multi_definition_suffix,
 
+        $.footnote_prefix,
+        $.multi_footnote_prefix,
+        $.multi_footnote_suffix,
+
         $.bold_segment,
         $.italic_segment,
         $.strikethrough_segment,
@@ -167,6 +171,7 @@ module.exports = grammar({
                         $._heading,
                         $._detached_modifier,
                         $._definition,
+                        $._footnote,
                         $._tag,
                         $.horizontal_line,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
@@ -870,6 +875,7 @@ module.exports = grammar({
                             $._paragraph_break,
                             $._detached_modifier,
                             $._definition,
+                            $._footnote,
                             $._tag,
                             $.horizontal_line,
 
@@ -915,6 +921,7 @@ module.exports = grammar({
                             $._paragraph_break,
                             $._detached_modifier,
                             $._definition,
+                            $._footnote,
                             $._tag,
                             $.horizontal_line,
 
@@ -956,6 +963,7 @@ module.exports = grammar({
                             $._paragraph_break,
                             $._detached_modifier,
                             $._definition,
+                            $._footnote,
                             $._tag,
                             $.horizontal_line,
 
@@ -996,6 +1004,7 @@ module.exports = grammar({
                             $._paragraph_break,
                             $._detached_modifier,
                             $._definition,
+                            $._footnote,
                             $._tag,
                             $.horizontal_line,
 
@@ -1035,6 +1044,7 @@ module.exports = grammar({
                             $._paragraph_break,
                             $._detached_modifier,
                             $._definition,
+                            $._footnote,
                             $._tag,
                             $.horizontal_line,
 
@@ -1073,6 +1083,7 @@ module.exports = grammar({
                             $._paragraph_break,
                             $._detached_modifier,
                             $._definition,
+                            $._footnote,
                             $._tag,
                             $.horizontal_line,
                         )
@@ -1576,6 +1587,7 @@ module.exports = grammar({
                             $._heading,
                             $._detached_modifier,
                             $._definition,
+                            $._footnote,
                             $._tag,
                             $._paragraph_break,
                         ),
@@ -1866,7 +1878,6 @@ module.exports = grammar({
                     )
                 ),
 
-                // Used for preventing annoying errors with incomplete marker definitions
                 field(
                     "end",
                     $.multi_definition_suffix
@@ -1875,6 +1886,56 @@ module.exports = grammar({
 
             alias(
                 $.multi_definition_suffix,
+                "_suffix"
+            )
+        ),
+
+        footnote: $ =>
+        seq(
+            $.footnote_prefix,
+
+            field(
+                "title",
+                $.paragraph_segment
+            ),
+
+            field(
+                "content",
+                $.paragraph
+            ),
+        ),
+
+        multi_footnote: $ =>
+        choice(
+            seq(
+                $.multi_footnote_prefix,
+
+                field(
+                    "title",
+                    $.paragraph_segment,
+                ),
+
+                field(
+                    "content",
+                    repeat(
+                        choice(
+                            $._paragraph,
+                            $._paragraph_break,
+
+                            $._detached_modifier,
+                            $._tag,
+                        )
+                    )
+                ),
+
+                field(
+                    "end",
+                    $.multi_footnote_suffix,
+                ),
+            ),
+
+            alias(
+                $.multi_footnote_suffix,
                 "_suffix"
             )
         ),
@@ -1972,6 +2033,7 @@ module.exports = grammar({
                             choice(
                                 $._detached_modifier,
                                 $._definition,
+                                $._footnote,
                                 $._heading,
                                 $.ranged_tag,
                                 $.marker,
@@ -2087,6 +2149,12 @@ module.exports = grammar({
         choice(
             $.single_definition,
             $.multi_definition,
+        ),
+
+        _footnote: $ =>
+        choice(
+            $.footnote,
+            $.multi_footnote,
         ),
 
         // A list of detached modifiers (excluding headings and definitons)
