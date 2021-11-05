@@ -113,6 +113,8 @@ enum TokenType : char
     MULTI_DEFINITION,
     MULTI_DEFINITION_SUFFIX,
 
+    // FOOTNOTE,
+
     BOLD,
     ITALIC,
     STRIKETHROUGH,
@@ -264,7 +266,7 @@ class Scanner
             case '?':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_UNCERTAIN;
                 break;
-            case '\0':
+            default:
                 advance(lexer);
                 return false;
             }
