@@ -484,17 +484,14 @@ module.exports = grammar({
         link: $ =>
         seq(
             $.link_begin,
-            optional($.link_file),
+            optional(
+                $.link_file
+            ),
             $.link_location,
             $.link_end,
             optional(
                 $.link_description,
             )
-        ),
-
-        strict_link: $ =>
-        seq(
-            $.link_location,
         ),
 
         unordered_link1: $ =>
@@ -504,7 +501,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -551,7 +548,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -594,7 +591,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -633,7 +630,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -668,7 +665,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -697,7 +694,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -716,7 +713,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -763,7 +760,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -806,7 +803,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -845,7 +842,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -880,7 +877,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
@@ -909,7 +906,7 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.strict_link,
+                    $.link,
                 ),
 
                 optional(
