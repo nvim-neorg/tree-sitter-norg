@@ -80,26 +80,27 @@ module.exports = grammar({
         $.weak_paragraph_delimiter,
         $.horizontal_line,
 
-        $.link_text_prefix,
-        $.text,
-        $.link_text_suffix,
-
-        $.link_location_prefix,
+        $.link_begin,
         $.link_file_begin,
-        $.link_file_location,
+        $.link_file_text,
         $.link_file_end,
-
-        $.link_end_generic,
-        $.link_end_url,
-        $.link_end_external_file,
-        $.link_end_heading1_reference,
-        $.link_end_heading2_reference,
-        $.link_end_heading3_reference,
-        $.link_end_heading4_reference,
-        $.link_end_heading5_reference,
-        $.link_end_heading6_reference,
-        $.link_end_marker_reference,
-        $.link_location_suffix,
+        $.link_location_generic,
+        $.link_location_url,
+        $.link_location_external_file,
+        $.link_location_heading1,
+        $.link_location_heading2,
+        $.link_location_heading3,
+        $.link_location_heading4,
+        $.link_location_heading5,
+        $.link_location_heading6,
+        $.link_location_marker,
+        $.link_location_definition,
+        $.link_location_footnote,
+        $.link_location_text,
+        $.link_end,
+        $.link_text_begin,
+        $.link_text,
+        $.link_text_end,
 
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
@@ -446,62 +447,53 @@ module.exports = grammar({
             )
         ),
 
-        link_text: $ =>
+        link_description: $ =>
         seq(
-            alias($.link_text_prefix, "_prefix"),
-            field("link_text", optional($.text)),
-            alias($.link_text_suffix, "_suffix"),
+            $.link_text_begin,
+            field("link_text", optional($.link_text)),
+            $.link_text_end,
         ),
 
         link_file: $ =>
         seq(
-            alias($.link_file_begin, "_prefix"),
-            field("location", $.link_file_location),
-            alias($.link_file_end, "_suffix"),
-        ),
-
-        link_end: $ =>
-        seq(
-            field("type", choice(
-                $.link_end_url,
-                $.link_end_generic,
-                $.link_end_external_file,
-                $.link_end_marker_reference,
-                $.link_end_heading1_reference,
-                $.link_end_heading2_reference,
-                $.link_end_heading3_reference,
-                $.link_end_heading4_reference,
-                $.link_end_heading5_reference,
-                $.link_end_heading6_reference,
-            )
-            ),
-            $.text,
+            $.link_file_begin,
+            field("location", $.link_file_text),
+            $.link_file_end,
         ),
 
         link_location: $ =>
         seq(
-            alias($.link_location_prefix, "_prefix"),
-            choice(
-                seq(
-                    $.link_file,
-                    optional(
-                        $.link_end,
-                    ),
-                ),
-                $.link_end,
-            ),
-            alias($.link_location_suffix, "_suffix"),
+            field("type", choice(
+                $.link_location_generic,
+                $.link_location_url,
+                $.link_location_external_file,
+                $.link_location_heading1,
+                $.link_location_heading2,
+                $.link_location_heading3,
+                $.link_location_heading4,
+                $.link_location_heading5,
+                $.link_location_heading6,
+                $.link_location_marker,
+                $.link_location_definition,
+                $.link_location_footnote,
+            )),
+            field("text", $.link_location_text),
         ),
+
 
         link: $ =>
         seq(
-            $.link_text,
-            optional($.link_location),
+            $.link_begin,
+            optional($.link_file),
+            $.link_location,
+            $.link_end,
+            optional(
+                $.link_description,
+            )
         ),
 
         strict_link: $ =>
         seq(
-            $.link_text,
             $.link_location,
         ),
 

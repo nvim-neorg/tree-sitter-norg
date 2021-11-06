@@ -83,26 +83,27 @@ enum TokenType : char
     WEAK_PARAGRAPH_DELIMITER,
     HORIZONTAL_LINE,
 
-    LINK_TEXT_PREFIX,
-    TEXT,
-    LINK_TEXT_SUFFIX,
-
-    LINK_LOCATION_PREFIX,
+    LINK_BEGIN,
     LINK_FILE_BEGIN,
-    LINK_FILE_LOCATION,
+    LINK_FILE_TEXT,
     LINK_FILE_END,
-
-    LINK_END_GENERIC,
-    LINK_END_URL,
-    LINK_END_EXTERNAL_FILE,
-    LINK_END_HEADING1_REFERENCE,
-    LINK_END_HEADING2_REFERENCE,
-    LINK_END_HEADING3_REFERENCE,
-    LINK_END_HEADING4_REFERENCE,
-    LINK_END_HEADING5_REFERENCE,
-    LINK_END_HEADING6_REFERENCE,
-    LINK_END_MARKER_REFERENCE,
-    LINK_LOCATION_SUFFIX,
+    LINK_LOCATION_GENERIC,
+    LINK_LOCATION_URL,
+    LINK_LOCATION_EXTERNAL_FILE,
+    LINK_LOCATION_HEADING1,
+    LINK_LOCATION_HEADING2,
+    LINK_LOCATION_HEADING3,
+    LINK_LOCATION_HEADING4,
+    LINK_LOCATION_HEADING5,
+    LINK_LOCATION_HEADING6,
+    LINK_LOCATION_MARKER,
+    LINK_LOCATION_DEFINITION,
+    LINK_LOCATION_FOOTNOTE,
+    LINK_LOCATION_TEXT,
+    LINK_END,
+    LINK_TEXT_BEGIN,
+    LINK_TEXT,
+    LINK_TEXT_END,
 
     RANGED_TAG,
     RANGED_TAG_END,
@@ -215,22 +216,16 @@ class Scanner
             lexer->result_symbol = m_LastToken = MARKUP_END;
             return m_LastToken;
         }
-        else if (m_LastToken >= LINK_TEXT_PREFIX && m_LastToken < LINK_LOCATION_SUFFIX)
+        else if (lexer->lookahead == '{' || (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
             return parse_link(lexer);
+        else if (lexer->lookahead == '[' || (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
+            return parse_link_text(lexer);
         // If we are not in a tag and we have a square bracket opening then try
         // matching either a todo item or beginning of a list
         else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 &&
                  lexer->lookahead == '[')
         {
             advance(lexer);
-
-            // If we instantly close the bracket (i.e. "[]") then treat it as an
-            // empty link beginning
-            if (lexer->lookahead == ']')
-            {
-                lexer->result_symbol = m_LastToken = LINK_TEXT_PREFIX;
-                return true;
-            }
 
             lexer->mark_end(lexer);
 
@@ -282,16 +277,8 @@ class Scanner
                 return true;
             }
             else
-            {
-                lexer->result_symbol = m_LastToken = LINK_LOCATION_PREFIX;
-                return true;
-            }
+                return false;
         }
-        // Otherwise make sure to check for the existence of an opening link
-        // location
-        else if (!m_TagLevel && (lexer->lookahead == '[' || (m_LastToken >= LINK_TEXT_PREFIX &&
-                                                             m_LastToken < LINK_LOCATION_SUFFIX)))
-            return parse_link(lexer);
         // Otherwise just check whether or not we're dealing with a newline and
         // return STANDALONE_BREAK if we are
         else if (lexer->lookahead == '\n')
@@ -778,14 +765,14 @@ class Scanner
     }
 
     /*
-     * Attempts to parse a link ([like](#this))
+     * Attempts to parse a link {* Like this}
      */
     bool parse_link(TSLexer* lexer)
     {
-        if (lexer->lookahead == '[')
+        if (lexer->lookahead == '{')
         {
             advance(lexer);
-            lexer->result_symbol = m_LastToken = LINK_TEXT_PREFIX;
+            lexer->result_symbol = m_LastToken = LINK_BEGIN;
             return true;
         }
 
@@ -793,97 +780,49 @@ class Scanner
 
         switch (m_LastToken)
         {
-        case LINK_TEXT_PREFIX:
-            while (lexer->lookahead)
+        case LINK_BEGIN:
+            if (lexer->lookahead == ':')
             {
-                if (lexer->lookahead == ']' && m_Current != '\\')
-                    break;
-
-                if (lexer->lookahead == '\n')
-                {
-                    advance(lexer);
-                    if (!lexer->lookahead || lexer->lookahead == '\n')
-                        break;
-                }
-
                 advance(lexer);
+                lexer->result_symbol = m_LastToken = LINK_FILE_BEGIN;
+                return true;
             }
-
-            lexer->result_symbol = m_LastToken = TEXT;
-            return true;
-        case TEXT:
-            switch (lexer->lookahead)
-            {
-            case ']':
-                lexer->result_symbol = m_LastToken = LINK_TEXT_SUFFIX;
-                break;
-            case ')':
-                lexer->result_symbol = m_LastToken = LINK_LOCATION_SUFFIX;
-                break;
-            default:
-                advance(lexer);
-                return false;
-            }
-
-            advance(lexer);
-            return true;
-        case LINK_TEXT_SUFFIX:
-            if (lexer->lookahead != '(')
-                return parse_text(lexer);
-
-            advance(lexer);
-            lexer->result_symbol = m_LastToken = LINK_LOCATION_PREFIX;
-            return true;
-        case LINK_LOCATION_PREFIX:
         case LINK_FILE_END:
             switch (lexer->lookahead)
             {
-            case '#':
-                advance(lexer);
-                lexer->result_symbol = m_LastToken = LINK_END_GENERIC;
-                break;
             case '*':
+                advance(lexer);
+
                 while (lexer->lookahead == '*')
                 {
                     ++count;
                     advance(lexer);
                 }
 
-                lexer->result_symbol = m_LastToken =
-                    static_cast<TokenType>(LINK_END_HEADING1_REFERENCE + clamp(count - 1, 0, 5));
+                lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_LOCATION_HEADING1 + clamp(count, 0ull, 5ull));
+                return std::iswspace(lexer->lookahead);
+            case '#':
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_GENERIC;
+                break;
+            case '$':
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_DEFINITION;
                 break;
             case '@':
-                advance(lexer);
-
-                if (m_LastToken == LINK_FILE_END)
-                    return false;
-
-                lexer->result_symbol = m_LastToken = LINK_END_EXTERNAL_FILE;
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_EXTERNAL_FILE;
                 break;
             case '|':
-                advance(lexer);
-                lexer->result_symbol = m_LastToken = LINK_END_MARKER_REFERENCE;
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_MARKER;
                 break;
-            case ':':
-                advance(lexer);
-                lexer->result_symbol = m_LastToken = LINK_FILE_BEGIN;
+            case '^':
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_FOOTNOTE;
                 break;
-            case ')':
-                advance(lexer);
-                lexer->result_symbol = m_LastToken = LINK_LOCATION_SUFFIX;
-                break;
-            case 0:
-                advance(lexer);
-                return false;
             default:
-                if (m_LastToken == LINK_FILE_END)
-                    return false;
-
-                lexer->result_symbol = m_LastToken = LINK_END_URL;
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_URL;
                 return true;
             }
 
-            return true;
+            advance(lexer);
+            return std::iswspace(lexer->lookahead);
         case LINK_FILE_BEGIN:
             while (lexer->lookahead)
             {
@@ -893,30 +832,36 @@ class Scanner
                 advance(lexer);
             }
 
-            lexer->result_symbol = m_LastToken = LINK_FILE_LOCATION;
+            lexer->result_symbol = m_LastToken = LINK_FILE_TEXT;
             return true;
-        case LINK_FILE_LOCATION:
-            advance(lexer);
-
-            if (m_Current != ':')
-                return false;
-
-            lexer->result_symbol = m_LastToken = LINK_FILE_END;
-            return true;
-        default:
-            if (m_LastToken >= LINK_END_GENERIC && m_LastToken <= LINK_END_MARKER_REFERENCE)
+        case LINK_FILE_TEXT:
+            if (lexer->lookahead == ':')
             {
-                if (lexer->lookahead == ')' && m_Current != '\\')
-                    return false;
+                advance(lexer);
+                lexer->result_symbol = m_LastToken = LINK_FILE_END;
+                return true;
+            }
 
+            return false;
+        case LINK_LOCATION_TEXT:
+            if (lexer->lookahead == '}')
+            {
+                advance(lexer);
+                lexer->result_symbol = m_LastToken = LINK_END;
+                return true;
+            }
+        default:
+            if (m_LastToken >= LINK_LOCATION_GENERIC && m_LastToken <= LINK_LOCATION_FOOTNOTE)
+            {
                 while (lexer->lookahead)
                 {
-                    if (lexer->lookahead == ')' && m_Current != '\\')
+                    if (lexer->lookahead == '}' && m_Current != '\\')
                         break;
 
                     if (lexer->lookahead == '\n')
                     {
                         advance(lexer);
+
                         if (!lexer->lookahead || lexer->lookahead == '\n')
                             break;
                     }
@@ -924,12 +869,46 @@ class Scanner
                     advance(lexer);
                 }
 
-                lexer->result_symbol = m_LastToken = TEXT;
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_TEXT;
                 return true;
             }
         }
 
         return false;
+    }
+
+    bool parse_link_text(TSLexer* lexer)
+    {
+        switch (m_LastToken)
+        {
+        case LINK_TEXT_BEGIN:
+            while (lexer->lookahead)
+            {
+                if (lexer->lookahead == ']' && m_Current != '\\')
+                    break;
+
+                advance(lexer);
+            }
+
+            lexer->result_symbol = m_LastToken = LINK_TEXT;
+            return true;
+        case LINK_TEXT:
+            if (lexer->lookahead == ']')
+                lexer->result_symbol = m_LastToken = LINK_TEXT_END;
+
+            break;
+        case LINK_END:
+            if (lexer->lookahead == '[')
+                lexer->result_symbol = m_LastToken = LINK_TEXT_BEGIN;
+
+            break;
+        default:
+            advance(lexer);
+            return false;
+        }
+
+        advance(lexer);
+        return true;
     }
 
     /*

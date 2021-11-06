@@ -925,17 +925,12 @@
         }
       ]
     },
-    "link_text": {
+    "link_description": {
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_text_prefix"
-          },
-          "named": false,
-          "value": "_prefix"
+          "type": "SYMBOL",
+          "name": "link_text_begin"
         },
         {
           "type": "FIELD",
@@ -945,7 +940,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "text"
+                "name": "link_text"
               },
               {
                 "type": "BLANK"
@@ -954,13 +949,8 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_text_suffix"
-          },
-          "named": false,
-          "value": "_suffix"
+          "type": "SYMBOL",
+          "name": "link_text_end"
         }
       ]
     },
@@ -968,34 +958,24 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_file_begin"
-          },
-          "named": false,
-          "value": "_prefix"
+          "type": "SYMBOL",
+          "name": "link_file_begin"
         },
         {
           "type": "FIELD",
           "name": "location",
           "content": {
             "type": "SYMBOL",
-            "name": "link_file_location"
+            "name": "link_file_text"
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_file_end"
-          },
-          "named": false,
-          "value": "_suffix"
+          "type": "SYMBOL",
+          "name": "link_file_end"
         }
       ]
     },
-    "link_end": {
+    "link_location": {
       "type": "SEQ",
       "members": [
         {
@@ -1006,103 +986,62 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "link_end_url"
+                "name": "link_location_generic"
               },
               {
                 "type": "SYMBOL",
-                "name": "link_end_generic"
+                "name": "link_location_url"
               },
               {
                 "type": "SYMBOL",
-                "name": "link_end_external_file"
+                "name": "link_location_external_file"
               },
               {
                 "type": "SYMBOL",
-                "name": "link_end_marker_reference"
+                "name": "link_location_heading1"
               },
               {
                 "type": "SYMBOL",
-                "name": "link_end_heading1_reference"
+                "name": "link_location_heading2"
               },
               {
                 "type": "SYMBOL",
-                "name": "link_end_heading2_reference"
+                "name": "link_location_heading3"
               },
               {
                 "type": "SYMBOL",
-                "name": "link_end_heading3_reference"
+                "name": "link_location_heading4"
               },
               {
                 "type": "SYMBOL",
-                "name": "link_end_heading4_reference"
+                "name": "link_location_heading5"
               },
               {
                 "type": "SYMBOL",
-                "name": "link_end_heading5_reference"
+                "name": "link_location_heading6"
               },
               {
                 "type": "SYMBOL",
-                "name": "link_end_heading6_reference"
+                "name": "link_location_marker"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "link_location_definition"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "link_location_footnote"
               }
             ]
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "text"
-        }
-      ]
-    },
-    "link_location": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "text",
           "content": {
             "type": "SYMBOL",
-            "name": "link_location_prefix"
-          },
-          "named": false,
-          "value": "_prefix"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "link_file"
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "link_end"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "SYMBOL",
-              "name": "link_end"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_location_suffix"
-          },
-          "named": false,
-          "value": "_suffix"
+            "name": "link_location_text"
+          }
         }
       ]
     },
@@ -1111,14 +1050,34 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "link_text"
+          "name": "link_begin"
         },
         {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "link_location"
+              "name": "link_file"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "link_location"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "link_end"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "link_description"
             },
             {
               "type": "BLANK"
@@ -1130,10 +1089,6 @@
     "strict_link": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "SYMBOL",
-          "name": "link_text"
-        },
         {
           "type": "SYMBOL",
           "name": "link_location"
@@ -5775,19 +5730,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "link_text_prefix"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "text"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "link_text_suffix"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "link_location_prefix"
+      "name": "link_begin"
     },
     {
       "type": "SYMBOL",
@@ -5795,7 +5738,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "link_file_location"
+      "name": "link_file_text"
     },
     {
       "type": "SYMBOL",
@@ -5803,47 +5746,71 @@
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_generic"
+      "name": "link_location_generic"
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_url"
+      "name": "link_location_url"
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_external_file"
+      "name": "link_location_external_file"
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_heading1_reference"
+      "name": "link_location_heading1"
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_heading2_reference"
+      "name": "link_location_heading2"
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_heading3_reference"
+      "name": "link_location_heading3"
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_heading4_reference"
+      "name": "link_location_heading4"
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_heading5_reference"
+      "name": "link_location_heading5"
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_heading6_reference"
+      "name": "link_location_heading6"
     },
     {
       "type": "SYMBOL",
-      "name": "link_end_marker_reference"
+      "name": "link_location_marker"
     },
     {
       "type": "SYMBOL",
-      "name": "link_location_suffix"
+      "name": "link_location_definition"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_location_footnote"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_location_text"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_end"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_text_begin"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_text"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_text_end"
     },
     {
       "type": "SYMBOL",
