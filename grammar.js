@@ -1189,6 +1189,8 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
+                prec(1, $._line_break),
+
                 repeat(
                     choice(
                         $.quote2,
@@ -1211,6 +1213,8 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
+                prec(1, $._line_break),
+
                 repeat(
                     choice(
                         $.quote3,
@@ -1232,6 +1236,8 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
+                prec(1, $._line_break),
+
                 repeat(
                     choice(
                         $.quote4,
@@ -1252,6 +1258,8 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
+                prec(1, $._line_break),
+
                 repeat(
                     choice(
                         $.quote5,
@@ -1271,6 +1279,8 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
+                prec(1, $._line_break),
+
                 repeat(
                     $.quote6,
                 )
@@ -1285,7 +1295,10 @@ module.exports = grammar({
                 field(
                     "content",
                     $.paragraph_segment,
-                )
+                ),
+
+                prec(1, $._line_break),
+
             )
         ),
 

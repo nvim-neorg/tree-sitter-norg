@@ -936,16 +936,8 @@
           "type": "FIELD",
           "name": "link_text",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "link_text"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "link_text"
           }
         },
         {
@@ -2826,6 +2818,14 @@
             }
           },
           {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "SYMBOL",
+              "name": "_line_break"
+            }
+          },
+          {
             "type": "REPEAT",
             "content": {
               "type": "CHOICE",
@@ -2875,6 +2875,14 @@
             }
           },
           {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "SYMBOL",
+              "name": "_line_break"
+            }
+          },
+          {
             "type": "REPEAT",
             "content": {
               "type": "CHOICE",
@@ -2920,6 +2928,14 @@
             }
           },
           {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "SYMBOL",
+              "name": "_line_break"
+            }
+          },
+          {
             "type": "REPEAT",
             "content": {
               "type": "CHOICE",
@@ -2961,6 +2977,14 @@
             }
           },
           {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "SYMBOL",
+              "name": "_line_break"
+            }
+          },
+          {
             "type": "REPEAT",
             "content": {
               "type": "CHOICE",
@@ -2998,6 +3022,14 @@
             }
           },
           {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "SYMBOL",
+              "name": "_line_break"
+            }
+          },
+          {
             "type": "REPEAT",
             "content": {
               "type": "SYMBOL",
@@ -3023,6 +3055,14 @@
             "content": {
               "type": "SYMBOL",
               "name": "paragraph_segment"
+            }
+          },
+          {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "SYMBOL",
+              "name": "_line_break"
             }
           }
         ]

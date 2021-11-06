@@ -1231,7 +1231,7 @@
     "fields": {
       "link_text": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "link_text",
