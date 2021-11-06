@@ -350,4 +350,118 @@ And here is some more text that has broken out of the matrix.
     )
 )
 
+=====================
+Indentation Reversion
+=====================
+Time to test indentation reversion.
 
+* This is a heading
+  ** It contains a level 2 heading
+     Which in turn contains some text.
+     ---
+  This should reverse the indentation and
+  it should be part of the first-level
+  heading now
+  *** This is now a third-level heading
+      ---
+  And it has reversed too
+  ---
+
+This should no longer be part of the heading.
+
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment)
+        )
+
+        (heading1
+            (heading1_prefix)
+            title: (paragraph_segment)
+            content:
+                (heading2
+                    (heading2_prefix)
+                    title: (paragraph_segment)
+                    content:
+                        (paragraph
+                            (paragraph_segment)
+                        )
+                    (weak_paragraph_delimiter)
+                )
+            content:
+                (paragraph
+                    (paragraph_segment)
+                    (paragraph_segment)
+                    (paragraph_segment)
+                )
+            content:
+                (heading3
+                    (heading3_prefix)
+                    title: (paragraph_segment)
+                    (weak_paragraph_delimiter)
+                )
+            content:
+                (paragraph
+                    (paragraph_segment)
+                )
+            (weak_paragraph_delimiter)
+        )
+
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
+
+===============================
+Malformed indentation reversion
+===============================
+* Heading
+  A paragraph
+  --- 
+  This should not be reverted since the previous element
+  has whitespace afterwards.
+  It should instead be treated as an unordered list element.
+
+  This --- should also not revert the heading.
+  --neither- should this
+  ---
+
+This should though.
+
+---
+(document
+    (document_content
+        (heading1
+            (heading1_prefix)
+            title: (paragraph_segment)
+            content:
+                (paragraph
+                    (paragraph_segment)
+                )
+                content:
+                    (generic_list
+                        (unordered_list3
+                            (unordered_list3_prefix)
+                            content:
+                                (paragraph
+                                    (paragraph_segment)
+                                    (paragraph_segment)
+                                    (paragraph_segment)
+                                )
+                        )
+                    )
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                        (paragraph_segment)
+                    )
+                (weak_paragraph_delimiter)
+        )
+        
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
