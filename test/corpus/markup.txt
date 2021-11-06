@@ -1,0 +1,412 @@
+====
+Bold
+====
+Here is a *bold* word.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (bold)
+            )
+        )
+    )
+)
+
+======
+Italic
+======
+Here is an /italic/ word.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (italic)
+            )
+        )
+    )
+)
+
+=============
+Strikethrough
+=============
+Here is a -struck through- word.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (strikethrough)
+            )
+        )
+    )
+)
+
+=========
+Underline
+=========
+Here is an _underlined_ word.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (underline)
+            )
+        )
+    )
+)
+
+=======
+Spoiler
+=======
+Here is a |spoiler| word.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (spoiler)
+            )
+        )
+    )
+)
+
+========
+Verbatim
+========
+Here is a `verbatim` word.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (verbatim)
+            )
+        )
+    )
+)
+
+===========
+Superscript
+===========
+Here is a ^superscript^ word.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (superscript)
+            )
+        )
+    )
+)
+
+=========
+Subscript
+=========
+Here is a ,subscript, word.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (subscript)
+            )
+        )
+    )
+)
+
+==============
+Inline Comment
+==============
+This sentence contains an +inlined comment+.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (inline_comment)
+            )
+        )
+    )
+)
+
+===========
+Inline Math
+===========
+This sentence contains some $inline math$.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (inline_math)
+            )
+        )
+    )
+)
+
+========
+Variable
+========
+This sentence contains a =variable= reference.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (variable)
+            )
+        )
+    )
+)
+
+=================
+Nesting into Bold
+=================
+*Bold and /italic/*
+*Bold and -struck through-*
+*Bold and _underlined_*
+*Bold and |spoiler|*
+*Bold and ^superscript^*
+*Bold and ,subscript,*
+*Bold and +inline comment+*
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment (bold (italic)))
+            (paragraph_segment (bold (strikethrough)))
+            (paragraph_segment (bold (underline)))
+            (paragraph_segment (bold (spoiler)))
+            (paragraph_segment (bold (superscript)))
+            (paragraph_segment (bold (subscript)))
+            (paragraph_segment (bold (inline_comment)))
+        )
+    )
+)
+
+===================
+Nesting into Italic
+===================
+/Italic and *bold*/
+/Italic and -struck through-/
+/Italic and _underlined_/
+/Italic and |spoiler|/
+/Italic and ^superscript^/
+/Italic and ,subscript,/
+/Italic and +inline comment+/
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment (italic (bold)))
+            (paragraph_segment (italic (strikethrough)))
+            (paragraph_segment (italic (underline)))
+            (paragraph_segment (italic (spoiler)))
+            (paragraph_segment (italic (superscript)))
+            (paragraph_segment (italic (subscript)))
+            (paragraph_segment (italic (inline_comment)))
+        )
+    )
+)
+
+==========================
+Nesting into Strikethrough
+==========================
+-Struck through and *bold*-
+-Struck through and /italic/-
+-Struck through and _underlined_-
+-Struck through and |spoiler|-
+-Struck through and ^superscript^-
+-Struck through and ,subscript,-
+-Struck through and +inline comment+-
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment (strikethrough (bold)))
+            (paragraph_segment (strikethrough (italic)))
+            (paragraph_segment (strikethrough (underline)))
+            (paragraph_segment (strikethrough (spoiler)))
+            (paragraph_segment (strikethrough (superscript)))
+            (paragraph_segment (strikethrough (subscript)))
+            (paragraph_segment (strikethrough (inline_comment)))
+        )
+    )
+)
+
+======================
+Nesting into Underline
+======================
+_Underlined and *bold*_
+_Underlined and /italic/_
+_Underlined and -struck through-_
+_Underlined and |spoiler|_
+_Underlined and ^superscript^_
+_Underlined and ,subscript,_
+_Underlined and +inline comment+_
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment (underline (bold)))
+            (paragraph_segment (underline (italic)))
+            (paragraph_segment (underline (strikethrough)))
+            (paragraph_segment (underline (spoiler)))
+            (paragraph_segment (underline (superscript)))
+            (paragraph_segment (underline (subscript)))
+            (paragraph_segment (underline (inline_comment)))
+        )
+    )
+)
+
+====================
+Nesting into Spoiler
+====================
+|Spoiler and *bold*|
+|Spoiler and /italic/|
+|Spoiler and -struck through-|
+|Spoiler and _underlined_|
+|Spoiler and ^superscript^|
+|Spoiler and ,subscript,|
+|Spoiler and +inline comment+^
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment (spoiler (bold)))
+            (paragraph_segment (spoiler (italic)))
+            (paragraph_segment (spoiler (strikethrough)))
+            (paragraph_segment (spoiler (underline)))
+            (paragraph_segment (spoiler (superscript)))
+            (paragraph_segment (spoiler (subscript)))
+            (paragraph_segment (spoiler (inline_comment)))
+        )
+    )
+)
+
+========================
+Nesting into Superscript
+========================
+^Superscript and *bold*^
+^Superscript and /italic/^
+^Superscript and -struck through-|
+^Superscript and _underlined_^
+^Superscript and |spoiler|^
+^Superscript and +inline comment+^
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment (superscript (bold)))
+            (paragraph_segment (superscript (italic)))
+            (paragraph_segment (superscript (strikethrough)))
+            (paragraph_segment (superscript (underline)))
+            (paragraph_segment (superscript (spoiler)))
+            (paragraph_segment (superscript (inline_comment)))
+        )
+    )
+)
+
+======================
+Nesting into Subscript
+======================
+,Subscript and *bold*,
+,Subscript and /italic/,
+,Subscript and -struck through-|
+,Subscript and _underlined_,
+,Subscript and |spoiler|,
+,Subscript and +inline comment+,
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment (subscript (bold)))
+            (paragraph_segment (subscript (italic)))
+            (paragraph_segment (subscript (strikethrough)))
+            (paragraph_segment (subscript (underline)))
+            (paragraph_segment (subscript (spoiler)))
+            (paragraph_segment (subscript (inline_comment)))
+        )
+    )
+)
+
+===========================
+Nesting into Inline Comment
+===========================
++Inline Comment and *bold*+
++Inline Comment and /italic/+
++Inline Comment and -struck through-|
++Inline Comment and _underlined_+
++Inline Comment and |spoiler|+
++Inline Comment and ^superscript^+
++Inline Comment and ,subscript,+
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment (inline_comment (bold)))
+            (paragraph_segment (inline_comment (italic)))
+            (paragraph_segment (inline_comment (strikethrough)))
+            (paragraph_segment (inline_comment (underline)))
+            (paragraph_segment (inline_comment (spoiler)))
+            (paragraph_segment (inline_comment (superscript)))
+            (paragraph_segment (inline_comment (subscript)))
+        )
+    )
+)
+
+======================================
+Disallow Nesting Sub- into Superscript
+======================================
+^Super- and ,subscript,^
+---
+(document
+    (ERROR
+        (subscript_segment)
+        (UNEXPECTED '^')
+    )
+)
+
+======================================
+Disallow Nesting Super- into Subscript
+======================================
+,Sub- and ^superscript^,
+---
+(document
+    (ERROR)
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (superscript)
+            )
+        )
+    )
+    (ERROR
+        (UNEXPECTED ',')
+    )
+)
+
+============
+Deep Nesting (why is this failing?)
+============
+*Bold /italic _underlined_/*
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (bold
+                    (italic
+                        (strikethrough
+                            (underline)
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
