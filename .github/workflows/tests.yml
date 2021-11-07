@@ -15,11 +15,6 @@ jobs:
     env:
       CC: clang
     steps:
-      - name: Install tree-sitter CLI
-        run: |
-          npm install tree-sitter-cli
-          which tree-sitter
-
       - name: Prepare tree-sitter
         uses: actions/checkout@v2
         with:
@@ -29,6 +24,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: test/fixtures/grammars/norg
+
+      - name: Install tree-sitter CLI
+        run: |
+          cd test/fixtures/grammars/norg
+          npm install tree-sitter-cli
+          which tree-sitter
 
       - name: Run tests
         run: |
