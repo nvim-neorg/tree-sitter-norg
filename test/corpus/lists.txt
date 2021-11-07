@@ -1,0 +1,168 @@
+==============
+Unordered List
+==============
+- Unordered list level 1
+-- Unordered list level 2
+--- Unordered list level 3
+---- Unordered list level 4
+----- Unordered list level 5
+------ Unordered list level 6
+
+---
+(document
+    (document_content
+        (generic_list
+            (unordered_list1
+                (unordered_list1_prefix)
+                (paragraph (paragraph_segment))
+                (unordered_list2
+                    (unordered_list2_prefix)
+                    (paragraph (paragraph_segment))
+                    (unordered_list3
+                        (unordered_list3_prefix)
+                        (paragraph (paragraph_segment))
+                        (unordered_list4
+                            (unordered_list4_prefix)
+                            (paragraph (paragraph_segment))
+                            (unordered_list5
+                                (unordered_list5_prefix)
+                                (paragraph (paragraph_segment))
+                                (unordered_list6
+                                    (unordered_list6_prefix)
+                                    (paragraph (paragraph_segment))
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+============
+Ordered List
+============
+~ Ordered list level 1
+~~ Ordered list level 2
+~~~ Ordered list level 3
+~~~~ Ordered list level 4
+~~~~~ Ordered list level 5
+~~~~~~ Ordered list level 6
+
+---
+(document
+    (document_content
+        (generic_list
+            (ordered_list1
+                (ordered_list1_prefix)
+                (paragraph (paragraph_segment))
+                (ordered_list2
+                    (ordered_list2_prefix)
+                    (paragraph (paragraph_segment))
+                    (ordered_list3
+                        (ordered_list3_prefix)
+                        (paragraph (paragraph_segment))
+                        (ordered_list4
+                            (ordered_list4_prefix)
+                            (paragraph (paragraph_segment))
+                            (ordered_list5
+                                (ordered_list5_prefix)
+                                (paragraph (paragraph_segment))
+                                (ordered_list6
+                                    (ordered_list6_prefix)
+                                    (paragraph (paragraph_segment))
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+===================
+List Item Paragraph
+===================
+- List item
+can be continued here
+because it consumes an entire paragraph.
+
+This is now longer part of the list item.
+
+---
+(document
+    (document_content
+        (generic_list
+            (unordered_list1
+                (unordered_list1_prefix)
+                (paragraph
+                    (paragraph_segment)
+                    (paragraph_segment)
+                    (paragraph_segment)
+                )
+            )
+        )
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
+
+==========
+Mixed List
+==========
+- Unordered list item
+~ Ordered list item
+-- unordered nested item
+--- unordered nested item
+~~~ ordered nested item
+~~~~ ordered nested item
+---- unordered nested item
+~~~~~ ordered nested item
+----- unordered nested item
+
+---
+(document
+    (document_content
+        (generic_list
+            (unordered_list1
+                (unordered_list1_prefix)
+                (paragraph (paragraph_segment))
+            )
+            (ordered_list1
+                (ordered_list1_prefix)
+                (paragraph (paragraph_segment))
+                (unordered_list2
+                    (unordered_list2_prefix)
+                    (paragraph (paragraph_segment))
+                    (unordered_list3
+                        (unordered_list3_prefix)
+                        (paragraph (paragraph_segment))
+                    )
+                    (ordered_list3
+                        (ordered_list3_prefix)
+                        (paragraph (paragraph_segment))
+                        (ordered_list4
+                            (ordered_list4_prefix)
+                            (paragraph (paragraph_segment))
+                        )
+                        (unordered_list4
+                            (unordered_list4_prefix)
+                            (paragraph (paragraph_segment))
+                            (ordered_list5
+                                (ordered_list5_prefix)
+                                (paragraph (paragraph_segment))
+                            )
+                            (unordered_list5
+                                (unordered_list5_prefix)
+                                (paragraph (paragraph_segment))
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
