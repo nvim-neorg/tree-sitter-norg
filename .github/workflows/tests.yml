@@ -17,8 +17,7 @@ jobs:
     steps:
       - name: Install tree-sitter CLI
         run: |
-          sudo apt-get update
-          sudo apt-get install -y tree-sitter
+          npm install tree-sitter-cli
 
       - name: Prepare tree-sitter
         uses: actions/checkout@v2
