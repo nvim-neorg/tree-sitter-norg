@@ -27,7 +27,5 @@ jobs:
 
       - name: Run tests
         run: |
-          pwd
-          ls -al
-          ls -al test/fixtures/grammars/norg
-          exit 1
+          cd test/fixtures/grammars/norg
+          yarn test
