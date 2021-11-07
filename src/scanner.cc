@@ -216,9 +216,9 @@ class Scanner
             lexer->result_symbol = m_LastToken = MARKUP_END;
             return m_LastToken;
         }
-        else if (lexer->lookahead == '{' || (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
+        else if (lexer->lookahead == '{' && (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
             return parse_link(lexer);
-        else if (lexer->lookahead == '[' || (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
+        else if (lexer->lookahead == '[' && (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
             return parse_link_text(lexer);
         // If we are not in a tag and we have a square bracket opening then try
         // matching either a todo item or beginning of a list
