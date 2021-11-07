@@ -1,0 +1,30 @@
+name: Parser tests
+
+on:
+  push:
+    branches:
+      main
+  pull_request:
+
+jobs:
+  test_parser:
+    strategy:
+      fail-fast: false
+    name: Testing
+    runs-on: ubuntu-latest
+    env:
+      CC: clang
+    steps:
+      - name: Prepare tree-sitter
+        uses: actions/checkout@v2
+        with:
+          repository: tree-sitter/tree-sitter
+
+      - name: Prepare tree-sitter-norg
+        uses: actions/checkout@v2
+        with:
+          path: test/fixtures/grammars/norg
+
+      - name: Run tests
+        run: |
+          yarn test
