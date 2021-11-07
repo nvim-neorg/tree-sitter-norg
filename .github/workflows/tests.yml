@@ -29,4 +29,5 @@ jobs:
         run: |
           pwd
           ls -al
+          ls -al test/fixtures/grammars/norg
           exit 1
