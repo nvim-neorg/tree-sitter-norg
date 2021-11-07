@@ -27,4 +27,6 @@ jobs:
 
       - name: Run tests
         run: |
-          tree-sitter test
+          pwd
+          ls --long --all
+          exit 1
