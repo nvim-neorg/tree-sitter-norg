@@ -18,6 +18,7 @@ jobs:
       - name: Install tree-sitter CLI
         run: |
           npm install tree-sitter-cli
+          which tree-sitter
 
       - name: Prepare tree-sitter
         uses: actions/checkout@v2
