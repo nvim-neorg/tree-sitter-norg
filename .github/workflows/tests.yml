@@ -15,6 +15,11 @@ jobs:
     env:
       CC: clang
     steps:
+      - name: Install tree-sitter CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tree-sitter
+
       - name: Prepare tree-sitter
         uses: actions/checkout@v2
         with:
@@ -28,4 +33,4 @@ jobs:
       - name: Run tests
         run: |
           cd test/fixtures/grammars/norg
-          yarn test
+          tree-sitter test
