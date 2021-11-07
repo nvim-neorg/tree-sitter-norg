@@ -28,5 +28,5 @@ jobs:
       - name: Run tests
         run: |
           pwd
-          ls --long --all
+          ls -al
           exit 1
