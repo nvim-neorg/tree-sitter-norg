@@ -365,7 +365,8 @@ Time to test indentation reversion.
   *** This is now a third-level heading
       ---
   And it has reversed too
-  ---
+  *** Another third-level heading
+  ===
 
 This should no longer be part of the heading.
 
@@ -405,9 +406,13 @@ This should no longer be part of the heading.
                 (paragraph
                     (paragraph_segment)
                 )
-            (weak_paragraph_delimiter)
+            content:
+                (heading3
+                    (heading3_prefix)
+                    title: (paragraph_segment)
+                )
+            (strong_paragraph_delimiter)
         )
-
         (paragraph
             (paragraph_segment)
         )
@@ -459,7 +464,6 @@ This should though.
                     )
                 (weak_paragraph_delimiter)
         )
-        
         (paragraph
             (paragraph_segment)
         )
