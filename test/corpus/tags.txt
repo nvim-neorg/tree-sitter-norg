@@ -1,0 +1,141 @@
+==========
+Ranged Tag (still failing)
+==========
+@math
+f(x) = \int
+@end
+No longer part of the ranged tag.
+---
+(document
+    (document_content
+        (ranged_tag
+            (tag_name
+                (tag_name_element)
+            )
+            (ranged_tag_content)
+            (ranged_tag_end)
+        )
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
+
+==========================
+Ranged Tag with Parameters (still failing)
+==========================
+@code lua
+print("Hello world")
+@end
+No longer part of the ranged tag.
+---
+(document
+    (document_content
+        (ranged_tag
+            (tag_name
+                (tag_name_element)
+                (tag_parameters (word))
+            )
+            (ranged_tag_content)
+            (ranged_tag_end)
+        )
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
+
+=============
+Carryover Tag
+=============
+#comment
+This is a comment.
+
+This is no longer part of the comment.
+---
+(document
+    (document_content
+        (carryover_tag_set
+            (carryover_tag
+                (tag_name
+                    (tag_name_element)
+                )
+            )
+            (paragraph
+                (paragraph_segment)
+            )
+        )
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
+
+=======================
+Carryover Tag Infection
+=======================
+#ordered
+- List item 1
+- List item 2
+
+This is no longer infected.
+---
+(document
+    (document_content
+        (carryover_tag_set
+            (carryover_tag
+                (tag_name
+                    (tag_name_element)
+                )
+            )
+            (generic_list
+                (unordered_list1
+                    (unordered_list1_prefix)
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                )
+                (unordered_list1
+                    (unordered_list1_prefix)
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                )
+            )
+        )
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
+
+=============================
+Carryover Tag with Parameters
+=============================
+#name bob
+> Hi, my name is Bob.
+
+Lol
+---
+(document
+    (document_content
+        (carryover_tag_set
+            (carryover_tag
+                (tag_name
+                    (tag_name_element)
+                )
+                (tag_parameters (word))
+            )
+            (quote
+                (quote1
+                    (quote1_prefix)
+                    (paragraph_segment)
+                    (MISSING _line_break)
+                )
+            )
+        )
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
