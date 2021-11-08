@@ -114,7 +114,7 @@ enum TokenType : char
     MULTI_DEFINITION,
     MULTI_DEFINITION_SUFFIX,
 
-    FOOTNOTE,
+    SINGLE_FOOTNOTE,
     MULTI_FOOTNOTE,
     MULTI_FOOTNOTE_SUFFIX,
 
@@ -457,7 +457,7 @@ class Scanner
                     return true;
                 }
 
-                if (check_detached(lexer, FOOTNOTE | MULTI_FOOTNOTE, {'^'}) != NONE)
+                if (check_detached(lexer, SINGLE_FOOTNOTE | MULTI_FOOTNOTE, {'^'}) != NONE)
                     return true;
                 else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
                 {

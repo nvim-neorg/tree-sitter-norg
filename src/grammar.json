@@ -4875,12 +4875,12 @@
         }
       ]
     },
-    "footnote": {
+    "single_footnote": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "footnote_prefix"
+          "name": "single_footnote_prefix"
         },
         {
           "type": "FIELD",
@@ -5410,7 +5410,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "footnote"
+          "name": "single_footnote"
         },
         {
           "type": "SYMBOL",
@@ -5869,7 +5869,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "footnote_prefix"
+      "name": "single_footnote_prefix"
     },
     {
       "type": "SYMBOL",

@@ -141,10 +141,6 @@
         "required": true,
         "types": [
           {
-            "type": "footnote",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -203,6 +199,10 @@
           {
             "type": "single_definition",
             "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
           }
         ]
       }
@@ -247,10 +247,6 @@
       "types": [
         {
           "type": "carryover_tag_set",
-          "named": true
-        },
-        {
-          "type": "footnote",
           "named": true
         },
         {
@@ -316,6 +312,10 @@
         {
           "type": "single_definition",
           "named": true
+        },
+        {
+          "type": "single_footnote",
+          "named": true
         }
       ]
     }
@@ -341,42 +341,6 @@
       "types": [
         {
           "type": "escape_sequence_prefix",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "footnote",
-    "named": true,
-    "fields": {
-      "content": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "paragraph",
-            "named": true
-          }
-        ]
-      },
-      "title": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "footnote_prefix",
           "named": true
         }
       ]
@@ -545,10 +509,6 @@
             "named": true
           },
           {
-            "type": "footnote",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -603,6 +563,10 @@
           {
             "type": "single_definition",
             "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
           }
         ]
       },
@@ -646,10 +610,6 @@
         "types": [
           {
             "type": "carryover_tag_set",
-            "named": true
-          },
-          {
-            "type": "footnote",
             "named": true
           },
           {
@@ -703,6 +663,10 @@
           {
             "type": "single_definition",
             "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
           }
         ]
       },
@@ -742,10 +706,6 @@
         "types": [
           {
             "type": "carryover_tag_set",
-            "named": true
-          },
-          {
-            "type": "footnote",
             "named": true
           },
           {
@@ -795,6 +755,10 @@
           {
             "type": "single_definition",
             "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
           }
         ]
       },
@@ -834,10 +798,6 @@
         "types": [
           {
             "type": "carryover_tag_set",
-            "named": true
-          },
-          {
-            "type": "footnote",
             "named": true
           },
           {
@@ -883,6 +843,10 @@
           {
             "type": "single_definition",
             "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
           }
         ]
       },
@@ -925,10 +889,6 @@
             "named": true
           },
           {
-            "type": "footnote",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -966,6 +926,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
             "named": true
           }
         ]
@@ -1009,10 +973,6 @@
             "named": true
           },
           {
-            "type": "footnote",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -1046,6 +1006,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
             "named": true
           }
         ]
@@ -1378,10 +1342,6 @@
             "named": true
           },
           {
-            "type": "footnote",
-            "named": true
-          },
-          {
             "type": "generic_list",
             "named": true
           },
@@ -1439,6 +1399,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
             "named": true
           },
           {
@@ -2924,6 +2888,42 @@
       "types": [
         {
           "type": "single_definition_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "single_footnote",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "title": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "single_footnote_prefix",
           "named": true
         }
       ]
@@ -4570,10 +4570,6 @@
     "named": true
   },
   {
-    "type": "footnote_prefix",
-    "named": true
-  },
-  {
     "type": "heading1_prefix",
     "named": true
   },
@@ -4803,6 +4799,10 @@
   },
   {
     "type": "single_definition_prefix",
+    "named": true
+  },
+  {
+    "type": "single_footnote_prefix",
     "named": true
   },
   {

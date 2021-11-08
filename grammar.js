@@ -111,7 +111,7 @@ module.exports = grammar({
         $.multi_definition_prefix,
         $.multi_definition_suffix,
 
-        $.footnote_prefix,
+        $.single_footnote_prefix,
         $.multi_footnote_prefix,
         $.multi_footnote_suffix,
 
@@ -2046,9 +2046,9 @@ module.exports = grammar({
             )
         ),
 
-        footnote: $ =>
+        single_footnote: $ =>
         seq(
-            $.footnote_prefix,
+            $.single_footnote_prefix,
 
             field(
                 "title",
@@ -2309,7 +2309,7 @@ module.exports = grammar({
 
         _footnote: $ =>
         choice(
-            $.footnote,
+            $.single_footnote,
             $.multi_footnote,
         ),
 

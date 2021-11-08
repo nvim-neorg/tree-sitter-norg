@@ -1,0 +1,51 @@
+=========================
+Single paragraph footnote
+=========================
+^ Single-paragraph footnote
+This is the actual footnote.
+
+This is no longer part of the footnote.
+---
+(document
+    (document_content
+        (single_footnote
+            (single_footnote_prefix)
+            (paragraph_segment)
+            (paragraph
+                (paragraph_segment)
+            )
+        )
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
+
+========================
+Multi paragraph footnote
+========================
+^^ Multi-paragraph footnote
+This is the actual footnote.
+
+This is also still part of the footnote.
+^^
+This is no longer part of the footnote.
+---
+(document
+    (document_content
+        (multi_footnote
+            (multi_footnote_prefix)
+            (paragraph_segment)
+            (paragraph
+                (paragraph_segment)
+            )
+            (paragraph
+                (paragraph_segment)
+            )
+            (multi_footnote_suffix)
+        )
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
