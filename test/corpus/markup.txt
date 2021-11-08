@@ -1,3 +1,5 @@
+TODO: escaping markup
+TODO: fix deep nesting test
 ====
 Bold
 ====
