@@ -469,3 +469,22 @@ This should though.
         )
     )
 )
+
+===============
+Horizontal Line
+===============
+This is some text.
+___
+Separated by a horizontal line.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment)
+        )
+        (horizontal_line)
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+)
