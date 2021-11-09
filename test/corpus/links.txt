@@ -688,6 +688,7 @@ Anchors (still failing)
 [heading 4 anchor]
 [heading 5 anchor]
 [heading 6 anchor]
+[heading 6+ anchor]
 [generic anchor]
 [marker anchor]
 [definition anchor]
@@ -706,6 +707,8 @@ Anchors (still failing)
 [non-norg file anchor]
 [url anchor]
 [file anchor]
+[invalid external with file anchor]
+[invalid url with file anchor]
 
 [heading 1 anchor]{* Heading 1}
 [heading 2 anchor]{** Heading 2}
@@ -713,6 +716,7 @@ Anchors (still failing)
 [heading 4 anchor]{**** Heading 4}
 [heading 5 anchor]{***** Heading 5}
 [heading 6 anchor]{****** Heading 6}
+[heading 6+ anchor]{******* Heading level above 6}
 [generic anchor]{# Generic}
 [marker anchor]{| Marker}
 [definition anchor]{$ Definition}
@@ -728,9 +732,482 @@ Anchors (still failing)
 [external marker anchor]{:norg_file:| Marker}
 [external definition anchor]{:norg_file:$ Definition}
 [external footnote anchor]{:norg_file:^ Footnote}
-[non-norg file anchor]{@external_file.txt}
+[non-norg file anchor]{@ external_file.txt}
 [url anchor]{https://github.com/}
 [file anchor]{file:///dev/null}
+[invalid external with file anchor]{:file:@ external_file.txt}
+[invalid url with file anchor]{:file:https://github.com/}
 ---
 (document
+    (paragraph
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                text: (anchor_declaration_text)
+            )
+        )
+    )
+
+    (paragraph
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_heading1)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_heading2)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_heading3)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_heading4)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_heading5)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_heading6)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_heading6)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_generic)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_marker)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_definition)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_footnote)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                   location: (link_file_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_heading1)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_heading2)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_heading3)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_heading4)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_heading5)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_heading6)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_generic)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_marker)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_definition)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (link_location
+                    type: (link_location_footnote)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_external_file)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_url)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_location
+                    type: (link_location_url)
+                    text: (link_location_text)
+                ) 
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (ERROR
+                   (UNEXPECTED '@')
+                )
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (anchor_declaration
+                    text: (anchor_declaration_text)
+                )
+                (link_file
+                    location: (link_file_text)
+                )
+                (ERROR
+                   (UNEXPECTED ':')
+                   (UNEXPECTED '/')
+                )
+            )
+        )
+    )
 )
