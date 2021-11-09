@@ -449,16 +449,16 @@ module.exports = grammar({
 
         link_description: $ =>
         seq(
-            $.link_text_begin,
+            alias($.link_text_begin, "_begin"),
             field("link_text", $.link_text),
-            $.link_text_end,
+            alias($.link_text_end, "_end"),
         ),
 
         link_file: $ =>
         seq(
-            $.link_file_begin,
+            alias($.link_file_begin, "_begin"),
             field("location", $.link_file_text),
-            $.link_file_end,
+            alias($.link_file_end, "_end"),
         ),
 
         link_location: $ =>
@@ -483,12 +483,17 @@ module.exports = grammar({
 
         link: $ =>
         seq(
-            $.link_begin,
-            optional(
-                $.link_file
+            alias($.link_begin, "_begin"),
+            choice(
+                $.link_location,
+                seq(
+                    $.link_file,
+                    optional(
+                        $.link_location,
+                    )
+                )
             ),
-            $.link_location,
-            $.link_end,
+            alias($.link_end, "_end"),
             optional(
                 $.link_description,
             )

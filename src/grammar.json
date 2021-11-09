@@ -929,8 +929,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "link_text_begin"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_text_begin"
+          },
+          "named": false,
+          "value": "_begin"
         },
         {
           "type": "FIELD",
@@ -941,8 +946,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "link_text_end"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_text_end"
+          },
+          "named": false,
+          "value": "_end"
         }
       ]
     },
@@ -950,8 +960,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "link_file_begin"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_file_begin"
+          },
+          "named": false,
+          "value": "_begin"
         },
         {
           "type": "FIELD",
@@ -962,8 +977,13 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "link_file_end"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_file_end"
+          },
+          "named": false,
+          "value": "_end"
         }
       ]
     },
@@ -1041,28 +1061,52 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "link_begin"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_begin"
+          },
+          "named": false,
+          "value": "_begin"
         },
         {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "link_file"
+              "name": "link_location"
             },
             {
-              "type": "BLANK"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link_file"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "link_location"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "link_location"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "link_end"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_end"
+          },
+          "named": false,
+          "value": "_end"
         },
         {
           "type": "CHOICE",

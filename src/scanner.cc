@@ -216,9 +216,9 @@ class Scanner
             lexer->result_symbol = m_LastToken = MARKUP_END;
             return m_LastToken;
         }
-        else if (lexer->lookahead == '{' && (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
+        else if (lexer->lookahead == '{' || (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
             return parse_link(lexer);
-        else if (lexer->lookahead == '[' && (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
+        else if ((lexer->lookahead == '[' && (m_LastToken < UNORDERED_LIST1 || m_LastToken > UNORDERED_LIST6)) || (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
             return parse_link_text(lexer);
         // If we are not in a tag and we have a square bracket opening then try
         // matching either a todo item or beginning of a list
@@ -790,6 +790,11 @@ class Scanner
         case LINK_FILE_END:
             switch (lexer->lookahead)
             {
+            case '}':
+                advance(lexer);
+
+                lexer->result_symbol = m_LastToken = LINK_END;
+                return true;
             case '*':
                 advance(lexer);
 
@@ -800,7 +805,9 @@ class Scanner
                 }
 
                 lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_LOCATION_HEADING1 + clamp(count, 0ull, 5ull));
-                return std::iswspace(lexer->lookahead);
+                advance(lexer);
+
+                return std::iswspace(m_Current);
             case '#':
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_GENERIC;
                 break;
@@ -808,6 +815,9 @@ class Scanner
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_DEFINITION;
                 break;
             case '@':
+                if (m_LastToken == LINK_FILE_END)
+                    return false;
+
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_EXTERNAL_FILE;
                 break;
             case '|':
@@ -817,12 +827,20 @@ class Scanner
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_FOOTNOTE;
                 break;
             default:
+                if (m_LastToken == LINK_FILE_END)
+                    return false;
+
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_URL;
                 return true;
             }
 
             advance(lexer);
-            return std::iswspace(lexer->lookahead);
+
+            if (!std::iswspace(lexer->lookahead))
+                return false;
+            
+            advance(lexer);
+            return true;
         case LINK_FILE_BEGIN:
             while (lexer->lookahead)
             {

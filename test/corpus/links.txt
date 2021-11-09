@@ -1,6 +1,6 @@
 TODO: fix tests
 ===========
-Basic Links (somehow failing)
+Basic Links
 ===========
 {* Heading 1}
 {** Heading 2}
@@ -8,6 +8,7 @@ Basic Links (somehow failing)
 {**** Heading 4}
 {***** Heading 5}
 {****** Heading 6}
+{******* Heading level above 6}
 {# Generic}
 {| Marker}
 {$ Definition}
@@ -19,16 +20,282 @@ Basic Links (somehow failing)
 {:norg_file:**** Heading 4}
 {:norg_file:***** Heading 5}
 {:norg_file:****** Heading 6}
+{:norg_file:******* Heading level above 6}
 {:norg_file:# Generic}
 {:norg_file:| Marker}
 {:norg_file:$ Definition}
 {:norg_file:^ Footnote}
-{@external_file.txt}
 {https://github.com/}
 {file:///dev/null}
+{@ external_file.txt}
+{:norg_file:@ external_file.txt}
+{:norg_file:https://github.com/}
 ---
 (document
     (document_content
+        (paragraph
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading1)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading2)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading3)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading4)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading5)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading6)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading6)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_generic)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_marker)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_definition)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_footnote)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                       location: (link_file_text) 
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading1)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading2)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading3)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading4)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading5)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading6)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading6)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_generic)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_marker)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_definition)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_footnote)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_url)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_url)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_external_file)
+                        text: (link_location_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (ERROR
+                       (UNEXPECTED '@') 
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (ERROR
+                       (UNEXPECTED ':') 
+                       (UNEXPECTED '/') 
+                    )
+                )
+            )
+        )
     )
 )
 
