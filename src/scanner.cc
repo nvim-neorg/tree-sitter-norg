@@ -657,9 +657,6 @@ class Scanner
             if (find_attached(m_Current) != s_AttachedModifiers.end() &&
                 (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
             {
-                if (find_attached(lexer->lookahead) != s_AttachedModifiers.end())
-                    goto parse_until_end;
-
                 m_AttachedModifierStack.pop_back();
 
                 lexer->result_symbol = m_LastToken = attached_modifier->second;
