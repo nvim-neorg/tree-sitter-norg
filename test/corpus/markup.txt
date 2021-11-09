@@ -411,3 +411,36 @@ Deep Nesting
         )
     )
 )
+
+============
+Empty Markup
+============
+This is not ** bold.
+This is not // italic.
+This is not -- struck through.
+This is not __ underlined.
+This is not || a spoiler.
+This is not `` verbatim.
+This is not ^^ superscript.
+This is not ,, subscript.
+This is not ++ an inline comment.
+This is not $$ inline math.
+This is not == a variable reference.
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment)
+            (paragraph_segment)
+            (paragraph_segment)
+            (paragraph_segment)
+            (paragraph_segment)
+            (paragraph_segment)
+            (paragraph_segment)
+            (paragraph_segment)
+            (paragraph_segment)
+            (paragraph_segment)
+            (paragraph_segment)
+        )
+    )
+)
