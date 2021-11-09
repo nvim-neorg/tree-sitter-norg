@@ -1,5 +1,4 @@
 TODO: escaping markup
-TODO: fix deep nesting test
 ====
 Bold
 ====
@@ -393,9 +392,9 @@ Disallow Nesting Super- into Subscript
 )
 
 ============
-Deep Nesting (why is this failing?)
+Deep Nesting
 ============
-*Bold /italic _underlined_/*
+*Bold /italic _underlined -struck through-_/*
 ---
 (document
     (document_content
@@ -403,8 +402,8 @@ Deep Nesting (why is this failing?)
             (paragraph_segment
                 (bold
                     (italic
-                        (strikethrough
-                            (underline)
+                        (underline
+                            (strikethrough)
                         )
                     )
                 )
