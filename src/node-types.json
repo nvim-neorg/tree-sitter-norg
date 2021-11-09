@@ -8,6 +8,10 @@
       "required": false,
       "types": [
         {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
           "type": "bold",
           "named": true
         },
@@ -66,6 +70,29 @@
     "type": "_word",
     "named": false,
     "fields": {}
+  },
+  {
+    "type": "anchor_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anchor_declaration_begin",
+          "named": true
+        },
+        {
+          "type": "anchor_declaration_end",
+          "named": true
+        },
+        {
+          "type": "anchor_declaration_text",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "bold",
@@ -2455,6 +2482,10 @@
       "required": false,
       "types": [
         {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
           "type": "bold",
           "named": true
         },
@@ -4520,6 +4551,18 @@
   {
     "type": "_uppercase",
     "named": false
+  },
+  {
+    "type": "anchor_declaration_begin",
+    "named": true
+  },
+  {
+    "type": "anchor_declaration_end",
+    "named": true
+  },
+  {
+    "type": "anchor_declaration_text",
+    "named": true
   },
   {
     "type": "any_char",

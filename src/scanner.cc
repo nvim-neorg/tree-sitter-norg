@@ -105,6 +105,14 @@ enum TokenType : char
     LINK_TEXT,
     LINK_TEXT_END,
 
+    ANCHOR_DECLARATION_BEGIN,
+    ANCHOR_DECLARATION_TEXT,
+    ANCHOR_DECLARATION_END,
+    ANCHOR_DEFINITION_BEGIN,
+    ANCHOR_DEFINITION_LOCATION,
+    ANCHOR_DEFINITION_TEXT,
+    ANCHOR_DEFINITION_END,
+
     RANGED_TAG,
     RANGED_TAG_END,
 
@@ -218,8 +226,11 @@ class Scanner
         }
         else if (lexer->lookahead == '{' || (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
             return parse_link(lexer);
-        else if ((lexer->lookahead == '[' && m_LastToken == LINK_END) || (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
+        else if ((lexer->lookahead == '[' && m_LastToken == LINK_END) ||
+                 (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
             return parse_link_text(lexer);
+        else if ((lexer->lookahead == '[' && m_LastToken == SPACE) || (m_LastToken >= ANCHOR_DECLARATION_BEGIN && m_LastToken < ANCHOR_DECLARATION_END))
+            return parse_anchor(lexer);
         // If we are not in a tag and we have a square bracket opening then try
         // matching either a todo item or beginning of a list
         else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 &&
@@ -804,7 +815,8 @@ class Scanner
                     advance(lexer);
                 }
 
-                lexer->result_symbol = m_LastToken = static_cast<TokenType>(LINK_LOCATION_HEADING1 + clamp(count, 0ull, 5ull));
+                lexer->result_symbol = m_LastToken =
+                    static_cast<TokenType>(LINK_LOCATION_HEADING1 + clamp(count, 0ull, 5ull));
                 advance(lexer);
 
                 return std::iswspace(m_Current);
@@ -838,7 +850,7 @@ class Scanner
 
             if (!std::iswspace(lexer->lookahead))
                 return false;
-            
+
             advance(lexer);
             return true;
         case LINK_FILE_BEGIN:
@@ -929,6 +941,42 @@ class Scanner
         return true;
     }
 
+    bool parse_anchor(TSLexer* lexer)
+    {
+        if (lexer->lookahead == '[')
+        {
+            advance(lexer);
+            lexer->result_symbol = m_LastToken = ANCHOR_DECLARATION_BEGIN;
+            return true;
+        }
+
+        switch (m_LastToken)
+        {
+        case ANCHOR_DECLARATION_BEGIN:
+            while (lexer->lookahead)
+            {
+                if (lexer->lookahead == ']' && m_Current != '\\')
+                    break;
+
+                advance(lexer);
+            }
+
+            lexer->result_symbol = m_LastToken = ANCHOR_DECLARATION_TEXT;
+            return true;
+        case ANCHOR_DECLARATION_TEXT:
+            if (lexer->lookahead == ']')
+                lexer->result_symbol = m_LastToken = ANCHOR_DECLARATION_END;
+
+            advance(lexer);
+            return true;
+        default:
+            advance(lexer);
+            return false;
+        }
+
+        return false;
+    }
+
     /*
      * Simply parses any word (segment containing consecutive non-whitespace
      * characters). If in a tag (m_TagLevel) parse_text parses
@@ -1006,7 +1054,8 @@ class Scanner
     std::vector<std::pair<char, TokenType>> m_AttachedModifierStack;
 
    private:
-    const std::array<int32_t, 9> s_DetachedModifiers = {'*', '-', '>', '|', '=', '~', '$', '_', '^'};
+    const std::array<int32_t, 9> s_DetachedModifiers = {'*', '-', '>', '|', '=',
+                                                        '~', '$', '_', '^'};
     const std::array<std::pair<char, TokenType>, NESTED_MASK> s_AttachedModifiers = {
         std::pair<int32_t, TokenType> {'*', BOLD},
         {'-', STRIKETHROUGH},
