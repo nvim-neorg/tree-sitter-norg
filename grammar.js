@@ -105,10 +105,6 @@ module.exports = grammar({
         $.anchor_declaration_begin,
         $.anchor_declaration_text,
         $.anchor_declaration_end,
-        $.anchor_definition_begin,
-        $.anchor_definition_location,
-        $.anchor_definition_text,
-        $.anchor_definition_end,
 
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
@@ -198,7 +194,7 @@ module.exports = grammar({
                     alias($.space, "_space"),
                     $.link,
                     $.anchor_declaration,
-                    // $.anchor_definition,
+                    $.anchor_definition,
                     $.escape_sequence,
                     $._attached_modifier,
                 ),
@@ -491,16 +487,26 @@ module.exports = grammar({
 
         anchor_declaration: $ =>
         seq(
-            $.anchor_declaration_begin,
-            $.anchor_declaration_text,
-            $.anchor_declaration_end,
+            alias($.anchor_declaration_begin, "_begin"),
+            field("text", $.anchor_declaration_text),
+            alias($.anchor_declaration_end, "_end"),
         ),
 
         anchor_definition: $ =>
-        seq(
+        prec(2, seq(
             $.anchor_declaration,
-            // other stuff here
-        ),
+            alias($.link_begin, "_begin"),
+            choice(
+                $.link_location,
+                seq(
+                    $.link_file,
+                    optional(
+                        $.link_location,
+                    )
+                )
+            ),
+            alias($.link_end, "_end"),
+        )),
 
         unordered_link1: $ =>
         prec.right(1,
