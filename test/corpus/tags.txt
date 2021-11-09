@@ -1,5 +1,5 @@
 ==========
-Ranged Tag (still failing)
+Ranged Tag
 ==========
 @math
 f(x) = \int
@@ -20,7 +20,7 @@ No longer part of the ranged tag.
 )
 
 ==========================
-Ranged Tag with Parameters (still failing)
+Ranged Tag with Parameters
 ==========================
 @code lua
 print("Hello world")

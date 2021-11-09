@@ -680,7 +680,7 @@ Links with text
 )
 
 =======
-Anchors (still failing)
+Anchors
 =======
 [heading 1 anchor]
 [heading 2 anchor]
