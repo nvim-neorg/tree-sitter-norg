@@ -450,7 +450,7 @@ module.exports = grammar({
         link_description: $ =>
         seq(
             alias($.link_text_begin, "_begin"),
-            field("link_text", $.link_text),
+            field("text", $.link_text),
             alias($.link_text_end, "_end"),
         ),
 

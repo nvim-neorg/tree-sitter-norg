@@ -1185,7 +1185,7 @@
     "type": "link_description",
     "named": true,
     "fields": {
-      "link_text": {
+      "text": {
         "multiple": false,
         "required": true,
         "types": [

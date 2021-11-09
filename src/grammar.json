@@ -939,7 +939,7 @@
         },
         {
           "type": "FIELD",
-          "name": "link_text",
+          "name": "text",
           "content": {
             "type": "SYMBOL",
             "name": "link_text"

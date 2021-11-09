@@ -125,7 +125,7 @@ Basic Links
             (paragraph_segment
                 (link
                     (link_file
-                       location: (link_file_text) 
+                       location: (link_file_text)
                     )
                 )
             )
@@ -280,7 +280,7 @@ Basic Links
                         location: (link_file_text)
                     )
                     (ERROR
-                       (UNEXPECTED '@') 
+                       (UNEXPECTED '@')
                     )
                 )
             )
@@ -290,8 +290,8 @@ Basic Links
                         location: (link_file_text)
                     )
                     (ERROR
-                       (UNEXPECTED ':') 
-                       (UNEXPECTED '/') 
+                       (UNEXPECTED ':')
+                       (UNEXPECTED '/')
                     )
                 )
             )
@@ -300,7 +300,7 @@ Basic Links
 )
 
 ===============
-Links with text (somehow failing)
+Links with text
 ===============
 {* Heading 1}[custom text]
 {** Heading 2}[custom text]
@@ -308,6 +308,7 @@ Links with text (somehow failing)
 {**** Heading 4}[custom text]
 {***** Heading 5}[custom text]
 {****** Heading 6}[custom text]
+{******* Heading level above 6}[custom text]
 {# Generic}[custom text]
 {| Marker}[custom text]
 {$ Definition}[custom text]
@@ -319,16 +320,366 @@ Links with text (somehow failing)
 {:norg_file:**** Heading 4}[custom text]
 {:norg_file:***** Heading 5}[custom text]
 {:norg_file:****** Heading 6}[custom text]
+{:norg_file:******* Heading level above 6}[custom text]
 {:norg_file:# Generic}[custom text]
 {:norg_file:| Marker}[custom text]
 {:norg_file:$ Definition}[custom text]
 {:norg_file:^ Footnote}[custom text]
-{@external_file.txt}[custom text]
 {https://github.com/}[custom text]
 {file:///dev/null}[custom text]
+{@ external_file.txt}[custom text]
+{:norg_file:@ external_file.txt}[custom text]
+{:norg_file:https://github.com/}[custom text]
 ---
 (document
     (document_content
+        (paragraph
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading1)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading2)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading3)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading4)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading5)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading6)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_heading6)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_generic)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_marker)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_definition)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_footnote)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                       location: (link_file_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading1)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading2)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading3)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading4)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading5)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading6)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_heading6)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_generic)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_marker)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_definition)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (link_location
+                        type: (link_location_footnote)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_url)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_url)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_location
+                        type: (link_location_external_file)
+                        text: (link_location_text)
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (ERROR
+                       (UNEXPECTED '@')
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+            (paragraph_segment
+                (link
+                    (link_file
+                        location: (link_file_text)
+                    )
+                    (ERROR
+                       (UNEXPECTED ':')
+                       (UNEXPECTED '/')
+                    )
+                    (link_description
+                       text: (link_text)
+                    )
+                )
+            )
+        )
     )
 )
 
