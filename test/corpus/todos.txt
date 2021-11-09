@@ -10,33 +10,31 @@ Undone Todo
 
 ---
 (document
-    (document_content
-        (generic_list
-            (todo_item1
-                (unordered_list1_prefix)
+    (generic_list
+        (todo_item1
+            (unordered_list1_prefix)
+            (todo_item_undone)
+            (paragraph (paragraph_segment))
+            (todo_item2
+                (unordered_list2_prefix)
                 (todo_item_undone)
                 (paragraph (paragraph_segment))
-                (todo_item2
-                    (unordered_list2_prefix)
+                (todo_item3
+                    (unordered_list3_prefix)
                     (todo_item_undone)
                     (paragraph (paragraph_segment))
-                    (todo_item3
-                        (unordered_list3_prefix)
+                    (todo_item4
+                        (unordered_list4_prefix)
                         (todo_item_undone)
                         (paragraph (paragraph_segment))
-                        (todo_item4
-                            (unordered_list4_prefix)
+                        (todo_item5
+                            (unordered_list5_prefix)
                             (todo_item_undone)
                             (paragraph (paragraph_segment))
-                            (todo_item5
-                                (unordered_list5_prefix)
+                            (todo_item6
+                                (unordered_list6_prefix)
                                 (todo_item_undone)
                                 (paragraph (paragraph_segment))
-                                (todo_item6
-                                    (unordered_list6_prefix)
-                                    (todo_item_undone)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )
@@ -58,33 +56,31 @@ Done Todo
 
 ---
 (document
-    (document_content
-        (generic_list
-            (todo_item1
-                (unordered_list1_prefix)
+    (generic_list
+        (todo_item1
+            (unordered_list1_prefix)
+            (todo_item_done)
+            (paragraph (paragraph_segment))
+            (todo_item2
+                (unordered_list2_prefix)
                 (todo_item_done)
                 (paragraph (paragraph_segment))
-                (todo_item2
-                    (unordered_list2_prefix)
+                (todo_item3
+                    (unordered_list3_prefix)
                     (todo_item_done)
                     (paragraph (paragraph_segment))
-                    (todo_item3
-                        (unordered_list3_prefix)
+                    (todo_item4
+                        (unordered_list4_prefix)
                         (todo_item_done)
                         (paragraph (paragraph_segment))
-                        (todo_item4
-                            (unordered_list4_prefix)
+                        (todo_item5
+                            (unordered_list5_prefix)
                             (todo_item_done)
                             (paragraph (paragraph_segment))
-                            (todo_item5
-                                (unordered_list5_prefix)
+                            (todo_item6
+                                (unordered_list6_prefix)
                                 (todo_item_done)
                                 (paragraph (paragraph_segment))
-                                (todo_item6
-                                    (unordered_list6_prefix)
-                                    (todo_item_done)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )
@@ -106,33 +102,31 @@ Pending Todo
 
 ---
 (document
-    (document_content
-        (generic_list
-            (todo_item1
-                (unordered_list1_prefix)
+    (generic_list
+        (todo_item1
+            (unordered_list1_prefix)
+            (todo_item_pending)
+            (paragraph (paragraph_segment))
+            (todo_item2
+                (unordered_list2_prefix)
                 (todo_item_pending)
                 (paragraph (paragraph_segment))
-                (todo_item2
-                    (unordered_list2_prefix)
+                (todo_item3
+                    (unordered_list3_prefix)
                     (todo_item_pending)
                     (paragraph (paragraph_segment))
-                    (todo_item3
-                        (unordered_list3_prefix)
+                    (todo_item4
+                        (unordered_list4_prefix)
                         (todo_item_pending)
                         (paragraph (paragraph_segment))
-                        (todo_item4
-                            (unordered_list4_prefix)
+                        (todo_item5
+                            (unordered_list5_prefix)
                             (todo_item_pending)
                             (paragraph (paragraph_segment))
-                            (todo_item5
-                                (unordered_list5_prefix)
+                            (todo_item6
+                                (unordered_list6_prefix)
                                 (todo_item_pending)
                                 (paragraph (paragraph_segment))
-                                (todo_item6
-                                    (unordered_list6_prefix)
-                                    (todo_item_pending)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )
@@ -154,33 +148,31 @@ On Hold Todo
 
 ---
 (document
-    (document_content
-        (generic_list
-            (todo_item1
-                (unordered_list1_prefix)
+    (generic_list
+        (todo_item1
+            (unordered_list1_prefix)
+            (todo_item_on_hold)
+            (paragraph (paragraph_segment))
+            (todo_item2
+                (unordered_list2_prefix)
                 (todo_item_on_hold)
                 (paragraph (paragraph_segment))
-                (todo_item2
-                    (unordered_list2_prefix)
+                (todo_item3
+                    (unordered_list3_prefix)
                     (todo_item_on_hold)
                     (paragraph (paragraph_segment))
-                    (todo_item3
-                        (unordered_list3_prefix)
+                    (todo_item4
+                        (unordered_list4_prefix)
                         (todo_item_on_hold)
                         (paragraph (paragraph_segment))
-                        (todo_item4
-                            (unordered_list4_prefix)
+                        (todo_item5
+                            (unordered_list5_prefix)
                             (todo_item_on_hold)
                             (paragraph (paragraph_segment))
-                            (todo_item5
-                                (unordered_list5_prefix)
+                            (todo_item6
+                                (unordered_list6_prefix)
                                 (todo_item_on_hold)
                                 (paragraph (paragraph_segment))
-                                (todo_item6
-                                    (unordered_list6_prefix)
-                                    (todo_item_on_hold)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )
@@ -202,33 +194,31 @@ Cancelled Todo
 
 ---
 (document
-    (document_content
-        (generic_list
-            (todo_item1
-                (unordered_list1_prefix)
+    (generic_list
+        (todo_item1
+            (unordered_list1_prefix)
+            (todo_item_cancelled)
+            (paragraph (paragraph_segment))
+            (todo_item2
+                (unordered_list2_prefix)
                 (todo_item_cancelled)
                 (paragraph (paragraph_segment))
-                (todo_item2
-                    (unordered_list2_prefix)
+                (todo_item3
+                    (unordered_list3_prefix)
                     (todo_item_cancelled)
                     (paragraph (paragraph_segment))
-                    (todo_item3
-                        (unordered_list3_prefix)
+                    (todo_item4
+                        (unordered_list4_prefix)
                         (todo_item_cancelled)
                         (paragraph (paragraph_segment))
-                        (todo_item4
-                            (unordered_list4_prefix)
+                        (todo_item5
+                            (unordered_list5_prefix)
                             (todo_item_cancelled)
                             (paragraph (paragraph_segment))
-                            (todo_item5
-                                (unordered_list5_prefix)
+                            (todo_item6
+                                (unordered_list6_prefix)
                                 (todo_item_cancelled)
                                 (paragraph (paragraph_segment))
-                                (todo_item6
-                                    (unordered_list6_prefix)
-                                    (todo_item_cancelled)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )
@@ -250,33 +240,31 @@ Urgent Todo
 
 ---
 (document
-    (document_content
-        (generic_list
-            (todo_item1
-                (unordered_list1_prefix)
+    (generic_list
+        (todo_item1
+            (unordered_list1_prefix)
+            (todo_item_urgent)
+            (paragraph (paragraph_segment))
+            (todo_item2
+                (unordered_list2_prefix)
                 (todo_item_urgent)
                 (paragraph (paragraph_segment))
-                (todo_item2
-                    (unordered_list2_prefix)
+                (todo_item3
+                    (unordered_list3_prefix)
                     (todo_item_urgent)
                     (paragraph (paragraph_segment))
-                    (todo_item3
-                        (unordered_list3_prefix)
+                    (todo_item4
+                        (unordered_list4_prefix)
                         (todo_item_urgent)
                         (paragraph (paragraph_segment))
-                        (todo_item4
-                            (unordered_list4_prefix)
+                        (todo_item5
+                            (unordered_list5_prefix)
                             (todo_item_urgent)
                             (paragraph (paragraph_segment))
-                            (todo_item5
-                                (unordered_list5_prefix)
+                            (todo_item6
+                                (unordered_list6_prefix)
                                 (todo_item_urgent)
                                 (paragraph (paragraph_segment))
-                                (todo_item6
-                                    (unordered_list6_prefix)
-                                    (todo_item_urgent)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )
@@ -298,33 +286,31 @@ Recurring Todo
 
 ---
 (document
-    (document_content
-        (generic_list
-            (todo_item1
-                (unordered_list1_prefix)
+    (generic_list
+        (todo_item1
+            (unordered_list1_prefix)
+            (todo_item_recurring)
+            (paragraph (paragraph_segment))
+            (todo_item2
+                (unordered_list2_prefix)
                 (todo_item_recurring)
                 (paragraph (paragraph_segment))
-                (todo_item2
-                    (unordered_list2_prefix)
+                (todo_item3
+                    (unordered_list3_prefix)
                     (todo_item_recurring)
                     (paragraph (paragraph_segment))
-                    (todo_item3
-                        (unordered_list3_prefix)
+                    (todo_item4
+                        (unordered_list4_prefix)
                         (todo_item_recurring)
                         (paragraph (paragraph_segment))
-                        (todo_item4
-                            (unordered_list4_prefix)
+                        (todo_item5
+                            (unordered_list5_prefix)
                             (todo_item_recurring)
                             (paragraph (paragraph_segment))
-                            (todo_item5
-                                (unordered_list5_prefix)
+                            (todo_item6
+                                (unordered_list6_prefix)
                                 (todo_item_recurring)
                                 (paragraph (paragraph_segment))
-                                (todo_item6
-                                    (unordered_list6_prefix)
-                                    (todo_item_recurring)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )
@@ -346,33 +332,31 @@ Uncertain Todo
 
 ---
 (document
-    (document_content
-        (generic_list
-            (todo_item1
-                (unordered_list1_prefix)
+    (generic_list
+        (todo_item1
+            (unordered_list1_prefix)
+            (todo_item_uncertain)
+            (paragraph (paragraph_segment))
+            (todo_item2
+                (unordered_list2_prefix)
                 (todo_item_uncertain)
                 (paragraph (paragraph_segment))
-                (todo_item2
-                    (unordered_list2_prefix)
+                (todo_item3
+                    (unordered_list3_prefix)
                     (todo_item_uncertain)
                     (paragraph (paragraph_segment))
-                    (todo_item3
-                        (unordered_list3_prefix)
+                    (todo_item4
+                        (unordered_list4_prefix)
                         (todo_item_uncertain)
                         (paragraph (paragraph_segment))
-                        (todo_item4
-                            (unordered_list4_prefix)
+                        (todo_item5
+                            (unordered_list5_prefix)
                             (todo_item_uncertain)
                             (paragraph (paragraph_segment))
-                            (todo_item5
-                                (unordered_list5_prefix)
+                            (todo_item6
+                                (unordered_list6_prefix)
                                 (todo_item_uncertain)
                                 (paragraph (paragraph_segment))
-                                (todo_item6
-                                    (unordered_list6_prefix)
-                                    (todo_item_uncertain)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )

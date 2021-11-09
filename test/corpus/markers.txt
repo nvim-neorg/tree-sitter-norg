@@ -11,24 +11,22 @@ Now this is on the root level.
 * This marker even captures other headings.
 ---
 (document
-    (document_content
+    (heading1
+        (heading1_prefix)
+        (paragraph_segment)
+        (paragraph
+            (paragraph_segment)
+        )
+    )
+    (marker
+        (marker_prefix)
+        (paragraph_segment)
+        (paragraph
+            (paragraph_segment)
+        )
         (heading1
             (heading1_prefix)
             (paragraph_segment)
-            (paragraph
-                (paragraph_segment)
-            )
-        )
-        (marker
-            (marker_prefix)
-            (paragraph_segment)
-            (paragraph
-                (paragraph_segment)
-            )
-            (heading1
-                (heading1_prefix)
-                (paragraph_segment)
-            )
         )
     )
 )

@@ -2,67 +2,6 @@
   "name": "norg",
   "rules": {
     "document": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "foreplay"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "document_content"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
-    },
-    "foreplay": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "PREC",
-          "value": 2,
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_paragraph_break"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_line_break"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "ranged_tag"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "insertion"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "document_content": {
       "type": "REPEAT1",
       "content": {
         "type": "CHOICE",

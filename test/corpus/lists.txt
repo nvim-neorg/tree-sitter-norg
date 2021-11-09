@@ -11,27 +11,25 @@ Unordered List
 
 ---
 (document
-    (document_content
-        (generic_list
-            (unordered_list1
-                (unordered_list1_prefix)
+    (generic_list
+        (unordered_list1
+            (unordered_list1_prefix)
+            (paragraph (paragraph_segment))
+            (unordered_list2
+                (unordered_list2_prefix)
                 (paragraph (paragraph_segment))
-                (unordered_list2
-                    (unordered_list2_prefix)
+                (unordered_list3
+                    (unordered_list3_prefix)
                     (paragraph (paragraph_segment))
-                    (unordered_list3
-                        (unordered_list3_prefix)
+                    (unordered_list4
+                        (unordered_list4_prefix)
                         (paragraph (paragraph_segment))
-                        (unordered_list4
-                            (unordered_list4_prefix)
+                        (unordered_list5
+                            (unordered_list5_prefix)
                             (paragraph (paragraph_segment))
-                            (unordered_list5
-                                (unordered_list5_prefix)
+                            (unordered_list6
+                                (unordered_list6_prefix)
                                 (paragraph (paragraph_segment))
-                                (unordered_list6
-                                    (unordered_list6_prefix)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )
@@ -53,27 +51,25 @@ Ordered List
 
 ---
 (document
-    (document_content
-        (generic_list
-            (ordered_list1
-                (ordered_list1_prefix)
+    (generic_list
+        (ordered_list1
+            (ordered_list1_prefix)
+            (paragraph (paragraph_segment))
+            (ordered_list2
+                (ordered_list2_prefix)
                 (paragraph (paragraph_segment))
-                (ordered_list2
-                    (ordered_list2_prefix)
+                (ordered_list3
+                    (ordered_list3_prefix)
                     (paragraph (paragraph_segment))
-                    (ordered_list3
-                        (ordered_list3_prefix)
+                    (ordered_list4
+                        (ordered_list4_prefix)
                         (paragraph (paragraph_segment))
-                        (ordered_list4
-                            (ordered_list4_prefix)
+                        (ordered_list5
+                            (ordered_list5_prefix)
                             (paragraph (paragraph_segment))
-                            (ordered_list5
-                                (ordered_list5_prefix)
+                            (ordered_list6
+                                (ordered_list6_prefix)
                                 (paragraph (paragraph_segment))
-                                (ordered_list6
-                                    (ordered_list6_prefix)
-                                    (paragraph (paragraph_segment))
-                                )
                             )
                         )
                     )
@@ -94,20 +90,18 @@ This is now longer part of the list item.
 
 ---
 (document
-    (document_content
-        (generic_list
-            (unordered_list1
-                (unordered_list1_prefix)
-                (paragraph
-                    (paragraph_segment)
-                    (paragraph_segment)
-                    (paragraph_segment)
-                )
+    (generic_list
+        (unordered_list1
+            (unordered_list1_prefix)
+            (paragraph
+                (paragraph_segment)
+                (paragraph_segment)
+                (paragraph_segment)
             )
         )
-        (paragraph
-            (paragraph_segment)
-        )
+    )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -126,40 +120,38 @@ Mixed List
 
 ---
 (document
-    (document_content
-        (generic_list
-            (unordered_list1
-                (unordered_list1_prefix)
+    (generic_list
+        (unordered_list1
+            (unordered_list1_prefix)
+            (paragraph (paragraph_segment))
+        )
+        (ordered_list1
+            (ordered_list1_prefix)
+            (paragraph (paragraph_segment))
+            (unordered_list2
+                (unordered_list2_prefix)
                 (paragraph (paragraph_segment))
-            )
-            (ordered_list1
-                (ordered_list1_prefix)
-                (paragraph (paragraph_segment))
-                (unordered_list2
-                    (unordered_list2_prefix)
+                (unordered_list3
+                    (unordered_list3_prefix)
                     (paragraph (paragraph_segment))
-                    (unordered_list3
-                        (unordered_list3_prefix)
+                )
+                (ordered_list3
+                    (ordered_list3_prefix)
+                    (paragraph (paragraph_segment))
+                    (ordered_list4
+                        (ordered_list4_prefix)
                         (paragraph (paragraph_segment))
                     )
-                    (ordered_list3
-                        (ordered_list3_prefix)
+                    (unordered_list4
+                        (unordered_list4_prefix)
                         (paragraph (paragraph_segment))
-                        (ordered_list4
-                            (ordered_list4_prefix)
+                        (ordered_list5
+                            (ordered_list5_prefix)
                             (paragraph (paragraph_segment))
                         )
-                        (unordered_list4
-                            (unordered_list4_prefix)
+                        (unordered_list5
+                            (unordered_list5_prefix)
                             (paragraph (paragraph_segment))
-                            (ordered_list5
-                                (ordered_list5_prefix)
-                                (paragraph (paragraph_segment))
-                            )
-                            (unordered_list5
-                                (unordered_list5_prefix)
-                                (paragraph (paragraph_segment))
-                            )
                         )
                     )
                 )

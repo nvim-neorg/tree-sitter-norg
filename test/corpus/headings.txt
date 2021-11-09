@@ -9,19 +9,17 @@ This is no longer part of the heading.
 
 ---
 (document
-    (document_content
-        (heading1
-            (heading1_prefix)
-            title: (paragraph_segment)
-            content:
-                (paragraph
-                    (paragraph_segment)
-                )
-            (strong_paragraph_delimiter)
-        )
-        (paragraph
-            (paragraph_segment)
-        )
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+        (strong_paragraph_delimiter)
+    )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -41,34 +39,32 @@ And here is some more text that has broken out of the matrix.
 
 ---
 (document
-    (document_content
-        (heading2
-            (heading2_prefix)
-            title: (paragraph_segment)
-            content:
-                (paragraph
-                    (paragraph_segment)
-                )
-        )
+    (heading2
+        (heading2_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
 
-        (heading1
-            (heading1_prefix)
-            title: (paragraph_segment)
-            content:
-                (heading2
-                    (heading2_prefix)
-                    title: (paragraph_segment)
-                    content:
-                        (paragraph
-                            (paragraph_segment)
-                        )
-                )
-            (strong_paragraph_delimiter)
-        )
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
 
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -90,43 +86,41 @@ And here is some more text that has broken out of the matrix.
 
 ---
 (document
-    (document_content
-        (heading3
-            (heading3_prefix)
-            title: (paragraph_segment)
-            content:
-                (paragraph
-                    (paragraph_segment)
-                )
-        )
+    (heading3
+        (heading3_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
 
-        (heading1
-            (heading1_prefix)
-            title: (paragraph_segment)
-            content:
-                (heading2
-                    (heading2_prefix)
-                    title: (paragraph_segment)
-                    content:
-                        (paragraph
-                            (paragraph_segment)
-                        )
-                    content:
-                        (heading3
-                            (heading3_prefix)
-                            title: (paragraph_segment)
-                            content:
-                                (paragraph
-                                    (paragraph_segment)
-                                )
-                        )
-                )
-            (strong_paragraph_delimiter)
-        )
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                content:
+                    (heading3
+                        (heading3_prefix)
+                        title: (paragraph_segment)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                            )
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
 
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -150,52 +144,50 @@ And here is some more text that has broken out of the matrix.
 
 ---
 (document
-    (document_content
-        (heading4
-            (heading4_prefix)
-            title: (paragraph_segment)
-            content:
-                (paragraph
-                    (paragraph_segment)
-                )
-        )
+    (heading4
+        (heading4_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
 
-        (heading1
-            (heading1_prefix)
-            title: (paragraph_segment)
-            content:
-                (heading2
-                    (heading2_prefix)
-                    title: (paragraph_segment)
-                    content:
-                        (paragraph
-                            (paragraph_segment)
-                        )
-                    content:
-                        (heading3
-                            (heading3_prefix)
-                            title: (paragraph_segment)
-                            content:
-                                (paragraph
-                                    (paragraph_segment)
-                                )
-                            content:
-                                (heading4
-                                    (heading4_prefix)
-                                    title: (paragraph_segment)
-                                    content:
-                                        (paragraph
-                                            (paragraph_segment)
-                                        )
-                                )
-                        )
-                )
-            (strong_paragraph_delimiter)
-        )
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                content:
+                    (heading3
+                        (heading3_prefix)
+                        title: (paragraph_segment)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                            )
+                        content:
+                            (heading4
+                                (heading4_prefix)
+                                title: (paragraph_segment)
+                                content:
+                                    (paragraph
+                                        (paragraph_segment)
+                                    )
+                            )
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
 
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -219,53 +211,51 @@ And here is some more text that has broken out of the matrix.
 
 ---
 (document
-    (document_content
-        (heading5
-            (heading5_prefix)
-            title: (paragraph_segment)
-            content:
-                (paragraph
-                    (paragraph_segment)
-                )
-        )
+    (heading5
+        (heading5_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
 
-        (heading1
-            (heading1_prefix)
-            title: (paragraph_segment)
-            content:
-                (heading2
-                    (heading2_prefix)
-                    title: (paragraph_segment)
-                    content:
-                        (paragraph
-                            (paragraph_segment)
-                        )
-                    content:
-                        (heading3
-                            (heading3_prefix)
-                            title: (paragraph_segment)
-                            content:
-                                (paragraph
-                                    (paragraph_segment)
-                                )
-                            content:
-                                (heading4
-                                    (heading4_prefix)
-                                    title: (paragraph_segment)
-                                    content:
-                                        (heading5
-                                            (heading5_prefix)
-                                            title: (paragraph_segment)
-                                        )
-                                )
-                        )
-                )
-            (strong_paragraph_delimiter)
-        )
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                content:
+                    (heading3
+                        (heading3_prefix)
+                        title: (paragraph_segment)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                            )
+                        content:
+                            (heading4
+                                (heading4_prefix)
+                                title: (paragraph_segment)
+                                content:
+                                    (heading5
+                                        (heading5_prefix)
+                                        title: (paragraph_segment)
+                                    )
+                            )
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
 
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -291,62 +281,60 @@ And here is some more text that has broken out of the matrix.
 
 ---
 (document
-    (document_content
-        (heading6
-            (heading6_prefix)
-            title: (paragraph_segment)
-            content:
-                (paragraph
-                    (paragraph_segment)
-                )
-        )
+    (heading6
+        (heading6_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
 
-        (heading1
-            (heading1_prefix)
-            title: (paragraph_segment)
-            content:
-                (heading2
-                    (heading2_prefix)
-                    title: (paragraph_segment)
-                    content:
-                        (paragraph
-                            (paragraph_segment)
-                        )
-                    content:
-                        (heading3
-                            (heading3_prefix)
-                            title: (paragraph_segment)
-                            content:
-                                (paragraph
-                                    (paragraph_segment)
-                                )
-                            content:
-                                (heading4
-                                    (heading4_prefix)
-                                    title: (paragraph_segment)
-                                    content:
-                                        (heading5
-                                            (heading5_prefix)
-                                            title: (paragraph_segment)
-                                            content:
-                                                (paragraph
-                                                    (paragraph_segment)
-                                                )
-                                            content:
-                                                (heading6
-                                                    (heading6_prefix)
-                                                    title: (paragraph_segment)
-                                                )
-                                        )
-                                )
-                        )
-                )
-            (strong_paragraph_delimiter)
-        )
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                content:
+                    (heading3
+                        (heading3_prefix)
+                        title: (paragraph_segment)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                            )
+                        content:
+                            (heading4
+                                (heading4_prefix)
+                                title: (paragraph_segment)
+                                content:
+                                    (heading5
+                                        (heading5_prefix)
+                                        title: (paragraph_segment)
+                                        content:
+                                            (paragraph
+                                                (paragraph_segment)
+                                            )
+                                        content:
+                                            (heading6
+                                                (heading6_prefix)
+                                                title: (paragraph_segment)
+                                            )
+                                    )
+                            )
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
 
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -372,50 +360,48 @@ This should no longer be part of the heading.
 
 ---
 (document
-    (document_content
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
+    )
 
-        (heading1
-            (heading1_prefix)
-            title: (paragraph_segment)
-            content:
-                (heading2
-                    (heading2_prefix)
-                    title: (paragraph_segment)
-                    content:
-                        (paragraph
-                            (paragraph_segment)
-                        )
-                    (weak_paragraph_delimiter)
-                )
-            content:
-                (paragraph
-                    (paragraph_segment)
-                    (paragraph_segment)
-                    (paragraph_segment)
-                )
-            content:
-                (heading3
-                    (heading3_prefix)
-                    title: (paragraph_segment)
-                    (weak_paragraph_delimiter)
-                )
-            content:
-                (paragraph
-                    (paragraph_segment)
-                )
-            content:
-                (heading3
-                    (heading3_prefix)
-                    title: (paragraph_segment)
-                )
-            (strong_paragraph_delimiter)
-        )
-        (paragraph
-            (paragraph_segment)
-        )
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                (weak_paragraph_delimiter)
+            )
+        content:
+            (paragraph
+                (paragraph_segment)
+                (paragraph_segment)
+                (paragraph_segment)
+            )
+        content:
+            (heading3
+                (heading3_prefix)
+                title: (paragraph_segment)
+                (weak_paragraph_delimiter)
+            )
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+        content:
+            (heading3
+                (heading3_prefix)
+                title: (paragraph_segment)
+            )
+        (strong_paragraph_delimiter)
+    )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -437,36 +423,34 @@ This should though.
 
 ---
 (document
-    (document_content
-        (heading1
-            (heading1_prefix)
-            title: (paragraph_segment)
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+            content:
+                (generic_list
+                    (unordered_list3
+                        (unordered_list3_prefix)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                                (paragraph_segment)
+                                (paragraph_segment)
+                            )
+                    )
+                )
             content:
                 (paragraph
                     (paragraph_segment)
+                    (paragraph_segment)
                 )
-                content:
-                    (generic_list
-                        (unordered_list3
-                            (unordered_list3_prefix)
-                            content:
-                                (paragraph
-                                    (paragraph_segment)
-                                    (paragraph_segment)
-                                    (paragraph_segment)
-                                )
-                        )
-                    )
-                content:
-                    (paragraph
-                        (paragraph_segment)
-                        (paragraph_segment)
-                    )
-                (weak_paragraph_delimiter)
-        )
-        (paragraph
-            (paragraph_segment)
-        )
+            (weak_paragraph_delimiter)
+    )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -478,13 +462,11 @@ ___
 Separated by a horizontal line.
 ---
 (document
-    (document_content
-        (paragraph
-            (paragraph_segment)
-        )
-        (horizontal_line)
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
+    )
+    (horizontal_line)
+    (paragraph
+        (paragraph_segment)
     )
 )

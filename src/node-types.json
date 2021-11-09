@@ -254,25 +254,6 @@
       "required": false,
       "types": [
         {
-          "type": "document_content",
-          "named": true
-        },
-        {
-          "type": "foreplay",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "document_content",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
           "type": "carryover_tag_set",
           "named": true
         },
@@ -368,25 +349,6 @@
       "types": [
         {
           "type": "escape_sequence_prefix",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "foreplay",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "insertion",
-          "named": true
-        },
-        {
-          "type": "ranged_tag",
           "named": true
         }
       ]

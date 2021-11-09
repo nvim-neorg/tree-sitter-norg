@@ -5,15 +5,13 @@ Level 1 Quotes
 This is no longer part of the quote.
 ---
 (document
-    (document_content
-        (quote
-            (quote1
-                (quote1_prefix)
-                content: (paragraph_segment)
-            )
+    (quote
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment)
         )
-        (paragraph (paragraph_segment))
     )
+    (paragraph (paragraph_segment))
 )
 
 ==============
@@ -23,15 +21,13 @@ Level 2 Quotes
 This is no longer part of the quote.
 ---
 (document
-    (document_content
-        (quote
-            (quote2
-                (quote2_prefix)
-                content: (paragraph_segment)
-            )
+    (quote
+        (quote2
+            (quote2_prefix)
+            content: (paragraph_segment)
         )
-        (paragraph (paragraph_segment))
     )
+    (paragraph (paragraph_segment))
 )
 
 ==============
@@ -41,15 +37,13 @@ Level 3 Quotes
 This is no longer part of the quote.
 ---
 (document
-    (document_content
-        (quote
-            (quote3
-                (quote3_prefix)
-                content: (paragraph_segment)
-            )
+    (quote
+        (quote3
+            (quote3_prefix)
+            content: (paragraph_segment)
         )
-        (paragraph (paragraph_segment))
     )
+    (paragraph (paragraph_segment))
 )
 
 ==============
@@ -59,15 +53,13 @@ Level 4 Quotes
 This is no longer part of the quote.
 ---
 (document
-    (document_content
-        (quote
-            (quote4
-                (quote4_prefix)
-                content: (paragraph_segment)
-            )
+    (quote
+        (quote4
+            (quote4_prefix)
+            content: (paragraph_segment)
         )
-        (paragraph (paragraph_segment))
     )
+    (paragraph (paragraph_segment))
 )
 
 ==============
@@ -77,15 +69,13 @@ Level 5 Quotes
 This is no longer part of the quote.
 ---
 (document
-    (document_content
-        (quote
-            (quote5
-                (quote5_prefix)
-                content: (paragraph_segment)
-            )
+    (quote
+        (quote5
+            (quote5_prefix)
+            content: (paragraph_segment)
         )
-        (paragraph (paragraph_segment))
     )
+    (paragraph (paragraph_segment))
 )
 
 ==============
@@ -95,15 +85,13 @@ Level 6 Quotes
 This is no longer part of the quote.
 ---
 (document
-    (document_content
-        (quote
-            (quote6
-                (quote6_prefix)
-                content: (paragraph_segment)
-            )
+    (quote
+        (quote6
+            (quote6_prefix)
+            content: (paragraph_segment)
         )
-        (paragraph (paragraph_segment))
     )
+    (paragraph (paragraph_segment))
 )
 
 =============
@@ -123,55 +111,53 @@ Nested Quotes
 This is no longer part of the quote.
 ---
 (document
-    (document_content
-        (quote
-            (quote1
-                (quote1_prefix)
+    (quote
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment)
+            (quote2
+                (quote2_prefix)
                 content: (paragraph_segment)
-                (quote2
-                    (quote2_prefix)
+                (quote3
+                    (quote3_prefix)
                     content: (paragraph_segment)
-                    (quote3
-                        (quote3_prefix)
+                    (quote4
+                        (quote4_prefix)
                         content: (paragraph_segment)
-                        (quote4
-                            (quote4_prefix)
+                        (quote5
+                            (quote5_prefix)
                             content: (paragraph_segment)
-                            (quote5
-                                (quote5_prefix)
-                                content: (paragraph_segment)
-                                (quote6
-                                    (quote6_prefix)
-                                    content: (paragraph_segment)
-                                )
-                            )
-                            (quote5
-                                (quote5_prefix)
+                            (quote6
+                                (quote6_prefix)
                                 content: (paragraph_segment)
                             )
                         )
-                        (quote4
-                            (quote4_prefix)
+                        (quote5
+                            (quote5_prefix)
                             content: (paragraph_segment)
                         )
                     )
-                    (quote3
-                        (quote3_prefix)
+                    (quote4
+                        (quote4_prefix)
                         content: (paragraph_segment)
                     )
                 )
-                (quote2
-                    (quote2_prefix)
+                (quote3
+                    (quote3_prefix)
                     content: (paragraph_segment)
                 )
             )
-            (quote1
-                (quote1_prefix)
+            (quote2
+                (quote2_prefix)
                 content: (paragraph_segment)
             )
         )
-        (paragraph (paragraph_segment))
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment)
+        )
     )
+    (paragraph (paragraph_segment))
 )
 
 =========
@@ -183,19 +169,17 @@ Quote End
 This is no longer part of the quote.
 ---
 (document
-    (document_content
-        (quote
-            (quote1
-                (quote1_prefix)
-                content: (paragraph_segment) (MISSING _line_break)
-            )
+    (quote
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment) (MISSING _line_break)
         )
-        (quote
-            (quote1
-                (quote1_prefix)
-                content: (paragraph_segment)
-            )
-        )
-        (paragraph (paragraph_segment))
     )
+    (quote
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
 )

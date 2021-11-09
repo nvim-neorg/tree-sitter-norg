@@ -151,27 +151,7 @@ module.exports = grammar({
     ],
 
     rules: {
-        document: $ =>
-        seq(
-            optional($.foreplay),
-            optional($.document_content),
-        ),
-
-        foreplay: $ =>
-        prec.right(0,
-            repeat1(
-                prec(2,
-                    choice(
-                        $._paragraph_break,
-                        $._line_break,
-                        $.ranged_tag,
-                        $.insertion,
-                    )
-                ),
-            )
-        ),
-
-        document_content: $ => repeat1(
+        document: $ => repeat1(
             choice(
                 prec(1,
                     choice(

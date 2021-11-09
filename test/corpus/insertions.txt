@@ -6,16 +6,12 @@ Insertion
 The above renders a table of contents.
 ---
 (document
-    (foreplay
-        (insertion
-            (insertion_prefix)
-            (capitalized_word)
-        )
+    (insertion
+        (insertion_prefix)
+        (capitalized_word)
     )
-    (document_content
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -27,17 +23,13 @@ Insertion with Parameters
 The above renders a table of contents with a custom title.
 ---
 (document
-    (foreplay
-        (insertion
-            (insertion_prefix)
-            (capitalized_word)
-            (paragraph_segment)
-        )
+    (insertion
+        (insertion_prefix)
+        (capitalized_word)
+        (paragraph_segment)
     )
-    (document_content
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -49,16 +41,12 @@ Variable Definition
 The above is a variable definition.
 ---
 (document
-    (foreplay
-        (insertion
-            (insertion_prefix)
-            (lowercase_word)
-            (paragraph_segment)
-        )
+    (insertion
+        (insertion_prefix)
+        (lowercase_word)
+        (paragraph_segment)
     )
-    (document_content
-        (paragraph
-            (paragraph_segment)
-        )
+    (paragraph
+        (paragraph_segment)
     )
 )

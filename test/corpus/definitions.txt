@@ -7,17 +7,15 @@ This is the actual definition.
 This is no longer part of the definition.
 ---
 (document
-    (document_content
-        (single_definition
-            (single_definition_prefix)
-            (paragraph_segment)
-            (paragraph
-                (paragraph_segment)
-            )
-        )
+    (single_definition
+        (single_definition_prefix)
+        (paragraph_segment)
         (paragraph
             (paragraph_segment)
         )
+    )
+    (paragraph
+        (paragraph_segment)
     )
 )
 
@@ -32,20 +30,18 @@ $$
 This is no longer part of the definition.
 ---
 (document
-    (document_content
-        (multi_definition
-            (multi_definition_prefix)
+    (multi_definition
+        (multi_definition_prefix)
+        (paragraph_segment)
+        (paragraph
             (paragraph_segment)
-            (paragraph
-                (paragraph_segment)
-            )
-            (paragraph
-                (paragraph_segment)
-            )
-            (multi_definition_suffix)
         )
         (paragraph
             (paragraph_segment)
         )
+        (multi_definition_suffix)
+    )
+    (paragraph
+        (paragraph_segment)
     )
 )
