@@ -1,4 +1,3 @@
-TODO: escaping markup
 ====
 Bold
 ====
@@ -441,6 +440,72 @@ This is not == a variable reference.
             (paragraph_segment)
             (paragraph_segment)
             (paragraph_segment)
+        )
+    )
+)
+
+==============
+Escaped Markup
+==============
+This is not \*bold\*
+This is not \/italic\/
+This is not \-struck through\-
+This is not \_underlined\_
+This is not \|a spoiler\|
+This is not \`verbatim\`
+This is not \^superscript\^
+This is not \,subscript\,
+This is not \+an inline comment\+
+This is not \$inline math\$
+This is not \=variable reference\=
+---
+(document
+    (document_content
+        (paragraph
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
+            (paragraph_segment
+                (escape_sequence (escape_sequence_prefix) (any_char))
+                (escape_sequence (escape_sequence_prefix) (any_char))
+            )
         )
     )
 )
