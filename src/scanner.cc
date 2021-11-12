@@ -244,11 +244,6 @@ class Scanner
             lexer->result_symbol = m_LastToken = MARKUP_END;
             return m_LastToken;
         }
-        else if (lexer->lookahead == '{' || (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
-            return parse_link(lexer);
-        else if ((lexer->lookahead == '[' && m_LastToken == LINK_END) ||
-                 (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
-            return parse_link_text(lexer);
         // If we are not in a tag and we have a square bracket opening then try
         // matching either a todo item or beginning of a list
         else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 &&
@@ -308,9 +303,6 @@ class Scanner
             else
                 return false;
         }
-        else if ((lexer->lookahead == '[' && m_LastToken != LINK_END) ||
-                 (m_LastToken >= ANCHOR_DECLARATION_BEGIN && m_LastToken < ANCHOR_DECLARATION_END))
-            return parse_anchor(lexer);
         // Otherwise just check whether or not we're dealing with a newline and
         // return STANDALONE_BREAK if we are
         else if (lexer->lookahead == '\n')
@@ -524,6 +516,15 @@ class Scanner
                 }
             }
         }
+
+        if (lexer->lookahead == '{' || (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
+            return parse_link(lexer);
+        else if ((lexer->lookahead == '[' && m_LastToken == LINK_END) ||
+                 (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
+            return parse_link_text(lexer);
+        else if ((lexer->lookahead == '[' && m_LastToken != LINK_END) ||
+                 (m_LastToken >= ANCHOR_DECLARATION_BEGIN && m_LastToken < ANCHOR_DECLARATION_END))
+            return parse_anchor(lexer);
 
         // If we are not in a ranged tag then we should also check for potential
         // attached modifiers, like *this*.
