@@ -517,14 +517,17 @@ class Scanner
             }
         }
 
-        if (lexer->lookahead == '{' || (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
-            return parse_link(lexer);
-        else if ((lexer->lookahead == '[' && m_LastToken == LINK_END) ||
-                 (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
-            return parse_link_text(lexer);
-        else if ((lexer->lookahead == '[' && m_LastToken != LINK_END) ||
-                 (m_LastToken >= ANCHOR_DECLARATION_BEGIN && m_LastToken < ANCHOR_DECLARATION_END))
-            return parse_anchor(lexer);
+        if (!m_TagLevel)
+        {
+            if (lexer->lookahead == '{' || (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
+                return parse_link(lexer);
+            else if ((lexer->lookahead == '[' && m_LastToken == LINK_END) ||
+                     (m_LastToken >= LINK_TEXT_BEGIN && m_LastToken < LINK_TEXT_END))
+                return parse_link_text(lexer);
+            else if ((lexer->lookahead == '[' && m_LastToken != LINK_END) ||
+                     (m_LastToken >= ANCHOR_DECLARATION_BEGIN && m_LastToken < ANCHOR_DECLARATION_END))
+                return parse_anchor(lexer);
+        }
 
         // If we are not in a ranged tag then we should also check for potential
         // attached modifiers, like *this*.
