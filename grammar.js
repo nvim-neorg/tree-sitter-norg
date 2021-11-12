@@ -527,7 +527,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -574,7 +577,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -617,7 +623,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -656,7 +665,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -691,7 +703,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -720,7 +735,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -739,7 +757,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -786,7 +807,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -829,7 +853,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -868,7 +895,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -903,7 +933,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(
@@ -932,7 +965,10 @@ module.exports = grammar({
 
                 field(
                     "location",
-                    $.link,
+                    choice(
+                        $.link,
+                        $.anchor_definition,
+                    ),
                 ),
 
                 optional(

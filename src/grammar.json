@@ -1184,8 +1184,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -1318,8 +1327,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -1436,8 +1454,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -1538,8 +1565,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -1624,8 +1660,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -1694,8 +1739,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -1740,8 +1794,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -1874,8 +1937,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -1992,8 +2064,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -2094,8 +2175,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -2180,8 +2270,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {
@@ -2250,8 +2349,17 @@
             "type": "FIELD",
             "name": "location",
             "content": {
-              "type": "SYMBOL",
-              "name": "link"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "anchor_definition"
+                }
+              ]
             }
           },
           {

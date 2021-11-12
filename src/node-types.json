@@ -1429,6 +1429,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -1545,6 +1549,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -1645,6 +1653,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -1729,6 +1741,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -1797,6 +1813,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -1848,6 +1868,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "anchor_definition",
+            "named": true
+          },
           {
             "type": "link",
             "named": true
@@ -3438,6 +3462,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -3554,6 +3582,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -3654,6 +3686,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -3738,6 +3774,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -3806,6 +3846,10 @@
         "required": true,
         "types": [
           {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
             "type": "link",
             "named": true
           }
@@ -3857,6 +3901,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "anchor_definition",
+            "named": true
+          },
           {
             "type": "link",
             "named": true
