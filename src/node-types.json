@@ -1242,16 +1242,6 @@
     "type": "marker",
     "named": true,
     "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      },
       "subtext": {
         "multiple": true,
         "required": false,
@@ -1286,6 +1276,16 @@
           },
           {
             "type": "tag",
+            "named": true
+          }
+        ]
+      },
+      "title": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
             "named": true
           }
         ]

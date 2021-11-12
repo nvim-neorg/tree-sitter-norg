@@ -4236,7 +4236,7 @@
           },
           {
             "type": "FIELD",
-            "name": "name",
+            "name": "title",
             "content": {
               "type": "SYMBOL",
               "name": "paragraph_segment"

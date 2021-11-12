@@ -1753,7 +1753,7 @@ module.exports = grammar({
                 $.marker_prefix,
 
                 field(
-                    "name",
+                    "title",
                     $.paragraph_segment
                 ),
 
