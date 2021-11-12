@@ -8,8 +8,17 @@
 module.exports = grammar({
     name: 'norg',
 
-    externals: $ => [
+    supertypes: $ => [
+        $.attached_modifier,
+        $.attached_modifier_segment,
+        $.heading,
+        $.detached_modifier,
+        $.footnote,
+        $.definition,
+        $.tag,
+    ],
 
+    externals: $ => [
         $._,
         $.space,
 
@@ -20,6 +29,8 @@ module.exports = grammar({
         $._paragraph_break,
 
         $.escape_sequence_prefix,
+
+        $.trailing_modifier,
 
         $.heading1_prefix,
         $.heading2_prefix,
@@ -153,11 +164,11 @@ module.exports = grammar({
                     choice(
                         $._paragraph_break,
                         $._line_break,
-                        $._heading,
-                        $._detached_modifier,
-                        $._definition,
-                        $._footnote,
-                        $._tag,
+                        $.heading,
+                        $.detached_modifier,
+                        $.definition,
+                        $.footnote,
+                        $.tag,
                         $.horizontal_line,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
                         $.marker,
@@ -192,11 +203,12 @@ module.exports = grammar({
                 choice(
                     alias($.word, "_word"),
                     alias($.space, "_space"),
+                    alias($.trailing_modifier, "_trailing_modifier"),
                     $.link,
                     $.anchor_declaration,
                     $.anchor_definition,
                     $.escape_sequence,
-                    $._attached_modifier,
+                    $.attached_modifier,
                 ),
             )
         ),
@@ -954,10 +966,10 @@ module.exports = grammar({
                             $._paragraph,
 
                             $._paragraph_break,
-                            $._detached_modifier,
-                            $._definition,
-                            $._footnote,
-                            $._tag,
+                            $.detached_modifier,
+                            $.definition,
+                            $.footnote,
+                            $.tag,
                             $.horizontal_line,
 
                             $.heading2,
@@ -1000,10 +1012,10 @@ module.exports = grammar({
                             $._paragraph,
 
                             $._paragraph_break,
-                            $._detached_modifier,
-                            $._definition,
-                            $._footnote,
-                            $._tag,
+                            $.detached_modifier,
+                            $.definition,
+                            $.footnote,
+                            $.tag,
                             $.horizontal_line,
 
                             $.heading3,
@@ -1042,10 +1054,10 @@ module.exports = grammar({
                             $._paragraph,
 
                             $._paragraph_break,
-                            $._detached_modifier,
-                            $._definition,
-                            $._footnote,
-                            $._tag,
+                            $.detached_modifier,
+                            $.definition,
+                            $.footnote,
+                            $.tag,
                             $.horizontal_line,
 
                             $.heading4,
@@ -1083,10 +1095,10 @@ module.exports = grammar({
                             $._paragraph,
 
                             $._paragraph_break,
-                            $._detached_modifier,
-                            $._definition,
-                            $._footnote,
-                            $._tag,
+                            $.detached_modifier,
+                            $.definition,
+                            $.footnote,
+                            $.tag,
                             $.horizontal_line,
 
                             $.heading5,
@@ -1123,10 +1135,10 @@ module.exports = grammar({
                             $._paragraph,
 
                             $._paragraph_break,
-                            $._detached_modifier,
-                            $._definition,
-                            $._footnote,
-                            $._tag,
+                            $.detached_modifier,
+                            $.definition,
+                            $.footnote,
+                            $.tag,
                             $.horizontal_line,
 
                             $.heading6,
@@ -1162,10 +1174,10 @@ module.exports = grammar({
                             $._paragraph,
 
                             $._paragraph_break,
-                            $._detached_modifier,
-                            $._definition,
-                            $._footnote,
-                            $._tag,
+                            $.detached_modifier,
+                            $.definition,
+                            $.footnote,
+                            $.tag,
                             $.horizontal_line,
                         )
                     )
@@ -1754,11 +1766,11 @@ module.exports = grammar({
                             $._paragraph,
                             $.strong_paragraph_delimiter,
                             $.horizontal_line,
-                            $._heading,
-                            $._detached_modifier,
-                            $._definition,
-                            $._footnote,
-                            $._tag,
+                            $.heading,
+                            $.detached_modifier,
+                            $.definition,
+                            $.footnote,
+                            $.tag,
                             $._paragraph_break,
                         ),
                     ),
@@ -2042,8 +2054,8 @@ module.exports = grammar({
                             $._paragraph,
                             $._paragraph_break,
 
-                            $._detached_modifier,
-                            $._tag,
+                            $.detached_modifier,
+                            $.tag,
                         )
                     )
                 ),
@@ -2092,8 +2104,8 @@ module.exports = grammar({
                             $._paragraph,
                             $._paragraph_break,
 
-                            $._detached_modifier,
-                            $._tag,
+                            $.detached_modifier,
+                            $.tag,
                         )
                     )
                 ),
@@ -2201,10 +2213,10 @@ module.exports = grammar({
                         $._paragraph,
                         repeat1(
                             choice(
-                                $._detached_modifier,
-                                $._definition,
-                                $._footnote,
-                                $._heading,
+                                $.detached_modifier,
+                                $.definition,
+                                $.footnote,
+                                $.heading,
                                 $.ranged_tag,
                                 $.marker,
                             ),
@@ -2294,7 +2306,7 @@ module.exports = grammar({
             ),
         ),
 
-        _tag: $ =>
+        tag: $ =>
         choice(
             $.ranged_tag,
             $.carryover_tag_set,
@@ -2302,7 +2314,7 @@ module.exports = grammar({
 
         // --------------------------------------------------
 
-        _heading: $ =>
+        heading: $ =>
         choice(
             $.heading1,
             $.heading2,
@@ -2312,30 +2324,30 @@ module.exports = grammar({
             $.heading6,
         ),
 
-        // definitions are in a separate group and not part of _detached_modifier
-        // because this allows us to nest the _detached_modifier group within
+        // definitions are in a separate group and not part of detached_modifier
+        // because this allows us to nest the detached_modifier group within
         // multi-paragraph definitions (but not nest definitions themselves)
-        _definition: $ =>
+        definition: $ =>
         choice(
             $.single_definition,
             $.multi_definition,
         ),
 
-        _footnote: $ =>
+        footnote: $ =>
         choice(
             $.single_footnote,
             $.multi_footnote,
         ),
 
         // A list of detached modifiers (excluding headings and definitons)
-        _detached_modifier: $ =>
+        detached_modifier: $ =>
         choice(
             $.quote,
             $.generic_list,
             $.insertion,
         ),
 
-        _attached_modifier_segment: $ =>
+        attached_modifier_segment: $ =>
         choice(
             $.bold_segment,
             $.italic_segment,
@@ -2348,7 +2360,7 @@ module.exports = grammar({
             $.markup_end,
         ),
 
-        _attached_modifier: $ =>
+        attached_modifier: $ =>
         choice(
             $.bold,
             $.italic,

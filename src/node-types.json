@@ -1,5 +1,187 @@
 [
   {
+    "type": "attached_modifier",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "bold",
+        "named": true
+      },
+      {
+        "type": "inline_comment",
+        "named": true
+      },
+      {
+        "type": "inline_math",
+        "named": true
+      },
+      {
+        "type": "italic",
+        "named": true
+      },
+      {
+        "type": "spoiler",
+        "named": true
+      },
+      {
+        "type": "strikethrough",
+        "named": true
+      },
+      {
+        "type": "subscript",
+        "named": true
+      },
+      {
+        "type": "superscript",
+        "named": true
+      },
+      {
+        "type": "underline",
+        "named": true
+      },
+      {
+        "type": "variable",
+        "named": true
+      },
+      {
+        "type": "verbatim",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "attached_modifier_segment",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "bold_segment",
+        "named": true
+      },
+      {
+        "type": "inline_comment_segment",
+        "named": true
+      },
+      {
+        "type": "italic_segment",
+        "named": true
+      },
+      {
+        "type": "markup_end",
+        "named": true
+      },
+      {
+        "type": "spoiler_segment",
+        "named": true
+      },
+      {
+        "type": "strikethrough_segment",
+        "named": true
+      },
+      {
+        "type": "subscript_segment",
+        "named": true
+      },
+      {
+        "type": "superscript_segment",
+        "named": true
+      },
+      {
+        "type": "underline_segment",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "definition",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "multi_definition",
+        "named": true
+      },
+      {
+        "type": "single_definition",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "detached_modifier",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "generic_list",
+        "named": true
+      },
+      {
+        "type": "insertion",
+        "named": true
+      },
+      {
+        "type": "quote",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "footnote",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "multi_footnote",
+        "named": true
+      },
+      {
+        "type": "single_footnote",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "heading",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "heading1",
+        "named": true
+      },
+      {
+        "type": "heading2",
+        "named": true
+      },
+      {
+        "type": "heading3",
+        "named": true
+      },
+      {
+        "type": "heading4",
+        "named": true
+      },
+      {
+        "type": "heading5",
+        "named": true
+      },
+      {
+        "type": "heading6",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "tag",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "carryover_tag_set",
+        "named": true
+      },
+      {
+        "type": "ranged_tag",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "_segment",
     "named": false,
     "fields": {},
@@ -16,7 +198,7 @@
           "named": true
         },
         {
-          "type": "bold",
+          "type": "attached_modifier",
           "named": true
         },
         {
@@ -24,47 +206,7 @@
           "named": true
         },
         {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
           "type": "link",
-          "named": true
-        },
-        {
-          "type": "spoiler",
-          "named": true
-        },
-        {
-          "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "superscript",
-          "named": true
-        },
-        {
-          "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        },
-        {
-          "type": "verbatim",
           "named": true
         }
       ]
@@ -188,35 +330,19 @@
         "required": true,
         "types": [
           {
-            "type": "generic_list",
+            "type": "definition",
             "named": true
           },
           {
-            "type": "heading1",
+            "type": "detached_modifier",
             "named": true
           },
           {
-            "type": "heading2",
+            "type": "footnote",
             "named": true
           },
           {
-            "type": "heading3",
-            "named": true
-          },
-          {
-            "type": "heading4",
-            "named": true
-          },
-          {
-            "type": "heading5",
-            "named": true
-          },
-          {
-            "type": "heading6",
-            "named": true
-          },
-          {
-            "type": "insertion",
+            "type": "heading",
             "named": true
           },
           {
@@ -224,31 +350,11 @@
             "named": true
           },
           {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
             "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
             "named": true
           }
         ]
@@ -274,35 +380,19 @@
       "required": false,
       "types": [
         {
-          "type": "carryover_tag_set",
+          "type": "definition",
           "named": true
         },
         {
-          "type": "generic_list",
+          "type": "detached_modifier",
           "named": true
         },
         {
-          "type": "heading1",
+          "type": "footnote",
           "named": true
         },
         {
-          "type": "heading2",
-          "named": true
-        },
-        {
-          "type": "heading3",
-          "named": true
-        },
-        {
-          "type": "heading4",
-          "named": true
-        },
-        {
-          "type": "heading5",
-          "named": true
-        },
-        {
-          "type": "heading6",
+          "type": "heading",
           "named": true
         },
         {
@@ -310,19 +400,7 @@
           "named": true
         },
         {
-          "type": "insertion",
-          "named": true
-        },
-        {
           "type": "marker",
-          "named": true
-        },
-        {
-          "type": "multi_definition",
-          "named": true
-        },
-        {
-          "type": "multi_footnote",
           "named": true
         },
         {
@@ -330,19 +408,7 @@
           "named": true
         },
         {
-          "type": "quote",
-          "named": true
-        },
-        {
-          "type": "ranged_tag",
-          "named": true
-        },
-        {
-          "type": "single_definition",
-          "named": true
-        },
-        {
-          "type": "single_footnote",
+          "type": "tag",
           "named": true
         }
       ]
@@ -514,11 +580,15 @@
         "required": false,
         "types": [
           {
-            "type": "carryover_tag_set",
+            "type": "definition",
             "named": true
           },
           {
-            "type": "generic_list",
+            "type": "detached_modifier",
+            "named": true
+          },
+          {
+            "type": "footnote",
             "named": true
           },
           {
@@ -546,35 +616,11 @@
             "named": true
           },
           {
-            "type": "insertion",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
+            "type": "tag",
             "named": true
           }
         ]
@@ -618,11 +664,15 @@
         "required": false,
         "types": [
           {
-            "type": "carryover_tag_set",
+            "type": "definition",
             "named": true
           },
           {
-            "type": "generic_list",
+            "type": "detached_modifier",
+            "named": true
+          },
+          {
+            "type": "footnote",
             "named": true
           },
           {
@@ -646,35 +696,11 @@
             "named": true
           },
           {
-            "type": "insertion",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
+            "type": "tag",
             "named": true
           }
         ]
@@ -714,11 +740,15 @@
         "required": false,
         "types": [
           {
-            "type": "carryover_tag_set",
+            "type": "definition",
             "named": true
           },
           {
-            "type": "generic_list",
+            "type": "detached_modifier",
+            "named": true
+          },
+          {
+            "type": "footnote",
             "named": true
           },
           {
@@ -738,35 +768,11 @@
             "named": true
           },
           {
-            "type": "insertion",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
+            "type": "tag",
             "named": true
           }
         ]
@@ -806,11 +812,15 @@
         "required": false,
         "types": [
           {
-            "type": "carryover_tag_set",
+            "type": "definition",
             "named": true
           },
           {
-            "type": "generic_list",
+            "type": "detached_modifier",
+            "named": true
+          },
+          {
+            "type": "footnote",
             "named": true
           },
           {
@@ -826,35 +836,11 @@
             "named": true
           },
           {
-            "type": "insertion",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
+            "type": "tag",
             "named": true
           }
         ]
@@ -894,11 +880,15 @@
         "required": false,
         "types": [
           {
-            "type": "carryover_tag_set",
+            "type": "definition",
             "named": true
           },
           {
-            "type": "generic_list",
+            "type": "detached_modifier",
+            "named": true
+          },
+          {
+            "type": "footnote",
             "named": true
           },
           {
@@ -910,35 +900,11 @@
             "named": true
           },
           {
-            "type": "insertion",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
+            "type": "tag",
             "named": true
           }
         ]
@@ -978,11 +944,15 @@
         "required": false,
         "types": [
           {
-            "type": "carryover_tag_set",
+            "type": "definition",
             "named": true
           },
           {
-            "type": "generic_list",
+            "type": "detached_modifier",
+            "named": true
+          },
+          {
+            "type": "footnote",
             "named": true
           },
           {
@@ -990,35 +960,11 @@
             "named": true
           },
           {
-            "type": "insertion",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
+            "type": "tag",
             "named": true
           }
         ]
@@ -1311,35 +1257,19 @@
         "required": false,
         "types": [
           {
-            "type": "carryover_tag_set",
+            "type": "definition",
             "named": true
           },
           {
-            "type": "generic_list",
+            "type": "detached_modifier",
             "named": true
           },
           {
-            "type": "heading1",
+            "type": "footnote",
             "named": true
           },
           {
-            "type": "heading2",
-            "named": true
-          },
-          {
-            "type": "heading3",
-            "named": true
-          },
-          {
-            "type": "heading4",
-            "named": true
-          },
-          {
-            "type": "heading5",
-            "named": true
-          },
-          {
-            "type": "heading6",
+            "type": "heading",
             "named": true
           },
           {
@@ -1347,39 +1277,15 @@
             "named": true
           },
           {
-            "type": "insertion",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
-            "named": true
-          },
-          {
             "type": "strong_paragraph_delimiter",
+            "named": true
+          },
+          {
+            "type": "tag",
             "named": true
           }
         ]
@@ -1405,15 +1311,7 @@
         "required": false,
         "types": [
           {
-            "type": "carryover_tag_set",
-            "named": true
-          },
-          {
-            "type": "generic_list",
-            "named": true
-          },
-          {
-            "type": "insertion",
+            "type": "detached_modifier",
             "named": true
           },
           {
@@ -1421,11 +1319,7 @@
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
+            "type": "tag",
             "named": true
           }
         ]
@@ -1471,15 +1365,7 @@
         "required": false,
         "types": [
           {
-            "type": "carryover_tag_set",
-            "named": true
-          },
-          {
-            "type": "generic_list",
-            "named": true
-          },
-          {
-            "type": "insertion",
+            "type": "detached_modifier",
             "named": true
           },
           {
@@ -1487,11 +1373,7 @@
             "named": true
           },
           {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
+            "type": "tag",
             "named": true
           }
         ]
@@ -2472,7 +2354,7 @@
           "named": true
         },
         {
-          "type": "bold",
+          "type": "attached_modifier",
           "named": true
         },
         {
@@ -2480,47 +2362,7 @@
           "named": true
         },
         {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
           "type": "link",
-          "named": true
-        },
-        {
-          "type": "spoiler",
-          "named": true
-        },
-        {
-          "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "superscript",
-          "named": true
-        },
-        {
-          "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        },
-        {
-          "type": "verbatim",
           "named": true
         }
       ]
@@ -4532,6 +4374,10 @@
   },
   {
     "type": "_suffix",
+    "named": false
+  },
+  {
+    "type": "_trailing_modifier",
     "named": false
   },
   {

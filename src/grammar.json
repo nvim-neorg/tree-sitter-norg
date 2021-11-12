@@ -22,23 +22,23 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_heading"
+                  "name": "heading"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_detached_modifier"
+                  "name": "detached_modifier"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_definition"
+                  "name": "definition"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_footnote"
+                  "name": "footnote"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_tag"
+                  "name": "tag"
                 },
                 {
                   "type": "SYMBOL",
@@ -133,6 +133,15 @@
               "value": "_space"
             },
             {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "trailing_modifier"
+              },
+              "named": false,
+              "value": "_trailing_modifier"
+            },
+            {
               "type": "SYMBOL",
               "name": "link"
             },
@@ -150,7 +159,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "_attached_modifier"
+              "name": "attached_modifier"
             }
           ]
         }
@@ -2320,19 +2329,19 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_detached_modifier"
+                    "name": "detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_definition"
+                    "name": "definition"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_footnote"
+                    "name": "footnote"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_tag"
+                    "name": "tag"
                   },
                   {
                     "type": "SYMBOL",
@@ -2433,19 +2442,19 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_detached_modifier"
+                    "name": "detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_definition"
+                    "name": "definition"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_footnote"
+                    "name": "footnote"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_tag"
+                    "name": "tag"
                   },
                   {
                     "type": "SYMBOL",
@@ -2533,19 +2542,19 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_detached_modifier"
+                    "name": "detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_definition"
+                    "name": "definition"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_footnote"
+                    "name": "footnote"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_tag"
+                    "name": "tag"
                   },
                   {
                     "type": "SYMBOL",
@@ -2629,19 +2638,19 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_detached_modifier"
+                    "name": "detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_definition"
+                    "name": "definition"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_footnote"
+                    "name": "footnote"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_tag"
+                    "name": "tag"
                   },
                   {
                     "type": "SYMBOL",
@@ -2721,19 +2730,19 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_detached_modifier"
+                    "name": "detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_definition"
+                    "name": "definition"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_footnote"
+                    "name": "footnote"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_tag"
+                    "name": "tag"
                   },
                   {
                     "type": "SYMBOL",
@@ -2809,19 +2818,19 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_detached_modifier"
+                    "name": "detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_definition"
+                    "name": "definition"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_footnote"
+                    "name": "footnote"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_tag"
+                    "name": "tag"
                   },
                   {
                     "type": "SYMBOL",
@@ -4266,23 +4275,23 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_heading"
+                    "name": "heading"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_detached_modifier"
+                    "name": "detached_modifier"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_definition"
+                    "name": "definition"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_footnote"
+                    "name": "footnote"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_tag"
+                    "name": "tag"
                   },
                   {
                     "type": "SYMBOL",
@@ -4927,11 +4936,11 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "_detached_modifier"
+                      "name": "detached_modifier"
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "_tag"
+                      "name": "tag"
                     }
                   ]
                 }
@@ -5019,11 +5028,11 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "_detached_modifier"
+                      "name": "detached_modifier"
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "_tag"
+                      "name": "tag"
                     }
                   ]
                 }
@@ -5237,19 +5246,19 @@
                     "members": [
                       {
                         "type": "SYMBOL",
-                        "name": "_detached_modifier"
+                        "name": "detached_modifier"
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "_definition"
+                        "name": "definition"
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "_footnote"
+                        "name": "footnote"
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "_heading"
+                        "name": "heading"
                       },
                       {
                         "type": "SYMBOL",
@@ -5433,7 +5442,7 @@
         }
       ]
     },
-    "_tag": {
+    "tag": {
       "type": "CHOICE",
       "members": [
         {
@@ -5446,7 +5455,7 @@
         }
       ]
     },
-    "_heading": {
+    "heading": {
       "type": "CHOICE",
       "members": [
         {
@@ -5475,7 +5484,7 @@
         }
       ]
     },
-    "_definition": {
+    "definition": {
       "type": "CHOICE",
       "members": [
         {
@@ -5488,7 +5497,7 @@
         }
       ]
     },
-    "_footnote": {
+    "footnote": {
       "type": "CHOICE",
       "members": [
         {
@@ -5501,7 +5510,7 @@
         }
       ]
     },
-    "_detached_modifier": {
+    "detached_modifier": {
       "type": "CHOICE",
       "members": [
         {
@@ -5518,7 +5527,7 @@
         }
       ]
     },
-    "_attached_modifier_segment": {
+    "attached_modifier_segment": {
       "type": "CHOICE",
       "members": [
         {
@@ -5559,7 +5568,7 @@
         }
       ]
     },
-    "_attached_modifier": {
+    "attached_modifier": {
       "type": "CHOICE",
       "members": [
         {
@@ -5645,6 +5654,10 @@
     {
       "type": "SYMBOL",
       "name": "escape_sequence_prefix"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "trailing_modifier"
     },
     {
       "type": "SYMBOL",
@@ -6068,6 +6081,14 @@
     }
   ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [
+    "attached_modifier",
+    "attached_modifier_segment",
+    "heading",
+    "detached_modifier",
+    "footnote",
+    "definition",
+    "tag"
+  ]
 }
 

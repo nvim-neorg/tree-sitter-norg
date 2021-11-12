@@ -24,6 +24,8 @@ enum TokenType : char
 
     ESCAPE_SEQUENCE,
 
+    TRAILING_MODIFIER,
+
     HEADING1,
     HEADING2,
     HEADING3,
@@ -200,6 +202,28 @@ class Scanner
         // TODO: Remove the insane amount of !m_TagLevel checks and put
         // it all in one if check
 
+        if (!m_TagLevel && lexer->lookahead == '~' &&
+            (m_LastToken == WORD || m_LastToken == CAPITALIZED_WORD))
+        {
+            advance(lexer);
+            lexer->mark_end(lexer);
+
+            if (lexer->lookahead == '\n')
+            {
+                advance(lexer);
+
+                if (lexer->eof(lexer))
+                    return false;
+
+                lexer->result_symbol = m_LastToken = TRAILING_MODIFIER;
+                return true;
+            }
+
+            return parse_text(lexer);
+        }
+        else if (m_LastToken == TRAILING_MODIFIER)
+            return parse_text(lexer);
+
         // Check for an escape seqence (e.g. "\*")
         if (!m_TagLevel && lexer->lookahead == '\\')
         {
@@ -284,7 +308,8 @@ class Scanner
             else
                 return false;
         }
-        else if ((lexer->lookahead == '[' && m_LastToken != LINK_END) || (m_LastToken >= ANCHOR_DECLARATION_BEGIN && m_LastToken < ANCHOR_DECLARATION_END))
+        else if ((lexer->lookahead == '[' && m_LastToken != LINK_END) ||
+                 (m_LastToken >= ANCHOR_DECLARATION_BEGIN && m_LastToken < ANCHOR_DECLARATION_END))
             return parse_anchor(lexer);
         // Otherwise just check whether or not we're dealing with a newline and
         // return STANDALONE_BREAK if we are
@@ -1001,18 +1026,8 @@ class Scanner
 
         do
         {
-            if (lexer->lookahead == '~')
-            {
-                advance(lexer);
-
-                if (lexer->lookahead == '\n')
-                {
-                    advance(lexer);
-
-                    if (lexer->eof(lexer) || !lexer->lookahead)
-                        return false;
-                }
-            }
+            if (lexer->lookahead == '~' && !std::iswspace(m_Current))
+                break;
             else if (!std::isalnum(m_Current) &&
                      find_attached(lexer->lookahead) != s_AttachedModifiers.end())
                 break;
