@@ -461,3 +461,48 @@ This is not \=variable reference\=
         )
     )
 )
+
+=============
+Link Modifier
+=============
+Ful:*ly contained bo*:ld.
+Partially :*contained bo*:ld.
+Another part:*ial bold*:.
+---
+(document
+    (paragraph
+        (paragraph_segment (bold))
+        (paragraph_segment (bold))
+        (paragraph_segment (bold))
+    )
+)
+
+=====================================
+Should not work without Link Modifier
+=====================================
+Ful*ly contained bo*ld.
+Partially *contained bo*ld.
+Another part*ial bold*.
+---
+(document
+    (paragraph
+        (paragraph_segment)
+        (paragraph_segment)
+        (paragraph_segment)
+    )
+)
+
+==========================================
+Should also not work without Link Modifier
+==========================================
+Ful/*ly contained bo*/ld.
+Partially /*contained bo*/ld.
+Another part/*ial bold*/.
+---
+(document
+    (paragraph
+        (paragraph_segment)
+        (paragraph_segment)
+        (paragraph_segment)
+    )
+)
