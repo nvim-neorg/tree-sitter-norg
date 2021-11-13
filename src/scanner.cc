@@ -199,6 +199,27 @@ class Scanner
             return false;
         }
 
+        // Otherwise just check whether or not we're dealing with a newline and
+        // return STANDALONE_BREAK if we are
+        if (lexer->lookahead == '\n')
+        {
+            advance(lexer);
+
+            lexer->result_symbol = m_LastToken = LINE_BREAK;
+
+            if (lexer->eof(lexer) || !lexer->lookahead)
+                return false;
+
+            if (lexer->lookahead == '\n')
+            {
+                advance(lexer);
+
+                lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
+            }
+
+            return true;
+        }
+
         // If we're at the beginning of a line check for all detached modifiers
         if (lexer->get_column(lexer) == 0)
         {
@@ -474,26 +495,6 @@ class Scanner
             }
             else
                 return false;
-        }
-        // Otherwise just check whether or not we're dealing with a newline and
-        // return STANDALONE_BREAK if we are
-        else if (lexer->lookahead == '\n')
-        {
-            advance(lexer);
-
-            lexer->result_symbol = m_LastToken = LINE_BREAK;
-
-            if (lexer->eof(lexer) || !lexer->lookahead)
-                return false;
-
-            if (lexer->lookahead == '\n')
-            {
-                advance(lexer);
-
-                lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
-            }
-
-            return true;
         }
         else if (lexer->lookahead == '{' || (m_LastToken >= LINK_BEGIN && m_LastToken < LINK_END))
             return parse_link(lexer);
