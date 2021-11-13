@@ -201,7 +201,12 @@ class Scanner
 
         // Otherwise just check whether or not we're dealing with a newline and
         // return STANDALONE_BREAK if we are
-        if (lexer->lookahead == '\n')
+        if (m_LastToken == TRAILING_MODIFIER)
+        {
+            advance(lexer);
+            return parse_text(lexer);
+        }
+        else if (lexer->lookahead == '\n')
         {
             advance(lexer);
 
@@ -416,8 +421,6 @@ class Scanner
 
             return parse_text(lexer);
         }
-        else if (m_LastToken == TRAILING_MODIFIER)
-            return parse_text(lexer);
         else if (lexer->lookahead == '\\')  // Check for an escape seqence (e.g. "\*")
         {
             advance(lexer);
