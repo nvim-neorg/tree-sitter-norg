@@ -492,17 +492,17 @@ Another part*ial bold*.
     )
 )
 
-==========================================
-Should also not work without Link Modifier
-==========================================
+===========================================
+Should partially work without Link Modifier
+===========================================
 Ful/*ly contained bo*/ld.
 Partially /*contained bo*/ld.
 Another part/*ial bold*/.
 ---
 (document
     (paragraph
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
+        (paragraph_segment (bold))
+        (paragraph_segment (bold))
+        (paragraph_segment (bold))
     )
 )
