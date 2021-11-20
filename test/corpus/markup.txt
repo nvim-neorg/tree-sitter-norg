@@ -1,3 +1,16 @@
+=================
+Standalone markup
+=================
+*bold*
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (bold)
+        )
+    )
+)
+
 ====
 Bold
 ====
