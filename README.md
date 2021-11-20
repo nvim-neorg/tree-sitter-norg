@@ -1,8 +1,8 @@
 # NFF TreeSitter Parser 
 
-<img src="https://raw.githubusercontent.com/vhyrro/neorg/main/res/neorg.svg" width="70" height="70">
+<img src="https://raw.githubusercontent.com/nvim-neorg/neorg/main/res/neorg.svg" width="70" height="70">
 
-A TreeSitter grammar for [Neorg](https://github.com/vhyrro/neorg).
+A TreeSitter grammar for [Neorg](https://github.com/nvim-neorg/neorg).
 
 ## Available Commands
 | Command           | Result																				|
