@@ -2,7 +2,7 @@
   "name": "norg",
   "rules": {
     "document": {
-      "type": "REPEAT",
+      "type": "REPEAT1",
       "content": {
         "type": "CHOICE",
         "members": [

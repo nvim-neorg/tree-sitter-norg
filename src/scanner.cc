@@ -403,7 +403,7 @@ class Scanner
             }
         }
 
-        if (lexer->lookahead == '~' && !std::iswspace(m_Current))
+        if (lexer->lookahead == '~' && (m_LastToken == WORD || m_LastToken == CAPITALIZED_WORD))
         {
             advance(lexer);
             lexer->mark_end(lexer);
@@ -519,8 +519,6 @@ class Scanner
 
     size_t& get_tag_level() noexcept { return m_TagLevel; }
     TokenType& get_last_token() noexcept { return m_LastToken; }
-    int32_t& get_current() noexcept { return m_Current; }
-
     std::vector<std::pair<char, TokenType>>& get_attached_modifier_stack() noexcept
     {
         return m_AttachedModifierStack;
@@ -708,10 +706,10 @@ class Scanner
 
                 auto attached = find_attached(lexer->lookahead);
 
-                if ((attached_modifier->second != VERBATIM &&
+                if (attached_modifier->second != VERBATIM &&
                     attached_modifier->second != INLINE_MATH &&
                     attached_modifier->second != VARIABLE && !std::isalnum(m_Current) &&
-                    attached != s_AttachedModifiers.end()))
+                    attached != s_AttachedModifiers.end())
                 {
                     lexer->mark_end(lexer);
                     lexer->result_symbol = m_LastToken =
@@ -735,18 +733,22 @@ class Scanner
                 // If we've encounted the end of our file then bail
                 if (!lexer->lookahead)
                     return NONE;
-                else if (lexer->lookahead == '~')
-                {
-                    lexer->mark_end(lexer);
-                    lexer->result_symbol = m_LastToken = attached_modifier->second;
-                    return m_LastToken;
-                }
                 else if (lexer->lookahead == '\n')
                 {
-                    lexer->mark_end(lexer);
-                    lexer->result_symbol = m_LastToken = attached_modifier->second;
-                    m_AttachedModifierStack.clear();
-                    return m_LastToken;
+                    advance(lexer);
+
+                    // If this check succeeds then we've encountered a \n\n
+                    // sequence and as a consequence should terminate the
+                    // attached modifier
+                    if (lexer->lookahead == '\n')
+                    {
+                        m_AttachedModifierStack.clear();
+
+                        lexer->result_symbol = m_LastToken =
+                            (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
+                        lexer->mark_end(lexer);
+                        return attached_modifier->second;
+                    }
                 }
 
                 advance(lexer);
@@ -760,7 +762,7 @@ class Scanner
 
                 // If the next char is whitespace then we've successfully
                 // matched our modifier!
-                if (!lexer->lookahead || std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead))
+                if (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead))
                 {
                     m_AttachedModifierStack.pop_back();
 
@@ -1079,23 +1081,24 @@ extern "C"
     {
         auto* scanner = static_cast<Scanner*>(payload);
 
+        auto& tag_level = scanner->get_tag_level();
+        auto& last_token = scanner->get_last_token();
         auto& attached_modifier_stack = scanner->get_attached_modifier_stack();
 
         if (2 + (attached_modifier_stack.size() * 2) >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
-        buffer[0] = scanner->get_current();
-        buffer[1] = scanner->get_last_token();
-        buffer[2] = scanner->get_tag_level();
+        buffer[0] = last_token;
+        buffer[1] = tag_level;
 
         for (size_t i = 0; i < attached_modifier_stack.size(); ++i)
         {
             const auto& pair = attached_modifier_stack[i];
-            buffer[(i * 2) + 3] = pair.first;
-            buffer[(i * 2) + 1 + 3] = pair.second;
+            buffer[(i * 2) + 2] = pair.first;
+            buffer[(i * 2) + 1 + 2] = pair.second;
         }
 
-        return 3 + (attached_modifier_stack.size() * 2);
+        return 2 + (attached_modifier_stack.size() * 2);
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload,
@@ -1104,7 +1107,6 @@ extern "C"
     {
         auto* scanner = static_cast<Scanner*>(payload);
 
-        auto& current = scanner->get_current();
         auto& tag_level = scanner->get_tag_level();
         auto& last_token = scanner->get_last_token();
         auto& attached_modifier_stack = scanner->get_attached_modifier_stack();
@@ -1113,12 +1115,11 @@ extern "C"
 
         if (length > 0)
         {
-            current = (int32_t)buffer[0];
-            last_token = (TokenType)buffer[1];
-            tag_level = (size_t)buffer[2];
+            last_token = (TokenType)buffer[0];
+            tag_level = (size_t)buffer[1];
 
-            for (size_t i = 0; i < length - 3; i += 2)
-                attached_modifier_stack.emplace_back(buffer[i + 3], (TokenType)buffer[i + 1 + 3]);
+            for (size_t i = 0; i < length - 2; i += 2)
+                attached_modifier_stack.emplace_back(buffer[i + 2], (TokenType)buffer[i + 1 + 2]);
         }
         else
             tag_level = 0;

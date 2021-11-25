@@ -339,11 +339,9 @@ Disallow Nesting Sub- into Superscript
 ======================================
 ^Super- and ,subscript,^
 ---
-(document
-    (ERROR
-        (subscript_segment)
-        (UNEXPECTED '^')
-    )
+(ERROR
+    (subscript_segment)
+    (UNEXPECTED '^')
 )
 
 ======================================

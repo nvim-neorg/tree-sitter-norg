@@ -158,7 +158,7 @@ module.exports = grammar({
     ],
 
     rules: {
-        document: $ => repeat(
+        document: $ => repeat1(
             choice(
                 prec(1,
                     choice(
