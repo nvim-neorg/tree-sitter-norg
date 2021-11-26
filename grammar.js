@@ -407,14 +407,14 @@ module.exports = grammar({
                 $._conflict_close,
                 field("content", $.paragraph_segment),
             ))),
-            alias($.superscript_close, "_close"),
+            alias($.subscript_close, "_close"),
         ),
 
         inline_comment: $ =>
         seq(
-            alias($.verbatim_open, "_open"),
+            alias($.inline_comment_open, "_open"),
             repeat1(prec(1, field("content", $.paragraph_segment))),
-            alias($.verbatim_close, "_close"),
+            alias($.inline_comment_close, "_close"),
         ),
 
         inline_math: $ =>
@@ -2425,7 +2425,7 @@ module.exports = grammar({
         choice(
             $.bold,
             $.italic,
-            /* $.strikethrough,
+            $.strikethrough,
             $.underline,
             $.verbatim,
             $.spoiler,
@@ -2433,7 +2433,7 @@ module.exports = grammar({
             $.subscript,
             $.inline_comment,
             $.inline_math,
-            $.variable, */
+            $.variable,
         ),
     }
 });

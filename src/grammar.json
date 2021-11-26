@@ -853,7 +853,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "superscript_close"
+            "name": "subscript_close"
           },
           "named": false,
           "value": "_close"
@@ -867,7 +867,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "verbatim_open"
+            "name": "inline_comment_open"
           },
           "named": false,
           "value": "_open"
@@ -891,7 +891,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "verbatim_close"
+            "name": "inline_comment_close"
           },
           "named": false,
           "value": "_close"
@@ -6040,6 +6040,42 @@
         {
           "type": "SYMBOL",
           "name": "italic"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "strikethrough"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "underline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "verbatim"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "spoiler"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "superscript"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "subscript"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inline_comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inline_math"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variable"
         }
       ]
     }
