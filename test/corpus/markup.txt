@@ -6,7 +6,9 @@ Standalone markup
 (document
     (paragraph
         (paragraph_segment
-            (bold)
+            (bold
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -19,7 +21,9 @@ Here is a *bold* word.
 (document
     (paragraph
         (paragraph_segment
-            (bold)
+            (bold
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -32,7 +36,9 @@ Here is an /italic/ word.
 (document
     (paragraph
         (paragraph_segment
-            (italic)
+            (italic
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -45,7 +51,9 @@ Here is a -struck through- word.
 (document
     (paragraph
         (paragraph_segment
-            (strikethrough)
+            (strikethrough
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -58,7 +66,9 @@ Here is an _underlined_ word.
 (document
     (paragraph
         (paragraph_segment
-            (underline)
+            (underline
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -71,7 +81,9 @@ Here is a |spoiler| word.
 (document
     (paragraph
         (paragraph_segment
-            (spoiler)
+            (spoiler
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -84,7 +96,9 @@ Here is a `verbatim` word.
 (document
     (paragraph
         (paragraph_segment
-            (verbatim)
+            (verbatim
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -97,7 +111,9 @@ Here is a ^superscript^ word.
 (document
     (paragraph
         (paragraph_segment
-            (superscript)
+            (superscript
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -110,7 +126,9 @@ Here is a ,subscript, word.
 (document
     (paragraph
         (paragraph_segment
-            (subscript)
+            (subscript
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -123,7 +141,9 @@ This sentence contains an +inlined comment+.
 (document
     (paragraph
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -136,7 +156,9 @@ This sentence contains some $inline math$.
 (document
     (paragraph
         (paragraph_segment
-            (inline_math)
+            (inline_math
+                (paragraph_segment)
+            )
         )
     )
 )
@@ -149,7 +171,9 @@ This sentence contains a =variable= reference.
 (document
     (paragraph
         (paragraph_segment
-            (variable)
+            (variable
+                (paragraph_segment)
+            )
         )
     )
 )

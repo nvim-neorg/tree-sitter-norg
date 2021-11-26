@@ -172,7 +172,7 @@ This is no longer part of the quote.
     (quote
         (quote1
             (quote1_prefix)
-            content: (paragraph_segment) (MISSING _line_break)
+            content: (paragraph_segment)
         )
     )
     (quote

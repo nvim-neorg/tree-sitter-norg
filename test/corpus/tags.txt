@@ -121,7 +121,6 @@ Lol
             (quote1
                 (quote1_prefix)
                 (paragraph_segment)
-                (MISSING _line_break)
             )
         )
     )
