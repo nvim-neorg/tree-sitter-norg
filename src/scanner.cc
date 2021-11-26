@@ -994,7 +994,7 @@ extern "C"
         auto& tag_level = scanner->get_tag_level();
         auto& last_token = scanner->get_last_token();
 
-        if (length == 3)
+        if (length == 2)
         {
             last_token = (TokenType)buffer[0];
             tag_level = (size_t)buffer[1];
