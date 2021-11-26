@@ -1289,7 +1289,7 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
-                prec(1, $._line_break),
+                optional(prec(1, $._line_break)),
 
                 repeat(
                     choice(
@@ -1313,7 +1313,7 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
-                prec(1, $._line_break),
+                optional(prec(1, $._line_break)),
 
                 repeat(
                     choice(
@@ -1336,7 +1336,7 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
-                prec(1, $._line_break),
+                optional(prec(1, $._line_break)),
 
                 repeat(
                     choice(
@@ -1358,7 +1358,7 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
-                prec(1, $._line_break),
+                optional(prec(1, $._line_break)),
 
                 repeat(
                     choice(
@@ -1379,7 +1379,7 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
-                prec(1, $._line_break),
+                optional(prec(1, $._line_break)),
 
                 repeat(
                     $.quote6,
@@ -1397,7 +1397,7 @@ module.exports = grammar({
                     $.paragraph_segment,
                 ),
 
-                prec(1, $._line_break),
+                optional(prec(1, $._line_break)),
 
             )
         ),
