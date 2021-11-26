@@ -164,6 +164,10 @@
             {
               "type": "SYMBOL",
               "name": "_conflict_open"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_conflict_close"
             }
           ]
         }
@@ -261,6 +265,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "_conflict_open"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_conflict_close"
                 },
                 {
                   "type": "FIELD",
@@ -709,6 +717,123 @@
             },
             "named": false,
             "value": "_ignore"
+          }
+        ]
+      }
+    },
+    "_conflict_close": {
+      "type": "PREC_DYNAMIC",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "bold_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "italic_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "strikethrough_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "underline_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "spoiler_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "verbatim_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "superscript_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "subscript_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "inline_comment_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "inline_math_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "variable_close"
+                },
+                "named": false,
+                "value": "_ignore"
+              }
+            ]
           }
         ]
       }
@@ -5591,6 +5716,57 @@
     [
       "variable",
       "_conflict_open"
+    ],
+    [
+      "paragraph",
+      "_conflict_close"
+    ],
+    [
+      "paragraph_segment"
+    ],
+    [
+      "bold",
+      "_conflict_close"
+    ],
+    [
+      "italic",
+      "_conflict_close"
+    ],
+    [
+      "strikethrough",
+      "_conflict_close"
+    ],
+    [
+      "underline",
+      "_conflict_close"
+    ],
+    [
+      "spoiler",
+      "_conflict_close"
+    ],
+    [
+      "verbatim",
+      "_conflict_close"
+    ],
+    [
+      "superscript",
+      "_conflict_close"
+    ],
+    [
+      "subscript",
+      "_conflict_close"
+    ],
+    [
+      "inline_comment",
+      "_conflict_close"
+    ],
+    [
+      "inline_math",
+      "_conflict_close"
+    ],
+    [
+      "variable",
+      "_conflict_close"
     ]
   ],
   "precedences": [],

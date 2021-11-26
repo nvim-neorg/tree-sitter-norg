@@ -171,6 +171,10 @@
         {
           "type": "link",
           "named": true
+        },
+        {
+          "type": "paragraph_segment",
+          "named": true
         }
       ]
     }
@@ -248,6 +252,10 @@
         },
         {
           "type": "italic",
+          "named": true
+        },
+        {
+          "type": "paragraph_segment",
           "named": true
         },
         {
@@ -2300,6 +2308,10 @@
         },
         {
           "type": "link",
+          "named": true
+        },
+        {
+          "type": "paragraph_segment",
           "named": true
         }
       ]

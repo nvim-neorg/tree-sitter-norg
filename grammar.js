@@ -1,8 +1,6 @@
 /*
 * Known bugs:
-* Fairly incomplete errors related to incomplete modifiers (ones that do not form a pair)
-* Idk whether the above issue is even fixable with TreeSitter's limitations
-* Placing a detached modifier below a paragraph messes it up
+* ERROR Nodes when the closing modifier doesn't have an opening modifier to complement it.
 */
 
 module.exports = grammar({
@@ -30,6 +28,20 @@ module.exports = grammar({
         [$.inline_comment, $._conflict_open],
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
+
+        [$.paragraph, $._conflict_close],
+        [$.paragraph_segment],
+        [$.bold, $._conflict_close],
+        [$.italic, $._conflict_close],
+        [$.strikethrough, $._conflict_close],
+        [$.underline, $._conflict_close],
+        [$.spoiler, $._conflict_close],
+        [$.verbatim, $._conflict_close],
+        [$.superscript, $._conflict_close],
+        [$.subscript, $._conflict_close],
+        [$.inline_comment, $._conflict_close],
+        [$.inline_math, $._conflict_close],
+        [$.variable, $._conflict_close],
     ],
 
     externals: $ => [
@@ -231,6 +243,7 @@ module.exports = grammar({
                     $.escape_sequence,
                     $.attached_modifier,
                     $._conflict_open,
+                    $._conflict_close,
                 ),
             )
         ),
@@ -242,7 +255,7 @@ module.exports = grammar({
                     alias($.paragraph_segment, "_segment"),
                     $._line_break,
                 )
-            )
+            ),
         ),
 
         // ---- ATTACHED MODIFIERS ----
@@ -262,6 +275,7 @@ module.exports = grammar({
                 $.variable,
                 $._line_break,
                 $._conflict_open,
+                $._conflict_close,
                 field("content", $.paragraph_segment),
             ))),
             alias($.bold_close, "_close"),
@@ -352,6 +366,26 @@ module.exports = grammar({
                 alias($.inline_math_open, "_ignore"),
                 alias($.variable_open, "_ignore"),
             )
+        ),
+
+        _conflict_close: $ =>
+        prec.dynamic(-1,
+            seq(
+                $.paragraph_segment,
+                choice(
+                    alias($.bold_close, "_ignore"),
+                    alias($.italic_close, "_ignore"),
+                    alias($.strikethrough_close, "_ignore"),
+                    alias($.underline_close, "_ignore"),
+                    alias($.spoiler_close, "_ignore"),
+                    alias($.verbatim_close, "_ignore"),
+                    alias($.superscript_close, "_ignore"),
+                    alias($.subscript_close, "_ignore"),
+                    alias($.inline_comment_close, "_ignore"),
+                    alias($.inline_math_close, "_ignore"),
+                    alias($.variable_close, "_ignore"),
+                ),
+            ),
         ),
 
         // Well, any character
