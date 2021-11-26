@@ -5,10 +5,9 @@
 #include <locale>
 #include <regex>
 #include <string>
+#include <unordered_map>
 
 #include "tree_sitter/parser.h"
-
-#define NESTED_MASK 11
 
 enum TokenType : char
 {
@@ -124,31 +123,38 @@ enum TokenType : char
     MULTI_FOOTNOTE,
     MULTI_FOOTNOTE_SUFFIX,
 
-    BOLD,
-    ITALIC,
-    STRIKETHROUGH,
-    UNDERLINE,
-    SPOILER,
-    VERBATIM,
-    SUPERSCRIPT,
-    SUBSCRIPT,
-    INLINE_COMMENT,
-    INLINE_MATH,
-    VARIABLE,
+    BOLD_OPEN,
+    BOLD_CLOSE,
 
-    BOLD_WITH_NEST,
-    ITALIC_WITH_NEST,
-    STRIKETHROUGH_WITH_NEST,
-    UNDERLINE_WITH_NEST,
-    SPOILER_WITH_NEST,
-    VERBATIM_WITH_NEST,  // should never occur!
-    SUPERSCRIPT_WITH_NEST,
-    SUBSCRIPT_WITH_NEST,
-    INLINE_COMMENT_WITH_NEST,
-    INLINE_MATH_WITH_NEST,  // should never occur!
-    VARIABLE_WITH_NEST,     // should never occur!
+    ITALIC_OPEN,
+    ITALIC_CLOSE,
 
-    MARKUP_END,
+    STRIKETHROUGH_OPEN,
+    STRIKETHROUGH_CLOSE,
+
+    UNDERLINE_OPEN,
+    UNDERLINE_CLOSE,
+
+    SPOILER_OPEN,
+    SPOILER_CLOSE,
+
+    VERBATIM_OPEN,
+    VERBATIM_CLOSE,
+
+    SUPERSCRIPT_OPEN,
+    SUPERSCRIPT_CLOSE,
+
+    SUBSCRIPT_OPEN,
+    SUBSCRIPT_CLOSE,
+
+    INLINE_COMMENT_OPEN,
+    INLINE_COMMENT_CLOSE,
+
+    INLINE_MATH_OPEN,
+    INLINE_MATH_CLOSE,
+
+    VARIABLE_OPEN,
+    VARIABLE_CLOSE,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -433,13 +439,6 @@ class Scanner
             else
                 return false;
         }
-        else if (!m_AttachedModifierStack.empty() &&
-                 m_AttachedModifierStack.back().second == MARKUP_END)
-        {
-            m_AttachedModifierStack.pop_back();
-            lexer->result_symbol = m_LastToken = MARKUP_END;
-            return m_LastToken;
-        }
         // If we are not in a tag and we have a square bracket opening then try
         // matching either a todo item or beginning of a list
         else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 &&
@@ -510,7 +509,7 @@ class Scanner
 
         // If we are not in a ranged tag then we should also check for potential
         // attached modifiers, like *this*.
-        if ((check_attached(lexer, false) != NONE))
+        if (check_attached(lexer) != NONE)
             return true;
 
         // Match paragraphs
@@ -519,10 +518,6 @@ class Scanner
 
     size_t& get_tag_level() noexcept { return m_TagLevel; }
     TokenType& get_last_token() noexcept { return m_LastToken; }
-    std::vector<std::pair<char, TokenType>>& get_attached_modifier_stack() noexcept
-    {
-        return m_AttachedModifierStack;
-    }
 
    private:
     // Skips the next character without including it in the final result
@@ -573,10 +568,10 @@ class Scanner
         size_t i = m_ParsedChars = 0;
 
         // Loop as long as the next character is a valid detached modifier
-        for (auto detached_modifier = std::find(s_DetachedModifiers.begin(),
-                                                s_DetachedModifiers.end(), lexer->lookahead);
-             detached_modifier != s_DetachedModifiers.end();
-             detached_modifier = std::find(s_DetachedModifiers.begin(), s_DetachedModifiers.end(),
+        for (auto detached_modifier = std::find(m_DetachedModifiers.begin(),
+                                                m_DetachedModifiers.end(), lexer->lookahead);
+             detached_modifier != m_DetachedModifiers.end();
+             detached_modifier = std::find(m_DetachedModifiers.begin(), m_DetachedModifiers.end(),
                                            lexer->lookahead),
                   i++, m_ParsedChars++)
         {
@@ -629,16 +624,17 @@ class Scanner
         // If we've only parsed one character and instantly failed then we might
         // be dealing with an attached modifier!
         if (m_ParsedChars == 1)
-            return check_attached(lexer, true);
-        else
-            return NONE;
-    }
+        {
+            auto found_attached_modifier = m_AttachedModifiers.find(m_Current);
 
-    auto find_attached(int32_t c)
-    {
-        return std::find_if(s_AttachedModifiers.begin(), s_AttachedModifiers.end(),
-                            [&](const std::pair<int32_t, TokenType>& pair)
-                            { return pair.first == c; });
+            if (found_attached_modifier != m_AttachedModifiers.end())
+            {
+                lexer->result_symbol = m_LastToken = found_attached_modifier->second;
+                return m_LastToken;
+            }
+        }
+
+        return NONE;
     }
 
     /*
@@ -647,130 +643,31 @@ class Scanner
      * @param behind - if true the parser will use m_Current instead of
      * lexer->lookahead as its main lookahead source
      */
-    TokenType check_attached(TSLexer* lexer, bool behind)
+    TokenType check_attached(TSLexer* lexer)
     {
-        // Return an iterator to an attached modifier if one can be found
-        const auto attached_modifier = m_AttachedModifierStack.empty()
-                                           ? find_attached(behind ? m_Current : lexer->lookahead)
-                                           : &m_AttachedModifierStack.back();
+        auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
 
-        if (!m_AttachedModifierStack.empty())
+        if (found_attached_modifier == m_AttachedModifiers.end())
+            return NONE;
+
+        // First check for the existence of an opening attached modifier
+        if (std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current)
         {
             advance(lexer);
 
-            if (find_attached(m_Current) != s_AttachedModifiers.end() &&
-                (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead)))
+            if (!std::iswspace(lexer->lookahead))
             {
-                m_AttachedModifierStack.pop_back();
-
-                lexer->result_symbol = m_LastToken = attached_modifier->second;
+                lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
-
-            goto parse_until_end;
         }
+        else
+            advance(lexer);
 
-        // Is our iterator valid? If it is then that means we've found an
-        // opening attached modifier
-        if (attached_modifier != s_AttachedModifiers.end())
+        if (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) || !lexer->lookahead)
         {
-            if (!behind)
-                advance(lexer);
-
-            // If the next char is a whitespace character then it doesn't count
-            if (std::iswspace(lexer->lookahead))
-                return NONE;
-
-            // If we have another attached modifier of the same type right after
-            // then do not count it e.g. if our input is "**" it'll get
-            // discarded and treated as a PARAGRAPH_SEGMENT instead
-            if (lexer->lookahead == attached_modifier->first)
-            {
-                advance(lexer);
-                return NONE;
-            }
-
-            m_AttachedModifierStack.push_back(*attached_modifier);
-
-        parse_until_end:
-            lexer->mark_end(lexer);
-
-            // While our lookahead is not equal to a potential closing modifier
-            while (lexer->lookahead)
-            {
-                if (m_Current == '\\')
-                    advance(lexer);
-
-                if (lexer->lookahead == attached_modifier->first)
-                    break;
-
-                auto attached = find_attached(lexer->lookahead);
-
-                if (attached_modifier->second != VERBATIM &&
-                    attached_modifier->second != INLINE_MATH &&
-                    attached_modifier->second != VARIABLE && !std::isalnum(m_Current) &&
-                    attached != s_AttachedModifiers.end())
-                {
-                    lexer->mark_end(lexer);
-                    lexer->result_symbol = m_LastToken =
-                        static_cast<TokenType>(attached_modifier->second + NESTED_MASK);
-
-                    for (const auto& item : m_AttachedModifierStack)
-                    {
-                        if (item.first == lexer->lookahead)
-                        {
-                            lexer->result_symbol = m_LastToken = NONE;
-                            return (TokenType)-1;
-                        }
-                    }
-
-                    m_AttachedModifierStack.push_back({' ', MARKUP_END});
-                    m_AttachedModifierStack.push_back(*attached);
-
-                    return m_LastToken;
-                }
-
-                // If we've encounted the end of our file then bail
-                if (!lexer->lookahead)
-                    return NONE;
-                else if (lexer->lookahead == '\n')
-                {
-                    advance(lexer);
-
-                    // If this check succeeds then we've encountered a \n\n
-                    // sequence and as a consequence should terminate the
-                    // attached modifier
-                    if (lexer->lookahead == '\n')
-                    {
-                        m_AttachedModifierStack.clear();
-
-                        lexer->result_symbol = m_LastToken =
-                            (bool)std::iswupper(lexer->lookahead) ? CAPITALIZED_WORD : WORD;
-                        lexer->mark_end(lexer);
-                        return attached_modifier->second;
-                    }
-                }
-
-                advance(lexer);
-            }
-
-            // If the previous char before the closing modifier is not
-            // whitespace then
-            if (!m_Current || !std::iswspace(m_Current))
-            {
-                advance(lexer);
-
-                // If the next char is whitespace then we've successfully
-                // matched our modifier!
-                if (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead))
-                {
-                    m_AttachedModifierStack.pop_back();
-
-                    lexer->mark_end(lexer);
-                    lexer->result_symbol = m_LastToken = attached_modifier->second;
-                    return attached_modifier->second;
-                }
-            }
+            lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + 1);
+            return m_LastToken;
         }
 
         return NONE;
@@ -1009,10 +906,7 @@ class Scanner
 
         do
         {
-            if (lexer->lookahead == '~' && !std::iswspace(m_Current))
-                break;
-            else if (!std::isalnum(m_Current) &&
-                     find_attached(lexer->lookahead) != s_AttachedModifiers.end())
+            if ((lexer->lookahead == '~' && !std::iswspace(m_Current)) || (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()))
                 break;
             else
                 advance(lexer);
@@ -1041,24 +935,22 @@ class Scanner
     // Used for lookback
     size_t m_ParsedChars = 0;
 
-    // Used for things like *bold*
-    std::vector<std::pair<char, TokenType>> m_AttachedModifierStack;
-
    private:
-    const std::array<int32_t, 9> s_DetachedModifiers = {'*', '-', '>', '|', '=',
+    const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '|', '=',
                                                         '~', '$', '_', '^'};
-    const std::array<std::pair<char, TokenType>, NESTED_MASK> s_AttachedModifiers = {
-        std::pair<int32_t, TokenType> {'*', BOLD},
-        {'-', STRIKETHROUGH},
-        {'_', UNDERLINE},
-        {'/', ITALIC},
-        {'|', SPOILER},
-        {'^', SUPERSCRIPT},
-        {',', SUBSCRIPT},
-        {'`', VERBATIM},
-        {'+', INLINE_COMMENT},
-        {'$', INLINE_MATH},
-        {'=', VARIABLE}};
+    const std::unordered_map<char, TokenType> m_AttachedModifiers = {
+        {'*', BOLD_OPEN},
+        {'-', STRIKETHROUGH_OPEN},
+        {'_', UNDERLINE_OPEN},
+        {'/', ITALIC_OPEN},
+        {'|', SPOILER_OPEN},
+        {'^', SUPERSCRIPT_OPEN},
+        {',', SUBSCRIPT_OPEN},
+        {'`', VERBATIM_OPEN},
+        {'+', INLINE_COMMENT_OPEN},
+        {'$', INLINE_MATH_OPEN},
+        {'=', VARIABLE_OPEN}
+    };
 };
 
 extern "C"
@@ -1079,47 +971,33 @@ extern "C"
 
     unsigned tree_sitter_norg_external_scanner_serialize(void* payload, char* buffer)
     {
-        auto* scanner = static_cast<Scanner*>(payload);
+        Scanner* scanner = static_cast<Scanner*>(payload);
 
-        auto& tag_level = scanner->get_tag_level();
-        auto& last_token = scanner->get_last_token();
-        auto& attached_modifier_stack = scanner->get_attached_modifier_stack();
+        const auto& tag_level = scanner->get_tag_level();
+        const auto& last_token = scanner->get_last_token();
 
-        if (2 + (attached_modifier_stack.size() * 2) >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (2 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
         buffer[1] = tag_level;
 
-        for (size_t i = 0; i < attached_modifier_stack.size(); ++i)
-        {
-            const auto& pair = attached_modifier_stack[i];
-            buffer[(i * 2) + 2] = pair.first;
-            buffer[(i * 2) + 1 + 2] = pair.second;
-        }
-
-        return 2 + (attached_modifier_stack.size() * 2);
+        return 2;
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload,
                                                        const char* buffer,
                                                        unsigned length)
     {
-        auto* scanner = static_cast<Scanner*>(payload);
+        Scanner* scanner = static_cast<Scanner*>(payload);
 
         auto& tag_level = scanner->get_tag_level();
         auto& last_token = scanner->get_last_token();
-        auto& attached_modifier_stack = scanner->get_attached_modifier_stack();
 
-        attached_modifier_stack.clear();
-
-        if (length > 0)
+        if (length == 3)
         {
             last_token = (TokenType)buffer[0];
             tag_level = (size_t)buffer[1];
-
-            for (size_t i = 0; i < length - 2; i += 2)
-                attached_modifier_stack.emplace_back(buffer[i + 2], (TokenType)buffer[i + 1 + 2]);
         }
         else
             tag_level = 0;

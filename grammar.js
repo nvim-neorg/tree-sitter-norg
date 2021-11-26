@@ -10,12 +10,26 @@ module.exports = grammar({
 
     supertypes: $ => [
         $.attached_modifier,
-        $.attached_modifier_segment,
+        // $.attached_modifier_segment,
         $.heading,
         $.detached_modifier,
         $.footnote,
         $.definition,
         $.tag,
+    ],
+
+    conflicts: $ => [
+        [$.bold, $._conflict_open],
+        [$.italic, $._conflict_open],
+        [$.strikethrough, $._conflict_open],
+        [$.underline, $._conflict_open],
+        [$.spoiler, $._conflict_open],
+        [$.verbatim, $._conflict_open],
+        [$.superscript, $._conflict_open],
+        [$.subscript, $._conflict_open],
+        [$.inline_comment, $._conflict_open],
+        [$.inline_math, $._conflict_open],
+        [$.variable, $._conflict_open],
     ],
 
     externals: $ => [
@@ -130,31 +144,38 @@ module.exports = grammar({
         $.multi_footnote_prefix,
         $.multi_footnote_suffix,
 
-        $.bold_segment,
-        $.italic_segment,
-        $.strikethrough_segment,
-        $.underline_segment,
-        $.spoiler_segment,
-        $.verbatim,
-        $.superscript_segment,
-        $.subscript_segment,
-        $.inline_comment_segment,
-        $.inline_math,
-        $.variable,
+        $.bold_open,
+        $.bold_close,
 
-        $.bold_segment_with_nest,
-        $.italic_segment_with_nest,
-        $.strikethrough_segment_with_nest,
-        $.underline_segment_with_nest,
-        $.spoiler_segment_with_nest,
-        $.verbatim_with_nest,
-        $.superscript_segment_with_nest,
-        $.subscript_segment_with_nest,
-        $.inline_comment_segment_with_nest,
-        $.inline_math_with_nest,
-        $.variable_with_nest,
+        $.italic_open,
+        $.italic_close,
 
-        $.markup_end,
+        $.strikethrough_open,
+        $.strikethrough_close,
+
+        $.underline_open,
+        $.underline_close,
+
+        $.spoiler_open,
+        $.spoiler_close,
+
+        $.verbatim_open,
+        $.verbatim_close,
+
+        $.superscript_open,
+        $.superscript_close,
+
+        $.subscript_open,
+        $.subscript_close,
+
+        $.inline_comment_open,
+        $.inline_comment_close,
+
+        $.inline_math_open,
+        $.inline_math_close,
+
+        $.variable_open,
+        $.variable_close,
     ],
 
     rules: {
@@ -209,6 +230,7 @@ module.exports = grammar({
                     $.anchor_definition,
                     $.escape_sequence,
                     $.attached_modifier,
+                    $._conflict_open,
                 ),
             )
         ),
@@ -217,7 +239,7 @@ module.exports = grammar({
         prec.right(0,
             repeat1(
                 choice(
-                    $.paragraph_segment,
+                    alias($.paragraph_segment, "_segment"),
                     $._line_break,
                 )
             )
@@ -225,209 +247,111 @@ module.exports = grammar({
 
         // ---- ATTACHED MODIFIERS ----
         bold: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    alias($.bold_segment, "_segment"),
-                    seq(
-                        alias($.bold_segment_with_nest, "_segment"),
-                        seq(
-                            repeat1(
-                                choice(
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.superscript,
-                                    $.subscript,
-                                    $.inline_comment,
-                                ),
-                            ),
-                            alias($.markup_end, "_end"),
-                        )
-                    ),
-                ),
-            ),
+        seq(
+            alias($.bold_open, "_open"),
+            repeat1(prec(1, choice(
+                $.italic,
+                $.strikethrough,
+                $.underline,
+                $.spoiler,
+                $.verbatim,
+                $.superscript,
+                $.subscript,
+                $.inline_comment,
+                $.inline_math,
+                $.variable,
+                $._line_break,
+                $._conflict_open,
+                field("content", $.paragraph_segment),
+            ))),
+            alias($.bold_close, "_close"),
         ),
 
         italic: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    alias($.italic_segment, "_segment"),
-                    seq(
-                        alias($.italic_segment_with_nest, "_segment"),
-                        seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.superscript,
-                                    $.subscript,
-                                    $.inline_comment,
-                                ),
-                            ),
-                            alias($.markup_end, "_end"),
-                        )
-                    ),
-                ),
-            ),
+        seq(
+            alias($.italic_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.italic_close, "_close"),
         ),
 
         strikethrough: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    alias($.strikethrough_segment, "_segment"),
-                    seq(
-                        alias($.strikethrough_segment_with_nest, "_segment"),
-                        seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.superscript,
-                                    $.subscript,
-                                    $.inline_comment,
-                                ),
-                            ),
-                            alias($.markup_end, "_end"),
-                        )
-                    ),
-                ),
-            ),
+        seq(
+            alias($.strikethrough_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.strikethrough_close, "_close"),
         ),
 
         underline: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    alias($.underline_segment, "_segment"),
-                    seq(
-                        alias($.underline_segment_with_nest, "_segment"),
-                        seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.spoiler,
-                                    $.superscript,
-                                    $.subscript,
-                                    $.inline_comment,
-                                ),
-                            ),
-                            alias($.markup_end, "_end"),
-                        )
-                    ),
-                ),
-            ),
+        seq(
+            alias($.underline_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.underline_close, "_close"),
         ),
 
         spoiler: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    alias($.spoiler_segment, "_segment"),
-                    seq(
-                        alias($.spoiler_segment_with_nest, "_segment"),
-                        seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.superscript,
-                                    $.subscript,
-                                    $.inline_comment,
-                                ),
-                            ),
-                            alias($.markup_end, "_end"),
-                        )
-                    ),
-                ),
-            ),
+        seq(
+            alias($.spoiler_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.spoiler_close, "_close"),
+        ),
+
+        verbatim: $ =>
+        seq(
+            alias($.verbatim_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.verbatim_close, "_close"),
         ),
 
         superscript: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    alias($.superscript_segment, "_segment"),
-                    seq(
-                        alias($.superscript_segment_with_nest, "_segment"),
-                        seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.inline_comment,
-                                ),
-                            ),
-                            alias($.markup_end, "_end"),
-                        )
-                    ),
-                ),
-            ),
+        seq(
+            alias($.superscript_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.superscript_close, "_close"),
         ),
 
         subscript: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    alias($.subscript_segment, "_segment"),
-                    seq(
-                        alias($.subscript_segment_with_nest, "_segment"),
-                        seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.inline_comment,
-                                ),
-                            ),
-                            alias($.markup_end, "_end"),
-                        )
-                    ),
-                ),
-            ),
+        seq(
+            alias($.subscript_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.subscript_close, "_close"),
         ),
 
         inline_comment: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    alias($.inline_comment_segment, "_segment"),
-                    seq(
-                        alias($.inline_comment_segment_with_nest, "_segment"),
-                        seq(
-                            repeat1(
-                                choice(
-                                    $.bold,
-                                    $.italic,
-                                    $.strikethrough,
-                                    $.underline,
-                                    $.spoiler,
-                                    $.superscript,
-                                    $.subscript,
-                                ),
-                            ),
-                            alias($.markup_end, "_end"),
-                        )
-                    ),
-                ),
-            ),
+        seq(
+            alias($.inline_comment_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.inline_comment_close, "_close"),
+        ),
+
+        inline_math: $ =>
+        seq(
+            alias($.inline_math_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.inline_math_close, "_close"),
+        ),
+
+        variable: $ =>
+        seq(
+            alias($.variable_open, "_open"),
+            alias($.paragraph, "_content"),
+            alias($.variable_close, "_close"),
+        ),
+
+        _conflict_open: $ =>
+        prec.dynamic(-1,
+            choice(
+                alias($.bold_open, "_ignore"),
+                alias($.italic_open, "_ignore"),
+                alias($.strikethrough_open, "_ignore"),
+                alias($.underline_open, "_ignore"),
+                alias($.spoiler_open, "_ignore"),
+                alias($.verbatim_open, "_ignore"),
+                alias($.superscript_open, "_ignore"),
+                alias($.subscript_open, "_ignore"),
+                alias($.inline_comment_open, "_ignore"),
+                alias($.inline_math_open, "_ignore"),
+                alias($.variable_open, "_ignore"),
+            )
         ),
 
         // Well, any character
@@ -2383,7 +2307,7 @@ module.exports = grammar({
             $.insertion,
         ),
 
-        attached_modifier_segment: $ =>
+        /* attached_modifier_segment: $ =>
         choice(
             $.bold_segment,
             $.italic_segment,
@@ -2394,7 +2318,7 @@ module.exports = grammar({
             $.subscript_segment,
             $.inline_comment_segment,
             $.markup_end,
-        ),
+        ), */
 
         attached_modifier: $ =>
         choice(
