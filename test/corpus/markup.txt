@@ -187,7 +187,6 @@ Nesting into Bold
 *Bold and |spoiler|*
 *Bold and ^superscript^*
 *Bold and ,subscript,*
-
 ---
 (document
     (paragraph
@@ -257,7 +256,6 @@ Nesting into Italic
 /Italic and |spoiler|/
 /Italic and ^superscript^/
 /Italic and ,subscript,/
-
 ---
 (document
     (paragraph
@@ -327,7 +325,6 @@ Nesting into Strikethrough
 -Struck through and |spoiler|-
 -Struck through and ^superscript^-
 -Struck through and ,subscript,-
-
 ---
 (document
     (paragraph
@@ -397,7 +394,6 @@ _Underlined and -struck through-_
 _Underlined and |spoiler|_
 _Underlined and ^superscript^_
 _Underlined and ,subscript,_
-
 ---
 (document
     (paragraph
@@ -467,7 +463,6 @@ Nesting into Spoiler
 |Spoiler and _underlined_|
 |Spoiler and ^superscript^|
 |Spoiler and ,subscript,|
-
 ---
 (document
     (paragraph
@@ -536,7 +531,6 @@ Nesting into Superscript
 ^Superscript and -struck through-^
 ^Superscript and _underlined_^
 ^Superscript and |spoiler|^
-
 ---
 (document
     (paragraph
@@ -596,7 +590,6 @@ Nesting into Subscript
 ,Subscript and -struck through-,
 ,Subscript and _underlined_,
 ,Subscript and |spoiler|,
-
 ---
 (document
     (paragraph
