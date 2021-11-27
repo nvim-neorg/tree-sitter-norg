@@ -201,6 +201,7 @@ class Scanner
         // Are we at the end of file? If so, bail
         if (lexer->eof(lexer) || !lexer->lookahead)
         {
+            m_AttachedModifierStatus.reset();
             advance(lexer);
             return false;
         }
@@ -225,6 +226,7 @@ class Scanner
             {
                 advance(lexer);
 
+                m_AttachedModifierStatus.reset();
                 lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
             }
 
@@ -629,6 +631,7 @@ class Scanner
 
             if (found_attached_modifier != m_AttachedModifiers.end())
             {
+                m_AttachedModifierStatus.set(m_AttachedModifierIndices[found_attached_modifier->first]);
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
@@ -651,12 +654,14 @@ class Scanner
             return NONE;
 
         // First check for the existence of an opening attached modifier
-        if (std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current)
+        if ((std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current) &&
+            !m_AttachedModifierStatus.test(m_AttachedModifierIndices[lexer->lookahead]))
         {
             advance(lexer);
 
             if (!std::iswspace(lexer->lookahead))
             {
+                m_AttachedModifierStatus.set(m_AttachedModifierIndices[found_attached_modifier->first]);
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
@@ -666,7 +671,9 @@ class Scanner
 
         if (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) || !lexer->lookahead)
         {
-            lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + 1);
+            m_AttachedModifierStatus.reset(m_AttachedModifierIndices[found_attached_modifier->first]);
+            lexer->result_symbol = m_LastToken =
+                static_cast<TokenType>(found_attached_modifier->second + 1);
             return m_LastToken;
         }
 
@@ -906,7 +913,8 @@ class Scanner
 
         do
         {
-            if ((lexer->lookahead == '~' && !std::iswspace(m_Current)) || (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()))
+            if ((lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
+                (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()))
                 break;
             else
                 advance(lexer);
@@ -949,8 +957,22 @@ class Scanner
         {'`', VERBATIM_OPEN},
         {'+', INLINE_COMMENT_OPEN},
         {'$', INLINE_MATH_OPEN},
-        {'=', VARIABLE_OPEN}
+        {'=', VARIABLE_OPEN},
     };
+    std::unordered_map<char, int> m_AttachedModifierIndices = {
+        {'*', 1},
+        {'-', 2},
+        {'_', 3},
+        {'/', 4},
+        {'|', 5},
+        {'^', 6},
+        {',', 7},
+        {'`', 8},
+        {'+', 9},
+        {'$', 10},
+        {'=', 11},
+    };
+    std::bitset<11> m_AttachedModifierStatus;
 };
 
 extern "C"
