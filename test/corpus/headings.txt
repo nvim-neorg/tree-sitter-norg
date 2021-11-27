@@ -444,9 +444,7 @@ This should though.
                 )
             content:
                 (paragraph
-                    (paragraph_segment
-                        (strikethrough)
-                    )
+                    (paragraph_segment)
                     (paragraph_segment)
                 )
             (weak_paragraph_delimiter)
