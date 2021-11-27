@@ -258,108 +258,46 @@ module.exports = grammar({
         ),
 
         // ---- ATTACHED MODIFIERS ----
+        _inner_choice: $ =>
+        repeat1(prec(1, choice(
+            $._line_break,
+            $._conflict_open,
+            $._conflict_close,
+            field("content", $.paragraph_segment),
+        ))),
+
         bold: $ =>
         seq(
             alias($.bold_open, "_open"),
-            repeat1(prec(1, choice(
-                $.italic,
-                $.strikethrough,
-                $.underline,
-                $.spoiler,
-                $.superscript,
-                $.subscript,
-                $.inline_comment,
-                $.inline_math,
-                $.variable,
-                $._line_break,
-                $._conflict_open,
-                $._conflict_close,
-                field("content", $.paragraph_segment),
-            ))),
+            $._inner_choice,
             alias($.bold_close, "_close"),
         ),
 
         italic: $ =>
         seq(
             alias($.italic_open, "_open"),
-            repeat1(prec(1, choice(
-                $.bold,
-                $.strikethrough,
-                $.underline,
-                $.spoiler,
-                $.superscript,
-                $.subscript,
-                $.inline_comment,
-                $.inline_math,
-                $.variable,
-                $._line_break,
-                $._conflict_open,
-                $._conflict_close,
-                field("content", $.paragraph_segment),
-            ))),
+            $._inner_choice,
             alias($.italic_close, "_close"),
         ),
 
         strikethrough: $ =>
         seq(
             alias($.strikethrough_open, "_open"),
-            repeat1(prec(1, choice(
-                $.bold,
-                $.italic,
-                $.underline,
-                $.spoiler,
-                $.superscript,
-                $.subscript,
-                $.inline_comment,
-                $.inline_math,
-                $.variable,
-                $._line_break,
-                $._conflict_open,
-                $._conflict_close,
-                field("content", $.paragraph_segment),
-            ))),
+            $._inner_choice,
             alias($.strikethrough_close, "_close"),
         ),
 
         underline: $ =>
         seq(
             alias($.underline_open, "_open"),
-            repeat1(prec(1, choice(
-                $.bold,
-                $.italic,
-                $.strikethrough,
-                $.spoiler,
-                $.superscript,
-                $.subscript,
-                $.inline_comment,
-                $.inline_math,
-                $.variable,
-                $._line_break,
-                $._conflict_open,
-                $._conflict_close,
-                field("content", $.paragraph_segment),
-            ))),
+            $._inner_choice,
             alias($.underline_close, "_close"),
         ),
 
         spoiler: $ =>
         seq(
             alias($.spoiler_open, "_open"),
-            repeat1(prec(1, choice(
-                $.bold,
-                $.italic,
-                $.strikethrough,
-                $.underline,
-                $.superscript,
-                $.subscript,
-                $.inline_comment,
-                $.inline_math,
-                $.variable,
-                $._line_break,
-                $._conflict_open,
-                $._conflict_close,
-                field("content", $.paragraph_segment),
-            ))),
+            $._inner_choice,
             alias($.spoiler_close, "_close"),
         ),
 
@@ -373,40 +311,14 @@ module.exports = grammar({
         superscript: $ =>
         seq(
             alias($.superscript_open, "_open"),
-            repeat1(prec(1, choice(
-                $.bold,
-                $.italic,
-                $.strikethrough,
-                $.underline,
-                $.spoiler,
-                $.inline_comment,
-                $.inline_math,
-                $.variable,
-                $._line_break,
-                $._conflict_open,
-                $._conflict_close,
-                field("content", $.paragraph_segment),
-            ))),
+            $._inner_choice,
             alias($.superscript_close, "_close"),
         ),
 
         subscript: $ =>
         seq(
             alias($.subscript_open, "_open"),
-            repeat1(prec(1, choice(
-                $.bold,
-                $.italic,
-                $.strikethrough,
-                $.underline,
-                $.spoiler,
-                $.inline_comment,
-                $.inline_math,
-                $.variable,
-                $._line_break,
-                $._conflict_open,
-                $._conflict_close,
-                field("content", $.paragraph_segment),
-            ))),
+            $._inner_choice,
             alias($.subscript_close, "_close"),
         ),
 

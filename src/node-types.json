@@ -228,48 +228,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
-          "type": "spoiler",
-          "named": true
-        },
-        {
-          "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "superscript",
-          "named": true
-        },
-        {
-          "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1058,48 +1016,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "bold",
-          "named": true
-        },
-        {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "spoiler",
-          "named": true
-        },
-        {
-          "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "superscript",
-          "named": true
-        },
-        {
-          "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2779,48 +2695,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "bold",
-          "named": true
-        },
-        {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
-          "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "superscript",
-          "named": true
-        },
-        {
-          "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2837,48 +2711,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "bold",
-          "named": true
-        },
-        {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
-          "type": "spoiler",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "superscript",
-          "named": true
-        },
-        {
-          "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2895,44 +2727,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "bold",
-          "named": true
-        },
-        {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
-          "type": "spoiler",
-          "named": true
-        },
-        {
-          "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2949,44 +2743,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "bold",
-          "named": true
-        },
-        {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
-          "type": "spoiler",
-          "named": true
-        },
-        {
-          "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -3483,48 +3239,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "bold",
-          "named": true
-        },
-        {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
-          "type": "spoiler",
-          "named": true
-        },
-        {
-          "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "superscript",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
     }
   },
   {
