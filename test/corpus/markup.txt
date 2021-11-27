@@ -641,28 +641,6 @@ Nesting into Subscript
     )
 )
 
-======================================
-Disallow Nesting Sub- into Superscript
-======================================
-^Super- and ,subscript,^
----
-(document
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
-======================================
-Disallow Nesting Super- into Subscript
-======================================
-,Sub- and ^superscript^,
----
-(document
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
 ============
 Deep Nesting
 ============
