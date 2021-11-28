@@ -162,6 +162,22 @@
         }
       ]
     },
+    "_multi_paragraph_element": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_line_break"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_paragraph_element"
+          }
+        ]
+      }
+    },
     "paragraph_segment": {
       "type": "PREC_RIGHT",
       "value": 0,
@@ -216,22 +232,6 @@
         }
       }
     },
-    "_inner_choice": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "_line_break"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_paragraph_element"
-          }
-        ]
-      }
-    },
     "bold": {
       "type": "SEQ",
       "members": [
@@ -246,7 +246,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_inner_choice"
+          "name": "_multi_paragraph_element"
         },
         {
           "type": "ALIAS",
@@ -273,7 +273,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_inner_choice"
+          "name": "_multi_paragraph_element"
         },
         {
           "type": "ALIAS",
@@ -300,7 +300,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_inner_choice"
+          "name": "_multi_paragraph_element"
         },
         {
           "type": "ALIAS",
@@ -327,7 +327,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_inner_choice"
+          "name": "_multi_paragraph_element"
         },
         {
           "type": "ALIAS",
@@ -354,7 +354,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_inner_choice"
+          "name": "_multi_paragraph_element"
         },
         {
           "type": "ALIAS",
@@ -419,7 +419,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_inner_choice"
+          "name": "_multi_paragraph_element"
         },
         {
           "type": "ALIAS",
@@ -446,7 +446,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_inner_choice"
+          "name": "_multi_paragraph_element"
         },
         {
           "type": "ALIAS",

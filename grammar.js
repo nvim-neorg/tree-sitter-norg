@@ -206,6 +206,14 @@ module.exports = grammar({
             $.attached_modifier,
         ),
 
+        _multi_paragraph_element: $ =>
+        repeat1(
+            choice(
+                $._line_break,
+                $._paragraph_element,
+            ),
+        ),
+
         paragraph_segment: $ =>
         prec.right(0,
             repeat1(
@@ -228,46 +236,38 @@ module.exports = grammar({
         ),
 
         // ---- ATTACHED MODIFIERS ----
-        _inner_choice: $ =>
-        repeat1(
-            choice(
-                $._line_break,
-                $._paragraph_element,
-            ),
-        ),
-
         bold: $ =>
         seq(
             alias($.bold_open, "_open_bold"),
-            $._inner_choice,
+            $._multi_paragraph_element,
             alias($.markup_close, "_close"),
         ),
 
         italic: $ =>
         seq(
             alias($.italic_open, "_open_italic"),
-            $._inner_choice,
+            $._multi_paragraph_element,
             alias($.markup_close, "_close"),
         ),
 
         strikethrough: $ =>
         seq(
             alias($.strikethrough_open, "_open_strikethrough"),
-            $._inner_choice,
+            $._multi_paragraph_element,
             alias($.markup_close, "_close"),
         ),
 
         underline: $ =>
         seq(
             alias($.underline_open, "_open_underline"),
-            $._inner_choice,
+            $._multi_paragraph_element,
             alias($.markup_close, "_close"),
         ),
 
         spoiler: $ =>
         seq(
             alias($.spoiler_open, "_open_spoiler"),
-            $._inner_choice,
+            $._multi_paragraph_element,
             alias($.markup_close, "_close"),
         ),
 
@@ -281,14 +281,14 @@ module.exports = grammar({
         superscript: $ =>
         seq(
             alias($.superscript_open, "_open_superscript"),
-            $._inner_choice,
+            $._multi_paragraph_element,
             alias($.markup_close, "_close"),
         ),
 
         subscript: $ =>
         seq(
             alias($.subscript_open, "_open_subscript"),
-            $._inner_choice,
+            $._multi_paragraph_element,
             alias($.markup_close, "_close"),
         ),
 
