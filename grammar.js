@@ -1264,7 +1264,7 @@ module.exports = grammar({
             )
         ),
 
-        // TODO: complete docs tomorrow
+        // TODO: complete docs
         generic_list: $ =>
         prec.right(0,
             repeat1(
