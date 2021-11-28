@@ -193,7 +193,7 @@ module.exports = grammar({
             )
         ),
 
-        _guts: $ =>
+        _paragraph_element: $ =>
         choice(
             alias($.word, "_word"),
             alias($.space, "_space"),
@@ -210,7 +210,7 @@ module.exports = grammar({
         prec.right(0,
             repeat1(
                 choice(
-                    $._guts,
+                    $._paragraph_element,
                     alias($._conflict_open, "_lowercase"),
                     alias($.markup_close, "_lowercase"),
                 ),
@@ -232,7 +232,7 @@ module.exports = grammar({
         repeat1(
             choice(
                 $._line_break,
-                $._guts,
+                $._paragraph_element,
             ),
         ),
 
@@ -274,7 +274,7 @@ module.exports = grammar({
         verbatim: $ =>
         seq(
             alias($.verbatim_open, "_open_verbatim"),
-            repeat1(prec(1, field("content", $._guts))),
+            repeat1(prec(1, field("content", $._paragraph_element))),
             alias($.markup_close, "_close"),
         ),
 
@@ -295,21 +295,21 @@ module.exports = grammar({
         inline_comment: $ =>
         seq(
             alias($.inline_comment_open, "_open_inline_comment"),
-            repeat1(prec(1, field("content", $._guts))),
+            repeat1(prec(1, field("content", $._paragraph_element))),
             alias($.markup_close, "_close"),
         ),
 
         inline_math: $ =>
         seq(
             alias($.inline_math_open, "_open_inline_math"),
-            repeat1(prec(1, field("content", $._guts))),
+            repeat1(prec(1, field("content", $._paragraph_element))),
             alias($.markup_close, "_close"),
         ),
 
         variable: $ =>
         seq(
             alias($.variable_open, "_open_variable"),
-            repeat1(prec(1, field("content", $._guts))),
+            repeat1(prec(1, field("content", $._paragraph_element))),
             alias($.markup_close, "_close"),
         ),
 
