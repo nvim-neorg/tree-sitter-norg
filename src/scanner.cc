@@ -124,37 +124,18 @@ enum TokenType : char
     MULTI_FOOTNOTE_SUFFIX,
 
     BOLD_OPEN,
-    BOLD_CLOSE,
-
     ITALIC_OPEN,
-    ITALIC_CLOSE,
-
     STRIKETHROUGH_OPEN,
-    STRIKETHROUGH_CLOSE,
-
     UNDERLINE_OPEN,
-    UNDERLINE_CLOSE,
-
     SPOILER_OPEN,
-    SPOILER_CLOSE,
-
     VERBATIM_OPEN,
-    VERBATIM_CLOSE,
-
     SUPERSCRIPT_OPEN,
-    SUPERSCRIPT_CLOSE,
-
     SUBSCRIPT_OPEN,
-    SUBSCRIPT_CLOSE,
-
     INLINE_COMMENT_OPEN,
-    INLINE_COMMENT_CLOSE,
-
     INLINE_MATH_OPEN,
-    INLINE_MATH_CLOSE,
-
     VARIABLE_OPEN,
-    VARIABLE_CLOSE,
+
+    MARKUP_CLOSE,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -201,7 +182,6 @@ class Scanner
         // Are we at the end of file? If so, bail
         if (lexer->eof(lexer) || !lexer->lookahead)
         {
-            m_AttachedModifierStatus.reset();
             advance(lexer);
             return false;
         }
@@ -225,8 +205,6 @@ class Scanner
             if (lexer->lookahead == '\n')
             {
                 advance(lexer);
-
-                m_AttachedModifierStatus.reset();
                 lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
             }
 
@@ -520,6 +498,7 @@ class Scanner
 
     size_t& get_tag_level() noexcept { return m_TagLevel; }
     TokenType& get_last_token() noexcept { return m_LastToken; }
+    int32_t& get_current_char() noexcept { return m_Current; }
 
    private:
     // Skips the next character without including it in the final result
@@ -631,7 +610,6 @@ class Scanner
 
             if (found_attached_modifier != m_AttachedModifiers.end())
             {
-                m_AttachedModifierStatus.set(m_AttachedModifierIndices[found_attached_modifier->first]);
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
@@ -648,34 +626,37 @@ class Scanner
      */
     TokenType check_attached(TSLexer* lexer)
     {
+        if ((!std::iswspace(m_Current) || !m_Current) && lexer->lookahead == '|')
+        {
+            advance(lexer);
+
+            if (std::iswpunct(lexer->lookahead) || std::iswspace(lexer->lookahead) || !lexer->lookahead)
+            {
+                lexer->result_symbol = m_LastToken = MARKUP_CLOSE;
+                return m_LastToken;
+            }
+
+            return NONE;
+        }
+
         auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
 
         if (found_attached_modifier == m_AttachedModifiers.end())
             return NONE;
 
         // First check for the existence of an opening attached modifier
-        if ((std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current) &&
-            !m_AttachedModifierStatus.test(m_AttachedModifierIndices[lexer->lookahead]))
+        if ((std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current))
         {
             advance(lexer);
 
             if (!std::iswspace(lexer->lookahead))
             {
-                m_AttachedModifierStatus.set(m_AttachedModifierIndices[found_attached_modifier->first]);
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
         }
-        else
-            advance(lexer);
 
-        if (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) || !lexer->lookahead)
-        {
-            m_AttachedModifierStatus.reset(m_AttachedModifierIndices[found_attached_modifier->first]);
-            lexer->result_symbol = m_LastToken =
-                static_cast<TokenType>(found_attached_modifier->second + 1);
-            return m_LastToken;
-        }
+        advance(lexer);
 
         return NONE;
     }
@@ -913,7 +894,7 @@ class Scanner
 
         do
         {
-            if ((lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
+            if (((lexer->lookahead == '~' || lexer->lookahead == '|') && !std::iswspace(m_Current)) ||
                 (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()))
                 break;
             else
@@ -951,7 +932,7 @@ class Scanner
         {'-', STRIKETHROUGH_OPEN},
         {'_', UNDERLINE_OPEN},
         {'/', ITALIC_OPEN},
-        {'|', SPOILER_OPEN},
+        {'~', SPOILER_OPEN},
         {'^', SUPERSCRIPT_OPEN},
         {',', SUBSCRIPT_OPEN},
         {'`', VERBATIM_OPEN},
@@ -959,20 +940,6 @@ class Scanner
         {'$', INLINE_MATH_OPEN},
         {'=', VARIABLE_OPEN},
     };
-    std::unordered_map<char, int> m_AttachedModifierIndices = {
-        {'*', 0},
-        {'-', 1},
-        {'_', 2},
-        {'/', 3},
-        {'|', 4},
-        {'^', 5},
-        {',', 6},
-        {'`', 7},
-        {'+', 8},
-        {'$', 9},
-        {'=', 10},
-    };
-    std::bitset<11> m_AttachedModifierStatus;
 };
 
 extern "C"
@@ -997,14 +964,19 @@ extern "C"
 
         const auto& tag_level = scanner->get_tag_level();
         const auto& last_token = scanner->get_last_token();
+        const auto& current = scanner->get_current_char();
 
-        if (2 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (3 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
         buffer[1] = tag_level;
+        // TODO: We're storing an int32_t inside of a `char` here, meaning
+        // loss of information. Should we divide the `current` value
+        // into 4 pieces and store those inside this buffer?
+        buffer[2] = current;
 
-        return 2;
+        return 3;
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload,
@@ -1015,11 +987,13 @@ extern "C"
 
         auto& tag_level = scanner->get_tag_level();
         auto& last_token = scanner->get_last_token();
+        auto& current = scanner->get_current_char();
 
-        if (length == 2)
+        if (length == 3)
         {
             last_token = (TokenType)buffer[0];
             tag_level = (size_t)buffer[1];
+            current = (int32_t)buffer[2];
         }
         else
             tag_level = 0;

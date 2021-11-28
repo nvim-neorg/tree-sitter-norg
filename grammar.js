@@ -156,37 +156,18 @@ module.exports = grammar({
         $.multi_footnote_suffix,
 
         $.bold_open,
-        $.bold_close,
-
         $.italic_open,
-        $.italic_close,
-
         $.strikethrough_open,
-        $.strikethrough_close,
-
         $.underline_open,
-        $.underline_close,
-
         $.spoiler_open,
-        $.spoiler_close,
-
         $.verbatim_open,
-        $.verbatim_close,
-
         $.superscript_open,
-        $.superscript_close,
-
         $.subscript_open,
-        $.subscript_close,
-
         $.inline_comment_open,
-        $.inline_comment_close,
-
         $.inline_math_open,
-        $.inline_math_close,
-
         $.variable_open,
-        $.variable_close,
+
+        $.markup_close,
     ],
 
     rules: {
@@ -268,95 +249,95 @@ module.exports = grammar({
 
         bold: $ =>
         seq(
-            alias($.bold_open, "_open"),
+            alias($.bold_open, "_open_bold"),
             $._inner_choice,
-            alias($.bold_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         italic: $ =>
         seq(
-            alias($.italic_open, "_open"),
+            alias($.italic_open, "_open_italic"),
             $._inner_choice,
-            alias($.italic_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         strikethrough: $ =>
         seq(
-            alias($.strikethrough_open, "_open"),
+            alias($.strikethrough_open, "_open_strikethrough"),
             $._inner_choice,
-            alias($.strikethrough_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         underline: $ =>
         seq(
-            alias($.underline_open, "_open"),
+            alias($.underline_open, "_open_underline"),
             $._inner_choice,
-            alias($.underline_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         spoiler: $ =>
         seq(
-            alias($.spoiler_open, "_open"),
+            alias($.spoiler_open, "_open_spoiler"),
             $._inner_choice,
-            alias($.spoiler_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         verbatim: $ =>
         seq(
-            alias($.verbatim_open, "_open"),
+            alias($.verbatim_open, "_open_verbatim"),
             repeat1(prec(1, field("content", $.paragraph_segment))),
-            alias($.verbatim_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         superscript: $ =>
         seq(
-            alias($.superscript_open, "_open"),
+            alias($.superscript_open, "_open_superscript"),
             $._inner_choice,
-            alias($.superscript_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         subscript: $ =>
         seq(
-            alias($.subscript_open, "_open"),
+            alias($.subscript_open, "_open_subscript"),
             $._inner_choice,
-            alias($.subscript_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         inline_comment: $ =>
         seq(
-            alias($.inline_comment_open, "_open"),
+            alias($.inline_comment_open, "_open_inline_comment"),
             repeat1(prec(1, field("content", $.paragraph_segment))),
-            alias($.inline_comment_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         inline_math: $ =>
         seq(
-            alias($.inline_math_open, "_open"),
+            alias($.inline_math_open, "_open_inline_math"),
             repeat1(prec(1, field("content", $.paragraph_segment))),
-            alias($.inline_math_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         variable: $ =>
         seq(
-            alias($.variable_open, "_open"),
+            alias($.variable_open, "_open_variable"),
             repeat1(prec(1, field("content", $.paragraph_segment))),
-            alias($.variable_close, "_close"),
+            alias($.markup_close, "_close"),
         ),
 
         _conflict_open: $ =>
         prec.dynamic(-1,
             choice(
-                alias($.bold_open, "_ignore"),
-                alias($.italic_open, "_ignore"),
-                alias($.strikethrough_open, "_ignore"),
-                alias($.underline_open, "_ignore"),
-                alias($.spoiler_open, "_ignore"),
-                alias($.verbatim_open, "_ignore"),
-                alias($.superscript_open, "_ignore"),
-                alias($.subscript_open, "_ignore"),
-                alias($.inline_comment_open, "_ignore"),
-                alias($.inline_math_open, "_ignore"),
-                alias($.variable_open, "_ignore"),
+                alias($.bold_open, "_lowercase"),
+                alias($.italic_open, "_lowercase"),
+                alias($.strikethrough_open, "_lowercase"),
+                alias($.underline_open, "_lowercase"),
+                alias($.spoiler_open, "_lowercase"),
+                alias($.verbatim_open, "_lowercase"),
+                alias($.superscript_open, "_lowercase"),
+                alias($.subscript_open, "_lowercase"),
+                alias($.inline_comment_open, "_lowercase"),
+                alias($.inline_math_open, "_lowercase"),
+                alias($.variable_open, "_lowercase"),
             )
         ),
 
@@ -364,24 +345,12 @@ module.exports = grammar({
         prec.dynamic(-1,
             seq(
                 alias($.paragraph_segment, "_segment"),
-                choice(
-                    alias($.bold_close, "_ignore"),
-                    alias($.italic_close, "_ignore"),
-                    alias($.strikethrough_close, "_ignore"),
-                    alias($.underline_close, "_ignore"),
-                    alias($.spoiler_close, "_ignore"),
-                    alias($.verbatim_close, "_ignore"),
-                    alias($.superscript_close, "_ignore"),
-                    alias($.subscript_close, "_ignore"),
-                    alias($.inline_comment_close, "_ignore"),
-                    alias($.inline_math_close, "_ignore"),
-                    alias($.variable_close, "_ignore"),
-                ),
+                alias($.markup_close, "_lowercase"),
             ),
         ),
 
         // Well, any character
-        any_char: $ =>
+        any_char: _ =>
         token.immediate(/./),
 
         // A backslash followed by the escape token (e.g. \*)
@@ -2247,7 +2216,7 @@ module.exports = grammar({
             ),
         ),
 
-        tag_name_element: $ =>
+        tag_name_element: _ =>
         seq(
             token(/[a-z0-9_\-\+]+/),
             token(/[a-zA-Z0-9_\-\+]*/),
