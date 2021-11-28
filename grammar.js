@@ -155,6 +155,8 @@ module.exports = grammar({
         $.multi_footnote_prefix,
         $.multi_footnote_suffix,
 
+        $.link_modifier,
+
         $.bold_open,
         $.italic_open,
         $.strikethrough_open,
@@ -221,6 +223,7 @@ module.exports = grammar({
                     $.anchor_declaration,
                     $.anchor_definition,
                     $.escape_sequence,
+                    $.link_modifier,
                     $.attached_modifier,
                     $._conflict_open,
                     $._conflict_close,

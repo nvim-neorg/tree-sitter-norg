@@ -159,6 +159,10 @@
             },
             {
               "type": "SYMBOL",
+              "name": "link_modifier"
+            },
+            {
+              "type": "SYMBOL",
               "name": "attached_modifier"
             },
             {
@@ -6041,6 +6045,10 @@
     {
       "type": "SYMBOL",
       "name": "multi_footnote_suffix"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_modifier"
     },
     {
       "type": "SYMBOL",

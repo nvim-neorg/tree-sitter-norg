@@ -123,6 +123,8 @@ enum TokenType : char
     MULTI_FOOTNOTE,
     MULTI_FOOTNOTE_SUFFIX,
 
+    LINK_MODIFIER,
+
     BOLD_OPEN,
     ITALIC_OPEN,
     STRIKETHROUGH_OPEN,
@@ -626,7 +628,22 @@ class Scanner
      */
     TokenType check_attached(TSLexer* lexer)
     {
-        if ((!std::iswspace(m_Current) || !m_Current) && lexer->lookahead == '|')
+        if (lexer->lookahead == ':')
+        {
+            if (m_Current != '|' && m_AttachedModifiers.find(m_Current) == m_AttachedModifiers.end())
+            {
+                advance(lexer);
+
+                if (lexer->lookahead != '|' && m_AttachedModifiers.find(lexer->lookahead) == m_AttachedModifiers.end())
+                    return NONE;
+            }
+            else
+                advance(lexer);
+
+            lexer->result_symbol = m_LastToken = LINK_MODIFIER;
+            return m_LastToken;
+        }
+        else if ((!std::iswspace(m_Current) || !m_Current) && lexer->lookahead == '|')
         {
             advance(lexer);
 
@@ -894,7 +911,9 @@ class Scanner
 
         do
         {
-            if (((lexer->lookahead == '~' || lexer->lookahead == '|') && !std::iswspace(m_Current)) ||
+            if (lexer->lookahead == ':')
+                break;
+            else if (((lexer->lookahead == '~' || lexer->lookahead == '|') && !std::iswspace(m_Current)) ||
                 (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()))
                 break;
             else

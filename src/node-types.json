@@ -166,6 +166,10 @@
         {
           "type": "link",
           "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
         }
       ]
     }
@@ -2293,6 +2297,10 @@
         {
           "type": "link",
           "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
         }
       ]
     }
@@ -4412,6 +4420,10 @@
   },
   {
     "type": "link_location_url",
+    "named": true
+  },
+  {
+    "type": "link_modifier",
     "named": true
   },
   {
