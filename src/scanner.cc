@@ -640,6 +640,9 @@ class Scanner
             else
                 advance(lexer);
 
+            if (std::iswspace(lexer->lookahead))
+                return NONE;
+
             lexer->result_symbol = m_LastToken = LINK_MODIFIER;
             return m_LastToken;
         }
