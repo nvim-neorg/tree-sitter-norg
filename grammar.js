@@ -27,20 +27,6 @@ module.exports = grammar({
         [$.inline_comment, $._conflict_open],
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
-
-        [$.paragraph, $._conflict_close],
-        [$.paragraph_segment],
-        [$.bold, $._conflict_close],
-        [$.italic, $._conflict_close],
-        [$.strikethrough, $._conflict_close],
-        [$.underline, $._conflict_close],
-        [$.spoiler, $._conflict_close],
-        [$.verbatim, $._conflict_close],
-        [$.superscript, $._conflict_close],
-        [$.subscript, $._conflict_close],
-        [$.inline_comment, $._conflict_close],
-        [$.inline_math, $._conflict_close],
-        [$.variable, $._conflict_close],
     ],
 
     externals: $ => [
@@ -212,21 +198,26 @@ module.exports = grammar({
             )
         ),
 
+        _guts: $ =>
+        choice(
+            alias($.word, "_word"),
+            alias($.space, "_space"),
+            alias($.trailing_modifier, "_trailing_modifier"),
+            $.link,
+            $.anchor_declaration,
+            $.anchor_definition,
+            $.escape_sequence,
+            $.link_modifier,
+            $.attached_modifier,
+        ),
+
         paragraph_segment: $ =>
         prec.right(0,
             repeat1(
                 choice(
-                    alias($.word, "_word"),
-                    alias($.space, "_space"),
-                    alias($.trailing_modifier, "_trailing_modifier"),
-                    $.link,
-                    $.anchor_declaration,
-                    $.anchor_definition,
-                    $.escape_sequence,
-                    $.link_modifier,
-                    $.attached_modifier,
-                    $._conflict_open,
-                    $._conflict_close,
+                    $._guts,
+                    alias($._conflict_open, "_lowercase"),
+                    alias($.markup_close, "_lowercase"),
                 ),
             )
         ),
@@ -243,12 +234,12 @@ module.exports = grammar({
 
         // ---- ATTACHED MODIFIERS ----
         _inner_choice: $ =>
-        repeat1(prec(1, choice(
-            $._line_break,
-            $._conflict_open,
-            $._conflict_close,
-            field("content", $.paragraph_segment),
-        ))),
+        repeat1(
+            choice(
+                $._line_break,
+                $._guts,
+            ),
+        ),
 
         bold: $ =>
         seq(
@@ -288,7 +279,7 @@ module.exports = grammar({
         verbatim: $ =>
         seq(
             alias($.verbatim_open, "_open_verbatim"),
-            repeat1(prec(1, field("content", $.paragraph_segment))),
+            repeat1(prec(1, field("content", $._guts))),
             alias($.markup_close, "_close"),
         ),
 
@@ -309,21 +300,21 @@ module.exports = grammar({
         inline_comment: $ =>
         seq(
             alias($.inline_comment_open, "_open_inline_comment"),
-            repeat1(prec(1, field("content", $.paragraph_segment))),
+            repeat1(prec(1, field("content", $._guts))),
             alias($.markup_close, "_close"),
         ),
 
         inline_math: $ =>
         seq(
             alias($.inline_math_open, "_open_inline_math"),
-            repeat1(prec(1, field("content", $.paragraph_segment))),
+            repeat1(prec(1, field("content", $._guts))),
             alias($.markup_close, "_close"),
         ),
 
         variable: $ =>
         seq(
             alias($.variable_open, "_open_variable"),
-            repeat1(prec(1, field("content", $.paragraph_segment))),
+            repeat1(prec(1, field("content", $._guts))),
             alias($.markup_close, "_close"),
         ),
 
@@ -342,14 +333,6 @@ module.exports = grammar({
                 alias($.inline_math_open, "_lowercase"),
                 alias($.variable_open, "_lowercase"),
             )
-        ),
-
-        _conflict_close: $ =>
-        prec.dynamic(-1,
-            seq(
-                alias($.paragraph_segment, "_segment"),
-                alias($.markup_close, "_lowercase"),
-            ),
         ),
 
         // Well, any character

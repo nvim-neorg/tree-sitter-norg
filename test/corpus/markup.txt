@@ -1,14 +1,12 @@
 =================
 Standalone markup
 =================
-*bold*
+*bold|
 ---
 (document
     (paragraph
         (paragraph_segment
-            (bold
-                (paragraph_segment)
-            )
+            (bold)
         )
     )
 )
@@ -16,14 +14,12 @@ Standalone markup
 ====
 Bold
 ====
-Here is a *bold* word.
+Here is a *bold| word.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (bold
-                (paragraph_segment)
-            )
+            (bold)
         )
     )
 )
@@ -31,14 +27,12 @@ Here is a *bold* word.
 ======
 Italic
 ======
-Here is an /italic/ word.
+Here is an /italic| word.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (italic
-                (paragraph_segment)
-            )
+            (italic)
         )
     )
 )
@@ -46,14 +40,12 @@ Here is an /italic/ word.
 =============
 Strikethrough
 =============
-Here is a -struck through- word.
+Here is a -struck through| word.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (strikethrough
-                (paragraph_segment)
-            )
+            (strikethrough)
         )
     )
 )
@@ -61,14 +53,12 @@ Here is a -struck through- word.
 =========
 Underline
 =========
-Here is an _underlined_ word.
+Here is an _underlined| word.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (underline
-                (paragraph_segment)
-            )
+            (underline)
         )
     )
 )
@@ -76,14 +66,12 @@ Here is an _underlined_ word.
 =======
 Spoiler
 =======
-Here is a |spoiler| word.
+Here is a ~spoiler| word.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (spoiler
-                (paragraph_segment)
-            )
+            (spoiler)
         )
     )
 )
@@ -91,14 +79,12 @@ Here is a |spoiler| word.
 ========
 Verbatim
 ========
-Here is a `verbatim` word.
+Here is a `verbatim| word.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (verbatim
-                (paragraph_segment)
-            )
+            (verbatim)
         )
     )
 )
@@ -106,14 +92,12 @@ Here is a `verbatim` word.
 ===========
 Superscript
 ===========
-Here is a ^superscript^ word.
+Here is a ^superscript| word.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (superscript
-                (paragraph_segment)
-            )
+            (superscript)
         )
     )
 )
@@ -121,14 +105,12 @@ Here is a ^superscript^ word.
 =========
 Subscript
 =========
-Here is a ,subscript, word.
+Here is a ,subscript| word.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (subscript
-                (paragraph_segment)
-            )
+            (subscript)
         )
     )
 )
@@ -136,14 +118,12 @@ Here is a ,subscript, word.
 ==============
 Inline Comment
 ==============
-This sentence contains an +inlined comment+.
+This sentence contains an +inlined comment|.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (inline_comment
-                (paragraph_segment)
-            )
+            (inline_comment)
         )
     )
 )
@@ -151,14 +131,12 @@ This sentence contains an +inlined comment+.
 ===========
 Inline Math
 ===========
-This sentence contains some $inline math$.
+This sentence contains some $inline math|.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (inline_math
-                (paragraph_segment)
-            )
+            (inline_math)
         )
     )
 )
@@ -166,14 +144,12 @@ This sentence contains some $inline math$.
 ========
 Variable
 ========
-This sentence contains a =variable= reference.
+This sentence contains a =variable| reference.
 ---
 (document
     (paragraph
         (paragraph_segment
-            (variable
-                (paragraph_segment)
-            )
+            (variable)
         )
     )
 )
@@ -181,67 +157,49 @@ This sentence contains a =variable= reference.
 =================
 Nesting into Bold
 =================
-*Bold and /italic/*
-*Bold and -struck through-*
-*Bold and _underlined_*
-*Bold and |spoiler|*
-*Bold and ^superscript^*
-*Bold and ,subscript,*
+*Bold and /italic||
+*Bold and -struck through||
+*Bold and _underlined||
+*Bold and ~spoiler||
+*Bold and ^superscript||
+*Bold and ,subscript||
 ---
 (document
     (paragraph
         (paragraph_segment
             (bold
-                (paragraph_segment
                     (italic
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (bold
-                (paragraph_segment
                     (strikethrough
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (bold
-                (paragraph_segment
                     (underline
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (bold
-                (paragraph_segment
                     (spoiler
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (bold
-                (paragraph_segment
                     (superscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (bold
-                (paragraph_segment
                     (subscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
     )
@@ -250,67 +208,49 @@ Nesting into Bold
 ===================
 Nesting into Italic
 ===================
-/Italic and *bold*/
-/Italic and -struck through-/
-/Italic and _underlined_/
-/Italic and |spoiler|/
-/Italic and ^superscript^/
-/Italic and ,subscript,/
+/Italic and *bold||
+/Italic and -struck through||
+/Italic and _underlined||
+/Italic and ~spoiler||
+/Italic and ^superscript||
+/Italic and ,subscript||
 ---
 (document
     (paragraph
         (paragraph_segment
             (italic
-                (paragraph_segment
                     (bold
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (italic
-                (paragraph_segment
                     (strikethrough
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (italic
-                (paragraph_segment
                     (underline
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (italic
-                (paragraph_segment
                     (spoiler
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (italic
-                (paragraph_segment
                     (superscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (italic
-                (paragraph_segment
                     (subscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
     )
@@ -319,67 +259,49 @@ Nesting into Italic
 ==========================
 Nesting into Strikethrough
 ==========================
--Struck through and *bold*-
--Struck through and /italic/-
--Struck through and _underlined_-
--Struck through and |spoiler|-
--Struck through and ^superscript^-
--Struck through and ,subscript,-
+-Struck through and *bold||
+-Struck through and /italic||
+-Struck through and _underlined||
+-Struck through and ~spoiler||
+-Struck through and ^superscript||
+-Struck through and ,subscript||
 ---
 (document
     (paragraph
         (paragraph_segment
             (strikethrough
-                (paragraph_segment
                     (bold
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (strikethrough
-                (paragraph_segment
                     (italic
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (strikethrough
-                (paragraph_segment
                     (underline
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (strikethrough
-                (paragraph_segment
                     (spoiler
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (strikethrough
-                (paragraph_segment
                     (superscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (strikethrough
-                (paragraph_segment
                     (subscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
     )
@@ -388,67 +310,49 @@ Nesting into Strikethrough
 ======================
 Nesting into Underline
 ======================
-_Underlined and *bold*_
-_Underlined and /italic/_
-_Underlined and -struck through-_
-_Underlined and |spoiler|_
-_Underlined and ^superscript^_
-_Underlined and ,subscript,_
+_Underlined and *bold||
+_Underlined and /italic||
+_Underlined and -struck through||
+_Underlined and ~spoiler||
+_Underlined and ^superscript||
+_Underlined and ,subscript||
 ---
 (document
     (paragraph
         (paragraph_segment
             (underline
-                (paragraph_segment
                     (bold
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (underline
-                (paragraph_segment
                     (italic
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (underline
-                (paragraph_segment
                     (strikethrough
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (underline
-                (paragraph_segment
                     (spoiler
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (underline
-                (paragraph_segment
                     (superscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (underline
-                (paragraph_segment
                     (subscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
     )
@@ -457,67 +361,49 @@ _Underlined and ,subscript,_
 ====================
 Nesting into Spoiler
 ====================
-|Spoiler and *bold*|
-|Spoiler and /italic/|
-|Spoiler and -struck through-|
-|Spoiler and _underlined_|
-|Spoiler and ^superscript^|
-|Spoiler and ,subscript,|
+~Spoiler and *bold||
+~Spoiler and /italic||
+~Spoiler and -struck through||
+~Spoiler and _underlined||
+~Spoiler and ^superscript||
+~Spoiler and ,subscript||
 ---
 (document
     (paragraph
         (paragraph_segment
             (spoiler
-                (paragraph_segment
                     (bold
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (spoiler
-                (paragraph_segment
                     (italic
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (spoiler
-                (paragraph_segment
                     (strikethrough
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (spoiler
-                (paragraph_segment
                     (underline
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (spoiler
-                (paragraph_segment
                     (superscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (spoiler
-                (paragraph_segment
                     (subscript
-                        (paragraph_segment)
                     )
-                )
             )
         )
     )
@@ -526,57 +412,42 @@ Nesting into Spoiler
 ========================
 Nesting into Superscript
 ========================
-^Superscript and *bold*^
-^Superscript and /italic/^
-^Superscript and -struck through-^
-^Superscript and _underlined_^
-^Superscript and |spoiler|^
+^Superscript and *bold||
+^Superscript and /italic||
+^Superscript and -struck through||
+^Superscript and _underlined||
+^Superscript and ~spoiler||
 ---
 (document
     (paragraph
         (paragraph_segment
             (superscript
-                (paragraph_segment
                     (bold
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (superscript
-                (paragraph_segment
                     (italic
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (superscript
-                (paragraph_segment
                     (strikethrough
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (superscript
-                (paragraph_segment
                     (underline
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (superscript
-                (paragraph_segment
                     (spoiler
-                        (paragraph_segment)
                     )
-                )
             )
         )
     )
@@ -585,57 +456,42 @@ Nesting into Superscript
 ======================
 Nesting into Subscript
 ======================
-,Subscript and *bold*,
-,Subscript and /italic/,
-,Subscript and -struck through-,
-,Subscript and _underlined_,
-,Subscript and |spoiler|,
+,Subscript and *bold||
+,Subscript and /italic||
+,Subscript and -struck through||
+,Subscript and _underlined||
+,Subscript and ~spoiler||
 ---
 (document
     (paragraph
         (paragraph_segment
             (subscript
-                (paragraph_segment
                     (bold
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (subscript
-                (paragraph_segment
                     (italic
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (subscript
-                (paragraph_segment
                     (strikethrough
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (subscript
-                (paragraph_segment
                     (underline
-                        (paragraph_segment)
                     )
-                )
             )
         )
         (paragraph_segment
             (subscript
-                (paragraph_segment
                     (spoiler
-                        (paragraph_segment)
                     )
-                )
             )
         )
     )
@@ -644,24 +500,16 @@ Nesting into Subscript
 ============
 Deep Nesting
 ============
-*Bold /italic _underlined -struck through-_/*
+*Bold /italic _underlined -struck through||||
 
 ---
 (document
     (paragraph
         (paragraph_segment
             (bold
-                (paragraph_segment
-                    (italic
-                        (paragraph_segment
-                            (underline
-                                (paragraph_segment
-                                    (strikethrough
-                                        (paragraph_segment)
-                                    )
-                                )
-                            )
-                        )
+                (italic
+                    (underline
+                        (strikethrough)
                     )
                 )
             )
@@ -672,17 +520,17 @@ Deep Nesting
 ============
 Empty Markup
 ============
-This is not ** bold.
-This is not // italic.
-This is not -- struck through.
-This is not __ underlined.
+This is not *| bold.
+This is not /| italic.
+This is not -| struck through.
+This is not _| underlined.
 This is not || a spoiler.
-This is not `` verbatim.
-This is not ^^ superscript.
-This is not ,, subscript.
-This is not ++ an inline comment.
-This is not $$ inline math.
-This is not == a variable reference.
+This is not `| verbatim.
+This is not ^| superscript.
+This is not ,| subscript.
+This is not +| an inline comment.
+This is not $| inline math.
+This is not =| a variable reference.
 ---
 (document
     (paragraph
@@ -703,17 +551,17 @@ This is not == a variable reference.
 ==============
 Escaped Markup
 ==============
-This is not \*bold\*
-This is not \/italic\/
-This is not \-struck through\-
-This is not \_underlined\_
+This is not \*bold\|
+This is not \/italic\|
+This is not \-struck through\|
+This is not \_underlined\|
 This is not \|a spoiler\|
-This is not \`verbatim\`
-This is not \^superscript\^
-This is not \,subscript\,
-This is not \+an inline comment\+
-This is not \$inline math\$
-This is not \=variable reference\=
+This is not \`verbatim\|
+This is not \^superscript\|
+This is not \,subscript\|
+This is not \+an inline comment\|
+This is not \$inline math\|
+This is not \=variable reference\|
 ---
 (document
     (paragraph

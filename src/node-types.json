@@ -140,6 +140,11 @@
     ]
   },
   {
+    "type": "_lowercase",
+    "named": false,
+    "fields": {}
+  },
+  {
     "type": "_segment",
     "named": false,
     "fields": {},
@@ -221,17 +226,36 @@
   {
     "type": "bold",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -943,7 +967,39 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "_space",
+            "named": false
+          },
+          {
+            "type": "_trailing_modifier",
+            "named": false
+          },
+          {
+            "type": "_word",
+            "named": false
+          },
+          {
+            "type": "anchor_declaration",
+            "named": true
+          },
+          {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
+            "type": "attached_modifier",
+            "named": true
+          },
+          {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "link",
+            "named": true
+          },
+          {
+            "type": "link_modifier",
             "named": true
           }
         ]
@@ -959,7 +1015,39 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "_space",
+            "named": false
+          },
+          {
+            "type": "_trailing_modifier",
+            "named": false
+          },
+          {
+            "type": "_word",
+            "named": false
+          },
+          {
+            "type": "anchor_declaration",
+            "named": true
+          },
+          {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
+            "type": "attached_modifier",
+            "named": true
+          },
+          {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "link",
+            "named": true
+          },
+          {
+            "type": "link_modifier",
             "named": true
           }
         ]
@@ -1009,17 +1097,36 @@
   {
     "type": "italic",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2692,65 +2799,141 @@
   {
     "type": "spoiler",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
     }
   },
   {
     "type": "strikethrough",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
     }
   },
   {
     "type": "subscript",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
     }
   },
   {
     "type": "superscript",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3236,17 +3419,36 @@
   {
     "type": "underline",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -4194,7 +4396,39 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "_space",
+            "named": false
+          },
+          {
+            "type": "_trailing_modifier",
+            "named": false
+          },
+          {
+            "type": "_word",
+            "named": false
+          },
+          {
+            "type": "anchor_declaration",
+            "named": true
+          },
+          {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
+            "type": "attached_modifier",
+            "named": true
+          },
+          {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "link",
+            "named": true
+          },
+          {
+            "type": "link_modifier",
             "named": true
           }
         ]
@@ -4210,7 +4444,39 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "_space",
+            "named": false
+          },
+          {
+            "type": "_trailing_modifier",
+            "named": false
+          },
+          {
+            "type": "_word",
+            "named": false
+          },
+          {
+            "type": "anchor_declaration",
+            "named": true
+          },
+          {
+            "type": "anchor_definition",
+            "named": true
+          },
+          {
+            "type": "attached_modifier",
+            "named": true
+          },
+          {
+            "type": "escape_sequence",
+            "named": true
+          },
+          {
+            "type": "link",
+            "named": true
+          },
+          {
+            "type": "link_modifier",
             "named": true
           }
         ]
