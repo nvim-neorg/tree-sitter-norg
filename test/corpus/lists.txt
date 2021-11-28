@@ -1,4 +1,3 @@
-TODO: link lists
 ==============
 Unordered List
 ==============
@@ -152,6 +151,144 @@ Mixed List
                         (unordered_list5
                             (unordered_list5_prefix)
                             (paragraph (paragraph_segment))
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+=========
+Link List
+=========
+-> {# link}
+--> {# link}
+---> {# link}
+----> {# link}
+-----> {# link}
+------> {# link}
+---
+(document
+    (generic_list
+        (unordered_link1
+            (unordered_link1_prefix)
+            (link
+                (link_location
+                    (link_location_generic)
+                    (link_location_text)
+                )
+            )
+            (unordered_link2
+                (unordered_link2_prefix)
+                (link
+                    (link_location
+                        (link_location_generic)
+                        (link_location_text)
+                    )
+                )
+                (unordered_link3
+                    (unordered_link3_prefix)
+                    (link
+                        (link_location
+                            (link_location_generic)
+                            (link_location_text)
+                        )
+                    )
+                    (unordered_link4
+                        (unordered_link4_prefix)
+                        (link
+                            (link_location
+                                (link_location_generic)
+                                (link_location_text)
+                            )
+                        )
+                        (unordered_link5
+                            (unordered_link5_prefix)
+                            (link
+                                (link_location
+                                    (link_location_generic)
+                                    (link_location_text)
+                                )
+                            )
+                            (unordered_link6
+                                (unordered_link6_prefix)
+                                (link
+                                    (link_location
+                                        (link_location_generic)
+                                        (link_location_text)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+=================
+Ordered Link List
+=================
+~> {# link}
+~~> {# link}
+~~~> {# link}
+~~~~> {# link}
+~~~~~> {# link}
+~~~~~~> {# link}
+---
+(document
+    (generic_list
+        (ordered_link1
+            (ordered_link1_prefix)
+            (link
+                (link_location
+                    (link_location_generic)
+                    (link_location_text)
+                )
+            )
+            (ordered_link2
+                (ordered_link2_prefix)
+                (link
+                    (link_location
+                        (link_location_generic)
+                        (link_location_text)
+                    )
+                )
+                (ordered_link3
+                    (ordered_link3_prefix)
+                    (link
+                        (link_location
+                            (link_location_generic)
+                            (link_location_text)
+                        )
+                    )
+                    (ordered_link4
+                        (ordered_link4_prefix)
+                        (link
+                            (link_location
+                                (link_location_generic)
+                                (link_location_text)
+                            )
+                        )
+                        (ordered_link5
+                            (ordered_link5_prefix)
+                            (link
+                                (link_location
+                                    (link_location_generic)
+                                    (link_location_text)
+                                )
+                            )
+                            (ordered_link6
+                                (ordered_link6_prefix)
+                                (link
+                                    (link_location
+                                        (link_location_generic)
+                                        (link_location_text)
+                                    )
+                                )
+                            )
                         )
                     )
                 )
