@@ -1,8 +1,3 @@
-/*
-* Known bugs:
-* ERROR Nodes when the closing modifier doesn't have an opening modifier to complement it.
-*/
-
 module.exports = grammar({
     name: 'norg',
 
