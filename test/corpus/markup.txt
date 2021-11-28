@@ -524,7 +524,7 @@ This is not *| bold.
 This is not /| italic.
 This is not -| struck through.
 This is not _| underlined.
-This is not || a spoiler.
+This is not ~| a spoiler.
 This is not `| verbatim.
 This is not ^| superscript.
 This is not ,| subscript.
@@ -555,7 +555,7 @@ This is not \*bold\|
 This is not \/italic\|
 This is not \-struck through\|
 This is not \_underlined\|
-This is not \|a spoiler\|
+This is not \~a spoiler\|
 This is not \`verbatim\|
 This is not \^superscript\|
 This is not \,subscript\|
@@ -608,6 +608,81 @@ This is not \=variable reference\|
         (paragraph_segment
             (escape_sequence (escape_sequence_prefix) (any_char))
             (escape_sequence (escape_sequence_prefix) (any_char))
+        )
+    )
+)
+
+=============
+Link Modifier
+=============
+Intra:*word|:bold
+Intra:/word|:italic
+Intra:-word|:strikethrough
+Intra:_word|:underline
+Intra:~word|:spoiler
+Intra:^word|:superscript
+Intra:,word|:subscript
+Intra:`word|:verbatim
+Intra:+word|:comment
+Intra:$word|:math
+Intra:=word|:variable
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (link_modifier)
+            (bold)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (italic)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (strikethrough)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (underline)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (spoiler)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (superscript)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (subscript)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (verbatim)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (inline_comment)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (inline_math)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (variable)
+            (link_modifier)
         )
     )
 )
