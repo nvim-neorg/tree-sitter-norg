@@ -11,6 +11,136 @@ Here is a *|scoped bold|| word.
     )
 )
 
+=============
+Scoped Italic
+=============
+Here is an /|scoped italic|| word.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_italic)
+        )
+    )
+)
+
+====================
+Scoped Strikethrough
+====================
+Here is a -|scoped struck through|| word.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_strikethrough)
+        )
+    )
+)
+
+================
+Scoped Underline
+================
+Here is an _|scoped underlined|| word.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_underline)
+        )
+    )
+)
+
+==============
+Scoped Spoiler
+==============
+Here is a ~|scoped spoiler|| word.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_spoiler)
+        )
+    )
+)
+
+===============
+Scoped Verbatim
+===============
+Here is a `|scoped verbatim|| word.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+    )
+)
+
+==================
+Scoped Superscript
+==================
+Here is a ^|scoped superscript|| word.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_superscript)
+        )
+    )
+)
+
+================
+Scoped Subscript
+================
+Here is a ,|scoped subscript|| word.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_subscript)
+        )
+    )
+)
+
+=====================
+Scoped Inline Comment
+=====================
+This sentence contains an +|scoped inlined comment||.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+    )
+)
+
+==================
+Scoped Inline Math
+==================
+This sentence contains some $|scoped inline math||.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+    )
+)
+
+======================
+Scoped Variable
+======================
+This sentence contains a =|scoped variable|| reference.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_variable)
+        )
+    )
+)
+
 ========================
 Nesting into Scoped Bold
 ========================
@@ -57,6 +187,318 @@ Nesting into Scoped Bold
             (scoped_bold
                     (subscript
                     )
+            )
+        )
+    )
+)
+
+==========================
+Nesting into Scoped Italic
+==========================
+/|Scoped italic and *bold|||
+/|Scoped italic and -struck through|||
+/|Scoped italic and _underlined|||
+/|Scoped italic and ~spoiler|||
+/|Scoped italic and ^superscript|||
+/|Scoped italic and ,subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_italic
+                    (bold
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_italic
+                    (strikethrough
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_italic
+                    (underline
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_italic
+                    (spoiler
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_italic
+                    (superscript
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_italic
+                    (subscript
+                    )
+            )
+        )
+    )
+)
+
+=================================
+Nesting into Scoped Strikethrough
+=================================
+-|Scoped struck through and *bold|||
+-|Scoped struck through and /italic|||
+-|Scoped struck through and _underlined|||
+-|Scoped struck through and ~spoiler|||
+-|Scoped struck through and ^superscript|||
+-|Scoped struck through and ,subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_strikethrough
+                    (bold
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_strikethrough
+                    (italic
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_strikethrough
+                    (underline
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_strikethrough
+                    (spoiler
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_strikethrough
+                    (superscript
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_strikethrough
+                    (subscript
+                    )
+            )
+        )
+    )
+)
+
+=============================
+Nesting into Scoped Underline
+=============================
+_|Scoped underlined and *bold|||
+_|Scoped underlined and /italic|||
+_|Scoped underlined and -struck through|||
+_|Scoped underlined and ~spoiler|||
+_|Scoped underlined and ^superscript|||
+_|Scoped underlined and ,subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_underline
+                    (bold
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_underline
+                    (italic
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_underline
+                    (strikethrough
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_underline
+                    (spoiler
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_underline
+                    (superscript
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_underline
+                    (subscript
+                    )
+            )
+        )
+    )
+)
+
+===========================
+Nesting into Scoped Spoiler
+===========================
+~|Scoped spoiler and *bold|||
+~|Scoped spoiler and /italic|||
+~|Scoped spoiler and -struck through|||
+~|Scoped spoiler and _underlined|||
+~|Scoped spoiler and ^superscript|||
+~|Scoped spoiler and ,subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_spoiler
+                    (bold
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_spoiler
+                    (italic
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_spoiler
+                    (strikethrough
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_spoiler
+                    (underline
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_spoiler
+                    (superscript
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_spoiler
+                    (subscript
+                    )
+            )
+        )
+    )
+)
+
+===============================
+Nesting into Scoped Superscript
+===============================
+^|Scoped superscript and *bold|||
+^|Scoped superscript and /italic|||
+^|Scoped superscript and -struck through|||
+^|Scoped superscript and _underlined|||
+^|Scoped superscript and ~spoiler|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_superscript
+                    (bold
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_superscript
+                    (italic
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_superscript
+                    (strikethrough
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_superscript
+                    (underline
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_superscript
+                    (spoiler
+                    )
+            )
+        )
+    )
+)
+
+=============================
+Nesting into Scoped Subscript
+=============================
+,|Scoped subscript and *bold|||
+,|Scoped subscript and /italic|||
+,|Scoped subscript and -struck through|||
+,|Scoped subscript and _underlined|||
+,|Scoped subscript and ~spoiler|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_subscript
+                    (bold
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_subscript
+                    (italic
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_subscript
+                    (strikethrough
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_subscript
+                    (underline
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_subscript
+                    (spoiler
+                    )
+            )
+        )
+    )
+)
+
+===================
+Deep Scoped Nesting
+===================
+*|Bold /|italic _|underlined -|struck through||||||||
+
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_bold
+                (scoped_italic
+                    (scoped_underline
+                        (scoped_strikethrough)
+                    )
+                )
             )
         )
     )

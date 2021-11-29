@@ -24,6 +24,46 @@
         "named": true
       },
       {
+        "type": "scoped_inline_comment",
+        "named": true
+      },
+      {
+        "type": "scoped_inline_math",
+        "named": true
+      },
+      {
+        "type": "scoped_italic",
+        "named": true
+      },
+      {
+        "type": "scoped_spoiler",
+        "named": true
+      },
+      {
+        "type": "scoped_strikethrough",
+        "named": true
+      },
+      {
+        "type": "scoped_subscript",
+        "named": true
+      },
+      {
+        "type": "scoped_superscript",
+        "named": true
+      },
+      {
+        "type": "scoped_underline",
+        "named": true
+      },
+      {
+        "type": "scoped_variable",
+        "named": true
+      },
+      {
+        "type": "scoped_verbatim",
+        "named": true
+      },
+      {
         "type": "spoiler",
         "named": true
       },
@@ -2699,6 +2739,236 @@
     }
   },
   {
+    "type": "scoped_inline_comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "scoped_inline_math",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "scoped_italic",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scoped_spoiler",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scoped_strikethrough",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scoped_subscript",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scoped_superscript",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scoped_underline",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scoped_variable",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "scoped_verbatim",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "single_definition",
     "named": true,
     "fields": {
@@ -4422,6 +4692,46 @@
   },
   {
     "type": "_open_scoped_bold",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_inline_comment",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_inline_math",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_italic",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_spoiler",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_strikethrough",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_subscript",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_superscript",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_underline",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_variable",
+    "named": false
+  },
+  {
+    "type": "_open_scoped_verbatim",
     "named": false
   },
   {
