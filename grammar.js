@@ -22,6 +22,8 @@ module.exports = grammar({
         [$.inline_comment, $._conflict_open],
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
+
+        [$.scoped_bold, $._conflict_open],
     ],
 
     externals: $ => [
@@ -150,6 +152,18 @@ module.exports = grammar({
         $.inline_math_open,
         $.variable_open,
 
+        $.scoped_bold_open,
+        $.scoped_italic_open,
+        $.scoped_strikethrough_open,
+        $.scoped_underline_open,
+        $.scoped_spoiler_open,
+        $.scoped_verbatim_open,
+        $.scoped_superscript_open,
+        $.scoped_subscript_open,
+        $.scoped_inline_comment_open,
+        $.scoped_inline_math_open,
+        $.scoped_variable_open,
+
         $.markup_close,
     ],
 
@@ -269,6 +283,17 @@ module.exports = grammar({
             alias($.markup_close, "_close"),
         ),
 
+        scoped_bold: $ =>
+        seq(
+            $.scoped_bold_open,
+            choice(
+                $._multi_paragraph_element,
+                $.markup_close, // Doesn't help
+            ),
+            $.markup_close,
+            $.markup_close,
+        ),
+
         italic: $ =>
         seq(
             alias($.italic_open, "_open_italic"),
@@ -353,6 +378,8 @@ module.exports = grammar({
                 alias($.inline_comment_open, "_lowercase"),
                 alias($.inline_math_open, "_lowercase"),
                 alias($.variable_open, "_lowercase"),
+
+                alias($.scoped_bold_open, "_lowercase"),
             )
         ),
 
@@ -2322,6 +2349,7 @@ module.exports = grammar({
             $.inline_comment,
             $.inline_math,
             $.variable,
+            $.scoped_bold,
         ),
     }
 });

@@ -420,6 +420,36 @@
         }
       ]
     },
+    "scoped_bold": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "scoped_bold_open"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_multi_paragraph_element"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "markup_close"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "markup_close"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "markup_close"
+        }
+      ]
+    },
     "italic": {
       "type": "SEQ",
       "members": [
@@ -791,6 +821,15 @@
             "content": {
               "type": "SYMBOL",
               "name": "variable_open"
+            },
+            "named": false,
+            "value": "_lowercase"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "scoped_bold_open"
             },
             "named": false,
             "value": "_lowercase"
@@ -5670,6 +5709,10 @@
         {
           "type": "SYMBOL",
           "name": "variable"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "scoped_bold"
         }
       ]
     }
@@ -5723,6 +5766,10 @@
     ],
     [
       "variable",
+      "_conflict_open"
+    ],
+    [
+      "scoped_bold",
       "_conflict_open"
     ]
   ],
@@ -6135,6 +6182,50 @@
     {
       "type": "SYMBOL",
       "name": "variable_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_bold_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_italic_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_strikethrough_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_underline_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_spoiler_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_verbatim_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_superscript_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_subscript_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_inline_comment_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_inline_math_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scoped_variable_open"
     },
     {
       "type": "SYMBOL",

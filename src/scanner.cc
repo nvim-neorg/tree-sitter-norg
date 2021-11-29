@@ -137,6 +137,18 @@ enum TokenType : char
     INLINE_MATH_OPEN,
     VARIABLE_OPEN,
 
+    SCOPED_BOLD_OPEN,
+    SCOPED_ITALIC_OPEN,
+    SCOPED_STRIKETHROUGH_OPEN,
+    SCOPED_UNDERLINE_OPEN,
+    SCOPED_SPOILER_OPEN,
+    SCOPED_VERBATIM_OPEN,
+    SCOPED_SUPERSCRIPT_OPEN,
+    SCOPED_SUBSCRIPT_OPEN,
+    SCOPED_INLINE_COMMENT_OPEN,
+    SCOPED_INLINE_MATH_OPEN,
+    SCOPED_VARIABLE_OPEN,
+
     MARKUP_CLOSE,
 };
 
@@ -664,11 +676,15 @@ class Scanner
         if (found_attached_modifier == m_AttachedModifiers.end())
             return NONE;
 
-        // First check for the existence of an opening attached modifier
         if ((std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current))
         {
             advance(lexer);
 
+            if (lexer->lookahead == '|')
+            {
+                lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + (VARIABLE_OPEN - BOLD_OPEN) + 1);
+                return m_LastToken;
+            }
             if (!std::iswspace(lexer->lookahead))
             {
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
