@@ -625,7 +625,16 @@ class Scanner
             if (found_attached_modifier != m_AttachedModifiers.end())
             {
                 if (lexer->lookahead == '|')
-                    lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + (VARIABLE_OPEN - BOLD_OPEN) + 1);
+                {
+                    advance(lexer);
+                    if (!std::iswspace(lexer->lookahead))
+                    {
+                        lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + (VARIABLE_OPEN - BOLD_OPEN) + 1);
+                        return m_LastToken;
+                    }
+
+                    return NONE;
+                }
                 else
                     lexer->result_symbol = m_LastToken = found_attached_modifier->second;
 
