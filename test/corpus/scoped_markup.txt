@@ -504,3 +504,243 @@ Deep Scoped Nesting
     )
 )
 
+
+=======================================
+No nested markup inside scoped verbatim
+=======================================
+`|*not bold|||
+`|/not italic|||
+`|-not struck through|||
+`|_not underlined|||
+`|~no spoiler|||
+`|^not superscripted|||
+`|,not subscripted|||
+`|+no inline comment|||
+`|$no inline math|||
+`|=no variable|||
+`|no:*link modifier|||
+`|hidden \*escaped char|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim)
+        )
+        (paragraph_segment
+            (scoped_verbatim
+                (escape_sequence_prefix)
+                (any_char)
+            )
+        )
+    )
+)
+
+==============================================
+No nested markup inside scoped inline comments
+==============================================
++|*not bold|||
++|/not italic|||
++|-not struck through|||
++|_not underlined|||
++|~no spoiler|||
++|^not superscripted|||
++|,not subscripted|||
++|`no verbatim|||
++|$no inline math|||
++|=no variable|||
++|no:*link modifier|||
++|hidden \*escaped char|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment)
+        )
+        (paragraph_segment
+            (scoped_inline_comment
+                (escape_sequence_prefix)
+                (any_char)
+            )
+        )
+    )
+)
+
+==========================================
+No nested markup inside scoped inline math
+==========================================
+$|*not bold|||
+$|/not italic|||
+$|-not struck through|||
+$|_not underlined|||
+$|~no spoiler|||
+$|^not superscripted|||
+$|,not subscripted|||
+$|`no verbatim|||
+$|+no inline comment|||
+$|=no variable|||
+$|no:*link modifier|||
+$|hidden \*escaped char|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math)
+        )
+        (paragraph_segment
+            (scoped_inline_math
+                (escape_sequence_prefix)
+                (any_char)
+            )
+        )
+    )
+)
+
+========================================
+No nested markup inside scoped variables
+========================================
+=|*not bold|||
+=|/not italic|||
+=|-not struck through|||
+=|_not underlined|||
+=|~no spoiler|||
+=|^not superscripted|||
+=|,not subscripted|||
+=|`no verbatim|||
+=|+no inline comment|||
+=|$no inline math|||
+=|no:*link modifier|||
+=|hidden \*escaped char|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable)
+        )
+        (paragraph_segment
+            (scoped_variable
+                (escape_sequence_prefix)
+                (any_char)
+            )
+        )
+    )
+)
