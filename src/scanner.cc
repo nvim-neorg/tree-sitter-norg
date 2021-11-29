@@ -682,8 +682,13 @@ class Scanner
 
             if (lexer->lookahead == '|')
             {
-                lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + (VARIABLE_OPEN - BOLD_OPEN) + 1);
-                return m_LastToken;
+                advance(lexer);
+
+                if (!std::iswspace(lexer->lookahead))
+                {
+                    lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + (VARIABLE_OPEN - BOLD_OPEN) + 1);
+                    return m_LastToken;
+                }
             }
             if (!std::iswspace(lexer->lookahead))
             {
