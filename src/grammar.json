@@ -190,8 +190,49 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "_paragraph_element"
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "word"
+                  },
+                  "named": false,
+                  "value": "_word"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "space"
+                  },
+                  "named": false,
+                  "value": "_space"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "trailing_modifier"
+                  },
+                  "named": false,
+                  "value": "_trailing_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "escape_sequence"
+                  },
+                  "named": false,
+                  "value": "_lowercase"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "link_modifier"
+                  },
+                  "named": false,
+                  "value": "_lowercase"
                 },
                 {
                   "type": "ALIAS",

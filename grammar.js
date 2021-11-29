@@ -219,7 +219,11 @@ module.exports = grammar({
             repeat1(
                 prec.right(1,
                     choice(
-                        $._paragraph_element,
+                        alias($.word, "_word"),
+                        alias($.space, "_space"),
+                        alias($.trailing_modifier, "_trailing_modifier"),
+                        alias($.escape_sequence, "_lowercase"),
+                        alias($.link_modifier, "_lowercase"),
                         alias($.bold_open, "_lowercase"),
                         alias($.italic_open, "_lowercase"),
                         alias($.strikethrough_open, "_lowercase"),
