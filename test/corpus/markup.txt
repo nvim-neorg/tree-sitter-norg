@@ -168,38 +168,32 @@ Nesting into Bold
     (paragraph
         (paragraph_segment
             (bold
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (bold
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (bold
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (bold
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
         (paragraph_segment
             (bold
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (bold
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -219,38 +213,32 @@ Nesting into Italic
     (paragraph
         (paragraph_segment
             (italic
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (italic
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (italic
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (italic
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
         (paragraph_segment
             (italic
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (italic
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -270,38 +258,32 @@ Nesting into Strikethrough
     (paragraph
         (paragraph_segment
             (strikethrough
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (strikethrough
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (strikethrough
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (strikethrough
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
         (paragraph_segment
             (strikethrough
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (strikethrough
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -321,38 +303,32 @@ _Underlined and ,subscript||
     (paragraph
         (paragraph_segment
             (underline
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (underline
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (underline
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (underline
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
         (paragraph_segment
             (underline
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (underline
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -372,38 +348,32 @@ Nesting into Spoiler
     (paragraph
         (paragraph_segment
             (spoiler
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (spoiler
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (spoiler
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (spoiler
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (spoiler
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (spoiler
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -422,32 +392,27 @@ Nesting into Superscript
     (paragraph
         (paragraph_segment
             (superscript
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (superscript
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (superscript
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (superscript
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (superscript
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
     )
@@ -466,32 +431,27 @@ Nesting into Subscript
     (paragraph
         (paragraph_segment
             (subscript
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (subscript
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (subscript
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (subscript
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (subscript
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
     )

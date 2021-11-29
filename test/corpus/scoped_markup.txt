@@ -155,38 +155,32 @@ Nesting into Scoped Bold
     (paragraph
         (paragraph_segment
             (scoped_bold
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (scoped_bold
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (scoped_bold
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (scoped_bold
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
         (paragraph_segment
             (scoped_bold
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (scoped_bold
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -206,38 +200,32 @@ Nesting into Scoped Italic
     (paragraph
         (paragraph_segment
             (scoped_italic
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (scoped_italic
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (scoped_italic
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (scoped_italic
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
         (paragraph_segment
             (scoped_italic
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (scoped_italic
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -257,38 +245,32 @@ Nesting into Scoped Strikethrough
     (paragraph
         (paragraph_segment
             (scoped_strikethrough
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (scoped_strikethrough
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (scoped_strikethrough
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (scoped_strikethrough
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
         (paragraph_segment
             (scoped_strikethrough
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (scoped_strikethrough
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -308,38 +290,32 @@ _|Scoped underlined and ,subscript|||
     (paragraph
         (paragraph_segment
             (scoped_underline
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (scoped_underline
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (scoped_underline
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (scoped_underline
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
         (paragraph_segment
             (scoped_underline
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (scoped_underline
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -359,38 +335,32 @@ Nesting into Scoped Spoiler
     (paragraph
         (paragraph_segment
             (scoped_spoiler
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (scoped_spoiler
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (scoped_spoiler
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (scoped_spoiler
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (scoped_spoiler
-                    (superscript
-                    )
+                (superscript)
             )
         )
         (paragraph_segment
             (scoped_spoiler
-                    (subscript
-                    )
+                (subscript)
             )
         )
     )
@@ -409,32 +379,27 @@ Nesting into Scoped Superscript
     (paragraph
         (paragraph_segment
             (scoped_superscript
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (scoped_superscript
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (scoped_superscript
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (scoped_superscript
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (scoped_superscript
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
     )
@@ -453,32 +418,27 @@ Nesting into Scoped Subscript
     (paragraph
         (paragraph_segment
             (scoped_subscript
-                    (bold
-                    )
+                (bold)
             )
         )
         (paragraph_segment
             (scoped_subscript
-                    (italic
-                    )
+                (italic)
             )
         )
         (paragraph_segment
             (scoped_subscript
-                    (strikethrough
-                    )
+                (strikethrough)
             )
         )
         (paragraph_segment
             (scoped_subscript
-                    (underline
-                    )
+                (underline)
             )
         )
         (paragraph_segment
             (scoped_subscript
-                    (spoiler
-                    )
+                (spoiler)
             )
         )
     )
