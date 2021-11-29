@@ -214,6 +214,28 @@ module.exports = grammar({
             ),
         ),
 
+        _verbatim_segment: $ =>
+        seq(
+            repeat1(
+                prec.right(1,
+                    choice(
+                        $._paragraph_element,
+                        alias($.bold_open, "_lowercase"),
+                        alias($.italic_open, "_lowercase"),
+                        alias($.strikethrough_open, "_lowercase"),
+                        alias($.underline_open, "_lowercase"),
+                        alias($.spoiler_open, "_lowercase"),
+                        alias($.verbatim_open, "_lowercase"),
+                        alias($.superscript_open, "_lowercase"),
+                        alias($.subscript_open, "_lowercase"),
+                        alias($.inline_comment_open, "_lowercase"),
+                        alias($.inline_math_open, "_lowercase"),
+                        alias($.variable_open, "_lowercase"),
+                    ),
+                )
+            ),
+        ),
+
         paragraph_segment: $ =>
         prec.right(0,
             repeat1(
@@ -274,7 +296,7 @@ module.exports = grammar({
         verbatim: $ =>
         seq(
             alias($.verbatim_open, "_open_verbatim"),
-            repeat1(prec(1, field("content", $._paragraph_element))),
+            $._verbatim_segment,
             alias($.markup_close, "_close"),
         ),
 
@@ -295,21 +317,21 @@ module.exports = grammar({
         inline_comment: $ =>
         seq(
             alias($.inline_comment_open, "_open_inline_comment"),
-            repeat1(prec(1, field("content", $._paragraph_element))),
+            $._verbatim_segment,
             alias($.markup_close, "_close"),
         ),
 
         inline_math: $ =>
         seq(
             alias($.inline_math_open, "_open_inline_math"),
-            repeat1(prec(1, field("content", $._paragraph_element))),
+            $._verbatim_segment,
             alias($.markup_close, "_close"),
         ),
 
         variable: $ =>
         seq(
             alias($.variable_open, "_open_variable"),
-            repeat1(prec(1, field("content", $._paragraph_element))),
+            $._verbatim_segment,
             alias($.markup_close, "_close"),
         ),
 
