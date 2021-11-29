@@ -284,15 +284,20 @@ module.exports = grammar({
         ),
 
         scoped_bold: $ =>
-        seq(
-            $.scoped_bold_open,
-            choice(
-                $._multi_paragraph_element,
-                $.markup_close, // Doesn't help
+        prec(2, seq(
+            alias($.scoped_bold_open, "_open_scoped_bold"),
+            repeat1(
+                choice(
+                    $._line_break,
+                    $._paragraph_element,
+                alias($.markup_close, "_lowercase"),
+                ),
             ),
-            $.markup_close,
-            $.markup_close,
-        ),
+            alias( seq(
+                $.markup_close,
+                $.markup_close,
+            ), "_close"),
+        )),
 
         italic: $ =>
         seq(

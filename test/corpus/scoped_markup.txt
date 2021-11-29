@@ -1,0 +1,64 @@
+===========
+Scoped Bold
+===========
+Here is a *|scoped bold|| word.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_bold)
+        )
+    )
+)
+
+========================
+Nesting into Scoped Bold
+========================
+*|Scoped bold and /italic|||
+*|Scoped bold and -struck through|||
+*|Scoped bold and _underlined|||
+*|Scoped bold and ~spoiler|||
+*|Scoped bold and ^superscript|||
+*|Scoped bold and ,subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (scoped_bold
+                    (italic
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_bold
+                    (strikethrough
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_bold
+                    (underline
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_bold
+                    (spoiler
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_bold
+                    (superscript
+                    )
+            )
+        )
+        (paragraph_segment
+            (scoped_bold
+                    (subscript
+                    )
+            )
+        )
+    )
+)
+

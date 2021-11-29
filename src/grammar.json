@@ -421,34 +421,65 @@
       ]
     },
     "scoped_bold": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "scoped_bold_open"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
               "type": "SYMBOL",
-              "name": "_multi_paragraph_element"
+              "name": "scoped_bold_open"
             },
-            {
-              "type": "SYMBOL",
-              "name": "markup_close"
+            "named": false,
+            "value": "_open_scoped_bold"
+          },
+          {
+            "type": "REPEAT1",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_line_break"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_paragraph_element"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "markup_close"
+                  },
+                  "named": false,
+                  "value": "_lowercase"
+                }
+              ]
             }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "markup_close"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "markup_close"
-        }
-      ]
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "markup_close"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "markup_close"
+                }
+              ]
+            },
+            "named": false,
+            "value": "_close"
+          }
+        ]
+      }
     },
     "italic": {
       "type": "SEQ",

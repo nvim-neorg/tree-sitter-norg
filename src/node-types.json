@@ -2669,7 +2669,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "anchor_declaration",
@@ -2693,14 +2693,6 @@
         },
         {
           "type": "link_modifier",
-          "named": true
-        },
-        {
-          "type": "markup_close",
-          "named": true
-        },
-        {
-          "type": "scoped_bold_open",
           "named": true
         }
       ]
@@ -4429,6 +4421,10 @@
     "named": false
   },
   {
+    "type": "_open_scoped_bold",
+    "named": false
+  },
+  {
     "type": "_open_spoiler",
     "named": false
   },
@@ -4601,10 +4597,6 @@
     "named": true
   },
   {
-    "type": "markup_close",
-    "named": true
-  },
-  {
     "type": "multi_definition_prefix",
     "named": true
   },
@@ -4690,10 +4682,6 @@
   },
   {
     "type": "quote6_prefix",
-    "named": true
-  },
-  {
-    "type": "scoped_bold_open",
     "named": true
   },
   {
