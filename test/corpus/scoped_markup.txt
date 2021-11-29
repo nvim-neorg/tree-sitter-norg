@@ -1007,3 +1007,306 @@ Nesting scoped into Scoped Subscript
         )
     )
 )
+
+========================
+Nesting scoped into Bold
+========================
+*Bold and /|scoped italic|||
+*Bold and -|scoped struck through|||
+*Bold and _|scoped underlined|||
+*Bold and ~|scoped spoiler|||
+*Bold and ^|scoped superscript|||
+*Bold and ,|scoped subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (bold
+                (scoped_italic)
+            )
+        )
+        (paragraph_segment
+            (bold
+                (scoped_strikethrough)
+            )
+        )
+        (paragraph_segment
+            (bold
+                (scoped_underline)
+            )
+        )
+        (paragraph_segment
+            (bold
+                (scoped_spoiler)
+            )
+        )
+        (paragraph_segment
+            (bold
+                (scoped_superscript)
+            )
+        )
+        (paragraph_segment
+            (bold
+                (scoped_subscript)
+            )
+        )
+    )
+)
+
+==========================
+Nesting scoped into Italic
+==========================
+/Italic and *|scoped bold|||
+/Italic and -|scoped struck through|||
+/Italic and _|scoped underlined|||
+/Italic and ~|scoped spoiler|||
+/Italic and ^|scoped superscript|||
+/Italic and ,|scoped subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (italic
+                (scoped_bold)
+            )
+        )
+        (paragraph_segment
+            (italic
+                (scoped_strikethrough)
+            )
+        )
+        (paragraph_segment
+            (italic
+                (scoped_underline)
+            )
+        )
+        (paragraph_segment
+            (italic
+                (scoped_spoiler)
+            )
+        )
+        (paragraph_segment
+            (italic
+                (scoped_superscript)
+            )
+        )
+        (paragraph_segment
+            (italic
+                (scoped_subscript)
+            )
+        )
+    )
+)
+
+=================================
+Nesting scoped into Strikethrough
+=================================
+-Struck through and *|scoped bold|||
+-Struck through and /|scoped italic|||
+-Struck through and _|scoped underlined|||
+-Struck through and ~|scoped spoiler|||
+-Struck through and ^|scoped superscript|||
+-Struck through and ,|scoped subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (strikethrough
+                (scoped_bold)
+            )
+        )
+        (paragraph_segment
+            (strikethrough
+                (scoped_italic)
+            )
+        )
+        (paragraph_segment
+            (strikethrough
+                (scoped_underline)
+            )
+        )
+        (paragraph_segment
+            (strikethrough
+                (scoped_spoiler)
+            )
+        )
+        (paragraph_segment
+            (strikethrough
+                (scoped_superscript)
+            )
+        )
+        (paragraph_segment
+            (strikethrough
+                (scoped_subscript)
+            )
+        )
+    )
+)
+
+=============================
+Nesting scoped into Underline
+=============================
+_Underlined and *|scoped bold|||
+_Underlined and /|scoped italic|||
+_Underlined and -|scoped struck through|||
+_Underlined and ~|scoped spoiler|||
+_Underlined and ^|scoped superscript|||
+_Underlined and ,|scoped subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (underline
+                (scoped_bold)
+            )
+        )
+        (paragraph_segment
+            (underline
+                (scoped_italic)
+            )
+        )
+        (paragraph_segment
+            (underline
+                (scoped_strikethrough)
+            )
+        )
+        (paragraph_segment
+            (underline
+                (scoped_spoiler)
+            )
+        )
+        (paragraph_segment
+            (underline
+                (scoped_superscript)
+            )
+        )
+        (paragraph_segment
+            (underline
+                (scoped_subscript)
+            )
+        )
+    )
+)
+
+===========================
+Nesting scoped into Spoiler
+===========================
+~Spoiler and *|scoped bold|||
+~Spoiler and /|scoped italic|||
+~Spoiler and -|scoped struck through|||
+~Spoiler and _|scoped underlined|||
+~Spoiler and ^|scoped superscript|||
+~Spoiler and ,|scoped subscript|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (spoiler
+                (scoped_bold)
+            )
+        )
+        (paragraph_segment
+            (spoiler
+                (scoped_italic)
+            )
+        )
+        (paragraph_segment
+            (spoiler
+                (scoped_strikethrough)
+            )
+        )
+        (paragraph_segment
+            (spoiler
+                (scoped_underline)
+            )
+        )
+        (paragraph_segment
+            (spoiler
+                (scoped_superscript)
+            )
+        )
+        (paragraph_segment
+            (spoiler
+                (scoped_subscript)
+            )
+        )
+    )
+)
+
+===============================
+Nesting scoped into Superscript
+===============================
+^Superscript and *|scoped bold|||
+^Superscript and /|scoped italic|||
+^Superscript and -|scoped struck through|||
+^Superscript and _|scoped underlined|||
+^Superscript and ~|scoped spoiler|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (superscript
+                (scoped_bold)
+            )
+        )
+        (paragraph_segment
+            (superscript
+                (scoped_italic)
+            )
+        )
+        (paragraph_segment
+            (superscript
+                (scoped_strikethrough)
+            )
+        )
+        (paragraph_segment
+            (superscript
+                (scoped_underline)
+            )
+        )
+        (paragraph_segment
+            (superscript
+                (scoped_spoiler)
+            )
+        )
+    )
+)
+
+=============================
+Nesting scoped into Subscript
+=============================
+,Subscript and *|scoped bold|||
+,Subscript and /|scoped italic|||
+,Subscript and -|scoped struck through|||
+,Subscript and _|scoped underlined|||
+,Subscript and ~|scoped spoiler|||
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (subscript
+                (scoped_bold)
+            )
+        )
+        (paragraph_segment
+            (subscript
+                (scoped_italic)
+            )
+        )
+        (paragraph_segment
+            (subscript
+                (scoped_strikethrough)
+            )
+        )
+        (paragraph_segment
+            (subscript
+                (scoped_underline)
+            )
+        )
+        (paragraph_segment
+            (subscript
+                (scoped_spoiler)
+            )
+        )
+    )
+)
