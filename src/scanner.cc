@@ -624,7 +624,11 @@ class Scanner
 
             if (found_attached_modifier != m_AttachedModifiers.end())
             {
-                lexer->result_symbol = m_LastToken = found_attached_modifier->second;
+                if (lexer->lookahead == '|')
+                    lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + (VARIABLE_OPEN - BOLD_OPEN) + 1);
+                else
+                    lexer->result_symbol = m_LastToken = found_attached_modifier->second;
+
                 return m_LastToken;
             }
         }
