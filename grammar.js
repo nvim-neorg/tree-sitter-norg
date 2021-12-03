@@ -22,20 +22,6 @@ module.exports = grammar({
         [$.inline_comment, $._conflict_open],
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
-
-        [$.scoped_bold, $._conflict_open],
-        [$.scoped_italic, $._conflict_open],
-        [$.scoped_strikethrough, $._conflict_open],
-        [$.scoped_underline, $._conflict_open],
-        [$.scoped_spoiler, $._conflict_open],
-        [$.scoped_verbatim, $._conflict_open],
-        [$.scoped_superscript, $._conflict_open],
-        [$.scoped_subscript, $._conflict_open],
-        [$.scoped_inline_comment, $._conflict_open],
-        [$.scoped_inline_math, $._conflict_open],
-        [$.scoped_variable, $._conflict_open],
-
-        [$._scoped_verbatim_segment],
     ],
 
     externals: $ => [
@@ -153,30 +139,37 @@ module.exports = grammar({
         $.link_modifier,
 
         $.bold_open,
+        $.bold_close,
+
         $.italic_open,
+        $.italic_close,
+
         $.strikethrough_open,
+        $.strikethrough_close,
+
         $.underline_open,
+        $.underline_close,
+
         $.spoiler_open,
+        $.spoiler_close,
+
         $.verbatim_open,
+        $.verbatim_close,
+
         $.superscript_open,
+        $.superscript_close,
+
         $.subscript_open,
+        $.subscript_close,
+
         $.inline_comment_open,
+        $.inline_comment_close,
+
         $.inline_math_open,
+        $.inline_math_close,
+
         $.variable_open,
-
-        $.scoped_bold_open,
-        $.scoped_italic_open,
-        $.scoped_strikethrough_open,
-        $.scoped_underline_open,
-        $.scoped_spoiler_open,
-        $.scoped_verbatim_open,
-        $.scoped_superscript_open,
-        $.scoped_subscript_open,
-        $.scoped_inline_comment_open,
-        $.scoped_inline_math_open,
-        $.scoped_variable_open,
-
-        $.markup_close,
+        $.variable_close,
     ],
 
     rules: {
@@ -237,15 +230,7 @@ module.exports = grammar({
             choice(
                 $._line_break,
                 $._paragraph_element,
-            ),
-        ),
-
-        _scoped_multi_paragraph_element: $ =>
-        repeat1(
-            choice(
-                $._line_break,
-                $._paragraph_element,
-                alias($.markup_close, "_lowercase"),
+                $._conflict_open,
             ),
         ),
 
@@ -270,55 +255,6 @@ module.exports = grammar({
                         alias($.inline_comment_open, "_lowercase"),
                         alias($.inline_math_open, "_lowercase"),
                         alias($.variable_open, "_lowercase"),
-                        alias($.scoped_bold_open, "_lowercase"),
-                        alias($.scoped_italic_open, "_lowercase"),
-                        alias($.scoped_strikethrough_open, "_lowercase"),
-                        alias($.scoped_underline_open, "_lowercase"),
-                        alias($.scoped_spoiler_open, "_lowercase"),
-                        alias($.scoped_verbatim_open, "_lowercase"),
-                        alias($.scoped_superscript_open, "_lowercase"),
-                        alias($.scoped_subscript_open, "_lowercase"),
-                        alias($.scoped_inline_comment_open, "_lowercase"),
-                        alias($.scoped_inline_math_open, "_lowercase"),
-                        alias($.scoped_variable_open, "_lowercase"),
-                    ),
-                )
-            ),
-        ),
-
-        _scoped_verbatim_segment: $ =>
-        seq(
-            repeat1(
-                prec.right(1,
-                    choice(
-                        alias($.word, "_word"),
-                        alias($.space, "_space"),
-                        alias($.trailing_modifier, "_trailing_modifier"),
-                        alias($.escape_sequence, "_lowercase"),
-                        alias($.link_modifier, "_lowercase"),
-                        alias($.bold_open, "_lowercase"),
-                        alias($.italic_open, "_lowercase"),
-                        alias($.strikethrough_open, "_lowercase"),
-                        alias($.underline_open, "_lowercase"),
-                        alias($.spoiler_open, "_lowercase"),
-                        alias($.verbatim_open, "_lowercase"),
-                        alias($.superscript_open, "_lowercase"),
-                        alias($.subscript_open, "_lowercase"),
-                        alias($.inline_comment_open, "_lowercase"),
-                        alias($.inline_math_open, "_lowercase"),
-                        alias($.variable_open, "_lowercase"),
-                        alias($.scoped_bold_open, "_lowercase"),
-                        alias($.scoped_italic_open, "_lowercase"),
-                        alias($.scoped_strikethrough_open, "_lowercase"),
-                        alias($.scoped_underline_open, "_lowercase"),
-                        alias($.scoped_spoiler_open, "_lowercase"),
-                        alias($.scoped_verbatim_open, "_lowercase"),
-                        alias($.scoped_superscript_open, "_lowercase"),
-                        alias($.scoped_subscript_open, "_lowercase"),
-                        alias($.scoped_inline_comment_open, "_lowercase"),
-                        alias($.scoped_inline_math_open, "_lowercase"),
-                        alias($.scoped_variable_open, "_lowercase"),
-                        alias($.markup_close, "_lowercase"),
                     ),
                 )
             ),
@@ -330,7 +266,17 @@ module.exports = grammar({
                 choice(
                     $._paragraph_element,
                     alias($._conflict_open, "_lowercase"),
-                    alias($.markup_close, "_lowercase"),
+                    /* alias($.bold_close, "_lowercase"),
+                    alias($.italic_close, "_lowercase"),
+                    alias($.strikethrough_close, "_lowercase"),
+                    alias($.underline_close, "_lowercase"),
+                    alias($.spoiler_close, "_lowercase"),
+                    alias($.verbatim_close, "_lowercase"),
+                    alias($.superscript_close, "_lowercase"),
+                    alias($.subscript_close, "_lowercase"),
+                    alias($.inline_comment_close, "_lowercase"),
+                    alias($.inline_math_close, "_lowercase"),
+                    alias($.variable_close, "_lowercase"), */
                 ),
             )
         ),
@@ -348,190 +294,80 @@ module.exports = grammar({
         // ---- ATTACHED MODIFIERS ----
         bold: $ =>
         seq(
-            alias($.bold_open, "_open_bold"),
+            alias($.bold_open, "_open"),
             $._multi_paragraph_element,
-            alias($.markup_close, "_close"),
+            alias($.bold_close, "_close"),
         ),
-
-        scoped_bold: $ =>
-        prec(2, seq(
-            alias($.scoped_bold_open, "_open_scoped_bold"),
-            $._scoped_multi_paragraph_element,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         italic: $ =>
         seq(
-            alias($.italic_open, "_open_italic"),
+            alias($.italic_open, "_open"),
             $._multi_paragraph_element,
-            alias($.markup_close, "_close"),
+            alias($.italic_close, "_close"),
         ),
-
-        scoped_italic: $ =>
-        prec(2, seq(
-            alias($.scoped_italic_open, "_open_scoped_italic"),
-            $._scoped_multi_paragraph_element,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         strikethrough: $ =>
         seq(
-            alias($.strikethrough_open, "_open_strikethrough"),
+            alias($.strikethrough_open, "_open"),
             $._multi_paragraph_element,
-            alias($.markup_close, "_close"),
+            alias($.strikethrough_close, "_close"),
         ),
-
-        scoped_strikethrough: $ =>
-        prec(2, seq(
-            alias($.scoped_strikethrough_open, "_open_scoped_strikethrough"),
-            $._scoped_multi_paragraph_element,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         underline: $ =>
         seq(
-            alias($.underline_open, "_open_underline"),
+            alias($.underline_open, "_open"),
             $._multi_paragraph_element,
-            alias($.markup_close, "_close"),
+            alias($.underline_close, "_close"),
         ),
-
-        scoped_underline: $ =>
-        prec(2, seq(
-            alias($.scoped_underline_open, "_open_scoped_underline"),
-            $._scoped_multi_paragraph_element,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         spoiler: $ =>
         seq(
-            alias($.spoiler_open, "_open_spoiler"),
+            alias($.spoiler_open, "_open"),
             $._multi_paragraph_element,
-            alias($.markup_close, "_close"),
+            alias($.spoiler_close, "_close"),
         ),
-
-        scoped_spoiler: $ =>
-        prec(2, seq(
-            alias($.scoped_spoiler_open, "_open_scoped_spoiler"),
-            $._scoped_multi_paragraph_element,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         verbatim: $ =>
         seq(
-            alias($.verbatim_open, "_open_verbatim"),
+            alias($.verbatim_open, "_open"),
             $._verbatim_segment,
-            alias($.markup_close, "_close"),
+            alias($.verbatim_close, "_close"),
         ),
-
-        scoped_verbatim: $ =>
-        prec(2, seq(
-            alias($.scoped_verbatim_open, "_open_scoped_verbatim"),
-            $._scoped_verbatim_segment,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         superscript: $ =>
         seq(
-            alias($.superscript_open, "_open_superscript"),
+            alias($.superscript_open, "_open"),
             $._multi_paragraph_element,
-            alias($.markup_close, "_close"),
+            alias($.superscript_close, "_close"),
         ),
-
-        scoped_superscript: $ =>
-        prec(2, seq(
-            alias($.scoped_superscript_open, "_open_scoped_superscript"),
-            $._scoped_multi_paragraph_element,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         subscript: $ =>
         seq(
-            alias($.subscript_open, "_open_subscript"),
+            alias($.subscript_open, "_open"),
             $._multi_paragraph_element,
-            alias($.markup_close, "_close"),
+            alias($.subscript_close, "_close"),
         ),
-
-        scoped_subscript: $ =>
-        prec(2, seq(
-            alias($.scoped_subscript_open, "_open_scoped_subscript"),
-            $._scoped_multi_paragraph_element,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         inline_comment: $ =>
         seq(
-            alias($.inline_comment_open, "_open_inline_comment"),
+            alias($.inline_comment_open, "_open"),
             $._verbatim_segment,
-            alias($.markup_close, "_close"),
+            alias($.inline_comment_close, "_close"),
         ),
-
-        scoped_inline_comment: $ =>
-        prec(2, seq(
-            alias($.scoped_inline_comment_open, "_open_scoped_inline_comment"),
-            $._scoped_verbatim_segment,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         inline_math: $ =>
         seq(
-            alias($.inline_math_open, "_open_inline_math"),
+            alias($.inline_math_open, "_open"),
             $._verbatim_segment,
-            alias($.markup_close, "_close"),
+            alias($.inline_math_close, "_close"),
         ),
-
-        scoped_inline_math: $ =>
-        prec(2, seq(
-            alias($.scoped_inline_math_open, "_open_scoped_inline_math"),
-            $._scoped_verbatim_segment,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         variable: $ =>
         seq(
-            alias($.variable_open, "_open_variable"),
+            alias($.variable_open, "_open"),
             $._verbatim_segment,
-            alias($.markup_close, "_close"),
+            alias($.variable_close, "_close"),
         ),
-
-        scoped_variable: $ =>
-        prec(2, seq(
-            alias($.scoped_variable_open, "_open_scoped_variable"),
-            $._scoped_verbatim_segment,
-            alias(seq(
-                $.markup_close,
-                $.markup_close,
-            ), "_close"),
-        )),
 
         _conflict_open: $ =>
         prec.dynamic(-1,
@@ -547,8 +383,6 @@ module.exports = grammar({
                 alias($.inline_comment_open, "_lowercase"),
                 alias($.inline_math_open, "_lowercase"),
                 alias($.variable_open, "_lowercase"),
-
-                alias($.scoped_bold_open, "_lowercase"),
             )
         ),
 
@@ -2518,17 +2352,6 @@ module.exports = grammar({
             $.inline_comment,
             $.inline_math,
             $.variable,
-            $.scoped_bold,
-            $.scoped_italic,
-            $.scoped_strikethrough,
-            $.scoped_underline,
-            $.scoped_verbatim,
-            $.scoped_spoiler,
-            $.scoped_superscript,
-            $.scoped_subscript,
-            $.scoped_inline_comment,
-            $.scoped_inline_math,
-            $.scoped_variable,
         ),
     }
 });

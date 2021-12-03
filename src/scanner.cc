@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <array>
+#include <bitset>
 #include <cwctype>
 #include <iostream>
 #include <locale>
@@ -126,30 +127,37 @@ enum TokenType : char
     LINK_MODIFIER,
 
     BOLD_OPEN,
+    BOLD_CLOSE,
+
     ITALIC_OPEN,
+    ITALIC_CLOSE,
+
     STRIKETHROUGH_OPEN,
+    STRIKETHROUGH_CLOSE,
+
     UNDERLINE_OPEN,
+    UNDERLINE_CLOSE,
+
     SPOILER_OPEN,
+    SPOILER_CLOSE,
+
     VERBATIM_OPEN,
+    VERBATIM_CLOSE,
+
     SUPERSCRIPT_OPEN,
+    SUPERSCRIPT_CLOSE,
+
     SUBSCRIPT_OPEN,
+    SUBSCRIPT_CLOSE,
+
     INLINE_COMMENT_OPEN,
+    INLINE_COMMENT_CLOSE,
+
     INLINE_MATH_OPEN,
+    INLINE_MATH_CLOSE,
+
     VARIABLE_OPEN,
-
-    SCOPED_BOLD_OPEN,
-    SCOPED_ITALIC_OPEN,
-    SCOPED_STRIKETHROUGH_OPEN,
-    SCOPED_UNDERLINE_OPEN,
-    SCOPED_SPOILER_OPEN,
-    SCOPED_VERBATIM_OPEN,
-    SCOPED_SUPERSCRIPT_OPEN,
-    SCOPED_SUBSCRIPT_OPEN,
-    SCOPED_INLINE_COMMENT_OPEN,
-    SCOPED_INLINE_MATH_OPEN,
-    SCOPED_VARIABLE_OPEN,
-
-    MARKUP_CLOSE,
+    VARIABLE_CLOSE,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -624,20 +632,8 @@ class Scanner
 
             if (found_attached_modifier != m_AttachedModifiers.end())
             {
-                if (lexer->lookahead == '|')
-                {
-                    advance(lexer);
-                    if (!std::iswspace(lexer->lookahead))
-                    {
-                        lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + (VARIABLE_OPEN - BOLD_OPEN) + 1);
-                        return m_LastToken;
-                    }
-
-                    return NONE;
-                }
-                else
-                    lexer->result_symbol = m_LastToken = found_attached_modifier->second;
-
+                m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
         }
@@ -653,13 +649,21 @@ class Scanner
      */
     TokenType check_attached(TSLexer* lexer)
     {
+        auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+
+        if (found_attached_modifier == m_AttachedModifiers.end())
+        {
+            advance(lexer);
+            return NONE;
+        }
+
         if (lexer->lookahead == ':')
         {
-            if (m_Current != '|' && m_AttachedModifiers.find(m_Current) == m_AttachedModifiers.end())
+            if (m_AttachedModifiers.find(m_Current) == m_AttachedModifiers.end())
             {
                 advance(lexer);
 
-                if (lexer->lookahead != '|' && m_AttachedModifiers.find(lexer->lookahead) == m_AttachedModifiers.end())
+                if (m_AttachedModifiers.find(lexer->lookahead) == m_AttachedModifiers.end())
                     return NONE;
             }
             else
@@ -671,46 +675,27 @@ class Scanner
             lexer->result_symbol = m_LastToken = LINK_MODIFIER;
             return m_LastToken;
         }
-        else if ((!std::iswspace(m_Current) || !m_Current) && lexer->lookahead == '|')
+        // First check for the existence of an opening attached modifier
+        else if ((std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current) && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
         {
             advance(lexer);
 
-            if (std::iswpunct(lexer->lookahead) || std::iswspace(lexer->lookahead) || !lexer->lookahead)
-            {
-                lexer->result_symbol = m_LastToken = MARKUP_CLOSE;
-                return m_LastToken;
-            }
-
-            return NONE;
-        }
-
-        auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
-
-        if (found_attached_modifier == m_AttachedModifiers.end())
-            return NONE;
-
-        if ((std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current))
-        {
-            advance(lexer);
-
-            if (lexer->lookahead == '|')
-            {
-                advance(lexer);
-
-                if (!std::iswspace(lexer->lookahead))
-                {
-                    lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + (VARIABLE_OPEN - BOLD_OPEN) + 1);
-                    return m_LastToken;
-                }
-            }
             if (!std::iswspace(lexer->lookahead))
             {
+                m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
         }
+        else
+            advance(lexer);
 
-        advance(lexer);
+        if ((std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) || !lexer->lookahead) && m_ActiveModifiers[(found_attached_modifier->second -  BOLD_OPEN) / 2])
+        {
+            lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + 1);
+            m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
+            return m_LastToken;
+        }
 
         return NONE;
     }
@@ -996,6 +981,8 @@ class Scanner
         {'$', INLINE_MATH_OPEN},
         {'=', VARIABLE_OPEN},
     };
+
+    std::bitset<((VARIABLE_OPEN - BOLD_OPEN) / 2) + 1> m_ActiveModifiers;
 };
 
 extern "C"
