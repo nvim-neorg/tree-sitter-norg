@@ -522,6 +522,7 @@ class Scanner
     size_t& get_tag_level() noexcept { return m_TagLevel; }
     TokenType& get_last_token() noexcept { return m_LastToken; }
     int32_t& get_current_char() noexcept { return m_Current; }
+    auto& get_active_modifiers() noexcept { return m_ActiveModifiers; }
 
    private:
     // Skips the next character without including it in the final result
@@ -677,7 +678,8 @@ class Scanner
             return m_LastToken;
         }
         // First check for the existence of an opening attached modifier
-        else if ((std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current) && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+        else if ((std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current) &&
+                 !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
         {
             advance(lexer);
 
@@ -691,9 +693,12 @@ class Scanner
         else
             advance(lexer);
 
-        if ((std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) || !lexer->lookahead) && m_ActiveModifiers[(found_attached_modifier->second -  BOLD_OPEN) / 2])
+        if ((std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) ||
+             !lexer->lookahead) &&
+            m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
         {
-            lexer->result_symbol = m_LastToken = static_cast<TokenType>(found_attached_modifier->second + 1);
+            lexer->result_symbol = m_LastToken =
+                static_cast<TokenType>(found_attached_modifier->second + 1);
             m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
             return m_LastToken;
         }
@@ -936,8 +941,9 @@ class Scanner
         {
             if (lexer->lookahead == ':')
                 break;
-            else if (((lexer->lookahead == '~' || lexer->lookahead == '|') && !std::iswspace(m_Current)) ||
-                (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()))
+            else if (((lexer->lookahead == '~' || lexer->lookahead == '|') &&
+                      !std::iswspace(m_Current)) ||
+                     (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()))
                 break;
             else
                 advance(lexer);
@@ -970,17 +976,10 @@ class Scanner
     const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '|', '=',
                                                         '~', '$', '_', '^'};
     const std::unordered_map<char, TokenType> m_AttachedModifiers = {
-        {'*', BOLD_OPEN},
-        {'-', STRIKETHROUGH_OPEN},
-        {'_', UNDERLINE_OPEN},
-        {'/', ITALIC_OPEN},
-        {'~', SPOILER_OPEN},
-        {'^', SUPERSCRIPT_OPEN},
-        {',', SUBSCRIPT_OPEN},
-        {'`', VERBATIM_OPEN},
-        {'+', INLINE_COMMENT_OPEN},
-        {'$', INLINE_MATH_OPEN},
-        {'=', VARIABLE_OPEN},
+        {'*', BOLD_OPEN},        {'-', STRIKETHROUGH_OPEN}, {'_', UNDERLINE_OPEN},
+        {'/', ITALIC_OPEN},      {'~', SPOILER_OPEN},       {'^', SUPERSCRIPT_OPEN},
+        {',', SUBSCRIPT_OPEN},   {'`', VERBATIM_OPEN},      {'+', INLINE_COMMENT_OPEN},
+        {'$', INLINE_MATH_OPEN}, {'=', VARIABLE_OPEN},
     };
 
     std::bitset<((VARIABLE_OPEN - BOLD_OPEN) / 2) + 1> m_ActiveModifiers;
@@ -1009,20 +1008,31 @@ extern "C"
         const auto& tag_level = scanner->get_tag_level();
         const auto& last_token = scanner->get_last_token();
         const auto& current = scanner->get_current_char();
+        const auto& active_modifiers = scanner->get_active_modifiers();
 
-        if (6 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (6 + active_modifiers.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
         buffer[1] = tag_level;
+
         // Store `current` (which is an int32_t) in a char array by splitting it up
         buffer[2] = current & 0xFF;
         buffer[3] = (current >> 8) & 0xFF;
         buffer[4] = (current >> 16) & 0xFF;
         buffer[5] = (current >> 24) & 0xFF;
-        // TODO: Serialize m_ActiveModifiers
 
-        return 6;
+        // Serialize the attached modifier bitset into the char array
+        // We cast it down to a uint32_t because we genuinely won't be using any
+        // more than that.
+        uint32_t active_modifiers_as_ulong = static_cast<uint32_t>(active_modifiers.to_ulong());
+
+        buffer[6] = active_modifiers_as_ulong & 0xFF;
+        buffer[7] = (active_modifiers_as_ulong >> 8) & 0xFF;
+        buffer[8] = (active_modifiers_as_ulong >> 16) & 0xFF;
+        buffer[9] = (active_modifiers_as_ulong >> 24) & 0xFF;
+
+        return 9;
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload,
@@ -1034,15 +1044,16 @@ extern "C"
         auto& tag_level = scanner->get_tag_level();
         auto& last_token = scanner->get_last_token();
         auto& current = scanner->get_current_char();
+        auto& active_modifiers = scanner->get_active_modifiers();
 
-        if (length == 6)
+        if (length == 9)
         {
             last_token = (TokenType)buffer[0];
             tag_level = (size_t)buffer[1];
-            current = (uint32_t)buffer[5] << 24 |
-                      (uint32_t)buffer[4] << 16 |
-                      (uint32_t)buffer[3] << 8  |
-                      (uint32_t)buffer[2];
+            current = (uint32_t)buffer[5] << 24 | (uint32_t)buffer[4] << 16 |
+                      (uint32_t)buffer[3] << 8 | (uint32_t)buffer[2];
+            active_modifiers = (uint32_t)active_modifiers[9] << 24 | (uint32_t)buffer[8] << 16 |
+                      (uint32_t)buffer[7] << 8 | (uint32_t)buffer[6];
         }
         else
             tag_level = 0;
