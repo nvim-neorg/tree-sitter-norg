@@ -218,7 +218,7 @@
                     "name": "trailing_modifier"
                   },
                   "named": false,
-                  "value": "_trailing_modifier"
+                  "value": "_lowercase"
                 },
                 {
                   "type": "ALIAS",
@@ -618,7 +618,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_verbatim_segment"
+          "name": "_multi_paragraph_element"
         },
         {
           "type": "ALIAS",

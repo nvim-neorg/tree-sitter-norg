@@ -241,7 +241,7 @@ module.exports = grammar({
                     choice(
                         alias($.word, "_word"),
                         alias($.space, "_space"),
-                        alias($.trailing_modifier, "_trailing_modifier"),
+                        alias($.trailing_modifier, "_lowercase"),
                         alias($.escape_sequence, "_lowercase"),
                         alias($.link_modifier, "_lowercase"),
                         alias($.bold_open, "_lowercase"),
@@ -266,17 +266,6 @@ module.exports = grammar({
                 choice(
                     $._paragraph_element,
                     alias($._conflict_open, "_lowercase"),
-                    /* alias($.bold_close, "_lowercase"),
-                    alias($.italic_close, "_lowercase"),
-                    alias($.strikethrough_close, "_lowercase"),
-                    alias($.underline_close, "_lowercase"),
-                    alias($.spoiler_close, "_lowercase"),
-                    alias($.verbatim_close, "_lowercase"),
-                    alias($.superscript_close, "_lowercase"),
-                    alias($.subscript_close, "_lowercase"),
-                    alias($.inline_comment_close, "_lowercase"),
-                    alias($.inline_math_close, "_lowercase"),
-                    alias($.variable_close, "_lowercase"), */
                 ),
             )
         ),

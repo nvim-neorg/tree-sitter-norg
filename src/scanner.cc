@@ -678,7 +678,7 @@ class Scanner
             return m_LastToken;
         }
         // First check for the existence of an opening attached modifier
-        else if ((std::iswspace(m_Current) || std::ispunct(m_Current) || !m_Current) &&
+        else if ((std::iswspace(m_Current) || std::iswpunct(m_Current) || !m_Current) &&
                  !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
         {
             advance(lexer);
@@ -691,16 +691,21 @@ class Scanner
             }
         }
         else
+        {
+            int32_t cur = m_Current;
+
             advance(lexer);
 
-        if ((std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) ||
-             !lexer->lookahead) &&
-            m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
-        {
-            lexer->result_symbol = m_LastToken =
-                static_cast<TokenType>(found_attached_modifier->second + 1);
-            m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
-            return m_LastToken;
+            if ((!std::iswspace(cur) || !cur) &&
+                (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) ||
+                 !lexer->lookahead) &&
+                m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+            {
+                lexer->result_symbol = m_LastToken =
+                    static_cast<TokenType>(found_attached_modifier->second + 1);
+                m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
+                return m_LastToken;
+            }
         }
 
         return NONE;
@@ -941,8 +946,7 @@ class Scanner
         {
             if (lexer->lookahead == ':')
                 break;
-            else if (((lexer->lookahead == '~' || lexer->lookahead == '|') &&
-                      !std::iswspace(m_Current)) ||
+            else if ((lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
                      (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()))
                 break;
             else
@@ -976,9 +980,9 @@ class Scanner
     const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '|', '=',
                                                         '~', '$', '_', '^'};
     const std::unordered_map<char, TokenType> m_AttachedModifiers = {
-        {'*', BOLD_OPEN},        {'-', STRIKETHROUGH_OPEN}, {'_', UNDERLINE_OPEN},
-        {'/', ITALIC_OPEN},      {'~', SPOILER_OPEN},       {'^', SUPERSCRIPT_OPEN},
-        {',', SUBSCRIPT_OPEN},   {'`', VERBATIM_OPEN},      {'+', INLINE_COMMENT_OPEN},
+        {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
+        {'_', UNDERLINE_OPEN},   {'|', SPOILER_OPEN},   {'`', VERBATIM_OPEN},
+        {'^', SUPERSCRIPT_OPEN}, {',', SUBSCRIPT_OPEN}, {'+', INLINE_COMMENT_OPEN},
         {'$', INLINE_MATH_OPEN}, {'=', VARIABLE_OPEN},
     };
 
@@ -1052,8 +1056,8 @@ extern "C"
             tag_level = (size_t)buffer[1];
             current = (uint32_t)buffer[5] << 24 | (uint32_t)buffer[4] << 16 |
                       (uint32_t)buffer[3] << 8 | (uint32_t)buffer[2];
-            active_modifiers = (uint32_t)active_modifiers[9] << 24 | (uint32_t)buffer[8] << 16 |
-                      (uint32_t)buffer[7] << 8 | (uint32_t)buffer[6];
+            active_modifiers = (uint64_t)active_modifiers[9] << 24 | (uint64_t)buffer[8] << 16 |
+                               (uint64_t)buffer[7] << 8 | (uint64_t)buffer[6];
         }
         else
             tag_level = 0;
