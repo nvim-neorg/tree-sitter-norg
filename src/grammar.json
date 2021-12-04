@@ -618,7 +618,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_multi_paragraph_element"
+          "name": "_verbatim_segment"
         },
         {
           "type": "ALIAS",

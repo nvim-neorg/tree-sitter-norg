@@ -947,7 +947,7 @@ class Scanner
             if (lexer->lookahead == ':')
                 break;
             else if ((lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
-                     (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()))
+                     (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) || lexer->lookahead == '\\')
                 break;
             else
                 advance(lexer);
@@ -1014,7 +1014,7 @@ extern "C"
         const auto& current = scanner->get_current_char();
         const auto& active_modifiers = scanner->get_active_modifiers();
 
-        if (6 + active_modifiers.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (9 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
@@ -1060,6 +1060,9 @@ extern "C"
                                (uint64_t)buffer[7] << 8 | (uint64_t)buffer[6];
         }
         else
+        {
+            active_modifiers = 0;
             tag_level = 0;
+        }
     }
 }
