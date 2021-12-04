@@ -228,6 +228,7 @@ class Scanner
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
+                m_ActiveModifiers.reset();
             }
 
             return true;
