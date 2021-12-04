@@ -1009,17 +1009,19 @@ extern "C"
         const auto& last_token = scanner->get_last_token();
         const auto& current = scanner->get_current_char();
 
-        if (3 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (6 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
         buffer[1] = tag_level;
-        // TODO: We're storing an int32_t inside of a `char` here, meaning
-        // loss of information. Should we divide the `current` value
-        // into 4 pieces and store those inside this buffer?
-        buffer[2] = current;
+        // Store `current` (which is an int32_t) in a char array by splitting it up
+        buffer[2] = current & 0xFF;
+        buffer[3] = (current >> 8) & 0xFF;
+        buffer[4] = (current >> 16) & 0xFF;
+        buffer[5] = (current >> 24) & 0xFF;
+        // TODO: Serialize m_ActiveModifiers
 
-        return 3;
+        return 6;
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload,
@@ -1032,11 +1034,14 @@ extern "C"
         auto& last_token = scanner->get_last_token();
         auto& current = scanner->get_current_char();
 
-        if (length == 3)
+        if (length == 6)
         {
             last_token = (TokenType)buffer[0];
             tag_level = (size_t)buffer[1];
-            current = (int32_t)buffer[2];
+            current = (uint32_t)buffer[5] << 24 |
+                      (uint32_t)buffer[4] << 16 |
+                      (uint32_t)buffer[3] << 8  |
+                      (uint32_t)buffer[2];
         }
         else
             tag_level = 0;
