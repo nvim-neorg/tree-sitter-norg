@@ -698,10 +698,7 @@ No nested markup inside verbatim
             (verbatim)
         )
         (paragraph_segment
-            (verbatim
-                (escape_sequence_prefix)
-                (any_char)
-            )
+            (verbatim)
         )
     )
 )
@@ -758,10 +755,7 @@ No nested markup inside inline comments
             (inline_comment)
         )
         (paragraph_segment
-            (inline_comment
-                (escape_sequence_prefix)
-                (any_char)
-            )
+            (inline_comment)
         )
     )
 )
@@ -818,10 +812,7 @@ $hidden \*escaped char*$
             (inline_math)
         )
         (paragraph_segment
-            (inline_math
-                (escape_sequence_prefix)
-                (any_char)
-            )
+            (inline_math)
         )
     )
 )

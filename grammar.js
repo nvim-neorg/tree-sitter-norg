@@ -1,3 +1,4 @@
+// TODO: Fix the thing where you don't parse anything when verbatim etc. bit flipped
 module.exports = grammar({
     name: 'norg',
 
@@ -153,14 +154,14 @@ module.exports = grammar({
         $.spoiler_open,
         $.spoiler_close,
 
-        $.verbatim_open,
-        $.verbatim_close,
-
         $.superscript_open,
         $.superscript_close,
 
         $.subscript_open,
         $.subscript_close,
+
+        $.verbatim_open,
+        $.verbatim_close,
 
         $.inline_comment_open,
         $.inline_comment_close,
@@ -237,26 +238,14 @@ module.exports = grammar({
         _verbatim_segment: $ =>
         seq(
             repeat1(
-                prec.right(1,
-                    choice(
-                        alias($.word, "_word"),
-                        alias($.space, "_space"),
-                        alias($.trailing_modifier, "_lowercase"),
-                        alias($.escape_sequence, "_lowercase"),
-                        alias($.link_modifier, "_lowercase"),
-                        alias($.bold_open, "_lowercase"),
-                        alias($.italic_open, "_lowercase"),
-                        alias($.strikethrough_open, "_lowercase"),
-                        alias($.underline_open, "_lowercase"),
-                        alias($.spoiler_open, "_lowercase"),
-                        alias($.verbatim_open, "_lowercase"),
-                        alias($.superscript_open, "_lowercase"),
-                        alias($.subscript_open, "_lowercase"),
-                        alias($.inline_comment_open, "_lowercase"),
-                        alias($.inline_math_open, "_lowercase"),
-                        alias($.variable_open, "_lowercase"),
-                    ),
-                )
+                choice(
+                    alias($.word, "_word"),
+                    alias($.space, "_space"),
+                    alias($.trailing_modifier, "_lowercase"),
+                    alias($.escape_sequence, "_lowercase"),
+                    alias($.link_modifier, "_lowercase"),
+                    alias($._conflict_open, "_lowercase"),
+                ),
             ),
         ),
 

@@ -141,14 +141,14 @@ enum TokenType : char
     SPOILER_OPEN,
     SPOILER_CLOSE,
 
-    VERBATIM_OPEN,
-    VERBATIM_CLOSE,
-
     SUPERSCRIPT_OPEN,
     SUPERSCRIPT_CLOSE,
 
     SUBSCRIPT_OPEN,
     SUBSCRIPT_CLOSE,
+
+    VERBATIM_OPEN,
+    VERBATIM_CLOSE,
 
     INLINE_COMMENT_OPEN,
     INLINE_COMMENT_CLOSE,
@@ -659,6 +659,12 @@ class Scanner
             return NONE;
         }
 
+        const auto can_have_modifier = [&]()
+        {
+            return !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] && !m_ActiveModifiers[(INLINE_COMMENT_OPEN - BOLD_OPEN) / 2]
+                && !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2] && !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2];
+        };
+
         if (lexer->lookahead == ':')
         {
             if (m_AttachedModifiers.find(m_Current) == m_AttachedModifiers.end())
@@ -678,7 +684,7 @@ class Scanner
             return m_LastToken;
         }
         // First check for the existence of an opening attached modifier
-        else if ((std::iswspace(m_Current) || std::iswpunct(m_Current) || !m_Current) &&
+        else if (can_have_modifier() && (std::iswspace(m_Current) || std::iswpunct(m_Current) || !m_Current) &&
                  !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
         {
             advance(lexer);
@@ -944,9 +950,7 @@ class Scanner
 
         do
         {
-            if (lexer->lookahead == ':')
-                break;
-            else if ((lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
+            if (lexer->lookahead == ':' || (lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
                      (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) || lexer->lookahead == '\\')
                 break;
             else
@@ -1014,7 +1018,7 @@ extern "C"
         const auto& current = scanner->get_current_char();
         const auto& active_modifiers = scanner->get_active_modifiers();
 
-        if (9 >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (6 + active_modifiers.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
@@ -1029,14 +1033,10 @@ extern "C"
         // Serialize the attached modifier bitset into the char array
         // We cast it down to a uint32_t because we genuinely won't be using any
         // more than that.
-        uint32_t active_modifiers_as_ulong = static_cast<uint32_t>(active_modifiers.to_ulong());
+        for (int i = 0; i < active_modifiers.size(); i++)
+            buffer[6 + i] = active_modifiers[i];
 
-        buffer[6] = active_modifiers_as_ulong & 0xFF;
-        buffer[7] = (active_modifiers_as_ulong >> 8) & 0xFF;
-        buffer[8] = (active_modifiers_as_ulong >> 16) & 0xFF;
-        buffer[9] = (active_modifiers_as_ulong >> 24) & 0xFF;
-
-        return 9;
+        return 6 + active_modifiers.size();
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload,
@@ -1050,19 +1050,19 @@ extern "C"
         auto& current = scanner->get_current_char();
         auto& active_modifiers = scanner->get_active_modifiers();
 
-        if (length == 9)
-        {
-            last_token = (TokenType)buffer[0];
-            tag_level = (size_t)buffer[1];
-            current = (uint32_t)buffer[5] << 24 | (uint32_t)buffer[4] << 16 |
-                      (uint32_t)buffer[3] << 8 | (uint32_t)buffer[2];
-            active_modifiers = (uint64_t)active_modifiers[9] << 24 | (uint64_t)buffer[8] << 16 |
-                               (uint64_t)buffer[7] << 8 | (uint64_t)buffer[6];
-        }
-        else
+        if (length == 0)
         {
             active_modifiers = 0;
             tag_level = 0;
+            return;
         }
+
+        last_token = (TokenType)buffer[0];
+        tag_level = (size_t)buffer[1];
+        current = (uint32_t)buffer[5] << 24 | (uint32_t)buffer[4] << 16 |
+                  (uint32_t)buffer[3] << 8 | (uint32_t)buffer[2];
+
+        for (int i = 0; i < active_modifiers.size(); i++)
+            active_modifiers[i] = buffer[6 + i];
     }
 }
