@@ -221,7 +221,16 @@
                 "type": "ALIAS",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "escape_sequence"
+                  "name": "escape_sequence_prefix"
+                },
+                "named": false,
+                "value": "_lowercase"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "any_char"
                 },
                 "named": false,
                 "value": "_lowercase"

@@ -869,10 +869,7 @@ No nested markup inside variables
             (variable)
         )
         (paragraph_segment
-            (variable
-                (escape_sequence_prefix)
-                (any_char)
-            )
+            (variable)
         )
     )
 )

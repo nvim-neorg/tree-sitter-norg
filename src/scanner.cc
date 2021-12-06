@@ -651,20 +651,6 @@ class Scanner
      */
     TokenType check_attached(TSLexer* lexer)
     {
-        auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
-
-        if (found_attached_modifier == m_AttachedModifiers.end())
-        {
-            advance(lexer);
-            return NONE;
-        }
-
-        const auto can_have_modifier = [&]()
-        {
-            return !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] && !m_ActiveModifiers[(INLINE_COMMENT_OPEN - BOLD_OPEN) / 2]
-                && !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2] && !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2];
-        };
-
         if (lexer->lookahead == ':')
         {
             if (m_AttachedModifiers.find(m_Current) == m_AttachedModifiers.end())
@@ -683,11 +669,29 @@ class Scanner
             lexer->result_symbol = m_LastToken = LINK_MODIFIER;
             return m_LastToken;
         }
+
+        auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+
+        if (found_attached_modifier == m_AttachedModifiers.end())
+            return NONE;
+
+        const auto can_have_modifier = [&]()
+        {
+            return !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] && !m_ActiveModifiers[(INLINE_COMMENT_OPEN - BOLD_OPEN) / 2]
+                && !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2] && !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2];
+        };
+
         // First check for the existence of an opening attached modifier
-        else if (can_have_modifier() && (std::iswspace(m_Current) || std::iswpunct(m_Current) || !m_Current) &&
+        if (can_have_modifier() && (std::iswspace(m_Current) || std::iswpunct(m_Current) || !m_Current) &&
                  !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
         {
             advance(lexer);
+
+            if (lexer->lookahead == found_attached_modifier->first)
+            {
+                advance(lexer);
+                return NONE;
+            }
 
             if (!std::iswspace(lexer->lookahead))
             {
