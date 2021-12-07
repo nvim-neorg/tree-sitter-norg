@@ -262,6 +262,7 @@ module.exports = grammar({
             seq(
                 repeat1(
                     choice(
+                        $._line_break,
                         alias($.word, "_word"),
                         alias($.space, "_space"),
                         alias($.trailing_modifier, "_lowercase"),

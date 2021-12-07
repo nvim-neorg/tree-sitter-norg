@@ -293,6 +293,10 @@
               "type": "CHOICE",
               "members": [
                 {
+                  "type": "SYMBOL",
+                  "name": "_line_break"
+                },
+                {
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
