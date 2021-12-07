@@ -1,4 +1,3 @@
-// TODO: Fix the thing where you don't parse anything when verbatim etc. bit flipped
 module.exports = grammar({
     name: 'norg',
 
@@ -23,7 +22,7 @@ module.exports = grammar({
         [$.inline_comment, $._conflict_open],
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
-        
+
         [$.bold, $._paragraph_element],
         [$.italic, $._paragraph_element],
         [$.strikethrough, $._paragraph_element],
