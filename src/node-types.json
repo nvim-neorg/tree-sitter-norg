@@ -142,28 +142,7 @@
   {
     "type": "_lowercase",
     "named": false,
-    "fields": {
-      "token": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "any_char",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "escape_sequence_prefix",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "_segment",

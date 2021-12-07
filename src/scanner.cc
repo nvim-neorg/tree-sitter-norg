@@ -675,15 +675,10 @@ class Scanner
         if (found_attached_modifier == m_AttachedModifiers.end())
             return NONE;
 
-        const auto can_have_modifier = [&]()
-        {
-            return !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] && !m_ActiveModifiers[(INLINE_COMMENT_OPEN - BOLD_OPEN) / 2]
-                && !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2] && !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2];
-        };
+        int32_t cur = m_Current;
 
         // First check for the existence of an opening attached modifier
-        if (can_have_modifier() && (std::iswspace(m_Current) || std::iswpunct(m_Current) || !m_Current) &&
-                 !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+        if (std::iswspace(m_Current) || std::iswpunct(m_Current) || !m_Current)
         {
             advance(lexer);
 
@@ -693,31 +688,31 @@ class Scanner
                 return NONE;
             }
 
-            if (!std::iswspace(lexer->lookahead))
+            auto can_have_modifier = [&]()
             {
-                m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                return !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2];
+            };
+
+            if (!std::iswspace(lexer->lookahead) && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+            {
+                if (can_have_modifier())
+                    m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
         }
         else
-        {
-            int32_t cur = m_Current;
-
             advance(lexer);
 
-            if ((!std::iswspace(cur) || !cur) &&
-                (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) ||
-                 !lexer->lookahead) &&
-                m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
-            {
-                lexer->result_symbol = m_LastToken =
-                    static_cast<TokenType>(found_attached_modifier->second + 1);
-                m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
-                return m_LastToken;
-            }
+        if ((!std::iswspace(cur) || !cur) &&
+            (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) ||
+             !lexer->lookahead))
+        {
+            m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
+            lexer->result_symbol = m_LastToken =
+                static_cast<TokenType>(found_attached_modifier->second + 1);
+            return m_LastToken;
         }
-
         return NONE;
     }
 
