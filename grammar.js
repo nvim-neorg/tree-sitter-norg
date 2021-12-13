@@ -34,6 +34,8 @@ module.exports = grammar({
         [$.inline_comment, $._paragraph_element],
         [$.inline_math, $._paragraph_element],
         [$.variable, $._paragraph_element],
+
+        [$._verbatim_segment, $.link]
     ],
 
     externals: $ => [
@@ -258,7 +260,7 @@ module.exports = grammar({
         ),
 
         _verbatim_segment: $ =>
-        prec.left(0,
+        prec.left(1,
             seq(
                 repeat1(
                     choice(
@@ -291,6 +293,30 @@ module.exports = grammar({
                         alias($.inline_math_close, "_lowercase"),
                         alias($.variable_open, "_lowercase"),
                         alias($.variable_close, "_lowercase"),
+                        alias($.link_begin, "_lowercase"),
+                        alias($.link_file_begin, "_lowercase"),
+                        alias($.link_file_text, "_lowercase"),
+                        alias($.link_file_end, "_lowercase"),
+                        alias($.link_location_generic, "_lowercase"),
+                        alias($.link_location_url, "_lowercase"),
+                        alias($.link_location_external_file, "_lowercase"),
+                        alias($.link_location_heading1, "_lowercase"),
+                        alias($.link_location_heading2, "_lowercase"),
+                        alias($.link_location_heading3, "_lowercase"),
+                        alias($.link_location_heading4, "_lowercase"),
+                        alias($.link_location_heading5, "_lowercase"),
+                        alias($.link_location_heading6, "_lowercase"),
+                        alias($.link_location_marker, "_lowercase"),
+                        alias($.link_location_definition, "_lowercase"),
+                        alias($.link_location_footnote, "_lowercase"),
+                        alias($.link_location_text, "_lowercase"),
+                        alias($.link_end, "_lowercase"),
+                        alias($.link_text_begin, "_lowercase"),
+                        alias($.link_text, "_lowercase"),
+                        alias($.link_text_end, "_lowercase"),
+                        alias($.anchor_declaration_begin, "_lowercase"),
+                        alias($.anchor_declaration_text, "_lowercase"),
+                        alias($.anchor_declaration_end, "_lowercase"),
                     ),
                 ),
             ),
