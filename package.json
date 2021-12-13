@@ -6,7 +6,8 @@
     "scripts": {
         "gen": "tree-sitter generate && node-gyp build",
         "test": "tree-sitter test",
-        "parse": "tree-sitter parse"
+        "parse": "tree-sitter parse",
+        "debug": "tree-sitter parse --debug-build"
     },
     "keywords": [
         "neorg",

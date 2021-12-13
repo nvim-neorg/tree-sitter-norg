@@ -1,54 +1,472 @@
-========
-Headings
-========
+================
+Level 1 Headings
+================
 * This is a heading
-And some text for that heading.
+  In this heading there is some text
+  ===
 
-** Then I go into some more detail here
-   And talk about some really important things
+This is no longer part of the heading.
 
 ---
-This bit of text is part of the first-level heading
-
-*** I would like to continue~
-    this text here
-
-    And talk about that thing here too
-
-This is a new paragraph.
-This paragraph will belong to the subsubheading. The reason is
-Neorg doesn't care about indentation
-
-===
-
-Last paragraph here
----
-
 (document
-	(document_content
-		(heading1
-	    	(heading1_prefix)
-	    	title: (paragraph_segment)
-	    	content: (paragraph)
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+        (strong_paragraph_delimiter)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
 
-	    	content:
-	        	(heading2
-                	(heading2_prefix)
-                	title: (paragraph_segment)
-                	content: (paragraph)
-	        		(weak_paragraph_delimiter)
-	        	)
-	        content: (paragraph)
+
+================
+Level 2 Headings
+================
+** This is a level 2 heading
+   That has text underneath
+
+* And here is a level 1 heading
+  ** With a level 2 heading
+     And some content
+     ===
+
+And here is some more text that has broken out of the matrix.
+
+---
+(document
+    (heading2
+        (heading2_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
+
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
+
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+
+================
+Level 3 Headings
+================
+*** This is a level 3 heading
+    That has text underneath
+
+* And here is a level 1 heading
+  ** With a level 2 heading
+     And some content
+     *** Then a level 3 heading
+         With more content
+         ===
+
+And here is some more text that has broken out of the matrix.
+
+---
+(document
+    (heading3
+        (heading3_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
+
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                content:
+                    (heading3
+                        (heading3_prefix)
+                        title: (paragraph_segment)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                            )
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
+
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+
+================
+Level 4 Headings
+================
+**** This is a level 4 heading
+     That has text underneath
+
+* And here is a level 1 heading
+  ** With a level 2 heading
+     And some content
+     *** Then a level 3 heading
+         With more content
+         **** And a level 4 heading
+              With a lil content
+              ===
+
+And here is some more text that has broken out of the matrix.
+
+---
+(document
+    (heading4
+        (heading4_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
+
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                content:
+                    (heading3
+                        (heading3_prefix)
+                        title: (paragraph_segment)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                            )
+                        content:
+                            (heading4
+                                (heading4_prefix)
+                                title: (paragraph_segment)
+                                content:
+                                    (paragraph
+                                        (paragraph_segment)
+                                    )
+                            )
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
+
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+
+================
+Level 5 Headings
+================
+***** This is a level 5 heading
+      That has text underneath
+
+* And here is a level 1 heading
+  ** With a level 2 heading
+     And some content
+     *** Then a level 3 heading
+         With more content
+         **** And a level 4 heading
+              ***** And then a level 5 heading
+              ===
+
+And here is some more text that has broken out of the matrix.
+
+---
+(document
+    (heading5
+        (heading5_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
+
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                content:
+                    (heading3
+                        (heading3_prefix)
+                        title: (paragraph_segment)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                            )
+                        content:
+                            (heading4
+                                (heading4_prefix)
+                                title: (paragraph_segment)
+                                content:
+                                    (heading5
+                                        (heading5_prefix)
+                                        title: (paragraph_segment)
+                                    )
+                            )
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
+
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+
+================
+Level 6 Headings
+================
+****** This is a level 6 heading
+      That has text underneath
+
+* And here is a level 1 heading
+  ** With a level 2 heading
+     And some content
+     *** Then a level 3 heading
+         With more content
+         **** And a level 4 heading
+              ***** And then a level 5 heading
+                    Content
+                    ****** And finally a level 6 heading
+              ===
+
+And here is some more text that has broken out of the matrix.
+
+---
+(document
+    (heading6
+        (heading6_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+    )
+
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                content:
+                    (heading3
+                        (heading3_prefix)
+                        title: (paragraph_segment)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                            )
+                        content:
+                            (heading4
+                                (heading4_prefix)
+                                title: (paragraph_segment)
+                                content:
+                                    (heading5
+                                        (heading5_prefix)
+                                        title: (paragraph_segment)
+                                        content:
+                                            (paragraph
+                                                (paragraph_segment)
+                                            )
+                                        content:
+                                            (heading6
+                                                (heading6_prefix)
+                                                title: (paragraph_segment)
+                                            )
+                                    )
+                            )
+                    )
+            )
+        (strong_paragraph_delimiter)
+    )
+
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+=====================
+Indentation Reversion
+=====================
+Time to test indentation reversion.
+
+* This is a heading
+  ** It contains a level 2 heading
+     Which in turn contains some text.
+     ---
+  This should reverse the indentation and
+  it should be part of the first-level
+  heading now
+  *** This is now a third-level heading
+      ---
+  And it has reversed too
+  *** Another third-level heading
+  ===
+
+This should no longer be part of the heading.
+
+---
+(document
+    (paragraph
+        (paragraph_segment)
+    )
+
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (heading2
+                (heading2_prefix)
+                title: (paragraph_segment)
+                content:
+                    (paragraph
+                        (paragraph_segment)
+                    )
+                (weak_paragraph_delimiter)
+            )
+        content:
+            (paragraph
+                (paragraph_segment)
+                (paragraph_segment)
+                (paragraph_segment)
+            )
+        content:
+            (heading3
+                (heading3_prefix)
+                title: (paragraph_segment)
+                (weak_paragraph_delimiter)
+            )
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
+        content:
+            (heading3
+                (heading3_prefix)
+                title: (paragraph_segment)
+            )
+        (strong_paragraph_delimiter)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+===============================
+Malformed indentation reversion
+===============================
+* Heading
+  A paragraph
+  --- 
+  This should not be reverted since the previous element
+  has whitespace afterwards.
+  It should instead be treated as an unordered list element.
+
+  This --- should also not revert the heading.
+  --neither- should this
+  ---
+
+This should though.
+
+---
+(document
+    (heading1
+        (heading1_prefix)
+        title: (paragraph_segment)
+        content:
+            (paragraph
+                (paragraph_segment)
+            )
             content:
-                (heading3
-                    (heading3_prefix)
-                    title: (paragraph_segment)
-                    content: (paragraph)
-                    content: (paragraph)
+                (generic_list
+                    (unordered_list3
+                        (unordered_list3_prefix)
+                        content:
+                            (paragraph
+                                (paragraph_segment)
+                                (paragraph_segment)
+                                (paragraph_segment)
+                            )
+                    )
                 )
-		)
+            content:
+                (paragraph
+                    (paragraph_segment)
+                    (paragraph_segment)
+                )
+            (weak_paragraph_delimiter)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
 
-		(strong_paragraph_delimiter)
-		(paragraph)
-	)
+===============
+Horizontal Line
+===============
+This is some text.
+___
+Separated by a horizontal line.
+---
+(document
+    (paragraph
+        (paragraph_segment)
+    )
+    (horizontal_line)
+    (paragraph
+        (paragraph_segment)
+    )
 )

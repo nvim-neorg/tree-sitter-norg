@@ -1,0 +1,185 @@
+==============
+Level 1 Quotes
+==============
+> This is a first level quote.
+This is no longer part of the quote.
+---
+(document
+    (quote
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
+)
+
+==============
+Level 2 Quotes
+==============
+>> This is a second level quote.
+This is no longer part of the quote.
+---
+(document
+    (quote
+        (quote2
+            (quote2_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
+)
+
+==============
+Level 3 Quotes
+==============
+>>> This is a third level quote.
+This is no longer part of the quote.
+---
+(document
+    (quote
+        (quote3
+            (quote3_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
+)
+
+==============
+Level 4 Quotes
+==============
+>>>> This is a forth level quote.
+This is no longer part of the quote.
+---
+(document
+    (quote
+        (quote4
+            (quote4_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
+)
+
+==============
+Level 5 Quotes
+==============
+>>>>> This is a fifth level quote.
+This is no longer part of the quote.
+---
+(document
+    (quote
+        (quote5
+            (quote5_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
+)
+
+==============
+Level 6 Quotes
+==============
+>>>>>> This is a sixth level quote.
+This is no longer part of the quote.
+---
+(document
+    (quote
+        (quote6
+            (quote6_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
+)
+
+=============
+Nested Quotes
+=============
+> This is a first level quote.
+>> This is a second level quote.
+>>> This is a third level quote.
+>>>> This is a forth level quote.
+>>>>> This is a fifth level quote.
+>>>>>> This is a sixth level quote.
+>>>>> Here, the fifth level quote continues.
+>>>> Here, the forth level quote continues.
+>>> Here, the third level quote continues.
+>> Here, the second level quote continues.
+> Here, the first level quote continues.
+This is no longer part of the quote.
+---
+(document
+    (quote
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment)
+            (quote2
+                (quote2_prefix)
+                content: (paragraph_segment)
+                (quote3
+                    (quote3_prefix)
+                    content: (paragraph_segment)
+                    (quote4
+                        (quote4_prefix)
+                        content: (paragraph_segment)
+                        (quote5
+                            (quote5_prefix)
+                            content: (paragraph_segment)
+                            (quote6
+                                (quote6_prefix)
+                                content: (paragraph_segment)
+                            )
+                        )
+                        (quote5
+                            (quote5_prefix)
+                            content: (paragraph_segment)
+                        )
+                    )
+                    (quote4
+                        (quote4_prefix)
+                        content: (paragraph_segment)
+                    )
+                )
+                (quote3
+                    (quote3_prefix)
+                    content: (paragraph_segment)
+                )
+            )
+            (quote2
+                (quote2_prefix)
+                content: (paragraph_segment)
+            )
+        )
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
+)
+
+=========
+Quote End
+=========
+> This is one quote.
+
+> And this is another.
+This is no longer part of the quote.
+---
+(document
+    (quote
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (quote
+        (quote1
+            (quote1_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
+)

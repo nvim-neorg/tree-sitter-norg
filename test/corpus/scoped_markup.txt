@@ -1,0 +1,1312 @@
+// ===========
+// Scoped Bold
+// ===========
+// Here is a *|scoped bold|| word.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_bold)
+//         )
+//     )
+// )
+// 
+// =============
+// Scoped Italic
+// =============
+// Here is an /|scoped italic|| word.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_italic)
+//         )
+//     )
+// )
+// 
+// ====================
+// Scoped Strikethrough
+// ====================
+// Here is a -|scoped struck through|| word.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_strikethrough)
+//         )
+//     )
+// )
+// 
+// ================
+// Scoped Underline
+// ================
+// Here is an _|scoped underlined|| word.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_underline)
+//         )
+//     )
+// )
+// 
+// ==============
+// Scoped Spoiler
+// ==============
+// Here is a ~|scoped spoiler|| word.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_spoiler)
+//         )
+//     )
+// )
+// 
+// ===============
+// Scoped Verbatim
+// ===============
+// Here is a `|scoped verbatim|| word.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//     )
+// )
+// 
+// ==================
+// Scoped Superscript
+// ==================
+// Here is a ^|scoped superscript|| word.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_superscript)
+//         )
+//     )
+// )
+// 
+// ================
+// Scoped Subscript
+// ================
+// Here is a ,|scoped subscript|| word.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_subscript)
+//         )
+//     )
+// )
+// 
+// =====================
+// Scoped Inline Comment
+// =====================
+// This sentence contains an +|scoped inlined comment||.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//     )
+// )
+// 
+// ==================
+// Scoped Inline Math
+// ==================
+// This sentence contains some $|scoped inline math||.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//     )
+// )
+// 
+// ======================
+// Scoped Variable
+// ======================
+// This sentence contains a =|scoped variable|| reference.
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//     )
+// )
+// 
+// ========================
+// Nesting into Scoped Bold
+// ========================
+// *|Scoped bold and /italic|||
+// *|Scoped bold and -struck through|||
+// *|Scoped bold and _underlined|||
+// *|Scoped bold and ~spoiler|||
+// *|Scoped bold and ^superscript|||
+// *|Scoped bold and ,subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_bold
+//                 (italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ==========================
+// Nesting into Scoped Italic
+// ==========================
+// /|Scoped italic and *bold|||
+// /|Scoped italic and -struck through|||
+// /|Scoped italic and _underlined|||
+// /|Scoped italic and ~spoiler|||
+// /|Scoped italic and ^superscript|||
+// /|Scoped italic and ,subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_italic
+//                 (bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// =================================
+// Nesting into Scoped Strikethrough
+// =================================
+// -|Scoped struck through and *bold|||
+// -|Scoped struck through and /italic|||
+// -|Scoped struck through and _underlined|||
+// -|Scoped struck through and ~spoiler|||
+// -|Scoped struck through and ^superscript|||
+// -|Scoped struck through and ,subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// =============================
+// Nesting into Scoped Underline
+// =============================
+// _|Scoped underlined and *bold|||
+// _|Scoped underlined and /italic|||
+// _|Scoped underlined and -struck through|||
+// _|Scoped underlined and ~spoiler|||
+// _|Scoped underlined and ^superscript|||
+// _|Scoped underlined and ,subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_underline
+//                 (bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ===========================
+// Nesting into Scoped Spoiler
+// ===========================
+// ~|Scoped spoiler and *bold|||
+// ~|Scoped spoiler and /italic|||
+// ~|Scoped spoiler and -struck through|||
+// ~|Scoped spoiler and _underlined|||
+// ~|Scoped spoiler and ^superscript|||
+// ~|Scoped spoiler and ,subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ===============================
+// Nesting into Scoped Superscript
+// ===============================
+// ^|Scoped superscript and *bold|||
+// ^|Scoped superscript and /italic|||
+// ^|Scoped superscript and -struck through|||
+// ^|Scoped superscript and _underlined|||
+// ^|Scoped superscript and ~spoiler|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (spoiler)
+//             )
+//         )
+//     )
+// )
+// 
+// =============================
+// Nesting into Scoped Subscript
+// =============================
+// ,|Scoped subscript and *bold|||
+// ,|Scoped subscript and /italic|||
+// ,|Scoped subscript and -struck through|||
+// ,|Scoped subscript and _underlined|||
+// ,|Scoped subscript and ~spoiler|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (spoiler)
+//             )
+//         )
+//     )
+// )
+// 
+// ===================
+// Deep Scoped Nesting
+// ===================
+// *|Bold /|italic _|underlined -|struck through||||||||
+// 
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_bold
+//                 (scoped_italic
+//                     (scoped_underline
+//                         (scoped_strikethrough)
+//                     )
+//                 )
+//             )
+//         )
+//     )
+// )
+// 
+// 
+// =======================================
+// No nested markup inside scoped verbatim
+// =======================================
+// `|*not bold|||
+// `|/not italic|||
+// `|-not struck through|||
+// `|_not underlined|||
+// `|~no spoiler|||
+// `|^not superscripted|||
+// `|,not subscripted|||
+// `|+no inline comment|||
+// `|$no inline math|||
+// `|=no variable|||
+// `|no:*link modifier|||
+// `|hidden \*escaped char|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim)
+//         )
+//         (paragraph_segment
+//             (scoped_verbatim
+//                 (escape_sequence_prefix)
+//                 (any_char)
+//             )
+//         )
+//     )
+// )
+// 
+// ==============================================
+// No nested markup inside scoped inline comments
+// ==============================================
+// +|*not bold|||
+// +|/not italic|||
+// +|-not struck through|||
+// +|_not underlined|||
+// +|~no spoiler|||
+// +|^not superscripted|||
+// +|,not subscripted|||
+// +|`no verbatim|||
+// +|$no inline math|||
+// +|=no variable|||
+// +|no:*link modifier|||
+// +|hidden \*escaped char|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_comment
+//                 (escape_sequence_prefix)
+//                 (any_char)
+//             )
+//         )
+//     )
+// )
+// 
+// ==========================================
+// No nested markup inside scoped inline math
+// ==========================================
+// $|*not bold|||
+// $|/not italic|||
+// $|-not struck through|||
+// $|_not underlined|||
+// $|~no spoiler|||
+// $|^not superscripted|||
+// $|,not subscripted|||
+// $|`no verbatim|||
+// $|+no inline comment|||
+// $|=no variable|||
+// $|no:*link modifier|||
+// $|hidden \*escaped char|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math)
+//         )
+//         (paragraph_segment
+//             (scoped_inline_math
+//                 (escape_sequence_prefix)
+//                 (any_char)
+//             )
+//         )
+//     )
+// )
+// 
+// ========================================
+// No nested markup inside scoped variables
+// ========================================
+// =|*not bold|||
+// =|/not italic|||
+// =|-not struck through|||
+// =|_not underlined|||
+// =|~no spoiler|||
+// =|^not superscripted|||
+// =|,not subscripted|||
+// =|`no verbatim|||
+// =|+no inline comment|||
+// =|$no inline math|||
+// =|no:*link modifier|||
+// =|hidden \*escaped char|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable)
+//         )
+//         (paragraph_segment
+//             (scoped_variable
+//                 (escape_sequence_prefix)
+//                 (any_char)
+//             )
+//         )
+//     )
+// )
+// 
+// ===============================
+// Nesting scoped into Scoped Bold
+// ===============================
+// *|Scoped bold and /|scoped italic||||
+// *|Scoped bold and -|scoped struck through||||
+// *|Scoped bold and _|scoped underlined||||
+// *|Scoped bold and ~|scoped spoiler||||
+// *|Scoped bold and ^|scoped superscript||||
+// *|Scoped bold and ,|scoped subscript||||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_bold
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (scoped_spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_bold
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// =================================
+// Nesting scoped into Scoped Italic
+// =================================
+// /|Scoped italic and *|scoped bold||||
+// /|Scoped italic and -|scoped struck through||||
+// /|Scoped italic and _|scoped underlined||||
+// /|Scoped italic and ~|scoped spoiler||||
+// /|Scoped italic and ^|scoped superscript||||
+// /|Scoped italic and ,|scoped subscript||||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_italic
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (scoped_spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_italic
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ========================================
+// Nesting scoped into Scoped Strikethrough
+// ========================================
+// -|Scoped struck through and *|scoped bold||||
+// -|Scoped struck through and /|scoped italic||||
+// -|Scoped struck through and _|scoped underlined||||
+// -|Scoped struck through and ~|scoped spoiler||||
+// -|Scoped struck through and ^|scoped superscript||||
+// -|Scoped struck through and ,|scoped subscript||||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (scoped_spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_strikethrough
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ====================================
+// Nesting scoped into Scoped Underline
+// ====================================
+// _|Scoped underlined and *|scoped bold||||
+// _|Scoped underlined and /|scoped italic||||
+// _|Scoped underlined and -|scoped struck through||||
+// _|Scoped underlined and ~|scoped spoiler||||
+// _|Scoped underlined and ^|scoped superscript||||
+// _|Scoped underlined and ,|scoped subscript||||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_underline
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (scoped_spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_underline
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ==================================
+// Nesting scoped into Scoped Spoiler
+// ==================================
+// ~|Scoped spoiler and *|scoped bold||||
+// ~|Scoped spoiler and /|scoped italic||||
+// ~|Scoped spoiler and -|scoped struck through||||
+// ~|Scoped spoiler and _|scoped underlined||||
+// ~|Scoped spoiler and ^|scoped superscript||||
+// ~|Scoped spoiler and ,|scoped subscript||||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_spoiler
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ======================================
+// Nesting scoped into Scoped Superscript
+// ======================================
+// ^|Scoped superscript and *|scoped bold||||
+// ^|Scoped superscript and /|scoped italic||||
+// ^|Scoped superscript and -|scoped struck through||||
+// ^|Scoped superscript and _|scoped underlined||||
+// ^|Scoped superscript and ~|scoped spoiler||||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_superscript
+//                 (scoped_spoiler)
+//             )
+//         )
+//     )
+// )
+// 
+// ====================================
+// Nesting scoped into Scoped Subscript
+// ====================================
+// ,|Scoped subscript and *|scoped bold||||
+// ,|Scoped subscript and /|scoped italic||||
+// ,|Scoped subscript and -|scoped struck through||||
+// ,|Scoped subscript and _|scoped underlined||||
+// ,|Scoped subscript and ~|scoped spoiler||||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (scoped_subscript
+//                 (scoped_spoiler)
+//             )
+//         )
+//     )
+// )
+// 
+// ========================
+// Nesting scoped into Bold
+// ========================
+// *Bold and /|scoped italic|||
+// *Bold and -|scoped struck through|||
+// *Bold and _|scoped underlined|||
+// *Bold and ~|scoped spoiler|||
+// *Bold and ^|scoped superscript|||
+// *Bold and ,|scoped subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (bold
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (bold
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (bold
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (bold
+//                 (scoped_spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (bold
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (bold
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ==========================
+// Nesting scoped into Italic
+// ==========================
+// /Italic and *|scoped bold|||
+// /Italic and -|scoped struck through|||
+// /Italic and _|scoped underlined|||
+// /Italic and ~|scoped spoiler|||
+// /Italic and ^|scoped superscript|||
+// /Italic and ,|scoped subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (italic
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (italic
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (italic
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (italic
+//                 (scoped_spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (italic
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (italic
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// =================================
+// Nesting scoped into Strikethrough
+// =================================
+// -Struck through and *|scoped bold|||
+// -Struck through and /|scoped italic|||
+// -Struck through and _|scoped underlined|||
+// -Struck through and ~|scoped spoiler|||
+// -Struck through and ^|scoped superscript|||
+// -Struck through and ,|scoped subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (strikethrough
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (strikethrough
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (strikethrough
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (strikethrough
+//                 (scoped_spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (strikethrough
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (strikethrough
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// =============================
+// Nesting scoped into Underline
+// =============================
+// _Underlined and *|scoped bold|||
+// _Underlined and /|scoped italic|||
+// _Underlined and -|scoped struck through|||
+// _Underlined and ~|scoped spoiler|||
+// _Underlined and ^|scoped superscript|||
+// _Underlined and ,|scoped subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (underline
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (underline
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (underline
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (underline
+//                 (scoped_spoiler)
+//             )
+//         )
+//         (paragraph_segment
+//             (underline
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (underline
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ===========================
+// Nesting scoped into Spoiler
+// ===========================
+// ~Spoiler and *|scoped bold|||
+// ~Spoiler and /|scoped italic|||
+// ~Spoiler and -|scoped struck through|||
+// ~Spoiler and _|scoped underlined|||
+// ~Spoiler and ^|scoped superscript|||
+// ~Spoiler and ,|scoped subscript|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (spoiler
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (spoiler
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (spoiler
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (spoiler
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (spoiler
+//                 (scoped_superscript)
+//             )
+//         )
+//         (paragraph_segment
+//             (spoiler
+//                 (scoped_subscript)
+//             )
+//         )
+//     )
+// )
+// 
+// ===============================
+// Nesting scoped into Superscript
+// ===============================
+// ^Superscript and *|scoped bold|||
+// ^Superscript and /|scoped italic|||
+// ^Superscript and -|scoped struck through|||
+// ^Superscript and _|scoped underlined|||
+// ^Superscript and ~|scoped spoiler|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (superscript
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (superscript
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (superscript
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (superscript
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (superscript
+//                 (scoped_spoiler)
+//             )
+//         )
+//     )
+// )
+// 
+// =============================
+// Nesting scoped into Subscript
+// =============================
+// ,Subscript and *|scoped bold|||
+// ,Subscript and /|scoped italic|||
+// ,Subscript and -|scoped struck through|||
+// ,Subscript and _|scoped underlined|||
+// ,Subscript and ~|scoped spoiler|||
+// ---
+// (document
+//     (paragraph
+//         (paragraph_segment
+//             (subscript
+//                 (scoped_bold)
+//             )
+//         )
+//         (paragraph_segment
+//             (subscript
+//                 (scoped_italic)
+//             )
+//         )
+//         (paragraph_segment
+//             (subscript
+//                 (scoped_strikethrough)
+//             )
+//         )
+//         (paragraph_segment
+//             (subscript
+//                 (scoped_underline)
+//             )
+//         )
+//         (paragraph_segment
+//             (subscript
+//                 (scoped_spoiler)
+//             )
+//         )
+//     )
+// )

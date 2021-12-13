@@ -1,0 +1,298 @@
+==============
+Unordered List
+==============
+- Unordered list level 1
+-- Unordered list level 2
+--- Unordered list level 3
+---- Unordered list level 4
+----- Unordered list level 5
+------ Unordered list level 6
+
+---
+(document
+    (generic_list
+        (unordered_list1
+            (unordered_list1_prefix)
+            (paragraph (paragraph_segment))
+            (unordered_list2
+                (unordered_list2_prefix)
+                (paragraph (paragraph_segment))
+                (unordered_list3
+                    (unordered_list3_prefix)
+                    (paragraph (paragraph_segment))
+                    (unordered_list4
+                        (unordered_list4_prefix)
+                        (paragraph (paragraph_segment))
+                        (unordered_list5
+                            (unordered_list5_prefix)
+                            (paragraph (paragraph_segment))
+                            (unordered_list6
+                                (unordered_list6_prefix)
+                                (paragraph (paragraph_segment))
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+============
+Ordered List
+============
+~ Ordered list level 1
+~~ Ordered list level 2
+~~~ Ordered list level 3
+~~~~ Ordered list level 4
+~~~~~ Ordered list level 5
+~~~~~~ Ordered list level 6
+
+---
+(document
+    (generic_list
+        (ordered_list1
+            (ordered_list1_prefix)
+            (paragraph (paragraph_segment))
+            (ordered_list2
+                (ordered_list2_prefix)
+                (paragraph (paragraph_segment))
+                (ordered_list3
+                    (ordered_list3_prefix)
+                    (paragraph (paragraph_segment))
+                    (ordered_list4
+                        (ordered_list4_prefix)
+                        (paragraph (paragraph_segment))
+                        (ordered_list5
+                            (ordered_list5_prefix)
+                            (paragraph (paragraph_segment))
+                            (ordered_list6
+                                (ordered_list6_prefix)
+                                (paragraph (paragraph_segment))
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+===================
+List Item Paragraph
+===================
+- List item
+can be continued here
+because it consumes an entire paragraph.
+
+This is now longer part of the list item.
+
+---
+(document
+    (generic_list
+        (unordered_list1
+            (unordered_list1_prefix)
+            (paragraph
+                (paragraph_segment)
+                (paragraph_segment)
+                (paragraph_segment)
+            )
+        )
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+==========
+Mixed List
+==========
+- Unordered list item
+~ Ordered list item
+-- unordered nested item
+--- unordered nested item
+~~~ ordered nested item
+~~~~ ordered nested item
+---- unordered nested item
+~~~~~ ordered nested item
+----- unordered nested item
+
+---
+(document
+    (generic_list
+        (unordered_list1
+            (unordered_list1_prefix)
+            (paragraph (paragraph_segment))
+        )
+        (ordered_list1
+            (ordered_list1_prefix)
+            (paragraph (paragraph_segment))
+            (unordered_list2
+                (unordered_list2_prefix)
+                (paragraph (paragraph_segment))
+                (unordered_list3
+                    (unordered_list3_prefix)
+                    (paragraph (paragraph_segment))
+                )
+                (ordered_list3
+                    (ordered_list3_prefix)
+                    (paragraph (paragraph_segment))
+                    (ordered_list4
+                        (ordered_list4_prefix)
+                        (paragraph (paragraph_segment))
+                    )
+                    (unordered_list4
+                        (unordered_list4_prefix)
+                        (paragraph (paragraph_segment))
+                        (ordered_list5
+                            (ordered_list5_prefix)
+                            (paragraph (paragraph_segment))
+                        )
+                        (unordered_list5
+                            (unordered_list5_prefix)
+                            (paragraph (paragraph_segment))
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+=========
+Link List
+=========
+-> {# link}
+--> {# link}
+---> {# link}
+----> {# link}
+-----> {# link}
+------> {# link}
+---
+(document
+    (generic_list
+        (unordered_link1
+            (unordered_link1_prefix)
+            (link
+                (link_location
+                    (link_location_generic)
+                    (link_location_text)
+                )
+            )
+            (unordered_link2
+                (unordered_link2_prefix)
+                (link
+                    (link_location
+                        (link_location_generic)
+                        (link_location_text)
+                    )
+                )
+                (unordered_link3
+                    (unordered_link3_prefix)
+                    (link
+                        (link_location
+                            (link_location_generic)
+                            (link_location_text)
+                        )
+                    )
+                    (unordered_link4
+                        (unordered_link4_prefix)
+                        (link
+                            (link_location
+                                (link_location_generic)
+                                (link_location_text)
+                            )
+                        )
+                        (unordered_link5
+                            (unordered_link5_prefix)
+                            (link
+                                (link_location
+                                    (link_location_generic)
+                                    (link_location_text)
+                                )
+                            )
+                            (unordered_link6
+                                (unordered_link6_prefix)
+                                (link
+                                    (link_location
+                                        (link_location_generic)
+                                        (link_location_text)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+=================
+Ordered Link List
+=================
+~> {# link}
+~~> {# link}
+~~~> {# link}
+~~~~> {# link}
+~~~~~> {# link}
+~~~~~~> {# link}
+---
+(document
+    (generic_list
+        (ordered_link1
+            (ordered_link1_prefix)
+            (link
+                (link_location
+                    (link_location_generic)
+                    (link_location_text)
+                )
+            )
+            (ordered_link2
+                (ordered_link2_prefix)
+                (link
+                    (link_location
+                        (link_location_generic)
+                        (link_location_text)
+                    )
+                )
+                (ordered_link3
+                    (ordered_link3_prefix)
+                    (link
+                        (link_location
+                            (link_location_generic)
+                            (link_location_text)
+                        )
+                    )
+                    (ordered_link4
+                        (ordered_link4_prefix)
+                        (link
+                            (link_location
+                                (link_location_generic)
+                                (link_location_text)
+                            )
+                        )
+                        (ordered_link5
+                            (ordered_link5_prefix)
+                            (link
+                                (link_location
+                                    (link_location_generic)
+                                    (link_location_text)
+                                )
+                            )
+                            (ordered_link6
+                                (ordered_link6_prefix)
+                                (link
+                                    (link_location
+                                        (link_location_generic)
+                                        (link_location_text)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)

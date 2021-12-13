@@ -1,0 +1,52 @@
+=========
+Insertion
+=========
+= ToC
+
+The above renders a table of contents.
+---
+(document
+    (insertion
+        (insertion_prefix)
+        (capitalized_word)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+=========================
+Insertion with Parameters
+=========================
+= ToC Table of Contents
+
+The above renders a table of contents with a custom title.
+---
+(document
+    (insertion
+        (insertion_prefix)
+        (capitalized_word)
+        (paragraph_segment)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+===================
+Variable Definition
+===================
+= title Neorg
+
+The above is a variable definition.
+---
+(document
+    (insertion
+        (insertion_prefix)
+        (lowercase_word)
+        (paragraph_segment)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
