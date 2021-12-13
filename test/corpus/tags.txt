@@ -32,7 +32,7 @@ No longer part of the ranged tag.
         (tag_name
             (tag_name_element)
         )
-        (tag_parameters (word))
+        (tag_parameters (tag_param))
         (ranged_tag_content)
         (ranged_tag_end)
     )
@@ -115,7 +115,7 @@ Lol
             (tag_name
                 (tag_name_element)
             )
-            (tag_parameters (word))
+            (tag_parameters (tag_param))
         )
         (quote
             (quote1
