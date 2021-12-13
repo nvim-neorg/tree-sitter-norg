@@ -5701,6 +5701,10 @@
         }
       ]
     },
+    "tag_param": {
+      "type": "PATTERN",
+      "value": "\\S+"
+    },
     "tag_parameters": {
       "type": "SEQ",
       "members": [
@@ -5709,7 +5713,7 @@
           "name": "parameter",
           "content": {
             "type": "SYMBOL",
-            "name": "word"
+            "name": "tag_param"
           }
         },
         {
@@ -5732,7 +5736,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "word"
+                      "name": "tag_param"
                     },
                     {
                       "type": "BLANK"

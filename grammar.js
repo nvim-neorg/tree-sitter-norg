@@ -2302,11 +2302,13 @@ module.exports = grammar({
             )
         ),
 
+        tag_param: $ => /\S+/,
+
         tag_parameters: $ =>
         seq(
             field(
                 "parameter",
-                $.word
+                $.tag_param,
             ),
 
             repeat(
@@ -2316,7 +2318,7 @@ module.exports = grammar({
                     field(
                         "parameter",
                         optional(
-                            $.word
+                            $.tag_param,
                         ),
                     ),
                 )

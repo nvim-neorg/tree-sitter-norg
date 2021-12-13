@@ -2879,7 +2879,7 @@
         "required": true,
         "types": [
           {
-            "type": "word",
+            "type": "tag_param",
             "named": true
           }
         ]
@@ -4312,11 +4312,6 @@
     "fields": {}
   },
   {
-    "type": "word",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "\n",
     "named": false
   },
@@ -4590,6 +4585,10 @@
   },
   {
     "type": "strong_paragraph_delimiter",
+    "named": true
+  },
+  {
+    "type": "tag_param",
     "named": true
   },
   {
