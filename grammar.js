@@ -34,8 +34,6 @@ module.exports = grammar({
         [$.inline_comment, $._paragraph_element],
         [$.inline_math, $._paragraph_element],
         [$.variable, $._paragraph_element],
-
-        [$._verbatim_segment, $.link]
     ],
 
     externals: $ => [
@@ -111,31 +109,10 @@ module.exports = grammar({
         $.weak_paragraph_delimiter,
         $.horizontal_line,
 
-        $.link_begin,
-        $.link_file_begin,
-        $.link_file_text,
-        $.link_file_end,
-        $.link_location_generic,
-        $.link_location_url,
-        $.link_location_external_file,
-        $.link_location_heading1,
-        $.link_location_heading2,
-        $.link_location_heading3,
-        $.link_location_heading4,
-        $.link_location_heading5,
-        $.link_location_heading6,
-        $.link_location_marker,
-        $.link_location_definition,
-        $.link_location_footnote,
-        $.link_location_text,
-        $.link_end,
-        $.link_text_begin,
-        $.link_text,
-        $.link_text_end,
-
-        $.anchor_declaration_begin,
-        $.anchor_declaration_text,
-        $.anchor_declaration_end,
+        $.link_location_begin,
+        $.link_location_end,
+        $.link_description_begin,
+        $.link_description_end,
 
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
@@ -231,7 +208,6 @@ module.exports = grammar({
             alias($.word, "_word"),
             alias($.space, "_space"),
             alias($.trailing_modifier, "_trailing_modifier"),
-            $.link,
             $.anchor_declaration,
             $.anchor_definition,
             $.escape_sequence,
@@ -293,30 +269,6 @@ module.exports = grammar({
                         alias($.inline_math_close, "_lowercase"),
                         alias($.variable_open, "_lowercase"),
                         alias($.variable_close, "_lowercase"),
-                        alias($.link_begin, "_lowercase"),
-                        alias($.link_file_begin, "_lowercase"),
-                        alias($.link_file_text, "_lowercase"),
-                        alias($.link_file_end, "_lowercase"),
-                        alias($.link_location_generic, "_lowercase"),
-                        alias($.link_location_url, "_lowercase"),
-                        alias($.link_location_external_file, "_lowercase"),
-                        alias($.link_location_heading1, "_lowercase"),
-                        alias($.link_location_heading2, "_lowercase"),
-                        alias($.link_location_heading3, "_lowercase"),
-                        alias($.link_location_heading4, "_lowercase"),
-                        alias($.link_location_heading5, "_lowercase"),
-                        alias($.link_location_heading6, "_lowercase"),
-                        alias($.link_location_marker, "_lowercase"),
-                        alias($.link_location_definition, "_lowercase"),
-                        alias($.link_location_footnote, "_lowercase"),
-                        alias($.link_location_text, "_lowercase"),
-                        alias($.link_end, "_lowercase"),
-                        alias($.link_text_begin, "_lowercase"),
-                        alias($.link_text, "_lowercase"),
-                        alias($.link_text_end, "_lowercase"),
-                        alias($.anchor_declaration_begin, "_lowercase"),
-                        alias($.anchor_declaration_text, "_lowercase"),
-                        alias($.anchor_declaration_end, "_lowercase"),
                     ),
                 ),
             ),
@@ -452,79 +404,27 @@ module.exports = grammar({
             )
         ),
 
-        link_description: $ =>
-        seq(
-            alias($.link_text_begin, "_begin"),
-            field("text", $.link_text),
-            alias($.link_text_end, "_end"),
-        ),
-
-        link_file: $ =>
-        seq(
-            alias($.link_file_begin, "_begin"),
-            field("location", $.link_file_text),
-            alias($.link_file_end, "_end"),
-        ),
-
         link_location: $ =>
         seq(
-            field("type", choice(
-                $.link_location_generic,
-                $.link_location_url,
-                $.link_location_external_file,
-                $.link_location_heading1,
-                $.link_location_heading2,
-                $.link_location_heading3,
-                $.link_location_heading4,
-                $.link_location_heading5,
-                $.link_location_heading6,
-                $.link_location_marker,
-                $.link_location_definition,
-                $.link_location_footnote,
-            )),
-            field("text", $.link_location_text),
-        ),
-
-
-        link: $ =>
-        seq(
-            alias($.link_begin, "_begin"),
-            choice(
-                $.link_location,
-                seq(
-                    $.link_file,
-                    optional(
-                        $.link_location,
-                    )
-                )
-            ),
-            alias($.link_end, "_end"),
-            optional(
-                $.link_description,
-            )
+            token.immediate("#"),
+            $.paragraph_segment,
         ),
 
         anchor_declaration: $ =>
-        seq(
-            alias($.anchor_declaration_begin, "_begin"),
-            field("text", $.anchor_declaration_text),
-            alias($.anchor_declaration_end, "_end"),
-        ),
+        prec.left(2, seq(
+            alias($.link_description_begin, "_begin"),
+            field("text", $.paragraph_segment),
+            alias($.link_description_end, "_end"),
+        )),
 
         anchor_definition: $ =>
         prec(2, seq(
             $.anchor_declaration,
-            alias($.link_begin, "_begin"),
+            alias($.link_location_begin, "_begin"),
             choice(
                 $.link_location,
-                seq(
-                    $.link_file,
-                    optional(
-                        $.link_location,
-                    )
-                )
             ),
-            alias($.link_end, "_end"),
+            alias($.link_location_end, "_end"),
         )),
 
         unordered_link1: $ =>
@@ -535,7 +435,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -585,7 +484,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -631,7 +529,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -673,7 +570,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -711,7 +607,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -743,7 +638,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -765,7 +659,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -815,7 +708,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -861,7 +753,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -903,7 +794,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -941,7 +831,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
@@ -973,7 +862,6 @@ module.exports = grammar({
                 field(
                     "location",
                     choice(
-                        $.link,
                         $.anchor_definition,
                     ),
                 ),
