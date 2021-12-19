@@ -1064,7 +1064,7 @@
         }
       ]
     },
-    "_link_description": {
+    "link_description": {
       "type": "SEQ",
       "members": [
         {
@@ -1193,17 +1193,33 @@
       ]
     },
     "link": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "link_location"
-        }
-      ]
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "link_location"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "link_description"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "anchor_declaration": {
       "type": "SYMBOL",
-      "name": "_link_description"
+      "name": "link_description"
     },
     "anchor_definition": {
       "type": "PREC",

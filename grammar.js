@@ -421,7 +421,7 @@ module.exports = grammar({
             )
         ),
 
-        _link_description: $ =>
+        link_description: $ =>
         seq(
             alias($.link_description_begin, "_begin"),
             field("text", $.paragraph_segment),
@@ -457,11 +457,14 @@ module.exports = grammar({
         ),
 
         link: $ =>
-        seq(
+        prec.left(seq(
             $.link_location,
-        ),
+            optional(
+                $.link_description,
+            ),
+        )),
 
-        anchor_declaration: $ => $._link_description,
+        anchor_declaration: $ => $.link_description,
 
         anchor_definition: $ =>
         prec(2, seq(

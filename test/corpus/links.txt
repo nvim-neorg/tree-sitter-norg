@@ -741,137 +741,191 @@ Anchors
     (paragraph
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
         (paragraph_segment
             (anchor_declaration
-                text: (anchor_declaration_text)
+                (link_description
+                  text: (paragraph_segment)
+                )
             )
         )
     )
@@ -880,7 +934,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_heading1)
@@ -891,7 +947,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_heading2)
@@ -902,7 +960,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_heading3)
@@ -913,7 +973,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_heading4)
@@ -924,7 +986,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_heading5)
@@ -935,7 +999,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_heading6)
@@ -946,7 +1012,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_heading6)
@@ -957,7 +1025,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_generic)
@@ -968,7 +1038,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_marker)
@@ -979,7 +1051,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_definition)
@@ -990,7 +1064,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_footnote)
@@ -1001,7 +1077,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                    location: (link_file_text)
@@ -1011,7 +1089,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1025,7 +1105,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1039,7 +1121,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1053,7 +1137,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1067,7 +1153,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1081,7 +1169,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1095,7 +1185,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1109,7 +1201,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1123,7 +1217,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1137,7 +1233,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1151,7 +1249,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_external_file)
@@ -1162,7 +1262,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_url)
@@ -1173,7 +1275,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_location
                     type: (link_target_url)
@@ -1184,7 +1288,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)
@@ -1197,7 +1303,9 @@ Anchors
         (paragraph_segment
             (anchor_definition
                 (anchor_declaration
-                    text: (anchor_declaration_text)
+                    (link_description
+                  text: (paragraph_segment)
+                )
                 )
                 (link_file
                     location: (link_file_text)

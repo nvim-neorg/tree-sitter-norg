@@ -187,17 +187,16 @@
   {
     "type": "anchor_declaration",
     "named": true,
-    "fields": {
-      "text": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "link_description",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1044,14 +1043,34 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "link_description",
+          "named": true
+        },
         {
           "type": "link_location",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "link_description",
+    "named": true,
+    "fields": {
+      "text": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
