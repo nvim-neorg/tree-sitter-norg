@@ -113,6 +113,8 @@ module.exports = grammar({
         $.link_description_end,
         $.link_location_begin,
         $.link_location_end,
+        $.link_file_begin,
+        $.link_file_end,
         $.link_target_url,
         $.link_target_generic,
         $.link_target_external_file,
@@ -431,8 +433,23 @@ module.exports = grammar({
         link_location: $ =>
         seq(
             alias($.link_location_begin, "_begin"),
-            $._link_target,
+            choice(
+                $._link_target,
+                seq(
+                    $._link_file,
+                    optional(
+                        $._link_target,
+                    ),
+                ),
+            ),
             alias($.link_location_end, "_end"),
+        ),
+
+        _link_file: $ =>
+        seq(
+            alias($.link_file_begin, "_begin"),
+            field("file", $.paragraph_segment),
+            alias($.link_file_end, "_end"),
         ),
 
         _link_target: $ =>
@@ -457,7 +474,7 @@ module.exports = grammar({
         ),
 
         link: $ =>
-        prec.left(seq(
+        prec.right(2, seq(
             $.link_location,
             optional(
                 $.link_description,

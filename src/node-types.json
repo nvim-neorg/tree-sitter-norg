@@ -1077,9 +1077,19 @@
     "type": "link_location",
     "named": true,
     "fields": {
+      "file": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      },
       "text": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -1089,7 +1099,7 @@
       },
       "type": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "link_target_definition",

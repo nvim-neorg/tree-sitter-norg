@@ -122,17 +122,15 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                   location: (link_file_text)
+                (link_location
+                   file: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading1)
                     text: (paragraph_segment)
                 )
@@ -140,10 +138,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading2)
                     text: (paragraph_segment)
                 )
@@ -151,10 +147,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading3)
                     text: (paragraph_segment)
                 )
@@ -162,10 +156,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading4)
                     text: (paragraph_segment)
                 )
@@ -173,10 +165,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading5)
                     text: (paragraph_segment)
                 )
@@ -184,10 +174,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
@@ -195,10 +183,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
@@ -206,10 +192,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_generic)
                     text: (paragraph_segment)
                 )
@@ -217,10 +201,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_marker)
                     text: (paragraph_segment)
                 )
@@ -228,10 +210,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_definition)
                     text: (paragraph_segment)
                 )
@@ -239,10 +219,8 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_footnote)
                     text: (paragraph_segment)
                 )
@@ -274,20 +252,16 @@ Basic Links
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (ERROR
+                    file: (paragraph_segment)
                    (UNEXPECTED '@')
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (ERROR
+                    file: (paragraph_segment)
                    (UNEXPECTED ':')
                    (UNEXPECTED '/')
                 )
@@ -337,7 +311,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -348,7 +322,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -359,7 +333,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -370,7 +344,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -381,7 +355,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -392,7 +366,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -403,7 +377,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -414,7 +388,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -425,7 +399,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -436,7 +410,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -447,171 +421,149 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                   location: (link_file_text)
+                (link_location
+                   file: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading1)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading2)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading3)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading4)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading5)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_generic)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_marker)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_definition)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_footnote)
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -622,7 +574,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -633,7 +585,7 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -644,34 +596,34 @@ Links with text
                     text: (paragraph_segment)
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_file
-                    location: (link_file_text)
+                    file: (paragraph_segment)
                 )
                 (ERROR
                    (UNEXPECTED '@')
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_file
-                    location: (link_file_text)
+                    file: (paragraph_segment)
                 )
                 (ERROR
                    (UNEXPECTED ':')
                    (UNEXPECTED '/')
                 )
                 (link_description
-                   text: (link_text)
+                   text: (paragraph_segment)
                 )
             )
         )
@@ -1081,8 +1033,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                   location: (link_file_text)
+                (link_location
+                   file: (paragraph_segment)
                 )
             )
         )
@@ -1093,10 +1045,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading1)
                     text: (paragraph_segment)
                 )
@@ -1109,10 +1059,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading2)
                     text: (paragraph_segment)
                 )
@@ -1125,10 +1073,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading3)
                     text: (paragraph_segment)
                 )
@@ -1141,10 +1087,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading4)
                     text: (paragraph_segment)
                 )
@@ -1157,10 +1101,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading5)
                     text: (paragraph_segment)
                 )
@@ -1173,10 +1115,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
@@ -1189,10 +1129,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_generic)
                     text: (paragraph_segment)
                 )
@@ -1205,10 +1143,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_marker)
                     text: (paragraph_segment)
                 )
@@ -1221,10 +1157,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_definition)
                     text: (paragraph_segment)
                 )
@@ -1237,10 +1171,8 @@ Anchors
                   text: (paragraph_segment)
                 )
                 )
-                (link_file
-                    location: (link_file_text)
-                )
                 (link_location
+                    file: (paragraph_segment)
                     type: (link_target_footnote)
                     text: (paragraph_segment)
                 )
@@ -1293,7 +1225,7 @@ Anchors
                 )
                 )
                 (link_file
-                    location: (link_file_text)
+                    file: (paragraph_segment)
                 )
                 (ERROR
                    (UNEXPECTED '@')
@@ -1308,7 +1240,7 @@ Anchors
                 )
                 )
                 (link_file
-                    location: (link_file_text)
+                    file: (paragraph_segment)
                 )
                 (ERROR
                    (UNEXPECTED ':')

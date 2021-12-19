@@ -1108,14 +1108,71 @@
           "value": "_begin"
         },
         {
-          "type": "SYMBOL",
-          "name": "_link_target"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_link_target"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_link_file"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_link_target"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
             "name": "link_location_end"
+          },
+          "named": false,
+          "value": "_end"
+        }
+      ]
+    },
+    "_link_file": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_file_begin"
+          },
+          "named": false,
+          "value": "_begin"
+        },
+        {
+          "type": "FIELD",
+          "name": "file",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_file_end"
           },
           "named": false,
           "value": "_end"
@@ -1193,8 +1250,8 @@
       ]
     },
     "link": {
-      "type": "PREC_LEFT",
-      "value": 0,
+      "type": "PREC_RIGHT",
+      "value": 2,
       "content": {
         "type": "SEQ",
         "members": [
@@ -6146,6 +6203,14 @@
     {
       "type": "SYMBOL",
       "name": "link_location_end"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_file_begin"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_file_end"
     },
     {
       "type": "SYMBOL",

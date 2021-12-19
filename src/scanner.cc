@@ -89,6 +89,8 @@ enum TokenType : char
     LINK_DESCRIPTION_END,
     LINK_LOCATION_BEGIN,
     LINK_LOCATION_END,
+    LINK_FILE_BEGIN,
+    LINK_FILE_END,
     LINK_TARGET_URL,
     LINK_TARGET_GENERIC,
     LINK_TARGET_EXTERNAL_FILE,
@@ -735,6 +737,13 @@ class Scanner
         switch (m_LastToken)
         {
         case LINK_LOCATION_BEGIN:
+            if (lexer->lookahead == ':')
+            {
+                lexer->result_symbol = m_LastToken = LINK_FILE_BEGIN;
+                advance(lexer);
+                return !std::iswspace(lexer->lookahead);
+            }
+        case LINK_FILE_END:
             switch (lexer->lookahead)
             {
                 case '#':
@@ -772,6 +781,13 @@ class Scanner
 
             advance(lexer);
             return std::iswspace(lexer->lookahead);
+        default:
+            if (lexer->lookahead == ':')
+            {
+                lexer->result_symbol = m_LastToken = LINK_FILE_END;
+                advance(lexer);
+                return (lexer->lookahead == '}' || lexer->lookahead == '#' || lexer->lookahead == '|' || lexer->lookahead == '$' || lexer->lookahead == '^' || lexer->lookahead == '*');
+            }
         }
 
 
