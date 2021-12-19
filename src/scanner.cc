@@ -85,10 +85,22 @@ enum TokenType : char
     WEAK_PARAGRAPH_DELIMITER,
     HORIZONTAL_LINE,
 
-    LINK_LOCATION_BEGIN,
-    LINK_LOCATION_END,
     LINK_DESCRIPTION_BEGIN,
     LINK_DESCRIPTION_END,
+    LINK_LOCATION_BEGIN,
+    LINK_LOCATION_END,
+    LINK_TARGET_URL,
+    LINK_TARGET_GENERIC,
+    LINK_TARGET_EXTERNAL_FILE,
+    LINK_TARGET_MARKER,
+    LINK_TARGET_DEFINITION,
+    LINK_TARGET_FOOTNOTE,
+    LINK_TARGET_HEADING1,
+    LINK_TARGET_HEADING2,
+    LINK_TARGET_HEADING3,
+    LINK_TARGET_HEADING4,
+    LINK_TARGET_HEADING5,
+    LINK_TARGET_HEADING6,
 
     RANGED_TAG,
     RANGED_TAG_END,
@@ -480,18 +492,6 @@ class Scanner
             else
                 return false;
         }
-        else if (lexer->lookahead == '{')
-        {
-            advance(lexer);
-            lexer->result_symbol = m_LastToken = LINK_LOCATION_BEGIN;
-            return true;
-        }
-        else if (lexer->lookahead == '}')
-        {
-            advance(lexer);
-            lexer->result_symbol = m_LastToken = LINK_LOCATION_END;
-            return true;
-        }
         else if (lexer->lookahead == '[')
         {
             advance(lexer);
@@ -504,6 +504,20 @@ class Scanner
             lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_END;
             return true;
         }
+        else if (lexer->lookahead == '{')
+        {
+            advance(lexer);
+            lexer->result_symbol = m_LastToken = LINK_LOCATION_BEGIN;
+            return true;
+        }
+        else if (lexer->lookahead == '}')
+        {
+            advance(lexer);
+            lexer->result_symbol = m_LastToken = LINK_LOCATION_END;
+            return true;
+        }
+        else if (check_link_location(lexer))
+            return true;
 
         // If we are not in a ranged tag then we should also check for potential
         // attached modifiers, like *this*.
@@ -709,6 +723,59 @@ class Scanner
             return m_LastToken;
         }
         return NONE;
+    }
+
+    /*
+     * Attempts to parse a link location.
+     */
+    bool check_link_location(TSLexer* lexer)
+    {
+        size_t count = 0;
+
+        switch (m_LastToken)
+        {
+        case LINK_LOCATION_BEGIN:
+            switch (lexer->lookahead)
+            {
+                case '#':
+                    lexer->result_symbol = m_LastToken = LINK_TARGET_GENERIC;
+                    break;
+                case '@':
+                    lexer->result_symbol = m_LastToken = LINK_TARGET_EXTERNAL_FILE;
+                    break;
+                case '|':
+                    lexer->result_symbol = m_LastToken = LINK_TARGET_MARKER;
+                    break;
+                case '$':
+                    lexer->result_symbol = m_LastToken = LINK_TARGET_DEFINITION;
+                    break;
+                case '^':
+                    lexer->result_symbol = m_LastToken = LINK_TARGET_FOOTNOTE;
+                    break;
+                case '*':
+                    advance(lexer);
+
+                    while (lexer->lookahead == '*')
+                    {
+                        ++count;
+                        advance(lexer);
+                    }
+
+                    lexer->result_symbol = m_LastToken =
+                        static_cast<TokenType>(LINK_TARGET_HEADING1 + clamp(count, 0ull, 5ull));
+
+                    return std::iswspace(lexer->lookahead);
+                default:
+                    lexer->result_symbol = m_LastToken = LINK_TARGET_URL;
+                    return true;
+            }
+
+            advance(lexer);
+            return std::iswspace(lexer->lookahead);
+        }
+
+
+        return false;
     }
 
     /*

@@ -175,48 +175,48 @@ Link List
             (unordered_link1_prefix)
             (link
                 (link_location
-                    (link_location_generic)
-                    (link_location_text)
+                    (link_target_generic)
+                    (paragraph_segment)
                 )
             )
             (unordered_link2
                 (unordered_link2_prefix)
                 (link
                     (link_location
-                        (link_location_generic)
-                        (link_location_text)
+                        (link_target_generic)
+                        (paragraph_segment)
                     )
                 )
                 (unordered_link3
                     (unordered_link3_prefix)
                     (link
                         (link_location
-                            (link_location_generic)
-                            (link_location_text)
+                            (link_target_generic)
+                            (paragraph_segment)
                         )
                     )
                     (unordered_link4
                         (unordered_link4_prefix)
                         (link
                             (link_location
-                                (link_location_generic)
-                                (link_location_text)
+                                (link_target_generic)
+                                (paragraph_segment)
                             )
                         )
                         (unordered_link5
                             (unordered_link5_prefix)
                             (link
                                 (link_location
-                                    (link_location_generic)
-                                    (link_location_text)
+                                    (link_target_generic)
+                                    (paragraph_segment)
                                 )
                             )
                             (unordered_link6
                                 (unordered_link6_prefix)
                                 (link
                                     (link_location
-                                        (link_location_generic)
-                                        (link_location_text)
+                                        (link_target_generic)
+                                        (paragraph_segment)
                                     )
                                 )
                             )
@@ -244,48 +244,48 @@ Ordered Link List
             (ordered_link1_prefix)
             (link
                 (link_location
-                    (link_location_generic)
-                    (link_location_text)
+                    (link_target_generic)
+                    (paragraph_segment)
                 )
             )
             (ordered_link2
                 (ordered_link2_prefix)
                 (link
                     (link_location
-                        (link_location_generic)
-                        (link_location_text)
+                        (link_target_generic)
+                        (paragraph_segment)
                     )
                 )
                 (ordered_link3
                     (ordered_link3_prefix)
                     (link
                         (link_location
-                            (link_location_generic)
-                            (link_location_text)
+                            (link_target_generic)
+                            (paragraph_segment)
                         )
                     )
                     (ordered_link4
                         (ordered_link4_prefix)
                         (link
                             (link_location
-                                (link_location_generic)
-                                (link_location_text)
+                                (link_target_generic)
+                                (paragraph_segment)
                             )
                         )
                         (ordered_link5
                             (ordered_link5_prefix)
                             (link
                                 (link_location
-                                    (link_location_generic)
-                                    (link_location_text)
+                                    (link_target_generic)
+                                    (paragraph_segment)
                                 )
                             )
                             (ordered_link6
                                 (ordered_link6_prefix)
                                 (link
                                     (link_location
-                                        (link_location_generic)
-                                        (link_location_text)
+                                        (link_target_generic)
+                                        (paragraph_segment)
                                     )
                                 )
                             )

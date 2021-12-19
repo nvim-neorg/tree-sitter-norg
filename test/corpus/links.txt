@@ -35,88 +35,88 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading1)
-                    text: (link_location_text)
+                    type: (link_target_heading1)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading2)
-                    text: (link_location_text)
+                    type: (link_target_heading2)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading3)
-                    text: (link_location_text)
+                    type: (link_target_heading3)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading4)
-                    text: (link_location_text)
+                    type: (link_target_heading4)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading5)
-                    text: (link_location_text)
+                    type: (link_target_heading5)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_generic)
-                    text: (link_location_text)
+                    type: (link_target_generic)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_marker)
-                    text: (link_location_text)
+                    type: (link_target_marker)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_definition)
-                    text: (link_location_text)
+                    type: (link_target_definition)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_footnote)
-                    text: (link_location_text)
+                    type: (link_target_footnote)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -133,8 +133,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading1)
-                    text: (link_location_text)
+                    type: (link_target_heading1)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -144,8 +144,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading2)
-                    text: (link_location_text)
+                    type: (link_target_heading2)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -155,8 +155,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading3)
-                    text: (link_location_text)
+                    type: (link_target_heading3)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -166,8 +166,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading4)
-                    text: (link_location_text)
+                    type: (link_target_heading4)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -177,8 +177,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading5)
-                    text: (link_location_text)
+                    type: (link_target_heading5)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -188,8 +188,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -199,8 +199,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -210,8 +210,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_generic)
-                    text: (link_location_text)
+                    type: (link_target_generic)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -221,8 +221,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_marker)
-                    text: (link_location_text)
+                    type: (link_target_marker)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -232,8 +232,8 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_definition)
-                    text: (link_location_text)
+                    type: (link_target_definition)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -243,32 +243,32 @@ Basic Links
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_footnote)
-                    text: (link_location_text)
+                    type: (link_target_footnote)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_url)
-                    text: (link_location_text)
+                    type: (link_target_url)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_url)
-                    text: (link_location_text)
+                    type: (link_target_url)
+                    text: (paragraph_segment)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_external_file)
-                    text: (link_location_text)
+                    type: (link_target_external_file)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -333,8 +333,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading1)
-                    text: (link_location_text)
+                    type: (link_target_heading1)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -344,8 +344,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading2)
-                    text: (link_location_text)
+                    type: (link_target_heading2)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -355,8 +355,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading3)
-                    text: (link_location_text)
+                    type: (link_target_heading3)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -366,8 +366,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading4)
-                    text: (link_location_text)
+                    type: (link_target_heading4)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -377,8 +377,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading5)
-                    text: (link_location_text)
+                    type: (link_target_heading5)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -388,8 +388,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -399,8 +399,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -410,8 +410,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_generic)
-                    text: (link_location_text)
+                    type: (link_target_generic)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -421,8 +421,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_marker)
-                    text: (link_location_text)
+                    type: (link_target_marker)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -432,8 +432,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_definition)
-                    text: (link_location_text)
+                    type: (link_target_definition)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -443,8 +443,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_footnote)
-                    text: (link_location_text)
+                    type: (link_target_footnote)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -467,8 +467,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading1)
-                    text: (link_location_text)
+                    type: (link_target_heading1)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -481,8 +481,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading2)
-                    text: (link_location_text)
+                    type: (link_target_heading2)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -495,8 +495,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading3)
-                    text: (link_location_text)
+                    type: (link_target_heading3)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -509,8 +509,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading4)
-                    text: (link_location_text)
+                    type: (link_target_heading4)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -523,8 +523,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading5)
-                    text: (link_location_text)
+                    type: (link_target_heading5)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -537,8 +537,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -551,8 +551,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -565,8 +565,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_generic)
-                    text: (link_location_text)
+                    type: (link_target_generic)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -579,8 +579,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_marker)
-                    text: (link_location_text)
+                    type: (link_target_marker)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -593,8 +593,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_definition)
-                    text: (link_location_text)
+                    type: (link_target_definition)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -607,8 +607,8 @@ Links with text
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_footnote)
-                    text: (link_location_text)
+                    type: (link_target_footnote)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -618,8 +618,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_url)
-                    text: (link_location_text)
+                    type: (link_target_url)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -629,8 +629,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_url)
-                    text: (link_location_text)
+                    type: (link_target_url)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -640,8 +640,8 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    type: (link_location_external_file)
-                    text: (link_location_text)
+                    type: (link_target_external_file)
+                    text: (paragraph_segment)
                 )
                 (link_description
                    text: (link_text)
@@ -883,8 +883,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_heading1)
-                    text: (link_location_text)
+                    type: (link_target_heading1)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -894,8 +894,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_heading2)
-                    text: (link_location_text)
+                    type: (link_target_heading2)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -905,8 +905,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_heading3)
-                    text: (link_location_text)
+                    type: (link_target_heading3)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -916,8 +916,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_heading4)
-                    text: (link_location_text)
+                    type: (link_target_heading4)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -927,8 +927,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_heading5)
-                    text: (link_location_text)
+                    type: (link_target_heading5)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -938,8 +938,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -949,8 +949,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -960,8 +960,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_generic)
-                    text: (link_location_text)
+                    type: (link_target_generic)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -971,8 +971,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_marker)
-                    text: (link_location_text)
+                    type: (link_target_marker)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -982,8 +982,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_definition)
-                    text: (link_location_text)
+                    type: (link_target_definition)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -993,8 +993,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_footnote)
-                    text: (link_location_text)
+                    type: (link_target_footnote)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1017,8 +1017,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading1)
-                    text: (link_location_text)
+                    type: (link_target_heading1)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1031,8 +1031,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading2)
-                    text: (link_location_text)
+                    type: (link_target_heading2)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1045,8 +1045,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading3)
-                    text: (link_location_text)
+                    type: (link_target_heading3)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1059,8 +1059,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading4)
-                    text: (link_location_text)
+                    type: (link_target_heading4)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1073,8 +1073,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading5)
-                    text: (link_location_text)
+                    type: (link_target_heading5)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1087,8 +1087,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_heading6)
-                    text: (link_location_text)
+                    type: (link_target_heading6)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1101,8 +1101,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_generic)
-                    text: (link_location_text)
+                    type: (link_target_generic)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1115,8 +1115,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_marker)
-                    text: (link_location_text)
+                    type: (link_target_marker)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1129,8 +1129,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_definition)
-                    text: (link_location_text)
+                    type: (link_target_definition)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1143,8 +1143,8 @@ Anchors
                     location: (link_file_text)
                 )
                 (link_location
-                    type: (link_location_footnote)
-                    text: (link_location_text)
+                    type: (link_target_footnote)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1154,8 +1154,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_external_file)
-                    text: (link_location_text)
+                    type: (link_target_external_file)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1165,8 +1165,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_url)
-                    text: (link_location_text)
+                    type: (link_target_url)
+                    text: (paragraph_segment)
                 )
             )
         )
@@ -1176,8 +1176,8 @@ Anchors
                     text: (anchor_declaration_text)
                 )
                 (link_location
-                    type: (link_location_url)
-                    text: (link_location_text)
+                    type: (link_target_url)
+                    text: (paragraph_segment)
                 )
             )
         )
