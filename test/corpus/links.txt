@@ -250,24 +250,15 @@ Basic Links
                 )
             )
         )
+        (ERROR (link_file_text))
+        (paragraph_segment)
+        (ERROR)
+        (ERROR (link_file_text))
         (paragraph_segment
-            (link
-                (ERROR
-                    file: (link_file_text)
-                   (UNEXPECTED '@')
-                )
-            )
-        )
-        (paragraph_segment
-            (link
-                (ERROR
-                    file: (link_file_text)
-                   (UNEXPECTED ':')
-                   (UNEXPECTED '/')
-                )
-            )
+            (link_modifier)
         )
     )
+    (ERROR)
 )
 
 ===============
@@ -600,28 +591,20 @@ Links with text
                 )
             )
         )
+        (ERROR (link_file_text))
         (paragraph_segment
-            (link
-                (link_file
-                    file: (link_file_text)
-                )
-                (ERROR
-                   (UNEXPECTED '@')
-                )
+            (ERROR)
+            (anchor_declaration
                 (link_description
                    text: (paragraph_segment)
                 )
             )
         )
+        (ERROR (link_file_text))
         (paragraph_segment
-            (link
-                (link_file
-                    file: (link_file_text)
-                )
-                (ERROR
-                   (UNEXPECTED ':')
-                   (UNEXPECTED '/')
-                )
+            (link_modifier)
+            (ERROR)
+            (anchor_declaration
                 (link_description
                    text: (paragraph_segment)
                 )
@@ -1218,35 +1201,23 @@ Anchors
             )
         )
         (paragraph_segment
-            (anchor_definition
-                (anchor_declaration
-                    (link_description
+            (anchor_declaration
+                (link_description
                   text: (paragraph_segment)
                 )
-                )
-                (link_file
-                    file: (link_file_text)
-                )
-                (ERROR
-                   (UNEXPECTED '@')
-                )
             )
+            (ERROR (link_file_text))
         )
+        (ERROR)
         (paragraph_segment
-            (anchor_definition
-                (anchor_declaration
-                    (link_description
+            (anchor_declaration
+                (link_description
                   text: (paragraph_segment)
                 )
-                )
-                (link_file
-                    file: (link_file_text)
-                )
-                (ERROR
-                   (UNEXPECTED ':')
-                   (UNEXPECTED '/')
-                )
             )
+            (ERROR (link_file_text))
+            (link_modifier)
         )
     )
+    (ERROR)
 )
