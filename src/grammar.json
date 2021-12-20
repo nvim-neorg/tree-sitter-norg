@@ -583,6 +583,15 @@
                   },
                   "named": false,
                   "value": "_lowercase"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "link_file_begin"
+                  },
+                  "named": false,
+                  "value": "_lowercase"
                 }
               ]
             }

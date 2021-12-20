@@ -288,6 +288,7 @@ module.exports = grammar({
                         alias($.link_description_end, "_lowercase"),
                         alias($.link_location_begin, "_lowercase"),
                         alias($.link_location_end, "_lowercase"),
+                        alias($.link_file_begin, "_lowercase"),
                     ),
                 ),
             ),

@@ -743,6 +743,8 @@ class Scanner
                 advance(lexer);
                 return !std::iswspace(lexer->lookahead);
             }
+            // since we have no break here, if we do not detect a beginning of a
+            // file segment we fall through into this next case statement
         case LINK_FILE_END:
             switch (lexer->lookahead)
             {
@@ -750,6 +752,9 @@ class Scanner
                     lexer->result_symbol = m_LastToken = LINK_TARGET_GENERIC;
                     break;
                 case '@':
+                    if (m_LastToken == LINK_FILE_END)
+                        return false;
+
                     lexer->result_symbol = m_LastToken = LINK_TARGET_EXTERNAL_FILE;
                     break;
                 case '|':
@@ -786,6 +791,7 @@ class Scanner
             {
                 lexer->result_symbol = m_LastToken = LINK_FILE_END;
                 advance(lexer);
+                // TODO: how can we disambiguate this from LINK_MODIFIER?
                 return (lexer->lookahead == '}' || lexer->lookahead == '#' || lexer->lookahead == '|' || lexer->lookahead == '$' || lexer->lookahead == '^' || lexer->lookahead == '*');
             }
         }
