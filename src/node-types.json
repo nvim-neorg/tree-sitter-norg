@@ -1082,7 +1082,7 @@
         "required": false,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "link_file_text",
             "named": true
           }
         ]
@@ -4394,6 +4394,10 @@
   },
   {
     "type": "insertion_prefix",
+    "named": true
+  },
+  {
+    "type": "link_file_text",
     "named": true
   },
   {

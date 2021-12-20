@@ -91,6 +91,7 @@ enum TokenType : char
     LINK_LOCATION_END,
     LINK_FILE_BEGIN,
     LINK_FILE_END,
+    LINK_FILE_TEXT,
     LINK_TARGET_URL,
     LINK_TARGET_GENERIC,
     LINK_TARGET_EXTERNAL_FILE,
@@ -786,14 +787,44 @@ class Scanner
 
             advance(lexer);
             return std::iswspace(lexer->lookahead);
-        default:
+        case LINK_FILE_BEGIN:
+            while (lexer->lookahead)
+            {
+                if (lexer->lookahead == ':' && m_Current != '\\')
+                    break;
+
+                // bail when potentially dealing with verbatim
+                if (lexer->lookahead == '`')
+                    return false;
+
+                // bail when potentially dealing with inline comments
+                if (lexer->lookahead == '+')
+                    return false;
+
+                // bail when potentially dealing with inline variables
+                if (lexer->lookahead == '=')
+                    return false;
+
+                // bail when potentially dealing with inline math
+                // Here we exclude the potential beginning of the file beginning
+                // because this is how we denote links to other workspaces.
+                if (lexer->lookahead == '$' && m_Current != ':')
+                    return false;
+
+                advance(lexer);
+            }
+
+            lexer->result_symbol = m_LastToken = LINK_FILE_TEXT;
+            return true;
+        case LINK_FILE_TEXT:
             if (lexer->lookahead == ':')
             {
                 lexer->result_symbol = m_LastToken = LINK_FILE_END;
                 advance(lexer);
-                // TODO: how can we disambiguate this from LINK_MODIFIER?
                 return (lexer->lookahead == '}' || lexer->lookahead == '#' || lexer->lookahead == '|' || lexer->lookahead == '$' || lexer->lookahead == '^' || lexer->lookahead == '*');
             }
+        default:
+            return false;
         }
 
 

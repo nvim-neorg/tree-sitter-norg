@@ -123,14 +123,14 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                   file: (paragraph_segment)
+                   file: (link_file_text)
                 )
             )
         )
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading1)
                     text: (paragraph_segment)
                 )
@@ -139,7 +139,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading2)
                     text: (paragraph_segment)
                 )
@@ -148,7 +148,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading3)
                     text: (paragraph_segment)
                 )
@@ -157,7 +157,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading4)
                     text: (paragraph_segment)
                 )
@@ -166,7 +166,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading5)
                     text: (paragraph_segment)
                 )
@@ -175,7 +175,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
@@ -184,7 +184,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
@@ -193,7 +193,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_generic)
                     text: (paragraph_segment)
                 )
@@ -202,7 +202,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_marker)
                     text: (paragraph_segment)
                 )
@@ -211,7 +211,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_definition)
                     text: (paragraph_segment)
                 )
@@ -220,7 +220,7 @@ Basic Links
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_footnote)
                     text: (paragraph_segment)
                 )
@@ -253,7 +253,7 @@ Basic Links
         (paragraph_segment
             (link
                 (ERROR
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                    (UNEXPECTED '@')
                 )
             )
@@ -261,7 +261,7 @@ Basic Links
         (paragraph_segment
             (link
                 (ERROR
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                    (UNEXPECTED ':')
                    (UNEXPECTED '/')
                 )
@@ -428,7 +428,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                   file: (paragraph_segment)
+                   file: (link_file_text)
                 )
                 (link_description
                    text: (paragraph_segment)
@@ -438,7 +438,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading1)
                     text: (paragraph_segment)
                 )
@@ -450,7 +450,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading2)
                     text: (paragraph_segment)
                 )
@@ -462,7 +462,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading3)
                     text: (paragraph_segment)
                 )
@@ -474,7 +474,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading4)
                     text: (paragraph_segment)
                 )
@@ -486,7 +486,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading5)
                     text: (paragraph_segment)
                 )
@@ -498,7 +498,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
@@ -510,7 +510,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
@@ -522,7 +522,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_generic)
                     text: (paragraph_segment)
                 )
@@ -534,7 +534,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_marker)
                     text: (paragraph_segment)
                 )
@@ -546,7 +546,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_definition)
                     text: (paragraph_segment)
                 )
@@ -558,7 +558,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_footnote)
                     text: (paragraph_segment)
                 )
@@ -603,7 +603,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_file
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                 )
                 (ERROR
                    (UNEXPECTED '@')
@@ -616,7 +616,7 @@ Links with text
         (paragraph_segment
             (link
                 (link_file
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                 )
                 (ERROR
                    (UNEXPECTED ':')
@@ -1034,7 +1034,7 @@ Anchors
                 )
                 )
                 (link_location
-                   file: (paragraph_segment)
+                   file: (link_file_text)
                 )
             )
         )
@@ -1046,7 +1046,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading1)
                     text: (paragraph_segment)
                 )
@@ -1060,7 +1060,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading2)
                     text: (paragraph_segment)
                 )
@@ -1074,7 +1074,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading3)
                     text: (paragraph_segment)
                 )
@@ -1088,7 +1088,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading4)
                     text: (paragraph_segment)
                 )
@@ -1102,7 +1102,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading5)
                     text: (paragraph_segment)
                 )
@@ -1116,7 +1116,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_heading6)
                     text: (paragraph_segment)
                 )
@@ -1130,7 +1130,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_generic)
                     text: (paragraph_segment)
                 )
@@ -1144,7 +1144,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_marker)
                     text: (paragraph_segment)
                 )
@@ -1158,7 +1158,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_definition)
                     text: (paragraph_segment)
                 )
@@ -1172,7 +1172,7 @@ Anchors
                 )
                 )
                 (link_location
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                     type: (link_target_footnote)
                     text: (paragraph_segment)
                 )
@@ -1225,7 +1225,7 @@ Anchors
                 )
                 )
                 (link_file
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                 )
                 (ERROR
                    (UNEXPECTED '@')
@@ -1240,7 +1240,7 @@ Anchors
                 )
                 )
                 (link_file
-                    file: (paragraph_segment)
+                    file: (link_file_text)
                 )
                 (ERROR
                    (UNEXPECTED ':')
