@@ -429,7 +429,7 @@ module.exports = grammar({
         link_description: $ =>
         seq(
             alias($.link_description_begin, "_begin"),
-            field("text", alias($._verbatim_segment, $.paragraph_segment)),
+            field("text", $.paragraph_segment),
             alias($.link_description_end, "_end"),
         ),
 
@@ -456,10 +456,15 @@ module.exports = grammar({
         ),
 
         _link_target: $ =>
+        choice(
+            $._link_target_markup,
+            $._link_target_verbatim,
+        ),
+
+        _link_target_markup: $ =>
         seq(
             field("type",
                 choice(
-                    $.link_target_url,
                     $.link_target_generic,
                     $.link_target_external_file,
                     $.link_target_marker,
@@ -471,6 +476,16 @@ module.exports = grammar({
                     $.link_target_heading4,
                     $.link_target_heading5,
                     $.link_target_heading6,
+                ),
+            ),
+            field("text", $.paragraph_segment),
+        ),
+
+        _link_target_verbatim: $ =>
+        seq(
+            field("type",
+                choice(
+                    $.link_target_url,
                 ),
             ),
             field("text", alias($._verbatim_segment, $.paragraph_segment)),

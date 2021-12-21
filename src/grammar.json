@@ -1098,13 +1098,8 @@
           "type": "FIELD",
           "name": "text",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_verbatim_segment"
-            },
-            "named": true,
-            "value": "paragraph_segment"
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
           }
         },
         {
@@ -1203,6 +1198,19 @@
       ]
     },
     "_link_target": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_link_target_markup"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_link_target_verbatim"
+        }
+      ]
+    },
+    "_link_target_markup": {
       "type": "SEQ",
       "members": [
         {
@@ -1211,10 +1219,6 @@
           "content": {
             "type": "CHOICE",
             "members": [
-              {
-                "type": "SYMBOL",
-                "name": "link_target_url"
-              },
               {
                 "type": "SYMBOL",
                 "name": "link_target_generic"
@@ -1258,6 +1262,32 @@
               {
                 "type": "SYMBOL",
                 "name": "link_target_heading6"
+              }
+            ]
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "text",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
+          }
+        }
+      ]
+    },
+    "_link_target_verbatim": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "link_target_url"
               }
             ]
           }
