@@ -208,7 +208,7 @@
       "required": true,
       "types": [
         {
-          "type": "anchor_declaration",
+          "type": "link_description",
           "named": true
         },
         {

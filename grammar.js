@@ -503,7 +503,7 @@ module.exports = grammar({
 
         anchor_definition: $ =>
         prec(2, seq(
-            $.anchor_declaration,
+            $.link_description,
             $.link_location,
         )),
 

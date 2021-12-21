@@ -1344,7 +1344,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "anchor_declaration"
+            "name": "link_description"
           },
           {
             "type": "SYMBOL",
