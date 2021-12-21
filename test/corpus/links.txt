@@ -1171,3 +1171,60 @@ Anchors
     )
     (ERROR)
 )
+
+==============
+Verbatim links
+==============
+`{* not a link}`
+`{:also_not_a_link:}`
+`{:$again_not_a_link:}`
+`{* not a link}[not a description]`
+`[not an anchor]`
+`[not an anchor]{* not a link}`
+${* not a link}$
+${:also_not_a_link:}$
+${:$again_not_a_link:}$
+${* not a link}[not a description]$
+$[not an anchor]$
+$[not an anchor]{* not a link}$
++{* not a link}+
++{:also_not_a_link:}+
++{:$again_not_a_link:}+
++{* not a link}[not a description]+
++[not an anchor]+
++[not an anchor]{* not a link}+
+={* not a link}=
+={:also_not_a_link:}=
+={:$again_not_a_link:}=
+={* not a link}[not a description]=
+=[not an anchor]=
+=[not an anchor]{* not a link}=
+---
+(document
+    (paragraph
+        (paragraph_segment (verbatim))
+        (paragraph_segment (verbatim))
+        (paragraph_segment (verbatim))
+        (paragraph_segment (verbatim))
+        (paragraph_segment (verbatim))
+        (paragraph_segment (verbatim))
+        (paragraph_segment (inline_math))
+        (paragraph_segment (inline_math))
+        (paragraph_segment (inline_math))
+        (paragraph_segment (inline_math))
+        (paragraph_segment (inline_math))
+        (paragraph_segment (inline_math))
+        (paragraph_segment (inline_comment))
+        (paragraph_segment (inline_comment))
+        (paragraph_segment (inline_comment))
+        (paragraph_segment (inline_comment))
+        (paragraph_segment (inline_comment))
+        (paragraph_segment (inline_comment))
+        (paragraph_segment (variable))
+        (paragraph_segment (variable))
+        (paragraph_segment (variable))
+        (paragraph_segment (variable))
+        (paragraph_segment (variable))
+        (paragraph_segment (variable))
+    )
+)
