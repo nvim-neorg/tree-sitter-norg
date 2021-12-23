@@ -34,8 +34,6 @@ module.exports = grammar({
         [$.inline_comment, $._paragraph_element],
         [$.inline_math, $._paragraph_element],
         [$.variable, $._paragraph_element],
-
-        [$._verbatim_segment, $.link]
     ],
 
     externals: $ => [
@@ -111,31 +109,25 @@ module.exports = grammar({
         $.weak_paragraph_delimiter,
         $.horizontal_line,
 
-        $.link_begin,
+        $.link_description_begin,
+        $.link_description_end,
+        $.link_location_begin,
+        $.link_location_end,
         $.link_file_begin,
-        $.link_file_text,
         $.link_file_end,
-        $.link_location_generic,
-        $.link_location_url,
-        $.link_location_external_file,
-        $.link_location_heading1,
-        $.link_location_heading2,
-        $.link_location_heading3,
-        $.link_location_heading4,
-        $.link_location_heading5,
-        $.link_location_heading6,
-        $.link_location_marker,
-        $.link_location_definition,
-        $.link_location_footnote,
-        $.link_location_text,
-        $.link_end,
-        $.link_text_begin,
-        $.link_text,
-        $.link_text_end,
-
-        $.anchor_declaration_begin,
-        $.anchor_declaration_text,
-        $.anchor_declaration_end,
+        $.link_file_text,
+        $.link_target_url,
+        $.link_target_generic,
+        $.link_target_external_file,
+        $.link_target_marker,
+        $.link_target_definition,
+        $.link_target_footnote,
+        $.link_target_heading1,
+        $.link_target_heading2,
+        $.link_target_heading3,
+        $.link_target_heading4,
+        $.link_target_heading5,
+        $.link_target_heading6,
 
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
@@ -293,30 +285,25 @@ module.exports = grammar({
                         alias($.inline_math_close, "_lowercase"),
                         alias($.variable_open, "_lowercase"),
                         alias($.variable_close, "_lowercase"),
-                        alias($.link_begin, "_lowercase"),
+                        alias($.link_description_begin, "_lowercase"),
+                        alias($.link_description_end, "_lowercase"),
+                        alias($.link_location_begin, "_lowercase"),
+                        alias($.link_location_end, "_lowercase"),
                         alias($.link_file_begin, "_lowercase"),
-                        alias($.link_file_text, "_lowercase"),
                         alias($.link_file_end, "_lowercase"),
-                        alias($.link_location_generic, "_lowercase"),
-                        alias($.link_location_url, "_lowercase"),
-                        alias($.link_location_external_file, "_lowercase"),
-                        alias($.link_location_heading1, "_lowercase"),
-                        alias($.link_location_heading2, "_lowercase"),
-                        alias($.link_location_heading3, "_lowercase"),
-                        alias($.link_location_heading4, "_lowercase"),
-                        alias($.link_location_heading5, "_lowercase"),
-                        alias($.link_location_heading6, "_lowercase"),
-                        alias($.link_location_marker, "_lowercase"),
-                        alias($.link_location_definition, "_lowercase"),
-                        alias($.link_location_footnote, "_lowercase"),
-                        alias($.link_location_text, "_lowercase"),
-                        alias($.link_end, "_lowercase"),
-                        alias($.link_text_begin, "_lowercase"),
-                        alias($.link_text, "_lowercase"),
-                        alias($.link_text_end, "_lowercase"),
-                        alias($.anchor_declaration_begin, "_lowercase"),
-                        alias($.anchor_declaration_text, "_lowercase"),
-                        alias($.anchor_declaration_end, "_lowercase"),
+                        alias($.link_file_text, "_lowercase"),
+                        alias($.link_target_url, "_lowercase"),
+                        alias($.link_target_generic, "_lowercase"),
+                        alias($.link_target_external_file, "_lowercase"),
+                        alias($.link_target_marker, "_lowercase"),
+                        alias($.link_target_definition, "_lowercase"),
+                        alias($.link_target_footnote, "_lowercase"),
+                        alias($.link_target_heading1, "_lowercase"),
+                        alias($.link_target_heading2, "_lowercase"),
+                        alias($.link_target_heading3, "_lowercase"),
+                        alias($.link_target_heading4, "_lowercase"),
+                        alias($.link_target_heading5, "_lowercase"),
+                        alias($.link_target_heading6, "_lowercase"),
                     ),
                 ),
             ),
@@ -454,77 +441,83 @@ module.exports = grammar({
 
         link_description: $ =>
         seq(
-            alias($.link_text_begin, "_begin"),
-            field("text", $.link_text),
-            alias($.link_text_end, "_end"),
-        ),
-
-        link_file: $ =>
-        seq(
-            alias($.link_file_begin, "_begin"),
-            field("location", $.link_file_text),
-            alias($.link_file_end, "_end"),
+            alias($.link_description_begin, "_begin"),
+            field("text", $.paragraph_segment),
+            alias($.link_description_end, "_end"),
         ),
 
         link_location: $ =>
         seq(
-            field("type", choice(
-                $.link_location_generic,
-                $.link_location_url,
-                $.link_location_external_file,
-                $.link_location_heading1,
-                $.link_location_heading2,
-                $.link_location_heading3,
-                $.link_location_heading4,
-                $.link_location_heading5,
-                $.link_location_heading6,
-                $.link_location_marker,
-                $.link_location_definition,
-                $.link_location_footnote,
-            )),
-            field("text", $.link_location_text),
+            alias($.link_location_begin, "_begin"),
+            choice(
+                $._link_target,
+                seq(
+                    $._link_file,
+                    optional(
+                        $._link_target,
+                    ),
+                ),
+            ),
+            alias($.link_location_end, "_end"),
         ),
 
+        _link_file: $ =>
+        seq(
+            alias($.link_file_begin, "_begin"),
+            field("file", $.link_file_text),
+            alias($.link_file_end, "_end"),
+        ),
+
+        _link_target: $ =>
+        choice(
+            $._link_target_markup,
+            $._link_target_verbatim,
+        ),
+
+        _link_target_markup: $ =>
+        seq(
+            field("type",
+                choice(
+                    $.link_target_generic,
+                    $.link_target_external_file,
+                    $.link_target_marker,
+                    $.link_target_definition,
+                    $.link_target_footnote,
+                    $.link_target_heading1,
+                    $.link_target_heading2,
+                    $.link_target_heading3,
+                    $.link_target_heading4,
+                    $.link_target_heading5,
+                    $.link_target_heading6,
+                ),
+            ),
+            field("text", $.paragraph_segment),
+        ),
+
+        _link_target_verbatim: $ =>
+        seq(
+            field("type",
+                choice(
+                    $.link_target_url,
+                ),
+            ),
+            field("text", alias($._verbatim_segment, $.paragraph_segment)),
+        ),
 
         link: $ =>
-        seq(
-            alias($.link_begin, "_begin"),
-            choice(
-                $.link_location,
-                seq(
-                    $.link_file,
-                    optional(
-                        $.link_location,
-                    )
-                )
-            ),
-            alias($.link_end, "_end"),
+        prec.right(2, seq(
+            $.link_location,
             optional(
                 $.link_description,
-            )
-        ),
+            ),
+        )),
 
-        anchor_declaration: $ =>
-        seq(
-            alias($.anchor_declaration_begin, "_begin"),
-            field("text", $.anchor_declaration_text),
-            alias($.anchor_declaration_end, "_end"),
-        ),
+        anchor_declaration: $ => $.link_description,
 
         anchor_definition: $ =>
         prec(2, seq(
-            $.anchor_declaration,
-            alias($.link_begin, "_begin"),
-            choice(
-                $.link_location,
-                seq(
-                    $.link_file,
-                    optional(
-                        $.link_location,
-                    )
-                )
-            ),
-            alias($.link_end, "_end"),
+            $.link_description,
+            $.link_location,
         )),
 
         unordered_link1: $ =>

@@ -187,17 +187,16 @@
   {
     "type": "anchor_declaration",
     "named": true,
-    "fields": {
-      "text": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "anchor_declaration_text",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "link_description",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -209,11 +208,7 @@
       "required": true,
       "types": [
         {
-          "type": "anchor_declaration",
-          "named": true
-        },
-        {
-          "type": "link_file",
+          "type": "link_description",
           "named": true
         },
         {
@@ -1056,10 +1051,6 @@
           "named": true
         },
         {
-          "type": "link_file",
-          "named": true
-        },
-        {
           "type": "link_location",
           "named": true
         }
@@ -1075,23 +1066,7 @@
         "required": true,
         "types": [
           {
-            "type": "link_text",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "link_file",
-    "named": true,
-    "fields": {
-      "location": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "link_file_text",
+            "type": "paragraph_segment",
             "named": true
           }
         ]
@@ -1102,66 +1077,76 @@
     "type": "link_location",
     "named": true,
     "fields": {
-      "text": {
+      "file": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
-            "type": "link_location_text",
+            "type": "link_file_text",
+            "named": true
+          }
+        ]
+      },
+      "text": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "paragraph_segment",
             "named": true
           }
         ]
       },
       "type": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
-            "type": "link_location_definition",
+            "type": "link_target_definition",
             "named": true
           },
           {
-            "type": "link_location_external_file",
+            "type": "link_target_external_file",
             "named": true
           },
           {
-            "type": "link_location_footnote",
+            "type": "link_target_footnote",
             "named": true
           },
           {
-            "type": "link_location_generic",
+            "type": "link_target_generic",
             "named": true
           },
           {
-            "type": "link_location_heading1",
+            "type": "link_target_heading1",
             "named": true
           },
           {
-            "type": "link_location_heading2",
+            "type": "link_target_heading2",
             "named": true
           },
           {
-            "type": "link_location_heading3",
+            "type": "link_target_heading3",
             "named": true
           },
           {
-            "type": "link_location_heading4",
+            "type": "link_target_heading4",
             "named": true
           },
           {
-            "type": "link_location_heading5",
+            "type": "link_target_heading5",
             "named": true
           },
           {
-            "type": "link_location_heading6",
+            "type": "link_target_heading6",
             "named": true
           },
           {
-            "type": "link_location_marker",
+            "type": "link_target_marker",
             "named": true
           },
           {
-            "type": "link_location_url",
+            "type": "link_target_url",
             "named": true
           }
         ]
@@ -4368,10 +4353,6 @@
     "named": false
   },
   {
-    "type": "anchor_declaration_text",
-    "named": true
-  },
-  {
     "type": "any_char",
     "named": true
   },
@@ -4420,63 +4401,55 @@
     "named": true
   },
   {
-    "type": "link_location_definition",
-    "named": true
-  },
-  {
-    "type": "link_location_external_file",
-    "named": true
-  },
-  {
-    "type": "link_location_footnote",
-    "named": true
-  },
-  {
-    "type": "link_location_generic",
-    "named": true
-  },
-  {
-    "type": "link_location_heading1",
-    "named": true
-  },
-  {
-    "type": "link_location_heading2",
-    "named": true
-  },
-  {
-    "type": "link_location_heading3",
-    "named": true
-  },
-  {
-    "type": "link_location_heading4",
-    "named": true
-  },
-  {
-    "type": "link_location_heading5",
-    "named": true
-  },
-  {
-    "type": "link_location_heading6",
-    "named": true
-  },
-  {
-    "type": "link_location_marker",
-    "named": true
-  },
-  {
-    "type": "link_location_text",
-    "named": true
-  },
-  {
-    "type": "link_location_url",
-    "named": true
-  },
-  {
     "type": "link_modifier",
     "named": true
   },
   {
-    "type": "link_text",
+    "type": "link_target_definition",
+    "named": true
+  },
+  {
+    "type": "link_target_external_file",
+    "named": true
+  },
+  {
+    "type": "link_target_footnote",
+    "named": true
+  },
+  {
+    "type": "link_target_generic",
+    "named": true
+  },
+  {
+    "type": "link_target_heading1",
+    "named": true
+  },
+  {
+    "type": "link_target_heading2",
+    "named": true
+  },
+  {
+    "type": "link_target_heading3",
+    "named": true
+  },
+  {
+    "type": "link_target_heading4",
+    "named": true
+  },
+  {
+    "type": "link_target_heading5",
+    "named": true
+  },
+  {
+    "type": "link_target_heading6",
+    "named": true
+  },
+  {
+    "type": "link_target_marker",
+    "named": true
+  },
+  {
+    "type": "link_target_url",
     "named": true
   },
   {

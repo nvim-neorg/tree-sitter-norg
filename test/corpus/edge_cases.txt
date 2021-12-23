@@ -1,0 +1,12 @@
+==========================
+Link parts inside verbatim
+==========================
+`[open` not verbatim
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (verbatim)
+        )
+    )
+)
