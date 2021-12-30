@@ -2059,7 +2059,7 @@ module.exports = grammar({
         ),
 
         single_definition: $ =>
-        seq(
+        prec.right(seq(
             $.single_definition_prefix,
 
             field(
@@ -2067,11 +2067,11 @@ module.exports = grammar({
                 $.paragraph_segment
             ),
 
-            field(
+            optional(field(
                 "definition",
                 $.paragraph
-            ),
-        ),
+            )),
+        )),
 
         multi_definition: $ =>
         choice(
@@ -2109,7 +2109,7 @@ module.exports = grammar({
         ),
 
         single_footnote: $ =>
-        seq(
+        prec.right(seq(
             $.single_footnote_prefix,
 
             field(
@@ -2117,11 +2117,11 @@ module.exports = grammar({
                 $.paragraph_segment
             ),
 
-            field(
+            optional(field(
                 "content",
                 $.paragraph
-            ),
-        ),
+            )),
+        )),
 
         multi_footnote: $ =>
         choice(

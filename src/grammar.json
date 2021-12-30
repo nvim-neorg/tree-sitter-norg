@@ -5332,29 +5332,41 @@
       }
     },
     "single_definition": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "single_definition_prefix"
-        },
-        {
-          "type": "FIELD",
-          "name": "title",
-          "content": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "paragraph_segment"
+            "name": "single_definition_prefix"
+          },
+          {
+            "type": "FIELD",
+            "name": "title",
+            "content": {
+              "type": "SYMBOL",
+              "name": "paragraph_segment"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "definition",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "paragraph"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
-        },
-        {
-          "type": "FIELD",
-          "name": "definition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "paragraph"
-          }
-        }
-      ]
+        ]
+      }
     },
     "multi_definition": {
       "type": "CHOICE",
@@ -5424,29 +5436,41 @@
       ]
     },
     "single_footnote": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "single_footnote_prefix"
-        },
-        {
-          "type": "FIELD",
-          "name": "title",
-          "content": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "paragraph_segment"
+            "name": "single_footnote_prefix"
+          },
+          {
+            "type": "FIELD",
+            "name": "title",
+            "content": {
+              "type": "SYMBOL",
+              "name": "paragraph_segment"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "content",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "paragraph"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
-        },
-        {
-          "type": "FIELD",
-          "name": "content",
-          "content": {
-            "type": "SYMBOL",
-            "name": "paragraph"
-          }
-        }
-      ]
+        ]
+      }
     },
     "multi_footnote": {
       "type": "CHOICE",

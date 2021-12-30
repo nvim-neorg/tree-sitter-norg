@@ -2629,7 +2629,7 @@
     "fields": {
       "definition": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph",
@@ -2665,7 +2665,7 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph",
