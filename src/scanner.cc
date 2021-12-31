@@ -277,10 +277,9 @@ class Scanner
                 }
 
                 // This is a fallback. If the tag ends up not being `@end`
-                // then...
-                if (m_LastToken == RANGED_TAG)
+                // then ignore the char if we are already inside of a ranged tag. 
+                if (m_TagLevel)
                 {
-                    // ignore the char if we are already inside of a ranged tag.
                     lexer->result_symbol = m_LastToken = WORD;
                     return true;
                 }
