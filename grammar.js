@@ -541,31 +541,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link2,
-                        $.unordered_link3,
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link2,
-                        $.ordered_link3,
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-
-                        $.unordered_list2,
-                        $.unordered_list3,
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list2,
-                        $.ordered_list3,
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_2,
                 )
             )
         ),
@@ -591,27 +567,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link3,
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link3,
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-
-                        $.unordered_list3,
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list3,
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_3,
                 )
             )
         ),
@@ -637,23 +593,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_4,
                 )
             )
         ),
@@ -679,19 +619,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link5,
-                        $.ordered_link6,
-
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list5,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_5,
                 )
             )
         ),
@@ -717,13 +645,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link6,
-                        $.ordered_link6,
-
-                        $.unordered_list6,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_6,
                 )
             )
         ),
@@ -771,31 +693,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link2,
-                        $.unordered_link3,
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link2,
-                        $.ordered_link3,
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-
-                        $.unordered_list2,
-                        $.unordered_list3,
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list2,
-                        $.ordered_list3,
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_2,
                 )
             )
         ),
@@ -821,27 +719,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link3,
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link3,
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-
-                        $.unordered_list3,
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list3,
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_3,
                 )
             )
         ),
@@ -867,23 +745,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_4,
                 )
             )
         ),
@@ -909,19 +771,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link5,
-                        $.ordered_link6,
-
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list5,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_5,
                 )
             )
         ),
@@ -947,13 +797,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.unordered_link6,
-                        $.ordered_link6,
-
-                        $.unordered_list6,
-                        $.ordered_list6,
-                    )
+                    $._any_list_item_level_6,
                 )
             )
         ),
@@ -1364,46 +1208,70 @@ module.exports = grammar({
             )
         ),
 
+        _any_list_item_level_1: $ =>
+        choice(
+            $.unordered_list1,
+            $.ordered_list1,
+            $.todo_item1,
+            $.unordered_link1,
+            $.ordered_link1,
+            $._any_list_item_level_2,
+        ),
+
+        _any_list_item_level_2: $ =>
+        choice(
+            $.unordered_list2,
+            $.ordered_list2,
+            $.todo_item2,
+            $.unordered_link2,
+            $.ordered_link2,
+            $._any_list_item_level_3,
+        ),
+
+        _any_list_item_level_3: $ =>
+        choice(
+            $.unordered_list3,
+            $.ordered_list3,
+            $.todo_item3,
+            $.unordered_link3,
+            $.ordered_link3,
+            $._any_list_item_level_4,
+        ),
+
+        _any_list_item_level_4: $ =>
+        choice(
+            $.unordered_list4,
+            $.ordered_list4,
+            $.todo_item4,
+            $.unordered_link4,
+            $.ordered_link4,
+            $._any_list_item_level_5,
+        ),
+
+        _any_list_item_level_5: $ =>
+        choice(
+            $.unordered_list5,
+            $.ordered_list5,
+            $.todo_item5,
+            $.unordered_link5,
+            $.ordered_link5,
+            $._any_list_item_level_6,
+        ),
+
+        _any_list_item_level_6: $ =>
+        choice(
+            $.unordered_list6,
+            $.ordered_list6,
+            $.todo_item6,
+            $.unordered_link6,
+            $.ordered_link6,
+        ),
+
         // TODO: complete docs
         generic_list: $ =>
         prec.right(0,
             repeat1(
-                choice(
-                    $.unordered_list1,
-                    $.unordered_list2,
-                    $.unordered_list3,
-                    $.unordered_list4,
-                    $.unordered_list5,
-                    $.unordered_list6,
-
-                    $.ordered_list1,
-                    $.ordered_list2,
-                    $.ordered_list3,
-                    $.ordered_list4,
-                    $.ordered_list5,
-                    $.ordered_list6,
-
-                    $.todo_item1,
-                    $.todo_item2,
-                    $.todo_item3,
-                    $.todo_item4,
-                    $.todo_item5,
-                    $.todo_item6,
-
-                    $.unordered_link1,
-                    $.unordered_link2,
-                    $.unordered_link3,
-                    $.unordered_link4,
-                    $.unordered_link5,
-                    $.unordered_link6,
-
-                    $.ordered_link1,
-                    $.ordered_link2,
-                    $.ordered_link3,
-                    $.ordered_link4,
-                    $.ordered_link5,
-                    $.ordered_link6,
-                )
+                $._any_list_item_level_1,
             )
         ),
 
@@ -1418,37 +1286,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item2,
-                        $.todo_item3,
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-
-                        $.unordered_list2,
-                        $.unordered_list3,
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list2,
-                        $.ordered_list3,
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-
-                        $.unordered_link2,
-                        $.unordered_link3,
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link2,
-                        $.ordered_link3,
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_2,
                 )
             )
         ),
@@ -1464,32 +1302,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item3,
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-
-                        $.unordered_list3,
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list3,
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-
-                        $.unordered_link3,
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link3,
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_3,
                 )
             )
         ),
@@ -1505,27 +1318,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_4,
                 )
             )
         ),
@@ -1541,22 +1334,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item5,
-                        $.todo_item6,
-
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list5,
-                        $.ordered_list6,
-
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link5,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_5,
                 )
             )
         ),
@@ -1572,13 +1350,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item6,
-                        $.unordered_list6,
-                        $.ordered_list6,
-                        $.unordered_link6,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_6,
                 )
             )
         ),
@@ -1606,37 +1378,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item2,
-                        $.todo_item3,
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-
-                        $.unordered_list2,
-                        $.unordered_list3,
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list2,
-                        $.ordered_list3,
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-
-                        $.unordered_link2,
-                        $.unordered_link3,
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link2,
-                        $.ordered_link3,
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_2,
                 )
             )
         ),
@@ -1652,32 +1394,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item3,
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-
-                        $.unordered_list3,
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list3,
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-
-                        $.unordered_link3,
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link3,
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_3,
                 )
             )
         ),
@@ -1693,27 +1410,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-
-                        $.unordered_list4,
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list4,
-                        $.ordered_list5,
-                        $.ordered_list6,
-
-                        $.unordered_link4,
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link4,
-                        $.ordered_link5,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_4,
                 )
             )
         ),
@@ -1729,22 +1426,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item5,
-                        $.todo_item6,
-
-                        $.unordered_list5,
-                        $.unordered_list6,
-
-                        $.ordered_list5,
-                        $.ordered_list6,
-
-                        $.unordered_link5,
-                        $.unordered_link6,
-
-                        $.ordered_link5,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_5,
                 )
             )
         ),
@@ -1760,13 +1442,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item6,
-                        $.unordered_list6,
-                        $.ordered_list6,
-                        $.unordered_link6,
-                        $.ordered_link6,
-                    )
+                    $._any_list_item_level_6,
                 )
             )
         ),
@@ -1815,6 +1491,18 @@ module.exports = grammar({
         ),
 
         // --------------------------------------------------
+        _any_todo_state: $ =>
+        choice(
+            $.todo_item_undone,
+            $.todo_item_pending,
+            $.todo_item_done,
+            $.todo_item_on_hold,
+            $.todo_item_cancelled,
+            $.todo_item_urgent,
+            $.todo_item_uncertain,
+            $.todo_item_recurring,
+        ),
+
         todo_item1: $ =>
         prec.right(0,
             seq(
@@ -1822,17 +1510,7 @@ module.exports = grammar({
 
                 field(
                     "state",
-
-                    choice(
-                        $.todo_item_undone,
-                        $.todo_item_pending,
-                        $.todo_item_done,
-                        $.todo_item_on_hold,
-                        $.todo_item_cancelled,
-                        $.todo_item_urgent,
-                        $.todo_item_uncertain,
-                        $.todo_item_recurring,
-                    ),
+                    $._any_todo_state,
                 ),
 
                 token.immediate(/\s+/),
@@ -1843,13 +1521,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item2,
-                        $.todo_item3,
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-                    ),
+                    $._any_list_item_level_2,
                 ),
             )
         ),
@@ -1861,17 +1533,7 @@ module.exports = grammar({
 
                 field(
                     "state",
-
-                    choice(
-                        $.todo_item_undone,
-                        $.todo_item_pending,
-                        $.todo_item_done,
-                        $.todo_item_on_hold,
-                        $.todo_item_cancelled,
-                        $.todo_item_urgent,
-                        $.todo_item_uncertain,
-                        $.todo_item_recurring,
-                    )
+                    $._any_todo_state,
                 ),
 
                 token(/\s+/),
@@ -1882,12 +1544,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item3,
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-                    ),
+                    $._any_list_item_level_3,
                 ),
             )
         ),
@@ -1899,17 +1556,7 @@ module.exports = grammar({
 
                 field(
                     "state",
-
-                    choice(
-                        $.todo_item_undone,
-                        $.todo_item_pending,
-                        $.todo_item_done,
-                        $.todo_item_on_hold,
-                        $.todo_item_cancelled,
-                        $.todo_item_urgent,
-                        $.todo_item_uncertain,
-                        $.todo_item_recurring,
-                    )
+                    $._any_todo_state,
                 ),
 
                 token(/\s+/),
@@ -1920,11 +1567,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item4,
-                        $.todo_item5,
-                        $.todo_item6,
-                    ),
+                    $._any_list_item_level_4,
                 ),
             )
         ),
@@ -1936,17 +1579,7 @@ module.exports = grammar({
 
                 field(
                     "state",
-
-                    choice(
-                        $.todo_item_undone,
-                        $.todo_item_pending,
-                        $.todo_item_done,
-                        $.todo_item_on_hold,
-                        $.todo_item_cancelled,
-                        $.todo_item_urgent,
-                        $.todo_item_uncertain,
-                        $.todo_item_recurring,
-                    )
+                    $._any_todo_state,
                 ),
 
                 token(/\s+/),
@@ -1957,10 +1590,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    choice(
-                        $.todo_item5,
-                        $.todo_item6,
-                    )
+                    $._any_list_item_level_5,
                 ),
             )
         ),
@@ -1972,17 +1602,7 @@ module.exports = grammar({
 
                 field(
                     "state",
-
-                    choice(
-                        $.todo_item_undone,
-                        $.todo_item_pending,
-                        $.todo_item_done,
-                        $.todo_item_on_hold,
-                        $.todo_item_cancelled,
-                        $.todo_item_urgent,
-                        $.todo_item_uncertain,
-                        $.todo_item_recurring,
-                    )
+                    $._any_todo_state,
                 ),
 
                 token(/\s+/),
@@ -1993,7 +1613,7 @@ module.exports = grammar({
                 ),
 
                 repeat(
-                    $.todo_item6,
+                    $._any_list_item_level_6,
                 ),
             )
         ),
@@ -2005,17 +1625,7 @@ module.exports = grammar({
 
                 field(
                     "state",
-
-                    choice(
-                        $.todo_item_undone,
-                        $.todo_item_pending,
-                        $.todo_item_done,
-                        $.todo_item_on_hold,
-                        $.todo_item_cancelled,
-                        $.todo_item_urgent,
-                        $.todo_item_uncertain,
-                        $.todo_item_recurring,
-                    )
+                    $._any_todo_state,
                 ),
 
                 token(/\s+/),

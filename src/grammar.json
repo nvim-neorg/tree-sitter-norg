@@ -1525,89 +1525,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_2"
             }
           }
         ]
@@ -1668,73 +1587,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_3"
             }
           }
         ]
@@ -1795,57 +1649,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_4"
             }
           }
         ]
@@ -1906,41 +1711,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_5"
             }
           }
         ]
@@ -2001,25 +1773,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_6"
             }
           }
         ]
@@ -2135,89 +1890,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_2"
             }
           }
         ]
@@ -2278,73 +1952,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_3"
             }
           }
         ]
@@ -2405,57 +2014,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_4"
             }
           }
         ]
@@ -2516,41 +2076,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_5"
             }
           }
         ]
@@ -2611,25 +2138,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_6"
             }
           }
         ]
@@ -3616,135 +3126,184 @@
         ]
       }
     },
+    "_any_list_item_level_1": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list1"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_list1"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item1"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_link1"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_link1"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_any_list_item_level_2"
+        }
+      ]
+    },
+    "_any_list_item_level_2": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_list2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_link2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_link2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_any_list_item_level_3"
+        }
+      ]
+    },
+    "_any_list_item_level_3": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list3"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_list3"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item3"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_link3"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_link3"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_any_list_item_level_4"
+        }
+      ]
+    },
+    "_any_list_item_level_4": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list4"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_list4"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item4"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_link4"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_link4"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_any_list_item_level_5"
+        }
+      ]
+    },
+    "_any_list_item_level_5": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list5"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_list5"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item5"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_link5"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_link5"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_any_list_item_level_6"
+        }
+      ]
+    },
+    "_any_list_item_level_6": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "unordered_list6"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_list6"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item6"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unordered_link6"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ordered_link6"
+        }
+      ]
+    },
     "generic_list": {
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
         "type": "REPEAT1",
         "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "unordered_list1"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_list2"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_list3"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_list4"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_list5"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_list6"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_list1"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_list2"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_list3"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_list4"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_list5"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_list6"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item1"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item2"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item3"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item4"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item5"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "todo_item6"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_link1"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_link2"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_link3"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_link4"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_link5"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unordered_link6"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_link1"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_link2"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_link3"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_link4"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_link5"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ordered_link6"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_any_list_item_level_1"
         }
       }
     },
@@ -3769,109 +3328,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_2"
             }
           }
         ]
@@ -3898,89 +3356,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_3"
             }
           }
         ]
@@ -4007,69 +3384,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_4"
             }
           }
         ]
@@ -4096,49 +3412,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_5"
             }
           }
         ]
@@ -4165,29 +3440,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_6"
             }
           }
         ]
@@ -4235,109 +3489,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_2"
             }
           }
         ]
@@ -4364,89 +3517,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_3"
             }
           }
         ]
@@ -4473,69 +3545,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_4"
             }
           }
         ]
@@ -4562,49 +3573,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_5"
             }
           }
         ]
@@ -4631,29 +3601,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_list6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "unordered_link6"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "ordered_link6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_6"
             }
           }
         ]
@@ -4760,6 +3709,43 @@
         ]
       }
     },
+    "_any_todo_state": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_undone"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_pending"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_done"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_on_hold"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_cancelled"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_urgent"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_uncertain"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "todo_item_recurring"
+        }
+      ]
+    },
     "todo_item1": {
       "type": "PREC_RIGHT",
       "value": 0,
@@ -4774,41 +3760,8 @@
             "type": "FIELD",
             "name": "state",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_undone"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_pending"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_done"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_on_hold"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_cancelled"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_urgent"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_uncertain"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_recurring"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_todo_state"
             }
           },
           {
@@ -4829,29 +3782,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item2"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_2"
             }
           }
         ]
@@ -4871,41 +3803,8 @@
             "type": "FIELD",
             "name": "state",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_undone"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_pending"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_done"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_on_hold"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_cancelled"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_urgent"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_uncertain"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_recurring"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_todo_state"
             }
           },
           {
@@ -4926,25 +3825,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item3"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_3"
             }
           }
         ]
@@ -4964,41 +3846,8 @@
             "type": "FIELD",
             "name": "state",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_undone"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_pending"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_done"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_on_hold"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_cancelled"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_urgent"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_uncertain"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_recurring"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_todo_state"
             }
           },
           {
@@ -5019,21 +3868,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item4"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_4"
             }
           }
         ]
@@ -5053,41 +3889,8 @@
             "type": "FIELD",
             "name": "state",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_undone"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_pending"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_done"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_on_hold"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_cancelled"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_urgent"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_uncertain"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_recurring"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_todo_state"
             }
           },
           {
@@ -5108,17 +3911,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item5"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item6"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_list_item_level_5"
             }
           }
         ]
@@ -5138,41 +3932,8 @@
             "type": "FIELD",
             "name": "state",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_undone"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_pending"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_done"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_on_hold"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_cancelled"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_urgent"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_uncertain"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_recurring"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_todo_state"
             }
           },
           {
@@ -5194,7 +3955,7 @@
             "type": "REPEAT",
             "content": {
               "type": "SYMBOL",
-              "name": "todo_item6"
+              "name": "_any_list_item_level_6"
             }
           }
         ]
@@ -5214,41 +3975,8 @@
             "type": "FIELD",
             "name": "state",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_undone"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_pending"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_done"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_on_hold"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_cancelled"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_urgent"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_uncertain"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "todo_item_recurring"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_any_todo_state"
             }
           },
           {
