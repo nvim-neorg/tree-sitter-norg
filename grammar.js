@@ -206,6 +206,13 @@ module.exports = grammar({
             alias($.capitalized_word, "_uppercase"),
         ),
 
+        _linked_attached_modifier: $ =>
+        prec.right(2, seq(
+            $.link_modifier,
+            $.attached_modifier,
+            $.link_modifier,
+        )),
+
         // Any regular text
         _paragraph: $ =>
         prec.right(0,
@@ -227,8 +234,9 @@ module.exports = grammar({
             $.anchor_declaration,
             $.anchor_definition,
             $.escape_sequence,
-            $.link_modifier,
             $.attached_modifier,
+            $._linked_attached_modifier,
+            alias($.link_modifier, "_lowercase"),
             alias($.bold_close, "_lowercase"),
             alias($.italic_close, "_lowercase"),
             alias($.strikethrough_close, "_lowercase"),

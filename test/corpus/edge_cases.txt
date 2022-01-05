@@ -10,3 +10,14 @@ Link parts inside verbatim
         )
     )
 )
+
+===============================================
+Plain text URL should not contain link modifier
+===============================================
+https://github.com/nvim-neorg/neorg
+---
+(document
+    (paragraph
+        (paragraph_segment)
+    )
+)

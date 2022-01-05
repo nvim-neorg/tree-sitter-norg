@@ -254,9 +254,7 @@ Basic Links
         (paragraph_segment)
         (ERROR)
         (ERROR (link_file_text))
-        (paragraph_segment
-            (link_modifier)
-        )
+        (paragraph_segment)
     )
     (ERROR)
 )
@@ -602,7 +600,6 @@ Links with text
         )
         (ERROR (link_file_text))
         (paragraph_segment
-            (link_modifier)
             (ERROR)
             (anchor_declaration
                 (link_description
@@ -1165,9 +1162,7 @@ Anchors
                   text: (paragraph_segment)
                 )
             )
-            (ERROR (link_file_text))
-            (link_modifier)
-        )
+            (ERROR (link_file_text)))
     )
     (ERROR)
 )

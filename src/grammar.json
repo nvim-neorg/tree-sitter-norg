@@ -81,6 +81,27 @@
         }
       ]
     },
+    "_linked_attached_modifier": {
+      "type": "PREC_RIGHT",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "link_modifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "attached_modifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "link_modifier"
+          }
+        ]
+      }
+    },
     "_paragraph": {
       "type": "PREC_RIGHT",
       "value": 0,
@@ -154,11 +175,20 @@
         },
         {
           "type": "SYMBOL",
-          "name": "link_modifier"
+          "name": "attached_modifier"
         },
         {
           "type": "SYMBOL",
-          "name": "attached_modifier"
+          "name": "_linked_attached_modifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_modifier"
+          },
+          "named": false,
+          "value": "_lowercase"
         },
         {
           "type": "ALIAS",
