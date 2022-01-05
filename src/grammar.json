@@ -88,16 +88,32 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "link_modifier"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "link_modifier"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           },
           {
             "type": "SYMBOL",
             "name": "attached_modifier"
           },
           {
-            "type": "SYMBOL",
-            "name": "link_modifier"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "link_modifier"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         ]
       }

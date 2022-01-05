@@ -208,9 +208,9 @@ module.exports = grammar({
 
         _linked_attached_modifier: $ =>
         prec.right(2, seq(
-            $.link_modifier,
+            optional($.link_modifier),
             $.attached_modifier,
-            $.link_modifier,
+            optional($.link_modifier),
         )),
 
         // Any regular text

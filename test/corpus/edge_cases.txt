@@ -21,3 +21,22 @@ https://github.com/nvim-neorg/neorg
         (paragraph_segment)
     )
 )
+
+================================================================
+Although the above is true, we still want to be able to do this:
+================================================================
+You may want to stress the *begin*:ning of a word.
+Or the end in some:/thing/.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (bold)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (italic)
+        )
+    )
+)
