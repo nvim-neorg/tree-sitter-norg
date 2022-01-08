@@ -724,7 +724,7 @@ class Scanner
             advance(lexer);
 
         if ((!std::iswspace(cur) || !cur) &&
-            (std::iswspace(lexer->lookahead) || std::ispunct(lexer->lookahead) ||
+            (std::iswspace(lexer->lookahead) || std::iswpunct(lexer->lookahead) ||
              !lexer->lookahead))
         {
             m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
