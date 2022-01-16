@@ -26,12 +26,37 @@ The above renders a table of contents with a custom title.
     (insertion
         (insertion_prefix)
         (capitalized_word)
-        (paragraph_segment)
+        (parameters
+            (parameter)
+        )
     )
     (paragraph
         (paragraph_segment)
     )
 )
+
+====================================
+Insertion with Multi-Word Parameters
+====================================
+= Insertion first | second argument | third
+
+The above is an insertion with three arguments
+---
+(document
+    (insertion
+        (insertion_prefix)
+        (capitalized_word)
+        (parameters
+            (parameter)
+            (parameter)
+            (parameter)
+        )
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
 
 ===================
 Variable Definition
@@ -44,7 +69,9 @@ The above is a variable definition.
     (insertion
         (insertion_prefix)
         (lowercase_word)
-        (paragraph_segment)
+        (parameters
+            (parameter)
+        )
     )
     (paragraph
         (paragraph_segment)

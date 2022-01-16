@@ -273,7 +273,7 @@
       "required": false,
       "types": [
         {
-          "type": "tag_parameters",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -980,24 +980,18 @@
             "named": true
           }
         ]
-      },
-      "parameters": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "insertion_prefix",
+          "named": true
+        },
+        {
+          "type": "parameters",
           "named": true
         }
       ]
@@ -2372,6 +2366,27 @@
     }
   },
   {
+    "type": "parameter",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "parameters",
+    "named": true,
+    "fields": {
+      "parameter": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "parameter",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "quote",
     "named": true,
     "fields": {},
@@ -2652,11 +2667,11 @@
       "required": false,
       "types": [
         {
-          "type": "ranged_tag_end",
+          "type": "parameters",
           "named": true
         },
         {
-          "type": "tag_parameters",
+          "type": "ranged_tag_end",
           "named": true
         }
       ]
@@ -2914,22 +2929,6 @@
     "type": "tag_name_element",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "tag_parameters",
-    "named": true,
-    "fields": {
-      "parameter": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "tag_param",
-            "named": true
-          }
-        ]
-      }
-    }
   },
   {
     "type": "todo_item1",
@@ -4918,10 +4917,6 @@
   },
   {
     "type": "strong_paragraph_delimiter",
-    "named": true
-  },
-  {
-    "type": "tag_param",
     "named": true
   },
   {

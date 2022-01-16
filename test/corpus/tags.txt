@@ -32,7 +32,35 @@ No longer part of the ranged tag.
         (tag_name
             (tag_name_element)
         )
-        (tag_parameters (tag_param))
+        (parameters
+            (parameter)
+        )
+        (ranged_tag_content)
+        (ranged_tag_end)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+=====================================
+Ranged Tag with Multi-Word Parameters
+=====================================
+@tag first | second argument | third
+print("Hello world")
+@end
+No longer part of the ranged tag.
+---
+(document
+    (ranged_tag
+        (tag_name
+            (tag_name_element)
+        )
+        (parameters
+            (parameter)
+            (parameter)
+            (parameter)
+        )
         (ranged_tag_content)
         (ranged_tag_end)
     )
@@ -115,7 +143,9 @@ Lol
             (tag_name
                 (tag_name_element)
             )
-            (tag_parameters (tag_param))
+            (parameters
+                (parameter)
+            )
         )
         (quote
             (quote1
@@ -126,5 +156,29 @@ Lol
     )
     (paragraph
         (paragraph_segment)
+    )
+)
+
+========================================
+Carryover Tag with Multi-Word Parameters
+========================================
+#tag first | second argument | third
+Lol
+---
+(document
+    (carryover_tag_set
+        (carryover_tag
+            (tag_name
+                (tag_name_element)
+            )
+            (parameters
+                (parameter)
+                (parameter)
+                (parameter)
+            )
+        )
+        (paragraph
+            (paragraph_segment)
+        )
     )
 )

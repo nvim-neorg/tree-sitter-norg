@@ -1672,18 +1672,20 @@ module.exports = grammar({
                 ),
 
                 choice(
-                    seq(
-                        token.immediate(
-                            /[\t\v ]+/
-                        ),
-                        field(
-                            "parameters",
-                            $.paragraph_segment
-                        )
+                    token.immediate(
+                        /[\t\v ]*\n/,
                     ),
 
-                    token.immediate(
-                        /[\t\v ]*\n/
+                    seq(
+                        token.immediate(
+                            /[\t\v ]+/,
+                        ),
+
+                        $.parameters,
+
+                        token.immediate(
+                            '\n'
+                        ),
                     ),
                 ),
             )
@@ -1847,7 +1849,7 @@ module.exports = grammar({
                             /[\t\v ]+/,
                         ),
 
-                        $.tag_parameters,
+                        $.parameters,
 
                         token.immediate(
                             '\n'
@@ -1915,7 +1917,7 @@ module.exports = grammar({
                         /[\t\v ]+/,
                     ),
 
-                    $.tag_parameters,
+                    $.parameters,
 
                     token.immediate(
                         '\n'
@@ -1952,26 +1954,39 @@ module.exports = grammar({
             )
         ),
 
-        tag_param: $ => /\S+/,
-
-        tag_parameters: $ =>
-        seq(
-            field(
-                "parameter",
-                $.tag_param,
+        parameter: $ =>
+        prec.right(
+            repeat1(
+                /\S+/,
             ),
+        ),
 
-            repeat(
-                seq(
-                    token.immediate(/[\t\v ]+/),
+        _parameter_separator: $ => '|',
 
-                    field(
-                        "parameter",
-                        optional(
-                            $.tag_param,
+        parameters: $ =>
+        prec.left(
+            seq(
+                optional(
+                    $._parameter_separator,
+                ),
+                field(
+                    "parameter",
+                    $.parameter,
+                ),
+
+                repeat(
+                    seq(
+                        $._parameter_separator,
+
+                        field(
+                            "parameter",
+                            $.parameter,
                         ),
                     ),
-                )
+                ),
+                optional(
+                    $._parameter_separator,
+                ),
             ),
         ),
 

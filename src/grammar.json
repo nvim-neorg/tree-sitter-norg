@@ -4074,6 +4074,13 @@
             "type": "CHOICE",
             "members": [
               {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[\\t\\v ]*\\n"
+                }
+              },
+              {
                 "type": "SEQ",
                 "members": [
                   {
@@ -4084,21 +4091,17 @@
                     }
                   },
                   {
-                    "type": "FIELD",
-                    "name": "parameters",
+                    "type": "SYMBOL",
+                    "name": "parameters"
+                  },
+                  {
+                    "type": "IMMEDIATE_TOKEN",
                     "content": {
-                      "type": "SYMBOL",
-                      "name": "paragraph_segment"
+                      "type": "STRING",
+                      "value": "\n"
                     }
                   }
                 ]
-              },
-              {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "[\\t\\v ]*\\n"
-                }
               }
             ]
           }
@@ -4426,7 +4429,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tag_parameters"
+                    "name": "parameters"
                   },
                   {
                     "type": "IMMEDIATE_TOKEN",
@@ -4573,7 +4576,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "tag_parameters"
+                  "name": "parameters"
                 },
                 {
                   "type": "IMMEDIATE_TOKEN",
@@ -4652,53 +4655,81 @@
         }
       ]
     },
-    "tag_param": {
-      "type": "PATTERN",
-      "value": "\\S+"
+    "parameter": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "PATTERN",
+          "value": "\\S+"
+        }
+      }
     },
-    "tag_parameters": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "parameter",
-          "content": {
-            "type": "SYMBOL",
-            "name": "tag_param"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
+    "_parameter_separator": {
+      "type": "STRING",
+      "value": "|"
+    },
+    "parameters": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
             "members": [
               {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "[\\t\\v ]+"
-                }
+                "type": "SYMBOL",
+                "name": "_parameter_separator"
               },
               {
-                "type": "FIELD",
-                "name": "parameter",
-                "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "tag_param"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "parameter",
+            "content": {
+              "type": "SYMBOL",
+              "name": "parameter"
+            }
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_parameter_separator"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "parameter",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "parameter"
+                  }
                 }
+              ]
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_parameter_separator"
+              },
+              {
+                "type": "BLANK"
               }
             ]
           }
-        }
-      ]
+        ]
+      }
     },
     "tag": {
       "type": "CHOICE",
