@@ -1,0 +1,396 @@
+===========
+Ranged Bold
+===========
+Here is some |*ranged bold*| markup.
+Here is some |* ranged bold*| markup.
+Here is some |*ranged bold *| markup.
+Here is some |* ranged bold *| markup.
+Here is some |* ranged
+bold *| markup.
+Here is some |* ranged
+
+bold *| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_bold)
+        )
+        (paragraph_segment
+            (ranged_bold)
+        )
+        (paragraph_segment
+            (ranged_bold)
+        )
+        (paragraph_segment
+            (ranged_bold)
+        )
+        (paragraph_segment
+            (ranged_bold)
+        )
+        (paragraph_segment
+            (ranged_bold)
+        )
+    )
+)
+
+===========
+Ranged Italic
+===========
+Here is some |/ranged italic/| markup.
+Here is some |/ ranged italic/| markup.
+Here is some |/ranged italic /| markup.
+Here is some |/ ranged italic /| markup.
+Here is some |/ ranged
+italic /| markup.
+Here is some |/ ranged
+
+italic /| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_italic)
+        )
+        (paragraph_segment
+            (ranged_italic)
+        )
+        (paragraph_segment
+            (ranged_italic)
+        )
+        (paragraph_segment
+            (ranged_italic)
+        )
+        (paragraph_segment
+            (ranged_italic)
+        )
+        (paragraph_segment
+            (ranged_italic)
+        )
+    )
+)
+
+===========
+Ranged Strikethrough
+===========
+Here is some |-ranged strikethrough-| markup.
+Here is some |- ranged strikethrough-| markup.
+Here is some |-ranged strikethrough -| markup.
+Here is some |- ranged strikethrough -| markup.
+Here is some |- ranged
+strikethrough -| markup.
+Here is some |- ranged
+
+strikethrough -| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_strikethrough)
+        )
+        (paragraph_segment
+            (ranged_strikethrough)
+        )
+        (paragraph_segment
+            (ranged_strikethrough)
+        )
+        (paragraph_segment
+            (ranged_strikethrough)
+        )
+        (paragraph_segment
+            (ranged_strikethrough)
+        )
+        (paragraph_segment
+            (ranged_strikethrough)
+        )
+    )
+)
+
+===========
+Ranged Underline
+===========
+Here is some |_ranged underline_| markup.
+Here is some |_ ranged underline_| markup.
+Here is some |_ranged underline _| markup.
+Here is some |_ ranged underline _| markup.
+Here is some |_ ranged
+underline _| markup.
+Here is some |_ ranged
+
+underline _| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_underline)
+        )
+        (paragraph_segment
+            (ranged_underline)
+        )
+        (paragraph_segment
+            (ranged_underline)
+        )
+        (paragraph_segment
+            (ranged_underline)
+        )
+        (paragraph_segment
+            (ranged_underline)
+        )
+        (paragraph_segment
+            (ranged_underline)
+        )
+    )
+)
+
+===========
+Ranged Spoiler
+===========
+Here is some |!ranged spoiler!| markup.
+Here is some |! ranged spoiler!| markup.
+Here is some |!ranged spoiler !| markup.
+Here is some |! ranged spoiler !| markup.
+Here is some |! ranged
+spoiler !| markup.
+Here is some |! ranged
+
+spoiler !| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_spoiler)
+        )
+        (paragraph_segment
+            (ranged_spoiler)
+        )
+        (paragraph_segment
+            (ranged_spoiler)
+        )
+        (paragraph_segment
+            (ranged_spoiler)
+        )
+        (paragraph_segment
+            (ranged_spoiler)
+        )
+        (paragraph_segment
+            (ranged_spoiler)
+        )
+    )
+)
+
+===========
+Ranged Superscript
+===========
+Here is some |^ranged superscript^| markup.
+Here is some |^ ranged superscript^| markup.
+Here is some |^ranged superscript ^| markup.
+Here is some |^ ranged superscript ^| markup.
+Here is some |^ ranged
+superscript ^| markup.
+Here is some |^ ranged
+
+superscript ^| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_superscript)
+        )
+        (paragraph_segment
+            (ranged_superscript)
+        )
+        (paragraph_segment
+            (ranged_superscript)
+        )
+        (paragraph_segment
+            (ranged_superscript)
+        )
+        (paragraph_segment
+            (ranged_superscript)
+        )
+        (paragraph_segment
+            (ranged_superscript)
+        )
+    )
+)
+
+===========
+Ranged Subscript
+===========
+Here is some |,ranged subscript,| markup.
+Here is some |, ranged subscript,| markup.
+Here is some |,ranged subscript ,| markup.
+Here is some |, ranged subscript ,| markup.
+Here is some |, ranged
+subscript ,| markup.
+Here is some |, ranged
+
+subscript ,| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_subscript)
+        )
+        (paragraph_segment
+            (ranged_subscript)
+        )
+        (paragraph_segment
+            (ranged_subscript)
+        )
+        (paragraph_segment
+            (ranged_subscript)
+        )
+        (paragraph_segment
+            (ranged_subscript)
+        )
+        (paragraph_segment
+            (ranged_subscript)
+        )
+    )
+)
+
+===========
+Ranged Verbatim
+===========
+Here is some |`ranged verbatim`| markup.
+Here is some |` ranged verbatim`| markup.
+Here is some |`ranged verbatim `| markup.
+Here is some |` ranged verbatim `| markup.
+Here is some |` ranged
+verbatim `| markup.
+Here is some |` ranged
+
+verbatim `| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_verbatim)
+        )
+        (paragraph_segment
+            (ranged_verbatim)
+        )
+        (paragraph_segment
+            (ranged_verbatim)
+        )
+        (paragraph_segment
+            (ranged_verbatim)
+        )
+        (paragraph_segment
+            (ranged_verbatim)
+        )
+        (paragraph_segment
+            (ranged_verbatim)
+        )
+    )
+)
+
+===========
+Ranged Inline Comment
+===========
+Here is some |+ranged inline_comment+| markup.
+Here is some |+ ranged inline_comment+| markup.
+Here is some |+ranged inline_comment +| markup.
+Here is some |+ ranged inline_comment +| markup.
+Here is some |+ ranged
+inline_comment +| markup.
+Here is some |+ ranged
+
+inline_comment +| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_inline_comment)
+        )
+        (paragraph_segment
+            (ranged_inline_comment)
+        )
+        (paragraph_segment
+            (ranged_inline_comment)
+        )
+        (paragraph_segment
+            (ranged_inline_comment)
+        )
+        (paragraph_segment
+            (ranged_inline_comment)
+        )
+        (paragraph_segment
+            (ranged_inline_comment)
+        )
+    )
+)
+
+===========
+Ranged Inline Math
+===========
+Here is some |$ranged inline_math$| markup.
+Here is some |$ ranged inline_math$| markup.
+Here is some |$ranged inline_math $| markup.
+Here is some |$ ranged inline_math $| markup.
+Here is some |$ ranged
+inline_math $| markup.
+Here is some |$ ranged
+
+inline_math $| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_inline_math)
+        )
+        (paragraph_segment
+            (ranged_inline_math)
+        )
+        (paragraph_segment
+            (ranged_inline_math)
+        )
+        (paragraph_segment
+            (ranged_inline_math)
+        )
+        (paragraph_segment
+            (ranged_inline_math)
+        )
+        (paragraph_segment
+            (ranged_inline_math)
+        )
+    )
+)
+
+===========
+Ranged Variable
+===========
+Here is some |=ranged variable=| markup.
+Here is some |= ranged variable=| markup.
+Here is some |=ranged variable =| markup.
+Here is some |= ranged variable =| markup.
+Here is some |= ranged
+variable =| markup.
+Here is some |= ranged
+
+variable =| markup.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (ranged_variable)
+        )
+        (paragraph_segment
+            (ranged_variable)
+        )
+        (paragraph_segment
+            (ranged_variable)
+        )
+        (paragraph_segment
+            (ranged_variable)
+        )
+        (paragraph_segment
+            (ranged_variable)
+        )
+        (paragraph_segment
+            (ranged_variable)
+        )
+    )
+)
+
