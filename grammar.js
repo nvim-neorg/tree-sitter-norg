@@ -200,12 +200,68 @@ module.exports = grammar({
             )
         ),
 
+        // Any word
         word: $ =>
         choice(
             alias($.lowercase_word, "_lowercase"),
             alias($.capitalized_word, "_uppercase"),
         ),
 
+        // Any regular text. A paragraph is made up of `paragraph_segment`
+        // objects and line breaks. It may optionally be followed by a paragraph
+        // break (which are two consecutive line breaks).
+        paragraph: $ =>
+        prec.right(0,
+            seq(
+                repeat1(
+                    choice(
+                        $.paragraph_segment,
+                        $._line_break,
+                    ),
+                ),
+
+                optional(
+                    $._paragraph_break,
+                ),
+            ),
+        ),
+
+        // A paragraph segment can contain any paragraph element.
+        paragraph_segment: $ =>
+        prec.right(0,
+            repeat1(
+                choice(
+                    $._paragraph_element,
+                    alias($._conflict_open, "_lowercase"),
+                ),
+            )
+        ),
+
+        // The attached modifiers canNOT contain a `paragraph_segment` directly,
+        // because they:
+        //   - require a higher precedence of their internals
+        _attached_modifier_content: $ =>
+        prec.right(1,
+            repeat1(
+                choice(
+                    $._paragraph_element,
+                    alias($._conflict_open, "_lowercase"),
+                ),
+            ),
+        ),
+
+        // Same as the non-verbatim modifier contents but using verbatim
+        // elements instead. It cannot contain `_conflict_open` because all of
+        // them are aliased to become verbatim.
+        _verbatim_modifier_content: $ =>
+        prec.right(1,
+            repeat1(
+                choice(
+                    $._verbatim_paragraph_element,
+                ),
+            ),
+        ),
+        // A linked attached modifier simply wraps a normal `attached_modifier`.
         _linked_attached_modifier: $ =>
         prec.right(2, seq(
             optional($.link_modifier),
@@ -213,18 +269,8 @@ module.exports = grammar({
             optional($.link_modifier),
         )),
 
-        // Any regular text
-        _paragraph: $ =>
-        prec.right(0,
-            seq(
-                $.paragraph,
-
-                optional(
-                    $._paragraph_break,
-                )
-            )
-        ),
-
+        // Any of the following choices are valid IN-LINE elements. Any
+        // multitude of these are combined to form a `paragraph_segment`.
         _paragraph_element: $ =>
         choice(
             alias($.word, "_word"),
@@ -250,168 +296,133 @@ module.exports = grammar({
             alias($.variable_close, "_lowercase"),
         ),
 
-        _multi_paragraph_element: $ =>
-        repeat1(
-            choice(
-                $._line_break,
-                $._paragraph_element,
-                $._conflict_open,
-            ),
-        ),
-
-        _verbatim_segment: $ =>
-        prec.left(1,
-            seq(
-                repeat1(
-                    choice(
-                        $._line_break,
-                        alias($.word, "_word"),
-                        alias($.space, "_space"),
-                        alias($.trailing_modifier, "_lowercase"),
-                        alias($.escape_sequence_prefix, "_lowercase"),
-                        alias($.any_char, "_lowercase"),
-                        alias($.link_modifier, "_lowercase"),
-                        alias($.bold_open, "_lowercase"),
-                        alias($.bold_close, "_lowercase"),
-                        alias($.italic_open, "_lowercase"),
-                        alias($.italic_close, "_lowercase"),
-                        alias($.strikethrough_open, "_lowercase"),
-                        alias($.strikethrough_close, "_lowercase"),
-                        alias($.underline_open, "_lowercase"),
-                        alias($.underline_close, "_lowercase"),
-                        alias($.spoiler_open, "_lowercase"),
-                        alias($.spoiler_close, "_lowercase"),
-                        alias($.superscript_open, "_lowercase"),
-                        alias($.superscript_close, "_lowercase"),
-                        alias($.subscript_open, "_lowercase"),
-                        alias($.subscript_close, "_lowercase"),
-                        alias($.verbatim_open, "_lowercase"),
-                        alias($.verbatim_close, "_lowercase"),
-                        alias($.inline_comment_open, "_lowercase"),
-                        alias($.inline_comment_close, "_lowercase"),
-                        alias($.inline_math_open, "_lowercase"),
-                        alias($.inline_math_close, "_lowercase"),
-                        alias($.variable_open, "_lowercase"),
-                        alias($.variable_close, "_lowercase"),
-                        alias($.link_description_begin, "_lowercase"),
-                        alias($.link_description_end, "_lowercase"),
-                        alias($.link_location_begin, "_lowercase"),
-                        alias($.link_location_end, "_lowercase"),
-                        alias($.link_file_begin, "_lowercase"),
-                        alias($.link_file_end, "_lowercase"),
-                        alias($.link_file_text, "_lowercase"),
-                        alias($.link_target_url, "_lowercase"),
-                        alias($.link_target_generic, "_lowercase"),
-                        alias($.link_target_external_file, "_lowercase"),
-                        alias($.link_target_marker, "_lowercase"),
-                        alias($.link_target_definition, "_lowercase"),
-                        alias($.link_target_footnote, "_lowercase"),
-                        alias($.link_target_heading1, "_lowercase"),
-                        alias($.link_target_heading2, "_lowercase"),
-                        alias($.link_target_heading3, "_lowercase"),
-                        alias($.link_target_heading4, "_lowercase"),
-                        alias($.link_target_heading5, "_lowercase"),
-                        alias($.link_target_heading6, "_lowercase"),
-                    ),
-                ),
-            ),
-        ),
-
-        paragraph_segment: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    $._paragraph_element,
-                    alias($._conflict_open, "_lowercase"),
-                ),
-            )
-        ),
-
-        paragraph: $ =>
-        prec.right(0,
-            repeat1(
-                choice(
-                    $.paragraph_segment,
-                    $._line_break,
-                )
-            ),
+        // A verbatim paragraph element essentially ignores all IN-LINE markup.
+        _verbatim_paragraph_element: $ =>
+        choice(
+            alias($.word, "_word"),
+            alias($.space, "_space"),
+            alias($.trailing_modifier, "_lowercase"),
+            alias($.escape_sequence_prefix, "_lowercase"),
+            alias($.any_char, "_lowercase"),
+            alias($.link_modifier, "_lowercase"),
+            alias($.bold_open, "_lowercase"),
+            alias($.bold_close, "_lowercase"),
+            alias($.italic_open, "_lowercase"),
+            alias($.italic_close, "_lowercase"),
+            alias($.strikethrough_open, "_lowercase"),
+            alias($.strikethrough_close, "_lowercase"),
+            alias($.underline_open, "_lowercase"),
+            alias($.underline_close, "_lowercase"),
+            alias($.spoiler_open, "_lowercase"),
+            alias($.spoiler_close, "_lowercase"),
+            alias($.superscript_open, "_lowercase"),
+            alias($.superscript_close, "_lowercase"),
+            alias($.subscript_open, "_lowercase"),
+            alias($.subscript_close, "_lowercase"),
+            alias($.verbatim_open, "_lowercase"),
+            alias($.verbatim_close, "_lowercase"),
+            alias($.inline_comment_open, "_lowercase"),
+            alias($.inline_comment_close, "_lowercase"),
+            alias($.inline_math_open, "_lowercase"),
+            alias($.inline_math_close, "_lowercase"),
+            alias($.variable_open, "_lowercase"),
+            alias($.variable_close, "_lowercase"),
+            alias($.link_description_begin, "_lowercase"),
+            alias($.link_description_end, "_lowercase"),
+            alias($.link_location_begin, "_lowercase"),
+            alias($.link_location_end, "_lowercase"),
+            alias($.link_file_begin, "_lowercase"),
+            alias($.link_file_end, "_lowercase"),
+            alias($.link_file_text, "_lowercase"),
+            alias($.link_target_url, "_lowercase"),
+            alias($.link_target_generic, "_lowercase"),
+            alias($.link_target_external_file, "_lowercase"),
+            alias($.link_target_marker, "_lowercase"),
+            alias($.link_target_definition, "_lowercase"),
+            alias($.link_target_footnote, "_lowercase"),
+            alias($.link_target_heading1, "_lowercase"),
+            alias($.link_target_heading2, "_lowercase"),
+            alias($.link_target_heading3, "_lowercase"),
+            alias($.link_target_heading4, "_lowercase"),
+            alias($.link_target_heading5, "_lowercase"),
+            alias($.link_target_heading6, "_lowercase"),
         ),
 
         // ---- ATTACHED MODIFIERS ----
         bold: $ =>
         seq(
             alias($.bold_open, "_open"),
-            $._multi_paragraph_element,
+            $._attached_modifier_content,
             alias($.bold_close, "_close"),
         ),
 
         italic: $ =>
         seq(
             alias($.italic_open, "_open"),
-            $._multi_paragraph_element,
+            $._attached_modifier_content,
             alias($.italic_close, "_close"),
         ),
 
         strikethrough: $ =>
         seq(
             alias($.strikethrough_open, "_open"),
-            $._multi_paragraph_element,
+            $._attached_modifier_content,
             alias($.strikethrough_close, "_close"),
         ),
 
         underline: $ =>
         seq(
             alias($.underline_open, "_open"),
-            $._multi_paragraph_element,
+            $._attached_modifier_content,
             alias($.underline_close, "_close"),
         ),
 
         spoiler: $ =>
         seq(
             alias($.spoiler_open, "_open"),
-            $._multi_paragraph_element,
+            $._attached_modifier_content,
             alias($.spoiler_close, "_close"),
         ),
 
         verbatim: $ =>
         seq(
             alias($.verbatim_open, "_open"),
-            $._verbatim_segment,
+            $._verbatim_modifier_content,
             alias($.verbatim_close, "_close"),
         ),
 
         superscript: $ =>
         seq(
             alias($.superscript_open, "_open"),
-            $._multi_paragraph_element,
+            $._attached_modifier_content,
             alias($.superscript_close, "_close"),
         ),
 
         subscript: $ =>
         seq(
             alias($.subscript_open, "_open"),
-            $._multi_paragraph_element,
+            $._attached_modifier_content,
             alias($.subscript_close, "_close"),
         ),
 
         inline_comment: $ =>
         seq(
             alias($.inline_comment_open, "_open"),
-            $._verbatim_segment,
+            $._verbatim_modifier_content,
             alias($.inline_comment_close, "_close"),
         ),
 
         inline_math: $ =>
         seq(
             alias($.inline_math_open, "_open"),
-            $._verbatim_segment,
+            $._verbatim_modifier_content,
             alias($.inline_math_close, "_close"),
         ),
 
         variable: $ =>
         seq(
             alias($.variable_open, "_open"),
-            $._verbatim_segment,
+            $._verbatim_modifier_content,
             alias($.variable_close, "_close"),
         ),
 
@@ -509,7 +520,7 @@ module.exports = grammar({
                     $.link_target_url,
                 ),
             ),
-            field("text", alias($._verbatim_segment, $.paragraph_segment)),
+            field("text", alias($._verbatim_modifier_content, $.paragraph_segment)),
         ),
 
         link: $ =>
@@ -851,7 +862,7 @@ module.exports = grammar({
 
                     repeat(
                         choice(
-                            $._paragraph,
+                            $.paragraph,
 
                             $._paragraph_break,
                             $.detached_modifier,
@@ -897,7 +908,7 @@ module.exports = grammar({
 
                     repeat(
                         choice(
-                            $._paragraph,
+                            $.paragraph,
 
                             $._paragraph_break,
                             $.detached_modifier,
@@ -939,7 +950,7 @@ module.exports = grammar({
 
                     repeat(
                         choice(
-                            $._paragraph,
+                            $.paragraph,
 
                             $._paragraph_break,
                             $.detached_modifier,
@@ -980,7 +991,7 @@ module.exports = grammar({
 
                     repeat(
                         choice(
-                            $._paragraph,
+                            $.paragraph,
 
                             $._paragraph_break,
                             $.detached_modifier,
@@ -1020,7 +1031,7 @@ module.exports = grammar({
 
                     repeat(
                         choice(
-                            $._paragraph,
+                            $.paragraph,
 
                             $._paragraph_break,
                             $.detached_modifier,
@@ -1059,7 +1070,7 @@ module.exports = grammar({
 
                     repeat(
                         choice(
-                            $._paragraph,
+                            $.paragraph,
 
                             $._paragraph_break,
                             $.detached_modifier,
@@ -1483,7 +1494,7 @@ module.exports = grammar({
                     "subtext",
                     repeat(
                         choice(
-                            $._paragraph,
+                            $.paragraph,
                             $.strong_paragraph_delimiter,
                             $.horizontal_line,
                             $.heading,
@@ -1705,7 +1716,7 @@ module.exports = grammar({
                     "content",
                     repeat(
                         choice(
-                            $._paragraph,
+                            $.paragraph,
                             $._paragraph_break,
 
                             $.detached_modifier,
@@ -1755,7 +1766,7 @@ module.exports = grammar({
                     "content",
                     repeat(
                         choice(
-                            $._paragraph,
+                            $.paragraph,
                             $._paragraph_break,
 
                             $.detached_modifier,
@@ -1864,7 +1875,7 @@ module.exports = grammar({
                     "target",
 
                     choice(
-                        $._paragraph,
+                        $.paragraph,
                         repeat1(
                             choice(
                                 $.detached_modifier,
@@ -2009,10 +2020,10 @@ module.exports = grammar({
             $.italic,
             $.strikethrough,
             $.underline,
-            $.verbatim,
             $.spoiler,
             $.superscript,
             $.subscript,
+            $.verbatim,
             $.inline_comment,
             $.inline_math,
             $.variable,
