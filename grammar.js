@@ -144,7 +144,6 @@ module.exports = grammar({
         $.multi_footnote_suffix,
 
         $.link_modifier,
-        $.ranged_modifier,
 
         $.bold_open,
         $.bold_close,
@@ -178,6 +177,9 @@ module.exports = grammar({
 
         $.variable_open,
         $.variable_close,
+
+        $.ranged_modifier_open,
+        $.ranged_modifier_close,
     ],
 
     rules: {
@@ -197,7 +199,6 @@ module.exports = grammar({
                         $.marker,
                     )
                 ),
-
                 $.paragraph,
             )
         ),
@@ -266,6 +267,7 @@ module.exports = grammar({
                     $._paragraph_break,
                     $._line_break,
                     $._paragraph_element,
+                    $.ranged_attached_modifier,
                     alias($._conflict_open, "_lowercase"),
                 ),
             ),
@@ -337,7 +339,8 @@ module.exports = grammar({
             alias($.escape_sequence_prefix, "_lowercase"),
             alias($.any_char, "_lowercase"),
             alias($.link_modifier, "_lowercase"),
-            alias($.ranged_modifier, "_lowercase"),
+            alias($.ranged_modifier_open, "_lowercase"),
+            alias($.ranged_modifier_close, "_lowercase"),
             alias($.bold_open, "_lowercase"),
             alias($.bold_close, "_lowercase"),
             alias($.italic_open, "_lowercase"),
@@ -477,214 +480,104 @@ module.exports = grammar({
         ),
 
         // ---- RANGED ATTACHED MODIFIERS ----
-        ranged_bold_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.bold_open, "_bold_open"),
-        )),
-
-        ranged_bold_close: $ =>
-        prec.left(2, seq(
-            alias($.bold_close, "_bold_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
-
         ranged_bold: $ =>
-        prec.left(seq(
-            alias($.ranged_bold_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.bold_open, "_open"),
             $._ranged_attached_modifier_content,
-            alias($.ranged_bold_close, "_close"),
-        )),
-
-        ranged_italic_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.italic_open, "_italic_open"),
-        )),
-
-        ranged_italic_close: $ =>
-        prec.left(2, seq(
-            alias($.italic_close, "_italic_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.bold_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_italic: $ =>
-        prec.left(seq(
-            alias($.ranged_italic_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.italic_open, "_open"),
             $._ranged_attached_modifier_content,
-            alias($.ranged_italic_close, "_close"),
-        )),
-
-        ranged_strikethrough_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.strikethrough_open, "_strikethrough_open"),
-        )),
-
-        ranged_strikethrough_close: $ =>
-        prec.left(2, seq(
-            alias($.strikethrough_close, "_strikethrough_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.italic_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_strikethrough: $ =>
-        prec.left(seq(
-            alias($.ranged_strikethrough_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.strikethrough_open, "_open"),
             $._ranged_attached_modifier_content,
-            alias($.ranged_strikethrough_close, "_close"),
-        )),
-
-        ranged_underline_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.underline_open, "_underline_open"),
-        )),
-
-        ranged_underline_close: $ =>
-        prec.left(2, seq(
-            alias($.underline_close, "_underline_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.strikethrough_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_underline: $ =>
-        prec.left(seq(
-            alias($.ranged_underline_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.underline_open, "_open"),
             $._ranged_attached_modifier_content,
-            alias($.ranged_underline_close, "_close"),
-        )),
-
-        ranged_spoiler_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.spoiler_open, "_spoiler_open"),
-        )),
-
-        ranged_spoiler_close: $ =>
-        prec.left(2, seq(
-            alias($.spoiler_close, "_spoiler_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.underline_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_spoiler: $ =>
-        prec.left(seq(
-            alias($.ranged_spoiler_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.spoiler_open, "_open"),
             $._ranged_attached_modifier_content,
-            alias($.ranged_spoiler_close, "_close"),
-        )),
-
-        ranged_superscript_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.superscript_open, "_superscript_open"),
-        )),
-
-        ranged_superscript_close: $ =>
-        prec.left(2, seq(
-            alias($.superscript_close, "_superscript_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.spoiler_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_superscript: $ =>
-        prec.left(seq(
-            alias($.ranged_superscript_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.superscript_open, "_open"),
             $._ranged_attached_modifier_content,
-            alias($.ranged_superscript_close, "_close"),
-        )),
-
-        ranged_subscript_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.subscript_open, "_subscript_open"),
-        )),
-
-        ranged_subscript_close: $ =>
-        prec.left(2, seq(
-            alias($.subscript_close, "_subscript_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.superscript_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_subscript: $ =>
-        prec.left(seq(
-            alias($.ranged_subscript_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.subscript_open, "_open"),
             $._ranged_attached_modifier_content,
-            alias($.ranged_subscript_close, "_close"),
-        )),
-
-        ranged_verbatim_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.verbatim_open, "_verbatim_open"),
-        )),
-
-        ranged_verbatim_close: $ =>
-        prec.left(2, seq(
-            alias($.verbatim_close, "_verbatim_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.subscript_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_verbatim: $ =>
-        prec.left(seq(
-            alias($.ranged_verbatim_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.verbatim_open, "_open"),
             $._ranged_verbatim_attached_modifier_content,
-            alias($.ranged_verbatim_close, "_close"),
-        )),
-
-        ranged_inline_comment_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.inline_comment_open, "_inline_comment_open"),
-        )),
-
-        ranged_inline_comment_close: $ =>
-        prec.left(2, seq(
-            alias($.inline_comment_close, "_inline_comment_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.verbatim_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_inline_comment: $ =>
-        prec.left(seq(
-            alias($.ranged_inline_comment_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.inline_comment_open, "_open"),
             $._ranged_verbatim_attached_modifier_content,
-            alias($.ranged_inline_comment_close, "_close"),
-        )),
-
-        ranged_inline_math_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.inline_math_open, "_inline_math_open"),
-        )),
-
-        ranged_inline_math_close: $ =>
-        prec.left(2, seq(
-            alias($.inline_math_close, "_inline_math_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.inline_comment_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_inline_math: $ =>
-        prec.left(seq(
-            alias($.ranged_inline_math_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.inline_math_open, "_open"),
             $._ranged_verbatim_attached_modifier_content,
-            alias($.ranged_inline_math_close, "_close"),
-        )),
-
-        ranged_variable_open: $ =>
-        prec.left(2, seq(
-            alias($.ranged_modifier, "_ranged_modifier"),
-            alias($.variable_open, "_variable_open"),
-        )),
-
-        ranged_variable_close: $ =>
-        prec.left(2, seq(
-            alias($.variable_close, "_variable_close"),
-            alias($.ranged_modifier, "_ranged_modifier"),
-        )),
+            alias($.inline_math_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         ranged_variable: $ =>
-        prec.left(seq(
-            alias($.ranged_variable_open, "_open"),
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            alias($.variable_open, "_open"),
             $._ranged_verbatim_attached_modifier_content,
-            alias($.ranged_variable_close, "_close"),
-        )),
+            alias($.variable_close, "_close"),
+            alias($.ranged_modifier_close, "_close"),
+        ),
 
         // Well, any character
         any_char: _ =>

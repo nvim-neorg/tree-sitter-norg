@@ -193,6 +193,10 @@
               "name": "_paragraph_element"
             },
             {
+              "type": "SYMBOL",
+              "name": "ranged_attached_modifier"
+            },
+            {
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
@@ -507,7 +511,16 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "ranged_modifier"
+            "name": "ranged_modifier_open"
+          },
+          "named": false,
+          "value": "_lowercase"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
           },
           "named": false,
           "value": "_lowercase"
@@ -1288,940 +1301,500 @@
         ]
       }
     },
-    "ranged_bold_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "bold_open"
-            },
-            "named": false,
-            "value": "_bold_open"
-          }
-        ]
-      }
-    },
-    "ranged_bold_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "bold_close"
-            },
-            "named": false,
-            "value": "_bold_close"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
-    },
     "ranged_bold": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_bold_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_bold_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_italic_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "bold_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "italic_open"
-            },
-            "named": false,
-            "value": "_italic_open"
-          }
-        ]
-      }
-    },
-    "ranged_italic_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "italic_close"
-            },
-            "named": false,
-            "value": "_italic_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "bold_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_italic": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_italic_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_italic_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_strikethrough_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "italic_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "strikethrough_open"
-            },
-            "named": false,
-            "value": "_strikethrough_open"
-          }
-        ]
-      }
-    },
-    "ranged_strikethrough_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "strikethrough_close"
-            },
-            "named": false,
-            "value": "_strikethrough_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "italic_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_strikethrough": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_strikethrough_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_strikethrough_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_underline_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "strikethrough_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "underline_open"
-            },
-            "named": false,
-            "value": "_underline_open"
-          }
-        ]
-      }
-    },
-    "ranged_underline_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "underline_close"
-            },
-            "named": false,
-            "value": "_underline_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "strikethrough_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_underline": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_underline_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_underline_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_spoiler_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "underline_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "spoiler_open"
-            },
-            "named": false,
-            "value": "_spoiler_open"
-          }
-        ]
-      }
-    },
-    "ranged_spoiler_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "spoiler_close"
-            },
-            "named": false,
-            "value": "_spoiler_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "underline_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_spoiler": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_spoiler_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_spoiler_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_superscript_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "spoiler_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "superscript_open"
-            },
-            "named": false,
-            "value": "_superscript_open"
-          }
-        ]
-      }
-    },
-    "ranged_superscript_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "superscript_close"
-            },
-            "named": false,
-            "value": "_superscript_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "spoiler_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_superscript": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_superscript_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_superscript_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_subscript_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "superscript_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "subscript_open"
-            },
-            "named": false,
-            "value": "_subscript_open"
-          }
-        ]
-      }
-    },
-    "ranged_subscript_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "subscript_close"
-            },
-            "named": false,
-            "value": "_subscript_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "superscript_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_subscript": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_subscript_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_subscript_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_verbatim_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "subscript_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "verbatim_open"
-            },
-            "named": false,
-            "value": "_verbatim_open"
-          }
-        ]
-      }
-    },
-    "ranged_verbatim_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "verbatim_close"
-            },
-            "named": false,
-            "value": "_verbatim_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "subscript_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_verbatim": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_verbatim_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_verbatim_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_verbatim_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_inline_comment_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "verbatim_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "inline_comment_open"
-            },
-            "named": false,
-            "value": "_inline_comment_open"
-          }
-        ]
-      }
-    },
-    "ranged_inline_comment_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "inline_comment_close"
-            },
-            "named": false,
-            "value": "_inline_comment_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_verbatim_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "verbatim_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_inline_comment": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_inline_comment_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_verbatim_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_inline_comment_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_inline_math_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "inline_comment_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "inline_math_open"
-            },
-            "named": false,
-            "value": "_inline_math_open"
-          }
-        ]
-      }
-    },
-    "ranged_inline_math_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "inline_math_close"
-            },
-            "named": false,
-            "value": "_inline_math_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_verbatim_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "inline_comment_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_inline_math": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_inline_math_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_verbatim_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_inline_math_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
-    },
-    "ranged_variable_open": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "inline_math_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "variable_open"
-            },
-            "named": false,
-            "value": "_variable_open"
-          }
-        ]
-      }
-    },
-    "ranged_variable_close": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "variable_close"
-            },
-            "named": false,
-            "value": "_variable_close"
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_verbatim_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "inline_math_close"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_modifier"
-            },
-            "named": false,
-            "value": "_ranged_modifier"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "ranged_variable": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_variable_open"
-            },
-            "named": false,
-            "value": "_open"
-          },
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_ranged_verbatim_attached_modifier_content"
+            "name": "ranged_modifier_open"
           },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_variable_close"
-            },
-            "named": false,
-            "value": "_close"
-          }
-        ]
-      }
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable_open"
+          },
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ranged_verbatim_attached_modifier_content"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable_close"
+          },
+          "named": false,
+          "value": "_close"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_modifier_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "any_char": {
       "type": "IMMEDIATE_TOKEN",
@@ -6330,10 +5903,6 @@
     },
     {
       "type": "SYMBOL",
-      "name": "ranged_modifier"
-    },
-    {
-      "type": "SYMBOL",
       "name": "bold_open"
     },
     {
@@ -6419,6 +5988,14 @@
     {
       "type": "SYMBOL",
       "name": "variable_close"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "ranged_modifier_open"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "ranged_modifier_close"
     }
   ],
   "inline": [],
