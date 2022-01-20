@@ -207,9 +207,13 @@ module.exports = grammar({
                     ),
                 ),
 
-                optional(
-                    $._paragraph_break,
-                ),
+                // TODO(mrossinek): I do not see the need for this. If we do
+                // need it, we need to extract it into _paragraph again because
+                // having it here would cause the ends of detached modifiers
+                // like quotes and lists to break.
+                // optional(
+                //     $._paragraph_break,
+                // ),
             ),
         ),
 
@@ -779,7 +783,7 @@ module.exports = grammar({
                     $.quote3,
                     $.quote4,
                     $.quote5,
-                    $.quote6
+                    $.quote6,
                 )
             )
         ),
@@ -791,7 +795,7 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph_segment,
+                    $.paragraph,
                 ),
 
                 optional(prec(1, $._line_break)),
@@ -815,7 +819,7 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph_segment,
+                    $.paragraph,
                 ),
 
                 optional(prec(1, $._line_break)),
@@ -838,7 +842,7 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph_segment,
+                    $.paragraph,
                 ),
 
                 optional(prec(1, $._line_break)),
@@ -860,7 +864,7 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph_segment,
+                    $.paragraph,
                 ),
 
                 optional(prec(1, $._line_break)),
@@ -881,7 +885,7 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph_segment,
+                    $.paragraph,
                 ),
 
                 optional(prec(1, $._line_break)),
@@ -899,7 +903,7 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph_segment,
+                    $.paragraph,
                 ),
 
                 optional(prec(1, $._line_break)),

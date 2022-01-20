@@ -1707,7 +1707,7 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
@@ -1753,7 +1753,7 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
@@ -1795,7 +1795,7 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
@@ -1833,7 +1833,7 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
@@ -1867,7 +1867,7 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
@@ -1897,7 +1897,7 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
