@@ -317,7 +317,7 @@ class Scanner
                 return true;
 
             // Check for the existence of quotes
-            if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6 | NONE,
+            if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6,
                                {'>'}) != NONE)
                 return true;
 
@@ -329,10 +329,10 @@ class Scanner
             if (check_detached(
                     lexer,
                     UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 |
-                        UNORDERED_LIST5 | UNORDERED_LIST6 | NONE,
+                        UNORDERED_LIST5 | UNORDERED_LIST6,
                     {'-'},
                     {'>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 | UNORDERED_LINK4 |
-                              UNORDERED_LINK5 | UNORDERED_LINK6 | NONE}) != NONE)
+                              UNORDERED_LINK5 | UNORDERED_LINK6}) != NONE)
             {
                 return true;
             }
@@ -365,10 +365,10 @@ class Scanner
 
             if (check_detached(lexer,
                                ORDERED_LIST1 | ORDERED_LIST2 | ORDERED_LIST3 | ORDERED_LIST4 |
-                                   ORDERED_LIST5 | ORDERED_LIST6 | NONE,
+                                   ORDERED_LIST5 | ORDERED_LIST6,
                                {'~'},
                                {'>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 |
-                                         ORDERED_LINK5 | ORDERED_LINK6 | NONE}) != NONE)
+                                         ORDERED_LINK5 | ORDERED_LINK6}) != NONE)
                 return true;
 
             if (check_detached(lexer, MARKER | NONE, {'|'}) != NONE)

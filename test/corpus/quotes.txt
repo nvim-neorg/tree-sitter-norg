@@ -94,6 +94,22 @@ This is no longer part of the quote.
     (paragraph (paragraph_segment))
 )
 
+==========================
+Fallback to Level 6 Quotes
+==========================
+>>>>>>> This falls back to a sixth level quote.
+This is no longer part of the quote.
+---
+(document
+    (quote
+        (quote6
+            (quote6_prefix)
+            content: (paragraph_segment)
+        )
+    )
+    (paragraph (paragraph_segment))
+)
+
 =============
 Nested Quotes
 =============
@@ -102,6 +118,8 @@ Nested Quotes
 >>> This is a third level quote.
 >>>> This is a forth level quote.
 >>>>> This is a fifth level quote.
+>>>>>> This is a sixth level quote.
+>>>>>>> This falls back to a sixth level quote.
 >>>>>> This is a sixth level quote.
 >>>>> Here, the fifth level quote continues.
 >>>> Here, the forth level quote continues.
@@ -127,6 +145,14 @@ This is no longer part of the quote.
                         (quote5
                             (quote5_prefix)
                             content: (paragraph_segment)
+                            (quote6
+                                (quote6_prefix)
+                                content: (paragraph_segment)
+                            )
+                            (quote6
+                                (quote6_prefix)
+                                content: (paragraph_segment)
+                            )
                             (quote6
                                 (quote6_prefix)
                                 content: (paragraph_segment)
