@@ -34,6 +34,19 @@ module.exports = grammar({
         [$.inline_comment, $._paragraph_element],
         [$.inline_math, $._paragraph_element],
         [$.variable, $._paragraph_element],
+
+        [$.unordered_link1, $.paragraph],
+        [$.unordered_link2, $.paragraph],
+        [$.unordered_link3, $.paragraph],
+        [$.unordered_link4, $.paragraph],
+        [$.unordered_link5, $.paragraph],
+        [$.unordered_link6, $.paragraph],
+        [$.ordered_link1, $.paragraph],
+        [$.ordered_link2, $.paragraph],
+        [$.ordered_link3, $.paragraph],
+        [$.ordered_link4, $.paragraph],
+        [$.ordered_link5, $.paragraph],
+        [$.ordered_link6, $.paragraph],
     ],
 
     externals: $ => [
@@ -529,7 +542,7 @@ module.exports = grammar({
         )),
 
         unordered_link1: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.unordered_link1_prefix,
 
@@ -555,7 +568,7 @@ module.exports = grammar({
         ),
 
         unordered_link2: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.unordered_link2_prefix,
 
@@ -581,7 +594,7 @@ module.exports = grammar({
         ),
 
         unordered_link3: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.unordered_link3_prefix,
 
@@ -607,7 +620,7 @@ module.exports = grammar({
         ),
 
         unordered_link4: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.unordered_link4_prefix,
 
@@ -633,7 +646,7 @@ module.exports = grammar({
         ),
 
         unordered_link5: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.unordered_link5_prefix,
 
@@ -659,7 +672,7 @@ module.exports = grammar({
         ),
 
         unordered_link6: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.unordered_link6_prefix,
 
@@ -681,7 +694,7 @@ module.exports = grammar({
         ),
 
         ordered_link1: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.ordered_link1_prefix,
 
@@ -707,7 +720,7 @@ module.exports = grammar({
         ),
 
         ordered_link2: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.ordered_link2_prefix,
 
@@ -733,7 +746,7 @@ module.exports = grammar({
         ),
 
         ordered_link3: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.ordered_link3_prefix,
 
@@ -759,7 +772,7 @@ module.exports = grammar({
         ),
 
         ordered_link4: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.ordered_link4_prefix,
 
@@ -785,7 +798,7 @@ module.exports = grammar({
         ),
 
         ordered_link5: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.ordered_link5_prefix,
 
@@ -811,7 +824,7 @@ module.exports = grammar({
         ),
 
         ordered_link6: $ =>
-        prec.right(1,
+        prec.right(0,
             seq(
                 $.ordered_link6_prefix,
 

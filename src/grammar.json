@@ -1518,7 +1518,7 @@
     },
     "unordered_link1": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1580,7 +1580,7 @@
     },
     "unordered_link2": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1642,7 +1642,7 @@
     },
     "unordered_link3": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1704,7 +1704,7 @@
     },
     "unordered_link4": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1766,7 +1766,7 @@
     },
     "unordered_link5": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1828,7 +1828,7 @@
     },
     "unordered_link6": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1883,7 +1883,7 @@
     },
     "ordered_link1": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1945,7 +1945,7 @@
     },
     "ordered_link2": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -2007,7 +2007,7 @@
     },
     "ordered_link3": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -2069,7 +2069,7 @@
     },
     "ordered_link4": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -2131,7 +2131,7 @@
     },
     "ordered_link5": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -2193,7 +2193,7 @@
     },
     "ordered_link6": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
@@ -4929,6 +4929,54 @@
     [
       "variable",
       "_paragraph_element"
+    ],
+    [
+      "unordered_link1",
+      "paragraph"
+    ],
+    [
+      "unordered_link2",
+      "paragraph"
+    ],
+    [
+      "unordered_link3",
+      "paragraph"
+    ],
+    [
+      "unordered_link4",
+      "paragraph"
+    ],
+    [
+      "unordered_link5",
+      "paragraph"
+    ],
+    [
+      "unordered_link6",
+      "paragraph"
+    ],
+    [
+      "ordered_link1",
+      "paragraph"
+    ],
+    [
+      "ordered_link2",
+      "paragraph"
+    ],
+    [
+      "ordered_link3",
+      "paragraph"
+    ],
+    [
+      "ordered_link4",
+      "paragraph"
+    ],
+    [
+      "ordered_link5",
+      "paragraph"
+    ],
+    [
+      "ordered_link6",
+      "paragraph"
     ]
   ],
   "precedences": [],

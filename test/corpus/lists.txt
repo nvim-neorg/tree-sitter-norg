@@ -7,6 +7,7 @@ Unordered List
 ---- Unordered list level 4
 ----- Unordered list level 5
 ------ Unordered list level 6
+------- Unordered list level 7 falls back to 6
 
 ---
 (document
@@ -30,6 +31,10 @@ Unordered List
                                 (unordered_list6_prefix)
                                 (paragraph (paragraph_segment))
                             )
+                            (unordered_list6
+                                (unordered_list6_prefix)
+                                (paragraph (paragraph_segment))
+                            )
                         )
                     )
                 )
@@ -47,6 +52,7 @@ Ordered List
 ~~~~ Ordered list level 4
 ~~~~~ Ordered list level 5
 ~~~~~~ Ordered list level 6
+~~~~~~~ Ordered list level 7 falls back to 6
 
 ---
 (document
@@ -66,6 +72,10 @@ Ordered List
                         (ordered_list5
                             (ordered_list5_prefix)
                             (paragraph (paragraph_segment))
+                            (ordered_list6
+                                (ordered_list6_prefix)
+                                (paragraph (paragraph_segment))
+                            )
                             (ordered_list6
                                 (ordered_list6_prefix)
                                 (paragraph (paragraph_segment))
@@ -168,6 +178,7 @@ Link List
 ----> {# link}
 -----> {# link}
 ------> {# link}
+-------> {# link}
 ---
 (document
     (generic_list
@@ -220,6 +231,15 @@ Link List
                                     )
                                 )
                             )
+                            (unordered_link6
+                                (unordered_link6_prefix)
+                                (link
+                                    (link_location
+                                        (link_target_generic)
+                                        (paragraph_segment)
+                                    )
+                                )
+                            )
                         )
                     )
                 )
@@ -237,6 +257,7 @@ Ordered Link List
 ~~~~> {# link}
 ~~~~~> {# link}
 ~~~~~~> {# link}
+~~~~~~~> {# link}
 ---
 (document
     (generic_list
@@ -278,6 +299,15 @@ Ordered Link List
                                 (link_location
                                     (link_target_generic)
                                     (paragraph_segment)
+                                )
+                            )
+                            (ordered_link6
+                                (ordered_link6_prefix)
+                                (link
+                                    (link_location
+                                        (link_target_generic)
+                                        (paragraph_segment)
+                                    )
                                 )
                             )
                             (ordered_link6
