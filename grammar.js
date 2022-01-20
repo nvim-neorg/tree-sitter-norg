@@ -119,6 +119,8 @@ module.exports = grammar({
         $.ordered_link5_prefix,
         $.ordered_link6_prefix,
 
+        $.indent_modifier,
+
         $.strong_paragraph_delimiter,
         $.weak_paragraph_delimiter,
         $.horizontal_line,
@@ -1447,6 +1449,25 @@ module.exports = grammar({
             )
         ),
 
+        indent_segment: $ =>
+        prec.right(
+            seq(
+                $.indent_modifier,
+                repeat1(
+                    choice(
+                        $.paragraph,
+                        $._paragraph_break,
+                        $.tag,
+                        // this following tag makes things complicated because it means we will need six of these indent_segment node types...
+                        $._any_list_item_level_2,
+                    ),
+                ),
+                optional(
+                    $.weak_paragraph_delimiter,
+                ),
+            ),
+        ),
+
         unordered_list1: $ =>
         prec.right(0,
             seq(
@@ -1454,7 +1475,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $.indent_segment,
+                    ),
                 ),
 
                 repeat(

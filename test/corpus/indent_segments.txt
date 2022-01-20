@@ -1,0 +1,25 @@
+======================
+Indent Segment in List
+======================
+- |
+  Indent list item
+
+  which continues here.
+- a normal list item which ends the list.
+---
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (indent_segment
+        (indent_modifier)
+        (paragraph (paragraph_segment))
+        (paragraph (paragraph_segment))
+      )
+    )
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph (paragraph_segment))
+    )
+  )
+)

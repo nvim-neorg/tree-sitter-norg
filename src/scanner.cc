@@ -81,6 +81,8 @@ enum TokenType : char
     ORDERED_LINK5,
     ORDERED_LINK6,
 
+    INDENT_MODIFIER,
+
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
     HORIZONTAL_LINE,
@@ -501,6 +503,21 @@ class Scanner
             {
                 advance(lexer);
                 lexer->mark_end(lexer);
+                return true;
+            }
+            else
+                return false;
+        }
+        // If we are not in a tag and we have a square bracket opening then try
+        // matching either a todo item or beginning of a list
+        else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= ORDERED_LIST6 &&
+                 lexer->lookahead == '|')
+        {
+            advance(lexer);
+
+            if (lexer->lookahead == '\n')
+            {
+                lexer->result_symbol = m_LastToken = INDENT_MODIFIER;
                 return true;
             }
             else
