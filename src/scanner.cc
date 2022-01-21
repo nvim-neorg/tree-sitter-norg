@@ -227,7 +227,7 @@ class Scanner
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
-                if (!m_ActiveModifiers[(RANGED_MODIFIER_OPEN - BOLD_OPEN) / 2])
+                if (!m_RangedActiveModifiers.any())
                     m_ActiveModifiers.reset();
             }
 
@@ -563,6 +563,7 @@ class Scanner
     TokenType& get_last_token() noexcept { return m_LastToken; }
     int32_t& get_current_char() noexcept { return m_Current; }
     auto& get_active_modifiers() noexcept { return m_ActiveModifiers; }
+    auto& get_ranged_active_modifiers() noexcept { return m_RangedActiveModifiers; }
 
    private:
     // Skips the next character without including it in the final result
@@ -680,11 +681,23 @@ class Scanner
                     lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                     return m_LastToken;
                 }
-                else if (std::iswpunct(lexer->lookahead) && m_ActiveModifiers[(RANGED_MODIFIER_OPEN - BOLD_OPEN) / 2])
+                // TODO(mrossinek): can this case actually occur?
+                else if (std::iswpunct(lexer->lookahead) && m_RangedActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2])
                 {
                     m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
                     lexer->result_symbol = m_LastToken =
                         static_cast<TokenType>(found_attached_modifier->second + 1);
+                    return m_LastToken;
+                }
+            }
+            else if (m_Current == '|')
+            {
+                auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+
+                if (found_attached_modifier != m_AttachedModifiers.end())
+                {
+                    m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                    lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
                     return m_LastToken;
                 }
             }
@@ -720,6 +733,30 @@ class Scanner
             return m_LastToken;
         }
 
+        if (lexer->lookahead == '|')
+        {
+            auto found_attached_modifier = m_AttachedModifiers.find(m_Current);
+
+            if (found_attached_modifier != m_AttachedModifiers.end())
+            {
+                advance(lexer);
+                m_RangedActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
+                lexer->result_symbol = m_LastToken = RANGED_MODIFIER_CLOSE;
+                return m_LastToken;
+            }
+
+            advance(lexer);
+
+            found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+            if (found_attached_modifier != m_AttachedModifiers.end())
+            {
+                m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
+                return m_LastToken;
+            }
+
+        }
+
         auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
 
         if (found_attached_modifier == m_AttachedModifiers.end())
@@ -747,12 +784,14 @@ class Scanner
             */
 
             if (
-                (!std::iswspace(lexer->lookahead) || (m_ActiveModifiers[(RANGED_MODIFIER_OPEN - BOLD_OPEN) / 2]))
+                (!std::iswspace(lexer->lookahead) || (m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2]))
                 && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2]
             )
             {
                 // if (can_have_modifier())
                 m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                if (m_Previous == '|')
+                    m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
@@ -765,8 +804,8 @@ class Scanner
              (!std::iswspace(cur) || !cur) &&
              (std::iswspace(lexer->lookahead) || std::iswpunct(lexer->lookahead) || !lexer->lookahead)
             ) || (
-             std::iswspace(cur) && m_ActiveModifiers[(RANGED_MODIFIER_OPEN - BOLD_OPEN) / 2] &&
-             std::iswpunct(lexer->lookahead)
+             std::iswspace(cur) && m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2] &&
+             lexer->lookahead == '|'
             )
         )
         {
@@ -950,10 +989,11 @@ class Scanner
         {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
         {'_', UNDERLINE_OPEN},   {'!', SPOILER_OPEN},   {'`', VERBATIM_OPEN},
         {'^', SUPERSCRIPT_OPEN}, {',', SUBSCRIPT_OPEN}, {'+', INLINE_COMMENT_OPEN},
-        {'$', INLINE_MATH_OPEN}, {'=', VARIABLE_OPEN}, {'|', RANGED_MODIFIER_OPEN},
+        {'$', INLINE_MATH_OPEN}, {'=', VARIABLE_OPEN},
     };
 
-    std::bitset<((RANGED_MODIFIER_OPEN - BOLD_OPEN) / 2) + 1> m_ActiveModifiers;
+    std::bitset<((VARIABLE_OPEN - BOLD_OPEN) / 2) + 1> m_ActiveModifiers;
+    std::bitset<((VARIABLE_OPEN - BOLD_OPEN) / 2) + 1> m_RangedActiveModifiers;
 };
 
 extern "C"
@@ -980,8 +1020,9 @@ extern "C"
         const auto& last_token = scanner->get_last_token();
         const auto& current = scanner->get_current_char();
         const auto& active_modifiers = scanner->get_active_modifiers();
+        const auto& ranged_active_modifiers = scanner->get_ranged_active_modifiers();
 
-        if (6 + active_modifiers.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (6 + active_modifiers.size() + ranged_active_modifiers.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
@@ -999,7 +1040,10 @@ extern "C"
         for (int i = 0; i < active_modifiers.size(); i++)
             buffer[6 + i] = active_modifiers[i];
 
-        return 6 + active_modifiers.size();
+        for (int i = 0; i < ranged_active_modifiers.size(); i++)
+            buffer[6 + active_modifiers.size() + i] = ranged_active_modifiers[i];
+
+        return 6 + active_modifiers.size() + ranged_active_modifiers.size();
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload,
@@ -1012,10 +1056,12 @@ extern "C"
         auto& last_token = scanner->get_last_token();
         auto& current = scanner->get_current_char();
         auto& active_modifiers = scanner->get_active_modifiers();
+        auto& ranged_active_modifiers = scanner->get_ranged_active_modifiers();
 
         if (length == 0)
         {
             active_modifiers = 0;
+            ranged_active_modifiers = 0;
             tag_level = 0;
             return;
         }
@@ -1027,5 +1073,8 @@ extern "C"
 
         for (int i = 0; i < active_modifiers.size(); i++)
             active_modifiers[i] = buffer[6 + i];
+
+        for (int i = 0; i < ranged_active_modifiers.size(); i++)
+            ranged_active_modifiers[i] = buffer[6 + active_modifiers.size() + i];
     }
 }
