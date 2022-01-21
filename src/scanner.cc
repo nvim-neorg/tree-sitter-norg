@@ -760,8 +760,6 @@ class Scanner
         if (found_attached_modifier == m_AttachedModifiers.end())
             return NONE;
 
-        int32_t cur = m_Current;
-
         // First check for the existence of an opening attached modifier
         if (std::iswspace(m_Current) || std::iswpunct(m_Current) || !m_Current)
         {
@@ -799,10 +797,10 @@ class Scanner
 
         if (
             (
-             (!std::iswspace(cur) || !cur) &&
+             (!std::iswspace(m_Previous) || !m_Previous) &&
              (std::iswspace(lexer->lookahead) || std::iswpunct(lexer->lookahead) || !lexer->lookahead)
             ) || (
-             std::iswspace(cur) && m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2] &&
+             std::iswspace(m_Previous) && m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2] &&
              lexer->lookahead == '|'
             )
         )
