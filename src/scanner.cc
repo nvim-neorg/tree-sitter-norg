@@ -508,8 +508,6 @@ class Scanner
             else
                 return false;
         }
-        // If we are not in a tag and we have a square bracket opening then try
-        // matching either a todo item or beginning of a list
         else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= ORDERED_LIST6 &&
                  lexer->lookahead == '|')
         {
