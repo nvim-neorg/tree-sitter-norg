@@ -1223,3 +1223,40 @@ $[not an anchor]{* not a link}$
         (paragraph_segment (variable))
     )
 )
+
+==========================================================
+Anchors inside unordered list. Regression test against #28
+==========================================================
+- [anchor]
+
+[anchor]{https://example.com/}
+---
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment
+          (anchor_declaration
+            (link_description
+              (paragraph_segment)
+            )
+          )
+        )
+      )
+    )
+  )
+  (paragraph
+    (paragraph_segment
+      (anchor_definition
+        (link_description
+          (paragraph_segment)
+        )
+        (link_location
+          (link_target_url)
+          (paragraph_segment)
+        )
+      )
+    )
+  )
+)
