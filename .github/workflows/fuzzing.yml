@@ -49,7 +49,7 @@ jobs:
       - name: Run fuzzer
         run: |
           cd out/results
-          ../norg_fuzzer -dict=../norg.dict -max_total_time=7200 -timeout=1 ./corpus
+          ../norg_fuzzer -dict=../norg.dict -max_total_time=7200 -timeout=2 ./corpus
 
       - name: Check corpuses
         run: |
