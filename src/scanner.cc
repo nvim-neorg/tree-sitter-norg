@@ -488,7 +488,8 @@ class Scanner
                 break;
             default:
                 advance(lexer);
-                return false;
+                lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_BEGIN;
+                return true;
             }
 
             advance(lexer);  // Move past the matched element (*/x/ )
