@@ -11,14 +11,36 @@ Indent Segment in List
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (indent_segment
-        (indent_modifier)
-        (paragraph (paragraph_segment))
-        (paragraph (paragraph_segment))
-      )
+      (indent_modifier)
+      (paragraph (paragraph_segment))
+      (paragraph (paragraph_segment))
     )
     (unordered_list1
       (unordered_list1_prefix)
+      (paragraph (paragraph_segment))
+    )
+  )
+)
+
+=======================
+Indent Segment in Quote
+=======================
+> |
+  Indent quote
+
+  which continues here.
+> a normal quote which ends the quote
+---
+(document
+  (quote
+    (quote1
+      (quote1_prefix)
+      (indent_modifier)
+      (paragraph (paragraph_segment))
+      (paragraph (paragraph_segment))
+    )
+    (quote1
+      (quote1_prefix)
       (paragraph (paragraph_segment))
     )
   )

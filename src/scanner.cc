@@ -508,8 +508,14 @@ class Scanner
             else
                 return false;
         }
-        else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= ORDERED_LIST6 &&
-                 lexer->lookahead == '|')
+        else if (
+            (lexer->lookahead == '|') &&
+            (
+                (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= ORDERED_LIST6)
+                ||
+                (m_LastToken >= QUOTE1 && m_LastToken <= QUOTE6)
+            )
+            )
         {
             advance(lexer);
 

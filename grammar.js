@@ -1251,6 +1251,41 @@ module.exports = grammar({
             )
         ),
 
+        _quote1: $ =>
+        choice(
+            $.quote1,
+            $._quote2,
+        ),
+
+        _quote2: $ =>
+        choice(
+            $.quote2,
+            $._quote3,
+        ),
+
+        _quote3: $ =>
+        choice(
+            $.quote3,
+            $._quote4,
+        ),
+
+        _quote4: $ =>
+        choice(
+            $.quote4,
+            $._quote5,
+        ),
+
+        _quote5: $ =>
+        choice(
+            $.quote5,
+            $._quote6,
+        ),
+
+        _quote6: $ =>
+        choice(
+            $.quote6,
+        ),
+
         quote1: $ =>
         prec.right(0,
             seq(
@@ -1258,19 +1293,14 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_1,
+                    ),
                 ),
 
-                optional(prec(1, $._line_break)),
-
                 repeat(
-                    choice(
-                        $.quote2,
-                        $.quote3,
-                        $.quote4,
-                        $.quote5,
-                        $.quote6,
-                    ),
+                    $._quote2,
                 )
             )
         ),
@@ -1282,18 +1312,14 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_2,
+                    ),
                 ),
 
-                optional(prec(1, $._line_break)),
-
                 repeat(
-                    choice(
-                        $.quote3,
-                        $.quote4,
-                        $.quote5,
-                        $.quote6,
-                    ),
+                    $._quote3,
                 )
             )
         ),
@@ -1305,17 +1331,14 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_3,
+                    ),
                 ),
 
-                optional(prec(1, $._line_break)),
-
                 repeat(
-                    choice(
-                        $.quote4,
-                        $.quote5,
-                        $.quote6,
-                    ),
+                    $._quote4,
                 )
             )
         ),
@@ -1327,16 +1350,14 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_4,
+                    ),
                 ),
 
-                optional(prec(1, $._line_break)),
-
                 repeat(
-                    choice(
-                        $.quote5,
-                        $.quote6,
-                    ),
+                    $._quote5,
                 )
             )
         ),
@@ -1348,13 +1369,14 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_5,
+                    ),
                 ),
 
-                optional(prec(1, $._line_break)),
-
                 repeat(
-                    $.quote6,
+                    $._quote6,
                 )
             )
         ),
@@ -1366,11 +1388,11 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_6,
+                    ),
                 ),
-
-                optional(prec(1, $._line_break)),
-
             )
         ),
 
@@ -1433,15 +1455,8 @@ module.exports = grammar({
             $.ordered_link6,
         ),
 
-        // TODO: complete docs
-        generic_list: $ =>
-        prec.right(0,
-            repeat1(
-                $._any_list_item_level_1,
-            )
-        ),
-
-        indent_segment: $ =>
+        // indent segment levels
+        _indent_segment_level_1: $ =>
         prec.right(
             seq(
                 $.indent_modifier,
@@ -1450,14 +1465,115 @@ module.exports = grammar({
                         $.paragraph,
                         $._paragraph_break,
                         $.tag,
-                        // this following tag makes things complicated because it means we will need six of these indent_segment node types...
                         $._any_list_item_level_2,
+                        $._quote2,
                     ),
                 ),
                 optional(
                     $.weak_paragraph_delimiter,
                 ),
             ),
+        ),
+
+        _indent_segment_level_2: $ =>
+        prec.right(
+            seq(
+                $.indent_modifier,
+                repeat1(
+                    choice(
+                        $.paragraph,
+                        $._paragraph_break,
+                        $.tag,
+                        $._any_list_item_level_3,
+                        $._quote3,
+                    ),
+                ),
+                optional(
+                    $.weak_paragraph_delimiter,
+                ),
+            ),
+        ),
+
+        _indent_segment_level_3: $ =>
+        prec.right(
+            seq(
+                $.indent_modifier,
+                repeat1(
+                    choice(
+                        $.paragraph,
+                        $._paragraph_break,
+                        $.tag,
+                        $._any_list_item_level_4,
+                        $._quote4,
+                    ),
+                ),
+                optional(
+                    $.weak_paragraph_delimiter,
+                ),
+            ),
+        ),
+
+        _indent_segment_level_4: $ =>
+        prec.right(
+            seq(
+                $.indent_modifier,
+                repeat1(
+                    choice(
+                        $.paragraph,
+                        $._paragraph_break,
+                        $.tag,
+                        $._any_list_item_level_5,
+                        $._quote5,
+                    ),
+                ),
+                optional(
+                    $.weak_paragraph_delimiter,
+                ),
+            ),
+        ),
+
+        _indent_segment_level_5: $ =>
+        prec.right(
+            seq(
+                $.indent_modifier,
+                repeat1(
+                    choice(
+                        $.paragraph,
+                        $._paragraph_break,
+                        $.tag,
+                        $._any_list_item_level_6,
+                        $._quote6,
+                    ),
+                ),
+                optional(
+                    $.weak_paragraph_delimiter,
+                ),
+            ),
+        ),
+
+        _indent_segment_level_6: $ =>
+        prec.right(
+            seq(
+                $.indent_modifier,
+                repeat1(
+                    choice(
+                        $.paragraph,
+                        $._paragraph_break,
+                        $.tag,
+                    ),
+                ),
+                optional(
+                    $.weak_paragraph_delimiter,
+                ),
+            ),
+        ),
+
+        // TODO: complete docs
+        generic_list: $ =>
+        prec.right(0,
+            repeat1(
+                $._any_list_item_level_1,
+            )
         ),
 
         unordered_list1: $ =>
@@ -1469,7 +1585,7 @@ module.exports = grammar({
                     "content",
                     choice(
                         $.paragraph,
-                        $.indent_segment,
+                        $._indent_segment_level_1,
                     ),
                 ),
 
@@ -1486,7 +1602,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_2,
+                    ),
                 ),
 
                 repeat(
@@ -1502,7 +1621,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_3,
+                    ),
                 ),
 
                 repeat(
@@ -1518,7 +1640,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_4,
+                    ),
                 ),
 
                 repeat(
@@ -1534,7 +1659,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_5,
+                    ),
                 ),
 
                 repeat(
@@ -1550,7 +1678,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_6,
+                    ),
                 ),
             )
         ),
@@ -1562,7 +1693,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_1,
+                    ),
                 ),
 
                 repeat(
@@ -1578,7 +1712,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_2,
+                    ),
                 ),
 
                 repeat(
@@ -1594,7 +1731,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_3,
+                    ),
                 ),
 
                 repeat(
@@ -1610,7 +1750,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_4,
+                    ),
                 ),
 
                 repeat(
@@ -1626,7 +1769,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_5,
+                    ),
                 ),
 
                 repeat(
@@ -1642,7 +1788,10 @@ module.exports = grammar({
 
                 field(
                     "content",
-                    $.paragraph,
+                    choice(
+                        $.paragraph,
+                        $._indent_segment_level_6,
+                    ),
                 ),
             )
         ),
