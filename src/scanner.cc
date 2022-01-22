@@ -816,16 +816,25 @@ class Scanner
             advance(lexer);
 
         if (
-            (
-             (!std::iswspace(m_Previous) || !m_Previous) &&
-             (std::iswspace(lexer->lookahead) || std::iswpunct(lexer->lookahead) || !lexer->lookahead)
-            ) || (
-             std::iswspace(m_Previous) && m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2]
-            )
+             m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2] && std::iswpunct(lexer->lookahead)
         )
         {
             m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
             m_RangedActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
+            lexer->result_symbol = m_LastToken =
+                static_cast<TokenType>(found_attached_modifier->second + 1);
+            return m_LastToken;
+        }
+
+        if (
+            (
+             (!std::iswspace(m_Previous) || !m_Previous) &&
+             (std::iswspace(lexer->lookahead) || std::iswpunct(lexer->lookahead) || !lexer->lookahead)
+             && !m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2]
+            )
+        )
+        {
+            m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
             lexer->result_symbol = m_LastToken =
                 static_cast<TokenType>(found_attached_modifier->second + 1);
             return m_LastToken;
