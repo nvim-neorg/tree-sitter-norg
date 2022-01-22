@@ -14,22 +14,22 @@ bold *| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_bold)
+            (ranged_attached_modifier (bold))
         )
         (paragraph_segment
-            (ranged_bold)
+            (ranged_attached_modifier (bold))
         )
         (paragraph_segment
-            (ranged_bold)
+            (ranged_attached_modifier (bold))
         )
         (paragraph_segment
-            (ranged_bold)
+            (ranged_attached_modifier (bold))
         )
         (paragraph_segment
-            (ranged_bold)
+            (ranged_attached_modifier (bold))
         )
         (paragraph_segment
-            (ranged_bold)
+            (ranged_attached_modifier (bold))
         )
     )
 )
@@ -50,22 +50,22 @@ italic /| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_italic)
+            (ranged_attached_modifier (italic))
         )
         (paragraph_segment
-            (ranged_italic)
+            (ranged_attached_modifier (italic))
         )
         (paragraph_segment
-            (ranged_italic)
+            (ranged_attached_modifier (italic))
         )
         (paragraph_segment
-            (ranged_italic)
+            (ranged_attached_modifier (italic))
         )
         (paragraph_segment
-            (ranged_italic)
+            (ranged_attached_modifier (italic))
         )
         (paragraph_segment
-            (ranged_italic)
+            (ranged_attached_modifier (italic))
         )
     )
 )
@@ -86,22 +86,22 @@ strikethrough -| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_strikethrough)
+            (ranged_attached_modifier (strikethrough))
         )
         (paragraph_segment
-            (ranged_strikethrough)
+            (ranged_attached_modifier (strikethrough))
         )
         (paragraph_segment
-            (ranged_strikethrough)
+            (ranged_attached_modifier (strikethrough))
         )
         (paragraph_segment
-            (ranged_strikethrough)
+            (ranged_attached_modifier (strikethrough))
         )
         (paragraph_segment
-            (ranged_strikethrough)
+            (ranged_attached_modifier (strikethrough))
         )
         (paragraph_segment
-            (ranged_strikethrough)
+            (ranged_attached_modifier (strikethrough))
         )
     )
 )
@@ -122,22 +122,22 @@ underline _| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_underline)
+            (ranged_attached_modifier (underline))
         )
         (paragraph_segment
-            (ranged_underline)
+            (ranged_attached_modifier (underline))
         )
         (paragraph_segment
-            (ranged_underline)
+            (ranged_attached_modifier (underline))
         )
         (paragraph_segment
-            (ranged_underline)
+            (ranged_attached_modifier (underline))
         )
         (paragraph_segment
-            (ranged_underline)
+            (ranged_attached_modifier (underline))
         )
         (paragraph_segment
-            (ranged_underline)
+            (ranged_attached_modifier (underline))
         )
     )
 )
@@ -158,22 +158,22 @@ spoiler !| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_spoiler)
+            (ranged_attached_modifier (spoiler))
         )
         (paragraph_segment
-            (ranged_spoiler)
+            (ranged_attached_modifier (spoiler))
         )
         (paragraph_segment
-            (ranged_spoiler)
+            (ranged_attached_modifier (spoiler))
         )
         (paragraph_segment
-            (ranged_spoiler)
+            (ranged_attached_modifier (spoiler))
         )
         (paragraph_segment
-            (ranged_spoiler)
+            (ranged_attached_modifier (spoiler))
         )
         (paragraph_segment
-            (ranged_spoiler)
+            (ranged_attached_modifier (spoiler))
         )
     )
 )
@@ -194,22 +194,22 @@ superscript ^| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_superscript)
+            (ranged_attached_modifier (superscript))
         )
         (paragraph_segment
-            (ranged_superscript)
+            (ranged_attached_modifier (superscript))
         )
         (paragraph_segment
-            (ranged_superscript)
+            (ranged_attached_modifier (superscript))
         )
         (paragraph_segment
-            (ranged_superscript)
+            (ranged_attached_modifier (superscript))
         )
         (paragraph_segment
-            (ranged_superscript)
+            (ranged_attached_modifier (superscript))
         )
         (paragraph_segment
-            (ranged_superscript)
+            (ranged_attached_modifier (superscript))
         )
     )
 )
@@ -230,22 +230,22 @@ subscript ,| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_subscript)
+            (ranged_attached_modifier (subscript))
         )
         (paragraph_segment
-            (ranged_subscript)
+            (ranged_attached_modifier (subscript))
         )
         (paragraph_segment
-            (ranged_subscript)
+            (ranged_attached_modifier (subscript))
         )
         (paragraph_segment
-            (ranged_subscript)
+            (ranged_attached_modifier (subscript))
         )
         (paragraph_segment
-            (ranged_subscript)
+            (ranged_attached_modifier (subscript))
         )
         (paragraph_segment
-            (ranged_subscript)
+            (ranged_attached_modifier (subscript))
         )
     )
 )
@@ -266,22 +266,22 @@ verbatim `| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_verbatim)
+            (ranged_attached_modifier (verbatim))
         )
         (paragraph_segment
-            (ranged_verbatim)
+            (ranged_attached_modifier (verbatim))
         )
         (paragraph_segment
-            (ranged_verbatim)
+            (ranged_attached_modifier (verbatim))
         )
         (paragraph_segment
-            (ranged_verbatim)
+            (ranged_attached_modifier (verbatim))
         )
         (paragraph_segment
-            (ranged_verbatim)
+            (ranged_attached_modifier (verbatim))
         )
         (paragraph_segment
-            (ranged_verbatim)
+            (ranged_attached_modifier (verbatim))
         )
     )
 )
@@ -302,22 +302,22 @@ inline_comment +| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_inline_comment)
+            (ranged_attached_modifier (inline_comment))
         )
         (paragraph_segment
-            (ranged_inline_comment)
+            (ranged_attached_modifier (inline_comment))
         )
         (paragraph_segment
-            (ranged_inline_comment)
+            (ranged_attached_modifier (inline_comment))
         )
         (paragraph_segment
-            (ranged_inline_comment)
+            (ranged_attached_modifier (inline_comment))
         )
         (paragraph_segment
-            (ranged_inline_comment)
+            (ranged_attached_modifier (inline_comment))
         )
         (paragraph_segment
-            (ranged_inline_comment)
+            (ranged_attached_modifier (inline_comment))
         )
     )
 )
@@ -338,22 +338,22 @@ inline_math $| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_inline_math)
+            (ranged_attached_modifier (inline_math))
         )
         (paragraph_segment
-            (ranged_inline_math)
+            (ranged_attached_modifier (inline_math))
         )
         (paragraph_segment
-            (ranged_inline_math)
+            (ranged_attached_modifier (inline_math))
         )
         (paragraph_segment
-            (ranged_inline_math)
+            (ranged_attached_modifier (inline_math))
         )
         (paragraph_segment
-            (ranged_inline_math)
+            (ranged_attached_modifier (inline_math))
         )
         (paragraph_segment
-            (ranged_inline_math)
+            (ranged_attached_modifier (inline_math))
         )
     )
 )
@@ -374,22 +374,22 @@ variable =| markup.
 (document
     (paragraph
         (paragraph_segment
-            (ranged_variable)
+            (ranged_attached_modifier (variable))
         )
         (paragraph_segment
-            (ranged_variable)
+            (ranged_attached_modifier (variable))
         )
         (paragraph_segment
-            (ranged_variable)
+            (ranged_attached_modifier (variable))
         )
         (paragraph_segment
-            (ranged_variable)
+            (ranged_attached_modifier (variable))
         )
         (paragraph_segment
-            (ranged_variable)
+            (ranged_attached_modifier (variable))
         )
         (paragraph_segment
-            (ranged_variable)
+            (ranged_attached_modifier (variable))
         )
     )
 )

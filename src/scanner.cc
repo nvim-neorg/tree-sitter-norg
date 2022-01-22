@@ -679,10 +679,10 @@ class Scanner
                     lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                     return m_LastToken;
                 }
-                // TODO(mrossinek): can this case actually occur?
-                else if (std::iswpunct(lexer->lookahead) && m_RangedActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2])
+                else if (std::iswpunct(lexer->lookahead) && m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
                 {
                     m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
+                    m_RangedActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
                     lexer->result_symbol = m_LastToken =
                         static_cast<TokenType>(found_attached_modifier->second + 1);
                     return m_LastToken;
@@ -779,6 +779,20 @@ class Scanner
             };
             */
 
+            auto found_previous_attached_modifier = m_AttachedModifiers.find(m_Previous);
+
+            if (
+                (m_Previous == '|') || (
+                    found_previous_attached_modifier != m_AttachedModifiers.end()
+                    && found_previous_attached_modifier->second == m_LastToken
+                    && m_RangedActiveModifiers[(found_previous_attached_modifier->second - BOLD_OPEN) / 2]
+                )
+                )
+            {
+                m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+            }
+
+
             if (
                 (!std::iswspace(lexer->lookahead) || (m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2]))
                 && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2]
@@ -786,8 +800,7 @@ class Scanner
             {
                 // if (can_have_modifier())
                 m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
-                if (m_Previous == '|')
-                    m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
@@ -800,12 +813,12 @@ class Scanner
              (!std::iswspace(m_Previous) || !m_Previous) &&
              (std::iswspace(lexer->lookahead) || std::iswpunct(lexer->lookahead) || !lexer->lookahead)
             ) || (
-             std::iswspace(m_Previous) && m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2] &&
-             lexer->lookahead == '|'
+             std::iswspace(m_Previous) && m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2]
             )
         )
         {
             m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
+            m_RangedActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
             lexer->result_symbol = m_LastToken =
                 static_cast<TokenType>(found_attached_modifier->second + 1);
             return m_LastToken;
