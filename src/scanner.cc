@@ -227,8 +227,7 @@ class Scanner
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
-                if (!m_RangedActiveModifiers.any())
-                    m_ActiveModifiers.reset();
+                reset_active_modifiers();
             }
 
             return true;
@@ -641,6 +640,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = result;
 
+                reset_active_modifiers();
                 return result;
             }
 
@@ -668,6 +668,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = result;
 
+                reset_active_modifiers();
                 return result;
             }
         }
@@ -996,6 +997,15 @@ class Scanner
     T clamp(T value, Comp min, Comp max)
     {
         return value < min ? min : (value > max ? max : value);
+    }
+
+    void reset_active_modifiers()
+    {
+        for (int i = 0; i < m_RangedActiveModifiers.size(); i++)
+        {
+            if (!m_RangedActiveModifiers[i])
+                m_ActiveModifiers.reset(i);
+        }
     }
 
    private:
