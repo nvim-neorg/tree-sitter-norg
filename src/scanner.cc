@@ -783,12 +783,20 @@ class Scanner
                 return NONE;
             }
 
-            /* TODO: what is this?
             auto can_have_modifier = [&]()
             {
-                return !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2];
+
+                return (
+                    !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] &&
+                    !m_ActiveModifiers[(INLINE_COMMENT_OPEN - BOLD_OPEN) / 2] &&
+                    !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2] &&
+                    !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2] &&
+                    !m_RangedActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] &&
+                    !m_RangedActiveModifiers[(INLINE_COMMENT_OPEN - BOLD_OPEN) / 2] &&
+                    !m_RangedActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2] &&
+                    !m_RangedActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2]
+                );
             };
-            */
 
             auto found_previous_attached_modifier = m_AttachedModifiers.find(m_Previous);
 
@@ -809,8 +817,8 @@ class Scanner
                 && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2]
             )
             {
-                // if (can_have_modifier())
-                m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                if (can_have_modifier())
+                    m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }
