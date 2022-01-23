@@ -815,8 +815,12 @@ class Scanner
         else
             advance(lexer);
 
+        auto found_next_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+
         if (
-             m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2] && std::iswpunct(lexer->lookahead)
+             m_RangedActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2] && (
+                 found_next_attached_modifier != m_AttachedModifiers.end() || lexer->lookahead == '|'
+            )
         )
         {
             m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
