@@ -101,12 +101,98 @@
 
     Paragraphs can also contain {# Attached Modifiers} or {# Linkables} as will be explained later.
 
-** Document Structure
-*** Structural Nodes
-**** Headings
-**** Markers
-
 ** Detached Modifiers
+   _Norg_ has multiple detached modifiers. The name originates from their differentiation to
+   _Norg_'s {# Attached Modifiers} which will be discussed later.
+   All detached modifiers must abide by the following rules:
+   - a detached modifier can _only_ occur at the beginning of the line (an arbitrary {# whitespace}
+     (but nothing else!) may precede it)
+   - a detached modifier must be immediately followed by {# whitespace} (incl. a {> line ending}) or
+     another detached modifier of the same type
+
+   The following list are the valid *detached* modifiers. The list also adds three possible
+   properties to each category which will be explained in more detail below.
+   - `*`: {# Headings} (structural, nestable)
+   - `|`: {# Markers} (structural)
+   - `-`: {# Unordered Lists} (nestable)
+   - `~`: {# Ordered Lists} (nestable)
+   - `>`: {# Quotes} (nestable)
+   - `$`: {# Definitions} (range-able)
+   - `^`: {# Footnotes} (range-able)
+   - `=`: {# Insertions}
+   - `?`: {# Multiple Choice Questions}
+
+*** Standard Detached Modifiers
+    The normal rules for the /standard/ detached modifiers are simple:
+    - TODO.
+
+    @code norg
+    = Insertion arg1 arg2 ...
+    @end
+
+    Markers also belong to this set of detached modifiers but will only be discussed later as part
+    of the {# Structural Detached Modifiers}.
+
+*** Nestable Detached Modifiers
+    Nestable detached modifiers are those kind which may be repeated multiple times in order to
+    produce a _nested_ object of the given type. The nesting levels are capped at 6 in the
+    [tree-sitter] parser but longer repetitions of the same modifier are allowed, falling back to
+    the sixth nesting level. Other parses may choose to support higher nesting levels.
+
+    Here are some correct examples of the nestable detached modifiers:
+    @code norg
+    - Unordered list level 1
+    -- Unordered list level 2
+    --- Unordered list level 3
+    ---- Unordered list level 4
+    ----- Unordered list level 5
+    ------ Unordered list level 6
+    ------- Unordered list level 7 (falls back to level 6 in the tree-sitter parser)
+    @end
+
+    @code norg
+    ~ Ordered list level 1
+    ~~ Ordered list level 2
+    ~~~ Ordered list level 3
+    ~~~~ Ordered list level 4
+    ~~~~~ Ordered list level 5
+    ~~~~~~ Ordered list level 6
+    ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree~sitter parser)
+    @end
+
+    @code norg
+    > Quote level 1
+    >> Quote level 2
+    >>> Quote level 3
+    >>>> Quote level 4
+    >>>>> Quote level 5
+    >>>>>> Quote level 6
+    >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
+    @end
+
+    Headings are also /nestable/ detached modifiers but will only be discussed later as part of the
+    {# Structural Detached Modifiers}.
+
+*** Structural Detached Modifiers
+    The `*` (headings) and `|` (marker) detached modifiers also have the _structural_ property,
+    meaning that these objects *structure* the _Norg_ document.
+
+    @code norg
+    * Heading level 1
+    ** Heading level 2
+    *** Heading level 3
+    **** Heading level 4
+    ***** Heading level 5
+    ****** Heading level 6
+    ******* Heading level 7 (falls back to level 6 in the tree-sitter parser)
+    @end
+
+    Markers TODO
+
+*** Range-able Detached Modifiers
+
+    TODO
+
 
 ** Attached Modifiers
 
