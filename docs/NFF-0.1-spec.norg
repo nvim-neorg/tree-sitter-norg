@@ -1,0 +1,118 @@
++General Notes+
++Formally define each object+
++Use many examples!+
++And also provide counter-examples for cases which are not expected to work!+
+
+* Norg File Format Specification
+  This file contains the formal file format specification of the _Norg_ syntax version 0.1.
+  This document is written in the Norg format in its original form and, thus, attempts to be
+  self-documenting.
+
+** Introduction
+   Before diving into the details we will start with a short introduction.
+   The _Norg_ file format was designed as part of the [Neorg] plugin for Neovim which was started by
+   /Vhyrro (@vhyrro)/ in April of 2021.
+   Soon after starting this work, /Max Rossmannek (@mrossinek)/ joined the development team, and,
+   with the help of the [Neorg] community, the two have shaped the _Norg_ syntax to what it has
+   become today.
+
+   [Neorg]{https://github.com/nvim-neorg/neorg}
+
+*** What is Norg?
+    The _Norg_ syntax is a plain-text file format which aims to be human readable when viewed
+    standalone while also providing a suite of markup utilities for typesetting structured
+    documents. Compared to other plain-text file formats like e.g. Markdown, RST or AsciiDoc, it
+    sets itself apart most notably by following a strict philosophy to abide by the following simple
+    rules:
+    ~ *Consistency:* the syntax should be consistent. Even if you know only a part of the syntax,
+      learning new parts should not be surprising and rather feel predictable and intuitive.
+    ~ *Unambiguous:* the syntax should leave _no_ room for ambiguity. This is especially motivated
+      by the use of [tree-sitter] for the original syntax parser which takes a strict left-to-right
+      parsing approach and only has single-character look-ahead.
+    ~ *[Free-form]:* whitespace is _only_ used to delimit tokens but has no other significance! This
+      is probably the most contrasting feature to other plain-text formats which often adhere to the
+      [off-side rule], meaning that the syntax relies on whitespace-indentation to carry meaning.
+
+    [tree-sitter]{https://tree-sitter.github.io/tree-sitter/}
+    [off-side rule]{https://en.wikipedia.org/wiki/Off-side_rule}
+    [Free-form]{https://en.wikipedia.org/wiki/Free-form_language}
+
+** Preliminaries
+   First, we define some basic concepts which will be used in this specification.
+
+
+*** Characters
+    A _Norg_ file is made up of /characters/.
+    A <character> is any Unicode [code point].
+
+    [code point]{https://en.wikipedia.org/wiki/Code_point}
+
+**** Whitespace
+     A {> character} is considered to be *whitespace* if it is any of the following:
+     - a tab `U+0009`
+     - a line feed `U+000A`
+     - a form feed `U+000C`
+     - a carriage return `U+000D`
+     - any code point in the [Unicode Zs general category] (includes the normal space `U+0020`)
+
+     Any combination of the above is also considered whitespace.
+
+     Tabs are not expanded to spaces and since whitespace has no semantic meaning there is no need
+     to define a default tab stop. However, if a parser must (for implementation reasons) define a
+     tab stop, we suggest to set it to 4 spaces.
+
+     However, the following whitespace combinations are a <line ending>:
+     - a single line feed
+     - a single carriage return
+     - a carriage return immediately followed by a line feed
+
+     [Unicode Zs general category]{https://www.fileformat.info/info/unicode/category/Zs/list.htm}
+
+**** Punctuation
+     A {> character} is considered to be *punctuation* if it is any of the following:
+     - a standard ASCII punctuation character: |`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`|
+     - any punctuation character specific to the current locale
+       +TODO(Vhyrro): check if this is what we really want. Currently taken from std::iswpunct docs+
+
+**** Escaping
+     A single {> character} can be escaped if it is immediately preceeded by a backslash, `\`
+     (`U+005C`).
+
+**** Special Character
+     TODO: formalize this section
+     - Emojis
+     - Should we support [entity references]?
+
+     [entity references]{https://spec.commonmark.org/0.30/#entity-references}
+
+*** Words
+    The _Norg_ format is designed to be parsed on a word-by-word basis from left-to-right through
+    the entire document /in a single pass/. This is possible, because the language is [Free-form],
+    meaning that whitespace has no semantic meaning, and because the markup follows strict rules
+    which are outlined in the later sections of this document.
+
+    A *word* is considered any combinations of {> character}s which are neither {# Whitespace} nor
+    {# Punctuation} or other {# Special Character}.
+
+*** Paragraphs
+    {# Words} are then combined into /paragraph _segments_/ which in turn make up a /paragraph/.
+    A single {> line ending} will terminate a /paragraph _segment_/ *only* whereas two consecutive
+    {> line ending}s are required to terminate a /paragraph/.
+
+    Paragraphs can also contain {# Attached Modifiers} or {# Linkables} as will be explained later.
+
+** Document Structure
+*** Structural Nodes
+**** Headings
+**** Markers
+
+** Detached Modifiers
+
+** Attached Modifiers
+
+** Linkables
+*** Link Locations `{}`
+*** Link Descriptions `[]`
+*** Links `{} or {}[]`
+*** Anchors `[] and []{}`
+*** Inline Link Targets `<>`
