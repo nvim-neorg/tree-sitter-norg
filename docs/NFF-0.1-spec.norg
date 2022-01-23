@@ -94,6 +94,9 @@
     A *word* is considered any combinations of {> character}s which are neither {# Whitespace} nor
     {# Punctuation} or other {# Special Character}.
 
+*** Paragraph Segments
+    TODO
+
 *** Paragraphs
     {# Words} are then combined into /paragraph _segments_/ which in turn make up a /paragraph/.
     A single {> line ending} will terminate a /paragraph _segment_/ *only* whereas two consecutive
@@ -102,8 +105,8 @@
     Paragraphs can also contain {# Attached Modifiers} or {# Linkables} as will be explained later.
 
 ** Detached Modifiers
-   _Norg_ has multiple detached modifiers. The name originates from their differentiation to
-   _Norg_'s {# Attached Modifiers} which will be discussed later.
+   _Norg_ has multiple detached modifiers. The name originates from their differentiation to the
+   {# Attached Modifiers} which will be discussed later.
    All detached modifiers must abide by the following rules:
    - a detached modifier can _only_ occur at the beginning of the line (an arbitrary {# whitespace}
      (but nothing else!) may precede it)
@@ -120,15 +123,24 @@
    - `$`: {# Definitions} (range-able)
    - `^`: {# Footnotes} (range-able)
    - `=`: {# Insertions}
-   - `?`: {# Multiple Choice Questions}
+   - `?`: {# Multiple Choice Questions} +TODO: decide whether or not to make these range-able+
 
 *** Standard Detached Modifiers
-    The normal rules for the /standard/ detached modifiers are simple:
-    - TODO.
+    The normal rules for the /standard/ detached modifiers are simple as outlined above. An
+    important differentiation is, that standard detached modifiers may _not_ be succeeded by another
+    detached modifier and instead require a whitespace immediately after them.
+    They then affect the interpretation of the following `paragraph_segment` which generally means
+    they extend up to the end of the current line.
 
-    @code norg
-    = Insertion arg1 arg2 ...
-    @end
+    The standard detached modifiers in the _Norg_ syntax are:
+
+**** Insertions
+     @code norg
+     = Insertion arg1 arg2 ...
+     @end
+     Depending on the kind of insertion, a different number of arguments can be set/required. These
+     arguments follow the same rules as those of {# Tags}.
+     ---
 
     Markers also belong to this set of detached modifiers but will only be discussed later as part
     of the {# Structural Detached Modifiers}.
@@ -139,36 +151,46 @@
     [tree-sitter] parser but longer repetitions of the same modifier are allowed, falling back to
     the sixth nesting level. Other parses may choose to support higher nesting levels.
 
+    Furthermore, in contrast to the {# Standard Detached Modifiers} this detached modifier type
+    affects the following `paragraph` instead of only the next segment. This means that in order to
+    terminate the detached modifier contents, you need two consecutive line breaks (forming a
+    `paragraph_break`).
+
     Here are some correct examples of the nestable detached modifiers:
-    @code norg
-    - Unordered list level 1
-    -- Unordered list level 2
-    --- Unordered list level 3
-    ---- Unordered list level 4
-    ----- Unordered list level 5
-    ------ Unordered list level 6
-    ------- Unordered list level 7 (falls back to level 6 in the tree-sitter parser)
-    @end
 
-    @code norg
-    ~ Ordered list level 1
-    ~~ Ordered list level 2
-    ~~~ Ordered list level 3
-    ~~~~ Ordered list level 4
-    ~~~~~ Ordered list level 5
-    ~~~~~~ Ordered list level 6
-    ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree~sitter parser)
-    @end
+**** Unordered Lists
+     @code norg
+     - Unordered list level 1
+     -- Unordered list level 2
+     --- Unordered list level 3
+     ---- Unordered list level 4
+     ----- Unordered list level 5
+     ------ Unordered list level 6
+     ------- Unordered list level 7 (falls back to level 6 in the tree-sitter parser)
+     @end
 
-    @code norg
-    > Quote level 1
-    >> Quote level 2
-    >>> Quote level 3
-    >>>> Quote level 4
-    >>>>> Quote level 5
-    >>>>>> Quote level 6
-    >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
-    @end
+**** Ordered Lists
+     @code norg
+     ~ Ordered list level 1
+     ~~ Ordered list level 2
+     ~~~ Ordered list level 3
+     ~~~~ Ordered list level 4
+     ~~~~~ Ordered list level 5
+     ~~~~~~ Ordered list level 6
+     ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree~sitter parser)
+     @end
+
+**** Quotes
+     @code norg
+     > Quote level 1
+     >> Quote level 2
+     >>> Quote level 3
+     >>>> Quote level 4
+     >>>>> Quote level 5
+     >>>>>> Quote level 6
+     >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
+     @end
+     ---
 
     Headings are also /nestable/ detached modifiers but will only be discussed later as part of the
     {# Structural Detached Modifiers}.
@@ -176,7 +198,10 @@
 *** Structural Detached Modifiers
     The `*` (headings) and `|` (marker) detached modifiers also have the _structural_ property,
     meaning that these objects *structure* the _Norg_ document.
+    This detached modifier type only affects the following `paragraph_segment` (just like the {#
+    standard detached modifiers}).
 
+**** Headings
     @code norg
     * Heading level 1
     ** Heading level 2
@@ -187,12 +212,106 @@
     ******* Heading level 7 (falls back to level 6 in the tree-sitter parser)
     @end
 
-    Markers TODO
+    Although headings are both, structural and nestable, the former takes precedence over the
+    latter, meaning that headings only affect a `paragraph_segment`. This is for user convenience as
+    it does not require an empty line right below a heading.
+
+**** Markers
+     @code norg
+     | Marker
+     @end
+     Markers are purely structural elements which split the entire document right down to the root
+     node.
+
+**** Delimiting Modifiers
+     Although not technically a detached modifier, we would like to insert a note on {# Delimiting
+     Modifiers} because they are immediately related to structuring a _Norg_ document. This kind of
+     modifier must abide by the following rules:
+     - a delimiting modifier can _only_ occur at the beginning of the line (an arbitrary
+       {# whitespace} (but nothing else!) may precede it)
+     - a delimiting modifier must consist of three or more consecutive modifiers of the same type
+     - it must be followed by an immediate {> line ending} (without any extra {# whitespace})
+
+***** Weak Delimiting Modifier
+      This modifier uses the `-` character and immediately closes the current heading level.
+      @code norg
+      * Heading level 1
+        Text under first level heading.
+
+      ** Heading level 2
+         Text under second level heading.
+         ---
+
+        Text under first level heading again.
+      @end
+
+***** Strong Delimiting Modifier
+      This modifier uses the `=` character and immediately closes all heading levels.
+      @code norg
+      * Heading level 1
+        Text under first level heading.
+
+      ** Heading level 2
+         Text under second level heading.
+         ===
+
+      Text belonging to no heading level (i.e. to the document's root node).
+      @end
+
+***** Horizontal Rule
+      This modifier uses the `_` character and simply renders a horizontal line. It does _NOT_
+      affect the heading level but immediately ends a {# paragraph}.
+      @code norg
+      * Heading level 1
+        Text under first level heading.
+        ___
+        This is a new paragraph separated from the previous one by a horizontal line.
+        This text still belongs to the first level heading.
+      @end
 
 *** Range-able Detached Modifiers
+    Range-able detached modifiers can occur in two forms:
+    - as a single detached modifier they affect:
+    -- the next `paragraph_segment` which becomes the /title/
+    -- the `paragraph` following that which becomes the /content/
+    - or they can occur as a pair of two detached modifiers in which case:
+    -- the next `paragraph_segment` still becomes the /title/
+    -- but the content continues until the "closing" detached modifier is found
 
-    TODO
+**** Definitions
+     @code norg
+     $ Single Definition
+     Optional definition content.
+     @end
 
+     @code norg
+     $$ Multiple Definition
+     Content of the definition.
+
+     Which scans up to the closing modifier.
+     $$
+     @end
+
+**** Footnotes
+     @code norg
+     ^ Single Footnote
+     Optional footnote content.
+     @end
+
+     @code norg
+     ^^ Multiple Footnote
+     Content of the footnote.
+
+     Which scans up to the closing modifier.
+     ^^
+     @end
+
+*** Complex Detached Modifiers
+    - ToDo items `- [ ]`
+    - Unordered links `->`
+    - Ordered links `~>`
+
+** Tags
 
 ** Attached Modifiers
 
