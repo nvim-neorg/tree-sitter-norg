@@ -700,7 +700,7 @@ class Scanner
             {
                 auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
 
-                if (found_attached_modifier != m_AttachedModifiers.end())
+                if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
                 {
                     m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
                     lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
@@ -741,9 +741,10 @@ class Scanner
 
         if (lexer->lookahead == '|')
         {
+
             auto found_attached_modifier = m_AttachedModifiers.find(m_Current);
 
-            if (found_attached_modifier != m_AttachedModifiers.end())
+            if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
             {
                 advance(lexer);
                 m_RangedActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
@@ -754,12 +755,14 @@ class Scanner
             advance(lexer);
 
             found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
-            if (found_attached_modifier != m_AttachedModifiers.end())
+            if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
             {
                 m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
                 lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
                 return m_LastToken;
             }
+
+            return NONE;
 
         }
 
@@ -790,7 +793,7 @@ class Scanner
             auto found_previous_attached_modifier = m_AttachedModifiers.find(m_Previous);
 
             if (
-                (m_Previous == '|') || (
+                (m_Previous == '|' && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2]) || (
                     found_previous_attached_modifier != m_AttachedModifiers.end()
                     && found_previous_attached_modifier->second == m_LastToken
                     && m_RangedActiveModifiers[(found_previous_attached_modifier->second - BOLD_OPEN) / 2]
@@ -808,7 +811,6 @@ class Scanner
             {
                 // if (can_have_modifier())
                 m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
-
                 lexer->result_symbol = m_LastToken = found_attached_modifier->second;
                 return m_LastToken;
             }

@@ -661,9 +661,13 @@ No nested markup inside verbatim
 `=no variable=`
 `no:*link modifier*`
 `hidden \*escaped char`
+`|`
 ---
 (document
     (paragraph
+        (paragraph_segment
+            (verbatim)
+        )
         (paragraph_segment
             (verbatim)
         )
@@ -718,9 +722,13 @@ No nested markup inside inline comments
 +=no variable=+
 +no:*link modifier*+
 +hidden \*escaped char*+
++|+
 ---
 (document
     (paragraph
+        (paragraph_segment
+            (inline_comment)
+        )
         (paragraph_segment
             (inline_comment)
         )
@@ -775,9 +783,13 @@ $+no inline comment+$
 $=no variable=$
 $no:*link modifier*$
 $hidden \*escaped char*$
+$|$
 ---
 (document
     (paragraph
+        (paragraph_segment
+            (inline_math)
+        )
         (paragraph_segment
             (inline_math)
         )
@@ -832,9 +844,13 @@ No nested markup inside variables
 =$no inline math$=
 =no:*link modifier*=
 =hidden \*escaped char*=
+=|=
 ---
 (document
     (paragraph
+        (paragraph_segment
+            (variable)
+        )
         (paragraph_segment
             (variable)
         )
