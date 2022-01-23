@@ -790,11 +790,7 @@ class Scanner
                     !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] &&
                     !m_ActiveModifiers[(INLINE_COMMENT_OPEN - BOLD_OPEN) / 2] &&
                     !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2] &&
-                    !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2] &&
-                    !m_RangedActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] &&
-                    !m_RangedActiveModifiers[(INLINE_COMMENT_OPEN - BOLD_OPEN) / 2] &&
-                    !m_RangedActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2] &&
-                    !m_RangedActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2]
+                    !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2]
                 );
             };
 
