@@ -117,4 +117,4 @@
 *** Anchors `[] and []{}`
 *** Inline Link Targets `<>`
 
-|+ vim:tw=100 +|
+|+ vim: set tw=100 :+|
