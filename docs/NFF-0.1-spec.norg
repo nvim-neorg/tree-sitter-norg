@@ -75,7 +75,7 @@
        +TODO(Vhyrro): check if this is what we really want. Currently taken from std::iswpunct docs+
 
 **** Escaping
-     A single {> character} can be escaped if it is immediately preceeded by a backslash, `\`
+     A single {> character} can be escaped if it is immediately preceded by a backslash, `\`
      (`U+005C`).
 
 **** Special Character
@@ -116,3 +116,5 @@
 *** Links `{} or {}[]`
 *** Anchors `[] and []{}`
 *** Inline Link Targets `<>`
+
+|+ vim:tw=100 +|
