@@ -29,7 +29,7 @@
     ~ *Unambiguous:* the syntax should leave _no_ room for ambiguity. This is especially motivated
       by the use of [tree-sitter] for the original syntax parser which takes a strict left-to-right
       parsing approach and only has single-character look-ahead.
-    ~ *[Free-form]:* whitespace is _only_ used to delimit tokens but has no other significance! This
+    ~ *[free-form]:* whitespace is _only_ used to delimit tokens but has no other significance! This
       is probably the most contrasting feature to other plain-text formats which often adhere to the
       [off-side rule], meaning that the syntax relies on whitespace-indentation to carry meaning.
 
@@ -66,6 +66,8 @@
      - a single carriage return
      - a carriage return immediately followed by a line feed
 
+     ^ Blank lines are irrelevant in _Norg_ because standalone whitespace has no semantic relevance.
+
      [Unicode Zs general category]{https://www.fileformat.info/info/unicode/category/Zs/list.htm}
 
 **** Punctuation
@@ -95,14 +97,18 @@
     {# Punctuation} or other {# Special Character}.
 
 *** Paragraph Segments
-    TODO
+    {# Words} are first combined into {# paragraph segments}. A segment gets terminated by any of
+    the following:
+    - a {> line ending}
+    - any of the {# attached modifiers}
+    - any of the {# linkables}
 
 *** Paragraphs
-    {# Words} are then combined into /paragraph _segments_/ which in turn make up a /paragraph/.
-    A single {> line ending} will terminate a /paragraph _segment_/ *only* whereas two consecutive
-    {> line ending}s are required to terminate a /paragraph/.
-
-    Paragraphs can also contain {# Attached Modifiers} or {# Linkables} as will be explained later.
+    Paragraphs are then formed of consecutive {# paragraph segments}, {# attached modifiers} or
+    {# linkables}. A paragraph is terminated by:
+    - a _paragraph break_ (which equals two consecutive {> line endings})
+    - any of the {# detached modifiers}
+    - any of the {# delimiting modifiers}
 
 ** Detached Modifiers
    _Norg_ has multiple detached modifiers. The name originates from their differentiation to the
@@ -198,8 +204,8 @@
 *** Structural Detached Modifiers
     The `*` (headings) and `|` (marker) detached modifiers also have the _structural_ property,
     meaning that these objects *structure* the _Norg_ document.
-    This detached modifier type only affects the following `paragraph_segment` (just like the {#
-    standard detached modifiers}).
+    This detached modifier type only affects the following `paragraph_segment` (just like the
+    {# standard detached modifiers}).
 
 **** Headings
     @code norg
@@ -224,9 +230,9 @@
      node.
 
 **** Delimiting Modifiers
-     Although not technically a detached modifier, we would like to insert a note on {# Delimiting
-     Modifiers} because they are immediately related to structuring a _Norg_ document. This kind of
-     modifier must abide by the following rules:
+     Although not technically a detached modifier, we would like to insert a note on
+     {# Delimiting Modifiers} because they are immediately related to structuring a _Norg_ document.
+     This kind of modifier must abide by the following rules:
      - a delimiting modifier can _only_ occur at the beginning of the line (an arbitrary
        {# whitespace} (but nothing else!) may precede it)
      - a delimiting modifier must consist of three or more consecutive modifiers of the same type
@@ -307,19 +313,109 @@
      @end
 
 *** Complex Detached Modifiers
-    - ToDo items `- [ ]`
-    - Unordered links `->`
-    - Ordered links `~>`
+    Besides all of the previously discussed {# detached modifiers} there are few special constructs
+    in the _Norg_ syntax which allow us to further manipulate these modifiers.
+    These special (or /complex/) modifiers will be outlined in this section.
+
+**** Lists of Links
+     TODO: do we actually still need these? We no longer have a logical clash with ToDo items...
+     - Unordered links `->`
+     - Ordered links `~>`
+
+**** ToDo Items
+     {# Unordered lists} will become ToDo items if they are immediately succeeded by a pattern
+     matching: `[.]` where the `.` can be one of multiple characters denoting the following
+     meanings:
+     @code norg
+     - [ ] Undone (space)
+     - [x] Done (`x`)  +TODO: should this be case-insensitive?+
+     - [?] Needs further input (`?`)
+
+     - [!] Urgent (`!`)
+     - [+] Recurring (`+`)
+
+     - [-] Pending/in Progress (`-`)
+     - [=] On Hold (`=`)
+     - [_] Canceled/put Down (`_`)
+     @end
+
+***** Multiple Choice Questions
+      TODO: introduce the `?` detached modifier
+      - should this be range-able?
+      - can it really only include undone/done todo items?
+      - I feel like it may make sense to make it range-able such that more elaborate questions can
+        be posed.
+
+**** Indent Segments
+     TODO
+     Valid only for purely {# nestable detached modifiers}. (I.e. not headings because they are also
+     structural.)
+     - `- |`
+     - `~ |`
+     - `> |`
+     Permits inclusion of tags, standard and range-able detached modifiers into the contents of a
+     nestable detached modifier.
 
 ** Tags
 
 ** Attached Modifiers
+   We can finally discuss attached modifiers (which originally gave rise to the name of
+   {# detached modifiers} as their natural counter-parts). Here are the general rules for attached
+   modifiers:
+   - TODO
+
+   The following attached modifiers exist and have the respective meaning:
+   - \*bold\*: *bold*
+   - \/italic\/: /italic/
+   - \_underline\_: _underline_
+   - \-strikethrough\-: -strikethrough-
+   - \!spoiler\!: !spoiler!
+   - \^superscript\^: ^superscript^  (when nested into `subscript`, will highlight as an error)
+   - \,subscript\,: ,subscript,  (when nested into `superscript`, will highlight as an error)
+   - \`inline code\`: `inline code`  (disables any nested markup)
+   - \+inline comment\+: +inline comment+  (disables any nested markup)
+   - \$inline math\$: $f(x) = y$  (disables any nested markup)
+   - \=variable\=: =variable=  (disables any nested markup)
+
+*** Link Modifier
+    TODO: for inner-word attached modifiers
+    - TODO: currently states in the docs that it must occur in pairs but this is not enforced by the
+      TS parser. I.e. the following is valid: ex:_ample_
+
+*** Ranged Attached Modifiers
+    TODO
+
+** Trailing Modifier
+   TODO
 
 ** Linkables
-*** Link Locations `{}`
-*** Link Descriptions `[]`
-*** Links `{} or {}[]`
-*** Anchors `[] and []{}`
-*** Inline Link Targets `<>`
+   Finally, there is one more kind of in-line syntax which are {# linkables}.
+
+*** Link Location
+    The locations where a link is pointing at are always placed inside of curly braces: `{}`.
+    TODO: add list of potential link targets.
+
+*** Link Description
+    Links can have custom descriptions which are always placed inside of square brackets: `[]`.
+
+*** Links
+    Links in _Norg_ can either be standalone a {# link location} in which case their text is used as
+    the link title (as often makes sense for headings).
+
+    When a custom description is required, it must be placed *_after_* the link location. This makes
+    sense in terms of writing as you first define where you link to, and then describe it further.
+
+*** Anchors
+    _Norg_ also has a concept called {# anchors}. These allow you to place a standalone
+    {# link description} inside of a text (referred to as an <anchor declaration>).
+    The target which this anchor links to can then be _defined_ at another place in the document
+    with an <anchor definition> which is an initial {# link description} followed by a
+    {# link location}. This is especially useful when you want to link to the same target very
+    often, like for example a specific website.
+
+*** Inline Link Targets
+    Finally, _Norg_ also has the possibility of placing link targets at arbitrary in-line positions
+    in your document. We call this {# inline link targets} which are formatted inside of angle
+    brackets: `<>`.
 
 |+ vim: set tw=100 :+|
