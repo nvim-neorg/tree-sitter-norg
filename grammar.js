@@ -34,19 +34,6 @@ module.exports = grammar({
         [$.inline_comment, $._paragraph_element],
         [$.inline_math, $._paragraph_element],
         [$.variable, $._paragraph_element],
-
-        [$.unordered_link1, $.paragraph],
-        [$.unordered_link2, $.paragraph],
-        [$.unordered_link3, $.paragraph],
-        [$.unordered_link4, $.paragraph],
-        [$.unordered_link5, $.paragraph],
-        [$.unordered_link6, $.paragraph],
-        [$.ordered_link1, $.paragraph],
-        [$.ordered_link2, $.paragraph],
-        [$.ordered_link3, $.paragraph],
-        [$.ordered_link4, $.paragraph],
-        [$.ordered_link5, $.paragraph],
-        [$.ordered_link6, $.paragraph],
     ],
 
     externals: $ => [
@@ -103,20 +90,6 @@ module.exports = grammar({
         $.todo_item_recurring,
 
         $.insertion_prefix,
-
-        $.unordered_link1_prefix,
-        $.unordered_link2_prefix,
-        $.unordered_link3_prefix,
-        $.unordered_link4_prefix,
-        $.unordered_link5_prefix,
-        $.unordered_link6_prefix,
-
-        $.ordered_link1_prefix,
-        $.ordered_link2_prefix,
-        $.ordered_link3_prefix,
-        $.ordered_link4_prefix,
-        $.ordered_link5_prefix,
-        $.ordered_link6_prefix,
 
         $.strong_paragraph_delimiter,
         $.weak_paragraph_delimiter,
@@ -541,310 +514,6 @@ module.exports = grammar({
             $.link_location,
         )),
 
-        unordered_link1: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_link1_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_2,
-                )
-            )
-        ),
-
-        unordered_link2: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_link2_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_3,
-                )
-            )
-        ),
-
-        unordered_link3: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_link3_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_4,
-                )
-            )
-        ),
-
-        unordered_link4: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_link4_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_5,
-                )
-            )
-        ),
-
-        unordered_link5: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_link5_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_6,
-                )
-            )
-        ),
-
-        unordered_link6: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_link6_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-            ),
-        ),
-
-        ordered_link1: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_link1_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_2,
-                )
-            )
-        ),
-
-        ordered_link2: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_link2_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_3,
-                )
-            )
-        ),
-
-        ordered_link3: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_link3_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_4,
-                )
-            )
-        ),
-
-        ordered_link4: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_link4_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_5,
-                )
-            )
-        ),
-
-        ordered_link5: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_link5_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-
-                repeat(
-                    $._any_list_item_level_6,
-                )
-            )
-        ),
-
-        ordered_link6: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_link6_prefix,
-
-                field(
-                    "location",
-                    choice(
-                        $.link,
-                        $.anchor_definition,
-                    ),
-                ),
-
-                optional(
-                    choice(
-                        $._line_break,
-                        field("description", $.paragraph),
-                    )
-                ),
-            )
-        ),
-
         // A first-level heading:
         // * Example
         heading1: $ =>
@@ -1234,8 +903,6 @@ module.exports = grammar({
             $.unordered_list1,
             $.ordered_list1,
             $.todo_item1,
-            $.unordered_link1,
-            $.ordered_link1,
             $._any_list_item_level_2,
         ),
 
@@ -1244,8 +911,6 @@ module.exports = grammar({
             $.unordered_list2,
             $.ordered_list2,
             $.todo_item2,
-            $.unordered_link2,
-            $.ordered_link2,
             $._any_list_item_level_3,
         ),
 
@@ -1254,8 +919,6 @@ module.exports = grammar({
             $.unordered_list3,
             $.ordered_list3,
             $.todo_item3,
-            $.unordered_link3,
-            $.ordered_link3,
             $._any_list_item_level_4,
         ),
 
@@ -1264,8 +927,6 @@ module.exports = grammar({
             $.unordered_list4,
             $.ordered_list4,
             $.todo_item4,
-            $.unordered_link4,
-            $.ordered_link4,
             $._any_list_item_level_5,
         ),
 
@@ -1274,8 +935,6 @@ module.exports = grammar({
             $.unordered_list5,
             $.ordered_list5,
             $.todo_item5,
-            $.unordered_link5,
-            $.ordered_link5,
             $._any_list_item_level_6,
         ),
 
@@ -1284,8 +943,6 @@ module.exports = grammar({
             $.unordered_list6,
             $.ordered_list6,
             $.todo_item6,
-            $.unordered_link6,
-            $.ordered_link6,
         ),
 
         // TODO: complete docs

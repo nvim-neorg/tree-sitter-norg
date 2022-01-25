@@ -67,20 +67,6 @@ enum TokenType : char
 
     INSERTION,
 
-    UNORDERED_LINK1,
-    UNORDERED_LINK2,
-    UNORDERED_LINK3,
-    UNORDERED_LINK4,
-    UNORDERED_LINK5,
-    UNORDERED_LINK6,
-
-    ORDERED_LINK1,
-    ORDERED_LINK2,
-    ORDERED_LINK3,
-    ORDERED_LINK4,
-    ORDERED_LINK5,
-    ORDERED_LINK6,
-
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
     HORIZONTAL_LINE,
@@ -318,17 +304,12 @@ class Scanner
                 return true;
 
             // Check for the existence of an unordered list element.
-            // The last parameter tells the neorg parser "hey parse as many
-            // '-' chars as possible BUT if you encounter a '>' char at the
-            // end of the parsed string then return an UNORDERED_LINK
             // instead".
             if (check_detached(
                     lexer,
                     UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 |
                         UNORDERED_LIST5 | UNORDERED_LIST6,
-                    {'-'},
-                    {'>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 | UNORDERED_LINK4 |
-                              UNORDERED_LINK5 | UNORDERED_LINK6}) != NONE)
+                    {'-'}) != NONE)
             {
                 return true;
             }
@@ -362,11 +343,10 @@ class Scanner
             if (check_detached(lexer,
                                ORDERED_LIST1 | ORDERED_LIST2 | ORDERED_LIST3 | ORDERED_LIST4 |
                                    ORDERED_LIST5 | ORDERED_LIST6,
-                               {'~'},
-                               {'>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 |
-                                         ORDERED_LINK5 | ORDERED_LINK6}) != NONE)
+                               {'~'}) != NONE)
+            {
                 return true;
-
+            }
             if (check_detached(lexer, MARKER | NONE, {'|'}) != NONE)
                 return true;
 
