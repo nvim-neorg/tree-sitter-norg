@@ -1,12 +1,12 @@
 ===========
 Undone Todo
 ===========
-- [ ] Undone task level 1
--- [ ] Undone task level 2
---- [ ] Undone task level 3
----- [ ] Undone task level 4
------ [ ] Undone task level 5
------- [ ] Undone task level 6
+- | | Undone task level 1
+-- | | Undone task level 2
+--- | | Undone task level 3
+---- | | Undone task level 4
+----- | | Undone task level 5
+------ | | Undone task level 6
 
 ---
 (document
@@ -47,12 +47,12 @@ Undone Todo
 =========
 Done Todo
 =========
-- [x] Done task level 1
--- [x] Done task level 2
---- [x] Done task level 3
----- [x] Done task level 4
------ [x] Done task level 5
------- [x] Done task level 6
+- |x| Done task level 1
+-- |x| Done task level 2
+--- |x| Done task level 3
+---- |x| Done task level 4
+----- |x| Done task level 5
+------ |x| Done task level 6
 
 ---
 (document
@@ -93,12 +93,12 @@ Done Todo
 ============
 Pending Todo
 ============
-- [-] Pending task level 1
--- [-] Pending task level 2
---- [-] Pending task level 3
----- [-] Pending task level 4
------ [-] Pending task level 5
------- [-] Pending task level 6
+- |-| Pending task level 1
+-- |-| Pending task level 2
+--- |-| Pending task level 3
+---- |-| Pending task level 4
+----- |-| Pending task level 5
+------ |-| Pending task level 6
 
 ---
 (document
@@ -139,12 +139,12 @@ Pending Todo
 ============
 On Hold Todo
 ============
-- [=] On hold task level 1
--- [=] On hold task level 2
---- [=] On hold task level 3
----- [=] On hold task level 4
------ [=] On hold task level 5
------- [=] On hold task level 6
+- |=| On hold task level 1
+-- |=| On hold task level 2
+--- |=| On hold task level 3
+---- |=| On hold task level 4
+----- |=| On hold task level 5
+------ |=| On hold task level 6
 
 ---
 (document
@@ -185,12 +185,12 @@ On Hold Todo
 ==============
 Cancelled Todo
 ==============
-- [_] Cancelled task level 1
--- [_] Cancelled task level 2
---- [_] Cancelled task level 3
----- [_] Cancelled task level 4
------ [_] Cancelled task level 5
------- [_] Cancelled task level 6
+- |_| Cancelled task level 1
+-- |_| Cancelled task level 2
+--- |_| Cancelled task level 3
+---- |_| Cancelled task level 4
+----- |_| Cancelled task level 5
+------ |_| Cancelled task level 6
 
 ---
 (document
@@ -231,12 +231,12 @@ Cancelled Todo
 ===========
 Urgent Todo
 ===========
-- [!] Urgent task level 1
--- [!] Urgent task level 2
---- [!] Urgent task level 3
----- [!] Urgent task level 4
------ [!] Urgent task level 5
------- [!] Urgent task level 6
+- |!| Urgent task level 1
+-- |!| Urgent task level 2
+--- |!| Urgent task level 3
+---- |!| Urgent task level 4
+----- |!| Urgent task level 5
+------ |!| Urgent task level 6
 
 ---
 (document
@@ -277,12 +277,12 @@ Urgent Todo
 ==============
 Recurring Todo
 ==============
-- [+] Recurring task level 1
--- [+] Recurring task level 2
---- [+] Recurring task level 3
----- [+] Recurring task level 4
------ [+] Recurring task level 5
------- [+] Recurring task level 6
+- |+| Recurring task level 1
+-- |+| Recurring task level 2
+--- |+| Recurring task level 3
+---- |+| Recurring task level 4
+----- |+| Recurring task level 5
+------ |+| Recurring task level 6
 
 ---
 (document
@@ -323,12 +323,12 @@ Recurring Todo
 ==============
 Uncertain Todo
 ==============
-- [?] Uncertain task level 1
--- [?] Uncertain task level 2
---- [?] Uncertain task level 3
----- [?] Uncertain task level 4
------ [?] Uncertain task level 5
------- [?] Uncertain task level 6
+- |?| Uncertain task level 1
+-- |?| Uncertain task level 2
+--- |?| Uncertain task level 3
+---- |?| Uncertain task level 4
+----- |?| Uncertain task level 5
+------ |?| Uncertain task level 6
 
 ---
 (document

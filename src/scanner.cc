@@ -426,7 +426,7 @@ class Scanner
         // If we are not in a tag and we have a square bracket opening then try
         // matching either a todo item or beginning of a list
         else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 &&
-                 lexer->lookahead == '[')
+                 lexer->lookahead == '|')
         {
             advance(lexer);
 
@@ -474,7 +474,7 @@ class Scanner
 
             advance(lexer);  // Move past the matched element (*/x/ )
 
-            if (lexer->lookahead == ']')
+            if (lexer->lookahead == '|')
             {
                 advance(lexer);
                 lexer->mark_end(lexer);
