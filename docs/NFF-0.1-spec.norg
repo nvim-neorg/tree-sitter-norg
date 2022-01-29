@@ -129,7 +129,7 @@
    - `$`: {# Definitions} (range-able)
    - `^`: {# Footnotes} (range-able)
    - `=`: {# Insertions}
-   - `?`: {# Multiple Choice Questions} +TODO: decide whether or not to make these range-able+
+   - | | `?`: {# Multiple Choice Questions} +TODO: decide whether or not to make these range-able+
 
 *** Standard Detached Modifiers
     The normal rules for the /standard/ detached modifiers are simple as outlined above. An
@@ -312,49 +312,59 @@
      ^^
      @end
 
-*** Complex Detached Modifiers
-    Besides all of the previously discussed {# detached modifiers} there are few special constructs
-    in the _Norg_ syntax which allow us to further manipulate these modifiers.
-    These special (or /complex/) modifiers will be outlined in this section.
+*** Detached Modifier Extensions
+    {# Detached modifiers} support extensions which must immediately follow the detached modifier
+    (or another extension).
 
-**** Lists of Links
-     TODO: do we actually still need these? We no longer have a logical clash with ToDo items...
-     - Unordered links `->`
-     - Ordered links `~>`
+**** ToDo Status Extension
+     The ToDo item extension assigns a task status to a certain modifier. You probably know this
+     concept from Markdown where unordered lists can become tasks. In _Norg_ we take this concept to
+     the next level because any detached modifier can be assigned a task status. This can for
+     example be useful for the author of a document to keep track of the status of certain sections.
+     The syntax is the following:
+     - a todo status extension starts with a `|` char
+     - immediately a single status indicator character must follow. The following statuses are
+       supported:
+    -- ` `: undone (a literal space)
+    -- `x`: done
+    -- `?`: needs further input/clarification
+    -- `!`: urgent
+    -- `+`: recurring
+    -- `-`: in-progress/pending
+    -- `=`: on hold
+    -- `_`: put down/cancelled
+    - finally another `|` char closes the todo status extension
 
-**** ToDo Items
-     {# Unordered lists} will become ToDo items if they are immediately succeeded by a pattern
-     matching: `[.]` where the `.` can be one of multiple characters denoting the following
-     meanings:
+**** Indent Segment Extension
+     Since {# nestable detached modifiers} can only contain a {# paragraphs}[paragraph] this can
+     cause severe limitations because insertion of (for example) code blocks is not possible. To
+     alleviate this deficiency, the {# indent segment extension} exists, which increases the
+     indentation of the tree by one level allowing nesting of more complex elements to occur.
+     The syntax is the following:
+     - the indent segment extension starts with a single `\` char
+     - this must be _immediately_ followed by a {# line ending}
+     -- thus, the start node of this extension can be seen as a {# trailing modifier}
+     - the contents follow
+     - the extension ends when:
+     -- another {# nestable detached modifier} occurs
+     -- or when the indentation is manually closed with one of the {# delimiting modifiers}
+
      @code norg
-     - [ ] Undone (space)
-     - [x] Done (`x`)  +TODO: should this be case-insensitive?+
-     - [?] Needs further input (`?`)
+     - \
+       The indent segment extension has started.
 
-     - [!] Urgent (`!`)
-     - [+] Recurring (`+`)
+       I can now include multple paragraphs into this list item.
 
-     - [-] Pending/in Progress (`-`)
-     - [=] On Hold (`=`)
-     - [_] Canceled/put Down (`_`)
+       @code lua
+       print("Even code blocks are allowed!")
+       @end
+
+       ^ Range-able detached modifiers can be inserted, too.
+
+       ---
+     - another nestable detached modifier ends the indent segment
+     - However, in this example I already closed the indent segment manually with `---`
      @end
-
-***** Multiple Choice Questions
-      TODO: introduce the `?` detached modifier
-      - should this be range-able?
-      - can it really only include undone/done todo items?
-      - I feel like it may make sense to make it range-able such that more elaborate questions can
-        be posed.
-
-**** Indent Segments
-     TODO
-     Valid only for purely {# nestable detached modifiers}. (I.e. not headings because they are also
-     structural.)
-     - `- |`
-     - `~ |`
-     - `> |`
-     Permits inclusion of tags, standard and range-able detached modifiers into the contents of a
-     nestable detached modifier.
 
 ** Tags
 
