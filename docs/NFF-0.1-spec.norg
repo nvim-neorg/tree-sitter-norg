@@ -3,6 +3,9 @@
 +Use many examples!+
 +And also provide counter-examples for cases which are not expected to work!+
 
+- [ ] restructure spec into multiple layers
+- [ ] ensure we state that this is a physical spec and not a reference implementation
+
 * Norg File Format Specification
   This file contains the formal file format specification of the _Norg_ syntax version 0.1.
   This document is written in the Norg format in its original form and, thus, attempts to be
@@ -81,7 +84,7 @@
      (`U+005C`).
 
 **** Special Character
-     TODO: formalize this section
+     - | | TODO: formalize this section
      - Emojis
      - Should we support [entity references]?
 
@@ -122,13 +125,13 @@
    The following list are the valid *detached* modifiers. The list also adds three possible
    properties to each category which will be explained in more detail below.
    - `*`: {# Headings} (structural, nestable)
-   - `|`: {# Markers} (structural)
+   - `%`: {# Markers} (structural)
    - `-`: {# Unordered Lists} (nestable)
    - `~`: {# Ordered Lists} (nestable)
    - `>`: {# Quotes} (nestable)
    - `$`: {# Definitions} (range-able)
    - `^`: {# Footnotes} (range-able)
-   - `=`: {# Insertions}
+   - `=`: {# Insertions} (range-able)
    - | | `?`: {# Multiple Choice Questions} +TODO: decide whether or not to make these range-able+
 
 *** Standard Detached Modifiers
@@ -137,19 +140,6 @@
     detached modifier and instead require a whitespace immediately after them.
     They then affect the interpretation of the following `paragraph_segment` which generally means
     they extend up to the end of the current line.
-
-    The standard detached modifiers in the _Norg_ syntax are:
-
-**** Insertions
-     @code norg
-     = Insertion arg1 arg2 ...
-     @end
-     Depending on the kind of insertion, a different number of arguments can be set/required. These
-     arguments follow the same rules as those of {# Tags}.
-     ---
-
-    Markers also belong to this set of detached modifiers but will only be discussed later as part
-    of the {# Structural Detached Modifiers}.
 
 *** Nestable Detached Modifiers
     Nestable detached modifiers are those kind which may be repeated multiple times in order to
@@ -224,7 +214,7 @@
 
 **** Markers
      @code norg
-     | Marker
+     % Marker
      @end
      Markers are purely structural elements which split the entire document right down to the root
      node.
@@ -312,6 +302,18 @@
      ^^
      @end
 
+**** Insertions
+     @code norg
+     = Insertion arg1 arg2 ...
+     @end
+     Depending on the kind of insertion, a different number of arguments can be set/required. These
+     arguments follow the same rules as those of {# Tags}.
+
+     @code norg
+     == Function definition
+     ==
+     @end
+
 *** Detached Modifier Extensions
     {# Detached modifiers} support extensions which must immediately follow the detached modifier
     (or another extension).
@@ -368,11 +370,39 @@
 
 ** Tags
 
+*** Carryover Tags
+    @code norg
+    |carryover param1 param2 "multi word param" "another param"
+    @end
+
+*** Ranged Tags
+
+**** Ranged Tags which support nested _Norg_ syntax
+     @code norg
+     #table
+     *heading* | /heading/ | _heading_
+     first | second | third
+     1 | | 3
+     | 2 |
+     #end
+     @end
+
+**** Ranged Tags which do *NOT* support nested _Norg_ syntax
+     @code java
+     @MyAnnotation(name="someName",  value="Hello World")
+     public class TheClass {
+       // ...
+     }
+     @end
+
 ** Attached Modifiers
    We can finally discuss attached modifiers (which originally gave rise to the name of
    {# detached modifiers} as their natural counter-parts). Here are the general rules for attached
    modifiers:
-   - TODO
+   - an opening modifier may only be preceded by whitespace or punctuation
+   - an opening modifier may _NOT_ be succeeded by whitespace
+   - a closing modifier may _NOT_ be preceded by whitespace
+   - a closing modifier may only be succeeded by whitespace or punctuation
 
    The following attached modifiers exist and have the respective meaning:
    - \*bold\*: *bold*
@@ -388,22 +418,61 @@
    - \=variable\=: =variable=  (disables any nested markup)
 
 *** Link Modifier
-    TODO: for inner-word attached modifiers
-    - TODO: currently states in the docs that it must occur in pairs but this is not enforced by the
-      TS parser. I.e. the following is valid: ex:_ample_
+    The link modifier, `:`, is a special modifier type called an _intersecting_ modifier. It puts a
+    twist on the original attached modifier rules because it allows non-whitespace characters in
+    front of the opening or after the closing modifier. This allows the intersection of a
+    non-whitespace string like so:
+    @code norg
+    Ex:*am*:ple
+    @end
+    Without the `:`-link modifier, the above example would not result in a bold segment.
+
+    - | | TODO: currently states in the docs that it must occur in pairs but this is not enforced by
+          the TS parser. I.e. the following is valid: ex:_ample_
 
 *** Ranged Attached Modifiers
-    TODO
+    Ranged attached modifiers can be used to:
+    - allow arbitrary whitespace within attached modifiers (including line breaks!)
+    - allow to represent verbatim attached modifier chars within the corresponding verbatim blocks
+
+    For example:
+    @code norg
+    Here, I am using some |*ranged bold
+    modifiers*| which allows me to span
+    the line break.
+    @end
+
+    @code norg
+    Here, I can write |`  leading and trailing whitespace  `| within a verbatim block.
+    @end
+
+    @code norg
+    Here, I can use a literal `$` inside of inline math: |$ 10$ + 10$ = 20$ $|.
+    @end
 
 ** Trailing Modifier
-   TODO
+   Trailing modifiers are another separate kind of modifiers in the _Norg_ syntax. They must follow
+   these rules:
+   - it may only exist at the end of a line and may not be followed by any characters after iteself
+   - it may only not have whitespace in front of it
+   -- | | do we want to enforce the above? If not, we can denote the `\` detached modifier extension
+          as a trailing modifier
+
+*** Line Continuation
+    The `~`-trailing modifier will concatenate the line which it ends with the following one.
+    This allows you to do something like the following:
+
+    @code norg
+    * I am a very long heading~
+      which did not end here because of the trailing modifier
+    @end
 
 ** Linkables
    Finally, there is one more kind of in-line syntax which are {# linkables}.
 
 *** Link Location
     The locations where a link is pointing at are always placed inside of curly braces: `{}`.
-    TODO: add list of potential link targets.
+    - | | TODO: add list of potential link targets.
 
 *** Link Description
     Links can have custom descriptions which are always placed inside of square brackets: `[]`.
