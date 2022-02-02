@@ -904,7 +904,7 @@ class Scanner
    private:
     const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '|', '=',
                                                         '~', '$', '_', '^'};
-    const std::unordered_map<char, TokenType> m_AttachedModifiers = {
+    const std::unordered_map<int32_t, TokenType> m_AttachedModifiers = {
         {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
         {'_', UNDERLINE_OPEN},   {'|', SPOILER_OPEN},   {'`', VERBATIM_OPEN},
         {'^', SUPERSCRIPT_OPEN}, {',', SUBSCRIPT_OPEN}, {'+', INLINE_COMMENT_OPEN},
