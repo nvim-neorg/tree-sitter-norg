@@ -40,3 +40,28 @@ Or the end in some:/thing/.
         )
     )
 )
+
+================================================
+Reset attached modifiers after detached modifier
+================================================
+- _:
+- _x_
+---
+(document
+    (generic_list
+        (unordered_list1
+            (unordered_list1_prefix)
+            (paragraph
+                (paragraph_segment)
+            )
+        )
+        (unordered_list1
+            (unordered_list1_prefix)
+            (paragraph
+                (paragraph_segment
+                    (underline)
+                )
+            )
+        )
+    )
+)

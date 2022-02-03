@@ -615,6 +615,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = result;
 
+                m_ActiveModifiers.reset();
                 return result;
             }
 
@@ -642,6 +643,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = result;
 
+                m_ActiveModifiers.reset();
                 return result;
             }
         }
