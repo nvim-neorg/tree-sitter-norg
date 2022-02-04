@@ -29,7 +29,7 @@
     rules:
     ~ *Consistency:* the syntax should be consistent. Even if you know only a part of the syntax,
       learning new parts should not be surprising and rather feel predictable and intuitive.
-    ~ *Unambiguous:* the syntax should leave _no_ room for ambiguity. This is especially motivated
+    ~ *Unambiguity:* the syntax should leave _no_ room for ambiguity. This is especially motivated
       by the use of [tree-sitter] for the original syntax parser which takes a strict left-to-right
       parsing approach and only has single-character look-ahead.
     ~ *[free-form]:* whitespace is _only_ used to delimit tokens but has no other significance! This
@@ -76,35 +76,38 @@
 **** Punctuation
      A {> character} is considered to be *punctuation* if it is any of the following:
      - a standard ASCII punctuation character: |`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`|
-     - any punctuation character specific to the current locale
-       +TODO(Vhyrro): check if this is what we really want. Currently taken from std::iswpunct docs+
+
+       +TODO: check whether we want to support every punctuation mark from the `en_US.utf8` locale+
 
 **** Escaping
      A single {> character} can be escaped if it is immediately preceded by a backslash, `\`
-     (`U+005C`).
+     (`U+005C`). Any {> character} may be escaped /apart from/ {> character}s within verbatim
+     segments +TODO: add link to verbatim segments+.
 
 **** Special Character
      - | | TODO: formalize this section
      - Emojis
-     - Should we support [entity references]?
-
+     +- Should we support [entity references]?
      [entity references]{https://spec.commonmark.org/0.30/#entity-references}
+     vhyrro: I'm personally very against this idea tbh. I don't see an immediate use case for it,
+     perhaps if it's a lifesaver for some we could modify the syntax a little by enforcing
+     &nbsp& instead of &nbsp;+
 
 *** Words
     The _Norg_ format is designed to be parsed on a word-by-word basis from left-to-right through
-    the entire document /in a single pass/. This is possible, because the language is [Free-form],
+    the entire document /in a single pass/. This is possible because the language is [Free-form],
     meaning that whitespace has no semantic meaning, and because the markup follows strict rules
     which are outlined in the later sections of this document.
 
-    A *word* is considered any combinations of {> character}s which are neither {# Whitespace} nor
-    {# Punctuation} or other {# Special Character}.
+    A *word* is considered to be any combination of {> character}s which are neither {# whitespace},
+    {# punctuation} nor other {# special character}s.
 
 *** Paragraph Segments
     {# Words} are first combined into {# paragraph segments}. A segment gets terminated by any of
     the following:
     - a {> line ending}
-    - any of the {# attached modifiers}
-    - any of the {# linkables}
+    - any of the {# attached modifiers} +NOTE(vhyrro): Don't paragraph segments contain attached mods?+
+    - any of the {# linkables} +Same here+
 
 *** Paragraphs
     Paragraphs are then formed of consecutive {# paragraph segments}, {# attached modifiers} or
@@ -114,15 +117,17 @@
     - any of the {# delimiting modifiers}
 
 ** Detached Modifiers
-   _Norg_ has multiple detached modifiers. The name originates from their differentiation to the
-   {# Attached Modifiers} which will be discussed later.
-   All detached modifiers must abide by the following rules:
-   - a detached modifier can _only_ occur at the beginning of the line (an arbitrary {# whitespace}
-     (but nothing else!) may precede it)
-   - a detached modifier must be immediately followed by {# whitespace} (incl. a {> line ending}) or
-     another detached modifier of the same type
+   _Norg_ has several detached modifiers. The name originates from their differentiation to the
+   {# Attached Modifiers}, which will be discussed later.
 
-   The following list are the valid *detached* modifiers. The list also adds three possible
+   All detached modifiers must abide by the following rules:
+   - a detached modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
+     (but nothing else!) may precede it)
+   - a detached modifier must be immediately followed by {# whitespace} (incl. a {> line ending}),
+     another detached modifier of the same type or by a {# detached modifier extensions}[detached
+     modifier extension]
+
+   The following list outlines all valid *detached* modifiers. The list also adds three possible
    properties to each category which will be explained in more detail below.
    - `*`: {# Headings} (structural, nestable)
    - `%`: {# Markers} (structural)
