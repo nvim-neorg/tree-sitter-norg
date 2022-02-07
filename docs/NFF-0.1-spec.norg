@@ -137,7 +137,6 @@
    - `$`: {# Definitions} (range-able)
    - `^`: {# Footnotes} (range-able)
    - `=`: {# Insertions} (range-able)
-   - | | `?`: {# Multiple Choice Questions} +TODO: decide whether or not to make these range-able+
 
 *** Standard Detached Modifiers
     The normal rules for the /standard/ detached modifiers are simple as outlined above. An
@@ -168,6 +167,21 @@
      ----- Unordered list level 5
      ------ Unordered list level 6
      ------- Unordered list level 7 (falls back to level 6 in the tree-sitter parser)
+
+     - Unordered list level 1
+       This text is still part of the level 1 list item.
+     -- Unordered list level 2
+        This text is still part of the level 2 list item.
+     --- Unordered list level 3
+         This text is still part of the level 3 list item.
+     ---- Unordered list level 4
+          This text is still part of the level 4 list item.
+     ----- Unordered list level 5
+           This text is still part of the level 5 list item.
+     ------ Unordered list level 6
+            This text is still part of the level 6 list item.
+     ------- Unordered list level 7 (falls back to level 6 in the tree-sitter parser)
+             This text is still part of the level 7 list item.
      @end
 
 **** Ordered Lists
@@ -178,7 +192,22 @@
      ~~~~ Ordered list level 4
      ~~~~~ Ordered list level 5
      ~~~~~~ Ordered list level 6
-     ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree~sitter parser)
+     ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree-sitter parser)
+
+     ~ Ordered list level 1
+       This text is still part of the level 1 list item.
+     ~~ Ordered list level 2
+        This text is still part of the level 2 list item.
+     ~~~ Ordered list level 3
+         This text is still part of the level 3 list item.
+     ~~~~ Ordered list level 4
+          This text is still part of the level 4 list item.
+     ~~~~~ Ordered list level 5
+           This text is still part of the level 5 list item.
+     ~~~~~~ Ordered list level 6
+            This text is still part of the level 6 list item.
+     ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree-sitter parser)
+             This text is still part of the level 7 list item.
      @end
 
 **** Quotes
@@ -190,14 +219,41 @@
      >>>>> Quote level 5
      >>>>>> Quote level 6
      >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
+
+     > Quote level 1
+       This text is still part of the level 1 quote.
+     >> Quote level 2
+        This text is still part of the level 2 quote.
+     >>> Quote level 3
+         This text is still part of the level 3 quote.
+     >>>> Quote level 4
+          This text is still part of the level 4 quote.
+     >>>>> Quote level 5
+           This text is still part of the level 5 quote.
+     >>>>>> Quote level 6
+            This text is still part of the level 6 quote.
+     >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
+             This text is still part of the level 7 quote.
      @end
      ---
 
+    Here are some invalid examples of detached modifiers:
+
+    @code norg
+    >I am not a quote
+
+    some preceding text $ I am not a definition
+
+    >$ I am not a detached modifier
+
+    > > I am only a level 1 quote
+    @end
+
     Headings are also /nestable/ detached modifiers but will only be discussed later as part of the
-    {# Structural Detached Modifiers}.
+    {# structural detached modifiers}.
 
 *** Structural Detached Modifiers
-    The `*` (headings) and `|` (marker) detached modifiers also have the _structural_ property,
+    The `*` (headings) and `%` (marker) detached modifiers also have the _structural_ property,
     meaning that these objects *structure* the _Norg_ document.
     This detached modifier type only affects the following `paragraph_segment` (just like the
     {# standard detached modifiers}).
