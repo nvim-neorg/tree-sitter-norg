@@ -492,6 +492,9 @@
     @code norg
     *Bold text*
 
+    *Bold text*,
+    .*Bold text*,
+
     *Bold
     text*
 
@@ -502,7 +505,32 @@
     @end
 
 *** Invalid Examples
-    +TODO+
+    @code norg
+    * Bold text *
+
+    *Bold text *
+
+    other text*Bold text*
+
+    *Bold text*other text
+
+    *
+    Bold text*
+
+    *Bold
+    text
+    *
+
+    *Bold
+
+    text*
+
+    Closed in the wrong order:
+    */Bold and italic*/ 
+
+    Also closed in the wrong order:
+    */Bold and italic* and only italic/
+    @end
 
 *** Link Modifier
     The link modifier, `:`, is a special modifier type called an _intersecting_ modifier. It puts a
