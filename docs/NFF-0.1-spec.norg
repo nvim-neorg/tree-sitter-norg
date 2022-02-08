@@ -598,11 +598,40 @@
     @end
 
 ** Linkables
-   Finally, there is one more kind of in-line syntax which are {# linkables}.
+   Finally, there is one more kind of in-line syntax which is the {# linkables} kind.
+   Linkables can link to any element /anywhere/ in the document.
+
+   When resolving links, the first match should always be the only match, starting from the top of
+   the document and heading towards the bottom. This means that if there are two matches, the one at
+   the topmost part of the document should be chosen as the target.
+
+   Linkables are comprised of many segments, and can change meaning depending on the order those
+   segments were defined:
 
 *** Link Location
-    The locations where a link is pointing at are always placed inside of curly braces: `{}`.
-    - | | TODO: add list of potential link targets.
+    The link location is defined through curly braces (`{}`) and contains the physical location
+    that the user would like to link to. Inside of these curly braces you can find one of three
+    types of data:
+    - A URL (most commonly to an external resource)
+    - A detached modifier followed by the name of the linkable
+    - A custom detached modifier specifically made for links (`@`, `#`)
+
+**** URL
+     You can define a link to an external resource by simply putting in the URL:
+     
+     @code norg
+     {https://github.com/nvim-neorg/neorg}
+     @end
+
+**** Detached Modifier
+     Neorg allows you to link to any {# Structural Detached Modifiers}[structural] or {# Range-able Detached Modifiers}[range-able] detached modifier:
+
+     @code norg
+     * I am a level 1 heading
+
+     Strict link to a level 1 heading:
+     {* I am a level 1 heading}
+     @end
 
 *** Link Description
     Links can have custom descriptions which are always placed inside of square brackets: `[]`.
@@ -616,7 +645,7 @@
 
 *** Anchors
     _Norg_ also has a concept called {# anchors}. These allow you to place a standalone
-    {# link description} inside of a text (referred to as an <anchor declaration>).
+    {# link description} inside of text (referred to as an <anchor declaration>).
     The target which this anchor links to can then be _defined_ at another place in the document
     with an <anchor definition> which is an initial {# link description} followed by a
     {# link location}. This is especially useful when you want to link to the same target very
