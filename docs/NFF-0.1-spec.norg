@@ -547,18 +547,10 @@
 
 *** Ranged Attached Modifiers
     Ranged attached modifiers can be used to:
-    - Allow arbitrary whitespace within attached modifiers (including line breaks!)
-    - Allow to represent verbatim attached modifier chars within the corresponding verbatim blocks
+    - Allow arbitrary {# whitespace} within {# attached modifiers}.
+    - Allow to represent verbatim attached modifier chars within the corresponding verbatim blocks.
 
     For example:
-    +NOTE(vhyrro): regular attached modifiers can already span line breaks, this isn't much of a
-    selling point lol+
-    @code norg
-    Here, I am using some |*ranged bold
-    modifiers*| which allows me to span
-    the line break.
-    @end
-
     @code norg
     Here, I can write |`  leading and trailing whitespace  `| within a verbatim block.
     @end
@@ -568,20 +560,41 @@
     @end
 
 ** Trailing Modifier
-   Trailing modifiers are another separate kind of modifiers in the _Norg_ syntax. They must follow
-   these rules:
-   - It may only exist at the end of a line and may not be followed by any characters after iteself
-   - It may only not have whitespace in front of it
-   -- | | do we want to enforce the above? If not, we can denote the `\` detached modifier extension
-          as a trailing modifier
+   Trailing modifiers are another separate kind of modifiers in the _Norg_ syntax. It has one very
+   simple rule: it may only exist at the end of a line and may not be followed by any characters
+   after itself.
 
 *** Line Continuation
     The `~`-trailing modifier will concatenate the line which it ends with the following one.
     This allows you to do something like the following:
 
     @code norg
-    * I am a very long heading~
+    * I am a very long heading title~
       which did not end here because of the trailing modifier
+    @end
+
+    It completely swallows the next line break, allowing for things like this:
+
+    @code norg
+    - I am a list item~
+
+    - And I am still the same list
+    @end
+
+    Without the trailing modifier those two items would've been treated as two separate lists, but
+    since the `~` char swallows the line break it makes the parser actually see:
+    
+    @code norg
+    - I am a list item
+    - And I am still the same list
+    @end
+
+    Note that trailing modifiers may also exist on a separate line:
+
+    @code norg
+    - I am a list item
+    ~
+    - And I am still the same list
     @end
 
 ** Linkables
