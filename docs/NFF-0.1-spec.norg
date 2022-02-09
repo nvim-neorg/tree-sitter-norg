@@ -642,11 +642,35 @@
      detached modifier, /except/ "ranged" versions of said modifiers - those are *disallowed* within
      the link syntax. By this we mean that syntax like `{$$ Text}` is _invalid_. To link to a ranged
      definition you'd still use `{$ Text}`, there's no reason to make a distinction between a ranged
-     and non-ranged detached modifier, as both have the same meaning, they just allow different
-     kinds of content to exist within them.
+     and non-ranged detached modifier, as both have the same meaning, one just allows more content
+     to exist within itself.
 
 **** Custom Detached Modifiers
-     +TODO+
+     Apart from linking to the detached modifiers outlined above, you can also link to a set of
+     custom modifiers specifically designed for links. These are the `#` (magic) and `@` (file)
+     linkable locations.
+
+***** The File Linkable (`@`)
+      Sometimes you may want to link to an external file that isn't an _Norg_ file.
+      In that case you may use `{@ /path/to/my/file.txt}` (notice the mandatory space after the `@`
+      char, just like with the {**** detached modifier}s). Paths are relative to the _Norg_
+      file that contains the link.
+
+***** The Magic Char (`#`)
+      Sometimes you simply want to be lazy, or you want to link to an {**** inline linkables}[inline
+      linkable] that doesn't have a dedicated modifier to denote it - in these scenarios you'd use
+      the magic char: `#`. It links to /any/ item type. The syntax is exactly the same as with the
+      other modifiers: `{# My Location}`.
+
+**** Inline Linkables
+     Although most linkable items are either {# Structural Detached Modifiers}[structural] or
+     {# Range-able Detached Modifiers}[range-able], there are also syntax elements in _Norg_ that
+     are inline - these are the `|name` {# Carryover Tags}[carryover tag] and the
+     {# Inline Link Target}[inline link target]. Both of these can be linked to through the
+     {# The Magic Char (`#`)}[the magic char].
+
+*** Link File Location
+    +TODO+
 
 *** Link Description
     Links can have custom descriptions which are always placed inside of square brackets: `[]`.
