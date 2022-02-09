@@ -2,6 +2,7 @@
 +Formally define each object+
 +Use many examples!+
 +And also provide counter-examples for cases which are not expected to work!+
++Discuss precedence for inline markup+
 
 - [ ] restructure spec into multiple layers
 - [ ] ensure we state that this is a physical spec and not a reference implementation
@@ -149,7 +150,7 @@
     Nestable detached modifiers are those kind which may be repeated multiple times in order to
     produce a _nested_ object of the given type. The nesting levels are capped at 6 in the
     [tree-sitter] parser but longer repetitions of the same modifier are allowed, falling back to
-    the sixth nesting level. Other parses may choose to support higher nesting levels.
+    the sixth nesting level. Other parsers may choose to support higher nesting levels.
 
     Furthermore, in contrast to the {# Standard Detached Modifiers} this detached modifier type
     affects the following `paragraph` instead of only the next segment. This means that in order to
@@ -708,7 +709,10 @@
      {# The Magic Char (`#`)}[the magic char].
 
 *** Link Description
-    Links can have custom descriptions which are always placed inside of square brackets: `[]`.
+    Link descriptions are denoted by square brackets: `[]`. They contain the description for either a
+    {# link location} (by placing the description after the link location), an {# anchors}[anchor]
+    definition (by placing the description before the link location) or an anchor declaration (where
+    the /only/ syntax item *is* the link description).
 
 *** Links
     Links in _Norg_ can either be standalone a {# link location} in which case their text is used as
