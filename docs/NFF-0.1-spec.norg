@@ -612,11 +612,49 @@
 
 *** Link Location
     The link location is defined through curly braces (`{}`) and contains the physical location
-    that the user would like to link to. Inside of these curly braces you can find one of three
+    that the user would like to link to. Inside of these curly braces you can find one of four
     types of data:
+    - A {# file location}
     - A URL (most commonly to an external resource)
     - A detached modifier followed by the name of the linkable
     - A custom detached modifier specifically made for links (`@`, `#`)
+
+**** File Location
+     The file location is a construct that allows you to specify the /target file/ in which you want
+     to make a link inside of. This allows you to *link to targets within other files* or just link
+     to other norg files entirely.
+
+     When standalone, the link syntax will simply point to another `.norg` file relative to the
+     current file the link is contained in:
+
+     @code norg
+     {:path/to/other-file:}
+     @end
+
+     Note that you do *not* provide the `.norg` extension within the path.
+     You can use traditional modifiers in your path, like `/` (in e.g. `/my/file`) to signify
+     the root of your filesystem, `~` (in e.g. `~/Documents/my-file`) to signify the current
+     user's home directory, /or/ you can use the [Neorg]-specific `$` (in e.g. `$/my/file`) to
+     signify the _root_ of the [Neorg] workspace.
+     Since not all _Norg_ files will be used strictly by [Neorg], the workspace root can be
+     implementation-specific - for git repos the workspace root could be simply the root of the
+     repository, and for other note taking apps it could simply be the root of the directory where
+     all the notes are stored.
+
+     A file location may /only/ be accompanied by a {# detached modifier} or the
+     {# The Magic Char (`#`)}[the magic char], in which case the link looks like so:
+
+     @code norg
+     {:path/to/file:# Location within that file}
+     {:path/to/file:** Level 2 heading}
+     @end
+
+     `@` and URLs are not allowed:
+
+     @code norg
+     {:path:@ file} <- invalid
+     {:path:https://my-url} <- also invalid
+     @end
 
 **** URL
      You can define a link to an external resource by simply putting in the URL:
@@ -668,9 +706,6 @@
      are inline - these are the `|name` {# Carryover Tags}[carryover tag] and the
      {# Inline Link Target}[inline link target]. Both of these can be linked to through the
      {# The Magic Char (`#`)}[the magic char].
-
-*** Link File Location
-    +TODO+
 
 *** Link Description
     Links can have custom descriptions which are always placed inside of square brackets: `[]`.
