@@ -712,12 +712,13 @@
     Link descriptions are denoted by square brackets: `[]`. They contain the description for either a
     {# link location} (by placing the description after the link location), an {# anchors}[anchor]
     definition (by placing the description before the link location) or an anchor declaration (where
-    the /only/ syntax item *is* the link description).
+    the /only/ syntax item *is* the link description). Anchors are described {# anchors}[later on].
 
 *** Links
-    Links in _Norg_ can either be standalone a {# link location} in which case their text is used as
-    the link title (as often makes sense for headings).
+    Links in _Norg_ can either be a standalone {# link location} in which case their text is used as
+    the link title (often makes sense for headings).
 
+    +TODO: Expand on this a little more+
     When a custom description is required, it must be placed *_after_* the link location. This makes
     sense in terms of writing as you first define where you link to, and then describe it further.
 
