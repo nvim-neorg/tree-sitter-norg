@@ -16,8 +16,8 @@ This is no longer part of the heading.
             (paragraph
                 (paragraph_segment)
             )
-        (strong_paragraph_delimiter)
     )
+    (strong_paragraph_delimiter)
     (paragraph
         (paragraph_segment)
     )
@@ -60,8 +60,9 @@ And here is some more text that has broken out of the matrix.
                         (paragraph_segment)
                     )
             )
-        (strong_paragraph_delimiter)
     )
+
+    (strong_paragraph_delimiter)
 
     (paragraph
         (paragraph_segment)
@@ -116,8 +117,9 @@ And here is some more text that has broken out of the matrix.
                             )
                     )
             )
-        (strong_paragraph_delimiter)
     )
+    
+    (strong_paragraph_delimiter)
 
     (paragraph
         (paragraph_segment)
@@ -183,8 +185,9 @@ And here is some more text that has broken out of the matrix.
                             )
                     )
             )
-        (strong_paragraph_delimiter)
     )
+
+    (strong_paragraph_delimiter)
 
     (paragraph
         (paragraph_segment)
@@ -251,8 +254,9 @@ And here is some more text that has broken out of the matrix.
                             )
                     )
             )
-        (strong_paragraph_delimiter)
     )
+
+    (strong_paragraph_delimiter)
 
     (paragraph
         (paragraph_segment)
@@ -330,8 +334,9 @@ And here is some more text that has broken out of the matrix.
                             )
                     )
             )
-        (strong_paragraph_delimiter)
     )
+
+    (strong_paragraph_delimiter)
 
     (paragraph
         (paragraph_segment)
@@ -398,8 +403,8 @@ This should no longer be part of the heading.
                 (heading3_prefix)
                 title: (paragraph_segment)
             )
-        (strong_paragraph_delimiter)
     )
+    (strong_paragraph_delimiter)
     (paragraph
         (paragraph_segment)
     )

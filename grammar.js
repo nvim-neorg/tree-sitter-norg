@@ -204,6 +204,7 @@ module.exports = grammar({
                         $.footnote,
                         $.tag,
                         $.horizontal_line,
+                        $.strong_paragraph_delimiter,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
                         $.marker,
                     )
@@ -883,10 +884,7 @@ module.exports = grammar({
                 ),
 
                 optional(
-                    choice(
-                        $.weak_paragraph_delimiter,
-                        $.strong_paragraph_delimiter,
-                    )
+                    $.weak_paragraph_delimiter,
                 )
             )
         ),
