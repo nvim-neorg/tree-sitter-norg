@@ -276,7 +276,7 @@ class Scanner
                 ++m_TagLevel;
                 return true;
             }
-            else if (lexer->lookahead == '#' && !m_TagLevel)
+            else if (lexer->lookahead == '|' && !m_TagLevel)
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
