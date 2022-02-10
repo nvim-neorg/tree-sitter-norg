@@ -1151,10 +1151,6 @@
             "named": true
           },
           {
-            "type": "link_target_inline",
-            "named": true
-          },
-          {
             "type": "link_target_marker",
             "named": true
           },
@@ -4815,10 +4811,6 @@
   },
   {
     "type": "link_target_heading6",
-    "named": true
-  },
-  {
-    "type": "link_target_inline",
     "named": true
   },
   {
