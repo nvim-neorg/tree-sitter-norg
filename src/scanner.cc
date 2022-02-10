@@ -255,13 +255,13 @@ class Scanner
                         if (lexer->lookahead == 'd')
                         {
                             advance(lexer);
-                            if (std::iswspace(lexer->lookahead))
+                            if (!lexer->lookahead || std::iswspace(lexer->lookahead))
                             {
                                 while (std::iswspace(lexer->lookahead) &&
                                        lexer->lookahead != '\n' && lexer->lookahead)
                                     advance(lexer);
 
-                                if (std::iswspace(lexer->lookahead) && m_TagLevel)
+                                if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) && m_TagLevel)
                                 {
                                     lexer->result_symbol = m_LastToken = RANGED_TAG_END;
 
