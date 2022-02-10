@@ -117,6 +117,8 @@ module.exports = grammar({
 
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
+        $.ranged_verbatim_tag_prefix,
+        $.ranged_verbatim_tag_end_prefix,
 
         $.carryover_tag_prefix,
 
@@ -1459,7 +1461,6 @@ module.exports = grammar({
             )
         ),
 
-        // TODO: Comment scanner code
         ranged_tag_content: $ =>
         prec.right(0,
             repeat1(
@@ -1536,6 +1537,77 @@ module.exports = grammar({
             ),
         ),
 
+        ranged_verbatim_tag_content: $ =>
+        prec.right(0,
+            repeat1(
+                choice(
+                    alias(
+                        choice(
+                            $.paragraph_segment,
+                            $._line_break,
+                            $._paragraph_break,
+                        ),
+                        "_segment",
+                    ),
+                ),
+            ),
+        ),
+
+        ranged_verbatim_tag_end: $ =>
+        seq(
+            alias(
+                $.ranged_verbatim_tag_end_prefix,
+                "_prefix",
+            ),
+
+            alias(
+                token.immediate("end"),
+                "_name",
+            ),
+        ),
+
+        ranged_verbatim_tag: $ =>
+        prec.right(0,
+            seq(
+                alias(
+                    $.ranged_verbatim_tag_prefix,
+                    "_prefix"
+                ),
+
+                field(
+                    "name",
+                    $.tag_name,
+                ),
+
+                choice(
+                    token.immediate(
+                        /[\t\v ]*\n/,
+                    ),
+
+                    seq(
+                        token.immediate(
+                            /[\t\v ]+/,
+                        ),
+
+                        $.tag_parameters,
+
+                        token.immediate(
+                            '\n'
+                        ),
+                    ),
+                ),
+
+                field(
+                    "content",
+                    optional(
+                        $.ranged_verbatim_tag_content,
+                    ),
+                ),
+
+                optional($.ranged_verbatim_tag_end),
+            ),
+        ),
+
         carryover_tag_set: $ =>
         prec.left(0,
             seq(
@@ -1555,6 +1627,7 @@ module.exports = grammar({
                                 $.footnote,
                                 $.heading,
                                 $.ranged_tag,
+                                $.ranged_verbatim_tag,
                                 $.marker,
                             ),
                         ),
@@ -1648,6 +1721,7 @@ module.exports = grammar({
         tag: $ =>
         choice(
             $.ranged_tag,
+            $.ranged_verbatim_tag,
             $.carryover_tag_set,
         ),
 

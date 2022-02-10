@@ -93,6 +93,8 @@ enum TokenType : char
 
     RANGED_TAG,
     RANGED_TAG_END,
+    RANGED_VERBATIM_TAG,
+    RANGED_VERBATIM_TAG_END,
 
     CARRYOVER_TAG,
 
@@ -214,14 +216,15 @@ class Scanner
             return true;
         }
 
+        // TODO: make verbatim not a naive copy of non-verbatim ranged tag
         // If we're at the beginning of a line check for all detached modifiers
         if (lexer->get_column(lexer) == 0)
         {
-            // Skip all leading whitespace and measure the indentation level
+            // Skip all leading whitespace
             while (std::iswblank(lexer->lookahead))
                 skip(lexer);
 
-            // We are dealing with a ranged tag (@something)
+            // We are dealing with a ranged verbatim tag (@something)
             if (lexer->lookahead == '@')
             {
                 advance(lexer);
@@ -232,6 +235,65 @@ class Scanner
                 lexer->mark_end(lexer);
 
                 // These sets of checks check whether the tag is `@end`
+                if (lexer->lookahead == 'e')
+                {
+                    advance(lexer);
+                    if (lexer->lookahead == 'n')
+                    {
+                        advance(lexer);
+                        if (lexer->lookahead == 'd')
+                        {
+                            advance(lexer);
+                            if (!lexer->lookahead || std::iswspace(lexer->lookahead))
+                            {
+                                while (std::iswspace(lexer->lookahead) &&
+                                       lexer->lookahead != '\n' && lexer->lookahead)
+                                    advance(lexer);
+
+                                if ((!lexer->lookahead || std::iswspace(lexer->lookahead)))
+                                {
+                                    lexer->result_symbol = m_LastToken = RANGED_VERBATIM_TAG_END;
+                                    m_TagLevel = 0;
+                                    return true;
+                                }
+
+                                lexer->result_symbol = m_LastToken = WORD;
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+                // This is a fallback. If the tag ends up not being `@end`
+                // then...
+                if (m_LastToken == RANGED_VERBATIM_TAG)
+                {
+                    // ignore the char if we are already inside of a ranged tag.
+                    lexer->result_symbol = m_LastToken = WORD;
+                    return true;
+                }
+
+                lexer->result_symbol = m_LastToken = RANGED_VERBATIM_TAG;
+                m_TagLevel = 1;
+                return true;
+            }
+            // We are dealing with a ranged tag (#something)
+            else if (lexer->lookahead == '#')
+            {
+                advance(lexer);
+
+                if (!lexer->lookahead || std::iswspace(lexer->lookahead))
+                {
+                    lexer->result_symbol = m_LastToken = WORD;
+                    return true;
+                }
+
+                // Mark the end of the token here
+                // We do this because we only want the returned token to be part
+                // of the `#` symbol, not the symbol + the name
+                lexer->mark_end(lexer);
+
+                // These sets of checks check whether the tag is `#end`
                 if (lexer->lookahead == 'e')
                 {
                     advance(lexer);
@@ -262,7 +324,7 @@ class Scanner
                     }
                 }
 
-                // This is a fallback. If the tag ends up not being `@end`
+                // This is a fallback. If the tag ends up not being `#end`
                 // then...
                 if (m_LastToken == RANGED_TAG)
                 {

@@ -3672,6 +3672,155 @@
         ]
       }
     },
+    "ranged_verbatim_tag_content": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "paragraph_segment"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_line_break"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_paragraph_break"
+                  }
+                ]
+              },
+              "named": false,
+              "value": "_segment"
+            }
+          ]
+        }
+      }
+    },
+    "ranged_verbatim_tag_end": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ranged_verbatim_tag_end_prefix"
+          },
+          "named": false,
+          "value": "_prefix"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "end"
+            }
+          },
+          "named": false,
+          "value": "_name"
+        }
+      ]
+    },
+    "ranged_verbatim_tag": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "ranged_verbatim_tag_prefix"
+            },
+            "named": false,
+            "value": "_prefix"
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "tag_name"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[\\t\\v ]*\\n"
+                }
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[\\t\\v ]+"
+                    }
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "tag_parameters"
+                  },
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "STRING",
+                      "value": "\n"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "content",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "ranged_verbatim_tag_content"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "ranged_verbatim_tag_end"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "carryover_tag_set": {
       "type": "PREC_LEFT",
       "value": 0,
@@ -3719,6 +3868,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "ranged_tag"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "ranged_verbatim_tag"
                       },
                       {
                         "type": "SYMBOL",
@@ -3908,6 +4061,10 @@
         {
           "type": "SYMBOL",
           "name": "ranged_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ranged_verbatim_tag"
         },
         {
           "type": "SYMBOL",
@@ -4398,6 +4555,14 @@
     {
       "type": "SYMBOL",
       "name": "ranged_tag_end_prefix"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "ranged_verbatim_tag_prefix"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "ranged_verbatim_tag_end_prefix"
     },
     {
       "type": "SYMBOL",
