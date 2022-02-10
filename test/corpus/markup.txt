@@ -703,9 +703,9 @@ No nested markup inside verbatim
     )
 )
 
-=======================================
-No nested markup inside inline comments
-=======================================
+===========================
+Nesting into Inline Comment
+===========================
 +*not bold*+
 +/not italic/+
 +-not struck through-+
@@ -716,46 +716,58 @@ No nested markup inside inline comments
 +`no verbatim`+
 +$no inline math$+
 +=no variable=+
-+no:*link modifier*+
-+hidden \*escaped char*+
 ---
 (document
     (paragraph
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (bold)
+            )
         )
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (italic)
+            )
         )
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (strikethrough)
+            )
         )
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (underline)
+            )
         )
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (spoiler)
+            )
         )
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (superscript)
+            )
         )
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (subscript)
+            )
         )
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (verbatim)
+            )
         )
         (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (inline_math)
+            )
         )
         (paragraph_segment
-            (inline_comment)
-        )
-        (paragraph_segment
-            (inline_comment)
-        )
-        (paragraph_segment
-            (inline_comment)
+            (inline_comment
+                (variable)
+            )
         )
     )
 )

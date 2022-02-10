@@ -1035,7 +1035,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_verbatim_modifier_content"
+          "name": "_attached_modifier_content"
         },
         {
           "type": "ALIAS",

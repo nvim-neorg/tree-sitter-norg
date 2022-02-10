@@ -399,7 +399,7 @@ module.exports = grammar({
         inline_comment: $ =>
         seq(
             alias($.inline_comment_open, "_open"),
-            $._verbatim_modifier_content,
+            $._attached_modifier_content,
             alias($.inline_comment_close, "_close"),
         ),
 
