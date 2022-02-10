@@ -128,3 +128,22 @@ Lol
         (paragraph_segment)
     )
 )
+
+===============================
+Carryover Tag inside Ranged Tag
+===============================
+@code python
+# This is a python comment
+print("Hello World") # this is a comment too
+@end
+---
+(document
+    (ranged_tag
+        (tag_name
+            (tag_name_element)
+        )
+        (tag_parameters (tag_param))
+        (ranged_tag_content)
+        (ranged_tag_end)
+    )
+)

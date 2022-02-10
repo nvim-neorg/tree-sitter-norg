@@ -366,6 +366,10 @@
           "named": true
         },
         {
+          "type": "strong_paragraph_delimiter",
+          "named": true
+        },
+        {
           "type": "tag",
           "named": true
         }
@@ -552,10 +556,6 @@
       "types": [
         {
           "type": "heading1_prefix",
-          "named": true
-        },
-        {
-          "type": "strong_paragraph_delimiter",
           "named": true
         },
         {

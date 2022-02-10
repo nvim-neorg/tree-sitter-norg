@@ -241,13 +241,13 @@ class Scanner
                         if (lexer->lookahead == 'd')
                         {
                             advance(lexer);
-                            if (std::iswspace(lexer->lookahead))
+                            if (!lexer->lookahead || std::iswspace(lexer->lookahead))
                             {
                                 while (std::iswspace(lexer->lookahead) &&
                                        lexer->lookahead != '\n' && lexer->lookahead)
                                     advance(lexer);
 
-                                if (std::iswspace(lexer->lookahead) && m_TagLevel)
+                                if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) && m_TagLevel)
                                 {
                                     lexer->result_symbol = m_LastToken = RANGED_TAG_END;
 
@@ -300,8 +300,8 @@ class Scanner
                 return true;
 
             // Check for the existence of quotes
-            if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6,
-                               {'>'}) != NONE)
+            if (check_detached(lexer, QUOTE1 | QUOTE2 | QUOTE3 | QUOTE4 | QUOTE5 | QUOTE6, {'>'}) !=
+                NONE)
                 return true;
 
             // Check for the existence of an unordered list element.
@@ -596,6 +596,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = result;
 
+                m_ActiveModifiers.reset();
                 return result;
             }
 
@@ -623,6 +624,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = result;
 
+                m_ActiveModifiers.reset();
                 return result;
             }
         }
@@ -690,11 +692,10 @@ class Scanner
             }
 
             auto can_have_modifier = [&]()
-            {
-                return !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2];
-            };
+            { return !m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2]; };
 
-            if (!std::iswspace(lexer->lookahead) && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+            if (!std::iswspace(lexer->lookahead) &&
+                !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
             {
                 if (can_have_modifier())
                     m_ActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
@@ -705,9 +706,8 @@ class Scanner
         else
             advance(lexer);
 
-        if ((!std::iswspace(cur) || !cur) &&
-            (std::iswspace(lexer->lookahead) || std::iswpunct(lexer->lookahead) ||
-             !lexer->lookahead))
+        if ((!std::iswspace(cur) || !cur) && (std::iswspace(lexer->lookahead) ||
+                                              std::iswpunct(lexer->lookahead) || !lexer->lookahead))
         {
             m_ActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
             lexer->result_symbol = m_LastToken =
@@ -738,44 +738,57 @@ class Scanner
         case LINK_FILE_END:
             switch (lexer->lookahead)
             {
-                case '#':
-                    lexer->result_symbol = m_LastToken = LINK_TARGET_GENERIC;
-                    break;
-                case '@':
-                    if (m_LastToken == LINK_FILE_END)
-                        return false;
+            case '#':
+                lexer->result_symbol = m_LastToken = LINK_TARGET_GENERIC;
+                break;
+            case '@':
+                if (m_LastToken == LINK_FILE_END)
+                    return false;
 
-                    lexer->result_symbol = m_LastToken = LINK_TARGET_EXTERNAL_FILE;
-                    break;
-                case '|':
-                    lexer->result_symbol = m_LastToken = LINK_TARGET_MARKER;
-                    break;
-                case '$':
-                    lexer->result_symbol = m_LastToken = LINK_TARGET_DEFINITION;
-                    break;
-                case '^':
-                    lexer->result_symbol = m_LastToken = LINK_TARGET_FOOTNOTE;
-                    break;
-                case '*':
+                lexer->result_symbol = m_LastToken = LINK_TARGET_EXTERNAL_FILE;
+                break;
+            case '|':
+                lexer->result_symbol = m_LastToken = LINK_TARGET_MARKER;
+                break;
+            case '$':
+                lexer->result_symbol = m_LastToken = LINK_TARGET_DEFINITION;
+                break;
+            case '^':
+                lexer->result_symbol = m_LastToken = LINK_TARGET_FOOTNOTE;
+                break;
+            case '*':
+                advance(lexer);
+
+                while (lexer->lookahead == '*')
+                {
+                    ++count;
+                    advance(lexer);
+                }
+
+                lexer->result_symbol = m_LastToken =
+                    static_cast<TokenType>(LINK_TARGET_HEADING1 + clamp(count, 0ull, 5ull));
+
+                if (!std::iswspace(lexer->lookahead))
+                    return false;
+
+                while (std::iswspace(lexer->lookahead))
                     advance(lexer);
 
-                    while (lexer->lookahead == '*')
-                    {
-                        ++count;
-                        advance(lexer);
-                    }
-
-                    lexer->result_symbol = m_LastToken =
-                        static_cast<TokenType>(LINK_TARGET_HEADING1 + clamp(count, 0ull, 5ull));
-
-                    return std::iswspace(lexer->lookahead);
-                default:
-                    lexer->result_symbol = m_LastToken = LINK_TARGET_URL;
-                    return true;
+                return true;
+            default:
+                lexer->result_symbol = m_LastToken = LINK_TARGET_URL;
+                return true;
             }
 
             advance(lexer);
-            return std::iswspace(lexer->lookahead);
+
+            if (!std::iswspace(lexer->lookahead))
+                return false;
+
+            while (std::iswspace(lexer->lookahead))
+                advance(lexer);
+
+            return true;
         case LINK_FILE_BEGIN:
             while (lexer->lookahead)
             {
@@ -810,12 +823,13 @@ class Scanner
             {
                 lexer->result_symbol = m_LastToken = LINK_FILE_END;
                 advance(lexer);
-                return (lexer->lookahead == '}' || lexer->lookahead == '#' || lexer->lookahead == '|' || lexer->lookahead == '$' || lexer->lookahead == '^' || lexer->lookahead == '*');
+                return (lexer->lookahead == '}' || lexer->lookahead == '#' ||
+                        lexer->lookahead == '|' || lexer->lookahead == '$' ||
+                        lexer->lookahead == '^' || lexer->lookahead == '*');
             }
         default:
             return false;
         }
-
 
         return false;
     }
@@ -852,8 +866,10 @@ class Scanner
         do
         {
             if (lexer->lookahead == ':' || (lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
-                     (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) ||
-                     (lexer->lookahead == '[' || lexer->lookahead == ']' || lexer->lookahead == '{' || lexer->lookahead == '}') || lexer->lookahead == '\\')
+                (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) ||
+                (lexer->lookahead == '[' || lexer->lookahead == ']' || lexer->lookahead == '{' ||
+                 lexer->lookahead == '}') ||
+                lexer->lookahead == '\\')
                 break;
             else
                 advance(lexer);
@@ -885,7 +901,7 @@ class Scanner
    private:
     const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '|', '=',
                                                         '~', '$', '_', '^'};
-    const std::unordered_map<char, TokenType> m_AttachedModifiers = {
+    const std::unordered_map<int32_t, TokenType> m_AttachedModifiers = {
         {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
         {'_', UNDERLINE_OPEN},   {'!', SPOILER_OPEN},   {'`', VERBATIM_OPEN},
         {'^', SUPERSCRIPT_OPEN}, {',', SUBSCRIPT_OPEN}, {'+', INLINE_COMMENT_OPEN},
@@ -961,8 +977,8 @@ extern "C"
 
         last_token = (TokenType)buffer[0];
         tag_level = (size_t)buffer[1];
-        current = (uint32_t)buffer[5] << 24 | (uint32_t)buffer[4] << 16 |
-                  (uint32_t)buffer[3] << 8 | (uint32_t)buffer[2];
+        current = (uint32_t)buffer[5] << 24 | (uint32_t)buffer[4] << 16 | (uint32_t)buffer[3] << 8 |
+                  (uint32_t)buffer[2];
 
         for (int i = 0; i < active_modifiers.size(); i++)
             active_modifiers[i] = buffer[6 + i];
