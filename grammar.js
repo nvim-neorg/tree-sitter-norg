@@ -134,6 +134,7 @@ module.exports = grammar({
         $.link_target_url,
         $.link_target_generic,
         $.link_target_external_file,
+        $.link_target_inline,
         $.link_target_marker,
         $.link_target_definition,
         $.link_target_footnote,
@@ -325,6 +326,7 @@ module.exports = grammar({
                         alias($.link_target_url, "_lowercase"),
                         alias($.link_target_generic, "_lowercase"),
                         alias($.link_target_external_file, "_lowercase"),
+                        alias($.link_target_inline, "_lowercase"),
                         alias($.link_target_marker, "_lowercase"),
                         alias($.link_target_definition, "_lowercase"),
                         alias($.link_target_footnote, "_lowercase"),
@@ -518,6 +520,7 @@ module.exports = grammar({
                 choice(
                     $.link_target_generic,
                     $.link_target_external_file,
+                    $.link_target_inline,
                     $.link_target_marker,
                     $.link_target_definition,
                     $.link_target_footnote,

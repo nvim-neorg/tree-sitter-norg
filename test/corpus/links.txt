@@ -9,6 +9,7 @@ Basic Links
 {****** Heading 6}
 {******* Heading level above 6}
 {# Generic}
+{> Inline Target}
 {| Marker}
 {$ Definition}
 {^ Footnote}
@@ -21,6 +22,7 @@ Basic Links
 {:norg_file:****** Heading 6}
 {:norg_file:******* Heading level above 6}
 {:norg_file:# Generic}
+{:norg_file:> Inline Target}
 {:norg_file:| Marker}
 {:norg_file:$ Definition}
 {:norg_file:^ Footnote}
@@ -92,6 +94,14 @@ Basic Links
             (link
                 (link_location
                     type: (link_target_generic)
+                    text: (paragraph_segment)
+                )
+            )
+        )
+        (paragraph_segment
+            (link
+                (link_location
+                    type: (link_target_inline)
                     text: (paragraph_segment)
                 )
             )
@@ -203,6 +213,15 @@ Basic Links
             (link
                 (link_location
                     file: (link_file_text)
+                    type: (link_target_inline)
+                    text: (paragraph_segment)
+                )
+            )
+        )
+        (paragraph_segment
+            (link
+                (link_location
+                    file: (link_file_text)
                     type: (link_target_marker)
                     text: (paragraph_segment)
                 )
@@ -270,6 +289,7 @@ Links with text
 {****** Heading 6}[custom text]
 {******* Heading level above 6}[custom text]
 {# Generic}[custom text]
+{> Inline Target}[custom text]
 {| Marker}[custom text]
 {$ Definition}[custom text]
 {^ Footnote}[custom text]
@@ -282,6 +302,7 @@ Links with text
 {:norg_file:****** Heading 6}[custom text]
 {:norg_file:******* Heading level above 6}[custom text]
 {:norg_file:# Generic}[custom text]
+{:norg_file:> Inline Target}[custom text]
 {:norg_file:| Marker}[custom text]
 {:norg_file:$ Definition}[custom text]
 {:norg_file:^ Footnote}[custom text]
@@ -384,6 +405,17 @@ Links with text
         (paragraph_segment
             (link
                 (link_location
+                    type: (link_target_inline)
+                    text: (paragraph_segment)
+                )
+                (link_description
+                   text: (paragraph_segment)
+                )
+            )
+        )
+        (paragraph_segment
+            (link
+                (link_location
                     type: (link_target_marker)
                     text: (paragraph_segment)
                 )
@@ -513,6 +545,18 @@ Links with text
                 (link_location
                     file: (link_file_text)
                     type: (link_target_generic)
+                    text: (paragraph_segment)
+                )
+                (link_description
+                   text: (paragraph_segment)
+                )
+            )
+        )
+        (paragraph_segment
+            (link
+                (link_location
+                    file: (link_file_text)
+                    type: (link_target_inline)
                     text: (paragraph_segment)
                 )
                 (link_description
@@ -621,6 +665,7 @@ Anchors
 [heading 6 anchor]
 [heading 6+ anchor]
 [generic anchor]
+[inline target anchor]
 [marker anchor]
 [definition anchor]
 [footnote anchor]
@@ -632,6 +677,7 @@ Anchors
 [external heading 5 anchor]
 [external heading 6 anchor]
 [external generic anchor]
+[external inline target anchor]
 [external marker anchor]
 [external definition anchor]
 [external footnote anchor]
@@ -649,6 +695,7 @@ Anchors
 [heading 6 anchor]{****** Heading 6}
 [heading 6+ anchor]{******* Heading level above 6}
 [generic anchor]{# Generic}
+[inline target anchor]{> Inline Target}
 [marker anchor]{| Marker}
 [definition anchor]{$ Definition}
 [footnote anchor]{^ Footnote}
@@ -660,6 +707,7 @@ Anchors
 [external heading 5 anchor]{:norg_file:***** Heading 5}
 [external heading 6 anchor]{:norg_file:****** Heading 6}
 [external generic anchor]{:norg_file:# Generic}
+[external inline target anchor]{:norg_file:> Inline Target}
 [external marker anchor]{:norg_file:| Marker}
 [external definition anchor]{:norg_file:$ Definition}
 [external footnote anchor]{:norg_file:^ Footnote}
@@ -860,6 +908,20 @@ Anchors
                 )
             )
         )
+        (paragraph_segment
+            (anchor_declaration
+                (link_description
+                  text: (paragraph_segment)
+                )
+            )
+        )
+        (paragraph_segment
+            (anchor_declaration
+                (link_description
+                  text: (paragraph_segment)
+                )
+            )
+        )
     )
 
     (paragraph
@@ -947,6 +1009,17 @@ Anchors
                 )
                 (link_location
                     type: (link_target_generic)
+                    text: (paragraph_segment)
+                )
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (link_description
+                  text: (paragraph_segment)
+                )
+                (link_location
+                    type: (link_target_inline)
                     text: (paragraph_segment)
                 )
             )
@@ -1074,6 +1147,18 @@ Anchors
                 (link_location
                     file: (link_file_text)
                     type: (link_target_generic)
+                    text: (paragraph_segment)
+                )
+            )
+        )
+        (paragraph_segment
+            (anchor_definition
+                (link_description
+                  text: (paragraph_segment)
+                )
+                (link_location
+                    file: (link_file_text)
+                    type: (link_target_inline)
                     text: (paragraph_segment)
                 )
             )

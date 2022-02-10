@@ -95,6 +95,7 @@ enum TokenType : char
     LINK_TARGET_URL,
     LINK_TARGET_GENERIC,
     LINK_TARGET_EXTERNAL_FILE,
+    LINK_TARGET_INLINE,
     LINK_TARGET_MARKER,
     LINK_TARGET_DEFINITION,
     LINK_TARGET_FOOTNOTE,
@@ -512,7 +513,8 @@ class Scanner
             lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_OPEN;
             return true;
         }
-        else if (lexer->lookahead == '>')
+        else if (lexer->lookahead == '>' && m_LastToken != LINK_LOCATION_BEGIN &&
+                 m_LastToken != LINK_FILE_END)
         {
             advance(lexer);
             lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_CLOSE;
@@ -781,6 +783,9 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = LINK_TARGET_EXTERNAL_FILE;
                 break;
+            case '>':
+                lexer->result_symbol = m_LastToken = LINK_TARGET_INLINE;
+                break;
             case '|':
                 lexer->result_symbol = m_LastToken = LINK_TARGET_MARKER;
                 break;
@@ -858,8 +863,9 @@ class Scanner
                 lexer->result_symbol = m_LastToken = LINK_FILE_END;
                 advance(lexer);
                 return (lexer->lookahead == '}' || lexer->lookahead == '#' ||
-                        lexer->lookahead == '|' || lexer->lookahead == '$' ||
-                        lexer->lookahead == '^' || lexer->lookahead == '*');
+                        lexer->lookahead == '>' || lexer->lookahead == '|' ||
+                        lexer->lookahead == '$' || lexer->lookahead == '^' ||
+                        lexer->lookahead == '*');
             }
         default:
             return false;

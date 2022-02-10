@@ -719,6 +719,15 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
+                    "name": "link_target_inline"
+                  },
+                  "named": false,
+                  "value": "_lowercase"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
                     "name": "link_target_marker"
                   },
                   "named": false,
@@ -1456,6 +1465,10 @@
               {
                 "type": "SYMBOL",
                 "name": "link_target_external_file"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "link_target_inline"
               },
               {
                 "type": "SYMBOL",
@@ -5318,6 +5331,10 @@
     {
       "type": "SYMBOL",
       "name": "link_target_external_file"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_target_inline"
     },
     {
       "type": "SYMBOL",
