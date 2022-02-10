@@ -503,11 +503,9 @@ This is not ,, subscript.
 This is not ++ an inline comment.
 This is not $$ inline math.
 This is not == a variable reference.
-This is not <> an inline link target.
 ---
 (document
     (paragraph
-        (paragraph_segment)
         (paragraph_segment)
         (paragraph_segment)
         (paragraph_segment)

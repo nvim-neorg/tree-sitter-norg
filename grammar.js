@@ -22,7 +22,6 @@ module.exports = grammar({
         [$.inline_comment, $._conflict_open],
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
-        [$.inline_link_target, $._conflict_open],
 
         [$.bold, $._paragraph_element],
         [$.italic, $._paragraph_element],
@@ -35,7 +34,6 @@ module.exports = grammar({
         [$.inline_comment, $._paragraph_element],
         [$.inline_math, $._paragraph_element],
         [$.variable, $._paragraph_element],
-        [$.inline_link_target, $._paragraph_element],
 
         [$.unordered_link1, $.paragraph],
         [$.unordered_link2, $.paragraph],
@@ -252,6 +250,7 @@ module.exports = grammar({
             $.link,
             $.anchor_declaration,
             $.anchor_definition,
+            $.inline_link_target,
             $.escape_sequence,
             $.attached_modifier,
             $._linked_attached_modifier,
@@ -267,7 +266,6 @@ module.exports = grammar({
             alias($.inline_comment_close, "_lowercase"),
             alias($.inline_math_close, "_lowercase"),
             alias($.variable_close, "_lowercase"),
-            alias($.inline_link_target_close, "_lowercase"),
         ),
 
         _multi_paragraph_element: $ =>
@@ -458,7 +456,6 @@ module.exports = grammar({
                 alias($.inline_comment_open, "_lowercase"),
                 alias($.inline_math_open, "_lowercase"),
                 alias($.variable_open, "_lowercase"),
-                alias($.inline_link_target_open, "_lowercase"),
             )
         ),
 
@@ -2043,7 +2040,6 @@ module.exports = grammar({
             $.inline_comment,
             $.inline_math,
             $.variable,
-            $.inline_link_target,
         ),
     }
 });

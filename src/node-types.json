@@ -12,10 +12,6 @@
         "named": true
       },
       {
-        "type": "inline_link_target",
-        "named": true
-      },
-      {
         "type": "inline_math",
         "named": true
       },
@@ -173,6 +169,10 @@
           "named": true
         },
         {
+          "type": "inline_link_target",
+          "named": true
+        },
+        {
           "type": "link",
           "named": true
         },
@@ -244,6 +244,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
@@ -1034,6 +1038,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
@@ -2370,6 +2378,10 @@
           "named": true
         },
         {
+          "type": "inline_link_target",
+          "named": true
+        },
+        {
           "type": "link",
           "named": true
         },
@@ -2789,6 +2801,10 @@
           "named": true
         },
         {
+          "type": "inline_link_target",
+          "named": true
+        },
+        {
           "type": "link",
           "named": true
         },
@@ -2821,6 +2837,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
@@ -2859,6 +2879,10 @@
           "named": true
         },
         {
+          "type": "inline_link_target",
+          "named": true
+        },
+        {
           "type": "link",
           "named": true
         },
@@ -2891,6 +2915,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
@@ -3646,6 +3674,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
