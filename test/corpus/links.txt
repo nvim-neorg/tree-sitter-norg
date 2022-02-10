@@ -9,7 +9,7 @@ Basic Links
 {****** Heading 6}
 {******* Heading level above 6}
 {# Generic}
-{| Marker}
+{% Marker}
 {$ Definition}
 {^ Footnote}
 {:norg_file:}
@@ -21,7 +21,7 @@ Basic Links
 {:norg_file:****** Heading 6}
 {:norg_file:******* Heading level above 6}
 {:norg_file:# Generic}
-{:norg_file:| Marker}
+{:norg_file:% Marker}
 {:norg_file:$ Definition}
 {:norg_file:^ Footnote}
 {https://github.com/}
@@ -270,7 +270,7 @@ Links with text
 {****** Heading 6}[custom text]
 {******* Heading level above 6}[custom text]
 {# Generic}[custom text]
-{| Marker}[custom text]
+{% Marker}[custom text]
 {$ Definition}[custom text]
 {^ Footnote}[custom text]
 {:norg_file:}[custom text]
@@ -282,7 +282,7 @@ Links with text
 {:norg_file:****** Heading 6}[custom text]
 {:norg_file:******* Heading level above 6}[custom text]
 {:norg_file:# Generic}[custom text]
-{:norg_file:| Marker}[custom text]
+{:norg_file:% Marker}[custom text]
 {:norg_file:$ Definition}[custom text]
 {:norg_file:^ Footnote}[custom text]
 {https://github.com/}[custom text]
@@ -649,7 +649,7 @@ Anchors
 [heading 6 anchor]{****** Heading 6}
 [heading 6+ anchor]{******* Heading level above 6}
 [generic anchor]{# Generic}
-[marker anchor]{| Marker}
+[marker anchor]{% Marker}
 [definition anchor]{$ Definition}
 [footnote anchor]{^ Footnote}
 [norg file anchor]{:norg_file:}
@@ -660,7 +660,7 @@ Anchors
 [external heading 5 anchor]{:norg_file:***** Heading 5}
 [external heading 6 anchor]{:norg_file:****** Heading 6}
 [external generic anchor]{:norg_file:# Generic}
-[external marker anchor]{:norg_file:| Marker}
+[external marker anchor]{:norg_file:% Marker}
 [external definition anchor]{:norg_file:$ Definition}
 [external footnote anchor]{:norg_file:^ Footnote}
 [non-norg file anchor]{@ external_file.txt}

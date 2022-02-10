@@ -348,7 +348,7 @@ class Scanner
             {
                 return true;
             }
-            if (check_detached(lexer, MARKER | NONE, {'|'}) != NONE)
+            if (check_detached(lexer, MARKER | NONE, {'%'}) != NONE)
                 return true;
 
             if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, {'$'}) != NONE)
@@ -747,7 +747,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = LINK_TARGET_EXTERNAL_FILE;
                 break;
-            case '|':
+            case '%':
                 lexer->result_symbol = m_LastToken = LINK_TARGET_MARKER;
                 break;
             case '$':
@@ -824,7 +824,7 @@ class Scanner
                 lexer->result_symbol = m_LastToken = LINK_FILE_END;
                 advance(lexer);
                 return (lexer->lookahead == '}' || lexer->lookahead == '#' ||
-                        lexer->lookahead == '|' || lexer->lookahead == '$' ||
+                        lexer->lookahead == '%' || lexer->lookahead == '$' ||
                         lexer->lookahead == '^' || lexer->lookahead == '*');
             }
         default:
@@ -899,7 +899,7 @@ class Scanner
     size_t m_ParsedChars = 0;
 
    private:
-    const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '|', '=',
+    const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '%', '=',
                                                         '~', '$', '_', '^'};
     const std::unordered_map<int32_t, TokenType> m_AttachedModifiers = {
         {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
