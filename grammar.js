@@ -22,6 +22,7 @@ module.exports = grammar({
         [$.inline_comment, $._conflict_open],
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
+        [$.inline_link_target, $._conflict_open],
 
         [$.bold, $._paragraph_element],
         [$.italic, $._paragraph_element],
@@ -34,6 +35,7 @@ module.exports = grammar({
         [$.inline_comment, $._paragraph_element],
         [$.inline_math, $._paragraph_element],
         [$.variable, $._paragraph_element],
+        [$.inline_link_target, $._paragraph_element],
 
         [$.unordered_link1, $.paragraph],
         [$.unordered_link2, $.paragraph],
@@ -189,6 +191,9 @@ module.exports = grammar({
 
         $.variable_open,
         $.variable_close,
+
+        $.inline_link_target_open,
+        $.inline_link_target_close,
     ],
 
     rules: {
@@ -262,6 +267,7 @@ module.exports = grammar({
             alias($.inline_comment_close, "_lowercase"),
             alias($.inline_math_close, "_lowercase"),
             alias($.variable_close, "_lowercase"),
+            alias($.inline_link_target_close, "_lowercase"),
         ),
 
         _multi_paragraph_element: $ =>
@@ -307,6 +313,8 @@ module.exports = grammar({
                         alias($.inline_math_close, "_lowercase"),
                         alias($.variable_open, "_lowercase"),
                         alias($.variable_close, "_lowercase"),
+                        alias($.inline_link_target_open, "_lowercase"),
+                        alias($.inline_link_target_close, "_lowercase"),
                         alias($.link_description_begin, "_lowercase"),
                         alias($.link_description_end, "_lowercase"),
                         alias($.link_location_begin, "_lowercase"),
@@ -429,6 +437,13 @@ module.exports = grammar({
             alias($.variable_close, "_close"),
         ),
 
+        inline_link_target: $ =>
+        seq(
+            alias($.inline_link_target_open, "_open"),
+            $._verbatim_segment,
+            alias($.inline_link_target_close, "_close"),
+        ),
+
         _conflict_open: $ =>
         prec.dynamic(-1,
             choice(
@@ -443,6 +458,7 @@ module.exports = grammar({
                 alias($.inline_comment_open, "_lowercase"),
                 alias($.inline_math_open, "_lowercase"),
                 alias($.variable_open, "_lowercase"),
+                alias($.inline_link_target_open, "_lowercase"),
             )
         ),
 
@@ -2027,6 +2043,7 @@ module.exports = grammar({
             $.inline_comment,
             $.inline_math,
             $.variable,
+            $.inline_link_target,
         ),
     }
 });

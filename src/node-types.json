@@ -12,6 +12,10 @@
         "named": true
       },
       {
+        "type": "inline_link_target",
+        "named": true
+      },
+      {
         "type": "inline_math",
         "named": true
       },
@@ -955,6 +959,11 @@
   },
   {
     "type": "inline_comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "inline_link_target",
     "named": true,
     "fields": {}
   },

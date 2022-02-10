@@ -154,6 +154,19 @@ This sentence contains a =variable= reference.
     )
 )
 
+==================
+Inline Link Target
+==================
+This sentence contains an <inline link target>.
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (inline_link_target)
+        )
+    )
+)
+
 =================
 Nesting into Bold
 =================
@@ -490,9 +503,11 @@ This is not ,, subscript.
 This is not ++ an inline comment.
 This is not $$ inline math.
 This is not == a variable reference.
+This is not <> an inline link target.
 ---
 (document
     (paragraph
+        (paragraph_segment)
         (paragraph_segment)
         (paragraph_segment)
         (paragraph_segment)
@@ -521,9 +536,14 @@ This is not \,subscript\,
 This is not \+an inline comment\+
 This is not \$inline math\$
 This is not \=variable reference\=
+This is not \<an inline link target\>
 ---
 (document
     (paragraph
+        (paragraph_segment
+            (escape_sequence (escape_sequence_prefix) (any_char))
+            (escape_sequence (escape_sequence_prefix) (any_char))
+        )
         (paragraph_segment
             (escape_sequence (escape_sequence_prefix) (any_char))
             (escape_sequence (escape_sequence_prefix) (any_char))
@@ -659,11 +679,15 @@ No nested markup inside verbatim
 `+no inline comment+`
 `$no inline math$`
 `=no variable=`
+`<no link target>`
 `no:*link modifier*`
 `hidden \*escaped char`
 ---
 (document
     (paragraph
+        (paragraph_segment
+            (verbatim)
+        )
         (paragraph_segment
             (verbatim)
         )
@@ -716,11 +740,15 @@ No nested markup inside inline comments
 +`no verbatim`+
 +$no inline math$+
 +=no variable=+
++<no link target>+
 +no:*link modifier*+
 +hidden \*escaped char*+
 ---
 (document
     (paragraph
+        (paragraph_segment
+            (inline_comment)
+        )
         (paragraph_segment
             (inline_comment)
         )
@@ -773,11 +801,15 @@ $,not subscripted,$
 $`no verbatim`$
 $+no inline comment+$
 $=no variable=$
+$<no link target>$
 $no:*link modifier*$
 $hidden \*escaped char*$
 ---
 (document
     (paragraph
+        (paragraph_segment
+            (inline_math)
+        )
         (paragraph_segment
             (inline_math)
         )
@@ -830,6 +862,7 @@ No nested markup inside variables
 =`no verbatim`=
 =+no inline comment+=
 =$no inline math$=
+=<no link target>=
 =no:*link modifier*=
 =hidden \*escaped char*=
 ---
@@ -870,6 +903,70 @@ No nested markup inside variables
         )
         (paragraph_segment
             (variable)
+        )
+        (paragraph_segment
+            (variable)
+        )
+    )
+)
+
+===========================================
+No nested markup inside inline link targets
+===========================================
+<*not bold*>
+</not italic/>
+<-not struck through->
+<_not underlined_>
+<|no spoiler|>
+<^not superscripted^>
+<,not subscripted,>
+<=no inline comment+>
+<`no verbatim`>
+<$no inline math$>
+<=no variable=>
+<no:*link modifier*>
+<hidden \*escaped char*>
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
+        )
+        (paragraph_segment
+            (inline_link_target)
         )
     )
 )

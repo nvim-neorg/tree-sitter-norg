@@ -152,6 +152,9 @@ enum TokenType : char
 
     VARIABLE_OPEN,
     VARIABLE_CLOSE,
+
+    INLINE_LINK_TARGET_OPEN,
+    INLINE_LINK_TARGET_CLOSE,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -502,6 +505,18 @@ class Scanner
             }
             else
                 return false;
+        }
+        else if (lexer->lookahead == '<')
+        {
+            advance(lexer);
+            lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_OPEN;
+            return true;
+        }
+        else if (lexer->lookahead == '>')
+        {
+            advance(lexer);
+            lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_CLOSE;
+            return true;
         }
         else if (lexer->lookahead == '[')
         {
@@ -886,8 +901,9 @@ class Scanner
         {
             if (lexer->lookahead == ':' || (lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
                 (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) ||
-                (lexer->lookahead == '[' || lexer->lookahead == ']' || lexer->lookahead == '{' ||
-                 lexer->lookahead == '}') ||
+                (lexer->lookahead == '<' || lexer->lookahead == '>' ||
+                 lexer->lookahead == '[' || lexer->lookahead == ']' ||
+                 lexer->lookahead == '{' || lexer->lookahead == '}') ||
                 lexer->lookahead == '\\')
                 break;
             else
