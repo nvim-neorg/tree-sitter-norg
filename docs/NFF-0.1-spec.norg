@@ -33,7 +33,7 @@
     ~ *Unambiguity:* the syntax should leave _no_ room for ambiguity. This is especially motivated
       by the use of [tree-sitter] for the original syntax parser which takes a strict left-to-right
       parsing approach and only has single-character look-ahead.
-    ~ *[free-form]:* whitespace is _only_ used to delimit tokens but has no other significance! This
+    ~ *[Free-form]:* whitespace is _only_ used to delimit tokens but has no other significance! This
       is probably the most contrasting feature to other plain-text formats which often adhere to the
       [off-side rule], meaning that the syntax relies on whitespace-indentation to carry meaning.
 
@@ -52,7 +52,7 @@
     [code point]{https://en.wikipedia.org/wiki/Code_point}
 
 **** Whitespace
-     A {> character} is considered to be *whitespace* if it is any of the following:
+     A {# character} is considered to be *whitespace* if it is any of the following:
      - A tab `U+0009`
      - A line feed `U+000A`
      - A form feed `U+000C`
@@ -75,47 +75,43 @@
      [Unicode Zs general category]{https://www.fileformat.info/info/unicode/category/Zs/list.htm}
 
 **** Punctuation
-     A {> character} is considered to be *punctuation* if it is any of the following:
+     A {# character} is considered to be *punctuation* if it is any of the following:
      - A standard ASCII punctuation character: |`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`|
 
        +TODO: check whether we want to support every punctuation mark from the `en_US.utf8` locale+
 
 **** Escaping
-     A single {> character} can be escaped if it is immediately preceded by a backslash, `\`
-     (`U+005C`). Any {> character} may be escaped /apart from/ {> character}s within verbatim
+     A single {# character} can be escaped if it is immediately preceded by a backslash, `\`
+     (`U+005C`). Any {# character} may be escaped /apart from/ {# character}s within verbatim
      segments +TODO: add link to verbatim segments+.
 
 **** Special Character
      - | | TODO: formalize this section
      - Emojis
-     +- Should we support [entity references]?
-     [entity references]{https://spec.commonmark.org/0.30/#entity-references}
-     vhyrro: I'm personally very against this idea tbh. I don't see an immediate use case for it,
-     perhaps if it's a lifesaver for some we could modify the syntax a little by enforcing
-     &nbsp& instead of &nbsp;+
 
 *** Words
     The _Norg_ format is designed to be parsed on a word-by-word basis from left-to-right through
-    the entire document /in a single pass/. This is possible because the language is [Free-form],
+    the entire document /in a single pass/. This is possible because the language is [free-form],
     meaning that whitespace has no semantic meaning, and because the markup follows strict rules
     which are outlined in the later sections of this document.
 
-    A *word* is considered to be any combination of {> character}s which are neither {# whitespace},
+    A *word* is considered to be any combination of {# character}s which are neither {# whitespace},
     {# punctuation} nor other {# special character}s.
 
 *** Paragraph Segments
     {# Words} are first combined into {# paragraph segments}. A segment gets terminated by any of
     the following:
-    - A {> line ending}
+    - A {# line ending}
     - Any of the {# attached modifiers} +NOTE(vhyrro): Don't paragraph segments contain attached mods?+
     - Any of the {# linkables} +Same here+
 
-*** Paragraphs
+*** Paragraph
     Paragraphs are then formed of consecutive {# paragraph segments}, {# attached modifiers} or
     {# linkables}. A paragraph is terminated by:
-    - A _paragraph break_ (which equals two consecutive {> line endings})
+    - A <paragraph break> (which equals two consecutive {# line endings})
     - Any of the {# detached modifiers}
     - Any of the {# delimiting modifiers}
+    - Any of the tags +TODO: link to section+
 
 ** Detached Modifiers
    _Norg_ has several detached modifiers. The name originates from their differentiation to the
@@ -124,7 +120,7 @@
    All detached modifiers must abide by the following rules:
    - A detached modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
      (but nothing else!) may precede it)
-   - A detached modifier must be immediately followed by {# whitespace} (incl. a {> line ending}),
+   - A detached modifier must be immediately followed by {# whitespace} (excl. a {# line ending}!),
      another detached modifier of the same type or by a {# detached modifier extensions}[detached
      modifier extension]
 
@@ -155,7 +151,7 @@
     Furthermore, in contrast to the {# Standard Detached Modifiers} this detached modifier type
     affects the following `paragraph` instead of only the next segment. This means that in order to
     terminate the detached modifier contents, you need two consecutive line breaks (forming a
-    `paragraph_break`).
+    {# paragraph break}).
 
     Here are some correct examples of the nestable detached modifiers:
 
@@ -240,11 +236,11 @@
 **** Invalid Examples
      @code norg
      >I am not a quote
- 
+
      some preceding text $ I am not a definition
- 
+
      >$ I am not a detached modifier
- 
+
      > > I am only a level 1 quote
      @end
      ---
@@ -259,19 +255,19 @@
     {# standard detached modifiers}).
 
 **** Headings
-    @code norg
-    * Heading level 1
-    ** Heading level 2
-    *** Heading level 3
-    **** Heading level 4
-    ***** Heading level 5
-    ****** Heading level 6
-    ******* Heading level 7 (falls back to level 6 in the tree-sitter parser)
-    @end
+     @code norg
+     * Heading level 1
+     ** Heading level 2
+     *** Heading level 3
+     **** Heading level 4
+     ***** Heading level 5
+     ****** Heading level 6
+     ******* Heading level 7 (falls back to level 6 in the tree-sitter parser)
+     @end
 
-    Although headings are both structural /and/ nestable, the former takes precedence over the
-    latter, meaning that headings only affect a `paragraph_segment`. This is for user convenience as
-    it does not require an empty line right below a heading.
+     Although headings are both structural /and/ nestable, the former takes precedence over the
+     latter, meaning that headings only affect a `paragraph_segment`. This is for user convenience as
+     it does not require an empty line right below a heading.
 
 **** Markers
      @code norg
@@ -289,7 +285,7 @@
      - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
        (but nothing else!) may precede it)
      - A delimiting modifier must consist of three or more consecutive modifiers of the same type
-     - It must be followed by an immediate {> line ending} (without any extra {# whitespace})
+     - It must be followed by an immediate {# line ending} (without any extra {# whitespace})
 
 ***** Weak Delimiting Modifier
       This modifier uses the `-` character and immediately closes the current heading level.
@@ -401,10 +397,10 @@
     - Finally another `|` char closes the todo status extension
 
 **** Indent Segment Extension
-     Since {# nestable detached modifiers} can only contain a {# paragraphs}[paragraph] this can
-     cause severe limitations because insertion of (for example) code blocks is not possible. To
-     alleviate this deficiency, the {# indent segment extension} exists, which increases the
-     indentation of the tree by one level allowing nesting of more complex elements to occur.
+     Since {# nestable detached modifiers} can only contain a {# paragraph} this can cause severe
+     limitations because insertion of (for example) code blocks is not possible. To alleviate this
+     deficiency, the {# indent segment extension} exists, which increases the indentation of the
+     tree by one level allowing nesting of more complex elements to occur.
      The syntax is the following:
      - The indent segment extension starts with a single `\` char
      - This must be _immediately_ followed by a {# line ending}
@@ -470,7 +466,7 @@
    - An opening modifier may _NOT_ be succeeded by {# whitespace}
    - A closing modifier may _NOT_ be preceded by {# whitespace}
    - A closing modifier may only be succeeded by {# whitespace} or {# punctuation}
-   - {# Attached modifiers} can only span at maximum a single {# paragraphs}[paragraph].
+   - {# Attached modifiers} can only span at maximum a single {# paragraph}.
    - Nested {# attached modifiers} should be closed in the opposite order they were opened.
 
    Their name should be rather self explanatory - both the opening and closing modifier are attached
@@ -482,10 +478,10 @@
    - \_underline\_: _underline_
    - \-strikethrough\-: -strikethrough-
    - \!spoiler\!: !spoiler!
-   - \^superscript\^: ^superscript^  (when nested into `subscript`, will highlight as an error)
-   - \,subscript\,: ,subscript,  (when nested into `superscript`, will highlight as an error)
+   - \^superscript\^: ^superscript^  (cannot be nested into `subscript`)
+   - \,subscript\,: ,subscript,  (cannot be nested into `superscript`)
    - \`inline code\`: `inline code` (disables any nested markup - verbatim)
-   - \+inline comment\+: +inline comment+  (verbatim)
+   - \+inline comment\+: +inline comment+
    - \$inline math\$: $f(x) = y$  (verbatim)
    - \=variable\=: =variable=  (verbatim)
 
@@ -527,7 +523,7 @@
     text*
 
     Closed in the wrong order:
-    */Bold and italic*/ 
+    */Bold and italic*/
 
     Also closed in the wrong order:
     */Bold and italic* and only italic/
@@ -582,9 +578,9 @@
     - And I am still the same list
     @end
 
-    Without the trailing modifier those two items would've been treated as two separate lists, but
+    Without the trailing modifier those two items would have been treated as two separate lists, but
     since the `~` char swallows the line break it makes the parser actually see:
-    
+
     @code norg
     - I am a list item
     - And I am still the same list
@@ -659,7 +655,7 @@
 
 **** URL
      You can define a link to an external resource by simply putting in the URL:
-     
+
      @code norg
      {https://github.com/nvim-neorg/neorg}
      @end
@@ -675,14 +671,14 @@
      {* I am a level 1 heading}
      @end
 
-     The inside of the link location looks just like a detached modifier definition, and that's
+     The inside of the link location looks just like a detached modifier definition, and that is
      because it pretty much is. You can substitute the `*` char for any other
      {# Structural Detached Modifiers}[structural] or {# Range-able Detached Modifiers}[range-able]
      detached modifier, /except/ "ranged" versions of said modifiers - those are *disallowed* within
      the link syntax. By this we mean that syntax like `{$$ Text}` is _invalid_. To link to a ranged
-     definition you'd still use `{$ Text}`, there's no reason to make a distinction between a ranged
-     and non-ranged detached modifier, as both have the same meaning, one just allows more content
-     to exist within itself.
+     definition you wouldd still use `{$ Text}`, there is no reason to make a distinction between a
+     ranged and non-ranged detached modifier, as both have the same meaning, one just allows more
+     content to exist within itself.
 
 **** Custom Detached Modifiers
      Apart from linking to the detached modifiers outlined above, you can also link to a set of
@@ -690,16 +686,16 @@
      linkable locations.
 
 ***** The File Linkable (`@`)
-      Sometimes you may want to link to an external file that isn't an _Norg_ file.
+      Sometimes you may want to link to an external file that is not a _Norg_ file.
       In that case you may use `{@ /path/to/my/file.txt}` (notice the mandatory space after the `@`
       char, just like with the {**** detached modifier}s). Paths are relative to the _Norg_
       file that contains the link.
 
 ***** The Magic Char (`#`)
       Sometimes you simply want to be lazy, or you want to link to an {**** inline linkables}[inline
-      linkable] that doesn't have a dedicated modifier to denote it - in these scenarios you'd use
-      the magic char: `#`. It links to /any/ item type. The syntax is exactly the same as with the
-      other modifiers: `{# My Location}`.
+      linkable] that does not have a dedicated modifier to denote it - in these scenarios you would
+      use the magic char: `#`. It links to /any/ item type. The syntax is exactly the same as with
+      the other modifiers: `{# My Location}`.
 
 **** Inline Linkables
      Although most linkable items are either {# Structural Detached Modifiers}[structural] or
@@ -724,7 +720,7 @@
 
     When a custom description is required, it must be placed *_after_* the link location. This makes
     sense in terms of writing as you first define where you link to, and then describe it further:
-    
+
     @code norg
     {* I am a link}[with a description]
     @end
@@ -749,14 +745,6 @@
     The `[Neorg]` declarations point to the definition, and then the definition points to the
     website.
 
-    @code norg
-    Take a look at my [website]{https://example.com}!
-
-    My [website] is really awesome.
-    @end
-    In the above example we first /define/ the anchor, then reuse the "website" anchor below. The
-    `[website]` anchor then points to the definition, which in turn points to `https://example.com`.
-
 *** Inline Link Targets
     Finally, _Norg_ also has the possibility of placing link targets at arbitrary in-line positions
     in your document. We call these {# inline link targets} which are formatted inside of angled
@@ -768,10 +756,10 @@
 
     ...
 
-    Refer to {# inline link targets} if you're interested in learning more.
+    Refer to {# inline link targets} if you are interested in learning more.
     @end
 
-    An important thing to note is that since inline link targets are - well - inline, they can't be
+    An important thing to note is that since inline link targets are - well - inline, they cannot be
     directly linked to with a dedicated char in the link syntax.
     To link to these syntax elements you can /only/ use {# The Magic Char (`#`)}[the magic char].
 
