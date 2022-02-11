@@ -162,7 +162,9 @@ This sentence contains an <inline link target>.
 (document
     (paragraph
         (paragraph_segment
-            (inline_link_target)
+            (inline_link_target
+                (paragraph)
+            )
         )
     )
 )
@@ -791,9 +793,6 @@ Nesting into Inline Comment
                 (variable)
             )
         )
-        (paragraph_segment
-            (inline_comment)
-        )
     )
 )
 
@@ -915,67 +914,6 @@ No nested markup inside variables
         )
         (paragraph_segment
             (variable)
-        )
-    )
-)
-
-===========================================
-No nested markup inside inline link targets
-===========================================
-<*not bold*>
-</not italic/>
-<-not struck through->
-<_not underlined_>
-<|no spoiler|>
-<^not superscripted^>
-<,not subscripted,>
-<=no inline comment+>
-<`no verbatim`>
-<$no inline math$>
-<=no variable=>
-<no:*link modifier*>
-<hidden \*escaped char*>
----
-(document
-    (paragraph
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
-        )
-        (paragraph_segment
-            (inline_link_target)
         )
     )
 )

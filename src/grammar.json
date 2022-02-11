@@ -1124,37 +1124,6 @@
         }
       ]
     },
-    "inline_link_target": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "inline_link_target_open"
-          },
-          "named": false,
-          "value": "_open"
-        },
-        {
-          "type": "FIELD",
-          "name": "text",
-          "content": {
-            "type": "SYMBOL",
-            "name": "paragraph_segment"
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "inline_link_target_close"
-          },
-          "named": false,
-          "value": "_close"
-        }
-      ]
-    },
     "_conflict_open": {
       "type": "PREC_DYNAMIC",
       "value": -1,
@@ -1345,6 +1314,42 @@
           }
         ]
       }
+    },
+    "inline_link_target": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "inline_link_target_open"
+          },
+          "named": false,
+          "value": "_open"
+        },
+        {
+          "type": "FIELD",
+          "name": "text",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_link_content"
+            },
+            "named": true,
+            "value": "paragraph"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "inline_link_target_close"
+          },
+          "named": false,
+          "value": "_close"
+        }
+      ]
     },
     "link_description": {
       "type": "SEQ",

@@ -969,7 +969,7 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
