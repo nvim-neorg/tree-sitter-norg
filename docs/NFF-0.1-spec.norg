@@ -44,7 +44,6 @@
 ** Preliminaries
    First, we define some basic concepts which will be used in this specification.
 
-
 *** Characters
     A _Norg_ file is made up of /characters/.
     A <character> is any Unicode [code point].
@@ -242,6 +241,9 @@
      >$ I am not a detached modifier
 
      > > I am only a level 1 quote
+
+     *
+         I am not a valid heading title.
      @end
      ---
 
@@ -329,9 +331,12 @@
     - As a single detached modifier they affect:
     -- The next `paragraph_segment` which becomes the /title/
     -- The `paragraph` following that which becomes the /content/
-    - Or they can occur as a pair of two detached modifiers in which case:
+    - As a pair of two detached modifiers in which case:
     -- The next `paragraph_segment` still becomes the /title/
     -- But the content continues until the "closing" detached modifier is found
+
+    The closing modifier has the same rules as an opening detached modifier except it /must/ be
+    directly succeeded by a {# line ending}.
 
 **** Definitions
      @code norg
@@ -377,8 +382,8 @@
     {# Detached modifiers} support extensions which must immediately follow the detached modifier
     (or another extension).
 
-**** Todo Status Extension
-     The ToDo item extension assigns a task status to a certain modifier. You probably know this
+**** TODO Status Extension
+     The TODO item extension assigns a task status to a certain modifier. You probably know this
      concept from Markdown where unordered lists can become tasks. In _Norg_ we take this concept to
      the next level because any detached modifier can be assigned a task status. This can for
      example be useful for the author of a document to keep track of the status of certain sections.
