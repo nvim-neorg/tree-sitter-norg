@@ -12,5 +12,12 @@
           source = ./.;
           inherit (pkgs.tree-sitter) version;
         };
+        devShell = pkgs.mkShell {
+          nativeBuildInputs = with pkgs; [
+            nodejs
+            nodePackages.node-gyp
+            tree-sitter
+          ];
+        };
       });
 }
