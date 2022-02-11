@@ -138,13 +138,13 @@ public class MyClass {}
 @end
 ---
 (document
-    (ranged_tag
+    (ranged_verbatim_tag
         (tag_name
             (tag_name_element)
         )
         (tag_parameters (tag_param))
-        (ranged_tag_content)
-        (ranged_tag_end)
+        (ranged_verbatim_tag_content)
+        (ranged_verbatim_tag_end)
     )
 )
 

@@ -173,6 +173,10 @@
           "named": true
         },
         {
+          "type": "inline_link_target",
+          "named": true
+        },
+        {
           "type": "link",
           "named": true
         },
@@ -244,6 +248,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
@@ -938,6 +946,10 @@
           "named": true
         },
         {
+          "type": "inline_link_target",
+          "named": true
+        },
+        {
           "type": "link",
           "named": true
         },
@@ -946,6 +958,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "inline_link_target",
+    "named": true,
+    "fields": {
+      "text": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1015,6 +1043,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
@@ -1676,6 +1708,10 @@
           "named": true
         },
         {
+          "type": "inline_link_target",
+          "named": true
+        },
+        {
           "type": "link",
           "named": true
         },
@@ -1712,6 +1748,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
@@ -2184,6 +2224,10 @@
           "named": true
         },
         {
+          "type": "inline_link_target",
+          "named": true
+        },
+        {
           "type": "link",
           "named": true
         },
@@ -2216,6 +2260,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
@@ -2254,6 +2302,10 @@
           "named": true
         },
         {
+          "type": "inline_link_target",
+          "named": true
+        },
+        {
           "type": "link",
           "named": true
         },
@@ -2286,6 +2338,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {
@@ -2921,6 +2977,10 @@
         },
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "inline_link_target",
           "named": true
         },
         {

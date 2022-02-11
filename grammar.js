@@ -164,6 +164,9 @@ module.exports = grammar({
 
         $.variable_open,
         $.variable_close,
+
+        $.inline_link_target_open,
+        $.inline_link_target_close,
     ],
 
     rules: {
@@ -272,6 +275,7 @@ module.exports = grammar({
             $.link,
             $.anchor_declaration,
             $.anchor_definition,
+            $.inline_link_target,
             $.escape_sequence,
             $.attached_modifier,
             $._linked_attached_modifier,
@@ -320,6 +324,8 @@ module.exports = grammar({
             alias($.inline_math_close, "_lowercase"),
             alias($.variable_open, "_lowercase"),
             alias($.variable_close, "_lowercase"),
+            alias($.inline_link_target_open, "_lowercase"),
+            alias($.inline_link_target_close, "_lowercase"),
             alias($.link_description_begin, "_lowercase"),
             alias($.link_description_end, "_lowercase"),
             alias($.link_location_begin, "_lowercase"),
@@ -417,6 +423,13 @@ module.exports = grammar({
             alias($.variable_open, "_open"),
             $._verbatim_modifier_content,
             alias($.variable_close, "_close"),
+        ),
+
+        inline_link_target: $ =>
+        seq(
+            alias($.inline_link_target_open, "_open"),
+            field("text", $.paragraph_segment),
+            alias($.inline_link_target_close, "_close"),
         ),
 
         _conflict_open: $ =>

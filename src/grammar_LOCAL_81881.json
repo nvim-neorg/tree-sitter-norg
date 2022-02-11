@@ -257,10 +257,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "inline_link_target"
-        },
-        {
-          "type": "SYMBOL",
           "name": "escape_sequence"
         },
         {
@@ -632,24 +628,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "variable_close"
-          },
-          "named": false,
-          "value": "_lowercase"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "inline_link_target_open"
-          },
-          "named": false,
-          "value": "_lowercase"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "inline_link_target_close"
           },
           "named": false,
           "value": "_lowercase"
@@ -1118,37 +1096,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "variable_close"
-          },
-          "named": false,
-          "value": "_close"
-        }
-      ]
-    },
-    "inline_link_target": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "inline_link_target_open"
-          },
-          "named": false,
-          "value": "_open"
-        },
-        {
-          "type": "FIELD",
-          "name": "text",
-          "content": {
-            "type": "SYMBOL",
-            "name": "paragraph_segment"
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "inline_link_target_close"
           },
           "named": false,
           "value": "_close"
@@ -4805,14 +4752,6 @@
     {
       "type": "SYMBOL",
       "name": "variable_close"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "inline_link_target_open"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "inline_link_target_close"
     }
   ],
   "inline": [],
