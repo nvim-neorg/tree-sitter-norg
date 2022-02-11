@@ -715,12 +715,19 @@
     the /only/ syntax item *is* the link description). Anchors are described {# anchors}[later on].
 
 *** Links
-    Links in _Norg_ can either be a standalone {# link location} in which case their text is used as
-    the link title (often makes sense for headings).
+    Links in _Norg_ can exist as a standalone {# link location} in which case their text is used as
+    the link title (often makes sense for headings):
 
-    +TODO: Expand on this a little more+
+    @code norg
+    {* I am a standalone link}
+    @end
+
     When a custom description is required, it must be placed *_after_* the link location. This makes
-    sense in terms of writing as you first define where you link to, and then describe it further.
+    sense in terms of writing as you first define where you link to, and then describe it further:
+    
+    @code norg
+    {* I am a link}[with a description]
+    @end
 
 *** Anchors
     _Norg_ also has a concept called {# anchors}. These allow you to place a standalone
@@ -729,6 +736,24 @@
     with an <anchor definition> which is an initial {# link description} followed by a
     {# link location}. This is especially useful when you want to link to the same target very
     often, like for example a specific website.
+
+    Few usage examples:
+    @code norg
+    [Neorg] is a fancy organizational tool for everyone.
+
+    I like shilling [Neorg] sorry :(
+
+    [Neorg]{https://github.com/nvim-neorg/neorg}
+    @end
+    Here we define +TODO+
+
+    @code norg
+    Take a look at my [website]{https://example.com}!
+
+    My [website] is really awesome.
+    @end
+    In the above example we first /define/ the anchor, then reuse the "website" anchor below. The
+    `[website]` anchor then points to the definition, 
 
 *** Inline Link Targets
     Finally, _Norg_ also has the possibility of placing link targets at arbitrary in-line positions
