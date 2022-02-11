@@ -1056,7 +1056,7 @@
         "required": true,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
@@ -1082,7 +1082,7 @@
         "required": false,
         "types": [
           {
-            "type": "paragraph_segment",
+            "type": "paragraph",
             "named": true
           }
         ]
@@ -1659,6 +1659,30 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "anchor_declaration",
+          "named": true
+        },
+        {
+          "type": "anchor_definition",
+          "named": true
+        },
+        {
+          "type": "attached_modifier",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "link",
+          "named": true
+        },
+        {
+          "type": "link_modifier",
+          "named": true
+        },
         {
           "type": "paragraph_segment",
           "named": true

@@ -451,10 +451,35 @@ module.exports = grammar({
             )
         ),
 
+        _link_content: $ =>
+        prec.right(1,
+            seq(
+                repeat1(
+                    choice(
+                        $._paragraph_element,
+                        alias($._conflict_open, "_lowercase"),
+                        $._line_break,
+                    ),
+                ),
+            ),
+        ),
+
+        _link_verbatim_content: $ =>
+        prec.right(1,
+            seq(
+                repeat1(
+                    choice(
+                        $._verbatim_modifier_content,
+                        $._line_break,
+                    ),
+                ),
+            ),
+        ),
+
         link_description: $ =>
         seq(
             alias($.link_description_begin, "_begin"),
-            field("text", $.paragraph_segment),
+            field("text", alias($._link_content, $.paragraph)),
             alias($.link_description_end, "_end"),
         ),
 
@@ -491,7 +516,6 @@ module.exports = grammar({
             field("type",
                 choice(
                     $.link_target_generic,
-                    $.link_target_external_file,
                     $.link_target_marker,
                     $.link_target_definition,
                     $.link_target_footnote,
@@ -503,7 +527,7 @@ module.exports = grammar({
                     $.link_target_heading6,
                 ),
             ),
-            field("text", $.paragraph_segment),
+            field("text", alias($._link_content, $.paragraph)),
         ),
 
         _link_target_verbatim: $ =>
@@ -511,9 +535,10 @@ module.exports = grammar({
             field("type",
                 choice(
                     $.link_target_url,
+                    $.link_target_external_file,
                 ),
             ),
-            field("text", alias($._verbatim_modifier_content, $.paragraph_segment)),
+            field("text", alias($._link_verbatim_content, $.paragraph)),
         ),
 
         link: $ =>

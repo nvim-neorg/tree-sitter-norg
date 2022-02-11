@@ -844,7 +844,7 @@ class Scanner
 
             advance(lexer);
 
-            if (!std::iswspace(lexer->lookahead))
+            if (!std::iswspace(lexer->lookahead) && m_LastToken != LINK_TARGET_EXTERNAL_FILE)
                 return false;
 
             while (std::iswspace(lexer->lookahead))
