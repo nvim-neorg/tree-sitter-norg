@@ -4,7 +4,7 @@ Marker
 * Here is some heading
   With some text.
 
-| This marker separates the document.
+% This marker separates the document.
 
 Now this is on the root level.
 

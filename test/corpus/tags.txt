@@ -7,12 +7,12 @@ f(x) = \int
 No longer part of the ranged tag.
 ---
 (document
-    (ranged_tag
+    (ranged_verbatim_tag
         (tag_name
             (tag_name_element)
         )
-        (ranged_tag_content)
-        (ranged_tag_end)
+        (ranged_verbatim_tag_content)
+        (ranged_verbatim_tag_end)
     )
     (paragraph
         (paragraph_segment)
@@ -28,13 +28,13 @@ print("Hello world")
 No longer part of the ranged tag.
 ---
 (document
-    (ranged_tag
+    (ranged_verbatim_tag
         (tag_name
             (tag_name_element)
         )
         (tag_parameters (tag_param))
-        (ranged_tag_content)
-        (ranged_tag_end)
+        (ranged_verbatim_tag_content)
+        (ranged_verbatim_tag_end)
     )
     (paragraph
         (paragraph_segment)
@@ -44,7 +44,7 @@ No longer part of the ranged tag.
 =============
 Carryover Tag
 =============
-#comment
+|comment
 This is a comment.
 
 This is no longer part of the comment.
@@ -68,7 +68,7 @@ This is no longer part of the comment.
 =======================
 Carryover Tag Infection
 =======================
-#ordered
+|ordered
 - List item 1
 - List item 2
 
@@ -104,7 +104,7 @@ This is no longer infected.
 =============================
 Carryover Tag with Parameters
 =============================
-#name bob
+|name bob
 > Hi, my name is Bob.
 
 Lol
@@ -120,7 +120,7 @@ Lol
         (quote
             (quote1
                 (quote1_prefix)
-                (paragraph_segment)
+                (paragraph (paragraph_segment))
             )
         )
     )
@@ -157,12 +157,12 @@ print("Hello World")
 @end
 ---
 (document
-    (ranged_tag
+    (ranged_verbatim_tag
         (tag_name
             (tag_name_element)
         )
         (tag_parameters (tag_param))
-        (ranged_tag_content)
-        (ranged_tag_end)
+        (ranged_verbatim_tag_content)
+        (ranged_verbatim_tag_end)
     )
 )

@@ -67,20 +67,6 @@ enum TokenType : char
 
     INSERTION,
 
-    UNORDERED_LINK1,
-    UNORDERED_LINK2,
-    UNORDERED_LINK3,
-    UNORDERED_LINK4,
-    UNORDERED_LINK5,
-    UNORDERED_LINK6,
-
-    ORDERED_LINK1,
-    ORDERED_LINK2,
-    ORDERED_LINK3,
-    ORDERED_LINK4,
-    ORDERED_LINK5,
-    ORDERED_LINK6,
-
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
     HORIZONTAL_LINE,
@@ -107,6 +93,8 @@ enum TokenType : char
 
     RANGED_TAG,
     RANGED_TAG_END,
+    RANGED_VERBATIM_TAG,
+    RANGED_VERBATIM_TAG_END,
 
     CARRYOVER_TAG,
 
@@ -228,14 +216,15 @@ class Scanner
             return true;
         }
 
+        // TODO: make verbatim not a naive copy of non-verbatim ranged tag
         // If we're at the beginning of a line check for all detached modifiers
         if (lexer->get_column(lexer) == 0)
         {
-            // Skip all leading whitespace and measure the indentation level
+            // Skip all leading whitespace
             while (std::iswblank(lexer->lookahead))
                 skip(lexer);
 
-            // We are dealing with a ranged tag (@something)
+            // We are dealing with a ranged verbatim tag (@something)
             if (lexer->lookahead == '@')
             {
                 advance(lexer);
@@ -246,6 +235,65 @@ class Scanner
                 lexer->mark_end(lexer);
 
                 // These sets of checks check whether the tag is `@end`
+                if (lexer->lookahead == 'e')
+                {
+                    advance(lexer);
+                    if (lexer->lookahead == 'n')
+                    {
+                        advance(lexer);
+                        if (lexer->lookahead == 'd')
+                        {
+                            advance(lexer);
+                            if (!lexer->lookahead || std::iswspace(lexer->lookahead))
+                            {
+                                while (std::iswspace(lexer->lookahead) &&
+                                       lexer->lookahead != '\n' && lexer->lookahead)
+                                    advance(lexer);
+
+                                if ((!lexer->lookahead || std::iswspace(lexer->lookahead)))
+                                {
+                                    lexer->result_symbol = m_LastToken = RANGED_VERBATIM_TAG_END;
+                                    m_TagLevel = 0;
+                                    return true;
+                                }
+
+                                lexer->result_symbol = m_LastToken = WORD;
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+                // This is a fallback. If the tag ends up not being `@end`
+                // then...
+                if (m_LastToken == RANGED_VERBATIM_TAG)
+                {
+                    // ignore the char if we are already inside of a ranged tag.
+                    lexer->result_symbol = m_LastToken = WORD;
+                    return true;
+                }
+
+                lexer->result_symbol = m_LastToken = RANGED_VERBATIM_TAG;
+                m_TagLevel = 1;
+                return true;
+            }
+            // We are dealing with a ranged tag (#something)
+            else if (lexer->lookahead == '#')
+            {
+                advance(lexer);
+
+                if (!lexer->lookahead || std::iswspace(lexer->lookahead))
+                {
+                    lexer->result_symbol = m_LastToken = WORD;
+                    return true;
+                }
+
+                // Mark the end of the token here
+                // We do this because we only want the returned token to be part
+                // of the `#` symbol, not the symbol + the name
+                lexer->mark_end(lexer);
+
+                // These sets of checks check whether the tag is `#end`
                 if (lexer->lookahead == 'e')
                 {
                     advance(lexer);
@@ -276,10 +324,11 @@ class Scanner
                     }
                 }
 
-                // This is a fallback. If the tag ends up not being `@end`
-                // then ignore the char if we are already inside of a ranged tag.
-                if (m_TagLevel)
+                // This is a fallback. If the tag ends up not being `#end`
+                // then...
+                if (m_LastToken == RANGED_TAG)
                 {
+                    // ignore the char if we are already inside of a ranged tag.
                     lexer->result_symbol = m_LastToken = WORD;
                     return true;
                 }
@@ -289,7 +338,7 @@ class Scanner
                 ++m_TagLevel;
                 return true;
             }
-            else if (lexer->lookahead == '#' && !m_TagLevel)
+            else if (lexer->lookahead == '|' && !m_TagLevel)
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
@@ -318,17 +367,12 @@ class Scanner
                 return true;
 
             // Check for the existence of an unordered list element.
-            // The last parameter tells the neorg parser "hey parse as many
-            // '-' chars as possible BUT if you encounter a '>' char at the
-            // end of the parsed string then return an UNORDERED_LINK
             // instead".
-            if (check_detached(lexer,
-                               UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 |
-                                   UNORDERED_LIST4 | UNORDERED_LIST5 | UNORDERED_LIST6,
-                               {'-'},
-                               {'>', UNORDERED_LINK1 | UNORDERED_LINK2 | UNORDERED_LINK3 |
-                                         UNORDERED_LINK4 | UNORDERED_LINK5 | UNORDERED_LINK6}) !=
-                NONE)
+            if (check_detached(
+                    lexer,
+                    UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 |
+                        UNORDERED_LIST5 | UNORDERED_LIST6,
+                    {'-'}) != NONE)
             {
                 return true;
             }
@@ -362,12 +406,11 @@ class Scanner
             if (check_detached(lexer,
                                ORDERED_LIST1 | ORDERED_LIST2 | ORDERED_LIST3 | ORDERED_LIST4 |
                                    ORDERED_LIST5 | ORDERED_LIST6,
-                               {'~'},
-                               {'>', ORDERED_LINK1 | ORDERED_LINK2 | ORDERED_LINK3 | ORDERED_LINK4 |
-                                         ORDERED_LINK5 | ORDERED_LINK6}) != NONE)
+                               {'~'}) != NONE)
+            {
                 return true;
-
-            if (check_detached(lexer, MARKER | NONE, {'|'}) != NONE)
+            }
+            if (check_detached(lexer, MARKER | NONE, {'%'}) != NONE)
                 return true;
 
             if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, {'$'}) != NONE)
@@ -446,7 +489,7 @@ class Scanner
         // If we are not in a tag and we have a square bracket opening then try
         // matching either a todo item or beginning of a list
         else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 &&
-                 lexer->lookahead == '[')
+                 lexer->lookahead == '|')
         {
             advance(lexer);
 
@@ -494,7 +537,7 @@ class Scanner
 
             advance(lexer);  // Move past the matched element (*/x/ )
 
-            if (lexer->lookahead == ']')
+            if (lexer->lookahead == '|')
             {
                 advance(lexer);
                 lexer->mark_end(lexer);
@@ -766,7 +809,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = LINK_TARGET_EXTERNAL_FILE;
                 break;
-            case '|':
+            case '%':
                 lexer->result_symbol = m_LastToken = LINK_TARGET_MARKER;
                 break;
             case '$':
@@ -801,7 +844,7 @@ class Scanner
 
             advance(lexer);
 
-            if (!std::iswspace(lexer->lookahead))
+            if (!std::iswspace(lexer->lookahead) && m_LastToken != LINK_TARGET_EXTERNAL_FILE)
                 return false;
 
             while (std::iswspace(lexer->lookahead))
@@ -843,7 +886,7 @@ class Scanner
                 lexer->result_symbol = m_LastToken = LINK_FILE_END;
                 advance(lexer);
                 return (lexer->lookahead == '}' || lexer->lookahead == '#' ||
-                        lexer->lookahead == '|' || lexer->lookahead == '$' ||
+                        lexer->lookahead == '%' || lexer->lookahead == '$' ||
                         lexer->lookahead == '^' || lexer->lookahead == '*');
             }
         default:
@@ -918,11 +961,11 @@ class Scanner
     size_t m_ParsedChars = 0;
 
    private:
-    const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '|', '=',
+    const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '%', '=',
                                                         '~', '$', '_', '^'};
     const std::unordered_map<int32_t, TokenType> m_AttachedModifiers = {
         {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
-        {'_', UNDERLINE_OPEN},   {'|', SPOILER_OPEN},   {'`', VERBATIM_OPEN},
+        {'_', UNDERLINE_OPEN},   {'!', SPOILER_OPEN},   {'`', VERBATIM_OPEN},
         {'^', SUPERSCRIPT_OPEN}, {',', SUBSCRIPT_OPEN}, {'+', INLINE_COMMENT_OPEN},
         {'$', INLINE_MATH_OPEN}, {'=', VARIABLE_OPEN},
     };
