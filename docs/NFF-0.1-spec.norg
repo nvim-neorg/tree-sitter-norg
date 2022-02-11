@@ -745,7 +745,9 @@
 
     [Neorg]{https://github.com/nvim-neorg/neorg}
     @end
-    Here we define +TODO+
+    Here we /declare/ the anchor twice, then /define/ the anchor at the very bottom.
+    The `[Neorg]` declarations point to the definition, and then the definition points to the
+    website.
 
     @code norg
     Take a look at my [website]{https://example.com}!
@@ -753,11 +755,24 @@
     My [website] is really awesome.
     @end
     In the above example we first /define/ the anchor, then reuse the "website" anchor below. The
-    `[website]` anchor then points to the definition, 
+    `[website]` anchor then points to the definition, which in turn points to `https://example.com`.
 
 *** Inline Link Targets
     Finally, _Norg_ also has the possibility of placing link targets at arbitrary in-line positions
-    in your document. We call this {# inline link targets} which are formatted inside of angle
+    in your document. We call these {# inline link targets} which are formatted inside of angled
     brackets: `<>`.
+
+    @code norg
+    One thing to mention is <inline link targets> - they allow you to link to any location in a
+    document.
+
+    ...
+
+    Refer to {# inline link targets} if you're interested in learning more.
+    @end
+
+    An important thing to note is that since inline link targets are - well - inline, they can't be
+    directly linked to with a dedicated char in the link syntax.
+    To link to these syntax elements you can /only/ use {# The Magic Char (`#`)}[the magic char].
 
 |+ vim: set tw=100 :+|
