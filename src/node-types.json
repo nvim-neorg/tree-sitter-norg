@@ -969,7 +969,18 @@
   {
     "type": "inline_link_target",
     "named": true,
-    "fields": {}
+    "fields": {
+      "text": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "inline_math",

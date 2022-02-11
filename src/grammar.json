@@ -1152,8 +1152,12 @@
           "value": "_open"
         },
         {
-          "type": "SYMBOL",
-          "name": "_verbatim_segment"
+          "type": "FIELD",
+          "name": "text",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
+          }
         },
         {
           "type": "ALIAS",

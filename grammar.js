@@ -438,7 +438,7 @@ module.exports = grammar({
         inline_link_target: $ =>
         seq(
             alias($.inline_link_target_open, "_open"),
-            $._verbatim_segment,
+            field("text", $.paragraph_segment),
             alias($.inline_link_target_close, "_close"),
         ),
 
