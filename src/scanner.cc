@@ -228,7 +228,7 @@ class Scanner
                 skip(lexer);
 
             // We are dealing with a ranged verbatim tag (@something)
-            if (lexer->lookahead == '@')
+            if (lexer->lookahead == '@' && !m_IsInVerbatimTag)
             {
                 advance(lexer);
 
@@ -256,7 +256,7 @@ class Scanner
                                 if ((!lexer->lookahead || std::iswspace(lexer->lookahead)))
                                 {
                                     lexer->result_symbol = m_LastToken = RANGED_VERBATIM_TAG_END;
-                                    m_TagLevel = 0;
+                                    m_IsInVerbatimTag = false;
                                     return true;
                                 }
 
@@ -277,11 +277,11 @@ class Scanner
                 }
 
                 lexer->result_symbol = m_LastToken = RANGED_VERBATIM_TAG;
-                m_TagLevel = 1;
+                m_IsInVerbatimTag = true;
                 return true;
             }
             // We are dealing with a ranged tag (#something)
-            else if (lexer->lookahead == '#')
+            else if (lexer->lookahead == '#' && !m_IsInVerbatimTag)
             {
                 advance(lexer);
 
@@ -315,7 +315,6 @@ class Scanner
                                 if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) && m_TagLevel)
                                 {
                                     lexer->result_symbol = m_LastToken = RANGED_TAG_END;
-
                                     --m_TagLevel;
                                     return true;
                                 }
@@ -341,7 +340,7 @@ class Scanner
                 ++m_TagLevel;
                 return true;
             }
-            else if (lexer->lookahead == '|' && !m_TagLevel)
+            else if (lexer->lookahead == '|' && !m_IsInVerbatimTag)
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
@@ -599,6 +598,7 @@ class Scanner
     }
 
     size_t& get_tag_level() noexcept { return m_TagLevel; }
+    bool& is_in_verbatim_tag() noexcept { return m_IsInVerbatimTag; }
     TokenType& get_last_token() noexcept { return m_LastToken; }
     int32_t& get_current_char() noexcept { return m_Current; }
     auto& get_active_modifiers() noexcept { return m_ActiveModifiers; }
@@ -968,6 +968,7 @@ class Scanner
     // Stores the current char rather than the next char
     int32_t m_Previous = 0, m_Current = 0;
 
+    bool m_IsInVerbatimTag = false;
     size_t m_TagLevel = 0;
 
     // The last matched token type (used to detect things like todo items
@@ -1011,29 +1012,31 @@ extern "C"
         Scanner* scanner = static_cast<Scanner*>(payload);
 
         const auto& tag_level = scanner->get_tag_level();
+        const auto& is_in_verbatim_tag = scanner->is_in_verbatim_tag();
         const auto& last_token = scanner->get_last_token();
         const auto& current = scanner->get_current_char();
         const auto& active_modifiers = scanner->get_active_modifiers();
 
-        if (6 + active_modifiers.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (7 + active_modifiers.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
         buffer[1] = tag_level;
+        buffer[2] = is_in_verbatim_tag;
 
         // Store `current` (which is an int32_t) in a char array by splitting it up
-        buffer[2] = current & 0xFF;
-        buffer[3] = (current >> 8) & 0xFF;
-        buffer[4] = (current >> 16) & 0xFF;
-        buffer[5] = (current >> 24) & 0xFF;
+        buffer[3] = current & 0xFF;
+        buffer[4] = (current >> 8) & 0xFF;
+        buffer[5] = (current >> 16) & 0xFF;
+        buffer[6] = (current >> 24) & 0xFF;
 
         // Serialize the attached modifier bitset into the char array
         // We cast it down to a uint32_t because we genuinely won't be using any
         // more than that.
         for (int i = 0; i < active_modifiers.size(); i++)
-            buffer[6 + i] = active_modifiers[i];
+            buffer[7 + i] = active_modifiers[i];
 
-        return 6 + active_modifiers.size();
+        return 7 + active_modifiers.size();
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload,
@@ -1043,6 +1046,7 @@ extern "C"
         Scanner* scanner = static_cast<Scanner*>(payload);
 
         auto& tag_level = scanner->get_tag_level();
+        auto& is_in_verbatim_tag = scanner->is_in_verbatim_tag();
         auto& last_token = scanner->get_last_token();
         auto& current = scanner->get_current_char();
         auto& active_modifiers = scanner->get_active_modifiers();
@@ -1051,15 +1055,17 @@ extern "C"
         {
             active_modifiers = 0;
             tag_level = 0;
+            is_in_verbatim_tag = false;
             return;
         }
 
         last_token = (TokenType)buffer[0];
+        is_in_verbatim_tag = (bool)buffer[2];
         tag_level = (size_t)buffer[1];
-        current = (uint32_t)buffer[5] << 24 | (uint32_t)buffer[4] << 16 | (uint32_t)buffer[3] << 8 |
-                  (uint32_t)buffer[2];
+        current = (uint32_t)buffer[6] << 24 | (uint32_t)buffer[5] << 16 | (uint32_t)buffer[4] << 8 |
+                  (uint32_t)buffer[3];
 
         for (int i = 0; i < active_modifiers.size(); i++)
-            active_modifiers[i] = buffer[6 + i];
+            active_modifiers[i] = buffer[7 + i];
     }
 }
