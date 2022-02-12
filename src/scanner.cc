@@ -228,7 +228,7 @@ class Scanner
                 skip(lexer);
 
             // We are dealing with a ranged verbatim tag (@something)
-            if (lexer->lookahead == '@' && !m_IsInVerbatimTag)
+            if (lexer->lookahead == '@')
             {
                 advance(lexer);
 
@@ -253,7 +253,7 @@ class Scanner
                                        lexer->lookahead != '\n' && lexer->lookahead)
                                     advance(lexer);
 
-                                if ((!lexer->lookahead || std::iswspace(lexer->lookahead)))
+                                if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) && m_IsInVerbatimTag)
                                 {
                                     lexer->result_symbol = m_LastToken = RANGED_VERBATIM_TAG_END;
                                     m_IsInVerbatimTag = false;
@@ -269,7 +269,7 @@ class Scanner
 
                 // This is a fallback. If the tag ends up not being `@end`
                 // then...
-                if (m_LastToken == RANGED_VERBATIM_TAG)
+                if (m_LastToken == RANGED_VERBATIM_TAG || m_IsInVerbatimTag)
                 {
                     // ignore the char if we are already inside of a ranged tag.
                     lexer->result_symbol = m_LastToken = WORD;
@@ -280,8 +280,12 @@ class Scanner
                 m_IsInVerbatimTag = true;
                 return true;
             }
+
+            if (m_IsInVerbatimTag)
+                return parse_text(lexer);
+
             // We are dealing with a ranged tag (#something)
-            else if (lexer->lookahead == '#' && !m_IsInVerbatimTag)
+            if (lexer->lookahead == '#')
             {
                 advance(lexer);
 
@@ -346,9 +350,6 @@ class Scanner
                 lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
                 return true;
             }
-
-            if (m_TagLevel)
-                return parse_text(lexer);
 
             // The idea of the check_detached function is as follows:
             // We check for the '*' character and depending on how many we
@@ -914,12 +915,12 @@ class Scanner
 
     /*
      * Simply parses any word (segment containing consecutive non-whitespace
-     * characters). If in a tag (m_TagLevel) parse_text parses
+     * characters). If in a tag (m_IsInVerbatimTag) parse_text parses
      * till a newline is encountered
      */
     bool parse_text(TSLexer* lexer)
     {
-        if (m_TagLevel)
+        if (m_IsInVerbatimTag)
         {
             while (lexer->lookahead && lexer->lookahead != '\n')
                 advance(lexer);

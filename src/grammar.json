@@ -3651,26 +3651,21 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "paragraph_segment"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_line_break"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_paragraph_break"
-                  }
-                ]
-              },
-              "named": false,
-              "value": "_segment"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "paragraph_segment"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_line_break"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_paragraph_break"
+                }
+              ]
             },
             {
               "type": "FIELD",

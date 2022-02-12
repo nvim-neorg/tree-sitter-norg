@@ -2070,6 +2070,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "paragraph_segment",
+          "named": true
+        }
+      ]
     }
   },
   {

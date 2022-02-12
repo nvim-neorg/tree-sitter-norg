@@ -1503,13 +1503,10 @@ module.exports = grammar({
         prec.right(0,
             repeat1(
                 choice(
-                    alias(
-                        choice(
-                            $.paragraph_segment,
-                            $._line_break,
-                            $._paragraph_break,
-                        ),
-                        "_segment",
+                    choice(
+                        $.paragraph_segment,
+                        $._line_break,
+                        $._paragraph_break,
                     ),
 
                     field(

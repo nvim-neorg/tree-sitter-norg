@@ -1,6 +1,6 @@
-==========
-Ranged Tag
-==========
+===================
+Ranged Verbatim Tag
+===================
 @math
 f(x) = \int
 @end
@@ -19,9 +19,9 @@ No longer part of the ranged tag.
     )
 )
 
-==========================
-Ranged Tag with Parameters
-==========================
+===================================
+Ranged Verbatim Tag with Parameters
+===================================
 @code lua
 print("Hello world")
 @end
@@ -37,6 +37,31 @@ No longer part of the ranged tag.
         (ranged_verbatim_tag_end)
     )
     (paragraph
+        (paragraph_segment)
+    )
+)
+
+====================================
+@end Tag without Ranged Verbatim Tag
+====================================
+@my.tag
+@end
+
+This
+@end
+shouldn't be a closing tag.
+---
+(document
+    (ranged_verbatim_tag
+        (tag_name
+            (tag_name_element)
+            (tag_name_element)
+        )
+        (ranged_verbatim_tag_end)
+    )
+    (paragraph
+        (paragraph_segment)
+        (paragraph_segment)
         (paragraph_segment)
     )
 )
