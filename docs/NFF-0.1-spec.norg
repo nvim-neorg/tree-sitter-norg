@@ -3,6 +3,10 @@
 +Use many examples!+
 +And also provide counter-examples for cases which are not expected to work!+
 +Discuss precedence for inline markup+
++Would we like to allow indented blocks within normal markup too? 🤔+
+|comment
+Talk about grouping of nodes, for example: a list is one entire item. Define what is and isn't a
+grouped node.
 
 - [ ] restructure spec into multiple layers
 - [ ] ensure we state that this is a physical spec and not a reference implementation
@@ -11,6 +15,9 @@
   This file contains the formal file format specification of the _Norg_ syntax version 0.1.
   This document is written in the Norg format in its original form and, thus, attempts to be
   self-documenting.
+
+  Please note that this is *not* a reference implementation - this is an established ruleset that should
+  be strictly followed.
 
 ** Introduction
    Before diving into the details we will start with a short introduction.
@@ -72,6 +79,11 @@
      ^ Blank lines are irrelevant in _Norg_ because standalone whitespace has no semantic relevance.
 
      [Unicode Zs general category]{https://www.fileformat.info/info/unicode/category/Zs/list.htm}
+
+**** Alphanumeric Characters
+     An alphanumeric character is any character that *isn't* punctuation, nor is it any special
+     character. In the English alphabet, an alphanumeric character means all letters from the
+     alphabet (uppercase/lowercase) and all numbers: `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`.
 
 **** Punctuation
      A {# character} is considered to be *punctuation* if it is any of the following:
@@ -444,6 +456,27 @@
      @end
 
 ** Tags
+   Tags are _Norg_'s official way of extending its own syntax.
+
+   There are 3 different tag types, each with their own way of changing the way text in _Norg_ is
+   interpreted. Before we discuss those, however, we should discuss the syntax rules for tags:
+   - A tag is similar to a {# detached modifiers}[detached modifier] in the sense that it must begin
+     at the beginning of a line with optional whitespace (but nothing else) preceding it.
+   - After that you will encounter the special tag character (`|`, `@` or `#`), /none/ of which are
+     attached modifiers - if those chars were attached modifiers then we would have ambiguity on our
+     hands. The special tag character is then /immediately/ followed by text, which becomes the /tag
+     name/. Said tag name can consist of any {# alphanumeric characters}[alphanumeric character]
+     and/or `-`, `_` and `.`.
+   - Tags can have their names delimited by a `.` in order to create a "hierarchy", e.g.
+     `document.meta`.
+   - \
+     After a whitespace character any number of parameters on the same line may follow:
+     @code norg
+     |tag-name.subtag parameter1 parameter2
+     @end
+
+     Parameters may consist of any character (apart from a {# line break}, of course).
+     ---
 
 *** Carryover Tags
     @code norg
