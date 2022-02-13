@@ -98,15 +98,21 @@
     {# punctuation} nor other {# special character}s.
 
 *** Paragraph Segments
-    {# Words} are first combined into {# paragraph segments}. A segment gets terminated by any of
-    the following:
-    - A {# line ending}
-    - Any of the {# attached modifiers} +NOTE(vhyrro): Don't paragraph segments contain attached mods?+
-    - Any of the {# linkables} +Same here+
+    {# Words} are first combined into {# paragraph segments}. A segment may contain any inline
+    element:
+    - Any of the {# attached modifiers}
+    - Any of the {# linkables}
+    
+    A {# line ending} terminates the paragraph segment. This means that a paragraph segment is
+    essentially just a line of text:
+    @code norg
+    I am a paragraph segment.
+    I am another paragraph segment.
+    And together we form a paragraph.
+    @end
 
 *** Paragraph
-    Paragraphs are then formed of consecutive {# paragraph segments}, {# attached modifiers} or
-    {# linkables}. A paragraph is terminated by:
+    Paragraphs are then formed of consecutive {# paragraph segments}. A paragraph is terminated by:
     - A <paragraph break> (which equals two consecutive {# line endings})
     - Any of the {# detached modifiers}
     - Any of the {# delimiting modifiers}
