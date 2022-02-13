@@ -471,7 +471,24 @@
    - An opening modifier may _NOT_ be succeeded by {# whitespace}
    - A closing modifier may _NOT_ be preceded by {# whitespace}
    - A closing modifier may only be succeeded by {# whitespace} or {# punctuation}
-   - {# Attached modifiers} can only span at maximum a single {# paragraph}.
+   - \
+      {# Attached modifiers} can only span at maximum a single {# paragraph}, i.e. they get
+      terminated as soon as they encounter a {# paragraph break}.
+
+      This means that this:
+      @code norg
+      *this
+
+      text*
+      @end
+      Will *not* result in any bold text, as it's divided by a {# paragraph break}.
+      However, this:
+
+      @code norg
+      *this
+      text*
+      @end
+      Is fine, and will result in *`this text`* being bold.
    - Nested {# attached modifiers} should be closed in the opposite order they were opened.
 
    Their name should be rather self explanatory - both the opening and closing modifier are attached
