@@ -8,8 +8,8 @@
 Talk about grouping of nodes, for example: a list is one entire item. Define what is and isn't a
 grouped node.
 
-- [ ] restructure spec into multiple layers
-- [ ] ensure we state that this is a physical spec and not a reference implementation
+- | | restructure spec into multiple layers
+- | | ensure we state that this is a physical spec and not a reference implementation
 
 * Norg File Format Specification
   This file contains the formal file format specification of the _Norg_ syntax version 0.1.
@@ -478,14 +478,28 @@ grouped node.
      Parameters may consist of any character (apart from a {# line break}, of course).
      ---
 
+    _Norg_ provides several inbuilt tag names that are reserved, but their details are not explained
+    in this specification - this document strictly covers syntax. There is no restriction in regards
+    to the length of a tag name, nor are there any disallowed names that a parser should omit
+    (unless they don't adhere to the above rules regarding tag names).
+
 *** Carryover Tags
+    A carryover tag is a way to assign some data to the next element in the document.
+    +TODO: Finish+
     @code norg
-    |carryover param1 param2 "multi word param" "another param"
+    |carryover-tag param1 param2
     @end
 
 *** Ranged Tags
+    Ranged tags are a way to express custom information within a range.
+    They begin with the traditional tag declaration and are ended with an `end` statement.
+
+    +Define rules for `#end` and `@end`+
+    +When you should use regular vs verbatim tags+
 
 **** Ranged Tags which support nested _Norg_ syntax
+     Sometimes you may want the freedom to have access to inline _Norg_ structures, like {# attached
+     modifiers} and/or {# links}.
      @code norg
      #table
      *heading* | /heading/ | _heading_
@@ -722,7 +736,7 @@ grouped node.
      @end
 
 **** Detached Modifier
-     Neorg allows you to link to any {# Structural Detached Modifiers}[structural] or
+     _Norg_ allows you to link to any {# Structural Detached Modifiers}[structural] or
      {# Range-able Detached Modifiers}[range-able] detached modifier:
 
      @code norg
