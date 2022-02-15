@@ -493,13 +493,19 @@ grouped node.
 *** Ranged Tags
     Ranged tags are a way to express custom information within a range.
     They begin with the traditional tag declaration and are ended with an `end` statement.
+    They allow you to create your own completely custom syntax within a determined boundary.
 
-    +Define rules for `#end` and `@end`+
-    +When you should use regular vs verbatim tags+
+    The `end` statement has a simple ruleset:
+    - Must be at the start of a line, may be preceded by any whitespace (but nothing else)
+    - Must use the same prefix as its parent (in the case of regular ranged tags: `#`; in the case
+      of verbatim tags: `@`)
+    - Must not be succeeded by anything other than a {# line break}.
 
-**** Ranged Tags which support nested _Norg_ syntax
+**** Ranged Tags
      Sometimes you may want the freedom to have access to inline _Norg_ structures, like {# attached
-     modifiers} and/or {# links}.
+     modifiers} and/or {# links}. Ranged tags allow you to do exactly this. An example of a ranged
+     tag is Neorg's `#table` tag:
+
      @code norg
      #table
      *heading* | /heading/ | _heading_
@@ -508,13 +514,23 @@ grouped node.
      #end
      @end
 
-**** Ranged Tags which do *not* support nested _Norg_ syntax (verbatim)
+**** Verbatim Ranged Tags
+     In other cases you may be more interested in a {# verbatim ranged tags}[verbatim ranged tag],
+     which disallows any _Norg_ markup to exist inside of itself. A prime example of this is
+     `@code`, which creates a code block - you obviously don't want nested _Norg_ syntax within
+     that!
      @code java
      @MyAnnotation(name="someName", value="Hello World")
      public class TheClass {
        // ...
      }
      @end
+     ---
+
+    Verbatim vs regular ranged tags is mostly a matter of /agreement/. If your "custom syntax" uses
+    inline _Norg_ markup then it *must* belong in a regular {# ranged tag}. If you do not want things
+    inside your syntax to be mistaken for _Norg_ markup then it must belong in a {# verbatim ranged
+    tag}.
 
 ** Attached Modifiers
    We can now discuss attached modifiers (which originally gave rise to the name of
