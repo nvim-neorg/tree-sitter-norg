@@ -1,5 +1,0 @@
-@code java
-@MyAnnotation(name="someName",  value = "Hello World")
-public class TheClass {
-}
-@end
