@@ -1,15 +1,14 @@
 +General Notes+
-+Formally define each object+
++Explain each syntax element briefly+
++Expand introduction, explain what a plain text format even is+
 +Use many examples!+
 +And also provide counter-examples for cases which are not expected to work!+
-+Discuss precedence for inline markup+
-+Would we like to allow indented blocks within normal markup too? 🤔+
 |comment
 Talk about grouping of nodes, for example: a list is one entire item. Define what is and isn't a
 grouped node.
 
 - | | restructure spec into multiple layers
-- | | ensure we state that this is a physical spec and not a reference implementation
+- |x| ensure we state that this is a physical spec and not a reference implementation
 
 * Norg File Format Specification
   This file contains the formal file format specification of the _Norg_ syntax version 0.1.
@@ -19,839 +18,855 @@ grouped node.
   Please note that this is *not* a reference implementation - this is an established ruleset that should
   be strictly followed.
 
-** Introduction
-   Before diving into the details we will start with a short introduction.
-   The _Norg_ file format was designed as part of the [Neorg] plugin for Neovim which was started by
-   /Vhyrro (@vhyrro)/ in April of 2021.
-   Soon after starting this work, /Max Rossmannek (@mrossinek)/ joined the development team, and,
-   with the help of the [Neorg] community, the two have shaped the _Norg_ syntax to what it has
-   become today.
+* Introduction
+  Before diving into the details we will start with a short introduction.
+  The _Norg_ file format was designed as part of the [Neorg] plugin for Neovim which was started by
+  /Vhyrro (@vhyrro)/ in April of 2021.
+  Soon after starting this work, /Max Rossmannek (@mrossinek)/ joined the development team, and,
+  with the help of the [Neorg] community, the two have shaped the _Norg_ syntax to what it has
+  become today.
 
    [Neorg]{https://github.com/nvim-neorg/neorg}
 
-*** What is Norg?
-    The _Norg_ syntax is a plain-text file format which aims to be human readable when viewed
-    standalone while also providing a suite of markup utilities for typesetting structured
-    documents. Compared to other plain-text file formats like e.g. Markdown, RST or AsciiDoc, it
-    sets itself apart most notably by following a strict philosophy to abide by the following simple
-    rules:
-    ~ *Consistency:* the syntax should be consistent. Even if you know only a part of the syntax,
-      learning new parts should not be surprising and rather feel predictable and intuitive.
-    ~ *Unambiguity:* the syntax should leave _no_ room for ambiguity. This is especially motivated
-      by the use of [tree-sitter] for the original syntax parser which takes a strict left-to-right
-      parsing approach and only has single-character look-ahead.
-    ~ *[Free-form]:* whitespace is _only_ used to delimit tokens but has no other significance! This
-      is probably the most contrasting feature to other plain-text formats which often adhere to the
-      [off-side rule], meaning that the syntax relies on whitespace-indentation to carry meaning.
+** What is Norg?
+   The _Norg_ syntax is a plain-text file format which aims to be human readable when viewed
+   standalone while also providing a suite of markup utilities for typesetting structured
+   documents. Compared to other plain-text file formats like e.g. Markdown, RST or AsciiDoc, it
+   sets itself apart most notably by following a strict philosophy to abide by the following simple
+   rules:
+   ~ *Consistency:* the syntax should be consistent. Even if you know only a part of the syntax,
+     learning new parts should not be surprising and rather feel predictable and intuitive.
+   ~ *Unambiguity:* the syntax should leave _no_ room for ambiguity. This is especially motivated
+     by the use of [tree-sitter] for the original syntax parser which takes a strict left-to-right
+     parsing approach and only has single-character look-ahead.
+   ~ *[Free-form]:* whitespace is _only_ used to delimit tokens but has no other significance! This
+     is probably the most contrasting feature to other plain-text formats which often adhere to the
+     [off-side rule], meaning that the syntax relies on whitespace-indentation to carry meaning.
 
-    [tree-sitter]{https://tree-sitter.github.io/tree-sitter/}
-    [off-side rule]{https://en.wikipedia.org/wiki/Off-side_rule}
-    [Free-form]{https://en.wikipedia.org/wiki/Free-form_language}
+   [tree-sitter]{https://tree-sitter.github.io/tree-sitter/}
+   [off-side rule]{https://en.wikipedia.org/wiki/Off-side_rule}
+   [Free-form]{https://en.wikipedia.org/wiki/Free-form_language}
 
-** Preliminaries
-   First, we define some basic concepts which will be used in this specification.
+* Preliminaries
+  First, we define some basic concepts which will be used in this specification.
 
-*** Characters
-    A _Norg_ file is made up of /characters/.
-    A <character> is any Unicode [code point].
+** Characters
+   A _Norg_ file is made up of /characters/.
+   A <character> is any Unicode [code point].
 
-    [code point]{https://en.wikipedia.org/wiki/Code_point}
+   [code point]{https://en.wikipedia.org/wiki/Code_point}
 
-**** Whitespace
-     A {# character} is considered to be *whitespace* if it is any of the following:
-     - A tab `U+0009`
-     - A line feed `U+000A`
-     - A form feed `U+000C`
-     - A carriage return `U+000D`
-     - Any code point in the [Unicode Zs general category] (includes the normal space `U+0020`)
+*** Whitespace
+    A {# character} is considered to be *whitespace* if it is any of the following:
+    - A tab `U+0009`
+    - A line feed `U+000A`
+    - A form feed `U+000C`
+    - A carriage return `U+000D`
+    - Any code point in the [Unicode Zs general category] (includes the normal space `U+0020`)
 
-     Any combination of the above is also considered whitespace.
+    Any combination of the above is also considered whitespace.
 
-     Tabs are not expanded to spaces and since whitespace has no semantic meaning there is no need
-     to define a default tab stop. However, if a parser must (for implementation reasons) define a
-     tab stop, we suggest to set it to 4 spaces.
+    Tabs are not expanded to spaces and since whitespace has no semantic meaning there is no need
+    to define a default tab stop. However, if a parser must (for implementation reasons) define a
+    tab stop, we suggest to set it to 4 spaces.
 
-     However, the following whitespace combinations are a <line ending>:
-     - A single line feed
-     - A single carriage return
-     - A carriage return immediately followed by a line feed
+    The following whitespace combinations are a <line ending>:
+    - A single line feed
+    - A single carriage return
+    - A carriage return immediately followed by a line feed
 
-     ^ Blank lines are irrelevant in _Norg_ because standalone whitespace has no semantic relevance.
+    ^ Blank lines are irrelevant in _Norg_ because standalone whitespace has no semantic relevance.
 
-     [Unicode Zs general category]{https://www.fileformat.info/info/unicode/category/Zs/list.htm}
+    [Unicode Zs general category]{https://www.fileformat.info/info/unicode/category/Zs/list.htm}
 
-**** Alphanumeric Characters
-     An alphanumeric character is any character that *isn't* punctuation, nor is it any special
-     character. In the English alphabet, an alphanumeric character means all letters from the
-     alphabet (uppercase/lowercase) and all numbers: `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`.
+*** Alphanumeric Characters
+    An alphanumeric character is any character that *isn't* punctuation, nor is it any special
+    character. In the English alphabet, an alphanumeric character means all letters from the
+    alphabet (uppercase/lowercase) and all numbers: `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`.
 
-**** Punctuation
-     A {# character} is considered to be *punctuation* if it is any of the following:
-     - A standard ASCII punctuation character: |`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`|
+*** Punctuation
+    A {# character} is considered to be *punctuation* if it is any of the following:
+    - A standard ASCII punctuation character: |`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`|
+      +TODO: check whether we want to support every punctuation mark from the `en_US.utf8` locale+
 
-       +TODO: check whether we want to support every punctuation mark from the `en_US.utf8` locale+
+*** Escaping
+    A single {# character} can be escaped if it is immediately preceded by a backslash, `\`
+    (`U+005C`). Any {# character} may be escaped /apart from/ {# character}s within verbatim
+    segments +TODO: add link to verbatim segments+.
 
-**** Escaping
-     A single {# character} can be escaped if it is immediately preceded by a backslash, `\`
-     (`U+005C`). Any {# character} may be escaped /apart from/ {# character}s within verbatim
-     segments +TODO: add link to verbatim segments+.
+*** Special Character
+    - | | TODO: formalize this section
+    - Emojis
 
-**** Special Character
-     - | | TODO: formalize this section
-     - Emojis
+** Words
+   The _Norg_ format is designed to be parsed on a word-by-word basis from left-to-right through
+   the entire document /in a single pass/. This is possible because the language is [free-form],
+   meaning that whitespace has no semantic meaning, and because the markup follows strict rules
+   which are outlined in the later sections of this document.
 
-*** Words
-    The _Norg_ format is designed to be parsed on a word-by-word basis from left-to-right through
-    the entire document /in a single pass/. This is possible because the language is [free-form],
-    meaning that whitespace has no semantic meaning, and because the markup follows strict rules
-    which are outlined in the later sections of this document.
+   A *word* is considered to be any combination of {# character}s which are neither {# whitespace},
+   {# punctuation} nor other {# special character}s.
 
-    A *word* is considered to be any combination of {# character}s which are neither {# whitespace},
-    {# punctuation} nor other {# special character}s.
+** Paragraph Segments
+   {# Words} are first combined into {# paragraph segments}. A segment may contain any inline
+   element:
+   - Any of the {# attached modifiers}
+   - Any of the {# linkables}
+   
+   A {# line ending} terminates the paragraph segment. This means that a paragraph segment is
+   essentially just a line of text:
+   @code norg
+   I am a paragraph segment.
+   I am another paragraph segment.
+   And together we form a paragraph.
+   @end
 
-*** Paragraph Segments
-    {# Words} are first combined into {# paragraph segments}. A segment may contain any inline
-    element:
-    - Any of the {# attached modifiers}
-    - Any of the {# linkables}
-    
-    A {# line ending} terminates the paragraph segment. This means that a paragraph segment is
-    essentially just a line of text:
+** Paragraph
+   Paragraphs are then formed of consecutive {# paragraph segments}. A paragraph is terminated by:
+   - A <paragraph break> (which equals two consecutive {# line endings})
+   - Any of the {# detached modifiers}
+   - Any of the {# delimiting modifiers}
+   - Any of the tags +TODO: link to section+
+
+* Detached Modifiers
+  _Norg_ has several detached modifiers. The name originates from their differentiation to the
+  {# Attached Modifiers}, which will be discussed later.
+
+  All detached modifiers must abide by the following rules:
+  - A detached modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
+    (but nothing else!) may precede it)
+  - A detached modifier must be immediately followed by {# whitespace} (excl. a {# line ending}!),
+    another detached modifier of the same type or by a {# detached modifier extensions}[detached
+    modifier extension]
+
+  The following list outlines all valid *detached* modifiers. The list also adds three possible
+  properties to each category which will be explained in more detail below.
+  - `*`: {# Headings} (structural, nestable)
+  - `%`: {# Markers} (structural)
+  - `-`: {# Unordered Lists} (nestable)
+  - `~`: {# Ordered Lists} (nestable)
+  - `>`: {# Quotes} (nestable)
+  - `$`: {# Definitions} (range-able)
+  - `^`: {# Footnotes} (range-able)
+  - `=`: {# Insertions} (range-able)
+
+** Standard Detached Modifiers
+   The normal rules for the /standard/ detached modifiers are simple as outlined above. An
+   important differentiation is, that standard detached modifiers may _not_ be succeeded by another
+   detached modifier and instead require a whitespace immediately after them.
+   They then affect the interpretation of the following `paragraph_segment` which generally means
+   they extend up to the end of the current line.
+
+** Nestable Detached Modifiers
+   Nestable detached modifiers are those kind which may be repeated multiple times in order to
+   produce a _nested_ object of the given type. The nesting levels are capped at 6 in the
+   [tree-sitter] parser but longer repetitions of the same modifier are allowed, falling back to
+   the sixth nesting level. Other parsers may choose to support higher nesting levels.
+
+   Furthermore, in contrast to the {# Standard Detached Modifiers} this detached modifier type
+   affects the following `paragraph` instead of only the next segment. This means that in order to
+   terminate the detached modifier contents, you need two consecutive line breaks (forming a
+   {# paragraph break}).
+
+   Here are some correct examples of the nestable detached modifiers:
+
+*** Unordered Lists
     @code norg
-    I am a paragraph segment.
-    I am another paragraph segment.
-    And together we form a paragraph.
+    - Unordered list level 1
+    -- Unordered list level 2
+    --- Unordered list level 3
+    ---- Unordered list level 4
+    ----- Unordered list level 5
+    ------ Unordered list level 6
+    ------- Unordered list level 7 (falls back to level 6 in the tree-sitter parser)
+
+    - Unordered list level 1
+      This text is still part of the level 1 list item.
+    -- Unordered list level 2
+       This text is still part of the level 2 list item.
+    --- Unordered list level 3
+        This text is still part of the level 3 list item.
+    ---- Unordered list level 4
+         This text is still part of the level 4 list item.
+    ----- Unordered list level 5
+          This text is still part of the level 5 list item.
+    ------ Unordered list level 6
+           This text is still part of the level 6 list item.
+    ------- Unordered list level 7 (falls back to level 6 in the tree-sitter parser)
+            This text is still part of the level 7 list item.
     @end
 
-*** Paragraph
-    Paragraphs are then formed of consecutive {# paragraph segments}. A paragraph is terminated by:
-    - A <paragraph break> (which equals two consecutive {# line endings})
-    - Any of the {# detached modifiers}
-    - Any of the {# delimiting modifiers}
-    - Any of the tags +TODO: link to section+
-
-** Detached Modifiers
-   _Norg_ has several detached modifiers. The name originates from their differentiation to the
-   {# Attached Modifiers}, which will be discussed later.
-
-   All detached modifiers must abide by the following rules:
-   - A detached modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
-     (but nothing else!) may precede it)
-   - A detached modifier must be immediately followed by {# whitespace} (excl. a {# line ending}!),
-     another detached modifier of the same type or by a {# detached modifier extensions}[detached
-     modifier extension]
-
-   The following list outlines all valid *detached* modifiers. The list also adds three possible
-   properties to each category which will be explained in more detail below.
-   - `*`: {# Headings} (structural, nestable)
-   - `%`: {# Markers} (structural)
-   - `-`: {# Unordered Lists} (nestable)
-   - `~`: {# Ordered Lists} (nestable)
-   - `>`: {# Quotes} (nestable)
-   - `$`: {# Definitions} (range-able)
-   - `^`: {# Footnotes} (range-able)
-   - `=`: {# Insertions} (range-able)
-
-*** Standard Detached Modifiers
-    The normal rules for the /standard/ detached modifiers are simple as outlined above. An
-    important differentiation is, that standard detached modifiers may _not_ be succeeded by another
-    detached modifier and instead require a whitespace immediately after them.
-    They then affect the interpretation of the following `paragraph_segment` which generally means
-    they extend up to the end of the current line.
-
-*** Nestable Detached Modifiers
-    Nestable detached modifiers are those kind which may be repeated multiple times in order to
-    produce a _nested_ object of the given type. The nesting levels are capped at 6 in the
-    [tree-sitter] parser but longer repetitions of the same modifier are allowed, falling back to
-    the sixth nesting level. Other parsers may choose to support higher nesting levels.
-
-    Furthermore, in contrast to the {# Standard Detached Modifiers} this detached modifier type
-    affects the following `paragraph` instead of only the next segment. This means that in order to
-    terminate the detached modifier contents, you need two consecutive line breaks (forming a
-    {# paragraph break}).
-
-    Here are some correct examples of the nestable detached modifiers:
-
-**** Unordered Lists
-     @code norg
-     - Unordered list level 1
-     -- Unordered list level 2
-     --- Unordered list level 3
-     ---- Unordered list level 4
-     ----- Unordered list level 5
-     ------ Unordered list level 6
-     ------- Unordered list level 7 (falls back to level 6 in the tree-sitter parser)
-
-     - Unordered list level 1
-       This text is still part of the level 1 list item.
-     -- Unordered list level 2
-        This text is still part of the level 2 list item.
-     --- Unordered list level 3
-         This text is still part of the level 3 list item.
-     ---- Unordered list level 4
-          This text is still part of the level 4 list item.
-     ----- Unordered list level 5
-           This text is still part of the level 5 list item.
-     ------ Unordered list level 6
-            This text is still part of the level 6 list item.
-     ------- Unordered list level 7 (falls back to level 6 in the tree-sitter parser)
-             This text is still part of the level 7 list item.
-     @end
-
-**** Ordered Lists
-     @code norg
-     ~ Ordered list level 1
-     ~~ Ordered list level 2
-     ~~~ Ordered list level 3
-     ~~~~ Ordered list level 4
-     ~~~~~ Ordered list level 5
-     ~~~~~~ Ordered list level 6
-     ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree-sitter parser)
-
-     ~ Ordered list level 1
-       This text is still part of the level 1 list item.
-     ~~ Ordered list level 2
-        This text is still part of the level 2 list item.
-     ~~~ Ordered list level 3
-         This text is still part of the level 3 list item.
-     ~~~~ Ordered list level 4
-          This text is still part of the level 4 list item.
-     ~~~~~ Ordered list level 5
-           This text is still part of the level 5 list item.
-     ~~~~~~ Ordered list level 6
-            This text is still part of the level 6 list item.
-     ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree-sitter parser)
-             This text is still part of the level 7 list item.
-     @end
-
-**** Quotes
-     @code norg
-     > Quote level 1
-     >> Quote level 2
-     >>> Quote level 3
-     >>>> Quote level 4
-     >>>>> Quote level 5
-     >>>>>> Quote level 6
-     >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
-
-     > Quote level 1
-       This text is still part of the level 1 quote.
-     >> Quote level 2
-        This text is still part of the level 2 quote.
-     >>> Quote level 3
-         This text is still part of the level 3 quote.
-     >>>> Quote level 4
-          This text is still part of the level 4 quote.
-     >>>>> Quote level 5
-           This text is still part of the level 5 quote.
-     >>>>>> Quote level 6
-            This text is still part of the level 6 quote.
-     >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
-             This text is still part of the level 7 quote.
-     @end
-
-**** Invalid Examples
-     @code norg
-     >I am not a quote
-
-     some preceding text $ I am not a definition
-
-     >$ I am not a detached modifier
-
-     > > I am only a level 1 quote
-
-     *
-         I am not a valid heading title.
-     @end
-     ---
-
-    Headings are also /nestable/ detached modifiers but will only be discussed later as part of the
-    {# structural detached modifiers}.
-
-*** Structural Detached Modifiers
-    The `*` (headings) and `%` (marker) detached modifiers also have the _structural_ property,
-    meaning that these objects *structure* the _Norg_ document.
-    This detached modifier type only affects the following `paragraph_segment` (just like the
-    {# standard detached modifiers}).
-
-**** Headings
-     @code norg
-     * Heading level 1
-     ** Heading level 2
-     *** Heading level 3
-     **** Heading level 4
-     ***** Heading level 5
-     ****** Heading level 6
-     ******* Heading level 7 (falls back to level 6 in the tree-sitter parser)
-     @end
-
-     Although headings are both structural /and/ nestable, the former takes precedence over the
-     latter, meaning that headings only affect a `paragraph_segment`. This is for user convenience as
-     it does not require an empty line right below a heading.
-
-**** Markers
-     @code norg
-     % Marker
-     @end
-
-     Markers are purely structural elements which split the entire document right down to the root
-     node.
-
-**** Delimiting Modifiers
-     Although not technically a detached modifier, we would like to insert a note on
-     {# Delimiting Modifiers} because they are immediately related to structuring a _Norg_ document.
-
-     This kind of modifier must abide by the following rules:
-     - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
-       (but nothing else!) may precede it)
-     - A delimiting modifier must consist of three or more consecutive modifiers of the same type
-     - It must be followed by an immediate {# line ending} (without any extra {# whitespace})
-
-***** Weak Delimiting Modifier
-      This modifier uses the `-` character and immediately closes the current heading level.
-      @code norg
-      * Heading level 1
-        Text under first level heading.
-
-      ** Heading level 2
-         Text under second level heading.
-         ---
-
-        Text under first level heading again.
-      @end
-
-***** Strong Delimiting Modifier
-      This modifier uses the `=` character and immediately closes all heading levels.
-      @code norg
-      * Heading level 1
-        Text under first level heading.
-
-      ** Heading level 2
-         Text under second level heading.
-         ===
-
-      Text belonging to no heading level (i.e. to the document's root).
-      @end
-
-***** Horizontal Rule
-      This modifier uses the `_` character and simply renders a horizontal line. It does _NOT_
-      affect the heading level but immediately terminates a {# paragraph}.
-      @code norg
-      * Heading level 1
-        Text under first level heading.
-        ___
-        This is a new paragraph separated from the previous one by a horizontal line.
-        This text still belongs to the first level heading.
-      @end
-
-*** Range-able Detached Modifiers
-    Range-able detached modifiers can occur in two forms:
-    - As a single detached modifier they affect:
-    -- The next `paragraph_segment` which becomes the /title/
-    -- The `paragraph` following that which becomes the /content/
-    - As a pair of two detached modifiers in which case:
-    -- The next `paragraph_segment` still becomes the /title/
-    -- But the content continues until the "closing" detached modifier is found
-
-    The closing modifier has the same rules as an opening detached modifier except it /must/ be
-    directly succeeded by a {# line ending}.
-
-**** Definitions
-     @code norg
-     $ Single Definition
-     Optional definition content.
-     @end
-
-     @code norg
-     $$ Multiple Definition
-     Content of the definition.
-
-     Which scans up to the closing modifier.
-     $$
-     @end
-
-**** Footnotes
-     @code norg
-     ^ Single Footnote
-     Optional footnote content.
-     @end
-
-     @code norg
-     ^^ Multiple Footnote
-     Content of the footnote.
-
-     Which scans up to the closing modifier.
-     ^^
-     @end
-
-**** Insertions
-     @code norg
-     = Insertion arg1 arg2 ...
-     @end
-     Depending on the kind of insertion, a different number of arguments can be set/required. These
-     arguments follow the same rules as those of {# Tags}.
-
-     @code norg
-     == Function definition
-     ==
-     @end
-
-*** Detached Modifier Extensions
-    {# Detached modifiers} support extensions which must immediately follow the detached modifier
-    (or another extension).
-
-**** TODO Status Extension
-     The TODO item extension assigns a task status to a certain modifier. You probably know this
-     concept from Markdown where unordered lists can become tasks. In _Norg_ we take this concept to
-     the next level because any detached modifier can be assigned a task status. This can for
-     example be useful for the author of a document to keep track of the status of certain sections.
-     The syntax is the following:
-     - A todo status extension starts with a `|` char
-     - Immediately a single status indicator character must follow. The following statuses are
-       supported:
-    -- ` `: undone (a literal space)
-    -- `x`: done
-    -- `?`: needs further input/clarification
-    -- `!`: urgent
-    -- `+`: recurring
-    -- `-`: in-progress/pending
-    -- `=`: on hold
-    -- `_`: put down/cancelled
-    - Finally another `|` char closes the todo status extension
-
-**** Indent Segment Extension
-     Since {# nestable detached modifiers} can only contain a {# paragraph} this can cause severe
-     limitations because insertion of (for example) code blocks is not possible. To alleviate this
-     deficiency, the {# indent segment extension} exists, which increases the indentation of the
-     tree by one level allowing nesting of more complex elements to occur.
-     The syntax is the following:
-     - The indent segment extension starts with a single `\` char
-     - This must be _immediately_ followed by a {# line ending}
-     -- Thus, the start node of this extension can be seen as a {# trailing modifier}
-     - The contents follow
-     - The extension ends when:
-     -- Another {# nestable detached modifier} occurs
-     -- Or when the indentation is manually closed with one of the {# delimiting modifiers}
-      +TODO(vhyrro): discuss what truly "automatically" ends the indent segment. I propose that the only way
-      to auto-close an indent segment is to use a structural detached modifier or a modifier of the same
-      type as the parent of the indent segment; i.e. if you attach an indent segment to a level 1
-      unordered list item then creating another level 1 unordered list item auto-closes the indent
-      segment. However, creating a level 1 ordered list segment inside would be okay.+
-
-     @code norg
-     - \
-       The indent segment extension has started.
-
-       I can now include multiple paragraphs within this list item.
-
-       @code lua
-       print("Even code blocks are allowed!")
-       @end
-
-       ^ Range-able detached modifiers can be inserted, too.
-
-       ---
-     - Another nestable detached modifier ends the indent segment
-     - However, in this example I already closed the indent segment manually with `---`
-     @end
-
-** Tags
-   Tags are _Norg_'s official way of extending its own syntax.
-
-   There are 3 different tag types, each with their own way of changing the way text in _Norg_ is
-   interpreted. Before we discuss those, however, we should discuss the syntax rules for tags:
-   - A tag is similar to a {# detached modifiers}[detached modifier] in the sense that it must begin
-     at the beginning of a line with optional whitespace (but nothing else) preceding it.
-   - After that you will encounter the special tag character (`|`, `@` or `#`), /none/ of which are
-     attached modifiers - if those chars were attached modifiers then we would have ambiguity on our
-     hands. The special tag character is then /immediately/ followed by text, which becomes the /tag
-     name/. Said tag name can consist of any {# alphanumeric characters}[alphanumeric character]
-     and/or `-`, `_` and `.`.
-   - Tags can have their names delimited by a `.` in order to create a "hierarchy", e.g.
-     `document.meta`.
-   - \
-     After a whitespace character any number of parameters on the same line may follow:
-     @code norg
-     |tag-name.subtag parameter1 parameter2
-     @end
-
-     Parameters may consist of any character (apart from a {# line break}, of course).
-     ---
-
-    _Norg_ provides several inbuilt tag names that are reserved, but their details are not explained
-    in this specification - this document strictly covers syntax. There is no restriction in regards
-    to the length of a tag name, nor are there any disallowed names that a parser should omit
-    (unless they don't adhere to the above rules regarding tag names).
-
-*** Carryover Tags
-    A carryover tag is a way to assign some data to the next element in the document.
-    +TODO: Finish+
+*** Ordered Lists
     @code norg
-    |carryover-tag param1 param2
+    ~ Ordered list level 1
+    ~~ Ordered list level 2
+    ~~~ Ordered list level 3
+    ~~~~ Ordered list level 4
+    ~~~~~ Ordered list level 5
+    ~~~~~~ Ordered list level 6
+    ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree-sitter parser)
+
+    ~ Ordered list level 1
+      This text is still part of the level 1 list item.
+    ~~ Ordered list level 2
+       This text is still part of the level 2 list item.
+    ~~~ Ordered list level 3
+        This text is still part of the level 3 list item.
+    ~~~~ Ordered list level 4
+         This text is still part of the level 4 list item.
+    ~~~~~ Ordered list level 5
+          This text is still part of the level 5 list item.
+    ~~~~~~ Ordered list level 6
+           This text is still part of the level 6 list item.
+    ~~~~~~~ Ordered list level 7 (falls back to level 6 in the tree-sitter parser)
+            This text is still part of the level 7 list item.
     @end
 
-*** Ranged Tags
-    Ranged tags are a way to express custom information within a range.
-    They begin with the traditional tag declaration and are ended with an `end` statement.
-    They allow you to create your own completely custom syntax within a determined boundary.
-
-    The `end` statement has a simple ruleset:
-    - Must be at the start of a line, may be preceded by any whitespace (but nothing else)
-    - Must use the same prefix as its parent (in the case of regular ranged tags: `#`; in the case
-      of verbatim tags: `@`)
-    - Must not be succeeded by anything other than a {# line break}.
-
-**** Ranged Tags
-     Sometimes you may want the freedom to have access to inline _Norg_ structures, like {# attached
-     modifiers} and/or {# links}. Ranged tags allow you to do exactly this. An example of a ranged
-     tag is Neorg's `#table` tag:
-
-     @code norg
-     #table
-     *heading* | /heading/ | _heading_
-     first | second | third
-     | 2 |
-     #end
-     @end
-
-**** Verbatim Ranged Tags
-     In other cases you may be more interested in a {# verbatim ranged tags}[verbatim ranged tag],
-     which disallows any _Norg_ markup to exist inside of itself. A prime example of this is
-     `@code`, which creates a code block - you obviously don't want nested _Norg_ syntax within
-     that!
-     @code java
-     @MyAnnotation(name="someName", value="Hello World")
-     public class TheClass {
-       // ...
-     }
-     @end
-     ---
-
-    Verbatim vs regular ranged tags is mostly a matter of /agreement/. If your "custom syntax" uses
-    inline _Norg_ markup then it *must* belong in a regular {# ranged tag}. If you do not want things
-    inside your syntax to be mistaken for _Norg_ markup then it must belong in a {# verbatim ranged
-    tag}.
-
-** Attached Modifiers
-   We can now discuss attached modifiers (which originally gave rise to the name of
-   {# detached modifiers} as their natural counter-parts). Here are the general rules for attached
-   modifiers:
-   - An opening modifier may only be preceded by {# whitespace} or {# punctuation}
-   - An opening modifier may _NOT_ be succeeded by {# whitespace}
-   - A closing modifier may _NOT_ be preceded by {# whitespace}
-   - A closing modifier may only be succeeded by {# whitespace} or {# punctuation}
-   - \
-      {# Attached modifiers} can only span at maximum a single {# paragraph}, i.e. they get
-      terminated as soon as they encounter a {# paragraph break}.
-
-      This means that this:
-      @code norg
-      *this
-
-      text*
-      @end
-      Will *not* result in any bold text, as it's divided by a {# paragraph break}.
-      However, this:
-
-      @code norg
-      *this
-      text*
-      @end
-      Is fine, and will result in *`this text`* being bold.
-   - Nested {# attached modifiers} should be closed in the opposite order they were opened.
-
-   Their name should be rather self explanatory - both the opening and closing modifier are attached
-   to one another.
-
-   The following attached modifiers exist and have respective meaning:
-   - \*bold\*: *bold*
-   - \/italic\/: /italic/
-   - \_underline\_: _underline_
-   - \-strikethrough\-: -strikethrough-
-   - \!spoiler\!: !spoiler!
-   - \^superscript\^: ^superscript^  (cannot be nested into `subscript`)
-   - \,subscript\,: ,subscript,  (cannot be nested into `superscript`)
-   - \`inline code\`: `inline code` (disables any nested markup - verbatim)
-   - \+inline comment\+: +inline comment+
-   - \$inline math\$: $f(x) = y$  (verbatim)
-   - \=variable\=: =variable=  (verbatim)
-
-*** Valid Examples
+*** Quotes
     @code norg
-    *Bold text*
+    > Quote level 1
+    >> Quote level 2
+    >>> Quote level 3
+    >>>> Quote level 4
+    >>>>> Quote level 5
+    >>>>>> Quote level 6
+    >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
 
-    *Bold text*,
-    .*Bold text*,
-
-    *Bold
-    text*
-
-    */Bold and italic/* <- closing modifiers closed in the opposite order they were opened
-    */Bold and italic/ and only bold*
-
-    Text */with/ _different_ ^markup^ !types!*
+    > Quote level 1
+      This text is still part of the level 1 quote.
+    >> Quote level 2
+       This text is still part of the level 2 quote.
+    >>> Quote level 3
+        This text is still part of the level 3 quote.
+    >>>> Quote level 4
+         This text is still part of the level 4 quote.
+    >>>>> Quote level 5
+          This text is still part of the level 5 quote.
+    >>>>>> Quote level 6
+           This text is still part of the level 6 quote.
+    >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
+            This text is still part of the level 7 quote.
     @end
 
 *** Invalid Examples
     @code norg
-    * Bold text *
+    >I am not a quote
 
-    *Bold text *
+    some preceding text $ I am not a definition
 
-    other text*Bold text*
+    >$ I am not a detached modifier
 
-    *Bold text*other text
+    > > I am only a level 1 quote
 
     *
-    Bold text*
-
-    *Bold
-    text
-    *
-
-    *Bold
-
-    text*
-
-    Closed in the wrong order:
-    */Bold and italic*/
-
-    Also closed in the wrong order:
-    */Bold and italic* and only italic/
+        I am not a valid heading title.
     @end
+    ---
 
-*** Link Modifier
-    The link modifier, `:`, is a special modifier type called an _intersecting_ modifier. It puts a
-    twist on the original attached modifier rules because it allows non-whitespace characters in
-    front of the opening or after the closing modifier. This allows the intersection of a
-    non-whitespace string like so:
+   Headings are also /nestable/ detached modifiers but will only be discussed later as part of the
+   {# structural detached modifiers}.
+
+** Structural Detached Modifiers
+   The `*` (headings) and `%` (marker) detached modifiers also have the _structural_ property,
+   meaning that these objects *structure* the _Norg_ document.
+   This detached modifier type only affects the following `paragraph_segment` (just like the
+   {# standard detached modifiers}).
+
+*** Headings
     @code norg
-    Ex:*am*:ple
+    * Heading level 1
+    ** Heading level 2
+    *** Heading level 3
+    **** Heading level 4
+    ***** Heading level 5
+    ****** Heading level 6
+    ******* Heading level 7 (falls back to level 6 in the tree-sitter parser)
     @end
-    Without the `:`-link modifier, the above example would not result in a bold segment.
 
-    - | | TODO: currently states in the docs that it must occur in pairs but this is not enforced by
-          the TS parser. I.e. the following is valid: ex:_ample_
+    Although headings are both structural /and/ nestable, the former takes precedence over the
+    latter, meaning that headings only affect a `paragraph_segment`. This is for user convenience as
+    it does not require an empty line right below a heading.
 
-*** Ranged Attached Modifiers
-    Ranged attached modifiers can be used to:
-    - Allow arbitrary {# whitespace} within {# attached modifiers}.
-    - Allow to represent verbatim attached modifier chars within the corresponding verbatim blocks.
-
-    For example:
+*** Markers
     @code norg
-    Here, I can write |`  leading and trailing whitespace  `| within a verbatim block.
+    % Marker
     @end
 
-    @code norg
-    Here, I can use a literal `$` inside of inline math: |$ 10$ + 10$ = 20$ $|.
-    @end
+    Markers are purely structural elements which split the entire document right down to the root
+    node.
 
-** Trailing Modifier
-   Trailing modifiers are another separate kind of modifiers in the _Norg_ syntax. It has one very
-   simple rule: it may only exist at the end of a line and may not be followed by any characters
-   after itself.
+*** Delimiting Modifiers
+    Although not technically a detached modifier, we would like to insert a note on
+    {# Delimiting Modifiers} because they are immediately related to structuring a _Norg_ document.
 
-*** Line Continuation
-    The `~`-trailing modifier will concatenate the line which it ends with the following one.
-    This allows you to do something like the following:
+    This kind of modifier must abide by the following rules:
+    - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
+      (but nothing else!) may precede it)
+    - A delimiting modifier must consist of three or more consecutive modifiers of the same type
+    - It must be followed by an immediate {# line ending} (without any extra {# whitespace})
 
-    @code norg
-    * I am a very long heading title~
-      which did not end here because of the trailing modifier
-    @end
-
-    It completely swallows the next line break, allowing for things like this:
-
-    @code norg
-    - I am a list item~
-
-    - And I am still the same list
-    @end
-
-    Without the trailing modifier those two items would have been treated as two separate lists, but
-    since the `~` char swallows the line break it makes the parser actually see:
-
-    @code norg
-    - I am a list item
-    - And I am still the same list
-    @end
-
-    Note that trailing modifiers may also exist on a separate line:
-
-    @code norg
-    - I am a list item
-    ~
-    - And I am still the same list
-    @end
-
-** Linkables
-   Finally, there is one more kind of in-line syntax which is the {# linkables} kind.
-   Linkables can link to any element /anywhere/ in the document.
-
-   When resolving links, the first match should always be the only match, starting from the top of
-   the document and heading towards the bottom. This means that if there are two matches, the one at
-   the topmost part of the document should be chosen as the target.
-
-   Linkables are comprised of many segments, and can change meaning depending on the order those
-   segments were defined:
-
-   +TODO: Examples+
-
-*** Link Location
-    The link location is defined through curly braces (`{}`) and contains the physical location
-    that the user would like to link to. Inside of these curly braces you can find one of four
-    types of data:
-    - A {# file location}
-    - A URL (most commonly to an external resource)
-    - A detached modifier followed by the name of the linkable
-    - A custom detached modifier specifically made for links (`@`, `#`)
-
-**** File Location
-     The file location is a construct that allows you to specify the /target file/ in which you want
-     to make a link inside of. This allows you to *link to targets within other files* or just link
-     to other norg files entirely.
-
-     When standalone, the link syntax will simply point to another `.norg` file relative to the
-     current file the link is contained in:
-
+**** Weak Delimiting Modifier
+     This modifier uses the `-` character and immediately closes the current heading level.
      @code norg
-     {:path/to/other-file:}
+     * Heading level 1
+       Text under first level heading.
+
+     ** Heading level 2
+        Text under second level heading.
+        ---
+
+       Text under first level heading again.
      @end
 
-     Note that you do *not* provide the `.norg` extension within the path.
-     You can use traditional modifiers in your path, like `/` (in e.g. `/my/file`) to signify
-     the root of your filesystem, `~` (in e.g. `~/Documents/my-file`) to signify the current
-     user's home directory, /or/ you can use the [Neorg]-specific `$` (in e.g. `$/my/file`) to
-     signify the _root_ of the [Neorg] workspace.
-     Since not all _Norg_ files will be used strictly by [Neorg], the workspace root can be
-     implementation-specific - for git repos the workspace root could be simply the root of the
-     repository, and for other note taking apps it could simply be the root of the directory where
-     all the notes are stored.
-
-     A file location may /only/ be accompanied by a {# detached modifier} or the
-     {# The Magic Char (`#`)}[the magic char], in which case the link looks like so:
-
+**** Strong Delimiting Modifier
+     This modifier uses the `=` character and immediately closes all heading levels.
      @code norg
-     {:path/to/file:# Location within that file}
-     {:path/to/file:** Level 2 heading}
+     * Heading level 1
+       Text under first level heading.
+
+     ** Heading level 2
+        Text under second level heading.
+        ===
+
+     Text belonging to no heading level (i.e. to the document's root).
      @end
 
-     `@` and URLs are not allowed:
-
+**** Horizontal Rule
+     This modifier uses the `_` character and simply renders a horizontal line. It does _NOT_
+     affect the heading level but immediately terminates a {# paragraph}.
      @code norg
-     {:path:@ file} <- invalid
-     {:path:https://my-url} <- also invalid
+     * Heading level 1
+       Text under first level heading.
+       ___
+       This is a new paragraph separated from the previous one by a horizontal line.
+       This text still belongs to the first level heading.
      @end
 
-**** URL
-     You can define a link to an external resource by simply putting in the URL:
+** Range-able Detached Modifiers
+   Range-able detached modifiers can occur in two forms:
+   - As a single detached modifier they affect:
+   -- The next `paragraph_segment` which becomes the /title/
+   -- The `paragraph` following that which becomes the /content/
+   - As a pair of two detached modifiers in which case:
+   -- The next `paragraph_segment` still becomes the /title/
+   -- But the content continues until the "closing" detached modifier is found
+
+   The closing modifier has the same rules as an opening detached modifier except it /must/ be
+   directly succeeded by a {# line ending}.
+
+*** Definitions
+    @code norg
+    $ Single Definition
+    Optional definition content.
+    @end
+
+    @code norg
+    $$ Multiple Definition
+    Content of the definition.
+
+    Which scans up to the closing modifier.
+    $$
+    @end
+
+*** Footnotes
+    @code norg
+    ^ Single Footnote
+    Optional footnote content.
+    @end
+
+    @code norg
+    ^^ Multiple Footnote
+    Content of the footnote.
+
+    Which scans up to the closing modifier.
+    ^^
+    @end
+
+*** Insertions
+    @code norg
+    = Insertion arg1 arg2 ...
+    @end
+    Depending on the kind of insertion, a different number of arguments can be set/required. These
+    arguments follow the same rules as those of {# Tags}.
+    +TODO: not sure I really like this. Tags are separate from detached modifiers, we shouldn't
+    draw parallels here+
+
+    @code norg
+    == Function definition
+    ==
+    @end
+
+** Detached Modifier Extensions
+   {# Detached modifiers} support extensions which must immediately follow the detached modifier
+   (or another extension).
+
+*** TODO Status Extension
+    The TODO item extension assigns a task status to a certain modifier. You probably know this
+    concept from Markdown where unordered lists can become tasks. In _Norg_ we take this concept to
+    the next level because any detached modifier can be assigned a task status. This can for
+    example be useful for the author of a document to keep track of the status of certain sections.
+    The syntax is the following:
+    - A todo status extension starts with a `|` char
+    - Immediately a single status indicator character must follow. The following statuses are
+      supported:
+   -- ` `: undone (a literal space)
+   -- `x`: done
+   -- `?`: needs further input/clarification
+   -- `!`: urgent
+   -- `+`: recurring
+   -- `-`: in-progress/pending
+   -- `=`: on hold
+   -- `_`: put down/cancelled
+   - Finally another `|` char closes the todo status extension
+
+*** Indent Segment Extension
+    Since {# nestable detached modifiers} can only contain a {# paragraph} this can cause severe
+    limitations because insertion of (for example) code blocks is not possible. To alleviate this
+    deficiency, the {# indent segment extension} exists, which increases the indentation of the
+    tree by one level allowing nesting of more complex elements to occur.
+    The syntax is the following:
+    - The indent segment extension starts with a single `\` char
+    - This must be _immediately_ followed by a {# line ending}
+    -- Thus, the start node of this extension can be seen as a {# trailing modifier}
+    - The contents follow
+    - The extension ends when:
+    -- Another {# nestable detached modifier} occurs
+    -- Or when the indentation is manually closed with one of the {# delimiting modifiers}
+     +TODO(vhyrro): discuss what truly "automatically" ends the indent segment. I propose that the only way
+     to auto-close an indent segment is to use a structural detached modifier or a modifier of the same
+     type as the parent of the indent segment; i.e. if you attach an indent segment to a level 1
+     unordered list item then creating another level 1 unordered list item auto-closes the indent
+     segment. However, creating a level 1 ordered list segment inside would be okay.+
+
+    @code norg
+    - \
+      The indent segment extension has started.
+
+      I can now include multiple paragraphs within this list item.
+
+      @code lua
+      print("Even code blocks are allowed!")
+      @end
+
+      ^ Range-able detached modifiers can be inserted, too.
+
+      ---
+    - Another nestable detached modifier ends the indent segment
+    - However, in this example I already closed the indent segment manually with `---`
+    @end
+
+* Tags
+  Tags are _Norg_'s official way of extending its own syntax.
+
+  There are 3 different tag types, each with their own way of changing the way text in _Norg_ is
+  interpreted. Before we discuss those, however, we should discuss the syntax rules for tags:
+  - A tag is similar to a {# detached modifiers}[detached modifier] in the sense that it must begin
+    at the beginning of a line with optional whitespace (but nothing else) preceding it.
+  - After that you will encounter the special tag character (`|`, `@` or `#`), /none/ of which are
+    attached modifiers - if those chars were attached modifiers then we would have ambiguity on our
+    hands. The special tag character is then /immediately/ followed by text, which becomes the /tag
+    name/. Said tag name can consist of any {# alphanumeric characters}[alphanumeric character]
+    and/or `-`, `_` and `.`.
+  - Tags can have their names delimited by a `.` in order to create a "hierarchy", e.g.
+    `document.meta`.
+  - \
+    After a whitespace character any number of parameters on the same line may follow:
+    @code norg
+    |tag-name.subtag parameter1 parameter2
+    @end
+
+    Parameters may consist of any character (apart from a {# line break}, of course).
+    ---
+
+   _Norg_ provides several inbuilt tag names that are reserved, but their details are not explained
+   in this specification - this document strictly covers syntax. There is no restriction in regards
+   to the length of a tag name, nor are there any disallowed names that a parser should omit
+   (unless they don't adhere to the above rules regarding tag names).
+
+** Carryover Tags
+   A carryover tag is a way to assign some data to the next element in the document.
+   +TODO: Finish+
+   @code norg
+   |carryover-tag param1 param2
+   @end
+
+** Ranged Tags
+   Ranged tags are a way to express custom information within a range.
+   They begin with the traditional tag declaration and are ended with an `end` statement.
+   They allow you to create your own completely custom syntax within a determined boundary.
+
+   The `end` statement has a simple ruleset:
+   - Must be at the start of a line, may be preceded by any whitespace (but nothing else)
+   - Must use the same prefix as its parent (in the case of regular ranged tags: `#`; in the case
+     of verbatim tags: `@`)
+   - Must not be succeeded by anything other than a {# line break}.
+
+*** Ranged Tags
+    Sometimes you may want the freedom to have access to inline _Norg_ structures, like {# attached
+    modifiers} and/or {# links}. Ranged tags allow you to do exactly this. An example of a ranged
+    tag is Neorg's `#table` tag:
+
+    @code norg
+    #table
+    *heading* | /heading/ | _heading_
+    first | second | third
+    | 2 |
+    #end
+    @end
+
+*** Verbatim Ranged Tags
+    In other cases you may be more interested in a {# verbatim ranged tags}[verbatim ranged tag],
+    which disallows any _Norg_ markup to exist inside of itself. A prime example of this is
+    `@code`, which creates a code block - you obviously don't want nested _Norg_ syntax within
+    that!
+    @code java
+    @MyAnnotation(name="someName", value="Hello World")
+    public class TheClass {
+      // ...
+    }
+    @end
+    ---
+
+   Verbatim vs regular ranged tags is mostly a matter of /agreement/. If your "custom syntax" uses
+   inline _Norg_ markup then it *must* belong in a regular {# ranged tag}. If you do not want things
+   inside your syntax to be mistaken for _Norg_ markup then it must belong in a {# verbatim ranged
+   tag}.
+
+* Attached Modifiers
+  We can now discuss attached modifiers (which originally gave rise to the name of
+  {# detached modifiers} as their natural counter-parts). Here are the general rules for attached
+  modifiers:
+  - An opening modifier may only be preceded by {# whitespace} or {# punctuation}
+  - An opening modifier may _NOT_ be succeeded by {# whitespace}
+  - A closing modifier may _NOT_ be preceded by {# whitespace}
+  - A closing modifier may only be succeeded by {# whitespace} or {# punctuation}
+  - \
+     {# Attached modifiers} can only span at maximum a single {# paragraph}, i.e. they get
+     terminated as soon as they encounter a {# paragraph break}.
+
+     This means that this:
+     @code norg
+     *this
+
+     text*
+     @end
+     Will *not* result in any bold text, as it's divided by a {# paragraph break}.
+     However, this:
 
      @code norg
-     {https://github.com/nvim-neorg/neorg}
+     *this
+     text*
      @end
+     Is fine, and will result in *`this text`* being bold.
+  - Nested {# attached modifiers} should be closed in the opposite order they were opened.
 
-**** Detached Modifier
-     _Norg_ allows you to link to any {# Structural Detached Modifiers}[structural] or
-     {# Range-able Detached Modifiers}[range-able] detached modifier:
+  Their name should be rather self explanatory - both the opening and closing modifier are attached
+  to one another.
 
-     @code norg
-     * I am a level 1 heading
+  The following attached modifiers exist and have respective meaning:
+  - \*bold\*: *bold*
+  - \/italic\/: /italic/
+  - \_underline\_: _underline_
+  - \-strikethrough\-: -strikethrough-
+  - \!spoiler\!: !spoiler!
+  - \^superscript\^: ^superscript^  (cannot be nested into `subscript`)
+  - \,subscript\,: ,subscript,  (cannot be nested into `superscript`)
+  - \`inline code\`: `inline code` (disables any nested markup - verbatim)
+  - \+inline comment\+: +inline comment+
+  - \$inline math\$: $f(x) = y$  (verbatim)
+  - \=variable\=: =variable=  (verbatim)
 
-     Strict link to a level 1 heading:
-     {* I am a level 1 heading}
-     @end
+** Valid Examples
+   @code norg
+   *Bold text*
 
-     The inside of the link location looks just like a detached modifier definition, and that is
-     because it pretty much is. You can substitute the `*` char for any other
-     {# Structural Detached Modifiers}[structural] or {# Range-able Detached Modifiers}[range-able]
-     detached modifier, /except/ "ranged" versions of said modifiers - those are *disallowed* within
-     the link syntax. By this we mean that syntax like `{$$ Text}` is _invalid_. To link to a ranged
-     definition you wouldd still use `{$ Text}`, there is no reason to make a distinction between a
-     ranged and non-ranged detached modifier, as both have the same meaning, one just allows more
-     content to exist within itself.
+   *Bold text*,
+   .*Bold text*,
 
-**** Custom Detached Modifiers
-     Apart from linking to the detached modifiers outlined above, you can also link to a set of
-     custom modifiers specifically designed for links. These are the `#` (magic) and `@` (file)
-     linkable locations.
+   *Bold
+   text*
 
-***** The File Linkable (`@`)
-      Sometimes you may want to link to an external file that is not a _Norg_ file.
-      In that case you may use `{@ /path/to/my/file.txt}` (notice the mandatory space after the `@`
-      char, just like with the {**** detached modifier}s). Paths are relative to the _Norg_
-      file that contains the link.
+   */Bold and italic/* <- closing modifiers closed in the opposite order they were opened
+   */Bold and italic/ and only bold*
 
-***** The Magic Char (`#`)
-      Sometimes you simply want to be lazy, or you want to link to an {**** inline linkables}[inline
-      linkable] that does not have a dedicated modifier to denote it - in these scenarios you would
-      use the magic char: `#`. It links to /any/ item type. The syntax is exactly the same as with
-      the other modifiers: `{# My Location}`.
+   Text */with/ _different_ ^markup^ !types!*
+   @end
 
-**** Inline Linkables
-     Although most linkable items are either {# Structural Detached Modifiers}[structural] or
-     {# Range-able Detached Modifiers}[range-able], there are also syntax elements in _Norg_ that
-     are inline - these are the `|name` {# Carryover Tags}[carryover tag] and the
-     {# Inline Link Target}[inline link target]. Both of these can be linked to through the
-     {# The Magic Char (`#`)}[the magic char].
+** Invalid Examples
+   @code norg
+   * Bold text *
 
-*** Link Description
-    Link descriptions are denoted by square brackets: `[]`. They contain the description for either a
-    {# link location} (by placing the description after the link location), an {# anchors}[anchor]
-    definition (by placing the description before the link location) or an anchor declaration (where
-    the /only/ syntax item *is* the link description). Anchors are described {# anchors}[later on].
+   *Bold text *
 
-*** Links
-    Links in _Norg_ can exist as a standalone {# link location} in which case their text is used as
-    the link title (often makes sense for headings):
+   other text*Bold text*
+
+   *Bold text*other text
+
+   *
+   Bold text*
+
+   *Bold
+   text
+   *
+
+   *Bold
+
+   text*
+
+   Closed in the wrong order:
+   */Bold and italic*/
+
+   Also closed in the wrong order:
+   */Bold and italic* and only italic/
+   @end
+
+** Link Modifier
+   The link modifier, `:`, is a special modifier type called an _intersecting_ modifier. It puts a
+   twist on the original attached modifier rules because it allows non-whitespace characters in
+   front of the opening or after the closing modifier. This allows the intersection of a
+   non-whitespace string like so:
+   @code norg
+   Ex:*am*:ple
+   @end
+   Without the `:`-link modifier, the above example would not result in a bold segment.
+
+   - | | TODO: currently states in the docs that it must occur in pairs but this is not enforced by
+         the TS parser. I.e. the following is valid: ex:_ample_
+
+** Ranged Attached Modifiers
+   Ranged attached modifiers can be used to:
+   - Allow arbitrary {# whitespace} within {# attached modifiers}.
+   - Allow to represent verbatim attached modifier chars within the corresponding verbatim blocks.
+
+   For example:
+   @code norg
+   Here, I can write |`  leading and trailing whitespace  `| within a verbatim block.
+   @end
+
+   @code norg
+   Here, I can use a literal `$` inside of inline math: |$ 10$ + 10$ = 20$ $|.
+   @end
+
+* Trailing Modifier
+  Trailing modifiers are another separate kind of modifiers in the _Norg_ syntax. It has one very
+  simple rule: it may only exist at the end of a line and may not be followed by any characters
+  after itself.
+
+** Line Continuation
+   The `~`-trailing modifier will concatenate the line which it ends with the following one.
+   This allows you to do something like the following:
+
+   @code norg
+   * I am a very long heading title~
+     which did not end here because of the trailing modifier
+   @end
+
+   It completely swallows the next line break, allowing for things like this:
+
+   @code norg
+   - I am a list item~
+
+   - And I am still the same list
+   @end
+
+   Without the trailing modifier those two items would have been treated as two separate lists, but
+   since the `~` char swallows the line break it makes the parser actually see:
+
+   @code norg
+   - I am a list item
+   - And I am still the same list
+   @end
+
+   Note that trailing modifiers may also exist on a separate line:
+
+   @code norg
+   - I am a list item
+   ~
+   - And I am still the same list
+   @end
+
+* Linkables
+  Finally, there is one more kind of in-line syntax which is the {# linkables} kind.
+  Linkables can link to any element /anywhere/ in the document.
+
+  When resolving links, the first match should always be the only match, starting from the top of
+  the document and heading towards the bottom. This means that if there are two matches, the one at
+  the topmost part of the document should be chosen as the target.
+
+  Linkables are comprised of many segments, and can change meaning depending on the order those
+  segments were defined:
+
+  +TODO: Examples+
+
+** Link Location
+   The link location is defined through curly braces (`{}`) and contains the physical location
+   that the user would like to link to. Inside of these curly braces you can find one of four
+   types of data:
+   - A {# file location}
+   - A URL (most commonly to an external resource)
+   - A detached modifier followed by the name of the linkable
+   - A custom detached modifier specifically made for links (`@`, `#`)
+
+*** File Location
+    The file location is a construct that allows you to specify the /target file/ in which you want
+    to make a link inside of. This allows you to *link to targets within other files* or just link
+    to other norg files entirely.
+
+    When standalone, the link syntax will simply point to another `.norg` file relative to the
+    current file the link is contained in:
 
     @code norg
-    {* I am a standalone link}
+    {:path/to/other-file:}
     @end
 
-    When a custom description is required, it must be placed *_after_* the link location. This makes
-    sense in terms of writing as you first define where you link to, and then describe it further:
+    Note that you do *not* provide the `.norg` extension within the path.
+    You can use traditional modifiers in your path, like `/` (in e.g. `/my/file`) to signify
+    the root of your filesystem, `~` (in e.g. `~/Documents/my-file`) to signify the current
+    user's home directory, /or/ you can use the [Neorg]-specific `$` (in e.g. `$/my/file`) to
+    signify the _root_ of the [Neorg] workspace.
+    Since not all _Norg_ files will be used strictly by [Neorg], the workspace root can be
+    implementation-specific - for git repos the workspace root could be simply the root of the
+    repository, and for other note taking apps it could simply be the root of the directory where
+    all the notes are stored.
+
+    A file location may /only/ be accompanied by a {# detached modifier} or the
+    {# The Magic Char (`#`)}[the magic char], in which case the link looks like so:
 
     @code norg
-    {* I am a link}[with a description]
+    {:path/to/file:# Location within that file}
+    {:path/to/file:** Level 2 heading}
     @end
 
-*** Anchors
-    _Norg_ also has a concept called {# anchors}. These allow you to place a standalone
-    {# link description} inside of text (referred to as an <anchor declaration>).
-    The target which this anchor links to can then be _defined_ at another place in the document
-    with an <anchor definition> which is an initial {# link description} followed by a
-    {# link location}. This is especially useful when you want to link to the same target very
-    often, like for example a specific website.
-
-    Few usage examples:
-    @code norg
-    [Neorg] is a fancy organizational tool for everyone.
-
-    I like shilling [Neorg] sorry :(
-
-    [Neorg]{https://github.com/nvim-neorg/neorg}
-    @end
-    Here we /declare/ the anchor twice, then /define/ the anchor at the very bottom.
-    The `[Neorg]` declarations point to the definition, and then the definition points to the
-    website.
-
-*** Inline Link Targets
-    Finally, _Norg_ also has the possibility of placing link targets at arbitrary in-line positions
-    in your document. We call these {# inline link targets} which are formatted inside of angled
-    brackets: `<>`.
+    `@` and URLs are not allowed:
 
     @code norg
-    One thing to mention is <inline link targets> - they allow you to link to any location in a
-    document.
-
-    ...
-
-    Refer to {# inline link targets} if you are interested in learning more.
+    {:path:@ file} <- invalid
+    {:path:https://my-url} <- also invalid
     @end
 
-    An important thing to note is that since inline link targets are - well - inline, they cannot be
-    directly linked to with a dedicated char in the link syntax.
-    To link to these syntax elements you can /only/ use {# The Magic Char (`#`)}[the magic char].
+*** URL
+    You can define a link to an external resource by simply putting in the URL:
+
+    @code norg
+    {https://github.com/nvim-neorg/neorg}
+    @end
+
+*** Detached Modifier
+    _Norg_ allows you to link to any {# Structural Detached Modifiers}[structural] or
+    {# Range-able Detached Modifiers}[range-able] detached modifier:
+
+    @code norg
+    * I am a level 1 heading
+
+    Strict link to a level 1 heading:
+    {* I am a level 1 heading}
+    @end
+
+    The inside of the link location looks just like a detached modifier definition, and that is
+    because it pretty much is. You can substitute the `*` char for any other
+    {# Structural Detached Modifiers}[structural] or {# Range-able Detached Modifiers}[range-able]
+    detached modifier, /except/ "ranged" versions of said modifiers - those are *disallowed* within
+    the link syntax. By this we mean that syntax like `{$$ Text}` is _invalid_. To link to a ranged
+    definition you would still use `{$ Text}`, there is no reason to make a distinction between a
+    ranged and non-ranged detached modifier, as both have the same meaning, one just allows more
+    content to exist within itself.
+
+*** Custom Detached Modifiers
+    Apart from linking to the detached modifiers outlined above, you can also link to a set of
+    custom modifiers specifically designed for links. These are the `#` (magic) and `@` (file)
+    linkable locations.
+
+**** The File Linkable (`@`)
+     Sometimes you may want to link to an external file that is not a _Norg_ file.
+     In that case you may use `{@ /path/to/my/file.txt}` (notice the mandatory space after the `@`
+     char, just like with the {**** detached modifier}s). Paths are relative to the _Norg_
+     file that contains the link.
+
+**** The Magic Char (`#`)
+     Sometimes you simply want to be lazy, or you want to link to an {**** inline linkables}[inline
+     linkable] that does not have a dedicated modifier to denote it - in these scenarios you would
+     use the magic char: `#`. It links to /any/ item type. The syntax is exactly the same as with
+     the other modifiers: `{# My Location}`.
+
+*** Inline Linkables
+    Although most linkable items are either {# Structural Detached Modifiers}[structural] or
+    {# Range-able Detached Modifiers}[range-able], there are also syntax elements in _Norg_ that
+    are inline - these are the `|name` {# Carryover Tags}[carryover tag] and the
+    {# Inline Link Target}[inline link target]. Both of these can be linked to through the
+    {# The Magic Char (`#`)}[the magic char].
+
+** Link Description
+   Link descriptions are denoted by square brackets: `[]`. They contain the description for either a
+   {# link location} (by placing the description after the link location), an {# anchors}[anchor]
+   definition (by placing the description before the link location) or an anchor declaration (where
+   the /only/ syntax item *is* the link description). Anchors are described {# anchors}[later on].
+
+** Links
+   Links in _Norg_ can exist as a standalone {# link location} in which case their text is used as
+   the link title (often makes sense for headings):
+
+   @code norg
+   {* I am a standalone link}
+   @end
+
+   When a custom description is required, it must be placed *_after_* the link location. This makes
+   sense in terms of writing as you first define where you link to, and then describe it further:
+
+   @code norg
+   {* I am a link}[with a description]
+   @end
+
+** Anchors
+   _Norg_ also has a concept called {# anchors}. These allow you to place a standalone
+   {# link description} inside of text (referred to as an <anchor declaration>).
+   The target which this anchor links to can then be _defined_ at another place in the document
+   with an <anchor definition> which is an initial {# link description} followed by a
+   {# link location}. This is especially useful when you want to link to the same target very
+   often, like for example a specific website.
+
+   Few usage examples:
+   @code norg
+   [Neorg] is a fancy organizational tool for everyone.
+
+   I like shilling [Neorg] sorry :(
+
+   [Neorg]{https://github.com/nvim-neorg/neorg}
+   @end
+   Here we /declare/ the anchor twice, then /define/ the anchor at the very bottom.
+   The `[Neorg]` declarations point to the definition, and then the definition points to the
+   website.
+
+* Inline Link Targets
+   Finally, _Norg_ also has the possibility of placing link targets at arbitrary in-line positions
+   in your document. We call these {# inline link targets} which are formatted inside of angled
+   brackets: `<>`.
+
+   @code norg
+   One thing to mention is <inline link targets> - they allow you to link to any location in a
+   document.
+
+   ...
+
+   Refer to {# inline link targets} if you are interested in learning more.
+   @end
+
+   An important thing to note is that since inline link targets are - well - inline, they cannot be
+   directly linked to with a dedicated char in the link syntax.
+   To link to these syntax elements you can /only/ use {# The Magic Char (`#`)}[the magic char].
+
+* Precedence
+  Precedence in _Norg_ is rather simple and intuitive. All non-inline elements have direct
+  precendce over all inline elements. Inline elements with a deterministic start and end have
+  greater priority than those that don't.
+
+  Here's the full list:
+  ~ Tags (`|carryover`, `#regular` and `@verbatim`)
+  ~ Structural detached modifiers
+  ~ Nestable detached modifiers / range-able detached modifiers (there isn't a case where these can
+    overlap) +TODO: is this alright?+
+  ~ Detached modifier extensions
+  ~ Linkables (`{}`, `[]`, `<>`)
+  ~ Ranged attached modifiers (`|**|`, `|//|` etc.)
+  ~ Regular attached modifers
 
 |+ vim: set tw=100 :+|
