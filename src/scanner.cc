@@ -219,7 +219,6 @@ class Scanner
             return true;
         }
 
-        // TODO: make verbatim not a naive copy of non-verbatim ranged tag
         // If we're at the beginning of a line check for all detached modifiers
         if (lexer->get_column(lexer) == 0)
         {
@@ -861,7 +860,7 @@ class Scanner
 
             advance(lexer);
 
-            if (!std::iswspace(lexer->lookahead) && m_LastToken != LINK_TARGET_EXTERNAL_FILE)
+            if (!std::iswspace(lexer->lookahead))
                 return false;
 
             while (std::iswspace(lexer->lookahead))
@@ -909,8 +908,6 @@ class Scanner
         default:
             return false;
         }
-
-        return false;
     }
 
     /*
