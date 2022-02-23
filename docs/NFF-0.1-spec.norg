@@ -29,10 +29,10 @@ grouped node.
    [Neorg]{https://github.com/nvim-neorg/neorg}
 
 ** What is Norg?
-   The _Norg_ syntax is a plain-text file format which aims to be human readable when viewed
-   standalone while also providing a suite of markup utilities for typesetting structured
-   documents. Compared to other plain-text file formats like e.g. Markdown, RST or AsciiDoc, it
-   sets itself apart most notably by following a strict philosophy to abide by the following simple
+   The _Norg_ syntax is a /structured/ plain-text file format which aims to be human readable when
+   viewed standalone while also providing a suite of markup utilities for typesetting structured
+   documents. Compared to other plain-text file formats like e.g. Markdown, RST or AsciiDoc, it sets
+   itself apart most notably by following a strict philosophy to abide by the following simple
    rules:
    ~ *Consistency:* the syntax should be consistent. Even if you know only a part of the syntax,
      learning new parts should not be surprising and rather feel predictable and intuitive.
@@ -866,6 +866,9 @@ grouped node.
     overlap) +TODO: is this alright?+
   ~ Detached modifier extensions
   ~ Linkables (`{}`, `[]`, `<>`)
+  ~ Ranged verbatim attached modifiers (`|``|`, `|``|`)
+  ~ Verbatim attached modifiers
+  ~ Escape character (`\`)
   ~ Ranged attached modifiers (`|**|`, `|//|` etc.)
   ~ Regular attached modifers
 
