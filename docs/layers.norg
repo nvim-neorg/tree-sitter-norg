@@ -1,0 +1,34 @@
+* Layer 1
+
+Pure in-line syntax which can be embedded in e.g. a messaging app
+
+- attached mods
+- links
+
+* Layer 2
+
+Basic structured doc
+
+- nestable detached mods (lists, quotes)
+- headings
+- remaining linkables (anchors, in-line)
+- verbatim tags (@code, etc.)
+- delimiting mods
+
+* Layer 3
+
+- markers
+- carryover tags (|name, |color, etc.)
+- detached modifier extensions
+- range-able detached mods (excl. interpretation/execution of ranged insertions)
+- trailing mod
+- link modifier
+
+* Layer 4
+
+- non-verbatim tags (#table, etc.)
+- ranged attached mods
+
+* Layer 5
+
+- interpretation/execution of ranged insertions
