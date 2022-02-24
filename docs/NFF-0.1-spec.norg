@@ -7,8 +7,7 @@
 Talk about grouping of nodes, for example: a list is one entire item. Define what is and isn't a
 grouped node.
 
-- | | restructure spec into multiple layers
-- |x| ensure we state that this is a physical spec and not a reference implementation
+- |_| restructure spec into multiple layers (instead finalize separate layers doc)
 
 * Norg File Format Specification
   This file contains the formal file format specification of the _Norg_ syntax version 0.1.
@@ -112,7 +111,7 @@ grouped node.
    element:
    - Any of the {# attached modifiers}
    - Any of the {# linkables}
-   
+
    A {# line ending} terminates the paragraph segment. This means that a paragraph segment is
    essentially just a line of text:
    @code norg
