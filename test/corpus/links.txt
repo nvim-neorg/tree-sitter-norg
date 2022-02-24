@@ -26,8 +26,8 @@ Basic Links
 {:norg_file:^ Footnote}
 {https://github.com/}
 {file:///dev/null}
-{@external_file.txt}
-{:norg_file:@external_file.txt}
+{@ external_file.txt}
+{:norg_file:@ external_file.txt}
 {:norg_file:https://github.com/}
 ---
 (document
@@ -252,9 +252,9 @@ Basic Links
         )
         (ERROR
             (link_file_text)
-            (lowercase_word)
-            (lowercase_word)
         )
+        (paragraph_segment)
+        (ERROR)
         (ERROR (link_file_text))
         (paragraph_segment)
     )
@@ -289,8 +289,8 @@ Links with text
 {:norg_file:^ Footnote}[custom text]
 {https://github.com/}[custom text]
 {file:///dev/null}[custom text]
-{@external_file.txt}[custom text]
-{:norg_file:@external_file.txt}[custom text]
+{@ external_file.txt}[custom text]
+{:norg_file:@ external_file.txt}[custom text]
 {:norg_file:https://github.com/}[custom text]
 ---
 (document
@@ -593,10 +593,9 @@ Links with text
         )
         (ERROR
             (link_file_text)
-            (lowercase_word)
-            (lowercase_word)
         )
         (paragraph_segment
+            (ERROR)
             (anchor_declaration
                 (link_description
                    text: (paragraph)
@@ -670,10 +669,10 @@ Anchors
 [external marker anchor]{:norg_file:% Marker}
 [external definition anchor]{:norg_file:$ Definition}
 [external footnote anchor]{:norg_file:^ Footnote}
-[non-norg file anchor]{@external_file.txt}
+[non-norg file anchor]{@ external_file.txt}
 [url anchor]{https://github.com/}
 [file anchor]{file:///dev/null}
-[invalid external with file anchor]{:file:@external_file.txt}
+[invalid external with file anchor]{:file:@ external_file.txt}
 [invalid url with file anchor]{:file:https://github.com/}
 ---
 (document
@@ -1160,12 +1159,11 @@ Anchors
                   text: (paragraph)
                 )
             )
+            (ERROR
+                (link_file_text)
+            )
         )
-        (ERROR
-            (link_file_text)
-            (lowercase_word)
-            (lowercase_word)
-        )
+        (ERROR)
         (paragraph_segment
             (anchor_declaration
                 (link_description
