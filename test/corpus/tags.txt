@@ -1,3 +1,31 @@
+==================
+Regular Ranged Tag
+==================
+#table
+*heading* | /heading/
+value | something else
+#end
+No longer part of the ranged tag.
+---
+(document
+    (ranged_tag
+        (tag_name
+            (tag_name_element)
+        )
+        (ranged_tag_content
+            (paragraph_segment
+                (bold)
+                (italic)
+            )
+            (paragraph_segment)
+        )
+        (ranged_tag_end)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
 ===================
 Ranged Verbatim Tag
 ===================
