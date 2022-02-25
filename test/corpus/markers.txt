@@ -12,8 +12,10 @@ Now this is on the root level.
 ---
 (document
     (heading1
-        (heading1_prefix)
-        (paragraph_segment)
+        (heading1_title
+            (heading1_prefix)
+            (paragraph_segment)
+        )
         (paragraph
             (paragraph_segment)
         )
@@ -25,8 +27,10 @@ Now this is on the root level.
             (paragraph_segment)
         )
         (heading1
-            (heading1_prefix)
-            (paragraph_segment)
+            (heading1_title
+                (heading1_prefix)
+                (paragraph_segment)
+            )
         )
     )
 )

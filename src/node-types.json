@@ -312,6 +312,30 @@
             "named": true
           },
           {
+            "type": "heading1_title",
+            "named": true
+          },
+          {
+            "type": "heading2_title",
+            "named": true
+          },
+          {
+            "type": "heading3_title",
+            "named": true
+          },
+          {
+            "type": "heading4_title",
+            "named": true
+          },
+          {
+            "type": "heading5_title",
+            "named": true
+          },
+          {
+            "type": "heading6_title",
+            "named": true
+          },
+          {
             "type": "marker",
             "named": true
           },
@@ -550,7 +574,31 @@
             "named": true
           }
         ]
-      },
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "heading1_title",
+          "named": true
+        },
+        {
+          "type": "weak_paragraph_delimiter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading1_title",
+    "named": true,
+    "fields": {
       "title": {
         "multiple": false,
         "required": true,
@@ -563,15 +611,11 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "heading1_prefix",
-          "named": true
-        },
-        {
-          "type": "weak_paragraph_delimiter",
           "named": true
         }
       ]
@@ -626,7 +670,31 @@
             "named": true
           }
         ]
-      },
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "heading2_title",
+          "named": true
+        },
+        {
+          "type": "weak_paragraph_delimiter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading2_title",
+    "named": true,
+    "fields": {
       "title": {
         "multiple": false,
         "required": true,
@@ -639,15 +707,11 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "heading2_prefix",
-          "named": true
-        },
-        {
-          "type": "weak_paragraph_delimiter",
           "named": true
         }
       ]
@@ -698,7 +762,31 @@
             "named": true
           }
         ]
-      },
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "heading3_title",
+          "named": true
+        },
+        {
+          "type": "weak_paragraph_delimiter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading3_title",
+    "named": true,
+    "fields": {
       "title": {
         "multiple": false,
         "required": true,
@@ -711,15 +799,11 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "heading3_prefix",
-          "named": true
-        },
-        {
-          "type": "weak_paragraph_delimiter",
           "named": true
         }
       ]
@@ -766,7 +850,31 @@
             "named": true
           }
         ]
-      },
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "heading4_title",
+          "named": true
+        },
+        {
+          "type": "weak_paragraph_delimiter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading4_title",
+    "named": true,
+    "fields": {
       "title": {
         "multiple": false,
         "required": true,
@@ -779,15 +887,11 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "heading4_prefix",
-          "named": true
-        },
-        {
-          "type": "weak_paragraph_delimiter",
           "named": true
         }
       ]
@@ -830,7 +934,31 @@
             "named": true
           }
         ]
-      },
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "heading5_title",
+          "named": true
+        },
+        {
+          "type": "weak_paragraph_delimiter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading5_title",
+    "named": true,
+    "fields": {
       "title": {
         "multiple": false,
         "required": true,
@@ -843,15 +971,11 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "heading5_prefix",
-          "named": true
-        },
-        {
-          "type": "weak_paragraph_delimiter",
           "named": true
         }
       ]
@@ -890,7 +1014,31 @@
             "named": true
           }
         ]
-      },
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "heading6_title",
+          "named": true
+        },
+        {
+          "type": "weak_paragraph_delimiter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading6_title",
+    "named": true,
+    "fields": {
       "title": {
         "multiple": false,
         "required": true,
@@ -903,15 +1051,11 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "heading6_prefix",
-          "named": true
-        },
-        {
-          "type": "weak_paragraph_delimiter",
           "named": true
         }
       ]
