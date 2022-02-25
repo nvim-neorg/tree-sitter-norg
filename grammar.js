@@ -348,82 +348,17 @@ module.exports = grammar({
         ),
 
         // ---- ATTACHED MODIFIERS ----
-        bold: $ =>
-        seq(
-            alias($.bold_open, "_open"),
-            $._attached_modifier_content,
-            alias($.bold_close, "_close"),
-        ),
-
-        italic: $ =>
-        seq(
-            alias($.italic_open, "_open"),
-            $._attached_modifier_content,
-            alias($.italic_close, "_close"),
-        ),
-
-        strikethrough: $ =>
-        seq(
-            alias($.strikethrough_open, "_open"),
-            $._attached_modifier_content,
-            alias($.strikethrough_close, "_close"),
-        ),
-
-        underline: $ =>
-        seq(
-            alias($.underline_open, "_open"),
-            $._attached_modifier_content,
-            alias($.underline_close, "_close"),
-        ),
-
-        spoiler: $ =>
-        seq(
-            alias($.spoiler_open, "_open"),
-            $._attached_modifier_content,
-            alias($.spoiler_close, "_close"),
-        ),
-
-        verbatim: $ =>
-        seq(
-            alias($.verbatim_open, "_open"),
-            $._verbatim_modifier_content,
-            alias($.verbatim_close, "_close"),
-        ),
-
-        superscript: $ =>
-        seq(
-            alias($.superscript_open, "_open"),
-            $._attached_modifier_content,
-            alias($.superscript_close, "_close"),
-        ),
-
-        subscript: $ =>
-        seq(
-            alias($.subscript_open, "_open"),
-            $._attached_modifier_content,
-            alias($.subscript_close, "_close"),
-        ),
-
-        inline_comment: $ =>
-        seq(
-            alias($.inline_comment_open, "_open"),
-            $._attached_modifier_content,
-            alias($.inline_comment_close, "_close"),
-        ),
-
-        inline_math: $ =>
-        seq(
-            alias($.inline_math_open, "_open"),
-            $._verbatim_modifier_content,
-            alias($.inline_math_close, "_close"),
-        ),
-
-        variable: $ =>
-        seq(
-            alias($.variable_open, "_open"),
-            $._verbatim_modifier_content,
-            alias($.variable_close, "_close"),
-        ),
+        bold: $ => gen_attached_modifier($, "bold", false),
+        italic: $ => gen_attached_modifier($, "italic", false),
+        strikethrough: $ => gen_attached_modifier($, "strikethrough", false),
+        underline: $ => gen_attached_modifier($, "underline", false),
+        spoiler: $ => gen_attached_modifier($, "spoiler", false),
+        superscript: $ => gen_attached_modifier($, "superscript", false),
+        subscript: $ => gen_attached_modifier($, "subscript", false),
+        inline_comment: $ => gen_attached_modifier($, "inline_comment", false),
+        verbatim: $ => gen_attached_modifier($, "verbatim", true),
+        inline_math: $ => gen_attached_modifier($, "inline_math", true),
+        variable: $ => gen_attached_modifier($, "variable", true),
 
         _conflict_open: $ =>
         prec.dynamic(-1,
@@ -1299,5 +1234,18 @@ function gen_quote($, level) {
                 ),
             ),
         ),
+    );
+}
+
+function gen_attached_modifier($, kind, verbatim) {
+    let content_rule = $._attached_modifier_content;
+    if (verbatim) {
+        content_rule = $._verbatim_modifier_content;
+    }
+
+    return seq(
+        alias($[kind + "_open"], "_open"),
+        content_rule,
+        alias($[kind + "_close"], "_close"),
     );
 }
