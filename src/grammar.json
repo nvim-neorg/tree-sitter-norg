@@ -3985,10 +3985,6 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "heading"
-                      },
-                      {
-                        "type": "SYMBOL",
                         "name": "ranged_tag"
                       },
                       {

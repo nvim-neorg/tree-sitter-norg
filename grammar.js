@@ -572,245 +572,12 @@ module.exports = grammar({
 
         // A first-level heading:
         // * Example
-        heading1: $ =>
-        prec.right(0,
-            seq(
-                $.heading1_prefix,
-
-                field(
-                    "title",
-                    $.paragraph_segment,
-                ),
-
-                repeat(prec(1, $._line_break)),
-
-                field(
-                    "content",
-
-                    repeat(
-                        choice(
-                            $.paragraph,
-
-                            $._paragraph_break,
-                            $.detached_modifier,
-                            $.definition,
-                            $.footnote,
-                            $.tag,
-                            $.horizontal_line,
-
-                            $.heading2,
-                            $.heading3,
-                            $.heading4,
-                            $.heading5,
-                            $.heading6,
-                        )
-                    )
-                ),
-
-                optional(
-                    $.weak_paragraph_delimiter,
-                )
-            )
-        ),
-
-        // A second-level heading:
-        // ** Example
-        heading2: $ =>
-        prec.right(0,
-            seq(
-                $.heading2_prefix,
-
-                field(
-                    "title",
-                    $.paragraph_segment,
-                ),
-
-                repeat(prec(1, $._line_break)),
-
-                field(
-                    "content",
-
-                    repeat(
-                        choice(
-                            $.paragraph,
-
-                            $._paragraph_break,
-                            $.detached_modifier,
-                            $.definition,
-                            $.footnote,
-                            $.tag,
-                            $.horizontal_line,
-
-                            $.heading3,
-                            $.heading4,
-                            $.heading5,
-                            $.heading6,
-                        )
-                    )
-                ),
-
-                optional(
-                    $.weak_paragraph_delimiter,
-                )
-            )
-        ),
-
-        // A third-level heading:
-        // *** Example
-        heading3: $ =>
-        prec.right(0,
-            seq(
-                $.heading3_prefix,
-
-                field(
-                    "title",
-                    $.paragraph_segment,
-                ),
-
-                repeat(prec(1, $._line_break)),
-
-                field(
-                    "content",
-
-                    repeat(
-                        choice(
-                            $.paragraph,
-
-                            $._paragraph_break,
-                            $.detached_modifier,
-                            $.definition,
-                            $.footnote,
-                            $.tag,
-                            $.horizontal_line,
-
-                            $.heading4,
-                            $.heading5,
-                            $.heading6,
-                        )
-                    )
-                ),
-
-                optional(
-                    $.weak_paragraph_delimiter,
-                )
-            )
-        ),
-
-        // A fourth-level heading:
-        // **** Example
-        heading4: $ =>
-        prec.right(0,
-            seq(
-                $.heading4_prefix,
-
-                field(
-                    "title",
-                    $.paragraph_segment,
-                ),
-
-                repeat(prec(1, $._line_break)),
-
-                field(
-                    "content",
-
-                    repeat(
-                        choice(
-                            $.paragraph,
-
-                            $._paragraph_break,
-                            $.detached_modifier,
-                            $.definition,
-                            $.footnote,
-                            $.tag,
-                            $.horizontal_line,
-
-                            $.heading5,
-                            $.heading6,
-                        )
-                    )
-                ),
-
-                optional(
-                    $.weak_paragraph_delimiter,
-                )
-            )
-        ),
-
-        // A fifth-level heading:
-        // ***** Example
-        heading5: $ =>
-        prec.right(0,
-            seq(
-                $.heading5_prefix,
-
-                field(
-                    "title",
-                    $.paragraph_segment,
-                ),
-
-                repeat(prec(1, $._line_break)),
-
-                field(
-                    "content",
-
-                    repeat(
-                        choice(
-                            $.paragraph,
-
-                            $._paragraph_break,
-                            $.detached_modifier,
-                            $.definition,
-                            $.footnote,
-                            $.tag,
-                            $.horizontal_line,
-
-                            $.heading6,
-                        )
-                    )
-                ),
-
-                optional(
-                    $.weak_paragraph_delimiter,
-                )
-            )
-        ),
-
-        // A sixth-level heading:
-        // ******* Example
-        heading6: $ =>
-        prec.right(0,
-            seq(
-                $.heading6_prefix,
-
-                field(
-                    "title",
-                    $.paragraph_segment,
-                ),
-
-                repeat(prec(1, $._line_break)),
-
-                field(
-                    "content",
-
-                    repeat(
-                        choice(
-                            $.paragraph,
-
-                            $._paragraph_break,
-                            $.detached_modifier,
-                            $.definition,
-                            $.footnote,
-                            $.tag,
-                            $.horizontal_line,
-                        )
-                    )
-                ),
-
-                optional(
-                    $.weak_paragraph_delimiter,
-                )
-            )
-        ),
+        heading1: $ => gen_heading($, 1),
+        heading2: $ => gen_heading($, 2),
+        heading3: $ => gen_heading($, 3),
+        heading4: $ => gen_heading($, 4),
+        heading5: $ => gen_heading($, 5),
+        heading6: $ => gen_heading($, 6),
 
         // A quote:
         // > That's what she said
@@ -1660,7 +1427,6 @@ module.exports = grammar({
                                 $.detached_modifier,
                                 $.definition,
                                 $.footnote,
-                                $.heading,
                                 $.ranged_tag,
                                 $.ranged_verbatim_tag,
                                 $.marker,
@@ -1811,3 +1577,46 @@ module.exports = grammar({
         ),
     }
 });
+
+function gen_heading($, level) {
+    let lower_level_heading = []
+    for (let i = 0; i + level < 6; i++) {
+        lower_level_heading[i] = $["heading" + (i + 1 + level)]
+    }
+
+    return prec.right(0,
+        seq(
+            $["heading" + level + "_prefix"],
+
+            field(
+                "title",
+                $.paragraph_segment,
+            ),
+
+            repeat(prec(1, $._line_break)),
+
+            field(
+                "content",
+
+                repeat(
+                    choice(
+                        $.paragraph,
+
+                        $._paragraph_break,
+                        $.detached_modifier,
+                        $.definition,
+                        $.footnote,
+                        $.tag,
+                        $.horizontal_line,
+
+                        ...lower_level_heading,
+                    )
+                )
+            ),
+
+            optional(
+                $.weak_paragraph_delimiter,
+            )
+        )
+    );
+}
