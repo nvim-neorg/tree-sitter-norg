@@ -606,177 +606,14 @@ module.exports = grammar({
             )
         ),
 
-        quote1: $ =>
-        prec.right(0,
-            seq(
-                $.quote1_prefix,
+        quote1: $ => gen_quote($, 1),
+        quote2: $ => gen_quote($, 2),
+        quote3: $ => gen_quote($, 3),
+        quote4: $ => gen_quote($, 4),
+        quote5: $ => gen_quote($, 5),
+        quote6: $ => gen_quote($, 6),
 
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                optional(prec(1, $._line_break)),
-
-                repeat(
-                    choice(
-                        $.quote2,
-                        $.quote3,
-                        $.quote4,
-                        $.quote5,
-                        $.quote6,
-                    ),
-                )
-            )
-        ),
-
-        quote2: $ =>
-        prec.right(0,
-            seq(
-                $.quote2_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                optional(prec(1, $._line_break)),
-
-                repeat(
-                    choice(
-                        $.quote3,
-                        $.quote4,
-                        $.quote5,
-                        $.quote6,
-                    ),
-                )
-            )
-        ),
-
-        quote3: $ =>
-        prec.right(0,
-            seq(
-                $.quote3_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                optional(prec(1, $._line_break)),
-
-                repeat(
-                    choice(
-                        $.quote4,
-                        $.quote5,
-                        $.quote6,
-                    ),
-                )
-            )
-        ),
-
-        quote4: $ =>
-        prec.right(0,
-            seq(
-                $.quote4_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                optional(prec(1, $._line_break)),
-
-                repeat(
-                    choice(
-                        $.quote5,
-                        $.quote6,
-                    ),
-                )
-            )
-        ),
-
-        quote5: $ =>
-        prec.right(0,
-            seq(
-                $.quote5_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                optional(prec(1, $._line_break)),
-
-                repeat(
-                    $.quote6,
-                )
-            )
-        ),
-
-        quote6: $ =>
-        prec.right(0,
-            seq(
-                $.quote6_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                optional(prec(1, $._line_break)),
-
-            )
-        ),
-
-        _any_list_item_level_1: $ =>
-        choice(
-            $.unordered_list1,
-            $.ordered_list1,
-            $.todo_item1,
-            $._any_list_item_level_2,
-        ),
-
-        _any_list_item_level_2: $ =>
-        choice(
-            $.unordered_list2,
-            $.ordered_list2,
-            $.todo_item2,
-            $._any_list_item_level_3,
-        ),
-
-        _any_list_item_level_3: $ =>
-        choice(
-            $.unordered_list3,
-            $.ordered_list3,
-            $.todo_item3,
-            $._any_list_item_level_4,
-        ),
-
-        _any_list_item_level_4: $ =>
-        choice(
-            $.unordered_list4,
-            $.ordered_list4,
-            $.todo_item4,
-            $._any_list_item_level_5,
-        ),
-
-        _any_list_item_level_5: $ =>
-        choice(
-            $.unordered_list5,
-            $.ordered_list5,
-            $.todo_item5,
-            $._any_list_item_level_6,
-        ),
-
-        _any_list_item_level_6: $ =>
-        choice(
-            $.unordered_list6,
-            $.ordered_list6,
-            $.todo_item6,
-        ),
-
-        // TODO: complete docs
+        // generic list
         generic_list: $ =>
         prec.right(0,
             repeat1(
@@ -784,189 +621,47 @@ module.exports = grammar({
             )
         ),
 
-        unordered_list1: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list1_prefix,
+        _any_list_item_level_1: $ => gen_any_list_item($, 1),
+        _any_list_item_level_2: $ => gen_any_list_item($, 2),
+        _any_list_item_level_3: $ => gen_any_list_item($, 3),
+        _any_list_item_level_4: $ => gen_any_list_item($, 4),
+        _any_list_item_level_5: $ => gen_any_list_item($, 5),
+        _any_list_item_level_6: $ => gen_any_list_item($, 6),
 
-                field(
-                    "content",
-                    $.paragraph,
-                ),
+        unordered_list1: $ => gen_generic_list_item($, "unordered", 1),
+        unordered_list2: $ => gen_generic_list_item($, "unordered", 2),
+        unordered_list3: $ => gen_generic_list_item($, "unordered", 3),
+        unordered_list4: $ => gen_generic_list_item($, "unordered", 4),
+        unordered_list5: $ => gen_generic_list_item($, "unordered", 5),
+        unordered_list6: $ => gen_generic_list_item($, "unordered", 6),
 
-                repeat(
-                    $._any_list_item_level_2,
-                )
-            )
+        ordered_list1: $ => gen_generic_list_item($, "ordered", 1),
+        ordered_list2: $ => gen_generic_list_item($, "ordered", 2),
+        ordered_list3: $ => gen_generic_list_item($, "ordered", 3),
+        ordered_list4: $ => gen_generic_list_item($, "ordered", 4),
+        ordered_list5: $ => gen_generic_list_item($, "ordered", 5),
+        ordered_list6: $ => gen_generic_list_item($, "ordered", 6),
+
+        _any_todo_state: $ =>
+        choice(
+            $.todo_item_undone,
+            $.todo_item_pending,
+            $.todo_item_done,
+            $.todo_item_on_hold,
+            $.todo_item_cancelled,
+            $.todo_item_urgent,
+            $.todo_item_uncertain,
+            $.todo_item_recurring,
         ),
 
-        unordered_list2: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list2_prefix,
+        todo_item1: $ => gen_todo_list_item($, 1),
+        todo_item2: $ => gen_todo_list_item($, 2),
+        todo_item3: $ => gen_todo_list_item($, 3),
+        todo_item4: $ => gen_todo_list_item($, 4),
+        todo_item5: $ => gen_todo_list_item($, 5),
+        todo_item6: $ => gen_todo_list_item($, 6),
 
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                repeat(
-                    $._any_list_item_level_3,
-                )
-            )
-        ),
-
-        unordered_list3: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list3_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                repeat(
-                    $._any_list_item_level_4,
-                )
-            )
-        ),
-
-        unordered_list4: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list4_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                repeat(
-                    $._any_list_item_level_5,
-                )
-            )
-        ),
-
-        unordered_list5: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list5_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                repeat(
-                    $._any_list_item_level_6,
-                )
-            )
-        ),
-
-        unordered_list6: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list6_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-            )
-        ),
-
-        ordered_list1: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_list1_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                repeat(
-                    $._any_list_item_level_2,
-                )
-            )
-        ),
-
-        ordered_list2: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_list2_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                repeat(
-                    $._any_list_item_level_3,
-                )
-            )
-        ),
-
-        ordered_list3: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_list3_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                repeat(
-                    $._any_list_item_level_4,
-                )
-            )
-        ),
-
-        ordered_list4: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_list4_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                repeat(
-                    $._any_list_item_level_5,
-                )
-            )
-        ),
-
-        ordered_list5: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_list5_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                repeat(
-                    $._any_list_item_level_6,
-                )
-            )
-        ),
-
-        ordered_list6: $ =>
-        prec.right(0,
-            seq(
-                $.ordered_list6_prefix,
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-            )
-        ),
+        // --------------------------------------------------
 
         marker: $ =>
         prec.right(0,
@@ -995,153 +690,6 @@ module.exports = grammar({
                             $._paragraph_break,
                         ),
                     ),
-                )
-            )
-        ),
-
-        // --------------------------------------------------
-        _any_todo_state: $ =>
-        choice(
-            $.todo_item_undone,
-            $.todo_item_pending,
-            $.todo_item_done,
-            $.todo_item_on_hold,
-            $.todo_item_cancelled,
-            $.todo_item_urgent,
-            $.todo_item_uncertain,
-            $.todo_item_recurring,
-        ),
-
-        todo_item1: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list1_prefix,
-
-                field(
-                    "state",
-                    $._any_todo_state,
-                ),
-
-                token.immediate(/\s+/),
-
-                field(
-                    "content",
-                    $.paragraph
-                ),
-
-                repeat(
-                    $._any_list_item_level_2,
-                ),
-            )
-        ),
-
-        todo_item2: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list2_prefix,
-
-                field(
-                    "state",
-                    $._any_todo_state,
-                ),
-
-                token(/\s+/),
-
-                field(
-                    "content",
-                    $.paragraph
-                ),
-
-                repeat(
-                    $._any_list_item_level_3,
-                ),
-            )
-        ),
-
-        todo_item3: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list3_prefix,
-
-                field(
-                    "state",
-                    $._any_todo_state,
-                ),
-
-                token(/\s+/),
-
-                field(
-                    "content",
-                    $.paragraph
-                ),
-
-                repeat(
-                    $._any_list_item_level_4,
-                ),
-            )
-        ),
-
-        todo_item4: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list4_prefix,
-
-                field(
-                    "state",
-                    $._any_todo_state,
-                ),
-
-                token(/\s+/),
-
-                field(
-                    "content",
-                    $.paragraph
-                ),
-
-                repeat(
-                    $._any_list_item_level_5,
-                ),
-            )
-        ),
-
-        todo_item5: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list5_prefix,
-
-                field(
-                    "state",
-                    $._any_todo_state,
-                ),
-
-                token(/\s+/),
-
-                field(
-                    "content",
-                    $.paragraph
-                ),
-
-                repeat(
-                    $._any_list_item_level_6,
-                ),
-            )
-        ),
-
-        todo_item6: $ =>
-        prec.right(0,
-            seq(
-                $.unordered_list6_prefix,
-
-                field(
-                    "state",
-                    $._any_todo_state,
-                ),
-
-                token(/\s+/),
-
-                field(
-                    "content",
-                    $.paragraph
                 )
             )
         ),
@@ -1650,6 +1198,135 @@ function gen_carryover_tag_set($, rule) {
             field(
                 "target",
                 rule,
+            ),
+        ),
+    );
+}
+
+function gen_any_list_item($, level) {
+    if (level == 6) {
+        return choice(
+            $["unordered_list" + level],
+            $["ordered_list" + level],
+            $["todo_item" + level],
+        );
+    }
+    return choice(
+        $["unordered_list" + level],
+        $["ordered_list" + level],
+        $["todo_item" + level],
+        $["_any_list_item_level_" + (level + 1)],
+    );
+}
+
+function gen_generic_list_item($, kind, level) {
+    if (level == 6) {
+        return prec.right(0,
+            seq(
+                $[kind + "_list" + level + "_prefix"],
+
+                field(
+                    "content",
+                    $.paragraph,
+                ),
+            ),
+        );
+    }
+    return prec.right(0,
+        seq(
+            $[kind + "_list" + level + "_prefix"],
+
+            field(
+                "content",
+                $.paragraph,
+            ),
+
+            repeat(
+                $["_any_list_item_level_" + (level + 1)],
+            ),
+        ),
+    );
+}
+
+function gen_todo_list_item($, level) {
+    if (level == 6) {
+        return prec.right(0,
+            seq(
+                $["unordered_list" + level + "_prefix"],
+
+                field(
+                    "state",
+                    $._any_todo_state,
+                ),
+
+                token.immediate(/\s+/),
+
+                field(
+                    "content",
+                    $.paragraph
+                ),
+            ),
+        );
+    }
+    return prec.right(0,
+        seq(
+            $["unordered_list" + level + "_prefix"],
+
+            field(
+                "state",
+                $._any_todo_state,
+            ),
+
+            token.immediate(/\s+/),
+
+            field(
+                "content",
+                $.paragraph
+            ),
+
+            repeat(
+                $["_any_list_item_level_" + (level + 1)],
+            ),
+        ),
+    );
+}
+
+function gen_quote($, level) {
+    if (level == 6) {
+        return prec.right(0,
+            seq(
+                $["quote" + level + "_prefix"],
+
+                field(
+                    "content",
+                    $.paragraph,
+                ),
+
+                optional(prec(1, $._line_break)),
+            ),
+        );
+    }
+
+    let lower_level_quotes = []
+    for (let i = 0; i + level < 6; i++) {
+        lower_level_quotes[i] = $["quote" + (i + 1 + level)]
+    }
+
+    return prec.right(0,
+        seq(
+            $["quote" + level + "_prefix"],
+
+            field(
+                "content",
+                $.paragraph,
+            ),
+
+            optional(prec(1, $._line_break)),
+
+            repeat(
+                choice(
+                    ...lower_level_quotes,
+                ),
             ),
         ),
     );
