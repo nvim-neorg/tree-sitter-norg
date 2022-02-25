@@ -1220,18 +1220,11 @@ function gen_any_list_item($, level) {
 }
 
 function gen_generic_list_item($, kind, level) {
-    if (level == 6) {
-        return prec.right(0,
-            seq(
-                $[kind + "_list" + level + "_prefix"],
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-            ),
-        );
+    lower_level_list_items = [];
+    if (level < 6) {
+        lower_level_list_items[0] = $["_any_list_item_level_" + (level + 1)]
     }
+
     return prec.right(0,
         seq(
             $[kind + "_list" + level + "_prefix"],
@@ -1242,32 +1235,20 @@ function gen_generic_list_item($, kind, level) {
             ),
 
             repeat(
-                $["_any_list_item_level_" + (level + 1)],
+                choice(
+                    ...lower_level_list_items,
+                ),
             ),
         ),
     );
 }
 
 function gen_todo_list_item($, level) {
-    if (level == 6) {
-        return prec.right(0,
-            seq(
-                $["unordered_list" + level + "_prefix"],
-
-                field(
-                    "state",
-                    $._any_todo_state,
-                ),
-
-                token.immediate(/\s+/),
-
-                field(
-                    "content",
-                    $.paragraph
-                ),
-            ),
-        );
+    lower_level_list_items = [];
+    if (level < 6) {
+        lower_level_list_items[0] = $["_any_list_item_level_" + (level + 1)]
     }
+
     return prec.right(0,
         seq(
             $["unordered_list" + level + "_prefix"],
@@ -1285,31 +1266,20 @@ function gen_todo_list_item($, level) {
             ),
 
             repeat(
-                $["_any_list_item_level_" + (level + 1)],
+                choice(
+                    ...lower_level_list_items,
+                ),
             ),
         ),
     );
 }
 
 function gen_quote($, level) {
-    if (level == 6) {
-        return prec.right(0,
-            seq(
-                $["quote" + level + "_prefix"],
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-
-                optional(prec(1, $._line_break)),
-            ),
-        );
-    }
-
-    let lower_level_quotes = []
-    for (let i = 0; i + level < 6; i++) {
-        lower_level_quotes[i] = $["quote" + (i + 1 + level)]
+    lower_level_quotes = [];
+    if (level < 6) {
+        for (let i = 0; i + level < 6; i++) {
+            lower_level_quotes[i] = $["quote" + (i + 1 + level)]
+        }
     }
 
     return prec.right(0,
