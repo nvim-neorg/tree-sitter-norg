@@ -753,8 +753,9 @@ grouped node.
    types of data:
    - A {# file location}
    - A URL (most commonly to an external resource)
-   - A detached modifier followed by the name of the linkable
-   - A custom detached modifier specifically made for links (`@`, `#`)
+   - A {# detached modifier} followed by the name of the linkable
+   - A {# custom detached modifiers}[custom detached modifier] specifically made for links
+     (`@`, `#`)
 
 *** File Location
     The file location is a construct that allows you to specify the /target file/ in which you want
