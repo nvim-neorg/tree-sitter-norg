@@ -6,9 +6,7 @@ This is still part of the heading.
 ---
 (document
     (heading1
-        (heading1_title
-            (heading1_prefix)
-            (paragraph_segment)
-        )
+        (heading1_prefix)
+        (paragraph_segment)
     )
 )

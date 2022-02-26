@@ -505,19 +505,8 @@ module.exports = grammar({
             $.link_location,
         )),
 
-        // headings
-        heading1_title: $ => gen_heading_title($, 1),
-        heading2_title: $ => gen_heading_title($, 2),
-        heading3_title: $ => gen_heading_title($, 3),
-        heading4_title: $ => gen_heading_title($, 4),
-        heading5_title: $ => gen_heading_title($, 5),
-        heading6_title: $ => gen_heading_title($, 6),
-        _heading1_title_with_carryover: $ => gen_carryover_tag_set($, $.heading1_title),
-        _heading2_title_with_carryover: $ => gen_carryover_tag_set($, $.heading2_title),
-        _heading3_title_with_carryover: $ => gen_carryover_tag_set($, $.heading3_title),
-        _heading4_title_with_carryover: $ => gen_carryover_tag_set($, $.heading4_title),
-        _heading5_title_with_carryover: $ => gen_carryover_tag_set($, $.heading5_title),
-        _heading6_title_with_carryover: $ => gen_carryover_tag_set($, $.heading6_title),
+        // A first-level heading:
+        // * Example
         heading1: $ => gen_heading($, 1),
         heading2: $ => gen_heading($, 2),
         heading3: $ => gen_heading($, 3),
@@ -1072,17 +1061,6 @@ module.exports = grammar({
     }
 });
 
-function gen_heading_title($, level) {
-    return seq(
-        $["heading" + level + "_prefix"],
-
-        field(
-            "title",
-            $.paragraph_segment,
-        ),
-    );
-}
-
 function gen_heading($, level) {
     let lower_level_heading = []
     for (let i = 0; i + level < 6; i++) {
@@ -1091,9 +1069,11 @@ function gen_heading($, level) {
 
     return prec.right(0,
         seq(
-            choice(
-                $["heading" + level + "_title"],
-                alias($["_heading" + level + "_title_with_carryover"], $.carryover_tag_set),
+            $["heading" + level + "_prefix"],
+
+            field(
+                "title",
+                $.paragraph_segment,
             ),
 
             repeat(prec(1, $._line_break)),
@@ -1121,20 +1101,6 @@ function gen_heading($, level) {
                 $.weak_paragraph_delimiter,
             )
         )
-    );
-}
-
-function gen_carryover_tag_set($, rule) {
-    return prec.left(0,
-        seq(
-            repeat1(
-                $.carryover_tag,
-            ),
-            field(
-                "target",
-                rule,
-            ),
-        ),
     );
 }
 
