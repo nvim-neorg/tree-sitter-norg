@@ -3565,7 +3565,7 @@
             "members": [
               {
                 "type": "FIELD",
-                "name": "definition",
+                "name": "content",
                 "content": {
                   "type": "SYMBOL",
                   "name": "paragraph"

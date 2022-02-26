@@ -649,105 +649,11 @@ module.exports = grammar({
             )
         ),
 
-        single_definition: $ =>
-        prec.right(seq(
-            $.single_definition_prefix,
+        single_definition: $ => gen_single_rangeable_detached_modifier($, "definition"),
+        multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition"),
 
-            field(
-                "title",
-                $.paragraph_segment
-            ),
-
-            optional(field(
-                "definition",
-                $.paragraph
-            )),
-        )),
-
-        multi_definition: $ =>
-        choice(
-            seq(
-                $.multi_definition_prefix,
-
-                field(
-                    "title",
-                    $.paragraph_segment,
-                ),
-
-                field(
-                    "content",
-                    repeat(
-                        choice(
-                            $.paragraph,
-                            $._paragraph_break,
-
-                            $.detached_modifier,
-                            $.tag,
-                        )
-                    )
-                ),
-
-                field(
-                    "end",
-                    $.multi_definition_suffix
-                ),
-            ),
-
-            alias(
-                $.multi_definition_suffix,
-                "_suffix"
-            )
-        ),
-
-        single_footnote: $ =>
-        prec.right(seq(
-            $.single_footnote_prefix,
-
-            field(
-                "title",
-                $.paragraph_segment
-            ),
-
-            optional(field(
-                "content",
-                $.paragraph
-            )),
-        )),
-
-        multi_footnote: $ =>
-        choice(
-            seq(
-                $.multi_footnote_prefix,
-
-                field(
-                    "title",
-                    $.paragraph_segment,
-                ),
-
-                field(
-                    "content",
-                    repeat(
-                        choice(
-                            $.paragraph,
-                            $._paragraph_break,
-
-                            $.detached_modifier,
-                            $.tag,
-                        )
-                    )
-                ),
-
-                field(
-                    "end",
-                    $.multi_footnote_suffix,
-                ),
-            ),
-
-            alias(
-                $.multi_footnote_suffix,
-                "_suffix"
-            )
-        ),
+        single_footnote: $ => gen_single_rangeable_detached_modifier($, "footnote"),
+        multi_footnote: $ => gen_multi_rangeable_detached_modifier($, "footnote"),
 
         ranged_tag_content: $ =>
         prec.right(0,
@@ -1213,5 +1119,60 @@ function gen_attached_modifier($, kind, verbatim) {
         alias($[kind + "_open"], "_open"),
         content_rule,
         alias($[kind + "_close"], "_close"),
+    );
+}
+
+function gen_single_rangeable_detached_modifier($, kind) {
+    return prec.right(
+        seq(
+            $["single_" + kind + "_prefix"],
+
+            field(
+                "title",
+                $.paragraph_segment,
+            ),
+
+            optional(
+                field(
+                    "content",
+                    $.paragraph,
+                ),
+            ),
+        ),
+    );
+}
+
+function gen_multi_rangeable_detached_modifier($, kind) {
+    return choice(
+        seq(
+            $["multi_" + kind + "_prefix"],
+
+            field(
+                "title",
+                $.paragraph_segment,
+            ),
+
+            field(
+                "content",
+                repeat(
+                    choice(
+                        $.paragraph,
+                        $._paragraph_break,
+                        $.detached_modifier,
+                        $.tag,
+                    ),
+                ),
+            ),
+
+            field(
+                "end",
+                $["multi_" + kind + "_suffix"],
+            ),
+        ),
+
+        alias(
+            $["multi_" + kind + "_suffix"],
+            "_suffix",
+        ),
     );
 }
