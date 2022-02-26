@@ -157,17 +157,18 @@ grouped node.
    they extend up to the end of the current line.
 
 ** Nestable Detached Modifiers
-   Nestable detached modifiers are those kind which may be repeated multiple times in order to
-   produce a _nested_ object of the given type. The nesting levels are capped at 6 in the
-   [tree-sitter] parser but longer repetitions of the same modifier are allowed, falling back to
-   the sixth nesting level. Other parsers may choose to support higher nesting levels.
+   Nestable detached modifiers are a kind which may be repeated multiple times in order to produce a
+   _nested_ object of the given type. The nesting levels are capped at 6 in the [tree-sitter] parser
+   but longer repetitions of the same modifier are allowed, falling back to the sixth nesting level.
+   Other parsers may choose to support higher nesting levels.
 
-   Furthermore, in contrast to the {# Standard Detached Modifiers} this detached modifier type
-   affects the following `paragraph` instead of only the next segment. This means that in order to
-   terminate the detached modifier contents, you need two consecutive line breaks (forming a
-   {# paragraph break}).
+   Furthermore, in contrast to the {# standard detached modifiers} this detached modifier type has
+   /no/ title, and affects the following `paragraph` instead of only the next {# paragraph
+   segments}[paragraph segment]. Said paragraph then becomes the modifier's /content/. This means
+   that in order to terminate the detached modifier contents, you need two consecutive line breaks
+   (forming a {# paragraph break}){^ 1}.
 
-   Here are some correct examples of the nestable detached modifiers:
+   Here are some correct examples of nestable detached modifiers:
 
 *** Unordered Lists
     @code norg
@@ -271,6 +272,10 @@ grouped node.
 
    Headings are also /nestable/ detached modifiers but will only be discussed later as part of the
    {# structural detached modifiers}.
+
+   ^ 1
+   This isn't the case if the detached modifier is succeeded by the {# detached modifier
+   extensions}[`\` detached modifier extension].
 
 ** Structural Detached Modifiers
    The `*` (headings) and `%` (marker) detached modifiers also have the _structural_ property,
