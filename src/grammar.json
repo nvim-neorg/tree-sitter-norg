@@ -3580,69 +3580,55 @@
       }
     },
     "multi_definition": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "multi_definition_prefix"
-            },
-            {
-              "type": "FIELD",
-              "name": "title",
-              "content": {
-                "type": "SYMBOL",
-                "name": "paragraph_segment"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "content",
-              "content": {
-                "type": "REPEAT",
-                "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "paragraph"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "_paragraph_break"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "detached_modifier"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "tag"
-                    }
-                  ]
-                }
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "end",
-              "content": {
-                "type": "SYMBOL",
-                "name": "multi_definition_suffix"
-              }
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "multi_definition_prefix"
         },
         {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "title",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "paragraph"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_paragraph_break"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "detached_modifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "tag"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "end",
           "content": {
             "type": "SYMBOL",
             "name": "multi_definition_suffix"
-          },
-          "named": false,
-          "value": "_suffix"
+          }
         }
       ]
     },
@@ -3684,69 +3670,55 @@
       }
     },
     "multi_footnote": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "multi_footnote_prefix"
-            },
-            {
-              "type": "FIELD",
-              "name": "title",
-              "content": {
-                "type": "SYMBOL",
-                "name": "paragraph_segment"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "content",
-              "content": {
-                "type": "REPEAT",
-                "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "paragraph"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "_paragraph_break"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "detached_modifier"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "tag"
-                    }
-                  ]
-                }
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "end",
-              "content": {
-                "type": "SYMBOL",
-                "name": "multi_footnote_suffix"
-              }
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "multi_footnote_prefix"
         },
         {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "title",
+          "content": {
+            "type": "SYMBOL",
+            "name": "paragraph_segment"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "paragraph"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_paragraph_break"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "detached_modifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "tag"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "end",
           "content": {
             "type": "SYMBOL",
             "name": "multi_footnote_suffix"
-          },
-          "named": false,
-          "value": "_suffix"
+          }
         }
       ]
     },

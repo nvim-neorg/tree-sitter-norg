@@ -1259,7 +1259,7 @@
       },
       "end": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "multi_definition_suffix",
@@ -1269,7 +1269,7 @@
       },
       "title": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "paragraph_segment",
@@ -1280,7 +1280,7 @@
     },
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "multi_definition_prefix",
@@ -1313,7 +1313,7 @@
       },
       "end": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "multi_footnote_suffix",
@@ -1323,7 +1323,7 @@
       },
       "title": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "paragraph_segment",
@@ -1334,7 +1334,7 @@
     },
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "multi_footnote_prefix",
@@ -3388,10 +3388,6 @@
   },
   {
     "type": "_space",
-    "named": false
-  },
-  {
-    "type": "_suffix",
     "named": false
   },
   {

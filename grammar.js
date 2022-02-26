@@ -1143,8 +1143,9 @@ function gen_single_rangeable_detached_modifier($, kind) {
 }
 
 function gen_multi_rangeable_detached_modifier($, kind) {
-    return choice(
-        seq(
+    // NOTE: there used to be a choice rule with an optional standalone suffix
+    // so if problems arise with standalone closing nodes, re-add that
+    return seq(
             $["multi_" + kind + "_prefix"],
 
             field(
@@ -1168,11 +1169,5 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                 "end",
                 $["multi_" + kind + "_suffix"],
             ),
-        ),
-
-        alias(
-            $["multi_" + kind + "_suffix"],
-            "_suffix",
-        ),
-    );
+        );
 }
