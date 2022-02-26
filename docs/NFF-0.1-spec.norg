@@ -259,9 +259,9 @@ grouped node.
     @code norg
     >I am not a quote
 
-    some preceding text $ I am not a definition
+    some preceding text > I am also not a quote
 
-    >$ I am not a detached modifier
+    >- I am not a valid detached modifier
 
     > > I am only a level 1 quote
 
@@ -534,11 +534,11 @@ grouped node.
 
    The `end` statement has a simple ruleset:
    - Must be at the start of a line, may be preceded by any whitespace (but nothing else)
-   - Must use the same prefix as its parent (in the case of regular ranged tags: `#`; in the case
+   - Must use the same prefix as its parent (in the case of standard ranged tags: `#`; in the case
      of verbatim tags: `@`)
    - Must not be succeeded by anything other than a {# line break}.
 
-*** Ranged Tags
+*** Standard Ranged Tags
     Sometimes you may want the freedom to have access to inline _Norg_ structures, like {# attached
     modifiers} and/or {# links}. Ranged tags allow you to do exactly this. An example of a ranged
     tag is Neorg's `#table` tag:
@@ -564,8 +564,8 @@ grouped node.
     @end
     ---
 
-   Verbatim vs regular ranged tags is mostly a matter of /agreement/. If your "custom syntax" uses
-   inline _Norg_ markup then it *must* belong in a regular {# ranged tag}. If you do not want things
+   Verbatim vs standard ranged tags is mostly a matter of /agreement/. If your "custom syntax" uses
+   inline _Norg_ markup then it *must* belong in a standard {# ranged tag}. If you do not want things
    inside your syntax to be mistaken for _Norg_ markup then it must belong in a {# verbatim ranged
    tag}.
 
@@ -695,14 +695,12 @@ grouped node.
 ** Line Continuation
    The `~`-trailing modifier will concatenate the line which it ends with the following one.
    This allows you to do something like the following:
-
    @code norg
    * I am a very long heading title~
      which did not end here because of the trailing modifier
    @end
 
    It completely swallows the next line break, allowing for things like this:
-
    @code norg
    - I am a list item~
 
@@ -711,18 +709,29 @@ grouped node.
 
    Without the trailing modifier those two items would have been treated as two separate lists, but
    since the `~` char swallows the line break it makes the parser actually see:
-
    @code norg
    - I am a list item
    - And I am still the same list
    @end
 
    Note that trailing modifiers may also exist on a separate line:
-
    @code norg
    - I am a list item
    ~
    - And I am still the same list
+   @end
+
+   Another important use case is disabling Neorg syntax temporarily, consider this example:
+   @code norg
+   That's when she opened the box
+   - she couldn't believe what she saw.
+   @end
+
+   In this case the second line of the example will be treated as a list item - but what if we don't
+   want that? You can use the trailing modifier to prevent that, of course:
+   @code norg
+   That's when she opened the box~
+   - she couldn't believe what she saw.
    @end
 
 * Linkables
@@ -900,7 +909,7 @@ grouped node.
   greater priority than those that don't.
 
   Here's the full list:
-  ~ Tags (`|carryover`, `#regular` and `@verbatim`)
+  ~ Tags (`|carryover`, `#standard` and `@verbatim`)
   ~ Structural detached modifiers
   ~ Nestable detached modifiers / range-able detached modifiers (there isn't a case where these can
     overlap) +TODO: is this alright?+
@@ -910,6 +919,6 @@ grouped node.
   ~ Verbatim attached modifiers
   ~ Escape character (`\`)
   ~ Ranged attached modifiers (`|**|`, `|//|` etc.)
-  ~ Regular attached modifers
+  ~ Standard attached modifers
 
 |+ vim: set tw=100 :+|
