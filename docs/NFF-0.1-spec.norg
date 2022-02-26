@@ -25,7 +25,7 @@ grouped node.
   with the help of the [Neorg] community, the two have shaped the _Norg_ syntax to what it has
   become today.
 
-   [Neorg]{https://github.com/nvim-neorg/neorg}
+  [Neorg]{https://github.com/nvim-neorg/neorg}
 
 ** What is Norg?
    The _Norg_ syntax is a /structured/ plain-text file format which aims to be human readable when
@@ -93,7 +93,7 @@ grouped node.
     (`U+005C`). Any {# character} may be escaped /apart from/ {# character}s within verbatim
     segments +TODO: add link to verbatim segments+.
 
-*** Special Character
+*** Special Characters
     - | | TODO: formalize this section
     - Emojis
 
@@ -125,7 +125,7 @@ grouped node.
    - A <paragraph break> (which equals two consecutive {# line endings})
    - Any of the {# detached modifiers}
    - Any of the {# delimiting modifiers}
-   - Any of the tags +TODO: link to section+
+   - Any of the {# tags}
 
 * Detached Modifiers
   _Norg_ has several detached modifiers. The name originates from their differentiation to the
@@ -246,6 +246,13 @@ grouped node.
     >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
             This text is still part of the level 7 quote.
     @end
+    ---
+
+   |name objects
+   Nestable detached modifiers have a unique quality - when several consecutive nestable modifiers
+   are encountered (by consecutive we mean _NOT_ separated via a {# paragraph break}), they are
+   treated as one whole /object/. This is important to note as it plays a role with {# carryover
+   tags}.
 
 *** Invalid Examples
     @code norg
@@ -484,9 +491,35 @@ grouped node.
 
 ** Carryover Tags
    A carryover tag is a way to assign some data to the next element in the document.
-   +TODO: Finish+
+   They are especially useful when you want to change the /properties/ of an item.
+
+   The syntax is as follows:
    @code norg
    |carryover-tag param1 param2
+   some item
+   @end
+
+   Carryover tags can apply to any non-inline element that occurs right after the carryover tag.
+
+   Examples:
+   @code norg
+   |name my-custom-name
+   * Heading Title
+
+   |color red
+   * Heading
+     Content
+   @end
+
+   When dealing with a range of objects (see {# objects}) the carryover tag affects the entire
+   object, i.e.:
+   @code norg
+   Converts the following list into a multiple choice question:
+
+   |choice
+   - |x| Correct answer
+   - | | Wrong answer
+   - | | Also wrong answer
    @end
 
 ** Ranged Tags
@@ -530,6 +563,9 @@ grouped node.
    inline _Norg_ markup then it *must* belong in a regular {# ranged tag}. If you do not want things
    inside your syntax to be mistaken for _Norg_ markup then it must belong in a {# verbatim ranged
    tag}.
+
+*** Differences in Tag Types
+    +TODO: Finish+
 
 * Attached Modifiers
   We can now discuss attached modifiers (which originally gave rise to the name of
