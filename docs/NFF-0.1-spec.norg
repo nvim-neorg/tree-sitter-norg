@@ -1,11 +1,7 @@
-+General Notes+
 +Explain each syntax element briefly+
 +Expand introduction, explain what a plain text format even is+
 +Use many examples!+
 +And also provide counter-examples for cases which are not expected to work!+
-|comment
-Talk about grouping of nodes, for example: a list is one entire item. Define what is and isn't a
-grouped node.
 
 - |_| restructure spec into multiple layers (instead finalize separate layers doc)
 
@@ -250,7 +246,7 @@ grouped node.
     ---
 
    |name objects
-   Nestable detached modifiers have a unique quality - when several consecutive nestable modifiers
+   Nestable detached modifiers have a unique quality - when several consecutive /nestable/ modifiers
    are encountered (by consecutive we mean _NOT_ separated via a {# paragraph break}), they are
    treated as one whole /object/. This is important to note as it plays a role with {# carryover
    tags}.
@@ -304,7 +300,7 @@ grouped node.
     @end
 
     Markers are purely structural elements which split the entire document right down to the root
-    node.
+    node. They simply serve as a guide to splitting your document into several meta-sections.
 
 *** Delimiting Modifiers
     Although not technically a detached modifier, we would like to insert a note on
@@ -360,15 +356,15 @@ grouped node.
    -- The `paragraph` following that which becomes the /content/
    - As a pair of two detached modifiers in which case:
    -- The next `paragraph_segment` still becomes the /title/
-   -- But the content continues until the "closing" detached modifier is found
+   -- The content continues until the "closing" detached modifier is found
 
    The closing modifier has the same rules as an opening detached modifier except it /must/ be
-   directly succeeded by a {# line ending}.
+   directly succeeded by a {# line ending} vs a whitespace char.
 
 *** Definitions
     @code norg
     $ Single Definition
-    Optional definition content.
+    Definition content.
     @end
 
     @code norg
@@ -413,7 +409,7 @@ grouped node.
 
 *** TODO Status Extension
     The TODO item extension assigns a task status to a certain modifier. You probably know this
-    concept from Markdown where unordered lists can become tasks. In _Norg_ we take this concept to
+    concept from Org where unordered lists can become tasks. In _Norg_ we take this concept to
     the next level because any detached modifier can be assigned a task status. This can for
     example be useful for the author of a document to keep track of the status of certain sections.
     The syntax is the following:
@@ -844,6 +840,23 @@ grouped node.
     are inline - these are the `|name` {# Carryover Tags}[carryover tag] and the
     {# Inline Link Target}[inline link target]. Both of these can be linked to through the
     {# The Magic Char (`#`)}[the magic char].
+
+*** Differences Between File Linkables
+    You may have realized that there are many different ways to reference a file:
+    - `{:my/file:}`
+    - `{@ my/file.norg}`
+    - `{file://my/file.norg}`
+
+    Why are there this many? Let's explain:
+    - `{:my/file:}` is strictly to access `.norg` files and nothing else. More specifically, it's
+       designed to access a resource /within/ a file (`{:my/file:* Heading}`), with the side effect
+       of being able to also exist in a standalone fashion (`{:my/file:}`).
+    - `{@ my/file.norg}` is used to link to a file and a file /only/ (vs `{:my/file:* Heading}`
+       which links to an element within a file). Although it /can/ link to `.norg` files, its main
+       use is to link to non-`.norg` files instead. Using the `@` syntax also disallows you from
+       accessing items within the file.
+    - `{file://my/file.norg}` is simply utilizing the `file://` schema to access a file. This
+       isn't /the/ recommended way to link to files, but it exists simply because of URI schemas.
 
 ** Link Description
    Link descriptions are denoted by square brackets: `[]`. They contain the description for either a
