@@ -506,6 +506,10 @@
         "required": false,
         "types": [
           {
+            "type": "_paragraph_break",
+            "named": false
+          },
+          {
             "type": "definition",
             "named": true
           },
@@ -586,6 +590,10 @@
         "required": false,
         "types": [
           {
+            "type": "_paragraph_break",
+            "named": false
+          },
+          {
             "type": "definition",
             "named": true
           },
@@ -662,6 +670,10 @@
         "required": false,
         "types": [
           {
+            "type": "_paragraph_break",
+            "named": false
+          },
+          {
             "type": "definition",
             "named": true
           },
@@ -734,6 +746,10 @@
         "required": false,
         "types": [
           {
+            "type": "_paragraph_break",
+            "named": false
+          },
+          {
             "type": "definition",
             "named": true
           },
@@ -802,6 +818,10 @@
         "required": false,
         "types": [
           {
+            "type": "_paragraph_break",
+            "named": false
+          },
+          {
             "type": "definition",
             "named": true
           },
@@ -865,6 +885,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "_paragraph_break",
+            "named": false
+          },
           {
             "type": "definition",
             "named": true
@@ -1180,6 +1204,10 @@
         "required": false,
         "types": [
           {
+            "type": "_paragraph_break",
+            "named": false
+          },
+          {
             "type": "definition",
             "named": true
           },
@@ -1244,6 +1272,10 @@
         "required": false,
         "types": [
           {
+            "type": "_paragraph_break",
+            "named": false
+          },
+          {
             "type": "detached_modifier",
             "named": true
           },
@@ -1297,6 +1329,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "_paragraph_break",
+            "named": false
+          },
           {
             "type": "detached_modifier",
             "named": true
@@ -3367,6 +3403,10 @@
     "named": false
   },
   {
+    "type": "_line_break",
+    "named": false
+  },
+  {
     "type": "_lowercase",
     "named": false
   },
@@ -3379,11 +3419,11 @@
     "named": false
   },
   {
-    "type": "_prefix",
+    "type": "_paragraph_break",
     "named": false
   },
   {
-    "type": "_segment",
+    "type": "_prefix",
     "named": false
   },
   {

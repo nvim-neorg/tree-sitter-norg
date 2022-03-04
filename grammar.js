@@ -43,8 +43,8 @@ module.exports = grammar({
         $.lowercase_word,
         $.capitalized_word,
 
-        $._line_break,
-        $._paragraph_break,
+        $.line_break,
+        $.paragraph_break,
 
         $.escape_sequence_prefix,
 
@@ -174,8 +174,8 @@ module.exports = grammar({
             choice(
                 prec(1,
                     choice(
-                        $._paragraph_break,
-                        $._line_break,
+                        alias($.paragraph_break, "_paragraph_break"),
+                        alias($.line_break, "_line_break"),
                         $.heading,
                         $.detached_modifier,
                         $.definition,
@@ -208,7 +208,7 @@ module.exports = grammar({
                 repeat1(
                     choice(
                         $.paragraph_segment,
-                        $._line_break,
+                        alias($.line_break, "_line_break"),
                     ),
                 ),
 
@@ -217,7 +217,7 @@ module.exports = grammar({
                 // having it here would cause the ends of detached modifiers
                 // like quotes and lists to break.
                 // optional(
-                //     $._paragraph_break,
+                //     alias($.paragraph_break, "_paragraph_break"),
                 // ),
             ),
         ),
@@ -399,7 +399,7 @@ module.exports = grammar({
                     choice(
                         $._paragraph_element,
                         alias($._conflict_open, "_lowercase"),
-                        $._line_break,
+                        alias($.line_break, "_line_break"),
                     ),
                 ),
             ),
@@ -411,7 +411,7 @@ module.exports = grammar({
                 repeat1(
                     choice(
                         $._verbatim_modifier_content,
-                        $._line_break,
+                        alias($.line_break, "_line_break"),
                     ),
                 ),
             ),
@@ -597,7 +597,7 @@ module.exports = grammar({
                     $.paragraph_segment
                 ),
 
-                repeat(prec(1, $._line_break)),
+                repeat(prec(1, alias($.line_break, "_line_break"))),
 
                 field(
                     "subtext",
@@ -611,7 +611,7 @@ module.exports = grammar({
                             $.definition,
                             $.footnote,
                             $.tag,
-                            $._paragraph_break,
+                            alias($.paragraph_break, "_paragraph_break"),
                         ),
                     ),
                 )
@@ -661,8 +661,8 @@ module.exports = grammar({
                 choice(
                     choice(
                         $.paragraph_segment,
-                        $._line_break,
-                        $._paragraph_break,
+                        alias($.line_break, "_line_break"),
+                        alias($.paragraph_break, "_paragraph_break"),
                     ),
 
                     field(
@@ -735,8 +735,8 @@ module.exports = grammar({
                     alias(
                         choice(
                             $.paragraph_segment,
-                            $._line_break,
-                            $._paragraph_break,
+                            alias($.line_break, "_line_break"),
+                            alias($.paragraph_break, "_paragraph_break"),
                         ),
                         "_segment",
                     ),
@@ -857,7 +857,7 @@ module.exports = grammar({
             ),
 
             repeat(
-                $._paragraph_break,
+                alias($.paragraph_break, "_paragraph_break"),
             ),
         ),
 
@@ -982,7 +982,7 @@ function gen_heading($, level) {
                 $.paragraph_segment,
             ),
 
-            repeat(prec(1, $._line_break)),
+            repeat(prec(1, alias($.line_break, "_line_break"))),
 
             field(
                 "content",
@@ -991,7 +991,7 @@ function gen_heading($, level) {
                     choice(
                         $.paragraph,
 
-                        $._paragraph_break,
+                        alias($.paragraph_break, "_paragraph_break"),
                         $.detached_modifier,
                         $.definition,
                         $.footnote,
@@ -1098,7 +1098,7 @@ function gen_quote($, level) {
                 $.paragraph,
             ),
 
-            optional(prec(1, $._line_break)),
+            optional(prec(1, alias($.line_break, "_line_break"))),
 
             repeat(
                 choice(
@@ -1158,7 +1158,7 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                 repeat(
                     choice(
                         $.paragraph,
-                        $._paragraph_break,
+                        alias($.paragraph_break, "_paragraph_break"),
                         $.detached_modifier,
                         $.tag,
                     ),
