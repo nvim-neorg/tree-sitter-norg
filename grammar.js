@@ -1696,10 +1696,17 @@ module.exports = grammar({
                 $.paragraph_segment
             ),
 
-            optional(field(
+            repeat(
+                prec(1, choice(
+                    alias($.line_break, "_line_break"),
+                    alias($.paragraph_break, "_paragraph_break"),
+                )),
+            ),
+
+            field(
                 "definition",
                 $.paragraph
-            )),
+            ),
         )),
 
         multi_definition: $ =>
@@ -1710,6 +1717,11 @@ module.exports = grammar({
                 field(
                     "title",
                     $.paragraph_segment,
+                ),
+
+                choice(
+                    alias($.line_break, "_line_break"),
+                    alias($.paragraph_break, "_paragraph_break"),
                 ),
 
                 field(
@@ -1746,10 +1758,17 @@ module.exports = grammar({
                 $.paragraph_segment
             ),
 
-            optional(field(
+            repeat(
+                prec(1, choice(
+                    alias($.line_break, "_line_break"),
+                    alias($.paragraph_break, "_paragraph_break"),
+                )),
+            ),
+
+            field(
                 "content",
                 $.paragraph
-            )),
+            ),
         )),
 
         multi_footnote: $ =>
@@ -1760,6 +1779,11 @@ module.exports = grammar({
                 field(
                     "title",
                     $.paragraph_segment,
+                ),
+
+                choice(
+                    alias($.line_break, "_line_break"),
+                    alias($.paragraph_break, "_paragraph_break"),
                 ),
 
                 field(
