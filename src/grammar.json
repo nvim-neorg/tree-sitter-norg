@@ -223,7 +223,7 @@
             "name": "link_modifier"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -232,7 +232,7 @@
             "name": "bold_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -241,7 +241,7 @@
             "name": "italic_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -250,7 +250,7 @@
             "name": "strikethrough_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -259,7 +259,7 @@
             "name": "underline_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -268,7 +268,7 @@
             "name": "spoiler_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -277,7 +277,7 @@
             "name": "superscript_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -286,7 +286,7 @@
             "name": "subscript_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -295,7 +295,7 @@
             "name": "verbatim_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -304,7 +304,7 @@
             "name": "inline_comment_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -313,7 +313,7 @@
             "name": "inline_math_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         },
         {
           "type": "ALIAS",
@@ -322,7 +322,7 @@
             "name": "variable_close"
           },
           "named": false,
-          "value": "_lowercase"
+          "value": "_word"
         }
       ]
     },
@@ -396,7 +396,7 @@
                     "name": "trailing_modifier"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -405,7 +405,7 @@
                     "name": "escape_sequence_prefix"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -414,7 +414,7 @@
                     "name": "any_char"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -423,7 +423,7 @@
                     "name": "link_modifier"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -432,7 +432,7 @@
                     "name": "bold_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -441,7 +441,7 @@
                     "name": "bold_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -450,7 +450,7 @@
                     "name": "italic_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -459,7 +459,7 @@
                     "name": "italic_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -468,7 +468,7 @@
                     "name": "strikethrough_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -477,7 +477,7 @@
                     "name": "strikethrough_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -486,7 +486,7 @@
                     "name": "underline_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -495,7 +495,7 @@
                     "name": "underline_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -504,7 +504,7 @@
                     "name": "spoiler_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -513,7 +513,7 @@
                     "name": "spoiler_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -522,7 +522,7 @@
                     "name": "superscript_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -531,7 +531,7 @@
                     "name": "superscript_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -540,7 +540,7 @@
                     "name": "subscript_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -549,7 +549,7 @@
                     "name": "subscript_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -558,7 +558,7 @@
                     "name": "verbatim_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -567,7 +567,7 @@
                     "name": "verbatim_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -576,7 +576,7 @@
                     "name": "inline_comment_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -585,7 +585,7 @@
                     "name": "inline_comment_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -594,7 +594,7 @@
                     "name": "inline_math_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -603,7 +603,7 @@
                     "name": "inline_math_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -612,7 +612,7 @@
                     "name": "variable_open"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -621,7 +621,7 @@
                     "name": "variable_close"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -630,7 +630,7 @@
                     "name": "link_description_begin"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -639,7 +639,7 @@
                     "name": "link_description_end"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -648,7 +648,7 @@
                     "name": "link_location_begin"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -657,7 +657,7 @@
                     "name": "link_location_end"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -666,7 +666,7 @@
                     "name": "link_file_begin"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -675,7 +675,7 @@
                     "name": "link_file_end"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -684,7 +684,7 @@
                     "name": "link_file_text"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -693,7 +693,7 @@
                     "name": "link_target_url"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -702,7 +702,7 @@
                     "name": "link_target_generic"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -711,7 +711,7 @@
                     "name": "link_target_external_file"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -720,7 +720,7 @@
                     "name": "link_target_marker"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -729,7 +729,7 @@
                     "name": "link_target_definition"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -738,7 +738,7 @@
                     "name": "link_target_footnote"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -747,7 +747,7 @@
                     "name": "link_target_heading1"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -756,7 +756,7 @@
                     "name": "link_target_heading2"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -765,7 +765,7 @@
                     "name": "link_target_heading3"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -774,7 +774,7 @@
                     "name": "link_target_heading4"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -783,7 +783,7 @@
                     "name": "link_target_heading5"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 },
                 {
                   "type": "ALIAS",
@@ -792,7 +792,7 @@
                     "name": "link_target_heading6"
                   },
                   "named": false,
-                  "value": "_lowercase"
+                  "value": "_word"
                 }
               ]
             }
@@ -819,7 +819,7 @@
                 "name": "_conflict_open"
               },
               "named": false,
-              "value": "_lowercase"
+              "value": "_word"
             }
           ]
         }
@@ -1160,7 +1160,7 @@
               "name": "bold_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1169,7 +1169,7 @@
               "name": "italic_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1178,7 +1178,7 @@
               "name": "strikethrough_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1187,7 +1187,7 @@
               "name": "underline_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1196,7 +1196,7 @@
               "name": "spoiler_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1205,7 +1205,7 @@
               "name": "verbatim_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1214,7 +1214,7 @@
               "name": "superscript_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1223,7 +1223,7 @@
               "name": "subscript_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1232,7 +1232,7 @@
               "name": "inline_comment_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1241,7 +1241,7 @@
               "name": "inline_math_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           },
           {
             "type": "ALIAS",
@@ -1250,7 +1250,7 @@
               "name": "variable_open"
             },
             "named": false,
-            "value": "_lowercase"
+            "value": "_word"
           }
         ]
       }
