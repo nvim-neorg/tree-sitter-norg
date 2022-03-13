@@ -47,6 +47,8 @@ module.exports = grammar({
         [$.ordered_link4, $.paragraph],
         [$.ordered_link5, $.paragraph],
         [$.ordered_link6, $.paragraph],
+
+        [$._paragraph_element],
     ],
 
     externals: $ => [
@@ -220,13 +222,6 @@ module.exports = grammar({
             alias($.capitalized_word, "_uppercase"),
         ),
 
-        _linked_attached_modifier: $ =>
-        prec.right(2, seq(
-            optional($.link_modifier),
-            $.attached_modifier,
-            optional($.link_modifier),
-        )),
-
         // Any regular text
         _paragraph: $ =>
         prec.right(0,
@@ -248,8 +243,11 @@ module.exports = grammar({
             $.anchor_declaration,
             $.anchor_definition,
             $.escape_sequence,
-            $.attached_modifier,
-            $._linked_attached_modifier,
+            seq(
+                optional($.link_modifier),
+                $.attached_modifier,
+                optional($.link_modifier),
+            ),
             alias($.link_modifier, "_word"),
             alias($.bold_close, "_word"),
             alias($.italic_close, "_word"),

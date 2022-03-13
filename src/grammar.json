@@ -95,43 +95,6 @@
         }
       ]
     },
-    "_linked_attached_modifier": {
-      "type": "PREC_RIGHT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "link_modifier"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          },
-          {
-            "type": "SYMBOL",
-            "name": "attached_modifier"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "link_modifier"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
-    },
     "_paragraph": {
       "type": "PREC_RIGHT",
       "value": 0,
@@ -209,12 +172,37 @@
           "name": "escape_sequence"
         },
         {
-          "type": "SYMBOL",
-          "name": "attached_modifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_linked_attached_modifier"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link_modifier"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "attached_modifier"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link_modifier"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "ALIAS",
@@ -5277,6 +5265,9 @@
     [
       "ordered_link6",
       "paragraph"
+    ],
+    [
+      "_paragraph_element"
     ]
   ],
   "precedences": [],
