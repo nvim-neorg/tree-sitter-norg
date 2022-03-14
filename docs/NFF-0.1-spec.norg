@@ -433,17 +433,16 @@
     tree by one level allowing nesting of more complex elements to occur.
     The syntax is the following:
     - The indent segment extension starts with a single `\` char
-    - This must be _immediately_ followed by a {# line ending}
-    -- Thus, the start node of this extension can be seen as a {# trailing modifier}
+    - This must be _immediately_ followed by a {# line ending}. Thus, the start node of this
+      extension can be seen as a {# trailing modifier}.
     - The contents follow
     - The extension ends when:
-    -- Another {# nestable detached modifier} occurs
-    -- Or when the indentation is manually closed with one of the {# delimiting modifiers}
-     +TODO(vhyrro): discuss what truly "automatically" ends the indent segment. I propose that the only way
-     to auto-close an indent segment is to use a structural detached modifier or a modifier of the same
-     type as the parent of the indent segment; i.e. if you attach an indent segment to a level 1
-     unordered list item then creating another level 1 unordered list item auto-closes the indent
-     segment. However, creating a level 1 ordered list segment inside would be okay.+
+    -- Another {# nestable detached modifier} of the /same or higher/ nesting level occurs.
+       A "higher" nesting level is one that is dominant in the hierarchy of list item nodes.
+       That is, a level 1 list item is considered "higher up" than a level 2 and level 3 list item,
+       and a level 3 list item is considered "higher up" than a level 4 or 5 list item
+    -- When the indentation is manually closed with one of the {# delimiting modifiers}
+    -- When a {# structural detached modifiers}[structural detached modifier] is encountered
 
     @code norg
     - \
