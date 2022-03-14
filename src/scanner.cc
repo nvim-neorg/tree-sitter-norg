@@ -772,6 +772,12 @@ class Scanner
         else
             advance(lexer);
 
+        if (lexer->lookahead == found_attached_modifier->first)
+        {
+            advance(lexer);
+            return NONE;
+        }
+
         if ((!std::iswspace(cur) || !cur) && (std::iswspace(lexer->lookahead) ||
                                               std::iswpunct(lexer->lookahead) || !lexer->lookahead))
         {
