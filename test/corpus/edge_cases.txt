@@ -65,3 +65,16 @@ Reset attached modifiers after detached modifier
         )
     )
 )
+
+=======================================================
+Double attached modifiers should be treated as raw text
+=======================================================
+C++, text, C++
+++text++
+---
+(document
+    (paragraph
+        (paragraph_segment)
+        (paragraph_segment)
+    )
+)
