@@ -3,8 +3,6 @@
 +Use many examples!+
 +And also provide counter-examples for cases which are not expected to work!+
 
-- |_| restructure spec into multiple layers (instead finalize separate layers doc)
-
 * Norg File Format Specification
   This file contains the formal file format specification of the _Norg_ syntax version 0.1.
   This document is written in the Norg format in its original form and, thus, attempts to be
@@ -87,7 +85,7 @@
 *** Escaping
     A single {# character} can be escaped if it is immediately preceded by a backslash, `\`
     (`U+005C`). Any {# character} may be escaped /apart from/ {# character}s within verbatim
-    segments +TODO: add link to verbatim segments+.
+    segments and {# line ending}s. +TODO: Add link to verbatim segments+
 
 *** Special Characters
     - | | TODO: formalize this section
@@ -130,7 +128,7 @@
   All detached modifiers must abide by the following rules:
   - A detached modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
     (but nothing else!) may precede it)
-  - A detached modifier must be immediately followed by {# whitespace} (excl. a {# line ending}!),
+  - A detached modifier must be immediately followed by {# whitespace} (excl. {# line ending}s!),
     another detached modifier of the same type or by a {# detached modifier extensions}[detached
     modifier extension]
 
@@ -304,7 +302,7 @@
 
 *** Delimiting Modifiers
     Although not technically a detached modifier, we would like to insert a note on
-    {# Delimiting Modifiers} because they are immediately related to structuring a _Norg_ document.
+    {# delimiting modifiers} because they are immediately related to structuring a _Norg_ document.
 
     This kind of modifier must abide by the following rules:
     - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
@@ -354,6 +352,7 @@
    - As a single detached modifier they affect:
    -- The next `paragraph_segment` which becomes the /title/
    -- The `paragraph` following that which becomes the /content/
+      +NOTE: do we /only/ want a paragraph to be allowed content?+
    - As a pair of two detached modifiers in which case:
    -- The next `paragraph_segment` still becomes the /title/
    -- The content continues until the "closing" detached modifier is found
@@ -390,18 +389,7 @@
     @end
 
 *** Insertions
-    @code norg
-    = Insertion arg1 arg2 ...
-    @end
-    Depending on the kind of insertion, a different number of arguments can be set/required. These
-    arguments follow the same rules as those of {# Tags}.
-    +TODO: not sure I really like this. Tags are separate from detached modifiers, we shouldn't
-    draw parallels here+
-
-    @code norg
-    == Function definition
-    ==
-    @end
+    +TODO+
 
 ** Detached Modifier Extensions
    {# Detached modifiers} support extensions which must immediately follow the detached modifier
@@ -413,10 +401,10 @@
     the next level because any detached modifier can be assigned a task status. This can for
     example be useful for the author of a document to keep track of the status of certain sections.
     The syntax is the following:
-    - A todo status extension starts with a `|` char
+    - A TODO status extension starts with a `|` char
     - Immediately a single status indicator character must follow. The following statuses are
       supported:
-   -- ` `: undone (a literal space)
+   -- |` `|: undone (a literal space)
    -- `x`: done
    -- `?`: needs further input/clarification
    -- `!`: urgent
@@ -424,7 +412,9 @@
    -- `-`: in-progress/pending
    -- `=`: on hold
    -- `_`: put down/cancelled
-   - Finally another `|` char closes the todo status extension
+   - Finally another `|` char closes the todo status extension.
+
+   NOTE: The TODO status extension /must/ be followed by whitespace (excluding {# line ending}s).
 
 *** Indent Segment Extension
     Since {# nestable detached modifiers} can only contain a {# paragraph} this can cause severe
@@ -688,7 +678,7 @@
   after itself.
 
 ** Line Continuation
-   The `~`-trailing modifier will concatenate the line which it ends with the following one.
+   The `~` trailing modifier will concatenate the line which it ends with the following one.
    This allows you to do something like the following:
    @code norg
    * I am a very long heading title~
