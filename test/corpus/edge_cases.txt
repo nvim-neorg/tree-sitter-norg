@@ -66,15 +66,74 @@ Reset attached modifiers after detached modifier
     )
 )
 
-=======================================================
-Double attached modifiers should be treated as raw text
-=======================================================
+=========================================================
+Repeated attached modifiers should be treated as raw text
+=========================================================
 C++, text, C++
 ++text++
++++text+++
+*///example//*
 ---
 (document
     (paragraph
         (paragraph_segment)
         (paragraph_segment)
+        (paragraph_segment)
+        (paragraph_segment
+            (bold)
+        )
+    )
+)
+
+=====================================
+Link modifiers with incomplete markup
+=====================================
+text:`verbatim`text
+
+text`verbatim`:text
+
+text `verbatim:text
+
+text verbatim`:text
+---
+(document
+    (paragraph
+        (paragraph_segment)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+    (paragraph
+        (paragraph_segment)
+    )
+)
+
+==========================================
+Link modifiers with surrounding whitespace
+==========================================
+:*text*:
+text:*more text*:text
+`some text`: text
+text :*more text*
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (bold)
+        )
+        (paragraph_segment
+            (link_modifier)
+            (bold)
+            (link_modifier)
+        )
+        (paragraph_segment
+            (verbatim)
+        )
+        (paragraph_segment
+            (bold)
+        )
     )
 )
