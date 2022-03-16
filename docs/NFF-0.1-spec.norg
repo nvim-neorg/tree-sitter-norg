@@ -646,16 +646,34 @@
 
 ** Link Modifier
    The link modifier, `:`, is a special modifier type called an _intersecting_ modifier. It puts a
-   twist on the original attached modifier rules because it allows non-whitespace characters in
-   front of the opening or after the closing modifier. This allows the intersection of a
-   non-whitespace string like so:
+   twist on the original attached modifier rules - in fact, they're the polar opposite.
+
+   There can be both an opening and closing link modifier in scenarios like this:
    @code norg
-   Ex:*am*:ple
+   Ex:*am*:ple text
    @end
    Without the `:`-link modifier, the above example would not result in a bold segment.
 
-   - | | TODO: currently states in the docs that it must occur in pairs but this is not enforced by
-         the TS parser. I.e. the following is valid: ex:_ample_
+   However, it is important to note that link modifiers do not need to occur in pairs. This:
+   @code norg
+   Ex:*ample* text
+   @end
+   Will also result in `ample` becoming *bold*.
+
+   With this knowledge, it is evident that there are two link modifier types: one where the link
+   modifier is an /opening/ link modifier (i.e. it appears before an opening attached modifier) and
+   one where it's a /closing/ link modifier (i.e. it appears after a closing attached modifier).
+
+   In the case that the link modifier is opening (the attached modifier appears on the right):
+   - The link modifier may only be preceded by an {# alphanumeric characters}[alphanumeric character]
+     (or, in other words, may /not/ be preceded by a punctuation character nor by a whitespace
+     character).
+   - The link modifier may only be succeeded by an opening attached modifier.
+
+   In the case that the link modifier is closing (the attached modifier appears on the left):
+   - The link modifier may only be succeeded by an
+     {# alphanumeric characters}[alphanumeric character].
+   - The link modifier may only be preceded by a closing attached modifier.
 
 ** Ranged Attached Modifiers
    Ranged attached modifiers can be used to:
