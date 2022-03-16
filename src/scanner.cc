@@ -734,7 +734,13 @@ class Scanner
     {
         if (lexer->lookahead == ':')
         {
+            bool is_current_char_whitespace = std::iswspace(m_Current) || !m_Current;
+
             advance(lexer);
+
+            if (is_current_char_whitespace || std::iswspace(lexer->lookahead))
+                return NONE;
+
             lexer->result_symbol = m_LastToken = LINK_MODIFIER;
             return m_LastToken;
         }
@@ -753,7 +759,8 @@ class Scanner
 
             if (lexer->lookahead == found_attached_modifier->first)
             {
-                advance(lexer);
+                while (lexer->lookahead == found_attached_modifier->first)
+                    advance(lexer);
                 return NONE;
             }
 
@@ -774,7 +781,8 @@ class Scanner
 
         if (lexer->lookahead == found_attached_modifier->first)
         {
-            advance(lexer);
+            while (lexer->lookahead == found_attached_modifier->first)
+                advance(lexer);
             return NONE;
         }
 
