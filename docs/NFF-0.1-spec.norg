@@ -141,7 +141,6 @@
   - `>`: {# Quotes} (nestable)
   - `$`: {# Definitions} (range-able)
   - `^`: {# Footnotes} (range-able)
-  - `=`: {# Insertions} (range-able)
 
 ** Standard Detached Modifiers
    The normal rules for the /standard/ detached modifiers are simple as outlined above. An
