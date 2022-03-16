@@ -156,10 +156,10 @@
    Other parsers may choose to support higher nesting levels.
 
    Furthermore, in contrast to the {# standard detached modifiers} this detached modifier type has
-   /no/ title, and affects the following `paragraph` instead of only the next {# paragraph
-   segments}[paragraph segment]. Said paragraph then becomes the modifier's /content/. This means
-   that in order to terminate the detached modifier contents, you need two consecutive line breaks
-   (forming a {# paragraph break}){^ 1}.
+   /no/ title, and affects the following `paragraph` instead of only the next
+   {# paragraph segments}[paragraph segment]. Said paragraph then becomes the modifier's /content/.
+   This means that in order to terminate the detached modifier contents, you need two consecutive
+   line breaks (forming a {# paragraph break}){^ 1}.
 
    Here are some correct examples of nestable detached modifiers:
 
@@ -360,13 +360,17 @@
    directly succeeded by a {# line ending} vs a whitespace char.
 
 *** Definitions
+    Definitions are primarily of use to people who write technical documents.
+    They consist of a term, and then are followed by a definition of that term.
+
     @code norg
-    $ Single Definition
+    $ Term
     Definition content.
     @end
 
+    To create longer definitions, use the ranged term instead:
     @code norg
-    $$ Multiple Definition
+    $$ Term
     Content of the definition.
 
     Which scans up to the closing modifier.
@@ -374,13 +378,17 @@
     @end
 
 *** Footnotes
+    Footnotes allow the user to give supplementary information related to some text without
+    polluting the paragraph itself. Footnotes can be linked to using {# linkables}.
+
     @code norg
     ^ Single Footnote
     Optional footnote content.
     @end
 
+    To create longer footnotes, use the ranged term instead:
     @code norg
-    ^^ Multiple Footnote
+    ^^ Ranged Footnote
     Content of the footnote.
 
     Which scans up to the closing modifier.
@@ -417,10 +425,10 @@
 
 *** Indent Segment Extension
     Since {# nestable detached modifiers} can only contain a {# paragraph} this can cause severe
-    limitations because insertion of (for example) code blocks is not possible. To alleviate this
-    deficiency, the {# indent segment extension} exists, which increases the indentation of the
-    tree by one level allowing nesting of more complex elements to occur.
-    The syntax is the following:
+    limitations because the insertion of (for example) code blocks is not possible. To alleviate
+    this deficiency, the {# indent segment extension} exists, which increases the indentation of the
+    tree by one level allowing nesting of more complex elements to occur. The syntax is the
+    following:
     - The indent segment extension starts with a single `\` char
     - This must be _immediately_ followed by a {# line ending}. Thus, the start node of this
       extension can be seen as a {# trailing modifier}.
