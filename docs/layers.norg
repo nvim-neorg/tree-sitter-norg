@@ -20,7 +20,7 @@ Basic structured doc
 - markers
 - carryover tags (|name, |color, etc.)
 - detached modifier extensions
-- range-able detached mods (excl. interpretation/execution of ranged insertions)
+- range-able detached mods
 - trailing mod
 - link modifier
 

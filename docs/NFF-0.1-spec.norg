@@ -1,5 +1,3 @@
-+Explain each syntax element briefly+
-+Expand introduction, explain what a plain text format even is+
 +Use many examples!+
 +And also provide counter-examples for cases which are not expected to work!+
 
@@ -12,7 +10,7 @@
   be strictly followed.
 
 * Introduction
-  Before diving into the details we will start with a short introduction.
+  Before diving into the details we will start with an introduction.
   The _Norg_ file format was designed as part of the [Neorg] plugin for Neovim which was started by
   /Vhyrro (@vhyrro)/ in April of 2021.
   Soon after starting this work, /Max Rossmannek (@mrossinek)/ joined the development team, and,
@@ -39,6 +37,11 @@
    [tree-sitter]{https://tree-sitter.github.io/tree-sitter/}
    [off-side rule]{https://en.wikipedia.org/wiki/Off-side_rule}
    [Free-form]{https://en.wikipedia.org/wiki/Free-form_language}
+
+   Although built with [Neorg] in mind, _Norg_ can be utilized in a wide range of applications,
+   from external note taking plugins to even messaging applications.
+   Thanks to its {:layers:}[layer] system you can choose the feature set you want to support, and
+   can ignore the higher levels.
 
 * Preliminaries
   First, we define some basic concepts which will be used in this specification.
@@ -88,8 +91,7 @@
     segments and {# line ending}s. +TODO: Add link to verbatim segments+
 
 *** Special Characters
-    - | | TODO: formalize this section
-    - Emojis
+    +TODO+
 
 ** Words
    The _Norg_ format is designed to be parsed on a word-by-word basis from left-to-right through
@@ -350,8 +352,7 @@
    Range-able detached modifiers can occur in two forms:
    - As a single detached modifier they affect:
    -- The next `paragraph_segment` which becomes the /title/
-   -- The `paragraph` following that which becomes the /content/
-      +NOTE: do we /only/ want a paragraph to be allowed content?+
+   -- Any following item which becomes the /content/
    - As a pair of two detached modifiers in which case:
    -- The next `paragraph_segment` still becomes the /title/
    -- The content continues until the "closing" detached modifier is found
@@ -394,9 +395,6 @@
     Which scans up to the closing modifier.
     ^^
     @end
-
-*** Insertions
-    +TODO+
 
 ** Detached Modifier Extensions
    {# Detached modifiers} support extensions which must immediately follow the detached modifier
@@ -556,13 +554,10 @@
     @end
     ---
 
-   Verbatim vs standard ranged tags is mostly a matter of /agreement/. If your "custom syntax" uses
-   inline _Norg_ markup then it *must* belong in a standard {# ranged tag}. If you do not want things
-   inside your syntax to be mistaken for _Norg_ markup then it must belong in a {# verbatim ranged
-   tag}.
-
-*** Differences in Tag Types
-    +TODO: Finish+
+   Verbatim vs standard ranged tags is mostly a matter of what your "custom syntax" looks like and
+   how it works. Think of it this way: in a standard and undefined {# ranged tags}[ranged tag] /all/
+   _Norg_ markup is readily available and usable, whereas by default in a
+   {# verbatim ranged tags}[verbatim ranged tag] all markup is completely disabled and unusable.
 
 * Attached Modifiers
   We can now discuss attached modifiers (which originally gave rise to the name of
@@ -755,8 +750,6 @@
   Linkables are comprised of many segments, and can change meaning depending on the order those
   segments were defined:
 
-  +TODO: Examples+
-
 ** Link Location
    The link location is defined through curly braces (`{}`) and contains the physical location
    that the user would like to link to. Inside of these curly braces you can find one of four
@@ -937,16 +930,72 @@
    An important thing to note is that unlike {# links} and {# anchors} {# inline link targets} may
    /not/ have a description.
 
+** Valid/Invalid Examples
+*** Valid Examples
+    @code norg
+    {link}
+
+    {:link:}
+
+    {# link
+       text   }
+
+    {* a link
+    to a heading}
+
+    {* a
+    link to a heading}[with
+    a description]
+
+    [te
+    xt]{# linkable}
+
+    {* Link to {# headings}[heading]}[*markup*]
+    @end
+
+*** Invalid Examples
+    @code norg
+    {*text}
+
+    {:file:https://github.com}
+    {:file:@ file.txt}
+
+    {* 
+    text}
+
+    {
+    * text}
+
+    {
+        * text
+    }
+
+    {* text
+    }
+
+    { * text}
+
+    {* text}[
+        text
+    ]
+
+    {* text}[text
+    ]
+
+    {* text}[
+    text]
+    @end
+
 * Precedence
   Precedence in _Norg_ is rather simple and intuitive. All non-inline elements have direct
   precendce over all inline elements. Inline elements with a deterministic start and end have
   greater priority than those that don't.
 
   Here's the full list:
-  ~ Tags (`|carryover`, `#standard` and `@verbatim`)
+  ~ Tags (`|carryover`, `#standard`, `@verbatim` and `=macro`)
   ~ Structural detached modifiers
   ~ Nestable detached modifiers / range-able detached modifiers (there isn't a case where these can
-    overlap) +TODO: is this alright?+
+    overlap)
   ~ Detached modifier extensions
   ~ Linkables (`{}`, `[]`, `<>`)
   ~ Ranged verbatim attached modifiers (`|``|`, `|``|`)
@@ -954,5 +1003,23 @@
   ~ Escape character (`\`)
   ~ Ranged attached modifiers (`|**|`, `|//|` etc.)
   ~ Standard attached modifers
+
+  Should any extra precedence problems arise (let us know if you find any) they can be disambiguated
+  through a simple left-to-right precedence approach.
+
+  Note that although e.g. linkables are above standard attached modifiers, this does not mean that
+  standard attached modifiers cannot /contain/ linkables, but in case there is an overlap the
+  linkable will have higher precedence.
+
+  For example:
+  @code norg
+  *{# i am a bold link!}*
+  @end
+
+  Is valid, however in this case:
+  @code norg
+  *i am {bold?*}
+  @end
+  The link takes precedence, and no bold is rendered.
 
 |+ vim: set tw=100 :+|
