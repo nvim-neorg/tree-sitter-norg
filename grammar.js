@@ -34,6 +34,8 @@ module.exports = grammar({
         [$.inline_comment, $._paragraph_element],
         [$.inline_math, $._paragraph_element],
         [$.variable, $._paragraph_element],
+
+        [$._paragraph_element],
     ],
 
     externals: $ => [
@@ -257,13 +259,6 @@ module.exports = grammar({
                 ),
             ),
         ),
-        // A linked attached modifier simply wraps a normal `attached_modifier`.
-        _linked_attached_modifier: $ =>
-        prec.right(2, seq(
-            optional($.link_modifier),
-            $.attached_modifier,
-            optional($.link_modifier),
-        )),
 
         // Any of the following choices are valid IN-LINE elements. Any
         // multitude of these are combined to form a `paragraph_segment`.
@@ -277,8 +272,11 @@ module.exports = grammar({
             $.anchor_definition,
             $.inline_link_target,
             $.escape_sequence,
-            $.attached_modifier,
-            $._linked_attached_modifier,
+            seq(
+                optional($.link_modifier),
+                $.attached_modifier,
+                optional($.link_modifier),
+            ),
             alias($.link_modifier, "_word"),
             alias($.bold_close, "_word"),
             alias($.italic_close, "_word"),

@@ -191,43 +191,6 @@
         }
       }
     },
-    "_linked_attached_modifier": {
-      "type": "PREC_RIGHT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "link_modifier"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          },
-          {
-            "type": "SYMBOL",
-            "name": "attached_modifier"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "link_modifier"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
-    },
     "_paragraph_element": {
       "type": "CHOICE",
       "members": [
@@ -279,12 +242,37 @@
           "name": "escape_sequence"
         },
         {
-          "type": "SYMBOL",
-          "name": "attached_modifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_linked_attached_modifier"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link_modifier"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "attached_modifier"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "link_modifier"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "ALIAS",
@@ -4761,6 +4749,9 @@
     ],
     [
       "variable",
+      "_paragraph_element"
+    ],
+    [
       "_paragraph_element"
     ]
   ],

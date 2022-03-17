@@ -734,19 +734,7 @@ class Scanner
     {
         if (lexer->lookahead == ':')
         {
-            if (m_AttachedModifiers.find(m_Current) == m_AttachedModifiers.end())
-            {
-                advance(lexer);
-
-                if (m_AttachedModifiers.find(lexer->lookahead) == m_AttachedModifiers.end())
-                    return NONE;
-            }
-            else
-                advance(lexer);
-
-            if (std::iswspace(lexer->lookahead))
-                return NONE;
-
+            advance(lexer);
             lexer->result_symbol = m_LastToken = LINK_MODIFIER;
             return m_LastToken;
         }
@@ -922,6 +910,12 @@ class Scanner
             while (lexer->lookahead && lexer->lookahead != '\n')
                 advance(lexer);
 
+            lexer->result_symbol = m_LastToken = WORD;
+            return true;
+        }
+
+        if (lexer->lookahead == '\n' || lexer->lookahead == '\r' || !lexer->lookahead)
+        {
             lexer->result_symbol = m_LastToken = WORD;
             return true;
         }
