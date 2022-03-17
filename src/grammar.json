@@ -4470,8 +4470,64 @@
       ]
     },
     "tag_param": {
-      "type": "PATTERN",
-      "value": "\\S+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "[^\\\"]\\S*"
+          }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "\""
+              }
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "[^\\n\\r\\\"\\s]+"
+              }
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[\\t\\v ]+"
+                    }
+                  },
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[^\\n\\r\\\"\\s]+"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "\""
+              }
+            }
+          ]
+        }
+      ]
     },
     "tag_parameters": {
       "type": "SEQ",
@@ -5158,14 +5214,14 @@
       "name": "inline_link_target_close"
     }
   ],
-  "inline": [],
-  "supertypes": [
+  "inline": [
     "attached_modifier",
     "heading",
     "detached_modifier",
     "footnote",
     "definition",
     "tag"
-  ]
+  ],
+  "supertypes": []
 }
 

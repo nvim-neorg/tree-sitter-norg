@@ -1,7 +1,7 @@
 module.exports = grammar({
     name: 'norg',
 
-    supertypes: $ => [
+    inline: $ => [
         $.attached_modifier,
         $.heading,
         $.detached_modifier,
@@ -235,7 +235,7 @@ module.exports = grammar({
             )
         ),
 
-        // The attached modifiers canNOT contain a `paragraph_segment` directly,
+        // The attached modifiers cannot contain a `paragraph_segment` directly,
         // because they:
         //   - require a higher precedence of their internals
         _attached_modifier_content: $ =>
@@ -291,7 +291,7 @@ module.exports = grammar({
             alias($.variable_close, "_word"),
         ),
 
-        // A verbatim paragraph element essentially ignores all IN-LINE markup.
+        // A verbatim paragraph element essentially ignores all inline markup.
         _verbatim_paragraph_element: $ =>
         choice(
             alias($.word, "_word"),
@@ -883,7 +883,22 @@ module.exports = grammar({
             )
         ),
 
-        tag_param: $ => /\S+/,
+        // TODO(vhyrro): Perhaps exclude the `""` chars from the `tag_param` node
+        tag_param: _ => choice(
+            token.immediate(/[^\"]\S*/),
+            seq(
+                token.immediate('"'),
+                token.immediate(/[^\n\r\"\s]+/),
+                repeat(
+                    seq(
+                        token.immediate(/[\t\v ]+/),
+                        token.immediate(/[^\n\r\"\s]+/),
+                    ),
+                ),
+                token.immediate('"'),
+            ),
+        ),
+
 
         tag_parameters: $ =>
         seq(
