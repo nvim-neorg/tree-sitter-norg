@@ -144,11 +144,6 @@
     ]
   },
   {
-    "type": "_lowercase",
-    "named": false,
-    "fields": {}
-  },
-  {
     "type": "_segment",
     "named": false,
     "fields": {},
@@ -3444,6 +3439,10 @@
   },
   {
     "type": "_uppercase",
+    "named": false
+  },
+  {
+    "type": "_word",
     "named": false
   },
   {
