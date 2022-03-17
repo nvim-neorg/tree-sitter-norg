@@ -4,7 +4,7 @@
     "description": "A TreeSitter Parser For The NFF",
     "main": "bindings/node",
     "scripts": {
-        "gen": "tree-sitter generate && node-gyp build",
+        "gen": "tree-sitter generate",
         "test": "tree-sitter test",
         "parse": "tree-sitter parse",
         "debug": "tree-sitter parse --debug-build"

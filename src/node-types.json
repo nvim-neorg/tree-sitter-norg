@@ -1272,6 +1272,10 @@
         "required": false,
         "types": [
           {
+            "type": "_line_break",
+            "named": false
+          },
+          {
             "type": "_paragraph_break",
             "named": false
           },
@@ -1329,6 +1333,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "_line_break",
+            "named": false
+          },
           {
             "type": "_paragraph_break",
             "named": false
@@ -2175,7 +2183,7 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "paragraph",
@@ -2211,7 +2219,7 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "paragraph",

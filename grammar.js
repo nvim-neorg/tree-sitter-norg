@@ -1132,11 +1132,16 @@ function gen_single_rangeable_detached_modifier($, kind) {
                 $.paragraph_segment,
             ),
 
-            optional(
-                field(
-                    "content",
-                    $.paragraph,
-                ),
+            repeat(
+                prec(1, choice(
+                    alias($.line_break, "_line_break"),
+                    alias($.paragraph_break, "_paragraph_break"),
+                )),
+            ),
+
+            field(
+                "content",
+                $.paragraph,
             ),
         ),
     );
@@ -1153,11 +1158,17 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                 $.paragraph_segment,
             ),
 
+            choice(
+                alias($.line_break, "_line_break"),
+                alias($.paragraph_break, "_paragraph_break"),
+            ),
+
             field(
                 "content",
                 repeat(
                     choice(
                         $.paragraph,
+                        prec(1, alias($.line_break, "_line_break")),
                         alias($.paragraph_break, "_paragraph_break"),
                         $.detached_modifier,
                         $.tag,
