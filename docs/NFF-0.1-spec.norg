@@ -1,5 +1,6 @@
 +Use many examples!+
 +And also provide counter-examples for cases which are not expected to work!+
++Markup cannot be directly chained one after another, i.e. `*hello**world*` is disallowed+
 
 * Norg File Format Specification
   This file contains the formal file format specification of the _Norg_ syntax version 0.1.
@@ -11,13 +12,14 @@
 
 * Introduction
   Before diving into the details we will start with an introduction.
-  The _Norg_ file format was designed as part of the [Neorg] plugin for Neovim which was started by
+  The _Norg_ file format was designed as part of the {^ Neorg} plugin for Neovim which was started by
   /Vhyrro (@vhyrro)/ in April of 2021.
   Soon after starting this work, /Max Rossmannek (@mrossinek)/ joined the development team, and,
-  with the help of the [Neorg] community, the two have shaped the _Norg_ syntax to what it has
+  with the help of the {^ Neorg} community, the two have shaped the _Norg_ syntax to what it has
   become today.
 
-  [Neorg]{https://github.com/nvim-neorg/neorg}
+  ^ neorg
+  {https://github.com/nvim-neorg/neorg}
 
 ** What is Norg?
    The _Norg_ syntax is a /structured/ plain-text file format which aims to be human readable when
@@ -28,17 +30,20 @@
    ~ *Consistency:* the syntax should be consistent. Even if you know only a part of the syntax,
      learning new parts should not be surprising and rather feel predictable and intuitive.
    ~ *Unambiguity:* the syntax should leave _no_ room for ambiguity. This is especially motivated
-     by the use of [tree-sitter] for the original syntax parser which takes a strict left-to-right
+     by the use of {^ tree-sitter} for the original syntax parser which takes a strict left-to-right
      parsing approach and only has single-character look-ahead.
-   ~ *[Free-form]:* whitespace is _only_ used to delimit tokens but has no other significance! This
+   ~ *{^ Free-form}:* whitespace is _only_ used to delimit tokens but has no other significance! This
      is probably the most contrasting feature to other plain-text formats which often adhere to the
-     [off-side rule], meaning that the syntax relies on whitespace-indentation to carry meaning.
+     {^ off-side rule}, meaning that the syntax relies on whitespace-indentation to carry meaning.
 
-   [tree-sitter]{https://tree-sitter.github.io/tree-sitter/}
-   [off-side rule]{https://en.wikipedia.org/wiki/Off-side_rule}
-   [Free-form]{https://en.wikipedia.org/wiki/Free-form_language}
+   ^ tree-sitter
+   {https://tree-sitter.github.io/tree-sitter/}
+   ^ free-form
+   {https://en.wikipedia.org/wiki/Free-form_language}
+   ^ off-side rule
+   {https://en.wikipedia.org/wiki/Off-side_rule}
 
-   Although built with [Neorg] in mind, _Norg_ can be utilized in a wide range of applications,
+   Although built with {^ Neorg} in mind, _Norg_ can be utilized in a wide range of applications,
    from external note taking plugins to even messaging applications.
    Thanks to its {:layers:}[layer] system you can choose the feature set you want to support, and
    can ignore the higher levels.
@@ -457,7 +462,8 @@
     @end
 
 * Tags
-  Tags are _Norg_'s official way of extending its own syntax.
+  Tags are _Norg_'s official way of extending its own syntax. It's the /only/ way that extensions
+  may be made to the format.
 
   There are 3 different tag types, each with their own way of changing the way text in _Norg_ is
   interpreted. Before we discuss those, however, we should discuss the syntax rules for tags:
@@ -775,9 +781,9 @@
     Note that you do *not* provide the `.norg` extension within the path.
     You can use traditional modifiers in your path, like `/` (in e.g. `/my/file`) to signify
     the root of your filesystem, `~` (in e.g. `~/Documents/my-file`) to signify the current
-    user's home directory, /or/ you can use the [Neorg]-specific `$` (in e.g. `$/my/file`) to
-    signify the _root_ of the [Neorg] workspace.
-    Since not all _Norg_ files will be used strictly by [Neorg], the workspace root can be
+    user's home directory, /or/ you can use the {^ Neorg}-specific `$` (in e.g. `$/my/file`) to
+    signify the _root_ of the {^ Neorg} workspace.
+    Since not all _Norg_ files will be used strictly by {^ Neorg}, the workspace root can be
     implementation-specific - for git repos the workspace root could be simply the root of the
     repository, and for other note taking apps it could simply be the root of the directory where
     all the notes are stored.
