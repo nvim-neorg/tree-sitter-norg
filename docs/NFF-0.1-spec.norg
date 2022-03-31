@@ -13,6 +13,8 @@
 * Introduction
   Before diving into the details we will start with an introduction.
   The _Norg_ file format was designed as part of the {^ Neorg} plugin for Neovim which was started by
+  %TODO: we currently always write "Norg" with underline. I'm not sure what drove me to do that%
+  %initially. Shall we stick with that or do something else?%
   /Vhyrro (@vhyrro)/ in April of 2021.
   Soon after starting this work, /Max Rossmannek (@mrossinek)/ joined the development team, and,
   with the help of the {^ Neorg} community, the two have shaped the _Norg_ syntax to what it has
@@ -47,6 +49,7 @@
    from external note taking plugins to even messaging applications.
    Thanks to its {:layers:}[layer] system you can choose the feature set you want to support, and
    can ignore the higher levels.
+   %TODO: should we move the layers into this document?%
 
 * Preliminaries
   First, we define some basic concepts which will be used in this specification.
@@ -79,11 +82,14 @@
     ^ Blank lines are irrelevant in _Norg_ because standalone whitespace has no semantic relevance.
 
     [Unicode Zs general category]{https://www.fileformat.info/info/unicode/category/Zs/list.htm}
+    %Here is a parser bug because this should not be part of the footnote%
 
 *** Alphanumeric Characters
     An alphanumeric character is any character that *isn't* punctuation, nor is it any special
     character. In the English alphabet, an alphanumeric character means all letters from the
     alphabet (uppercase/lowercase) and all numbers: `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`.
+    %TODO: link punctuation and special characters%
+    %TODO: it's also not a whitespace%
 
 *** Punctuation
     A {# character} is considered to be *punctuation* if it is any of the following:
@@ -96,7 +102,7 @@
     segments and {# line ending}s. %TODO: Add link to verbatim segments%
 
 *** Special Characters
-    %TODO%
+    %TODO: how do non-latin characters work? If they go in here, they do not form words as below...%
 
 ** Words
    The _Norg_ format is designed to be parsed on a word-by-word basis from left-to-right through
@@ -126,7 +132,7 @@
    - A <paragraph break> (which equals two consecutive {# line endings})
    - Any of the {# detached modifiers}
    - Any of the {# delimiting modifiers}
-   - Any of the {# tags}
+   - Any of the {# ranged tags}  %TODO: also differentiate the various carryover tag kinds%
 
 * Detached Modifiers
   _Norg_ has several detached modifiers. The name originates from their differentiation to the
@@ -148,6 +154,9 @@
   - `>`: {# Quotes} (nestable)
   - `$`: {# Definitions} (range-able)
   - `^`: {# Footnotes} (range-able)
+  - | | `/`: add drawers/details (range-able)
+  - | | `&`: add variables (range-able)
+  - | | `=`: add macros (range-able)
 
 ** Standard Detached Modifiers
    The normal rules for the /standard/ detached modifiers are simple as outlined above. An
@@ -276,6 +285,7 @@
    ^ 1
    This isn't the case if the detached modifier is succeeded by the {# detached modifier
    extensions}[`\` detached modifier extension].
+   %TODO: I'm not sure I fully understand this footnote. It would help to see an example here.%
 
 ** Structural Detached Modifiers
    The `*` (headings) and `%` (marker) detached modifiers also have the _structural_ property,
@@ -314,6 +324,7 @@
     - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
       (but nothing else!) may precede it)
     - A delimiting modifier must consist of three or more consecutive modifiers of the same type
+      %TODO: can we explain/argue, why 3 is the minimum? I.e. remove arbitrariness?%
     - It must be followed by an immediate {# line ending} (without any extra {# whitespace})
 
 **** Weak Delimiting Modifier
@@ -363,7 +374,8 @@
    -- The content continues until the "closing" detached modifier is found
 
    The closing modifier has the same rules as an opening detached modifier except it /must/ be
-   directly succeeded by a {# line ending} vs a whitespace char.
+   directly succeeded by a {# line ending} in contrast to the whitespace character which follows the
+   opening modifier.
 
 *** Definitions
     Definitions are primarily of use to people who write technical documents.
@@ -401,6 +413,15 @@
     ^^
     @end
 
+*** | | Drawers/Details
+    The `/` char.
+
+*** | | Variables
+    The `&` char.
+
+*** | | Macros
+    The `=` char.
+
 ** Detached Modifier Extensions
    {# Detached modifiers} support extensions which must immediately follow the detached modifier
    (or another extension).
@@ -425,6 +446,10 @@
    - Finally another `|` char closes the todo status extension.
 
    NOTE: The TODO status extension /must/ be followed by whitespace (excluding {# line ending}s).
+
+*** | | Timestamp Extension
+    Maybe we can discuss the full timestamp format specification here, too, and then refer back to
+    it when discussing links to timestamps?
 
 *** Indent Segment Extension
     Since {# nestable detached modifiers} can only contain a {# paragraph} this can cause severe
@@ -460,16 +485,19 @@
     - Another nestable detached modifier ends the indent segment
     - However, in this example I already closed the indent segment manually with `---`
     @end
+    %TODO: we need to convert all example ranged tags, right?%
 
 * Tags
   Tags are _Norg_'s official way of extending its own syntax. It's the /only/ way that extensions
   may be made to the format.
 
   There are 3 different tag types, each with their own way of changing the way text in _Norg_ is
+  %TODO: we have actually added more by now... I lost count :kek:... Is it 5?%
   interpreted. Before we discuss those, however, we should discuss the syntax rules for tags:
   - A tag is similar to a {# detached modifiers}[detached modifier] in the sense that it must begin
     at the beginning of a line with optional whitespace (but nothing else) preceding it.
   - After that you will encounter the special tag character (`|`, `@` or `#`), /none/ of which are
+    %TODO: update set of allowed tag chars%
     attached modifiers - if those chars were attached modifiers then we would have ambiguity on our
     hands. The special tag character is then /immediately/ followed by text, which becomes the /tag
     name/. Said tag name can consist of any {# alphanumeric characters}[alphanumeric character]
@@ -481,6 +509,7 @@
     @code norg
     |tag-name.subtag parameter1 parameter2
     @end
+    %TODO: we should already discuss multi-word parameters, too%
 
     Parameters may consist of any character (apart from a {# line break}, of course).
     ---
@@ -490,7 +519,11 @@
    to the length of a tag name, nor are there any disallowed names that a parser should omit
    (unless they don't adhere to the above rules regarding tag names).
 
+** Macro Tags
+   The `=`-tag.
+
 ** Carryover Tags
+   %TODO: differentiate `|` and `+` carryover behavior%
    A carryover tag is a way to assign some data to the next element in the document.
    They are especially useful when you want to change the /properties/ of an item.
 
@@ -501,6 +534,7 @@
    @end
 
    Carryover tags can apply to any non-inline element that occurs right after the carryover tag.
+   %TODO: careful with new differentation%
 
    Examples:
    @code norg
@@ -514,6 +548,7 @@
 
    When dealing with a range of objects (see {# objects}) the carryover tag affects the entire
    object, i.e.:
+   %TODO: careful with new differentation%
    @code norg
    Converts the following list into a multiple choice question:
 
@@ -539,6 +574,7 @@
     modifiers} and/or {# links}. Ranged tags allow you to do exactly this. An example of a ranged
     tag is Neorg's `#table` tag:
 
+    %TODO: should we use a different example since we are not settled on the table format?%
     @code norg
     #table
     *heading* | /heading/ | _heading_
@@ -591,6 +627,7 @@
      text*
      @end
      Is fine, and will result in *`this text`* being bold.
+     %TODO: I think this is currently not working as expected on the dev branch of TS%
   - Nested {# attached modifiers} should be closed in the opposite order they were opened.
 
   Their name should be rather self explanatory - both the opening and closing modifier are attached
@@ -607,7 +644,7 @@
   - \`inline code\`: `inline code` (disables any nested markup - verbatim)
   - \%inline comment\%: %inline comment%
   - \$inline math\$: $f(x) = y$ (verbatim)
-  - \=variable\=: =variable= (verbatim)
+  - \=variable\=: =variable= (verbatim)  %TODO: update variable reference to `&` char%
 
 ** Valid Examples
    @code norg
@@ -698,17 +735,28 @@
    Here, I can use a literal `$` inside of inline math: |$ 10$ + 10$ = 20$ $|.
    @end
 
+   %TODO: I think we need to extend this a bit%
+
 * Trailing Modifier
-  Trailing modifiers are another separate kind of modifiers in the _Norg_ syntax. It has one very
-  simple rule: it may only exist at the end of a line and may not be followed by any characters
-  after itself.
+  Trailing modifiers are another separate kind of modifiers in the _Norg_ syntax. They have one very
+  simple rule: they may only exist at the end of a line and may not be followed by any characters
+  after themselves.
 
 ** Line Continuation
-   The `~` trailing modifier will concatenate the line which it ends with the following one.
+   The `~`-trailing modifier will concatenate the line which it ends with the following one.
    This allows you to do something like the following:
    @code norg
    * I am a very long heading title~
      which did not end here because of the trailing modifier
+   @end
+   Note, that the `~`-trailing modifier will concatenate the two lines with a single separating
+   whitespace. In other words it transforms a line ending, `\n`, into a single white space, |` `|.
+
+   The `\`-trailing modifier on the other hand, will concatenate the two lines with:*out* separating
+   whitespace.
+   @code norg
+   * I am a very long heading title\
+     which will result in a weird word called "titlewhich"
    @end
 
    It completely swallows the next line break, allowing for things like this:
@@ -744,6 +792,7 @@
    That's when she opened the box~
    - she couldn't believe what she saw.
    @end
+   %TODO: test that this actually works%
 
 * Linkables
   Finally, there is one more kind of in-line syntax which is the {# linkables} kind.
@@ -764,7 +813,8 @@
    - A URL (most commonly to an external resource)
    - A {# detached modifier} followed by the name of the linkable
    - A {# custom detached modifiers}[custom detached modifier] specifically made for links
-     (`@`, `#`)
+     (`/`, `#`)
+   - | | time stamps (see also earlier)
 
 *** File Location
     The file location is a construct that allows you to specify the /target file/ in which you want
@@ -796,10 +846,11 @@
     {:path/to/file:** Level 2 heading}
     @end
 
-    `@` and URLs are not allowed:
+    `/`, `@` and URLs are not allowed:
 
     @code norg
-    {:path:@ file} <- invalid
+    {:path:/ file} <- invalid
+    {:path:@ timestamp} <- invalid
     {:path:https://my-url} <- also invalid
     @end
 
@@ -809,10 +860,14 @@
     @code norg
     {https://github.com/nvim-neorg/neorg}
     @end
+    %TODO: mention that other schema are also possible and should be handled by the OS%
 
 *** Detached Modifier
     _Norg_ allows you to link to any {# Structural Detached Modifiers}[structural] or
     {# Range-able Detached Modifiers}[range-able] detached modifier:
+    %TODO: careful: this will include variables and macros if we keep it like this...%
+    %Maybe we should give those an additional detached modifier attribute to differentiate them.%
+    %Something which indicates that these are tied to some logic/processing?%
 
     @code norg
     * I am a level 1 heading
@@ -835,11 +890,15 @@
     custom modifiers specifically designed for links. These are the `#` (magic) and `@` (file)
     linkable locations.
 
-**** The File Linkable (`@`)
+**** The File Linkable (`/`)
      Sometimes you may want to link to an external file that is not a _Norg_ file.
-     In that case you may use `{@ /path/to/my/file.txt}` (notice the mandatory space after the `@`
+     In that case you may use `{/ /path/to/my/file.txt}` (notice the mandatory space after the `/`
      char, just like with the {**** detached modifier}s). Paths are relative to the _Norg_
      file that contains the link.
+     %TODO: shouldn't we support the same kind of file path processing as we do within norg files?%
+
+**** | | Timestamps (`@`)
+     %TODO%
 
 **** The Magic Char (`#`)
      Sometimes you simply want to be lazy, or you want to link to an {**** inline linkables}[inline
@@ -857,16 +916,16 @@
 *** Differences Between File Linkables
     You may have realized that there are many different ways to reference a file:
     - `{:my/file:}`
-    - `{@ my/file.norg}`
+    - `{/ my/file.norg}`
     - `{file://my/file.norg}`
 
     Why are there this many? Let's explain:
     - `{:my/file:}` is strictly to access `.norg` files and nothing else. More specifically, it's
        designed to access a resource /within/ a file (`{:my/file:* Heading}`), with the side effect
        of being able to also exist in a standalone fashion (`{:my/file:}`).
-    - `{@ my/file.norg}` is used to link to a file and a file /only/ (vs `{:my/file:* Heading}`
+    - `{/ my/file.norg}` is used to link to a file and a file /only/ (vs `{:my/file:* Heading}`
        which links to an element within a file). Although it /can/ link to `.norg` files, its main
-       use is to link to non-`.norg` files instead. Using the `@` syntax also disallows you from
+       use is to link to non-`.norg` files instead. Using the `/` syntax also disallows you from
        accessing items within the file.
     - `{file://my/file.norg}` is simply utilizing the `file://` schema to access a file. This
        isn't /the/ recommended way to link to files, but it exists simply because of URI schemas.
@@ -891,6 +950,7 @@
    @code norg
    {* I am a link}[with a description]
    @end
+   %TODO: this example does not really make sense because the link location text will be concealed%
 
 ** Anchors
    _Norg_ also has a concept called {# anchors}. These allow you to place a standalone
@@ -911,6 +971,9 @@
    Here we /declare/ the anchor twice, then /define/ the anchor at the very bottom.
    The `[Neorg]` declarations point to the definition, and then the definition points to the
    website.
+   %TODO: we should clarify that this is _not_ a two-step link but that clicking the [Neorg] link%
+   %should immediately open the link location%
+   %I.e. we should make the difference to footnotes more clear%
 
    Anchors (like {# links}) may also be described by using `[...]`, in which case the syntax looks
    like this: `[anchor name][anchor description]`.
