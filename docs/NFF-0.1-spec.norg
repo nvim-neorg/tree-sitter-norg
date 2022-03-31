@@ -1,6 +1,6 @@
-+Use many examples!+
-+And also provide counter-examples for cases which are not expected to work!+
-+Markup cannot be directly chained one after another, i.e. `*hello**world*` is disallowed+
+%Use many examples!%
+%And also provide counter-examples for cases which are not expected to work!%
+%Markup cannot be directly chained one after another, i.e. `*hello**world*` is disallowed%
 
 * Norg File Format Specification
   This file contains the formal file format specification of the _Norg_ syntax version 0.1.
@@ -88,15 +88,15 @@
 *** Punctuation
     A {# character} is considered to be *punctuation* if it is any of the following:
     - A standard ASCII punctuation character: |`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`|
-      +TODO: check whether we want to support every punctuation mark from the `en_US.utf8` locale+
+      %TODO: check whether we want to support every punctuation mark from the `en_US.utf8` locale%
 
 *** Escaping
     A single {# character} can be escaped if it is immediately preceded by a backslash, `\`
     (`U+005C`). Any {# character} may be escaped /apart from/ {# character}s within verbatim
-    segments and {# line ending}s. +TODO: Add link to verbatim segments+
+    segments and {# line ending}s. %TODO: Add link to verbatim segments%
 
 *** Special Characters
-    +TODO+
+    %TODO%
 
 ** Words
    The _Norg_ format is designed to be parsed on a word-by-word basis from left-to-right through
@@ -602,12 +602,12 @@
   - \_underline\_: _underline_
   - \-strikethrough\-: -strikethrough-
   - \!spoiler\!: !spoiler!
-  - \^superscript\^: ^superscript^  (cannot be nested into `subscript`)
-  - \,subscript\,: ,subscript,  (cannot be nested into `superscript`)
+  - \^superscript\^: ^superscript^ (cannot be nested into `subscript`)
+  - \,subscript\,: ,subscript, (cannot be nested into `superscript`)
   - \`inline code\`: `inline code` (disables any nested markup - verbatim)
-  - \+inline comment\+: +inline comment+
-  - \$inline math\$: $f(x) = y$  (verbatim)
-  - \=variable\=: =variable=  (verbatim)
+  - \%inline comment\%: %inline comment%
+  - \$inline math\$: $f(x) = y$ (verbatim)
+  - \=variable\=: =variable= (verbatim)
 
 ** Valid Examples
    @code norg
@@ -1028,4 +1028,4 @@
   @end
   The link takes precedence, and no bold is rendered.
 
-|+ vim: set tw=100 :+|
+|% vim: set tw=100 :%|

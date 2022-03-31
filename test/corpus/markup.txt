@@ -118,7 +118,7 @@ Here is a ,subscript, word.
 ==============
 Inline Comment
 ==============
-This sentence contains an +inlined comment+.
+This sentence contains an %inlined comment%.
 ---
 (document
     (paragraph
@@ -502,7 +502,7 @@ This is not !! a spoiler.
 This is not `` verbatim.
 This is not ^^ superscript.
 This is not ,, subscript.
-This is not ++ an inline comment.
+This is not %% an inline comment.
 This is not $$ inline math.
 This is not == a variable reference.
 ---
@@ -533,7 +533,7 @@ This is not \!a spoiler\!
 This is not \`verbatim\`
 This is not \^superscript\^
 This is not \,subscript\,
-This is not \+an inline comment\+
+This is not \%an inline comment\%
 This is not \$inline math\$
 This is not \=variable reference\=
 This is not \<an inline link target\>
@@ -602,7 +602,7 @@ Intra:!word!:spoiler
 Intra:^word^:superscript
 Intra:,word,:subscript
 Intra:`word`:verbatim
-Intra:+word+:comment
+Intra:%word%:comment
 Intra:$word$:math
 Intra:=word=:variable
 ---
@@ -676,7 +676,7 @@ No nested markup inside verbatim
 `!no spoiler!`
 `^not superscripted^`
 `,not subscripted,`
-`+no inline comment+`
+`%no inline comment%`
 `$no inline math$`
 `=no variable=`
 `<no link target>`
@@ -730,16 +730,16 @@ No nested markup inside verbatim
 ===========================
 Nesting into Inline Comment
 ===========================
-+*not bold*+
-+/not italic/+
-+-not struck through-+
-+_not underlined_+
-+!no spoiler!+
-+^not superscripted^+
-+,not subscripted,+
-+`no verbatim`+
-+$no inline math$+
-+=no variable=+
+%*not bold*%
+%/not italic/%
+%-not struck through-%
+%_not underlined_%
+%!no spoiler!%
+%^not superscripted^%
+%,not subscripted,%
+%`no verbatim`%
+%$no inline math$%
+%=no variable=%
 ---
 (document
     (paragraph
@@ -807,7 +807,7 @@ $!no spoiler!$
 $^not superscripted^$
 $,not subscripted,$
 $`no verbatim`$
-$+no inline comment+$
+$%no inline comment%$
 $=no variable=$
 $<no link target>$
 $no:*link modifier*$
@@ -868,7 +868,7 @@ No nested markup inside variables
 =^not superscripted^=
 =,not subscripted,=
 =`no verbatim`=
-=+no inline comment+=
+=%no inline comment%=
 =$no inline math$=
 =<no link target>=
 =no:*link modifier*=
