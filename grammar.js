@@ -247,6 +247,7 @@ module.exports = grammar({
             repeat1(
                 choice(
                     $._paragraph_element,
+                    alias($.line_break, "_line_break"),
                     alias($._conflict_open, "_word"),
                 ),
             ),
@@ -260,6 +261,7 @@ module.exports = grammar({
             repeat1(
                 choice(
                     $._verbatim_paragraph_element,
+                    alias($.line_break, "_line_break"),
                 ),
             ),
         ),
@@ -411,10 +413,7 @@ module.exports = grammar({
         prec.right(1,
             seq(
                 repeat1(
-                    choice(
-                        $._verbatim_modifier_content,
-                        alias($.line_break, "_line_break"),
-                    ),
+                    $._verbatim_modifier_content,
                 ),
             ),
         ),

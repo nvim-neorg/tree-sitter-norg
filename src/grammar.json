@@ -61,10 +61,6 @@
                 {
                   "type": "SYMBOL",
                   "name": "marker"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_"
                 }
               ]
             }
@@ -170,6 +166,15 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
+                "name": "line_break"
+              },
+              "named": false,
+              "value": "_line_break"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
                 "name": "_conflict_open"
               },
               "named": false,
@@ -190,6 +195,15 @@
             {
               "type": "SYMBOL",
               "name": "_verbatim_paragraph_element"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "line_break"
+              },
+              "named": false,
+              "value": "_line_break"
             }
           ]
         }
@@ -1311,22 +1325,8 @@
           {
             "type": "REPEAT1",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_verbatim_modifier_content"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "line_break"
-                  },
-                  "named": false,
-                  "value": "_line_break"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_verbatim_modifier_content"
             }
           }
         ]
