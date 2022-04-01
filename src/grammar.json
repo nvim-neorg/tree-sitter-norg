@@ -61,6 +61,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "marker"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_"
                 }
               ]
             }
@@ -5340,10 +5344,6 @@
     },
     {
       "type": "SYMBOL",
-      "name": "marker_prefix"
-    },
-    {
-      "type": "SYMBOL",
       "name": "todo_item_undone"
     },
     {
@@ -5373,6 +5373,10 @@
     {
       "type": "SYMBOL",
       "name": "todo_item_recurring"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "marker_prefix"
     },
     {
       "type": "SYMBOL",

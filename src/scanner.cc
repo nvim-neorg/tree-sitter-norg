@@ -56,8 +56,6 @@ enum TokenType : char
     ORDERED_LIST5,
     ORDERED_LIST6,
 
-    MARKER,
-
     TODO_ITEM_UNDONE,
     TODO_ITEM_PENDING,
     TODO_ITEM_DONE,
@@ -66,6 +64,8 @@ enum TokenType : char
     TODO_ITEM_URGENT,
     TODO_ITEM_UNCERTAIN,
     TODO_ITEM_RECURRING,
+
+    MARKER,
 
     INSERTION,
 
@@ -464,6 +464,12 @@ class Scanner
             }
         }
 
+        if (m_LastToken >= TODO_ITEM_UNDONE && m_LastToken <= TODO_ITEM_RECURRING && std::iswspace(lexer->lookahead))
+        {
+            while (lexer->lookahead && std::iswspace(lexer->lookahead))
+                skip(lexer);
+        }
+
         if (lexer->lookahead == '~' && (m_LastToken == WORD || m_LastToken == CAPITALIZED_WORD))
         {
             advance(lexer);
@@ -488,7 +494,7 @@ class Scanner
 
             if (lexer->lookahead)
             {
-                lexer->result_symbol = m_LastToken = (m_LastToken >= QUOTE1 && m_LastToken <= ORDERED_LIST6 && (lexer->lookahead == '\n' || lexer->lookahead == '\r')) ? INDENT_SEGMENT : ESCAPE_SEQUENCE;
+                lexer->result_symbol = m_LastToken = (m_LastToken >= QUOTE1 && m_LastToken <= TODO_ITEM_RECURRING && (lexer->lookahead == '\n' || lexer->lookahead == '\r')) ? INDENT_SEGMENT : ESCAPE_SEQUENCE;
                 return true;
             }
             else
@@ -538,6 +544,7 @@ class Scanner
                 lexer->result_symbol = m_LastToken = TODO_ITEM_UNCERTAIN;
                 break;
             default:
+                lexer->mark_end(lexer);
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = WORD;
                 return true;
@@ -549,6 +556,7 @@ class Scanner
             {
                 advance(lexer);
                 lexer->mark_end(lexer);
+
                 return true;
             }
             else

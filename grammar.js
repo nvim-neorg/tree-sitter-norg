@@ -82,8 +82,6 @@ module.exports = grammar({
         $.ordered_list5_prefix,
         $.ordered_list6_prefix,
 
-        $.marker_prefix,
-
         $.todo_item_undone,
         $.todo_item_pending,
         $.todo_item_done,
@@ -92,6 +90,8 @@ module.exports = grammar({
         $.todo_item_urgent,
         $.todo_item_uncertain,
         $.todo_item_recurring,
+
+        $.marker_prefix,
 
         $.insertion_prefix,
 
