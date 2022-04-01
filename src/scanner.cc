@@ -194,6 +194,7 @@ class Scanner
         if (lexer->eof(lexer) || !lexer->lookahead)
         {
             advance(lexer);
+            m_ActiveModifiers.reset();
             return false;
         }
 
@@ -211,7 +212,10 @@ class Scanner
             lexer->result_symbol = m_LastToken = LINE_BREAK;
 
             if (lexer->eof(lexer) || !lexer->lookahead)
+            {
+                m_ActiveModifiers.reset();
                 return false;
+            }
 
             if (lexer->lookahead == '\n')
             {
@@ -480,7 +484,10 @@ class Scanner
                 advance(lexer);
 
                 if (lexer->eof(lexer))
+                {
+                    m_ActiveModifiers.reset();
                     return false;
+                }
 
                 lexer->result_symbol = m_LastToken = TRAILING_MODIFIER;
                 return true;

@@ -24,18 +24,6 @@ module.exports = grammar({
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
 
-        [$.bold, $._paragraph_element],
-        [$.italic, $._paragraph_element],
-        [$.strikethrough, $._paragraph_element],
-        [$.underline, $._paragraph_element],
-        [$.spoiler, $._paragraph_element],
-        [$.verbatim, $._paragraph_element],
-        [$.superscript, $._paragraph_element],
-        [$.subscript, $._paragraph_element],
-        [$.inline_comment, $._paragraph_element],
-        [$.inline_math, $._paragraph_element],
-        [$.variable, $._paragraph_element],
-
         [$._paragraph_element],
         [$.indent_segment],
     ],
@@ -217,14 +205,6 @@ module.exports = grammar({
                         alias($.line_break, "_line_break"),
                     ),
                 ),
-
-                // TODO(mrossinek): I do not see the need for this. If we do
-                // need it, we need to extract it into _paragraph again because
-                // having it here would cause the ends of detached modifiers
-                // like quotes and lists to break.
-                // optional(
-                //     alias($.paragraph_break, "_paragraph_break"),
-                // ),
             ),
         ),
 
@@ -248,14 +228,12 @@ module.exports = grammar({
                 choice(
                     $._paragraph_element,
                     alias($.line_break, "_line_break"),
-                    alias($._conflict_open, "_word"),
                 ),
             ),
         ),
 
         // Same as the non-verbatim modifier contents but using verbatim
-        // elements instead. It cannot contain `_conflict_open` because all of
-        // them are aliased to become verbatim.
+        // elements instead.
         _verbatim_modifier_content: $ =>
         prec.right(1,
             repeat1(
@@ -284,17 +262,7 @@ module.exports = grammar({
                 optional($.link_modifier),
             ),
             alias($.link_modifier, "_word"),
-            alias($.bold_close, "_word"),
-            alias($.italic_close, "_word"),
-            alias($.strikethrough_close, "_word"),
-            alias($.underline_close, "_word"),
-            alias($.spoiler_close, "_word"),
-            alias($.superscript_close, "_word"),
-            alias($.subscript_close, "_word"),
-            alias($.verbatim_close, "_word"),
-            alias($.inline_comment_close, "_word"),
-            alias($.inline_math_close, "_word"),
-            alias($.variable_close, "_word"),
+            alias($._conflict_close, "_word"),
         ),
 
         // A verbatim paragraph element essentially ignores all inline markup.
@@ -306,28 +274,8 @@ module.exports = grammar({
             alias($.escape_sequence_prefix, "_word"),
             alias($.any_char, "_word"),
             alias($.link_modifier, "_word"),
-            alias($.bold_open, "_word"),
-            alias($.bold_close, "_word"),
-            alias($.italic_open, "_word"),
-            alias($.italic_close, "_word"),
-            alias($.strikethrough_open, "_word"),
-            alias($.strikethrough_close, "_word"),
-            alias($.underline_open, "_word"),
-            alias($.underline_close, "_word"),
-            alias($.spoiler_open, "_word"),
-            alias($.spoiler_close, "_word"),
-            alias($.superscript_open, "_word"),
-            alias($.superscript_close, "_word"),
-            alias($.subscript_open, "_word"),
-            alias($.subscript_close, "_word"),
-            alias($.verbatim_open, "_word"),
-            alias($.verbatim_close, "_word"),
-            alias($.inline_comment_open, "_word"),
-            alias($.inline_comment_close, "_word"),
-            alias($.inline_math_open, "_word"),
-            alias($.inline_math_close, "_word"),
-            alias($.variable_open, "_word"),
-            alias($.variable_close, "_word"),
+            prec.dynamic(5, alias($._conflict_open, "_word")),
+            prec.dynamic(5, alias($._conflict_close, "_word")),
             alias($.inline_link_target_open, "_word"),
             alias($.inline_link_target_close, "_word"),
             alias($.link_description_begin, "_word"),
@@ -365,20 +313,33 @@ module.exports = grammar({
         variable: $ => gen_attached_modifier($, "variable", true),
 
         _conflict_open: $ =>
-        prec.dynamic(-1,
-            choice(
-                alias($.bold_open, "_word"),
-                alias($.italic_open, "_word"),
-                alias($.strikethrough_open, "_word"),
-                alias($.underline_open, "_word"),
-                alias($.spoiler_open, "_word"),
-                alias($.verbatim_open, "_word"),
-                alias($.superscript_open, "_word"),
-                alias($.subscript_open, "_word"),
-                alias($.inline_comment_open, "_word"),
-                alias($.inline_math_open, "_word"),
-                alias($.variable_open, "_word"),
-            )
+        choice(
+            alias($.bold_open, "_word"),
+            alias($.italic_open, "_word"),
+            alias($.strikethrough_open, "_word"),
+            alias($.underline_open, "_word"),
+            alias($.spoiler_open, "_word"),
+            alias($.verbatim_open, "_word"),
+            alias($.superscript_open, "_word"),
+            alias($.subscript_open, "_word"),
+            alias($.inline_comment_open, "_word"),
+            alias($.inline_math_open, "_word"),
+            alias($.variable_open, "_word"),
+        ),
+
+        _conflict_close: $ =>
+        choice(
+            alias($.bold_close, "_word"),
+            alias($.italic_close, "_word"),
+            alias($.strikethrough_close, "_word"),
+            alias($.underline_close, "_word"),
+            alias($.spoiler_close, "_word"),
+            alias($.verbatim_close, "_word"),
+            alias($.superscript_close, "_word"),
+            alias($.subscript_close, "_word"),
+            alias($.inline_comment_close, "_word"),
+            alias($.inline_math_close, "_word"),
+            alias($.variable_close, "_word"),
         ),
 
         // Well, any character
@@ -1134,14 +1095,18 @@ function gen_quote($, level) {
 
 function gen_attached_modifier($, kind, verbatim) {
     let content_rule = $._attached_modifier_content;
+    let precedence = 3;
     if (verbatim) {
         content_rule = $._verbatim_modifier_content;
+        precedence = 4;
     }
 
-    return seq(
-        alias($[kind + "_open"], "_open"),
-        content_rule,
-        alias($[kind + "_close"], "_close"),
+    return prec.dynamic(precedence,
+        seq(
+            alias($[kind + "_open"], "_open"),
+            content_rule,
+            alias($[kind + "_close"], "_close"),
+        ),
     );
 }
 

@@ -917,3 +917,16 @@ No nested markup inside variables
         )
     )
 )
+
+===================
+Verbatim precedence
+===================
+*not bold `because verbatim* has higher precedence`
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (verbatim)
+        )
+    )
+)
