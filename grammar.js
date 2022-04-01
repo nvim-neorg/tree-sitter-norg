@@ -8,6 +8,7 @@ module.exports = grammar({
         $.footnote,
         $.definition,
         $.tag,
+        $.any_todo_state,
     ],
 
     conflicts: $ => [
@@ -93,6 +94,14 @@ module.exports = grammar({
 
         $.insertion_prefix,
 
+        $.single_definition_prefix,
+        $.multi_definition_prefix,
+        $.multi_definition_suffix,
+
+        $.single_footnote_prefix,
+        $.multi_footnote_prefix,
+        $.multi_footnote_suffix,
+
         $.strong_paragraph_delimiter,
         $.weak_paragraph_delimiter,
         $.horizontal_line,
@@ -123,14 +132,6 @@ module.exports = grammar({
         $.ranged_verbatim_tag_end_prefix,
 
         $.carryover_tag_prefix,
-
-        $.single_definition_prefix,
-        $.multi_definition_prefix,
-        $.multi_definition_suffix,
-
-        $.single_footnote_prefix,
-        $.multi_footnote_prefix,
-        $.multi_footnote_suffix,
 
         $.link_modifier,
 
@@ -564,7 +565,7 @@ module.exports = grammar({
         ordered_list5: $ => gen_generic_list_item($, "ordered", 5),
         ordered_list6: $ => gen_generic_list_item($, "ordered", 6),
 
-        _any_todo_state: $ =>
+        any_todo_state: $ =>
         choice(
             $.todo_item_undone,
             $.todo_item_pending,
@@ -576,18 +577,13 @@ module.exports = grammar({
             $.todo_item_recurring,
         ),
 
-        todo_item1: $ => gen_todo_list_item($, 1),
-        todo_item2: $ => gen_todo_list_item($, 2),
-        todo_item3: $ => gen_todo_list_item($, 3),
-        todo_item4: $ => gen_todo_list_item($, 4),
-        todo_item5: $ => gen_todo_list_item($, 5),
-        todo_item6: $ => gen_todo_list_item($, 6),
-
         // --------------------------------------------------
 
         marker: $ =>
         prec.right(0,
-            seq(
+            gen_detached_modifier(
+                $,
+
                 $.marker_prefix,
 
                 field(
@@ -618,7 +614,9 @@ module.exports = grammar({
 
         insertion: $ =>
         prec.right(0,
-            seq(
+            gen_detached_modifier(
+                $,
+
                 $.insertion_prefix,
 
                 field(
@@ -980,6 +978,21 @@ module.exports = grammar({
     }
 });
 
+function gen_detached_modifier($, prefix, ...rest) {
+    return seq(
+        prefix,
+
+        optional(
+            field(
+                "state",
+                $.any_todo_state,
+            ),
+        ),
+
+        ...rest,
+    )
+}
+
 function gen_heading($, level) {
     let lower_level_heading = []
     for (let i = 0; i + level < 6; i++) {
@@ -987,7 +1000,9 @@ function gen_heading($, level) {
     }
 
     return prec.right(0,
-        seq(
+        gen_detached_modifier(
+            $,
+
             $["heading" + level + "_prefix"],
 
             field(
@@ -1028,13 +1043,11 @@ function gen_any_list_item($, level) {
         return choice(
             $["unordered_list" + level],
             $["ordered_list" + level],
-            $["todo_item" + level],
         );
     }
     return choice(
         $["unordered_list" + level],
         $["ordered_list" + level],
-        $["todo_item" + level],
         $["_any_list_item_level_" + (level + 1)],
     );
 }
@@ -1046,43 +1059,14 @@ function gen_generic_list_item($, kind, level) {
     }
 
     return prec.right(0,
-        seq(
+        gen_detached_modifier(
+            $,
+
             $[kind + "_list" + level + "_prefix"],
 
             field(
                 "content",
                 $.paragraph,
-            ),
-
-            repeat(
-                choice(
-                    ...lower_level_list_items,
-                ),
-            ),
-        ),
-    );
-}
-
-function gen_todo_list_item($, level) {
-    lower_level_list_items = [];
-    if (level < 6) {
-        lower_level_list_items[0] = $["_any_list_item_level_" + (level + 1)]
-    }
-
-    return prec.right(0,
-        seq(
-            $["unordered_list" + level + "_prefix"],
-
-            field(
-                "state",
-                $._any_todo_state,
-            ),
-
-            token.immediate(/\s+/),
-
-            field(
-                "content",
-                $.paragraph
             ),
 
             repeat(
@@ -1103,7 +1087,9 @@ function gen_quote($, level) {
     }
 
     return prec.right(0,
-        seq(
+        gen_detached_modifier(
+            $,
+
             $["quote" + level + "_prefix"],
 
             field(
@@ -1137,7 +1123,9 @@ function gen_attached_modifier($, kind, verbatim) {
 
 function gen_single_rangeable_detached_modifier($, kind) {
     return prec.right(
-        seq(
+        gen_detached_modifier(
+            $,
+
             $["single_" + kind + "_prefix"],
 
             field(
@@ -1163,7 +1151,9 @@ function gen_single_rangeable_detached_modifier($, kind) {
 function gen_multi_rangeable_detached_modifier($, kind) {
     // NOTE: there used to be a choice rule with an optional standalone suffix
     // so if problems arise with standalone closing nodes, re-add that
-    return seq(
+    return gen_detached_modifier(
+            $,
+
             $["multi_" + kind + "_prefix"],
 
             field(

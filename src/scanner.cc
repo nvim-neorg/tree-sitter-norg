@@ -69,6 +69,14 @@ enum TokenType : char
 
     INSERTION,
 
+    SINGLE_DEFINITION,
+    MULTI_DEFINITION,
+    MULTI_DEFINITION_SUFFIX,
+
+    SINGLE_FOOTNOTE,
+    MULTI_FOOTNOTE,
+    MULTI_FOOTNOTE_SUFFIX,
+
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
     HORIZONTAL_LINE,
@@ -99,14 +107,6 @@ enum TokenType : char
     RANGED_VERBATIM_TAG_END,
 
     CARRYOVER_TAG,
-
-    SINGLE_DEFINITION,
-    MULTI_DEFINITION,
-    MULTI_DEFINITION_SUFFIX,
-
-    SINGLE_FOOTNOTE,
-    MULTI_FOOTNOTE,
-    MULTI_FOOTNOTE_SUFFIX,
 
     LINK_MODIFIER,
 
@@ -490,9 +490,9 @@ class Scanner
             else
                 return false;
         }
-        // If we are not in a tag and we have a square bracket opening then try
+        // If we are not in a tag and we have an opening pipe symbol then try
         // matching either a todo item or beginning of a list
-        else if (m_LastToken >= UNORDERED_LIST1 && m_LastToken <= UNORDERED_LIST6 &&
+        else if (m_LastToken >= HEADING1 && m_LastToken <= MULTI_FOOTNOTE_SUFFIX &&
                  lexer->lookahead == '|')
         {
             advance(lexer);
@@ -501,41 +501,41 @@ class Scanner
 
             switch (lexer->lookahead)
             {
-            // We're dealing with an undone item ([ ])
+            // We're dealing with an undone item (| |)
             case ' ':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
                 break;
-            // We're dealing with a pending item ([-])
+            // We're dealing with a pending item (|-|)
             case '-':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_PENDING;
                 break;
-            // We're dealing with a done item ([x])
+            // We're dealing with a done item (|x|)
             case 'x':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
                 break;
-            // We're dealing with an item that has been put on hold ([=])
+            // We're dealing with an item that has been put on hold (|=|)
             case '=':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_ON_HOLD;
                 break;
-            // We're dealing with an item that has been cancelled ([_])
+            // We're dealing with an item that has been cancelled (|_|)
             case '_':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_CANCELLED;
                 break;
-            // We're dealing with an item that is urgent ([!])
+            // We're dealing with an item that is urgent (|!|)
             case '!':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_URGENT;
                 break;
-            // We're dealing with an item that is recurring ([+])
+            // We're dealing with an item that is recurring (|+|)
             case '+':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_RECURRING;
                 break;
-            // We're dealing with an item that needs further elaboration ([?])
+            // We're dealing with an item that needs further elaboration (|?|)
             case '?':
                 lexer->result_symbol = m_LastToken = TODO_ITEM_UNCERTAIN;
                 break;
             default:
                 advance(lexer);
-                lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_BEGIN;
+                lexer->result_symbol = m_LastToken = WORD;
                 return true;
             }
 
