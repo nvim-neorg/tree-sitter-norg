@@ -368,8 +368,7 @@
    Range-able detached modifiers can occur in two forms:
    - As a single detached modifier they affect:
    -- The next `paragraph_segment` which becomes the /title/
-   -- Any following item which becomes the /content/. Be aware that said item may *not* be a
-      {# structural detached modifier} (see {# precedence}).
+   -- Any following paragraph which becomes the /content/ .
    - As a pair of two detached modifiers in which case:
    -- The next `paragraph_segment` still becomes the /title/
    -- The content continues until the "closing" detached modifier is found
