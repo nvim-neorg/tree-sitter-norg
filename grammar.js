@@ -37,6 +37,7 @@ module.exports = grammar({
         [$.variable, $._paragraph_element],
 
         [$._paragraph_element],
+        [$.indent_segment],
     ],
 
     externals: $ => [
@@ -170,6 +171,8 @@ module.exports = grammar({
 
         $.inline_link_target_open,
         $.inline_link_target_close,
+
+        $.indent_segment_begin,
     ],
 
     rules: {
@@ -926,6 +929,22 @@ module.exports = grammar({
             $.carryover_tag_set,
         ),
 
+        indent_segment: $ => seq(
+            $.indent_segment_begin,
+
+            repeat(
+                choice(
+                    $.paragraph,
+                    prec(1, alias($.line_break, "_line_break")),
+                    prec(1, alias($.paragraph_break, "_paragraph_break")),
+                ),
+            ),
+
+            optional(
+                $.weak_paragraph_delimiter,
+            ),
+        ),
+
         // --------------------------------------------------
 
         heading: $ =>
@@ -1066,7 +1085,10 @@ function gen_generic_list_item($, kind, level) {
 
             field(
                 "content",
-                $.paragraph,
+                choice(
+                    $.paragraph,
+                    $.indent_segment,
+                ),
             ),
 
             repeat(
@@ -1094,7 +1116,10 @@ function gen_quote($, level) {
 
             field(
                 "content",
-                $.paragraph,
+                choice(
+                    $.paragraph,
+                    $.indent_segment,
+                ),
             ),
 
             optional(prec(1, alias($.line_break, "_line_break"))),

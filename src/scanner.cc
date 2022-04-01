@@ -145,6 +145,8 @@ enum TokenType : char
 
     INLINE_LINK_TARGET_OPEN,
     INLINE_LINK_TARGET_CLOSE,
+
+    INDENT_SEGMENT,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -360,6 +362,7 @@ class Scanner
             // the given amount of fallbacks then the last fallback will
             // always be chosen. This means that if we have 7 consecutive
             // '*' chars then we will still fall back to the HEADING6 token
+            // instead.
             if (check_detached(lexer,
                                HEADING1 | HEADING2 | HEADING3 | HEADING4 | HEADING5 | HEADING6,
                                {'*'}) != NONE)
@@ -371,7 +374,6 @@ class Scanner
                 return true;
 
             // Check for the existence of an unordered list element.
-            // instead".
             if (check_detached(
                     lexer,
                     UNORDERED_LIST1 | UNORDERED_LIST2 | UNORDERED_LIST3 | UNORDERED_LIST4 |
@@ -403,6 +405,7 @@ class Scanner
             //   ^ will be here, and lexer->lookahead will return '\n'
             else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
             {
+                advance(lexer);
                 lexer->result_symbol = m_LastToken = WEAK_PARAGRAPH_DELIMITER;
                 return true;
             }
@@ -440,6 +443,7 @@ class Scanner
             {
                 if (m_ParsedChars >= 3)
                 {
+                    advance(lexer);
                     lexer->result_symbol = m_LastToken = STRONG_PARAGRAPH_DELIMITER;
                     return true;
                 }
@@ -484,7 +488,7 @@ class Scanner
 
             if (lexer->lookahead)
             {
-                lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
+                lexer->result_symbol = m_LastToken = (m_LastToken >= QUOTE1 && m_LastToken <= ORDERED_LIST6 && (lexer->lookahead == '\n' || lexer->lookahead == '\r')) ? INDENT_SEGMENT : ESCAPE_SEQUENCE;
                 return true;
             }
             else

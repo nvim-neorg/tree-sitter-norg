@@ -1281,6 +1281,29 @@
     }
   },
   {
+    "type": "indent_segment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "indent_segment_begin",
+          "named": true
+        },
+        {
+          "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "weak_paragraph_delimiter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "inline_comment",
     "named": true,
     "fields": {},
@@ -2043,6 +2066,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -2147,6 +2174,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -2243,6 +2274,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -2331,6 +2366,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -2411,6 +2450,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -2482,6 +2525,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "indent_segment",
+            "named": true
+          },
           {
             "type": "paragraph",
             "named": true
@@ -2744,6 +2791,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -2828,6 +2879,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -2908,6 +2963,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -2984,6 +3043,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -3056,6 +3119,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -3123,6 +3190,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "indent_segment",
+            "named": true
+          },
           {
             "type": "paragraph",
             "named": true
@@ -3893,6 +3964,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -3997,6 +4072,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -4093,6 +4172,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -4181,6 +4264,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -4261,6 +4348,10 @@
         "required": true,
         "types": [
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           }
@@ -4332,6 +4423,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "indent_segment",
+            "named": true
+          },
           {
             "type": "paragraph",
             "named": true
@@ -4500,6 +4595,10 @@
   },
   {
     "type": "horizontal_line",
+    "named": true
+  },
+  {
+    "type": "indent_segment_begin",
     "named": true
   },
   {
