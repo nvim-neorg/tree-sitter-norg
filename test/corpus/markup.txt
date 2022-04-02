@@ -930,3 +930,17 @@ Verbatim precedence
         )
     )
 )
+
+=====================================
+First closing modifier has precedence
+=====================================
+*first bold* some /italic/ and not bold*
+---
+(document
+    (paragraph
+        (paragraph_segment
+            (bold)
+            (italic)
+        )
+    )
+)
