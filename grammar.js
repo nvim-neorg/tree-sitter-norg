@@ -9,6 +9,13 @@ module.exports = grammar({
         $.definition,
         $.tag,
         $.any_todo_state,
+
+        $._indent_segment_contents1,
+        $._indent_segment_contents2,
+        $._indent_segment_contents3,
+        $._indent_segment_contents4,
+        $._indent_segment_contents5,
+        $._indent_segment_contents6,
     ],
 
     conflicts: $ => [
@@ -25,7 +32,13 @@ module.exports = grammar({
         [$.variable, $._conflict_open],
 
         [$._paragraph_element],
-        [$.indent_segment],
+
+        [$.indent_segment1],
+        [$.indent_segment2],
+        [$.indent_segment3],
+        [$.indent_segment4],
+        [$.indent_segment5],
+        [$.indent_segment6],
     ],
 
     externals: $ => [
@@ -889,21 +902,19 @@ module.exports = grammar({
             $.carryover_tag_set,
         ),
 
-        indent_segment: $ => seq(
-            $.indent_segment_begin,
+        indent_segment1: $ => gen_indent_segment($, 1),
+        indent_segment2: $ => gen_indent_segment($, 2),
+        indent_segment3: $ => gen_indent_segment($, 3),
+        indent_segment4: $ => gen_indent_segment($, 4),
+        indent_segment5: $ => gen_indent_segment($, 5),
+        indent_segment6: $ => gen_indent_segment($, 6),
 
-            repeat(
-                choice(
-                    $.paragraph,
-                    prec(1, alias($.line_break, "_line_break")),
-                    prec(1, alias($.paragraph_break, "_paragraph_break")),
-                ),
-            ),
-
-            optional(
-                $.weak_paragraph_delimiter,
-            ),
-        ),
+        _indent_segment_contents1: $ => gen_indent_segment_contents($, 1),
+        _indent_segment_contents2: $ => gen_indent_segment_contents($, 2),
+        _indent_segment_contents3: $ => gen_indent_segment_contents($, 3),
+        _indent_segment_contents4: $ => gen_indent_segment_contents($, 4),
+        _indent_segment_contents5: $ => gen_indent_segment_contents($, 5),
+        _indent_segment_contents6: $ => gen_indent_segment_contents($, 6),
 
         // --------------------------------------------------
 
@@ -1047,7 +1058,7 @@ function gen_generic_list_item($, kind, level) {
                 "content",
                 choice(
                     $.paragraph,
-                    $.indent_segment,
+                    $["indent_segment" + level],
                 ),
             ),
 
@@ -1062,6 +1073,7 @@ function gen_generic_list_item($, kind, level) {
 
 function gen_quote($, level) {
     lower_level_quotes = [];
+
     if (level < 6) {
         for (let i = 0; i + level < 6; i++) {
             lower_level_quotes[i] = $["quote" + (i + 1 + level)]
@@ -1078,7 +1090,7 @@ function gen_quote($, level) {
                 "content",
                 choice(
                     $.paragraph,
-                    $.indent_segment,
+                    $["indent_segment" + level],
                 ),
             ),
 
@@ -1173,4 +1185,47 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                 $["multi_" + kind + "_suffix"],
             ),
         );
+}
+
+function gen_indent_segment_contents($, level) {
+    const numbered_items = level < 6 ? [
+        "unordered_list",
+        "ordered_list",
+        "quote",
+        "_indent_segment_contents",
+    ] : [];
+
+    if (level < 6) {
+        return prec(1, choice(
+            $.insertion,
+            $.footnote,
+            $.tag,
+            ...numbered_items.map(item => $[item + (level + 1)]),
+        ))
+    } else {
+        return prec(1, choice(
+            $.insertion,
+            $.footnote,
+            $.tag
+        ))
+    }
+}
+
+function gen_indent_segment($, level) {
+    return prec.dynamic(1, seq(
+        $.indent_segment_begin,
+
+        repeat(
+            prec(1, choice(
+                $.paragraph,
+                alias($.line_break, "_line_break"),
+                alias($.paragraph_break, "_paragraph_break"),
+                $["_indent_segment_contents" + level],
+            )),
+        ),
+
+        optional(
+            $.weak_paragraph_delimiter,
+        ),
+    ));
 }
