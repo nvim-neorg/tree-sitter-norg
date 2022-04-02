@@ -1,32 +1,27 @@
-================
+================================================================================
 Level 1 Headings
-================
+================================================================================
 * This is a heading
   In this heading there is some text
   ===
 
 This is no longer part of the heading.
 
----
+--------------------------------------------------------------------------------
+
 (document
-    (heading1
-        (heading1_prefix)
-        title: (paragraph_segment)
-        content:
-            (paragraph
-                (paragraph_segment)
-            )
-    )
-    (strong_paragraph_delimiter)
-    (paragraph
-        (paragraph_segment)
-    )
-)
+  (heading1
+    (heading1_prefix)
+    title: (paragraph_segment)
+    content: (paragraph
+      (paragraph_segment)))
+  (strong_paragraph_delimiter)
+  (paragraph
+    (paragraph_segment)))
 
-
-================
+================================================================================
 Level 2 Headings
-================
+================================================================================
 ** This is a level 2 heading
    That has text underneath
 
@@ -37,42 +32,29 @@ Level 2 Headings
 
 And here is some more text that has broken out of the matrix.
 
----
+--------------------------------------------------------------------------------
+
 (document
-    (heading2
-        (heading2_prefix)
-        title: (paragraph_segment)
-        content:
-            (paragraph
-                (paragraph_segment)
-            )
-    )
+  (heading2
+    (heading2_prefix)
+    title: (paragraph_segment)
+    content: (paragraph
+      (paragraph_segment)))
+  (heading1
+    (heading1_prefix)
+    title: (paragraph_segment)
+    content: (heading2
+      (heading2_prefix)
+      title: (paragraph_segment)
+      content: (paragraph
+        (paragraph_segment))))
+  (strong_paragraph_delimiter)
+  (paragraph
+    (paragraph_segment)))
 
-    (heading1
-        (heading1_prefix)
-        title: (paragraph_segment)
-        content:
-            (heading2
-                (heading2_prefix)
-                title: (paragraph_segment)
-                content:
-                    (paragraph
-                        (paragraph_segment)
-                    )
-            )
-    )
-
-    (strong_paragraph_delimiter)
-
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
-
-================
+================================================================================
 Level 3 Headings
-================
+================================================================================
 *** This is a level 3 heading
     That has text underneath
 
@@ -85,51 +67,34 @@ Level 3 Headings
 
 And here is some more text that has broken out of the matrix.
 
----
+--------------------------------------------------------------------------------
+
 (document
-    (heading3
+  (heading3
+    (heading3_prefix)
+    title: (paragraph_segment)
+    content: (paragraph
+      (paragraph_segment)))
+  (heading1
+    (heading1_prefix)
+    title: (paragraph_segment)
+    content: (heading2
+      (heading2_prefix)
+      title: (paragraph_segment)
+      content: (paragraph
+        (paragraph_segment))
+      content: (heading3
         (heading3_prefix)
         title: (paragraph_segment)
-        content:
-            (paragraph
-                (paragraph_segment)
-            )
-    )
+        content: (paragraph
+          (paragraph_segment)))))
+  (strong_paragraph_delimiter)
+  (paragraph
+    (paragraph_segment)))
 
-    (heading1
-        (heading1_prefix)
-        title: (paragraph_segment)
-        content:
-            (heading2
-                (heading2_prefix)
-                title: (paragraph_segment)
-                content:
-                    (paragraph
-                        (paragraph_segment)
-                    )
-                content:
-                    (heading3
-                        (heading3_prefix)
-                        title: (paragraph_segment)
-                        content:
-                            (paragraph
-                                (paragraph_segment)
-                            )
-                    )
-            )
-    )
-    
-    (strong_paragraph_delimiter)
-
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
-
-================
+================================================================================
 Level 4 Headings
-================
+================================================================================
 **** This is a level 4 heading
      That has text underneath
 
@@ -144,60 +109,39 @@ Level 4 Headings
 
 And here is some more text that has broken out of the matrix.
 
----
+--------------------------------------------------------------------------------
+
 (document
-    (heading4
-        (heading4_prefix)
+  (heading4
+    (heading4_prefix)
+    title: (paragraph_segment)
+    content: (paragraph
+      (paragraph_segment)))
+  (heading1
+    (heading1_prefix)
+    title: (paragraph_segment)
+    content: (heading2
+      (heading2_prefix)
+      title: (paragraph_segment)
+      content: (paragraph
+        (paragraph_segment))
+      content: (heading3
+        (heading3_prefix)
         title: (paragraph_segment)
-        content:
-            (paragraph
-                (paragraph_segment)
-            )
-    )
+        content: (paragraph
+          (paragraph_segment))
+        content: (heading4
+          (heading4_prefix)
+          title: (paragraph_segment)
+          content: (paragraph
+            (paragraph_segment))))))
+  (strong_paragraph_delimiter)
+  (paragraph
+    (paragraph_segment)))
 
-    (heading1
-        (heading1_prefix)
-        title: (paragraph_segment)
-        content:
-            (heading2
-                (heading2_prefix)
-                title: (paragraph_segment)
-                content:
-                    (paragraph
-                        (paragraph_segment)
-                    )
-                content:
-                    (heading3
-                        (heading3_prefix)
-                        title: (paragraph_segment)
-                        content:
-                            (paragraph
-                                (paragraph_segment)
-                            )
-                        content:
-                            (heading4
-                                (heading4_prefix)
-                                title: (paragraph_segment)
-                                content:
-                                    (paragraph
-                                        (paragraph_segment)
-                                    )
-                            )
-                    )
-            )
-    )
-
-    (strong_paragraph_delimiter)
-
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
-
-================
+================================================================================
 Level 5 Headings
-================
+================================================================================
 ***** This is a level 5 heading
       That has text underneath
 
@@ -212,61 +156,40 @@ Level 5 Headings
 
 And here is some more text that has broken out of the matrix.
 
----
+--------------------------------------------------------------------------------
+
 (document
-    (heading5
-        (heading5_prefix)
+  (heading5
+    (heading5_prefix)
+    title: (paragraph_segment)
+    content: (paragraph
+      (paragraph_segment)))
+  (heading1
+    (heading1_prefix)
+    title: (paragraph_segment)
+    content: (heading2
+      (heading2_prefix)
+      title: (paragraph_segment)
+      content: (paragraph
+        (paragraph_segment))
+      content: (heading3
+        (heading3_prefix)
         title: (paragraph_segment)
-        content:
-            (paragraph
-                (paragraph_segment)
-            )
-    )
+        content: (paragraph
+          (paragraph_segment))
+        content: (heading4
+          (heading4_prefix)
+          title: (paragraph_segment)
+          content: (heading5
+            (heading5_prefix)
+            title: (paragraph_segment))))))
+  (strong_paragraph_delimiter)
+  (paragraph
+    (paragraph_segment)))
 
-    (heading1
-        (heading1_prefix)
-        title: (paragraph_segment)
-        content:
-            (heading2
-                (heading2_prefix)
-                title: (paragraph_segment)
-                content:
-                    (paragraph
-                        (paragraph_segment)
-                    )
-                content:
-                    (heading3
-                        (heading3_prefix)
-                        title: (paragraph_segment)
-                        content:
-                            (paragraph
-                                (paragraph_segment)
-                            )
-                        content:
-                            (heading4
-                                (heading4_prefix)
-                                title: (paragraph_segment)
-                                content:
-                                    (heading5
-                                        (heading5_prefix)
-                                        title: (paragraph_segment)
-                                    )
-                            )
-                    )
-            )
-    )
-
-    (strong_paragraph_delimiter)
-
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
-
-================
+================================================================================
 Level 6 Headings
-================
+================================================================================
 ****** This is a level 6 heading
       That has text underneath
 
@@ -283,69 +206,45 @@ Level 6 Headings
 
 And here is some more text that has broken out of the matrix.
 
----
+--------------------------------------------------------------------------------
+
 (document
-    (heading6
-        (heading6_prefix)
+  (heading6
+    (heading6_prefix)
+    title: (paragraph_segment)
+    content: (paragraph
+      (paragraph_segment)))
+  (heading1
+    (heading1_prefix)
+    title: (paragraph_segment)
+    content: (heading2
+      (heading2_prefix)
+      title: (paragraph_segment)
+      content: (paragraph
+        (paragraph_segment))
+      content: (heading3
+        (heading3_prefix)
         title: (paragraph_segment)
-        content:
-            (paragraph
-                (paragraph_segment)
-            )
-    )
+        content: (paragraph
+          (paragraph_segment))
+        content: (heading4
+          (heading4_prefix)
+          title: (paragraph_segment)
+          content: (heading5
+            (heading5_prefix)
+            title: (paragraph_segment)
+            content: (paragraph
+              (paragraph_segment))
+            content: (heading6
+              (heading6_prefix)
+              title: (paragraph_segment)))))))
+  (strong_paragraph_delimiter)
+  (paragraph
+    (paragraph_segment)))
 
-    (heading1
-        (heading1_prefix)
-        title: (paragraph_segment)
-        content:
-            (heading2
-                (heading2_prefix)
-                title: (paragraph_segment)
-                content:
-                    (paragraph
-                        (paragraph_segment)
-                    )
-                content:
-                    (heading3
-                        (heading3_prefix)
-                        title: (paragraph_segment)
-                        content:
-                            (paragraph
-                                (paragraph_segment)
-                            )
-                        content:
-                            (heading4
-                                (heading4_prefix)
-                                title: (paragraph_segment)
-                                content:
-                                    (heading5
-                                        (heading5_prefix)
-                                        title: (paragraph_segment)
-                                        content:
-                                            (paragraph
-                                                (paragraph_segment)
-                                            )
-                                        content:
-                                            (heading6
-                                                (heading6_prefix)
-                                                title: (paragraph_segment)
-                                            )
-                                    )
-                            )
-                    )
-            )
-    )
-
-    (strong_paragraph_delimiter)
-
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
-=====================
+================================================================================
 Indentation Reversion
-=====================
+================================================================================
 Time to test indentation reversion.
 
 * This is a heading
@@ -363,56 +262,40 @@ Time to test indentation reversion.
 
 This should no longer be part of the heading.
 
----
+--------------------------------------------------------------------------------
+
 (document
-    (paragraph
-        (paragraph_segment)
-    )
+  (paragraph
+    (paragraph_segment))
+  (heading1
+    (heading1_prefix)
+    title: (paragraph_segment)
+    content: (heading2
+      (heading2_prefix)
+      title: (paragraph_segment)
+      content: (paragraph
+        (paragraph_segment))
+      (weak_paragraph_delimiter))
+    content: (paragraph
+      (paragraph_segment)
+      (paragraph_segment)
+      (paragraph_segment))
+    content: (heading3
+      (heading3_prefix)
+      title: (paragraph_segment)
+      (weak_paragraph_delimiter))
+    content: (paragraph
+      (paragraph_segment))
+    content: (heading3
+      (heading3_prefix)
+      title: (paragraph_segment)))
+  (strong_paragraph_delimiter)
+  (paragraph
+    (paragraph_segment)))
 
-    (heading1
-        (heading1_prefix)
-        title: (paragraph_segment)
-        content:
-            (heading2
-                (heading2_prefix)
-                title: (paragraph_segment)
-                content:
-                    (paragraph
-                        (paragraph_segment)
-                    )
-                (weak_paragraph_delimiter)
-            )
-        content:
-            (paragraph
-                (paragraph_segment)
-                (paragraph_segment)
-                (paragraph_segment)
-            )
-        content:
-            (heading3
-                (heading3_prefix)
-                title: (paragraph_segment)
-                (weak_paragraph_delimiter)
-            )
-        content:
-            (paragraph
-                (paragraph_segment)
-            )
-        content:
-            (heading3
-                (heading3_prefix)
-                title: (paragraph_segment)
-            )
-    )
-    (strong_paragraph_delimiter)
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
-===============================
+================================================================================
 Malformed indentation reversion
-===============================
+================================================================================
 * Heading
   A paragraph
   --- 
@@ -426,52 +309,39 @@ Malformed indentation reversion
 
 This should though.
 
----
-(document
-    (heading1
-        (heading1_prefix)
-        title: (paragraph_segment)
-        content:
-            (paragraph
-                (paragraph_segment)
-            )
-            content:
-                (generic_list
-                    (unordered_list3
-                        (unordered_list3_prefix)
-                        content:
-                            (paragraph
-                                (paragraph_segment)
-                                (paragraph_segment)
-                                (paragraph_segment)
-                            )
-                    )
-                )
-            content:
-                (paragraph
-                    (paragraph_segment)
-                    (paragraph_segment)
-                )
-            (weak_paragraph_delimiter)
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-)
+--------------------------------------------------------------------------------
 
-===============
+(document
+  (heading1
+    (heading1_prefix)
+    title: (paragraph_segment)
+    content: (paragraph
+      (paragraph_segment))
+    content: (generic_list
+      (unordered_list3
+        (unordered_list3_prefix)
+        content: (paragraph
+          (paragraph_segment)
+          (paragraph_segment)
+          (paragraph_segment))))
+    content: (paragraph
+      (paragraph_segment)
+      (paragraph_segment))
+    (weak_paragraph_delimiter))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
 Horizontal Line
-===============
+================================================================================
 This is some text.
 ___
 Separated by a horizontal line.
----
+--------------------------------------------------------------------------------
+
 (document
-    (paragraph
-        (paragraph_segment)
-    )
-    (horizontal_line)
-    (paragraph
-        (paragraph_segment)
-    )
-)
+  (paragraph
+    (paragraph_segment))
+  (horizontal_line)
+  (paragraph
+    (paragraph_segment)))

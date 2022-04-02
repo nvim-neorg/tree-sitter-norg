@@ -1,499 +1,380 @@
-=================
+================================================================================
 Standalone markup
-=================
+================================================================================
 *bold*
----
-(document
-    (paragraph
-        (paragraph_segment
-            (bold)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-====
+(document
+  (paragraph
+    (paragraph_segment
+      (bold))))
+
+================================================================================
 Bold
-====
+================================================================================
 Here is a *bold* word.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (bold)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-======
+(document
+  (paragraph
+    (paragraph_segment
+      (bold))))
+
+================================================================================
 Italic
-======
+================================================================================
 Here is an /italic/ word.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (italic)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=============
+(document
+  (paragraph
+    (paragraph_segment
+      (italic))))
+
+================================================================================
 Strikethrough
-=============
+================================================================================
 Here is a -struck through- word.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (strikethrough)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=========
+(document
+  (paragraph
+    (paragraph_segment
+      (strikethrough))))
+
+================================================================================
 Underline
-=========
+================================================================================
 Here is an _underlined_ word.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (underline)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=======
+(document
+  (paragraph
+    (paragraph_segment
+      (underline))))
+
+================================================================================
 Spoiler
-=======
+================================================================================
 Here is a !spoiler! word.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (spoiler)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-========
+(document
+  (paragraph
+    (paragraph_segment
+      (spoiler))))
+
+================================================================================
 Verbatim
-========
+================================================================================
 Here is a `verbatim` word.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (verbatim)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-===========
+(document
+  (paragraph
+    (paragraph_segment
+      (verbatim))))
+
+================================================================================
 Superscript
-===========
+================================================================================
 Here is a ^superscript^ word.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (superscript)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=========
+(document
+  (paragraph
+    (paragraph_segment
+      (superscript))))
+
+================================================================================
 Subscript
-=========
+================================================================================
 Here is a ,subscript, word.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (subscript)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-==============
+(document
+  (paragraph
+    (paragraph_segment
+      (subscript))))
+
+================================================================================
 Inline Comment
-==============
+================================================================================
 This sentence contains an %inlined comment%.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (inline_comment)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-===========
+(document
+  (paragraph
+    (paragraph_segment
+      (inline_comment))))
+
+================================================================================
 Inline Math
-===========
+================================================================================
 This sentence contains some $inline math$.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (inline_math)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-========
+(document
+  (paragraph
+    (paragraph_segment
+      (inline_math))))
+
+================================================================================
 Variable
-========
+================================================================================
 This sentence contains a =variable= reference.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (variable)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-==================
+(document
+  (paragraph
+    (paragraph_segment
+      (variable))))
+
+================================================================================
 Inline Link Target
-==================
+================================================================================
 This sentence contains an <inline link target>.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (inline_link_target
-                (paragraph)
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=================
+(document
+  (paragraph
+    (paragraph_segment
+      (inline_link_target
+        (paragraph)))))
+
+================================================================================
 Nesting into Bold
-=================
+================================================================================
 *Bold and /italic/*
 *Bold and -struck through-*
 *Bold and _underlined_*
 *Bold and !spoiler!*
 *Bold and ^superscript^*
 *Bold and ,subscript,*
----
-(document
-    (paragraph
-        (paragraph_segment
-            (bold
-                (italic)
-            )
-        )
-        (paragraph_segment
-            (bold
-                (strikethrough)
-            )
-        )
-        (paragraph_segment
-            (bold
-                (underline)
-            )
-        )
-        (paragraph_segment
-            (bold
-                (spoiler)
-            )
-        )
-        (paragraph_segment
-            (bold
-                (superscript)
-            )
-        )
-        (paragraph_segment
-            (bold
-                (subscript)
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-===================
+(document
+  (paragraph
+    (paragraph_segment
+      (bold
+        (italic)))
+    (paragraph_segment
+      (bold
+        (strikethrough)))
+    (paragraph_segment
+      (bold
+        (underline)))
+    (paragraph_segment
+      (bold
+        (spoiler)))
+    (paragraph_segment
+      (bold
+        (superscript)))
+    (paragraph_segment
+      (bold
+        (subscript)))))
+
+================================================================================
 Nesting into Italic
-===================
+================================================================================
 /Italic and *bold*/
 /Italic and -struck through-/
 /Italic and _underlined_/
 /Italic and !spoiler!/
 /Italic and ^superscript^/
 /Italic and ,subscript,/
----
-(document
-    (paragraph
-        (paragraph_segment
-            (italic
-                (bold)
-            )
-        )
-        (paragraph_segment
-            (italic
-                (strikethrough)
-            )
-        )
-        (paragraph_segment
-            (italic
-                (underline)
-            )
-        )
-        (paragraph_segment
-            (italic
-                (spoiler)
-            )
-        )
-        (paragraph_segment
-            (italic
-                (superscript)
-            )
-        )
-        (paragraph_segment
-            (italic
-                (subscript)
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-==========================
+(document
+  (paragraph
+    (paragraph_segment
+      (italic
+        (bold)))
+    (paragraph_segment
+      (italic
+        (strikethrough)))
+    (paragraph_segment
+      (italic
+        (underline)))
+    (paragraph_segment
+      (italic
+        (spoiler)))
+    (paragraph_segment
+      (italic
+        (superscript)))
+    (paragraph_segment
+      (italic
+        (subscript)))))
+
+================================================================================
 Nesting into Strikethrough
-==========================
+================================================================================
 -Struck through and *bold*-
 -Struck through and /italic/-
 -Struck through and _underlined_-
 -Struck through and !spoiler!-
 -Struck through and ^superscript^-
 -Struck through and ,subscript,-
----
-(document
-    (paragraph
-        (paragraph_segment
-            (strikethrough
-                (bold)
-            )
-        )
-        (paragraph_segment
-            (strikethrough
-                (italic)
-            )
-        )
-        (paragraph_segment
-            (strikethrough
-                (underline)
-            )
-        )
-        (paragraph_segment
-            (strikethrough
-                (spoiler)
-            )
-        )
-        (paragraph_segment
-            (strikethrough
-                (superscript)
-            )
-        )
-        (paragraph_segment
-            (strikethrough
-                (subscript)
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-======================
+(document
+  (paragraph
+    (paragraph_segment
+      (strikethrough
+        (bold)))
+    (paragraph_segment
+      (strikethrough
+        (italic)))
+    (paragraph_segment
+      (strikethrough
+        (underline)))
+    (paragraph_segment
+      (strikethrough
+        (spoiler)))
+    (paragraph_segment
+      (strikethrough
+        (superscript)))
+    (paragraph_segment
+      (strikethrough
+        (subscript)))))
+
+================================================================================
 Nesting into Underline
-======================
+================================================================================
 _Underlined and *bold*_
 _Underlined and /italic/_
 _Underlined and -struck through-_
 _Underlined and !spoiler!_
 _Underlined and ^superscript^_
 _Underlined and ,subscript,_
----
-(document
-    (paragraph
-        (paragraph_segment
-            (underline
-                (bold)
-            )
-        )
-        (paragraph_segment
-            (underline
-                (italic)
-            )
-        )
-        (paragraph_segment
-            (underline
-                (strikethrough)
-            )
-        )
-        (paragraph_segment
-            (underline
-                (spoiler)
-            )
-        )
-        (paragraph_segment
-            (underline
-                (superscript)
-            )
-        )
-        (paragraph_segment
-            (underline
-                (subscript)
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-====================
+(document
+  (paragraph
+    (paragraph_segment
+      (underline
+        (bold)))
+    (paragraph_segment
+      (underline
+        (italic)))
+    (paragraph_segment
+      (underline
+        (strikethrough)))
+    (paragraph_segment
+      (underline
+        (spoiler)))
+    (paragraph_segment
+      (underline
+        (superscript)))
+    (paragraph_segment
+      (underline
+        (subscript)))))
+
+================================================================================
 Nesting into Spoiler
-====================
+================================================================================
 !Spoiler and *bold*!
 !Spoiler and /italic/!
 !Spoiler and -struck through-!
 !Spoiler and _underlined_!
 !Spoiler and ^superscript^!
 !Spoiler and ,subscript,!
----
-(document
-    (paragraph
-        (paragraph_segment
-            (spoiler
-                (bold)
-            )
-        )
-        (paragraph_segment
-            (spoiler
-                (italic)
-            )
-        )
-        (paragraph_segment
-            (spoiler
-                (strikethrough)
-            )
-        )
-        (paragraph_segment
-            (spoiler
-                (underline)
-            )
-        )
-        (paragraph_segment
-            (spoiler
-                (superscript)
-            )
-        )
-        (paragraph_segment
-            (spoiler
-                (subscript)
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-========================
+(document
+  (paragraph
+    (paragraph_segment
+      (spoiler
+        (bold)))
+    (paragraph_segment
+      (spoiler
+        (italic)))
+    (paragraph_segment
+      (spoiler
+        (strikethrough)))
+    (paragraph_segment
+      (spoiler
+        (underline)))
+    (paragraph_segment
+      (spoiler
+        (superscript)))
+    (paragraph_segment
+      (spoiler
+        (subscript)))))
+
+================================================================================
 Nesting into Superscript
-========================
+================================================================================
 ^Superscript and *bold*^
 ^Superscript and /italic/^
 ^Superscript and -struck through-^
 ^Superscript and _underlined_^
 ^Superscript and !spoiler!^
----
-(document
-    (paragraph
-        (paragraph_segment
-            (superscript
-                (bold)
-            )
-        )
-        (paragraph_segment
-            (superscript
-                (italic)
-            )
-        )
-        (paragraph_segment
-            (superscript
-                (strikethrough)
-            )
-        )
-        (paragraph_segment
-            (superscript
-                (underline)
-            )
-        )
-        (paragraph_segment
-            (superscript
-                (spoiler)
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-======================
+(document
+  (paragraph
+    (paragraph_segment
+      (superscript
+        (bold)))
+    (paragraph_segment
+      (superscript
+        (italic)))
+    (paragraph_segment
+      (superscript
+        (strikethrough)))
+    (paragraph_segment
+      (superscript
+        (underline)))
+    (paragraph_segment
+      (superscript
+        (spoiler)))))
+
+================================================================================
 Nesting into Subscript
-======================
+================================================================================
 ,Subscript and *bold*,
 ,Subscript and /italic/,
 ,Subscript and -struck through-,
 ,Subscript and _underlined_,
 ,Subscript and !spoiler!,
----
-(document
-    (paragraph
-        (paragraph_segment
-            (subscript
-                (bold)
-            )
-        )
-        (paragraph_segment
-            (subscript
-                (italic)
-            )
-        )
-        (paragraph_segment
-            (subscript
-                (strikethrough)
-            )
-        )
-        (paragraph_segment
-            (subscript
-                (underline)
-            )
-        )
-        (paragraph_segment
-            (subscript
-                (spoiler)
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-============
+(document
+  (paragraph
+    (paragraph_segment
+      (subscript
+        (bold)))
+    (paragraph_segment
+      (subscript
+        (italic)))
+    (paragraph_segment
+      (subscript
+        (strikethrough)))
+    (paragraph_segment
+      (subscript
+        (underline)))
+    (paragraph_segment
+      (subscript
+        (spoiler)))))
+
+================================================================================
 Deep Nesting
-============
+================================================================================
 *Bold /italic _underlined -struck through-_/*
----
-(document
-    (paragraph
-        (paragraph_segment
-            (bold
-                (italic
-                    (underline
-                        (strikethrough)
-                    )
-                )
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-============
+(document
+  (paragraph
+    (paragraph_segment
+      (bold
+        (italic
+          (underline
+            (strikethrough)))))))
+
+================================================================================
 Empty Markup
-============
+================================================================================
 This is not ** bold.
 This is not // italic.
 This is not -- struck through.
@@ -505,26 +386,25 @@ This is not ,, subscript.
 This is not %% an inline comment.
 This is not $$ inline math.
 This is not == a variable reference.
----
-(document
-    (paragraph
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-    )
-)
+--------------------------------------------------------------------------------
 
-==============
+(document
+  (paragraph
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)))
+
+================================================================================
 Escaped Markup
-==============
+================================================================================
 This is not \*bold\*
 This is not \/italic\/
 This is not \-struck through\-
@@ -537,63 +417,98 @@ This is not \%an inline comment\%
 This is not \$inline math\$
 This is not \=variable reference\=
 This is not \<an inline link target\>
----
-(document
-    (paragraph
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-        (paragraph_segment
-            (escape_sequence (escape_sequence_prefix) (any_char))
-            (escape_sequence (escape_sequence_prefix) (any_char))
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=============
+(document
+  (paragraph
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))
+    (paragraph_segment
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char))
+      (escape_sequence
+        (escape_sequence_prefix)
+        (any_char)))))
+
+================================================================================
 Link Modifier
-=============
+================================================================================
 Intra:*word*:bold
 Intra:/word/:italic
 Intra:-word-:strikethrough
@@ -605,70 +520,58 @@ Intra:`word`:verbatim
 Intra:%word%:comment
 Intra:$word$:math
 Intra:=word=:variable
----
-(document
-    (paragraph
-        (paragraph_segment
-            (link_modifier)
-            (bold)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (italic)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (strikethrough)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (underline)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (spoiler)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (superscript)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (subscript)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (verbatim)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (inline_comment)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (inline_math)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (variable)
-            (link_modifier)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-================================
+(document
+  (paragraph
+    (paragraph_segment
+      (link_modifier)
+      (bold)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (italic)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (strikethrough)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (underline)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (spoiler)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (superscript)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (subscript)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (verbatim)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (inline_comment)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (inline_math)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (variable)
+      (link_modifier))))
+
+================================================================================
 No nested markup inside verbatim
-================================
+================================================================================
 `*not bold*`
 `/not italic/`
 `-not struck through-`
@@ -682,54 +585,40 @@ No nested markup inside verbatim
 `<no link target>`
 `no:*link modifier*`
 `hidden \*escaped char`
----
-(document
-    (paragraph
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-===========================
+(document
+  (paragraph
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))))
+
+================================================================================
 Nesting into Inline Comment
-===========================
+================================================================================
 %*not bold*%
 %/not italic/%
 %-not struck through-%
@@ -740,65 +629,44 @@ Nesting into Inline Comment
 %`no verbatim`%
 %$no inline math$%
 %=no variable=%
----
-(document
-    (paragraph
-        (paragraph_segment
-            (inline_comment
-                (bold)
-            )
-        )
-        (paragraph_segment
-            (inline_comment
-                (italic)
-            )
-        )
-        (paragraph_segment
-            (inline_comment
-                (strikethrough)
-            )
-        )
-        (paragraph_segment
-            (inline_comment
-                (underline)
-            )
-        )
-        (paragraph_segment
-            (inline_comment
-                (spoiler)
-            )
-        )
-        (paragraph_segment
-            (inline_comment
-                (superscript)
-            )
-        )
-        (paragraph_segment
-            (inline_comment
-                (subscript)
-            )
-        )
-        (paragraph_segment
-            (inline_comment
-                (verbatim)
-            )
-        )
-        (paragraph_segment
-            (inline_comment
-                (inline_math)
-            )
-        )
-        (paragraph_segment
-            (inline_comment
-                (variable)
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-===================================
+(document
+  (paragraph
+    (paragraph_segment
+      (inline_comment
+        (bold)))
+    (paragraph_segment
+      (inline_comment
+        (italic)))
+    (paragraph_segment
+      (inline_comment
+        (strikethrough)))
+    (paragraph_segment
+      (inline_comment
+        (underline)))
+    (paragraph_segment
+      (inline_comment
+        (spoiler)))
+    (paragraph_segment
+      (inline_comment
+        (superscript)))
+    (paragraph_segment
+      (inline_comment
+        (subscript)))
+    (paragraph_segment
+      (inline_comment
+        (verbatim)))
+    (paragraph_segment
+      (inline_comment
+        (inline_math)))
+    (paragraph_segment
+      (inline_comment
+        (variable)))))
+
+================================================================================
 No nested markup inside inline math
-===================================
+================================================================================
 $*not bold*$
 $/not italic/$
 $-not struck through-$
@@ -812,54 +680,40 @@ $=no variable=$
 $<no link target>$
 $no:*link modifier*$
 $hidden \*escaped char*$
----
-(document
-    (paragraph
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-        (paragraph_segment
-            (inline_math)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=================================
+(document
+  (paragraph
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))))
+
+================================================================================
 No nested markup inside variables
-=================================
+================================================================================
 =*not bold*=
 =/not italic/=
 =-not struck through-=
@@ -873,74 +727,56 @@ No nested markup inside variables
 =<no link target>=
 =no:*link modifier*=
 =hidden \*escaped char*=
----
-(document
-    (paragraph
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-        (paragraph_segment
-            (variable)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-===================
+(document
+  (paragraph
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))))
+
+================================================================================
 Verbatim precedence
-===================
+================================================================================
 *not bold `because verbatim* has higher precedence`
----
-(document
-    (paragraph
-        (paragraph_segment
-            (verbatim)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=====================================
-First closing modifier has precedence
-=====================================
-*first bold* some /italic/ and not bold*
----
 (document
-    (paragraph
-        (paragraph_segment
-            (bold)
-            (italic)
-        )
-    )
-)
+  (paragraph
+    (paragraph_segment
+      (verbatim))))
+
+================================================================================
+First closing modifier has precedence
+================================================================================
+*first bold* some /italic/ and not bold*
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (bold)
+      (italic))))

@@ -1,47 +1,40 @@
-===========================
+================================================================================
 Single paragraph definition
-===========================
+================================================================================
 $ Single-paragraph definition
 This is the actual definition.
 
 This is no longer part of the definition.
----
-(document
-    (single_definition
-        (single_definition_prefix)
-        (paragraph_segment)
-        (paragraph
-            (paragraph_segment)
-        )
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-)
+--------------------------------------------------------------------------------
 
-==========================
+(document
+  (single_definition
+    (single_definition_prefix)
+    (paragraph_segment)
+    (paragraph
+      (paragraph_segment)))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
 Multi paragraph definition
-==========================
+================================================================================
 $$ Multi-paragraph definition
 This is the actual definition.
 
 This is also still part of the definition.
 $$
 This is no longer part of the definition.
----
+--------------------------------------------------------------------------------
+
 (document
-    (multi_definition
-        (multi_definition_prefix)
-        (paragraph_segment)
-        (paragraph
-            (paragraph_segment)
-        )
-        (paragraph
-            (paragraph_segment)
-        )
-        (multi_definition_suffix)
-    )
+  (multi_definition
+    (multi_definition_prefix)
+    (paragraph_segment)
     (paragraph
-        (paragraph_segment)
-    )
-)
+      (paragraph_segment))
+    (paragraph
+      (paragraph_segment))
+    (multi_definition_suffix))
+  (paragraph
+    (paragraph_segment)))

@@ -1,6 +1,6 @@
-===========
+================================================================================
 Undone Todo
-===========
+================================================================================
 - | | Undone task level 1
 -- | | Undone task level 2
 --- | | Undone task level 3
@@ -8,45 +8,44 @@ Undone Todo
 ----- | | Undone task level 5
 ------ | | Undone task level 6
 
----
-(document
-    (generic_list
-        (unordered_list1
-            (unordered_list1_prefix)
-            (todo_item_undone)
-            (paragraph (paragraph_segment))
-            (unordered_list2
-                (unordered_list2_prefix)
-                (todo_item_undone)
-                (paragraph (paragraph_segment))
-                (unordered_list3
-                    (unordered_list3_prefix)
-                    (todo_item_undone)
-                    (paragraph (paragraph_segment))
-                    (unordered_list4
-                        (unordered_list4_prefix)
-                        (todo_item_undone)
-                        (paragraph (paragraph_segment))
-                        (unordered_list5
-                            (unordered_list5_prefix)
-                            (todo_item_undone)
-                            (paragraph (paragraph_segment))
-                            (unordered_list6
-                                (unordered_list6_prefix)
-                                (todo_item_undone)
-                                (paragraph (paragraph_segment))
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=========
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (todo_item_undone)
+      (paragraph
+        (paragraph_segment))
+      (unordered_list2
+        (unordered_list2_prefix)
+        (todo_item_undone)
+        (paragraph
+          (paragraph_segment))
+        (unordered_list3
+          (unordered_list3_prefix)
+          (todo_item_undone)
+          (paragraph
+            (paragraph_segment))
+          (unordered_list4
+            (unordered_list4_prefix)
+            (todo_item_undone)
+            (paragraph
+              (paragraph_segment))
+            (unordered_list5
+              (unordered_list5_prefix)
+              (todo_item_undone)
+              (paragraph
+                (paragraph_segment))
+              (unordered_list6
+                (unordered_list6_prefix)
+                (todo_item_undone)
+                (paragraph
+                  (paragraph_segment))))))))))
+
+================================================================================
 Done Todo
-=========
+================================================================================
 - |x| Done task level 1
 -- |x| Done task level 2
 --- |x| Done task level 3
@@ -54,45 +53,44 @@ Done Todo
 ----- |x| Done task level 5
 ------ |x| Done task level 6
 
----
-(document
-    (generic_list
-        (unordered_list1
-            (unordered_list1_prefix)
-            (todo_item_done)
-            (paragraph (paragraph_segment))
-            (unordered_list2
-                (unordered_list2_prefix)
-                (todo_item_done)
-                (paragraph (paragraph_segment))
-                (unordered_list3
-                    (unordered_list3_prefix)
-                    (todo_item_done)
-                    (paragraph (paragraph_segment))
-                    (unordered_list4
-                        (unordered_list4_prefix)
-                        (todo_item_done)
-                        (paragraph (paragraph_segment))
-                        (unordered_list5
-                            (unordered_list5_prefix)
-                            (todo_item_done)
-                            (paragraph (paragraph_segment))
-                            (unordered_list6
-                                (unordered_list6_prefix)
-                                (todo_item_done)
-                                (paragraph (paragraph_segment))
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-============
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (todo_item_done)
+      (paragraph
+        (paragraph_segment))
+      (unordered_list2
+        (unordered_list2_prefix)
+        (todo_item_done)
+        (paragraph
+          (paragraph_segment))
+        (unordered_list3
+          (unordered_list3_prefix)
+          (todo_item_done)
+          (paragraph
+            (paragraph_segment))
+          (unordered_list4
+            (unordered_list4_prefix)
+            (todo_item_done)
+            (paragraph
+              (paragraph_segment))
+            (unordered_list5
+              (unordered_list5_prefix)
+              (todo_item_done)
+              (paragraph
+                (paragraph_segment))
+              (unordered_list6
+                (unordered_list6_prefix)
+                (todo_item_done)
+                (paragraph
+                  (paragraph_segment))))))))))
+
+================================================================================
 Pending Todo
-============
+================================================================================
 - |-| Pending task level 1
 -- |-| Pending task level 2
 --- |-| Pending task level 3
@@ -100,45 +98,44 @@ Pending Todo
 ----- |-| Pending task level 5
 ------ |-| Pending task level 6
 
----
-(document
-    (generic_list
-        (unordered_list1
-            (unordered_list1_prefix)
-            (todo_item_pending)
-            (paragraph (paragraph_segment))
-            (unordered_list2
-                (unordered_list2_prefix)
-                (todo_item_pending)
-                (paragraph (paragraph_segment))
-                (unordered_list3
-                    (unordered_list3_prefix)
-                    (todo_item_pending)
-                    (paragraph (paragraph_segment))
-                    (unordered_list4
-                        (unordered_list4_prefix)
-                        (todo_item_pending)
-                        (paragraph (paragraph_segment))
-                        (unordered_list5
-                            (unordered_list5_prefix)
-                            (todo_item_pending)
-                            (paragraph (paragraph_segment))
-                            (unordered_list6
-                                (unordered_list6_prefix)
-                                (todo_item_pending)
-                                (paragraph (paragraph_segment))
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-============
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (todo_item_pending)
+      (paragraph
+        (paragraph_segment))
+      (unordered_list2
+        (unordered_list2_prefix)
+        (todo_item_pending)
+        (paragraph
+          (paragraph_segment))
+        (unordered_list3
+          (unordered_list3_prefix)
+          (todo_item_pending)
+          (paragraph
+            (paragraph_segment))
+          (unordered_list4
+            (unordered_list4_prefix)
+            (todo_item_pending)
+            (paragraph
+              (paragraph_segment))
+            (unordered_list5
+              (unordered_list5_prefix)
+              (todo_item_pending)
+              (paragraph
+                (paragraph_segment))
+              (unordered_list6
+                (unordered_list6_prefix)
+                (todo_item_pending)
+                (paragraph
+                  (paragraph_segment))))))))))
+
+================================================================================
 On Hold Todo
-============
+================================================================================
 - |=| On hold task level 1
 -- |=| On hold task level 2
 --- |=| On hold task level 3
@@ -146,45 +143,44 @@ On Hold Todo
 ----- |=| On hold task level 5
 ------ |=| On hold task level 6
 
----
-(document
-    (generic_list
-        (unordered_list1
-            (unordered_list1_prefix)
-            (todo_item_on_hold)
-            (paragraph (paragraph_segment))
-            (unordered_list2
-                (unordered_list2_prefix)
-                (todo_item_on_hold)
-                (paragraph (paragraph_segment))
-                (unordered_list3
-                    (unordered_list3_prefix)
-                    (todo_item_on_hold)
-                    (paragraph (paragraph_segment))
-                    (unordered_list4
-                        (unordered_list4_prefix)
-                        (todo_item_on_hold)
-                        (paragraph (paragraph_segment))
-                        (unordered_list5
-                            (unordered_list5_prefix)
-                            (todo_item_on_hold)
-                            (paragraph (paragraph_segment))
-                            (unordered_list6
-                                (unordered_list6_prefix)
-                                (todo_item_on_hold)
-                                (paragraph (paragraph_segment))
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-==============
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (todo_item_on_hold)
+      (paragraph
+        (paragraph_segment))
+      (unordered_list2
+        (unordered_list2_prefix)
+        (todo_item_on_hold)
+        (paragraph
+          (paragraph_segment))
+        (unordered_list3
+          (unordered_list3_prefix)
+          (todo_item_on_hold)
+          (paragraph
+            (paragraph_segment))
+          (unordered_list4
+            (unordered_list4_prefix)
+            (todo_item_on_hold)
+            (paragraph
+              (paragraph_segment))
+            (unordered_list5
+              (unordered_list5_prefix)
+              (todo_item_on_hold)
+              (paragraph
+                (paragraph_segment))
+              (unordered_list6
+                (unordered_list6_prefix)
+                (todo_item_on_hold)
+                (paragraph
+                  (paragraph_segment))))))))))
+
+================================================================================
 Cancelled Todo
-==============
+================================================================================
 - |_| Cancelled task level 1
 -- |_| Cancelled task level 2
 --- |_| Cancelled task level 3
@@ -192,45 +188,44 @@ Cancelled Todo
 ----- |_| Cancelled task level 5
 ------ |_| Cancelled task level 6
 
----
-(document
-    (generic_list
-        (unordered_list1
-            (unordered_list1_prefix)
-            (todo_item_cancelled)
-            (paragraph (paragraph_segment))
-            (unordered_list2
-                (unordered_list2_prefix)
-                (todo_item_cancelled)
-                (paragraph (paragraph_segment))
-                (unordered_list3
-                    (unordered_list3_prefix)
-                    (todo_item_cancelled)
-                    (paragraph (paragraph_segment))
-                    (unordered_list4
-                        (unordered_list4_prefix)
-                        (todo_item_cancelled)
-                        (paragraph (paragraph_segment))
-                        (unordered_list5
-                            (unordered_list5_prefix)
-                            (todo_item_cancelled)
-                            (paragraph (paragraph_segment))
-                            (unordered_list6
-                                (unordered_list6_prefix)
-                                (todo_item_cancelled)
-                                (paragraph (paragraph_segment))
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-===========
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (todo_item_cancelled)
+      (paragraph
+        (paragraph_segment))
+      (unordered_list2
+        (unordered_list2_prefix)
+        (todo_item_cancelled)
+        (paragraph
+          (paragraph_segment))
+        (unordered_list3
+          (unordered_list3_prefix)
+          (todo_item_cancelled)
+          (paragraph
+            (paragraph_segment))
+          (unordered_list4
+            (unordered_list4_prefix)
+            (todo_item_cancelled)
+            (paragraph
+              (paragraph_segment))
+            (unordered_list5
+              (unordered_list5_prefix)
+              (todo_item_cancelled)
+              (paragraph
+                (paragraph_segment))
+              (unordered_list6
+                (unordered_list6_prefix)
+                (todo_item_cancelled)
+                (paragraph
+                  (paragraph_segment))))))))))
+
+================================================================================
 Urgent Todo
-===========
+================================================================================
 - |!| Urgent task level 1
 -- |!| Urgent task level 2
 --- |!| Urgent task level 3
@@ -238,45 +233,44 @@ Urgent Todo
 ----- |!| Urgent task level 5
 ------ |!| Urgent task level 6
 
----
-(document
-    (generic_list
-        (unordered_list1
-            (unordered_list1_prefix)
-            (todo_item_urgent)
-            (paragraph (paragraph_segment))
-            (unordered_list2
-                (unordered_list2_prefix)
-                (todo_item_urgent)
-                (paragraph (paragraph_segment))
-                (unordered_list3
-                    (unordered_list3_prefix)
-                    (todo_item_urgent)
-                    (paragraph (paragraph_segment))
-                    (unordered_list4
-                        (unordered_list4_prefix)
-                        (todo_item_urgent)
-                        (paragraph (paragraph_segment))
-                        (unordered_list5
-                            (unordered_list5_prefix)
-                            (todo_item_urgent)
-                            (paragraph (paragraph_segment))
-                            (unordered_list6
-                                (unordered_list6_prefix)
-                                (todo_item_urgent)
-                                (paragraph (paragraph_segment))
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-==============
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (todo_item_urgent)
+      (paragraph
+        (paragraph_segment))
+      (unordered_list2
+        (unordered_list2_prefix)
+        (todo_item_urgent)
+        (paragraph
+          (paragraph_segment))
+        (unordered_list3
+          (unordered_list3_prefix)
+          (todo_item_urgent)
+          (paragraph
+            (paragraph_segment))
+          (unordered_list4
+            (unordered_list4_prefix)
+            (todo_item_urgent)
+            (paragraph
+              (paragraph_segment))
+            (unordered_list5
+              (unordered_list5_prefix)
+              (todo_item_urgent)
+              (paragraph
+                (paragraph_segment))
+              (unordered_list6
+                (unordered_list6_prefix)
+                (todo_item_urgent)
+                (paragraph
+                  (paragraph_segment))))))))))
+
+================================================================================
 Recurring Todo
-==============
+================================================================================
 - |+| Recurring task level 1
 -- |+| Recurring task level 2
 --- |+| Recurring task level 3
@@ -284,45 +278,44 @@ Recurring Todo
 ----- |+| Recurring task level 5
 ------ |+| Recurring task level 6
 
----
-(document
-    (generic_list
-        (unordered_list1
-            (unordered_list1_prefix)
-            (todo_item_recurring)
-            (paragraph (paragraph_segment))
-            (unordered_list2
-                (unordered_list2_prefix)
-                (todo_item_recurring)
-                (paragraph (paragraph_segment))
-                (unordered_list3
-                    (unordered_list3_prefix)
-                    (todo_item_recurring)
-                    (paragraph (paragraph_segment))
-                    (unordered_list4
-                        (unordered_list4_prefix)
-                        (todo_item_recurring)
-                        (paragraph (paragraph_segment))
-                        (unordered_list5
-                            (unordered_list5_prefix)
-                            (todo_item_recurring)
-                            (paragraph (paragraph_segment))
-                            (unordered_list6
-                                (unordered_list6_prefix)
-                                (todo_item_recurring)
-                                (paragraph (paragraph_segment))
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-==============
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (todo_item_recurring)
+      (paragraph
+        (paragraph_segment))
+      (unordered_list2
+        (unordered_list2_prefix)
+        (todo_item_recurring)
+        (paragraph
+          (paragraph_segment))
+        (unordered_list3
+          (unordered_list3_prefix)
+          (todo_item_recurring)
+          (paragraph
+            (paragraph_segment))
+          (unordered_list4
+            (unordered_list4_prefix)
+            (todo_item_recurring)
+            (paragraph
+              (paragraph_segment))
+            (unordered_list5
+              (unordered_list5_prefix)
+              (todo_item_recurring)
+              (paragraph
+                (paragraph_segment))
+              (unordered_list6
+                (unordered_list6_prefix)
+                (todo_item_recurring)
+                (paragraph
+                  (paragraph_segment))))))))))
+
+================================================================================
 Uncertain Todo
-==============
+================================================================================
 - |?| Uncertain task level 1
 -- |?| Uncertain task level 2
 --- |?| Uncertain task level 3
@@ -330,38 +323,37 @@ Uncertain Todo
 ----- |?| Uncertain task level 5
 ------ |?| Uncertain task level 6
 
----
+--------------------------------------------------------------------------------
+
 (document
-    (generic_list
-        (unordered_list1
-            (unordered_list1_prefix)
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (todo_item_uncertain)
+      (paragraph
+        (paragraph_segment))
+      (unordered_list2
+        (unordered_list2_prefix)
+        (todo_item_uncertain)
+        (paragraph
+          (paragraph_segment))
+        (unordered_list3
+          (unordered_list3_prefix)
+          (todo_item_uncertain)
+          (paragraph
+            (paragraph_segment))
+          (unordered_list4
+            (unordered_list4_prefix)
             (todo_item_uncertain)
-            (paragraph (paragraph_segment))
-            (unordered_list2
-                (unordered_list2_prefix)
+            (paragraph
+              (paragraph_segment))
+            (unordered_list5
+              (unordered_list5_prefix)
+              (todo_item_uncertain)
+              (paragraph
+                (paragraph_segment))
+              (unordered_list6
+                (unordered_list6_prefix)
                 (todo_item_uncertain)
-                (paragraph (paragraph_segment))
-                (unordered_list3
-                    (unordered_list3_prefix)
-                    (todo_item_uncertain)
-                    (paragraph (paragraph_segment))
-                    (unordered_list4
-                        (unordered_list4_prefix)
-                        (todo_item_uncertain)
-                        (paragraph (paragraph_segment))
-                        (unordered_list5
-                            (unordered_list5_prefix)
-                            (todo_item_uncertain)
-                            (paragraph (paragraph_segment))
-                            (unordered_list6
-                                (unordered_list6_prefix)
-                                (todo_item_uncertain)
-                                (paragraph (paragraph_segment))
-                            )
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
+                (paragraph
+                  (paragraph_segment))))))))))
