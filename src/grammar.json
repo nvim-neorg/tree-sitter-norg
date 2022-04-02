@@ -170,6 +170,15 @@
               },
               "named": false,
               "value": "_line_break"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_conflict_open"
+              },
+              "named": false,
+              "value": "_word"
             }
           ]
         }

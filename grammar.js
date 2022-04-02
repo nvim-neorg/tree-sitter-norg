@@ -241,6 +241,7 @@ module.exports = grammar({
                 choice(
                     $._paragraph_element,
                     alias($.line_break, "_line_break"),
+                    alias($._conflict_open, "_word"),
                 ),
             ),
         ),
