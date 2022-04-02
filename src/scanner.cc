@@ -91,6 +91,7 @@ enum TokenType : char
     LINK_TARGET_URL,
     LINK_TARGET_GENERIC,
     LINK_TARGET_EXTERNAL_FILE,
+    LINK_TARGET_TIMESTAMP,
     LINK_TARGET_MARKER,
     LINK_TARGET_DEFINITION,
     LINK_TARGET_FOOTNOTE,
@@ -842,11 +843,17 @@ class Scanner
             case '#':
                 lexer->result_symbol = m_LastToken = LINK_TARGET_GENERIC;
                 break;
-            case '@':
+            case '/':
                 if (m_LastToken == LINK_FILE_END)
                     return false;
 
                 lexer->result_symbol = m_LastToken = LINK_TARGET_EXTERNAL_FILE;
+                break;
+            case '@':
+                if (m_LastToken == LINK_FILE_END)
+                    return false;
+
+                lexer->result_symbol = m_LastToken = LINK_TARGET_TIMESTAMP;
                 break;
             case '%':
                 lexer->result_symbol = m_LastToken = LINK_TARGET_MARKER;

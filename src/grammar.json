@@ -507,6 +507,15 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
+            "name": "link_target_timestamp"
+          },
+          "named": false,
+          "value": "_word"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
             "name": "link_target_marker"
           },
           "named": false,
@@ -1466,6 +1475,10 @@
               {
                 "type": "SYMBOL",
                 "name": "link_target_external_file"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "link_target_timestamp"
               }
             ]
           }
@@ -5835,6 +5848,10 @@
     {
       "type": "SYMBOL",
       "name": "link_target_external_file"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_target_timestamp"
     },
     {
       "type": "SYMBOL",

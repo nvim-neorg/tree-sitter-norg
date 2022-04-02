@@ -118,6 +118,7 @@ module.exports = grammar({
         $.link_target_url,
         $.link_target_generic,
         $.link_target_external_file,
+        $.link_target_timestamp,
         $.link_target_marker,
         $.link_target_definition,
         $.link_target_footnote,
@@ -302,6 +303,7 @@ module.exports = grammar({
             alias($.link_target_url, "_word"),
             alias($.link_target_generic, "_word"),
             alias($.link_target_external_file, "_word"),
+            alias($.link_target_timestamp, "_word"),
             alias($.link_target_marker, "_word"),
             alias($.link_target_definition, "_word"),
             alias($.link_target_footnote, "_word"),
@@ -460,6 +462,7 @@ module.exports = grammar({
                 choice(
                     $.link_target_url,
                     $.link_target_external_file,
+                    $.link_target_timestamp,
                 ),
             ),
             field("text", alias($._link_verbatim_content, $.paragraph)),
