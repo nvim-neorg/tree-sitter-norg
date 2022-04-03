@@ -1309,6 +1309,10 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
           "type": "multi_footnote",
           "named": true
         },
@@ -1365,6 +1369,10 @@
           "named": true
         },
         {
+          "type": "single_definition",
+          "named": true
+        },
+        {
           "type": "single_footnote",
           "named": true
         },
@@ -1416,6 +1424,10 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
           "type": "multi_footnote",
           "named": true
         },
@@ -1461,6 +1473,10 @@
         },
         {
           "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
           "named": true
         },
         {
@@ -1511,6 +1527,10 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
           "type": "multi_footnote",
           "named": true
         },
@@ -1548,6 +1568,10 @@
         },
         {
           "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
           "named": true
         },
         {
@@ -1594,6 +1618,10 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
           "type": "multi_footnote",
           "named": true
         },
@@ -1623,6 +1651,10 @@
         },
         {
           "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
           "named": true
         },
         {
@@ -1665,6 +1697,10 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
           "type": "multi_footnote",
           "named": true
         },
@@ -1686,6 +1722,10 @@
         },
         {
           "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
           "named": true
         },
         {
@@ -1724,6 +1764,10 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
           "type": "multi_footnote",
           "named": true
         },
@@ -1737,6 +1781,10 @@
         },
         {
           "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
           "named": true
         },
         {
@@ -2305,19 +2353,19 @@
             "named": true
           },
           {
-            "type": "generic_list",
-            "named": true
-          },
-          {
             "type": "insertion",
             "named": true
           },
           {
-            "type": "paragraph",
+            "type": "multi_definition",
             "named": true
           },
           {
-            "type": "quote",
+            "type": "multi_footnote",
+            "named": true
+          },
+          {
+            "type": "paragraph",
             "named": true
           },
           {
@@ -2326,6 +2374,14 @@
           },
           {
             "type": "ranged_verbatim_tag",
+            "named": true
+          },
+          {
+            "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
             "named": true
           }
         ]
@@ -2421,19 +2477,19 @@
             "named": true
           },
           {
-            "type": "generic_list",
-            "named": true
-          },
-          {
             "type": "insertion",
             "named": true
           },
           {
-            "type": "paragraph",
+            "type": "multi_definition",
             "named": true
           },
           {
-            "type": "quote",
+            "type": "multi_footnote",
+            "named": true
+          },
+          {
+            "type": "paragraph",
             "named": true
           },
           {
@@ -2442,6 +2498,14 @@
           },
           {
             "type": "ranged_verbatim_tag",
+            "named": true
+          },
+          {
+            "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
             "named": true
           }
         ]

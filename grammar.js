@@ -4,9 +4,8 @@ module.exports = grammar({
     inline: $ => [
         $.attached_modifier,
         $.heading,
-        $.detached_modifier,
-        $.footnote,
-        $.definition,
+        $.nestable_detached_modifier,
+        $.rangeable_detached_modifier,
         $.tag,
         $.any_todo_state,
 
@@ -190,10 +189,10 @@ module.exports = grammar({
                         alias($.paragraph_break, "_paragraph_break"),
                         alias($.line_break, "_line_break"),
                         $.heading,
-                        $.detached_modifier,
-                        $.definition,
-                        $.footnote,
+                        $.nestable_detached_modifier,
+                        $.rangeable_detached_modifier,
                         $.tag,
+                        $.insertion,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
@@ -605,10 +604,10 @@ module.exports = grammar({
                             $.strong_paragraph_delimiter,
                             $.horizontal_line,
                             $.heading,
-                            $.detached_modifier,
-                            $.definition,
-                            $.footnote,
+                            $.nestable_detached_modifier,
+                            $.rangeable_detached_modifier,
                             $.tag,
+                            $.insertion,
                             alias($.paragraph_break, "_paragraph_break"),
                         ),
                     ),
@@ -813,9 +812,9 @@ module.exports = grammar({
                         $.paragraph,
                         repeat1(
                             choice(
-                                $.detached_modifier,
-                                $.definition,
-                                $.footnote,
+                                $.nestable_detached_modifier,
+                                $.rangeable_detached_modifier,
+                                $.insertion,
                                 $.ranged_tag,
                                 $.ranged_verbatim_tag,
                                 $.marker,
@@ -958,27 +957,19 @@ module.exports = grammar({
             $.heading6,
         ),
 
-        // definitions are in a separate group and not part of detached_modifier
-        // because this allows us to nest the detached_modifier group within
-        // multi-paragraph definitions (but not nest definitions themselves)
-        definition: $ =>
-        choice(
-            $.single_definition,
-            $.multi_definition,
-        ),
-
-        footnote: $ =>
-        choice(
-            $.single_footnote,
-            $.multi_footnote,
-        ),
-
         // A list of detached modifiers (excluding headings and definitons)
-        detached_modifier: $ =>
+        nestable_detached_modifier: $ =>
         choice(
             $.quote,
             $.generic_list,
-            $.insertion,
+        ),
+
+        rangeable_detached_modifier: $ =>
+        choice(
+            $.single_definition,
+            $.multi_definition,
+            $.single_footnote,
+            $.multi_footnote,
         ),
 
         attached_modifier: $ =>
@@ -1064,10 +1055,10 @@ function gen_heading($, level) {
                         $.paragraph,
 
                         alias($.paragraph_break, "_paragraph_break"),
-                        $.detached_modifier,
-                        $.definition,
-                        $.footnote,
+                        $.nestable_detached_modifier,
+                        $.rangeable_detached_modifier,
                         $.tag,
+                        $.insertion,
                         $.horizontal_line,
 
                         ...lower_level_heading,
@@ -1233,8 +1224,9 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                         $.paragraph,
                         prec(1, alias($.line_break, "_line_break")),
                         alias($.paragraph_break, "_paragraph_break"),
-                        $.detached_modifier,
+                        $.rangeable_detached_modifier,
                         $.tag,
+                        $.insertion,
                     ),
                 ),
             ),
@@ -1257,14 +1249,14 @@ function gen_indent_segment_contents($, level) {
     if (level < 6) {
         return prec(1, choice(
             $.insertion,
-            $.footnote,
+            $.rangeable_detached_modifier,
             $.tag,
             ...numbered_items.map(item => $[item + (level + 1)]),
         ))
     } else {
         return prec(1, choice(
             $.insertion,
-            $.footnote,
+            $.rangeable_detached_modifier,
             $.tag
         ))
     }
