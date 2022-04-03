@@ -5081,62 +5081,43 @@
       ]
     },
     "tag_param": {
-      "type": "CHOICE",
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\\"]\\S*"
+      }
+    },
+    "_quoted_tag_contents": {
+      "type": "SEQ",
       "members": [
         {
           "type": "IMMEDIATE_TOKEN",
           "content": {
             "type": "PATTERN",
-            "value": "[^\\\"]\\S*"
+            "value": "[^\\n\\r\\\"\\s]+"
           }
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": "\""
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[\\t\\v ]+"
+                }
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^\\n\\r\\\"\\s]+"
+                }
               }
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "[^\\n\\r\\\"\\s]+"
-              }
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "IMMEDIATE_TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[\\t\\v ]+"
-                    }
-                  },
-                  {
-                    "type": "IMMEDIATE_TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[^\\n\\r\\\"\\s]+"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": "\""
-              }
-            }
-          ]
+            ]
+          }
         }
       ]
     },
@@ -5170,8 +5151,51 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "tag_param"
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "tag_param"
+                        },
+                        {
+                          "type": "SEQ",
+                          "members": [
+                            {
+                              "type": "ALIAS",
+                              "content": {
+                                "type": "IMMEDIATE_TOKEN",
+                                "content": {
+                                  "type": "STRING",
+                                  "value": "\""
+                                }
+                              },
+                              "named": false,
+                              "value": "_tag_param_delimiter"
+                            },
+                            {
+                              "type": "ALIAS",
+                              "content": {
+                                "type": "SYMBOL",
+                                "name": "_quoted_tag_contents"
+                              },
+                              "named": true,
+                              "value": "tag_param"
+                            },
+                            {
+                              "type": "ALIAS",
+                              "content": {
+                                "type": "IMMEDIATE_TOKEN",
+                                "content": {
+                                  "type": "STRING",
+                                  "value": "\""
+                                }
+                              },
+                              "named": false,
+                              "value": "_tag_param_delimiter"
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "type": "BLANK"

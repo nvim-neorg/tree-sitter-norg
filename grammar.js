@@ -885,22 +885,17 @@ module.exports = grammar({
             )
         ),
 
-        // TODO(vhyrro): Perhaps exclude the `""` chars from the `tag_param` node
-        tag_param: _ => choice(
-            token.immediate(/[^\"]\S*/),
-            seq(
-                token.immediate('"'),
-                token.immediate(/[^\n\r\"\s]+/),
-                repeat(
-                    seq(
-                        token.immediate(/[\t\v ]+/),
-                        token.immediate(/[^\n\r\"\s]+/),
-                    ),
+        tag_param: _ => token.immediate(/[^\"]\S*/),
+
+        _quoted_tag_contents: _ => seq(
+            token.immediate(/[^\n\r\"\s]+/),
+            repeat(
+                seq(
+                    token.immediate(/[\t\v ]+/),
+                    token.immediate(/[^\n\r\"\s]+/),
                 ),
-                token.immediate('"'),
             ),
         ),
-
 
         tag_parameters: $ =>
         seq(
@@ -916,7 +911,14 @@ module.exports = grammar({
                     field(
                         "parameter",
                         optional(
-                            $.tag_param,
+                            choice(
+                                $.tag_param,
+                                seq(
+                                    alias(token.immediate('"'), "_tag_param_delimiter"),
+                                    alias($._quoted_tag_contents, $.tag_param),
+                                    alias(token.immediate('"'), "_tag_param_delimiter"),
+                                ),
+                            ),
                         ),
                     ),
                 )

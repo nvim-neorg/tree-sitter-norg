@@ -4407,6 +4407,10 @@
         "required": true,
         "types": [
           {
+            "type": "_tag_param_delimiter",
+            "named": false
+          },
+          {
             "type": "tag_param",
             "named": true
           }
@@ -5040,10 +5044,6 @@
     "named": false
   },
   {
-    "type": "\"",
-    "named": false
-  },
-  {
     "type": "_begin",
     "named": false
   },
@@ -5085,6 +5085,10 @@
   },
   {
     "type": "_space",
+    "named": false
+  },
+  {
+    "type": "_tag_param_delimiter",
     "named": false
   },
   {
