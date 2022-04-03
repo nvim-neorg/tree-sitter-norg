@@ -530,6 +530,8 @@ class Scanner
 
             lexer->mark_end(lexer);
 
+            auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+
             switch (lexer->lookahead)
             {
             // We're dealing with an undone item (| |)
@@ -565,6 +567,12 @@ class Scanner
                 lexer->result_symbol = m_LastToken = TODO_ITEM_UNCERTAIN;
                 break;
             default:
+                if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+                {
+                    m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                    lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
+                    return m_LastToken;
+                }
                 lexer->mark_end(lexer);
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = WORD;
@@ -581,7 +589,15 @@ class Scanner
                 return true;
             }
             else
+            {
+                if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+                {
+                    m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                    lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
+                    return m_LastToken;
+                }
                 return false;
+            }
         }
         else if (lexer->lookahead == '<')
         {

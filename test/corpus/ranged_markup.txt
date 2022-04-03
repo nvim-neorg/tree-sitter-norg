@@ -1266,3 +1266,38 @@ No nested markup inside ranged variable
     (paragraph_segment
       (ranged_attached_modifier
         (variable)))))
+
+================================================================================
+Do not confuse with ToDo detached mod extension
+================================================================================
+- |*bold*|
+* |_underline_|
+> |-struck through-|
+** |! spoiler !|
+--------------------------------------------------------------------------------
+
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment
+          (ranged_attached_modifier
+            (bold))))))
+  (heading1
+    (heading1_prefix)
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline)))
+    (quote
+      (quote1
+        (quote1_prefix)
+        (paragraph
+          (paragraph_segment
+            (ranged_attached_modifier
+              (strikethrough))))))
+    (heading2
+      (heading2_prefix)
+      (paragraph_segment
+        (ranged_attached_modifier
+          (spoiler))))))
