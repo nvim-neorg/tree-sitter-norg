@@ -31,6 +31,18 @@ module.exports = grammar({
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
 
+        [$._ranged_bold, $._conflict_open],
+        [$._ranged_italic, $._conflict_open],
+        [$._ranged_strikethrough, $._conflict_open],
+        [$._ranged_underline, $._conflict_open],
+        [$._ranged_spoiler, $._conflict_open],
+        [$._ranged_verbatim, $._conflict_open],
+        [$._ranged_superscript, $._conflict_open],
+        [$._ranged_subscript, $._conflict_open],
+        [$._ranged_inline_comment, $._conflict_open],
+        [$._ranged_inline_math, $._conflict_open],
+        [$._ranged_variable, $._conflict_open],
+
         [$._paragraph_element],
 
         [$.indent_segment1],
@@ -171,6 +183,9 @@ module.exports = grammar({
         $.variable_open,
         $.variable_close,
 
+        $.ranged_modifier_open,
+        $.ranged_modifier_close,
+
         $.inline_link_target_open,
         $.inline_link_target_close,
 
@@ -222,12 +237,16 @@ module.exports = grammar({
             ),
         ),
 
-        // A paragraph segment can contain any paragraph element.
+        // A paragraph segment can contain any paragraph element or a
+        // `ranged_attached_modifier`. Note, that this object can contain
+        // arbitrary whitespace resulting in what may look like multiple
+        // paragraphs being joined into one (inside the ranged markup).
         paragraph_segment: $ =>
         prec.right(0,
             repeat1(
                 choice(
                     $._paragraph_element,
+                    $.ranged_attached_modifier,
                     alias($._conflict_open, "_word"),
                 ),
             )
@@ -236,6 +255,7 @@ module.exports = grammar({
         // The attached modifiers cannot contain a `paragraph_segment` directly,
         // because they:
         //   - require a higher precedence of their internals
+        //   -- canNOT contain a `ranged_attached_modifier` element
         _attached_modifier_content: $ =>
         prec.right(1,
             repeat1(
@@ -247,14 +267,43 @@ module.exports = grammar({
             ),
         ),
 
+        // A ranged attached modifier may even contain a `pargraph_break`
+        // compared to a normal `attached_modifier`.
+        _ranged_attached_modifier_content: $ =>
+        prec.right(1,
+            repeat1(
+                choice(
+                    $._paragraph_element,
+                    $.ranged_attached_modifier,
+                    alias($.line_break, "_line_break"),
+                    alias($.paragraph_break, "_paragraph_break"),
+                    alias($._conflict_open, "_word"),
+                ),
+            ),
+        ),
+
         // Same as the non-verbatim modifier contents but using verbatim
-        // elements instead.
+        // elements instead. It cannot contain `_conflict_open` because all of
+        // them are aliased to become verbatim.
         _verbatim_modifier_content: $ =>
         prec.right(1,
             repeat1(
                 choice(
                     $._verbatim_paragraph_element,
                     alias($.line_break, "_line_break"),
+                ),
+            ),
+        ),
+
+        // The ranged version may again contain a `paragraph_break` compared to
+        // the normal version above.
+        _ranged_verbatim_modifier_content: $ =>
+        prec.right(1,
+            repeat1(
+                choice(
+                    $._verbatim_paragraph_element,
+                    alias($.line_break, "_line_break"),
+                    alias($.paragraph_break, "_paragraph_break"),
                 ),
             ),
         ),
@@ -289,6 +338,8 @@ module.exports = grammar({
             alias($.escape_sequence_prefix, "_word"),
             alias($.any_char, "_word"),
             alias($.link_modifier, "_word"),
+            alias($.ranged_modifier_open, "_word"),
+            alias($.ranged_modifier_close, "_word"),
             prec.dynamic(5, alias($._conflict_open, "_word")),
             prec.dynamic(5, alias($._conflict_close, "_word")),
             alias($.inline_link_target_open, "_word"),
@@ -316,17 +367,29 @@ module.exports = grammar({
         ),
 
         // ---- ATTACHED MODIFIERS ----
-        bold: $ => gen_attached_modifier($, "bold", false),
-        italic: $ => gen_attached_modifier($, "italic", false),
-        strikethrough: $ => gen_attached_modifier($, "strikethrough", false),
-        underline: $ => gen_attached_modifier($, "underline", false),
-        spoiler: $ => gen_attached_modifier($, "spoiler", false),
-        superscript: $ => gen_attached_modifier($, "superscript", false),
-        subscript: $ => gen_attached_modifier($, "subscript", false),
-        inline_comment: $ => gen_attached_modifier($, "inline_comment", false),
-        verbatim: $ => gen_attached_modifier($, "verbatim", true),
-        inline_math: $ => gen_attached_modifier($, "inline_math", true),
-        variable: $ => gen_attached_modifier($, "variable", true),
+        bold: $ => gen_attached_modifier($, "bold", false, false),
+        italic: $ => gen_attached_modifier($, "italic", false, false),
+        strikethrough: $ => gen_attached_modifier($, "strikethrough", false, false),
+        underline: $ => gen_attached_modifier($, "underline", false, false),
+        spoiler: $ => gen_attached_modifier($, "spoiler", false, false),
+        superscript: $ => gen_attached_modifier($, "superscript", false, false),
+        subscript: $ => gen_attached_modifier($, "subscript", false, false),
+        inline_comment: $ => gen_attached_modifier($, "inline_comment", false, false),
+        verbatim: $ => gen_attached_modifier($, "verbatim", true, false),
+        inline_math: $ => gen_attached_modifier($, "inline_math", true, false),
+        variable: $ => gen_attached_modifier($, "variable", true, false),
+
+        _ranged_bold: $ => gen_attached_modifier($, "bold", false, true),
+        _ranged_italic: $ => gen_attached_modifier($, "italic", false, true),
+        _ranged_strikethrough: $ => gen_attached_modifier($, "strikethrough", false, true),
+        _ranged_underline: $ => gen_attached_modifier($, "underline", false, true),
+        _ranged_spoiler: $ => gen_attached_modifier($, "spoiler", false, true),
+        _ranged_superscript: $ => gen_attached_modifier($, "superscript", false, true),
+        _ranged_subscript: $ => gen_attached_modifier($, "subscript", false, true),
+        _ranged_inline_comment: $ => gen_attached_modifier($, "inline_comment", false, true),
+        _ranged_verbatim: $ => gen_attached_modifier($, "verbatim", true, true),
+        _ranged_inline_math: $ => gen_attached_modifier($, "inline_math", true, true),
+        _ranged_variable: $ => gen_attached_modifier($, "variable", true, true),
 
         _conflict_open: $ =>
         choice(
@@ -969,6 +1032,28 @@ module.exports = grammar({
             $.inline_math,
             $.variable,
         ),
+
+        _ranged_attached_modifier: $ =>
+        choice(
+            alias($._ranged_bold, $.bold),
+            alias($._ranged_italic, $.italic),
+            alias($._ranged_strikethrough, $.strikethrough),
+            alias($._ranged_underline, $.underline),
+            alias($._ranged_spoiler, $.spoiler),
+            alias($._ranged_superscript, $.superscript),
+            alias($._ranged_subscript, $.subscript),
+            alias($._ranged_verbatim, $.verbatim),
+            alias($._ranged_inline_comment, $.inline_comment),
+            alias($._ranged_inline_math, $.inline_math),
+            alias($._ranged_variable, $.variable),
+        ),
+
+        ranged_attached_modifier: $ =>
+        seq(
+            alias($.ranged_modifier_open, "_open"),
+            $._ranged_attached_modifier,
+            alias($.ranged_modifier_close, "_close"),
+        ),
     }
 });
 
@@ -1109,11 +1194,18 @@ function gen_quote($, level) {
     );
 }
 
-function gen_attached_modifier($, kind, verbatim) {
+function gen_attached_modifier($, kind, verbatim, ranged) {
     let content_rule = $._attached_modifier_content;
     let precedence = 3;
     if (verbatim) {
         content_rule = $._verbatim_modifier_content;
+        precedence = 5;
+        if (ranged) {
+            content_rule = $._ranged_verbatim_modifier_content;
+            precedence = 6;
+        }
+    } else if (ranged) {
+        content_rule = $._ranged_attached_modifier_content;
         precedence = 4;
     }
 

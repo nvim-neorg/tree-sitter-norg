@@ -1,0 +1,1334 @@
+================================================================================
+Ranged Bold
+================================================================================
+Here is some |*ranged bold*| markup.
+Here is some |* ranged bold*| markup.
+Here is some |*ranged bold *| markup.
+Here is some |* ranged bold *| markup.
+Here is some |* ranged
+bold *| markup.
+Here is some |* ranged
+
+bold *| markup.
+|* Extend as *far* as possible *|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold)))))
+
+================================================================================
+Ranged Italic
+================================================================================
+Here is some |/ranged italic/| markup.
+Here is some |/ ranged italic/| markup.
+Here is some |/ranged italic /| markup.
+Here is some |/ ranged italic /| markup.
+Here is some |/ ranged
+italic /| markup.
+Here is some |/ ranged
+
+italic /| markup.
+|/ Extend as /far/ as possible /|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic)))))
+
+================================================================================
+Ranged Strikethrough
+================================================================================
+Here is some |-ranged strikethrough-| markup.
+Here is some |- ranged strikethrough-| markup.
+Here is some |-ranged strikethrough -| markup.
+Here is some |- ranged strikethrough -| markup.
+Here is some |- ranged
+strikethrough -| markup.
+Here is some |- ranged
+
+strikethrough -| markup.
+|- Extend as -far- as possible -|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough)))))
+
+================================================================================
+Ranged Underline
+================================================================================
+Here is some |_ranged underline_| markup.
+Here is some |_ ranged underline_| markup.
+Here is some |_ranged underline _| markup.
+Here is some |_ ranged underline _| markup.
+Here is some |_ ranged
+underline _| markup.
+Here is some |_ ranged
+
+underline _| markup.
+|_ Extend as _far_ as possible _|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline)))))
+
+================================================================================
+Ranged Spoiler
+================================================================================
+Here is some |!ranged spoiler!| markup.
+Here is some |! ranged spoiler!| markup.
+Here is some |!ranged spoiler !| markup.
+Here is some |! ranged spoiler !| markup.
+Here is some |! ranged
+spoiler !| markup.
+Here is some |! ranged
+
+spoiler !| markup.
+|! Extend as !far! as possible !|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler)))))
+
+================================================================================
+Ranged Superscript
+================================================================================
+Here is some |^ranged superscript^| markup.
+Here is some |^ ranged superscript^| markup.
+Here is some |^ranged superscript ^| markup.
+Here is some |^ ranged superscript ^| markup.
+Here is some |^ ranged
+superscript ^| markup.
+Here is some |^ ranged
+
+superscript ^| markup.
+|^ Extend as ^far^ as possible ^|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript)))))
+
+================================================================================
+Ranged Subscript
+================================================================================
+Here is some |,ranged subscript,| markup.
+Here is some |, ranged subscript,| markup.
+Here is some |,ranged subscript ,| markup.
+Here is some |, ranged subscript ,| markup.
+Here is some |, ranged
+subscript ,| markup.
+Here is some |, ranged
+
+subscript ,| markup.
+|, Extend as ,far, as possible ,|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript)))))
+
+================================================================================
+Ranged Verbatim
+================================================================================
+Here is some |`ranged verbatim`| markup.
+Here is some |` ranged verbatim`| markup.
+Here is some |`ranged verbatim `| markup.
+Here is some |` ranged verbatim `| markup.
+Here is some |` ranged
+verbatim `| markup.
+Here is some |` ranged
+
+verbatim `| markup.
+|` Extend as `far` as possible `|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))))
+
+================================================================================
+Ranged Inline Comment
+================================================================================
+Here is some |%ranged inline_comment%| markup.
+Here is some |% ranged inline_comment%| markup.
+Here is some |%ranged inline_comment %| markup.
+Here is some |% ranged inline_comment %| markup.
+Here is some |% ranged
+inline_comment %| markup.
+Here is some |% ranged
+
+inline_comment %| markup.
+|% Extend as %far% as possible %|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment)))))
+
+================================================================================
+Ranged Inline Math
+================================================================================
+Here is some |$ranged inline_math$| markup.
+Here is some |$ ranged inline_math$| markup.
+Here is some |$ranged inline_math $| markup.
+Here is some |$ ranged inline_math $| markup.
+Here is some |$ ranged
+inline_math $| markup.
+Here is some |$ ranged
+
+inline_math $| markup.
+|$ Extend as $far$ as possible $|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))))
+
+================================================================================
+Ranged Variable
+================================================================================
+Here is some |=ranged variable=| markup.
+Here is some |= ranged variable=| markup.
+Here is some |=ranged variable =| markup.
+Here is some |= ranged variable =| markup.
+Here is some |= ranged
+variable =| markup.
+Here is some |= ranged
+
+variable =| markup.
+|= Extend as =far= as possible =|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))))
+
+================================================================================
+Nesting into Ranged Bold
+================================================================================
+|*Bold and /italic/*|
+|*Bold and -struck through-*|
+|*Bold and _underlined_*|
+|*Bold and !spoiler!*|
+|*Bold and ^superscript^*|
+|*Bold and ,subscript,*|
+|*Bold and |/italic/|*|
+|*Bold and |-struck through-|*|
+|*Bold and |_underlined_|*|
+|*Bold and |!spoiler!|*|
+|*Bold and |^superscript^|*|
+|*Bold and |,subscript,|*|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (italic))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (strikethrough))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (underline))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (spoiler))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (superscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (subscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (ranged_attached_modifier
+            (italic)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (ranged_attached_modifier
+            (strikethrough)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (ranged_attached_modifier
+            (underline)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (ranged_attached_modifier
+            (spoiler)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (ranged_attached_modifier
+            (superscript)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (ranged_attached_modifier
+            (subscript)))))))
+
+================================================================================
+Nesting into Ranged Italic
+================================================================================
+|/Italic and *bold*/|
+|/Italic and -struck through-/|
+|/Italic and _underlined_/|
+|/Italic and !spoiler!/|
+|/Italic and ^superscript^/|
+|/Italic and ,subscript,/|
+|/Italic and |*bold*|/|
+|/Italic and |-struck through-|/|
+|/Italic and |_underlined_|/|
+|/Italic and |!spoiler!|/|
+|/Italic and |^superscript^|/|
+|/Italic and |,subscript,|/|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (bold))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (strikethrough))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (underline))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (spoiler))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (superscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (subscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (ranged_attached_modifier
+            (bold)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (ranged_attached_modifier
+            (strikethrough)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (ranged_attached_modifier
+            (underline)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (ranged_attached_modifier
+            (spoiler)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (ranged_attached_modifier
+            (superscript)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (italic
+          (ranged_attached_modifier
+            (subscript)))))))
+
+================================================================================
+Nesting into Ranged Strikethrough
+================================================================================
+|-Strikethrough and *bold*-|
+|-Strikethrough and /italic/-|
+|-Strikethrough and _underlined_-|
+|-Strikethrough and !spoiler!-|
+|-Strikethrough and ^superscript^-|
+|-Strikethrough and ,subscript,-|
+|-Strikethrough and |*bold*|-|
+|-Strikethrough and |/italic/|-|
+|-Strikethrough and |_underlined_|-|
+|-Strikethrough and |!spoiler!|-|
+|-Strikethrough and |^superscript^|-|
+|-Strikethrough and |,subscript,|-|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (bold))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (italic))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (underline))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (spoiler))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (superscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (subscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (ranged_attached_modifier
+            (bold)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (ranged_attached_modifier
+            (italic)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (ranged_attached_modifier
+            (underline)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (ranged_attached_modifier
+            (spoiler)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (ranged_attached_modifier
+            (superscript)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (strikethrough
+          (ranged_attached_modifier
+            (subscript)))))))
+
+================================================================================
+Nesting into Ranged Underline
+================================================================================
+|_Underline and *bold*_|
+|_Underline and /italic/_|
+|_Underline and -struck through-_|
+|_Underline and !spoiler!_|
+|_Underline and ^superscript^_|
+|_Underline and ,subscript,_|
+|_Underline and |*bold*|_|
+|_Underline and |/italic/|_|
+|_Underline and |-strikethrough-|_|
+|_Underline and |!spoiler!|_|
+|_Underline and |^superscript^|_|
+|_Underline and |,subscript,|_|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (bold))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (italic))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (strikethrough))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (spoiler))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (superscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (subscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (ranged_attached_modifier
+            (bold)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (ranged_attached_modifier
+            (italic)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (ranged_attached_modifier
+            (strikethrough)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (ranged_attached_modifier
+            (spoiler)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (ranged_attached_modifier
+            (superscript)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (underline
+          (ranged_attached_modifier
+            (subscript)))))))
+
+================================================================================
+Nesting into Ranged Spoiler
+================================================================================
+|!Spoiler and *bold*!|
+|!Spoiler and /italic/!|
+|!Spoiler and -struck through-!|
+|!Spoiler and _underline_!|
+|!Spoiler and ^superscript^!|
+|!Spoiler and ,subscript,!|
+|!Spoiler and |*bold*|!|
+|!Spoiler and |/italic/|!|
+|!Spoiler and |-strikethrough-|!|
+|!Spoiler and |_underline_|!|
+|!Spoiler and |^superscript^|!|
+|!Spoiler and |,subscript,|!|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (bold))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (italic))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (strikethrough))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (underline))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (superscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (subscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (ranged_attached_modifier
+            (bold)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (ranged_attached_modifier
+            (italic)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (ranged_attached_modifier
+            (strikethrough)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (ranged_attached_modifier
+            (underline)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (ranged_attached_modifier
+            (superscript)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (spoiler
+          (ranged_attached_modifier
+            (subscript)))))))
+
+================================================================================
+Nesting into Ranged Superscript
+================================================================================
+|^Superscript and *bold*^|
+|^Superscript and /italic/^|
+|^Superscript and -struck through-^|
+|^Superscript and _underline_^|
+|^Superscript and !spoiler!^|
+|^Superscript and ,subscript,^|
+|^Superscript and |*bold*|^|
+|^Superscript and |/italic/|^|
+|^Superscript and |-strikethrough-|^|
+|^Superscript and |_underline_|^|
+|^Superscript and |!spoiler!|^|
+|^Superscript and |,subscript,|^|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (bold))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (italic))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (strikethrough))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (underline))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (spoiler))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (subscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (ranged_attached_modifier
+            (bold)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (ranged_attached_modifier
+            (italic)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (ranged_attached_modifier
+            (strikethrough)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (ranged_attached_modifier
+            (underline)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (ranged_attached_modifier
+            (spoiler)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (superscript
+          (ranged_attached_modifier
+            (subscript)))))))
+
+================================================================================
+Nesting into Ranged Subscript
+================================================================================
+|,Subscript and *bold*,|
+|,Subscript and /italic/,|
+|,Subscript and -struck through-,|
+|,Subscript and _underline_,|
+|,Subscript and !spoiler!,|
+|,Subscript and ^superscript^,|
+|,Subscript and |*bold*|,|
+|,Subscript and |/italic/|,|
+|,Subscript and |-strikethrough-|,|
+|,Subscript and |_underline_|,|
+|,Subscript and |!spoiler!|,|
+|,Subscript and |^superscript^|,|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (bold))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (italic))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (strikethrough))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (underline))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (spoiler))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (superscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (ranged_attached_modifier
+            (bold)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (ranged_attached_modifier
+            (italic)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (ranged_attached_modifier
+            (strikethrough)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (ranged_attached_modifier
+            (underline)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (ranged_attached_modifier
+            (spoiler)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (subscript
+          (ranged_attached_modifier
+            (superscript)))))))
+
+================================================================================
+Nesting into Inline Comment
+================================================================================
+|%Inline comment and *bold*%|
+|%Inline comment and /italic/%|
+|%Inline comment and -struck through-%|
+|%Inline comment and _underline_%|
+|%Inline comment and !spoiler!%|
+|%Inline comment and ^superscript^%|
+|%Inline comment and ,subscript,%|
+|%Inline comment and |*bold*|%|
+|%Inline comment and |/italic/|%|
+|%Inline comment and |-strikethrough-|%|
+|%Inline comment and |_underline_|%|
+|%Inline comment and |!spoiler!|%|
+|%Inline comment and |^superscript^|%|
+|%Inline comment and |,subscript,|%|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (bold))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (italic))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (strikethrough))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (underline))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (spoiler))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (superscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (subscript))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (ranged_attached_modifier
+            (bold)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (ranged_attached_modifier
+            (italic)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (ranged_attached_modifier
+            (strikethrough)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (ranged_attached_modifier
+            (underline)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (ranged_attached_modifier
+            (spoiler)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (ranged_attached_modifier
+            (superscript)))))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_comment
+          (ranged_attached_modifier
+            (subscript)))))))
+
+================================================================================
+Deep Nesting
+================================================================================
+|*Bold /italic _underlined -struck through-_/*|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (bold
+          (italic
+            (underline
+              (strikethrough))))))))
+
+================================================================================
+No nested markup inside ranged verbatim
+================================================================================
+|`*not bold*`|
+|`/not italic/`|
+|`-not struck through-`|
+|`_not underlined_`|
+|`!not spoiler!`|
+|`^not superscripted^`|
+|`,not subscripted,`|
+|`+not inline comment+`|
+|`$not inline math$`|
+|`=not variable=`|
+|`no:*link modifier*`|
+|`hidden \*escaped char`|
+|`|*not ranged bold*|`|
+|`|/not ranged italic/|`|
+|`|-not ranged struck through-|`|
+|`|_not ranged underlined_|`|
+|`|!not ranged spoiler!|`|
+|`|^not ranged superscripted^|`|
+|`|,not ranged subscripted,|`|
+|`|+not ranged inline comment+|`|
+|`|$not ranged inline math$|`|
+|`|=not ranged variable=|`|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (verbatim)))))
+
+================================================================================
+No nested markup inside ranged inline math
+================================================================================
+|$*not bold*$|
+|$/not italic/$|
+|$-not struck through-$|
+|$_not underlined_$|
+|$!not spoiler!$|
+|$^not superscripted^$|
+|$,not subscripted,$|
+|$`not verbatim`$|
+|$+not inline comment+$|
+|$=not variable=$|
+|$no:*link modifier*$|
+|$hidden \*escaped char$|
+|$|*not ranged bold*|$|
+|$|/not ranged italic/|$|
+|$|-not ranged struck through-|$|
+|$|_not ranged underlined_|$|
+|$|!not ranged spoiler!|$|
+|$|^not ranged superscripted^|$|
+|$|,not ranged subscripted,|$|
+|$|`not ranged verbatim`|$|
+|$|+not ranged inline comment+|$|
+|$|=not ranged variable=|$|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (inline_math)))))
+
+================================================================================
+No nested markup inside ranged variable
+================================================================================
+|=*not bold*=|
+|=/not italic/=|
+|=-not struck through-=|
+|=_not underlined_=|
+|=!no spoiler!=|
+|=^not superscripted^=|
+|=,not subscripted,=|
+|=`no verbatim`=|
+|=+no inline comment+=|
+|=$no inline math$=|
+|=no:*link modifier*=|
+|=hidden \*escaped char=|
+|=|*not ranged bold*|=|
+|=|/not ranged italic/|=|
+|=|-not ranged struck through-|=|
+|=|_not ranged underlined_|=|
+|=|!not ranged spoiler!|=|
+|=|^not ranged superscripted^|=|
+|=|,not ranged subscripted,|=|
+|=|`not ranged verbatim`|=|
+|=|+not ranged inline comment+|=|
+|=|$not ranged inline math$|=|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))
+    (paragraph_segment
+      (ranged_attached_modifier
+        (variable)))))
