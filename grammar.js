@@ -31,17 +31,7 @@ module.exports = grammar({
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
 
-        [$._ranged_bold, $._conflict_open],
-        [$._ranged_italic, $._conflict_open],
-        [$._ranged_strikethrough, $._conflict_open],
-        [$._ranged_underline, $._conflict_open],
-        [$._ranged_spoiler, $._conflict_open],
-        [$._ranged_verbatim, $._conflict_open],
-        [$._ranged_superscript, $._conflict_open],
-        [$._ranged_subscript, $._conflict_open],
-        [$._ranged_inline_comment, $._conflict_open],
-        [$._ranged_inline_math, $._conflict_open],
-        [$._ranged_variable, $._conflict_open],
+        [$.paragraph_segment, $.ranged_attached_modifier],
 
         [$._paragraph_element],
 
@@ -243,6 +233,7 @@ module.exports = grammar({
                 choice(
                     $._paragraph_element,
                     alias($._conflict_open, "_word"),
+                    alias($.ranged_modifier_open, "_word"),
                 ),
             )
         ),
@@ -1019,10 +1010,12 @@ module.exports = grammar({
         ),
 
         ranged_attached_modifier: $ =>
-        seq(
-            alias($.ranged_modifier_open, "_open"),
-            $._ranged_attached_modifier,
-            alias($.ranged_modifier_close, "_close"),
+        prec.dynamic(1,
+            seq(
+                alias($.ranged_modifier_open, "_open"),
+                $._ranged_attached_modifier,
+                alias($.ranged_modifier_close, "_close"),
+            ),
         ),
     }
 });
@@ -1167,14 +1160,14 @@ function gen_quote($, level) {
 function gen_attached_modifier($, kind, verbatim, ranged) {
     let content_rule = $._attached_modifier_content;
     let precedence = 3;
+
     if (verbatim) {
         content_rule = $._verbatim_modifier_content;
         precedence = 5;
-        if (ranged) {
-            precedence = 6;
-        }
-    } else if (ranged) {
-        precedence = 4;
+    }
+
+    if (ranged) {
+        precedence = precedence + 1;
     }
 
     return prec.dynamic(precedence,

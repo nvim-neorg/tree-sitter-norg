@@ -145,6 +145,15 @@
               },
               "named": false,
               "value": "_word"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "ranged_modifier_open"
+              },
+              "named": false,
+              "value": "_word"
             }
           ]
         }
@@ -6002,31 +6011,35 @@
       ]
     },
     "ranged_attached_modifier": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "ranged_modifier_open"
+      "type": "PREC_DYNAMIC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "ranged_modifier_open"
+            },
+            "named": false,
+            "value": "_open"
           },
-          "named": false,
-          "value": "_open"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_ranged_attached_modifier"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
+          {
             "type": "SYMBOL",
-            "name": "ranged_modifier_close"
+            "name": "_ranged_attached_modifier"
           },
-          "named": false,
-          "value": "_close"
-        }
-      ]
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "ranged_modifier_close"
+            },
+            "named": false,
+            "value": "_close"
+          }
+        ]
+      }
     }
   },
   "extras": [
@@ -6081,48 +6094,8 @@
       "_conflict_open"
     ],
     [
-      "_ranged_bold",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_italic",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_strikethrough",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_underline",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_spoiler",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_verbatim",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_superscript",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_subscript",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_inline_comment",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_inline_math",
-      "_conflict_open"
-    ],
-    [
-      "_ranged_variable",
-      "_conflict_open"
+      "paragraph_segment",
+      "ranged_attached_modifier"
     ],
     [
       "_paragraph_element"
