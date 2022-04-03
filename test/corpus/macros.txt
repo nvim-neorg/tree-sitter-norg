@@ -1,0 +1,33 @@
+================================================================================
+Short Macro
+================================================================================
+= MacroName parameter
+Parameters are variables, and as such &parameter&.
+--------------------------------------------------------------------------------
+
+(document
+  (single_macro
+    (single_macro_prefix)
+    (paragraph_segment)
+    (paragraph
+      (paragraph_segment
+        (variable)))))
+
+================================================================================
+Long Macro
+================================================================================
+== OtherMacroName
+Macros can also be long.
+Pretty neat.
+==
+
+--------------------------------------------------------------------------------
+
+(document
+  (multi_macro
+    (multi_macro_prefix)
+    (paragraph_segment)
+    (paragraph
+      (paragraph_segment)
+      (paragraph_segment))
+    (multi_macro_suffix)))

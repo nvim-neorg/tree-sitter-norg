@@ -122,7 +122,7 @@ This sentence contains some $inline math$.
 ================================================================================
 Variable
 ================================================================================
-This sentence contains a =variable= reference.
+This sentence contains a &variable& reference.
 --------------------------------------------------------------------------------
 
 (document
@@ -385,7 +385,7 @@ This is not ^^ superscript.
 This is not ,, subscript.
 This is not %% an inline comment.
 This is not $$ inline math.
-This is not == a variable reference.
+This is not && a variable reference.
 --------------------------------------------------------------------------------
 
 (document
@@ -415,7 +415,7 @@ This is not \^superscript\^
 This is not \,subscript\,
 This is not \%an inline comment\%
 This is not \$inline math\$
-This is not \=variable reference\=
+This is not \&variable reference\&
 This is not \<an inline link target\>
 --------------------------------------------------------------------------------
 
@@ -519,7 +519,7 @@ Intra:,word,:subscript
 Intra:`word`:verbatim
 Intra:%word%:comment
 Intra:$word$:math
-Intra:=word=:variable
+Intra:&word&:variable
 --------------------------------------------------------------------------------
 
 (document
@@ -581,7 +581,7 @@ No nested markup inside verbatim
 `,not subscripted,`
 `%no inline comment%`
 `$no inline math$`
-`=no variable=`
+`&no variable&`
 `<no link target>`
 `no:*link modifier*`
 `hidden \*escaped char`
@@ -628,7 +628,7 @@ Nesting into Inline Comment
 %,not subscripted,%
 %`no verbatim`%
 %$no inline math$%
-%=no variable=%
+%&no variable&%
 --------------------------------------------------------------------------------
 
 (document
@@ -676,7 +676,7 @@ $^not superscripted^$
 $,not subscripted,$
 $`no verbatim`$
 $%no inline comment%$
-$=no variable=$
+$&no variable&$
 $<no link target>$
 $no:*link modifier*$
 $hidden \*escaped char*$
@@ -714,19 +714,19 @@ $hidden \*escaped char*$
 ================================================================================
 No nested markup inside variables
 ================================================================================
-=*not bold*=
-=/not italic/=
-=-not struck through-=
-=_not underlined_=
-=!no spoiler!=
-=^not superscripted^=
-=,not subscripted,=
-=`no verbatim`=
-=%no inline comment%=
-=$no inline math$=
-=<no link target>=
-=no:*link modifier*=
-=hidden \*escaped char*=
+&*not bold*&
+&/not italic/&
+&-not struck through-&
+&_not underlined_&
+&!no spoiler!&
+&^not superscripted^&
+&,not subscripted,&
+&`no verbatim`&
+&%no inline comment%&
+&$no inline math$&
+&<no link target>&
+&no:*link modifier*&
+&hidden \*escaped char*&
 --------------------------------------------------------------------------------
 
 (document

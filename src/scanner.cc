@@ -67,7 +67,13 @@ enum TokenType : char
 
     MARKER,
 
-    INSERTION,
+    SINGLE_MACRO,
+    MULTI_MACRO,
+    MULTI_MACRO_SUFFIX,
+
+    SINGLE_VARIABLE,
+    MULTI_VARIABLE,
+    MULTI_VARIABLE_SUFFIX,
 
     SINGLE_DEFINITION,
     MULTI_DEFINITION,
@@ -454,9 +460,13 @@ class Scanner
                 return true;
             }
 
-            if (check_detached(lexer, INSERTION, {'='}) != NONE)
+            if (check_detached(lexer, SINGLE_MACRO | MULTI_MACRO, {'='}) != NONE)
                 return true;
-            // TODO: Comment
+            else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+            {
+                lexer->result_symbol = MULTI_MACRO_SUFFIX;
+                return true;
+            }
             else if (lexer->lookahead == '\n')
             {
                 if (m_ParsedChars >= 3)
@@ -471,6 +481,14 @@ class Scanner
                     lexer->result_symbol = m_LastToken = WORD;
                     return true;
                 }
+            }
+
+            if (check_detached(lexer, SINGLE_VARIABLE | MULTI_VARIABLE, {'&'}) != NONE)
+                return true;
+            else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+            {
+                lexer->result_symbol = MULTI_VARIABLE_SUFFIX;
+                return true;
             }
 
             if (check_detached(lexer, NONE, {'_'}) != NONE)
@@ -1142,13 +1160,13 @@ class Scanner
     size_t m_ParsedChars = 0;
 
    private:
-    const std::array<int32_t, 9> m_DetachedModifiers = {'*', '-', '>', '%', '=',
-                                                        '~', '$', '_', '^'};
+    const std::array<int32_t, 10> m_DetachedModifiers = {'*', '-', '>', '%', '=',
+                                                        '~', '$', '_', '^', '&'};
     const std::unordered_map<int32_t, TokenType> m_AttachedModifiers = {
         {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
         {'_', UNDERLINE_OPEN},   {'!', SPOILER_OPEN},   {'`', VERBATIM_OPEN},
         {'^', SUPERSCRIPT_OPEN}, {',', SUBSCRIPT_OPEN}, {'%', INLINE_COMMENT_OPEN},
-        {'$', INLINE_MATH_OPEN}, {'=', VARIABLE_OPEN},
+        {'$', INLINE_MATH_OPEN}, {'&', VARIABLE_OPEN},
     };
 
     std::bitset<((VARIABLE_OPEN - BOLD_OPEN) / 2) + 1> m_ActiveModifiers;

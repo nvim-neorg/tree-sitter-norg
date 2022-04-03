@@ -331,13 +331,13 @@ inline_math $| markup.
 ================================================================================
 Ranged Variable
 ================================================================================
-Here is some |=ranged variable=| markup.
-Here is some |= ranged variable=| markup.
-Here is some |=ranged variable =| markup.
-Here is some |= ranged variable =| markup.
-Here is some |= ranged
-variable =| markup.
-|= Extend as =far= as possible =|
+Here is some |&ranged variable&| markup.
+Here is some |& ranged variable&| markup.
+Here is some |&ranged variable &| markup.
+Here is some |& ranged variable &| markup.
+Here is some |& ranged
+variable &| markup.
+|& Extend as &far& as possible &|
 --------------------------------------------------------------------------------
 
 (document
@@ -991,7 +991,7 @@ No nested markup inside ranged verbatim
 |`,not subscripted,`|
 |`+not inline comment+`|
 |`$not inline math$`|
-|`=not variable=`|
+|`&not variable&`|
 |`no:*link modifier*`|
 |`hidden \*escaped char`|
 |`|*not ranged bold*|`|
@@ -1003,7 +1003,7 @@ No nested markup inside ranged verbatim
 |`|,not ranged subscripted,|`|
 |`|+not ranged inline comment+|`|
 |`|$not ranged inline math$|`|
-|`|=not ranged variable=|`|
+|`|&not ranged variable&|`|
 --------------------------------------------------------------------------------
 
 (document
@@ -1087,7 +1087,7 @@ No nested markup inside ranged inline math
 |$,not subscripted,$|
 |$`not verbatim`$|
 |$+not inline comment+$|
-|$=not variable=$|
+|$&not variable&$|
 |$no:*link modifier*$|
 |$hidden \*escaped char$|
 |$|*not ranged bold*|$|
@@ -1099,7 +1099,7 @@ No nested markup inside ranged inline math
 |$|,not ranged subscripted,|$|
 |$|`not ranged verbatim`|$|
 |$|+not ranged inline comment+|$|
-|$|=not ranged variable=|$|
+|$|&not ranged variable&|$|
 --------------------------------------------------------------------------------
 
 (document
@@ -1174,28 +1174,28 @@ No nested markup inside ranged inline math
 ================================================================================
 No nested markup inside ranged variable
 ================================================================================
-|=*not bold*=|
-|=/not italic/=|
-|=-not struck through-=|
-|=_not underlined_=|
-|=!no spoiler!=|
-|=^not superscripted^=|
-|=,not subscripted,=|
-|=`no verbatim`=|
-|=+no inline comment+=|
-|=$no inline math$=|
-|=no:*link modifier*=|
-|=hidden \*escaped char=|
-|=|*not ranged bold*|=|
-|=|/not ranged italic/|=|
-|=|-not ranged struck through-|=|
-|=|_not ranged underlined_|=|
-|=|!not ranged spoiler!|=|
-|=|^not ranged superscripted^|=|
-|=|,not ranged subscripted,|=|
-|=|`not ranged verbatim`|=|
-|=|+not ranged inline comment+|=|
-|=|$not ranged inline math$|=|
+|&*not bold*&|
+|&/not italic/&|
+|&-not struck through-&|
+|&_not underlined_&|
+|&!no spoiler!&|
+|&^not superscripted^&|
+|&,not subscripted,&|
+|&`no verbatim`&|
+|&+no inline comment+&|
+|&$no inline math$&|
+|&no:*link modifier*&|
+|&hidden \*escaped char&|
+|&|*not ranged bold*|&|
+|&|/not ranged italic/|&|
+|&|-not ranged struck through-|&|
+|&|_not ranged underlined_|&|
+|&|!not ranged spoiler!|&|
+|&|^not ranged superscripted^|&|
+|&|,not ranged subscripted,|&|
+|&|`not ranged verbatim`|&|
+|&|+not ranged inline comment+|&|
+|&|$not ranged inline math$|&|
 --------------------------------------------------------------------------------
 
 (document

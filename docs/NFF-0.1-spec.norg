@@ -644,7 +644,7 @@
   - \`inline code\`: `inline code` (disables any nested markup - verbatim)
   - \%inline comment\%: %inline comment%
   - \$inline math\$: $f(x) = y$ (verbatim)
-  - \=variable\=: =variable= (verbatim)  %TODO: update variable reference to `&` char%
+  - \&variable\&: &variable& (verbatim)
 
 ** Valid Examples
    @code norg

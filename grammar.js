@@ -95,7 +95,13 @@ module.exports = grammar({
 
         $.marker_prefix,
 
-        $.insertion_prefix,
+        $.single_macro_prefix,
+        $.multi_macro_prefix,
+        $.multi_macro_suffix,
+
+        $.single_variable_prefix,
+        $.multi_variable_prefix,
+        $.multi_variable_suffix,
 
         $.single_definition_prefix,
         $.multi_definition_prefix,
@@ -192,7 +198,6 @@ module.exports = grammar({
                         $.nestable_detached_modifier,
                         $.rangeable_detached_modifier,
                         $.tag,
-                        $.insertion,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
@@ -382,8 +387,7 @@ module.exports = grammar({
         ),
 
         // Well, any character
-        any_char: _ =>
-        token.immediate(/./),
+        any_char: _ => token.immediate(/./),
 
         // A backslash followed by the escape token (e.g. \*)
         escape_sequence: $ =>
@@ -607,7 +611,6 @@ module.exports = grammar({
                             $.nestable_detached_modifier,
                             $.rangeable_detached_modifier,
                             $.tag,
-                            $.insertion,
                             alias($.paragraph_break, "_paragraph_break"),
                         ),
                     ),
@@ -615,38 +618,11 @@ module.exports = grammar({
             )
         ),
 
-        insertion: $ =>
-        prec.right(0,
-            gen_detached_modifier(
-                $,
+        single_macro: $ => gen_single_rangeable_detached_modifier($, "macro"),
+        multi_macro: $ => gen_multi_rangeable_detached_modifier($, "macro"),
 
-                $.insertion_prefix,
-
-                field(
-                    "item",
-                    choice(
-                        $.capitalized_word,
-                        $.lowercase_word
-                    )
-                ),
-
-                choice(
-                    seq(
-                        token.immediate(
-                            /[\t\v ]+/
-                        ),
-                        field(
-                            "parameters",
-                            $.paragraph_segment
-                        )
-                    ),
-
-                    token.immediate(
-                        /[\t\v ]*\n/
-                    ),
-                ),
-            )
-        ),
+        single_variable: $ => gen_single_rangeable_detached_modifier($, "variable"),
+        multi_variable: $ => gen_multi_rangeable_detached_modifier($, "variable"),
 
         single_definition: $ => gen_single_rangeable_detached_modifier($, "definition"),
         multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition"),
@@ -814,7 +790,6 @@ module.exports = grammar({
                             choice(
                                 $.nestable_detached_modifier,
                                 $.rangeable_detached_modifier,
-                                $.insertion,
                                 $.ranged_tag,
                                 $.ranged_verbatim_tag,
                                 $.marker,
@@ -970,6 +945,10 @@ module.exports = grammar({
             $.multi_definition,
             $.single_footnote,
             $.multi_footnote,
+            $.single_macro,
+            $.multi_macro,
+            $.single_variable,
+            $.multi_variable,
         ),
 
         attached_modifier: $ =>
@@ -1058,7 +1037,6 @@ function gen_heading($, level) {
                         $.nestable_detached_modifier,
                         $.rangeable_detached_modifier,
                         $.tag,
-                        $.insertion,
                         $.horizontal_line,
 
                         ...lower_level_heading,
@@ -1226,7 +1204,6 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                         alias($.paragraph_break, "_paragraph_break"),
                         $.rangeable_detached_modifier,
                         $.tag,
-                        $.insertion,
                     ),
                 ),
             ),
@@ -1248,14 +1225,12 @@ function gen_indent_segment_contents($, level) {
 
     if (level < 6) {
         return prec(1, choice(
-            $.insertion,
             $.rangeable_detached_modifier,
             $.tag,
             ...numbered_items.map(item => $[item + (level + 1)]),
         ))
     } else {
         return prec(1, choice(
-            $.insertion,
             $.rangeable_detached_modifier,
             $.tag
         ))

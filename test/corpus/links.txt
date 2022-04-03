@@ -847,12 +847,12 @@ ${:$again_not_a_link:}$
 ${* not a link}[not a description]$
 $[not an anchor]$
 $[not an anchor]{* not a link}$
-={* not a link}=
-={:also_not_a_link:}=
-={:$again_not_a_link:}=
-={* not a link}[not a description]=
-=[not an anchor]=
-=[not an anchor]{* not a link}=
+&{* not a link}&
+&{:also_not_a_link:}&
+&{:$again_not_a_link:}&
+&{* not a link}[not a description]&
+&[not an anchor]&
+&[not an anchor]{* not a link}&
 --------------------------------------------------------------------------------
 
 (document
