@@ -223,8 +223,7 @@ module.exports = grammar({
         ),
 
         // Any regular text. A paragraph is made up of `paragraph_segment`
-        // objects and line breaks. It may optionally be followed by a paragraph
-        // break (which are two consecutive line breaks).
+        // objects and line breaks.
         paragraph: $ =>
         prec.right(0,
             seq(
@@ -237,16 +236,12 @@ module.exports = grammar({
             ),
         ),
 
-        // A paragraph segment can contain any paragraph element or a
-        // `ranged_attached_modifier`. Note, that this object can contain
-        // arbitrary whitespace resulting in what may look like multiple
-        // paragraphs being joined into one (inside the ranged markup).
+        // A paragraph segment can contain any paragraph element.
         paragraph_segment: $ =>
         prec.right(0,
             repeat1(
                 choice(
                     $._paragraph_element,
-                    $.ranged_attached_modifier,
                     alias($._conflict_open, "_word"),
                 ),
             )
@@ -255,28 +250,13 @@ module.exports = grammar({
         // The attached modifiers cannot contain a `paragraph_segment` directly,
         // because they:
         //   - require a higher precedence of their internals
-        //   -- canNOT contain a `ranged_attached_modifier` element
+        //   - allow line breaks within themselves
         _attached_modifier_content: $ =>
         prec.right(1,
             repeat1(
                 choice(
                     $._paragraph_element,
                     alias($.line_break, "_line_break"),
-                    alias($._conflict_open, "_word"),
-                ),
-            ),
-        ),
-
-        // A ranged attached modifier may even contain a `pargraph_break`
-        // compared to a normal `attached_modifier`.
-        _ranged_attached_modifier_content: $ =>
-        prec.right(1,
-            repeat1(
-                choice(
-                    $._paragraph_element,
-                    $.ranged_attached_modifier,
-                    alias($.line_break, "_line_break"),
-                    alias($.paragraph_break, "_paragraph_break"),
                     alias($._conflict_open, "_word"),
                 ),
             ),
@@ -295,19 +275,6 @@ module.exports = grammar({
             ),
         ),
 
-        // The ranged version may again contain a `paragraph_break` compared to
-        // the normal version above.
-        _ranged_verbatim_modifier_content: $ =>
-        prec.right(1,
-            repeat1(
-                choice(
-                    $._verbatim_paragraph_element,
-                    alias($.line_break, "_line_break"),
-                    alias($.paragraph_break, "_paragraph_break"),
-                ),
-            ),
-        ),
-
         // Any of the following choices are valid IN-LINE elements. Any
         // multitude of these are combined to form a `paragraph_segment`.
         _paragraph_element: $ =>
@@ -322,7 +289,10 @@ module.exports = grammar({
             $.escape_sequence,
             seq(
                 optional($.link_modifier),
-                $.attached_modifier,
+                choice(
+                    $.attached_modifier,
+                    $.ranged_attached_modifier,
+                ),
                 optional($.link_modifier),
             ),
             alias($.link_modifier, "_word"),
@@ -1201,11 +1171,9 @@ function gen_attached_modifier($, kind, verbatim, ranged) {
         content_rule = $._verbatim_modifier_content;
         precedence = 5;
         if (ranged) {
-            content_rule = $._ranged_verbatim_modifier_content;
             precedence = 6;
         }
     } else if (ranged) {
-        content_rule = $._ranged_attached_modifier_content;
         precedence = 4;
     }
 

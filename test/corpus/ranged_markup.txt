@@ -7,17 +7,11 @@ Here is some |*ranged bold *| markup.
 Here is some |* ranged bold *| markup.
 Here is some |* ranged
 bold *| markup.
-Here is some |* ranged
-
-bold *| markup.
 |* Extend as *far* as possible *|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (bold)))
     (paragraph_segment
       (ranged_attached_modifier
         (bold)))
@@ -46,17 +40,11 @@ Here is some |/ranged italic /| markup.
 Here is some |/ ranged italic /| markup.
 Here is some |/ ranged
 italic /| markup.
-Here is some |/ ranged
-
-italic /| markup.
 |/ Extend as /far/ as possible /|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (italic)))
     (paragraph_segment
       (ranged_attached_modifier
         (italic)))
@@ -85,17 +73,11 @@ Here is some |-ranged strikethrough -| markup.
 Here is some |- ranged strikethrough -| markup.
 Here is some |- ranged
 strikethrough -| markup.
-Here is some |- ranged
-
-strikethrough -| markup.
 |- Extend as -far- as possible -|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (strikethrough)))
     (paragraph_segment
       (ranged_attached_modifier
         (strikethrough)))
@@ -124,17 +106,11 @@ Here is some |_ranged underline _| markup.
 Here is some |_ ranged underline _| markup.
 Here is some |_ ranged
 underline _| markup.
-Here is some |_ ranged
-
-underline _| markup.
 |_ Extend as _far_ as possible _|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (underline)))
     (paragraph_segment
       (ranged_attached_modifier
         (underline)))
@@ -163,17 +139,11 @@ Here is some |!ranged spoiler !| markup.
 Here is some |! ranged spoiler !| markup.
 Here is some |! ranged
 spoiler !| markup.
-Here is some |! ranged
-
-spoiler !| markup.
 |! Extend as !far! as possible !|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (spoiler)))
     (paragraph_segment
       (ranged_attached_modifier
         (spoiler)))
@@ -202,17 +172,11 @@ Here is some |^ranged superscript ^| markup.
 Here is some |^ ranged superscript ^| markup.
 Here is some |^ ranged
 superscript ^| markup.
-Here is some |^ ranged
-
-superscript ^| markup.
 |^ Extend as ^far^ as possible ^|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (superscript)))
     (paragraph_segment
       (ranged_attached_modifier
         (superscript)))
@@ -241,17 +205,11 @@ Here is some |,ranged subscript ,| markup.
 Here is some |, ranged subscript ,| markup.
 Here is some |, ranged
 subscript ,| markup.
-Here is some |, ranged
-
-subscript ,| markup.
 |, Extend as ,far, as possible ,|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (subscript)))
     (paragraph_segment
       (ranged_attached_modifier
         (subscript)))
@@ -280,17 +238,11 @@ Here is some |`ranged verbatim `| markup.
 Here is some |` ranged verbatim `| markup.
 Here is some |` ranged
 verbatim `| markup.
-Here is some |` ranged
-
-verbatim `| markup.
 |` Extend as `far` as possible `|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (verbatim)))
     (paragraph_segment
       (ranged_attached_modifier
         (verbatim)))
@@ -319,17 +271,11 @@ Here is some |%ranged inline_comment %| markup.
 Here is some |% ranged inline_comment %| markup.
 Here is some |% ranged
 inline_comment %| markup.
-Here is some |% ranged
-
-inline_comment %| markup.
 |% Extend as %far% as possible %|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (inline_comment)))
     (paragraph_segment
       (ranged_attached_modifier
         (inline_comment)))
@@ -358,17 +304,11 @@ Here is some |$ranged inline_math $| markup.
 Here is some |$ ranged inline_math $| markup.
 Here is some |$ ranged
 inline_math $| markup.
-Here is some |$ ranged
-
-inline_math $| markup.
 |$ Extend as $far$ as possible $|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (inline_math)))
     (paragraph_segment
       (ranged_attached_modifier
         (inline_math)))
@@ -397,17 +337,11 @@ Here is some |=ranged variable =| markup.
 Here is some |= ranged variable =| markup.
 Here is some |= ranged
 variable =| markup.
-Here is some |= ranged
-
-variable =| markup.
 |= Extend as =far= as possible =|
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
-    (paragraph_segment
-      (ranged_attached_modifier
-        (variable)))
     (paragraph_segment
       (ranged_attached_modifier
         (variable)))

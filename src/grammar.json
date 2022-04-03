@@ -138,10 +138,6 @@
               "name": "_paragraph_element"
             },
             {
-              "type": "SYMBOL",
-              "name": "ranged_attached_modifier"
-            },
-            {
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
@@ -188,53 +184,6 @@
         }
       }
     },
-    "_ranged_attached_modifier_content": {
-      "type": "PREC_RIGHT",
-      "value": 1,
-      "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_paragraph_element"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ranged_attached_modifier"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "line_break"
-              },
-              "named": false,
-              "value": "_line_break"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "paragraph_break"
-              },
-              "named": false,
-              "value": "_paragraph_break"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_conflict_open"
-              },
-              "named": false,
-              "value": "_word"
-            }
-          ]
-        }
-      }
-    },
     "_verbatim_modifier_content": {
       "type": "PREC_RIGHT",
       "value": 1,
@@ -255,40 +204,6 @@
               },
               "named": false,
               "value": "_line_break"
-            }
-          ]
-        }
-      }
-    },
-    "_ranged_verbatim_modifier_content": {
-      "type": "PREC_RIGHT",
-      "value": 1,
-      "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_verbatim_paragraph_element"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "line_break"
-              },
-              "named": false,
-              "value": "_line_break"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "paragraph_break"
-              },
-              "named": false,
-              "value": "_paragraph_break"
             }
           ]
         }
@@ -360,8 +275,17 @@
               ]
             },
             {
-              "type": "SYMBOL",
-              "name": "attached_modifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "attached_modifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "ranged_attached_modifier"
+                }
+              ]
             },
             {
               "type": "CHOICE",
@@ -1056,7 +980,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "_attached_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1087,7 +1011,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "_attached_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1118,7 +1042,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "_attached_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1149,7 +1073,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "_attached_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1180,7 +1104,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "_attached_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1211,7 +1135,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "_attached_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1242,7 +1166,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "_attached_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1273,7 +1197,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_attached_modifier_content"
+            "name": "_attached_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1304,7 +1228,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_verbatim_modifier_content"
+            "name": "_verbatim_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1335,7 +1259,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_verbatim_modifier_content"
+            "name": "_verbatim_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1366,7 +1290,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_ranged_verbatim_modifier_content"
+            "name": "_verbatim_modifier_content"
           },
           {
             "type": "ALIAS",

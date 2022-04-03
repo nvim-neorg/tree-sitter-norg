@@ -3097,6 +3097,10 @@
           "named": true
         },
         {
+          "type": "ranged_attached_modifier",
+          "named": true
+        },
+        {
           "type": "spoiler",
           "named": true
         },

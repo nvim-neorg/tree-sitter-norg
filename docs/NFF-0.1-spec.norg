@@ -723,7 +723,7 @@
 
 ** Ranged Attached Modifiers
    Ranged attached modifiers can be used to:
-   - Allow arbitrary {# whitespace} within {# attached modifiers}.
+   - Allow arbitrary {# whitespace} within {# attached modifiers}. (except for a {# paragraph break})
    - Allow to represent verbatim attached modifier chars within the corresponding verbatim blocks.
 
    For example:
