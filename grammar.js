@@ -111,6 +111,10 @@ module.exports = grammar({
         $.multi_footnote_prefix,
         $.multi_footnote_suffix,
 
+        $.single_drawer_prefix,
+        $.multi_drawer_prefix,
+        $.multi_drawer_suffix,
+
         $.strong_paragraph_delimiter,
         $.weak_paragraph_delimiter,
         $.horizontal_line,
@@ -129,6 +133,7 @@ module.exports = grammar({
         $.link_target_marker,
         $.link_target_definition,
         $.link_target_footnote,
+        $.link_target_drawer,
         $.link_target_heading1,
         $.link_target_heading2,
         $.link_target_heading3,
@@ -323,6 +328,7 @@ module.exports = grammar({
             alias($.link_target_marker, "_word"),
             alias($.link_target_definition, "_word"),
             alias($.link_target_footnote, "_word"),
+            alias($.link_target_drawer, "_word"),
             alias($.link_target_heading1, "_word"),
             alias($.link_target_heading2, "_word"),
             alias($.link_target_heading3, "_word"),
@@ -472,6 +478,7 @@ module.exports = grammar({
                     $.link_target_marker,
                     $.link_target_definition,
                     $.link_target_footnote,
+                    $.link_target_drawer,
                     $.link_target_heading1,
                     $.link_target_heading2,
                     $.link_target_heading3,
@@ -629,6 +636,9 @@ module.exports = grammar({
 
         single_footnote: $ => gen_single_rangeable_detached_modifier($, "footnote"),
         multi_footnote: $ => gen_multi_rangeable_detached_modifier($, "footnote"),
+
+        single_drawer: $ => gen_single_rangeable_detached_modifier($, "drawer"),
+        multi_drawer: $ => gen_multi_rangeable_detached_modifier($, "drawer"),
 
         ranged_tag_content: $ =>
         prec.right(0,
@@ -789,7 +799,7 @@ module.exports = grammar({
                         repeat1(
                             choice(
                                 $.nestable_detached_modifier,
-                                $.rangeable_detached_modifier,
+                                // $.rangeable_detached_modifier,
                                 $.ranged_tag,
                                 $.ranged_verbatim_tag,
                                 $.marker,
@@ -945,6 +955,8 @@ module.exports = grammar({
             $.multi_definition,
             $.single_footnote,
             $.multi_footnote,
+            $.single_drawer,
+            $.multi_drawer,
             $.single_macro,
             $.multi_macro,
             $.single_variable,
@@ -1202,7 +1214,7 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                         $.paragraph,
                         prec(1, alias($.line_break, "_line_break")),
                         alias($.paragraph_break, "_paragraph_break"),
-                        $.rangeable_detached_modifier,
+                        // $.rangeable_detached_modifier,
                         $.tag,
                     ),
                 ),
@@ -1225,13 +1237,13 @@ function gen_indent_segment_contents($, level) {
 
     if (level < 6) {
         return prec(1, choice(
-            $.rangeable_detached_modifier,
+            // $.rangeable_detached_modifier,
             $.tag,
             ...numbered_items.map(item => $[item + (level + 1)]),
         ))
     } else {
         return prec(1, choice(
-            $.rangeable_detached_modifier,
+            // $.rangeable_detached_modifier,
             $.tag
         ))
     }

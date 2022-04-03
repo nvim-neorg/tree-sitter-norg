@@ -83,6 +83,10 @@ enum TokenType : char
     MULTI_FOOTNOTE,
     MULTI_FOOTNOTE_SUFFIX,
 
+    SINGLE_DRAWER,
+    MULTI_DRAWER,
+    MULTI_DRAWER_SUFFIX,
+
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
     HORIZONTAL_LINE,
@@ -101,6 +105,7 @@ enum TokenType : char
     LINK_TARGET_MARKER,
     LINK_TARGET_DEFINITION,
     LINK_TARGET_FOOTNOTE,
+    LINK_TARGET_DRAWER,
     LINK_TARGET_HEADING1,
     LINK_TARGET_HEADING2,
     LINK_TARGET_HEADING3,
@@ -452,7 +457,7 @@ class Scanner
                 return true;
             }
 
-            if (check_detached(lexer, SINGLE_FOOTNOTE | MULTI_FOOTNOTE, {'^'}) != NONE)
+            if (check_detached(lexer, SINGLE_FOOTNOTE | MULTI_FOOTNOTE | NONE, {'^'}) != NONE)
                 return true;
             else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
             {
@@ -460,7 +465,15 @@ class Scanner
                 return true;
             }
 
-            if (check_detached(lexer, SINGLE_MACRO | MULTI_MACRO, {'='}) != NONE)
+            if (check_detached(lexer, SINGLE_DRAWER | MULTI_DRAWER | NONE, {'<'}) != NONE)
+                return true;
+            else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+            {
+                lexer->result_symbol = MULTI_DRAWER_SUFFIX;
+                return true;
+            }
+
+            if (check_detached(lexer, SINGLE_MACRO | MULTI_MACRO | NONE, {'='}) != NONE)
                 return true;
             else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
             {
@@ -483,7 +496,7 @@ class Scanner
                 }
             }
 
-            if (check_detached(lexer, SINGLE_VARIABLE | MULTI_VARIABLE, {'&'}) != NONE)
+            if (check_detached(lexer, SINGLE_VARIABLE | MULTI_VARIABLE | NONE, {'&'}) != NONE)
                 return true;
             else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
             {
@@ -541,7 +554,7 @@ class Scanner
         }
         // If we are not in a tag and we have an opening pipe symbol then try
         // matching either a todo item or beginning of a list
-        else if (m_LastToken >= HEADING1 && m_LastToken <= MULTI_FOOTNOTE_SUFFIX &&
+        else if (m_LastToken >= HEADING1 && m_LastToken <= MULTI_DRAWER_SUFFIX &&
                  lexer->lookahead == '|')
         {
             advance(lexer);
@@ -620,11 +633,14 @@ class Scanner
         else if (lexer->lookahead == '<')
         {
             advance(lexer);
-            lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_OPEN;
-            return true;
+            if (!std::iswspace(lexer->lookahead))
+            {
+                lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_OPEN;
+                return true;
+            }
         }
-        else if (lexer->lookahead == '>' && m_LastToken != LINK_LOCATION_BEGIN &&
-                 m_LastToken != LINK_FILE_END)
+        else if (lexer->lookahead == '>' && !std::iswspace(m_Current) &&
+                 m_LastToken != LINK_LOCATION_BEGIN && m_LastToken != LINK_FILE_END)
         {
             advance(lexer);
             lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_CLOSE;
@@ -633,10 +649,13 @@ class Scanner
         else if (lexer->lookahead == '[')
         {
             advance(lexer);
-            lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_BEGIN;
-            return true;
+            if (!std::iswspace(lexer->lookahead))
+            {
+                lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_BEGIN;
+                return true;
+            }
         }
-        else if (lexer->lookahead == ']')
+        else if (lexer->lookahead == ']' && !std::iswspace(m_Current))
         {
             advance(lexer);
             lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_END;
@@ -645,10 +664,13 @@ class Scanner
         else if (lexer->lookahead == '{')
         {
             advance(lexer);
-            lexer->result_symbol = m_LastToken = LINK_LOCATION_BEGIN;
-            return true;
+            if (!std::iswspace(lexer->lookahead))
+            {
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_BEGIN;
+                return true;
+            }
         }
-        else if (lexer->lookahead == '}')
+        else if (lexer->lookahead == '}' && !std::iswspace(m_Current))
         {
             advance(lexer);
             lexer->result_symbol = m_LastToken = LINK_LOCATION_END;
@@ -1002,6 +1024,9 @@ class Scanner
             case '^':
                 lexer->result_symbol = m_LastToken = LINK_TARGET_FOOTNOTE;
                 break;
+            case '<':
+                lexer->result_symbol = m_LastToken = LINK_TARGET_DRAWER;
+                break;
             case '*':
                 advance(lexer);
 
@@ -1160,8 +1185,8 @@ class Scanner
     size_t m_ParsedChars = 0;
 
    private:
-    const std::array<int32_t, 10> m_DetachedModifiers = {'*', '-', '>', '%', '=',
-                                                        '~', '$', '_', '^', '&'};
+    const std::array<int32_t, 11> m_DetachedModifiers = {'*', '-', '>', '%', '=',
+                                                        '~', '$', '_', '^', '&', '<'};
     const std::unordered_map<int32_t, TokenType> m_AttachedModifiers = {
         {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
         {'_', UNDERLINE_OPEN},   {'!', SPOILER_OPEN},   {'`', VERBATIM_OPEN},

@@ -247,22 +247,6 @@
             "named": true
           },
           {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -276,22 +260,6 @@
           },
           {
             "type": "ranged_verbatim_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           }
         ]
@@ -361,6 +329,10 @@
           "named": true
         },
         {
+          "type": "multi_drawer",
+          "named": true
+        },
+        {
           "type": "multi_footnote",
           "named": true
         },
@@ -390,6 +362,10 @@
         },
         {
           "type": "single_definition",
+          "named": true
+        },
+        {
+          "type": "single_drawer",
           "named": true
         },
         {
@@ -545,6 +521,10 @@
             "named": true
           },
           {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
             "type": "multi_footnote",
             "named": true
           },
@@ -574,6 +554,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_drawer",
             "named": true
           },
           {
@@ -699,6 +683,10 @@
             "named": true
           },
           {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
             "type": "multi_footnote",
             "named": true
           },
@@ -728,6 +716,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_drawer",
             "named": true
           },
           {
@@ -849,6 +841,10 @@
             "named": true
           },
           {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
             "type": "multi_footnote",
             "named": true
           },
@@ -878,6 +874,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_drawer",
             "named": true
           },
           {
@@ -995,6 +995,10 @@
             "named": true
           },
           {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
             "type": "multi_footnote",
             "named": true
           },
@@ -1024,6 +1028,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_drawer",
             "named": true
           },
           {
@@ -1137,6 +1145,10 @@
             "named": true
           },
           {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
             "type": "multi_footnote",
             "named": true
           },
@@ -1166,6 +1178,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_drawer",
             "named": true
           },
           {
@@ -1275,6 +1291,10 @@
             "named": true
           },
           {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
             "type": "multi_footnote",
             "named": true
           },
@@ -1304,6 +1324,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_drawer",
             "named": true
           },
           {
@@ -1401,22 +1425,6 @@
           "named": true
         },
         {
-          "type": "multi_definition",
-          "named": true
-        },
-        {
-          "type": "multi_footnote",
-          "named": true
-        },
-        {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ordered_list2",
           "named": true
         },
@@ -1469,22 +1477,6 @@
           "named": true
         },
         {
-          "type": "single_definition",
-          "named": true
-        },
-        {
-          "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
-          "named": true
-        },
-        {
           "type": "unordered_list2",
           "named": true
         },
@@ -1525,22 +1517,6 @@
         },
         {
           "type": "indent_segment_begin",
-          "named": true
-        },
-        {
-          "type": "multi_definition",
-          "named": true
-        },
-        {
-          "type": "multi_footnote",
-          "named": true
-        },
-        {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
           "named": true
         },
         {
@@ -1588,22 +1564,6 @@
           "named": true
         },
         {
-          "type": "single_definition",
-          "named": true
-        },
-        {
-          "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
-          "named": true
-        },
-        {
           "type": "unordered_list3",
           "named": true
         },
@@ -1643,22 +1603,6 @@
           "named": true
         },
         {
-          "type": "multi_definition",
-          "named": true
-        },
-        {
-          "type": "multi_footnote",
-          "named": true
-        },
-        {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ordered_list4",
           "named": true
         },
@@ -1692,22 +1636,6 @@
         },
         {
           "type": "ranged_verbatim_tag",
-          "named": true
-        },
-        {
-          "type": "single_definition",
-          "named": true
-        },
-        {
-          "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -1746,22 +1674,6 @@
           "named": true
         },
         {
-          "type": "multi_definition",
-          "named": true
-        },
-        {
-          "type": "multi_footnote",
-          "named": true
-        },
-        {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ordered_list5",
           "named": true
         },
@@ -1787,22 +1699,6 @@
         },
         {
           "type": "ranged_verbatim_tag",
-          "named": true
-        },
-        {
-          "type": "single_definition",
-          "named": true
-        },
-        {
-          "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -1837,22 +1733,6 @@
           "named": true
         },
         {
-          "type": "multi_definition",
-          "named": true
-        },
-        {
-          "type": "multi_footnote",
-          "named": true
-        },
-        {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ordered_list6",
           "named": true
         },
@@ -1870,22 +1750,6 @@
         },
         {
           "type": "ranged_verbatim_tag",
-          "named": true
-        },
-        {
-          "type": "single_definition",
-          "named": true
-        },
-        {
-          "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -1916,22 +1780,6 @@
           "named": true
         },
         {
-          "type": "multi_definition",
-          "named": true
-        },
-        {
-          "type": "multi_footnote",
-          "named": true
-        },
-        {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "paragraph",
           "named": true
         },
@@ -1941,22 +1789,6 @@
         },
         {
           "type": "ranged_verbatim_tag",
-          "named": true
-        },
-        {
-          "type": "single_definition",
-          "named": true
-        },
-        {
-          "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -2221,6 +2053,10 @@
             "named": true
           },
           {
+            "type": "link_target_drawer",
+            "named": true
+          },
+          {
             "type": "link_target_external_file",
             "named": true
           },
@@ -2363,6 +2199,10 @@
             "named": true
           },
           {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
             "type": "multi_footnote",
             "named": true
           },
@@ -2392,6 +2232,10 @@
           },
           {
             "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_drawer",
             "named": true
           },
           {
@@ -2455,22 +2299,6 @@
             "named": true
           },
           {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -2480,22 +2308,6 @@
           },
           {
             "type": "ranged_verbatim_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           }
         ]
@@ -2571,6 +2383,110 @@
     }
   },
   {
+    "type": "multi_drawer",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "_line_break",
+            "named": false
+          },
+          {
+            "type": "_paragraph_break",
+            "named": false
+          },
+          {
+            "type": "carryover_tag_set",
+            "named": true
+          },
+          {
+            "type": "paragraph",
+            "named": true
+          },
+          {
+            "type": "ranged_tag",
+            "named": true
+          },
+          {
+            "type": "ranged_verbatim_tag",
+            "named": true
+          }
+        ]
+      },
+      "end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "multi_drawer_suffix",
+            "named": true
+          }
+        ]
+      },
+      "state": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_cancelled",
+            "named": true
+          },
+          {
+            "type": "todo_item_done",
+            "named": true
+          },
+          {
+            "type": "todo_item_on_hold",
+            "named": true
+          },
+          {
+            "type": "todo_item_pending",
+            "named": true
+          },
+          {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
+            "named": true
+          },
+          {
+            "type": "todo_item_undone",
+            "named": true
+          },
+          {
+            "type": "todo_item_urgent",
+            "named": true
+          }
+        ]
+      },
+      "title": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "multi_drawer_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "multi_footnote",
     "named": true,
     "fields": {
@@ -2591,22 +2507,6 @@
             "named": true
           },
           {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -2616,22 +2516,6 @@
           },
           {
             "type": "ranged_verbatim_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           }
         ]
@@ -2727,22 +2611,6 @@
             "named": true
           },
           {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -2752,22 +2620,6 @@
           },
           {
             "type": "ranged_verbatim_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           }
         ]
@@ -2863,22 +2715,6 @@
             "named": true
           },
           {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -2888,22 +2724,6 @@
           },
           {
             "type": "ranged_verbatim_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           }
         ]
@@ -4430,6 +4250,80 @@
     }
   },
   {
+    "type": "single_drawer",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "state": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "todo_item_cancelled",
+            "named": true
+          },
+          {
+            "type": "todo_item_done",
+            "named": true
+          },
+          {
+            "type": "todo_item_on_hold",
+            "named": true
+          },
+          {
+            "type": "todo_item_pending",
+            "named": true
+          },
+          {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
+            "named": true
+          },
+          {
+            "type": "todo_item_undone",
+            "named": true
+          },
+          {
+            "type": "todo_item_urgent",
+            "named": true
+          }
+        ]
+      },
+      "title": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "single_drawer_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "single_footnote",
     "named": true,
     "fields": {
@@ -5766,6 +5660,10 @@
     "named": true
   },
   {
+    "type": "link_target_drawer",
+    "named": true
+  },
+  {
     "type": "link_target_external_file",
     "named": true
   },
@@ -5823,6 +5721,14 @@
   },
   {
     "type": "multi_definition_suffix",
+    "named": true
+  },
+  {
+    "type": "multi_drawer_prefix",
+    "named": true
+  },
+  {
+    "type": "multi_drawer_suffix",
     "named": true
   },
   {
@@ -5899,6 +5805,10 @@
   },
   {
     "type": "single_definition_prefix",
+    "named": true
+  },
+  {
+    "type": "single_drawer_prefix",
     "named": true
   },
   {
