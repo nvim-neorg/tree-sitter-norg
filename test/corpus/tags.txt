@@ -82,7 +82,7 @@ shouldn't be a closing tag.
     (paragraph_segment)))
 
 ================================================================================
-Carryover Tag
+Infecting Tag on paragraph
 ================================================================================
 |comment
 This is a comment.
@@ -91,17 +91,17 @@ This is no longer part of the comment.
 --------------------------------------------------------------------------------
 
 (document
-  (carryover_tag_set
-    (carryover_tag
-      (tag_name
-        (tag_name_element)))
-    (paragraph
-      (paragraph_segment)))
+  (paragraph
+    (infecting_tag_set
+      (infecting_tag
+        (tag_name
+          (tag_name_element))))
+    (paragraph_segment))
   (paragraph
     (paragraph_segment)))
 
 ================================================================================
-Carryover Tag Infection
+Infecting Tag on generic list
 ================================================================================
 |ordered
 - List item 1
@@ -111,24 +111,101 @@ This is no longer infected.
 --------------------------------------------------------------------------------
 
 (document
-  (carryover_tag_set
-    (carryover_tag
-      (tag_name
-        (tag_name_element)))
-    (generic_list
-      (unordered_list1
-        (unordered_list1_prefix)
-        (paragraph
-          (paragraph_segment)))
-      (unordered_list1
-        (unordered_list1_prefix)
-        (paragraph
-          (paragraph_segment)))))
+  (generic_list
+    (infecting_tag_set
+      (infecting_tag
+        (tag_name
+          (tag_name_element))))
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment))))
   (paragraph
     (paragraph_segment)))
 
 ================================================================================
-Carryover Tag with Parameters
+Infecting Tag on quote
+================================================================================
+|ordered
+> quote item 1
+> quote item 2
+
+This is no longer infected.
+--------------------------------------------------------------------------------
+
+(document
+  (quote
+    (infecting_tag_set
+      (infecting_tag
+        (tag_name
+          (tag_name_element))))
+    (quote1
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (quote1
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment))))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
+Carryover Tag on generic list
+================================================================================
+- List item 1
++color blue
+- List item 2
+--------------------------------------------------------------------------------
+
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (unordered_list1
+      (carryover_tag_set
+        (carryover_tag
+          (tag_name
+            (tag_name_element))
+          (tag_parameters
+            (tag_param))))
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment)))))
+
+================================================================================
+Carryover Tag on quote
+================================================================================
+> quote item 1
++color blue
+> quote item 2
+--------------------------------------------------------------------------------
+
+(document
+  (quote
+    (quote1
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (quote1
+      (carryover_tag_set
+        (carryover_tag
+          (tag_name
+            (tag_name_element))
+          (tag_parameters
+            (tag_param))))
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment)))))
+
+================================================================================
+Infecting Tag with parameters
 ================================================================================
 |name bob
 > Hi, my name is Bob.
@@ -137,17 +214,17 @@ Lol
 --------------------------------------------------------------------------------
 
 (document
-  (carryover_tag_set
-    (carryover_tag
-      (tag_name
-        (tag_name_element))
-      (tag_parameters
-        (tag_param)))
-    (quote
-      (quote1
-        (quote1_prefix)
-        (paragraph
-          (paragraph_segment)))))
+  (quote
+    (infecting_tag_set
+      (infecting_tag
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (quote1
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment))))
   (paragraph
     (paragraph_segment)))
 

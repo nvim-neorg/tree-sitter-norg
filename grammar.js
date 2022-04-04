@@ -15,6 +15,13 @@ module.exports = grammar({
         $._indent_segment_contents4,
         $._indent_segment_contents5,
         $._indent_segment_contents6,
+
+        $._any_list_item_level_1,
+        $._any_list_item_level_2,
+        $._any_list_item_level_3,
+        $._any_list_item_level_4,
+        $._any_list_item_level_5,
+        $._any_list_item_level_6,
     ],
 
     conflicts: $ => [
@@ -40,6 +47,34 @@ module.exports = grammar({
         [$.indent_segment4],
         [$.indent_segment5],
         [$.indent_segment6],
+
+        // TODO: refactor: we do not want these many conflicts. The problem:
+        // - carryover tag inclusion into the detached modifier wants left
+        //   precedence
+        // - but grouping of nested detached mods into the higher level mod
+        //   requires right precedence
+        // - so we end up with wanting to pull into two directions, which is...
+        //   difficult :sadge:
+        [$.quote1],
+        [$.quote2],
+        [$.quote3],
+        [$.quote4],
+        [$.quote5],
+        [$.quote6],
+
+        [$.ordered_list1],
+        [$.ordered_list2],
+        [$.ordered_list3],
+        [$.ordered_list4],
+        [$.ordered_list5],
+        [$.ordered_list6],
+
+        [$.unordered_list1],
+        [$.unordered_list2],
+        [$.unordered_list3],
+        [$.unordered_list4],
+        [$.unordered_list5],
+        [$.unordered_list6],
     ],
 
     externals: $ => [
@@ -147,6 +182,7 @@ module.exports = grammar({
         $.ranged_verbatim_tag_end_prefix,
 
         $.carryover_tag_prefix,
+        $.infecting_tag_prefix,
 
         $.link_modifier,
 
@@ -223,9 +259,13 @@ module.exports = grammar({
 
         // Any regular text. A paragraph is made up of `paragraph_segment`
         // objects and line breaks.
+        // TODO: add "inline" carryover tags
         paragraph: $ =>
         prec.right(0,
             seq(
+                optional(
+                    $.infecting_tag_set,
+                ),
                 repeat1(
                     choice(
                         $.paragraph_segment,
@@ -531,16 +571,19 @@ module.exports = grammar({
         // > That's what she said
         quote: $ =>
         prec.right(0,
-            repeat1(
-                choice(
-                    $.quote1,
-                    $.quote2,
-                    $.quote3,
-                    $.quote4,
-                    $.quote5,
-                    $.quote6,
-                )
-            )
+            seq(
+                optional($.infecting_tag_set),
+                repeat1(
+                    choice(
+                        $.quote1,
+                        $.quote2,
+                        $.quote3,
+                        $.quote4,
+                        $.quote5,
+                        $.quote6,
+                    ),
+                ),
+            ),
         ),
 
         quote1: $ => gen_quote($, 1),
@@ -553,9 +596,12 @@ module.exports = grammar({
         // generic list
         generic_list: $ =>
         prec.right(0,
-            repeat1(
-                $._any_list_item_level_1,
-            )
+            seq(
+                optional($.infecting_tag_set),
+                repeat1(
+                    $._any_list_item_level_1,
+                ),
+            ),
         ),
 
         _any_list_item_level_1: $ => gen_any_list_item($, 1),
@@ -593,6 +639,7 @@ module.exports = grammar({
 
         // --------------------------------------------------
 
+        // TODO: add carryover/infecting tag
         marker: $ =>
         prec.right(0,
             gen_detached_modifier(
@@ -653,6 +700,8 @@ module.exports = grammar({
             ),
         ),
 
+        // TODO: add carryover/infecting tag
+        // TODO: also: refactor me!
         ranged_tag: $ =>
         prec.right(0,
             seq(
@@ -666,23 +715,7 @@ module.exports = grammar({
                     $.tag_name,
                 ),
 
-                choice(
-                    token.immediate(
-                        /[\t\v ]*\n/,
-                    ),
-
-                    seq(
-                        token.immediate(
-                            /[\t\v ]+/,
-                        ),
-
-                        $.tag_parameters,
-
-                        token.immediate(
-                            '\n'
-                        ),
-                    ),
-                ),
+                $._tag_parameters,
 
                 field(
                     "content",
@@ -724,6 +757,8 @@ module.exports = grammar({
             ),
         ),
 
+        // TODO: add carryover/infecting tag
+        // TODO: also: refactor me!
         ranged_verbatim_tag: $ =>
         prec.right(0,
             seq(
@@ -737,23 +772,7 @@ module.exports = grammar({
                     $.tag_name,
                 ),
 
-                choice(
-                    token.immediate(
-                        /[\t\v ]*\n/,
-                    ),
-
-                    seq(
-                        token.immediate(
-                            /[\t\v ]+/,
-                        ),
-
-                        $.tag_parameters,
-
-                        token.immediate(
-                            '\n'
-                        ),
-                    ),
-                ),
+                $._tag_parameters,
 
                 field(
                     "content",
@@ -767,31 +786,11 @@ module.exports = grammar({
         ),
 
         carryover_tag_set: $ =>
-        prec.left(
-            seq(
-                repeat1(
-                    $.carryover_tag,
-                ),
-
-                field(
-                    "target",
-
-                    choice(
-                        $.paragraph,
-                        repeat1(
-                            choice(
-                                $.nestable_detached_modifier,
-                                $.rangeable_detached_modifier,
-                                $.ranged_tag,
-                                $.ranged_verbatim_tag,
-                                $.marker,
-                            ),
-                        ),
-                    ),
-                ),
-            )
+        repeat1(
+            $.carryover_tag,
         ),
 
+        // TODO: refactor me!
         carryover_tag: $ =>
         seq(
             alias(
@@ -804,23 +803,32 @@ module.exports = grammar({
                 $.tag_name,
             ),
 
-            choice(
-                token.immediate(
-                    /[\t\v ]*\n/,
-                ),
+            $._tag_parameters,
 
-                seq(
-                    token.immediate(
-                        /[\t\v ]+/,
-                    ),
-
-                    $.tag_parameters,
-
-                    token.immediate(
-                        '\n'
-                    ),
-                ),
+            repeat(
+                alias($.paragraph_break, "_paragraph_break"),
             ),
+        ),
+
+        infecting_tag_set: $ =>
+        repeat1(
+            $.infecting_tag,
+        ),
+
+        // TODO: refactor me!
+        infecting_tag: $ =>
+        seq(
+            alias(
+                $.infecting_tag_prefix,
+                "_prefix",
+            ),
+
+            field(
+                "name",
+                $.tag_name,
+            ),
+
+            $._tag_parameters,
 
             repeat(
                 alias($.paragraph_break, "_paragraph_break"),
@@ -891,11 +899,29 @@ module.exports = grammar({
             ),
         ),
 
+        _tag_parameters: $ =>
+        choice(
+            token.immediate(
+                /[\t\v ]*\n/,
+            ),
+
+            seq(
+                token.immediate(
+                    /[\t\v ]+/,
+                ),
+
+                $.tag_parameters,
+
+                token.immediate(
+                    '\n'
+                ),
+            ),
+        ),
+
         tag: $ =>
         choice(
             $.ranged_tag,
             $.ranged_verbatim_tag,
-            $.carryover_tag_set,
         ),
 
         indent_segment1: $ => gen_indent_segment($, 1),
@@ -988,6 +1014,8 @@ module.exports = grammar({
 
 function gen_detached_modifier($, prefix, ...rest) {
     return seq(
+        optional($.carryover_tag_set),
+
         prefix,
 
         optional(
@@ -1001,6 +1029,7 @@ function gen_detached_modifier($, prefix, ...rest) {
     )
 }
 
+// TODO: add infecting tag
 function gen_heading($, level) {
     let lower_level_heading = []
     for (let i = 0; i + level < 6; i++) {
@@ -1065,24 +1094,22 @@ function gen_generic_list_item($, kind, level) {
         lower_level_list_items[0] = $["_any_list_item_level_" + (level + 1)]
     }
 
-    return prec.right(0,
-        gen_detached_modifier(
-            $,
+    return gen_detached_modifier(
+        $,
 
-            $[kind + "_list" + level + "_prefix"],
+        $[kind + "_list" + level + "_prefix"],
 
-            field(
-                "content",
-                choice(
-                    $.paragraph,
-                    $["indent_segment" + level],
-                ),
+        field(
+            "content",
+            choice(
+                $.paragraph,
+                $["indent_segment" + level],
             ),
+        ),
 
-            repeat(
-                choice(
-                    ...lower_level_list_items,
-                ),
+        repeat(
+            choice(
+                ...lower_level_list_items,
             ),
         ),
     );
@@ -1097,26 +1124,24 @@ function gen_quote($, level) {
         }
     }
 
-    return prec.right(0,
-        gen_detached_modifier(
-            $,
+    return gen_detached_modifier(
+        $,
 
-            $["quote" + level + "_prefix"],
+        $["quote" + level + "_prefix"],
 
-            field(
-                "content",
-                choice(
-                    $.paragraph,
-                    $["indent_segment" + level],
-                ),
+        field(
+            "content",
+            choice(
+                $.paragraph,
+                $["indent_segment" + level],
             ),
+        ),
 
-            optional(prec(1, alias($.line_break, "_line_break"))),
+        optional(prec(1, alias($.line_break, "_line_break"))),
 
-            repeat(
-                choice(
-                    ...lower_level_quotes,
-                ),
+        repeat(
+            choice(
+                ...lower_level_quotes,
             ),
         ),
     );
@@ -1144,6 +1169,7 @@ function gen_attached_modifier($, kind, verbatim, ranged) {
     );
 }
 
+// TODO: add carryover/infecting tag
 function gen_single_rangeable_detached_modifier($, kind) {
     return prec.right(
         gen_detached_modifier(
@@ -1171,6 +1197,7 @@ function gen_single_rangeable_detached_modifier($, kind) {
     );
 }
 
+// TODO: add carryover/infecting tag
 function gen_multi_rangeable_detached_modifier($, kind) {
     // NOTE: there used to be a choice rule with an optional standalone suffix
     // so if problems arise with standalone closing nodes, re-add that

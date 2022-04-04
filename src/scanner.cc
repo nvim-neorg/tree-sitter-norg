@@ -119,6 +119,7 @@ enum TokenType : char
     RANGED_VERBATIM_TAG_END,
 
     CARRYOVER_TAG,
+    INFECTING_TAG,
 
     LINK_MODIFIER,
 
@@ -379,8 +380,17 @@ class Scanner
                     return m_LastToken;
                 }
 
-                lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
+                lexer->result_symbol = m_LastToken = INFECTING_TAG;
                 return true;
+            }
+            else if (lexer->lookahead == '+' && !m_IsInVerbatimTag)
+            {
+                advance(lexer);
+                if (lexer->lookahead != '+')
+                {
+                    lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
+                    return true;
+                }
             }
 
             // The idea of the check_detached function is as follows:
