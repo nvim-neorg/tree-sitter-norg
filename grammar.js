@@ -604,25 +604,7 @@ module.exports = grammar({
                     "title",
                     $.paragraph_segment
                 ),
-
-                repeat(prec(1, alias($.line_break, "_line_break"))),
-
-                field(
-                    "subtext",
-                    repeat(
-                        choice(
-                            $.paragraph,
-                            $.strong_paragraph_delimiter,
-                            $.horizontal_line,
-                            $.heading,
-                            $.nestable_detached_modifier,
-                            $.rangeable_detached_modifier,
-                            $.tag,
-                            alias($.paragraph_break, "_paragraph_break"),
-                        ),
-                    ),
-                )
-            )
+            ),
         ),
 
         single_macro: $ => gen_single_rangeable_detached_modifier($, "macro"),
@@ -785,7 +767,7 @@ module.exports = grammar({
         ),
 
         carryover_tag_set: $ =>
-        prec.left(0,
+        prec.left(
             seq(
                 repeat1(
                     $.carryover_tag,
@@ -799,7 +781,7 @@ module.exports = grammar({
                         repeat1(
                             choice(
                                 $.nestable_detached_modifier,
-                                // $.rangeable_detached_modifier,
+                                $.rangeable_detached_modifier,
                                 $.ranged_tag,
                                 $.ranged_verbatim_tag,
                                 $.marker,
@@ -1214,7 +1196,7 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                         $.paragraph,
                         prec(1, alias($.line_break, "_line_break")),
                         alias($.paragraph_break, "_paragraph_break"),
-                        // $.rangeable_detached_modifier,
+                        $.rangeable_detached_modifier,
                         $.tag,
                     ),
                 ),
@@ -1237,13 +1219,13 @@ function gen_indent_segment_contents($, level) {
 
     if (level < 6) {
         return prec(1, choice(
-            // $.rangeable_detached_modifier,
+            $.rangeable_detached_modifier,
             $.tag,
             ...numbered_items.map(item => $[item + (level + 1)]),
         ))
     } else {
         return prec(1, choice(
-            // $.rangeable_detached_modifier,
+            $.rangeable_detached_modifier,
             $.tag
         ))
     }

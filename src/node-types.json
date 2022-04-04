@@ -247,6 +247,26 @@
             "named": true
           },
           {
+            "type": "multi_definition",
+            "named": true
+          },
+          {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
+            "type": "multi_footnote",
+            "named": true
+          },
+          {
+            "type": "multi_macro",
+            "named": true
+          },
+          {
+            "type": "multi_variable",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
@@ -260,6 +280,26 @@
           },
           {
             "type": "ranged_verbatim_tag",
+            "named": true
+          },
+          {
+            "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_drawer",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
+          },
+          {
+            "type": "single_macro",
+            "named": true
+          },
+          {
+            "type": "single_variable",
             "named": true
           }
         ]
@@ -1425,6 +1465,26 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
+          "type": "multi_drawer",
+          "named": true
+        },
+        {
+          "type": "multi_footnote",
+          "named": true
+        },
+        {
+          "type": "multi_macro",
+          "named": true
+        },
+        {
+          "type": "multi_variable",
+          "named": true
+        },
+        {
           "type": "ordered_list2",
           "named": true
         },
@@ -1477,6 +1537,26 @@
           "named": true
         },
         {
+          "type": "single_definition",
+          "named": true
+        },
+        {
+          "type": "single_drawer",
+          "named": true
+        },
+        {
+          "type": "single_footnote",
+          "named": true
+        },
+        {
+          "type": "single_macro",
+          "named": true
+        },
+        {
+          "type": "single_variable",
+          "named": true
+        },
+        {
           "type": "unordered_list2",
           "named": true
         },
@@ -1517,6 +1597,26 @@
         },
         {
           "type": "indent_segment_begin",
+          "named": true
+        },
+        {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
+          "type": "multi_drawer",
+          "named": true
+        },
+        {
+          "type": "multi_footnote",
+          "named": true
+        },
+        {
+          "type": "multi_macro",
+          "named": true
+        },
+        {
+          "type": "multi_variable",
           "named": true
         },
         {
@@ -1564,6 +1664,26 @@
           "named": true
         },
         {
+          "type": "single_definition",
+          "named": true
+        },
+        {
+          "type": "single_drawer",
+          "named": true
+        },
+        {
+          "type": "single_footnote",
+          "named": true
+        },
+        {
+          "type": "single_macro",
+          "named": true
+        },
+        {
+          "type": "single_variable",
+          "named": true
+        },
+        {
           "type": "unordered_list3",
           "named": true
         },
@@ -1603,6 +1723,26 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
+          "type": "multi_drawer",
+          "named": true
+        },
+        {
+          "type": "multi_footnote",
+          "named": true
+        },
+        {
+          "type": "multi_macro",
+          "named": true
+        },
+        {
+          "type": "multi_variable",
+          "named": true
+        },
+        {
           "type": "ordered_list4",
           "named": true
         },
@@ -1636,6 +1776,26 @@
         },
         {
           "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
+          "named": true
+        },
+        {
+          "type": "single_drawer",
+          "named": true
+        },
+        {
+          "type": "single_footnote",
+          "named": true
+        },
+        {
+          "type": "single_macro",
+          "named": true
+        },
+        {
+          "type": "single_variable",
           "named": true
         },
         {
@@ -1674,6 +1834,26 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
+          "type": "multi_drawer",
+          "named": true
+        },
+        {
+          "type": "multi_footnote",
+          "named": true
+        },
+        {
+          "type": "multi_macro",
+          "named": true
+        },
+        {
+          "type": "multi_variable",
+          "named": true
+        },
+        {
           "type": "ordered_list5",
           "named": true
         },
@@ -1699,6 +1879,26 @@
         },
         {
           "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
+          "named": true
+        },
+        {
+          "type": "single_drawer",
+          "named": true
+        },
+        {
+          "type": "single_footnote",
+          "named": true
+        },
+        {
+          "type": "single_macro",
+          "named": true
+        },
+        {
+          "type": "single_variable",
           "named": true
         },
         {
@@ -1733,6 +1933,26 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
+          "type": "multi_drawer",
+          "named": true
+        },
+        {
+          "type": "multi_footnote",
+          "named": true
+        },
+        {
+          "type": "multi_macro",
+          "named": true
+        },
+        {
+          "type": "multi_variable",
+          "named": true
+        },
+        {
           "type": "ordered_list6",
           "named": true
         },
@@ -1750,6 +1970,26 @@
         },
         {
           "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
+          "named": true
+        },
+        {
+          "type": "single_drawer",
+          "named": true
+        },
+        {
+          "type": "single_footnote",
+          "named": true
+        },
+        {
+          "type": "single_macro",
+          "named": true
+        },
+        {
+          "type": "single_variable",
           "named": true
         },
         {
@@ -1780,6 +2020,26 @@
           "named": true
         },
         {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
+          "type": "multi_drawer",
+          "named": true
+        },
+        {
+          "type": "multi_footnote",
+          "named": true
+        },
+        {
+          "type": "multi_macro",
+          "named": true
+        },
+        {
+          "type": "multi_variable",
+          "named": true
+        },
+        {
           "type": "paragraph",
           "named": true
         },
@@ -1789,6 +2049,26 @@
         },
         {
           "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
+          "named": true
+        },
+        {
+          "type": "single_drawer",
+          "named": true
+        },
+        {
+          "type": "single_footnote",
+          "named": true
+        },
+        {
+          "type": "single_macro",
+          "named": true
+        },
+        {
+          "type": "single_variable",
           "named": true
         },
         {
@@ -2150,112 +2430,6 @@
           }
         ]
       },
-      "subtext": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "_paragraph_break",
-            "named": false
-          },
-          {
-            "type": "carryover_tag_set",
-            "named": true
-          },
-          {
-            "type": "generic_list",
-            "named": true
-          },
-          {
-            "type": "heading1",
-            "named": true
-          },
-          {
-            "type": "heading2",
-            "named": true
-          },
-          {
-            "type": "heading3",
-            "named": true
-          },
-          {
-            "type": "heading4",
-            "named": true
-          },
-          {
-            "type": "heading5",
-            "named": true
-          },
-          {
-            "type": "heading6",
-            "named": true
-          },
-          {
-            "type": "horizontal_line",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_drawer",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
-            "type": "paragraph",
-            "named": true
-          },
-          {
-            "type": "quote",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "ranged_verbatim_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_drawer",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
-            "named": true
-          },
-          {
-            "type": "strong_paragraph_delimiter",
-            "named": true
-          }
-        ]
-      },
       "title": {
         "multiple": false,
         "required": true,
@@ -2299,15 +2473,47 @@
             "named": true
           },
           {
+            "type": "multi_definition",
+            "named": true
+          },
+          {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
+            "type": "multi_footnote",
+            "named": true
+          },
+          {
+            "type": "multi_macro",
+            "named": true
+          },
+          {
+            "type": "multi_variable",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "ranged_tag",
+            "type": "single_definition",
             "named": true
           },
           {
-            "type": "ranged_verbatim_tag",
+            "type": "single_drawer",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
+          },
+          {
+            "type": "single_macro",
+            "named": true
+          },
+          {
+            "type": "single_variable",
             "named": true
           }
         ]
@@ -2403,15 +2609,47 @@
             "named": true
           },
           {
+            "type": "multi_definition",
+            "named": true
+          },
+          {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
+            "type": "multi_footnote",
+            "named": true
+          },
+          {
+            "type": "multi_macro",
+            "named": true
+          },
+          {
+            "type": "multi_variable",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "ranged_tag",
+            "type": "single_definition",
             "named": true
           },
           {
-            "type": "ranged_verbatim_tag",
+            "type": "single_drawer",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
+          },
+          {
+            "type": "single_macro",
+            "named": true
+          },
+          {
+            "type": "single_variable",
             "named": true
           }
         ]
@@ -2507,15 +2745,47 @@
             "named": true
           },
           {
+            "type": "multi_definition",
+            "named": true
+          },
+          {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
+            "type": "multi_footnote",
+            "named": true
+          },
+          {
+            "type": "multi_macro",
+            "named": true
+          },
+          {
+            "type": "multi_variable",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "ranged_tag",
+            "type": "single_definition",
             "named": true
           },
           {
-            "type": "ranged_verbatim_tag",
+            "type": "single_drawer",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
+          },
+          {
+            "type": "single_macro",
+            "named": true
+          },
+          {
+            "type": "single_variable",
             "named": true
           }
         ]
@@ -2611,15 +2881,47 @@
             "named": true
           },
           {
+            "type": "multi_definition",
+            "named": true
+          },
+          {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
+            "type": "multi_footnote",
+            "named": true
+          },
+          {
+            "type": "multi_macro",
+            "named": true
+          },
+          {
+            "type": "multi_variable",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "ranged_tag",
+            "type": "single_definition",
             "named": true
           },
           {
-            "type": "ranged_verbatim_tag",
+            "type": "single_drawer",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
+          },
+          {
+            "type": "single_macro",
+            "named": true
+          },
+          {
+            "type": "single_variable",
             "named": true
           }
         ]
@@ -2715,15 +3017,47 @@
             "named": true
           },
           {
+            "type": "multi_definition",
+            "named": true
+          },
+          {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
+            "type": "multi_footnote",
+            "named": true
+          },
+          {
+            "type": "multi_macro",
+            "named": true
+          },
+          {
+            "type": "multi_variable",
+            "named": true
+          },
+          {
             "type": "paragraph",
             "named": true
           },
           {
-            "type": "ranged_tag",
+            "type": "single_definition",
             "named": true
           },
           {
-            "type": "ranged_verbatim_tag",
+            "type": "single_drawer",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
+          },
+          {
+            "type": "single_macro",
+            "named": true
+          },
+          {
+            "type": "single_variable",
             "named": true
           }
         ]
