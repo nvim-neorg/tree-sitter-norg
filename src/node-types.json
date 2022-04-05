@@ -593,10 +593,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "heading1_prefix",
           "named": true
         },
@@ -755,10 +751,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "heading2_prefix",
           "named": true
         },
@@ -913,10 +905,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "heading3_prefix",
           "named": true
         },
@@ -1067,10 +1055,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "heading4_prefix",
           "named": true
         },
@@ -1217,10 +1201,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "heading5_prefix",
           "named": true
         },
@@ -1362,10 +1342,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "heading6_prefix",
           "named": true
@@ -2388,13 +2364,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "marker_prefix",
           "named": true
@@ -2532,13 +2504,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "multi_definition_prefix",
           "named": true
@@ -2676,13 +2644,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "multi_drawer_prefix",
           "named": true
@@ -2820,13 +2784,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "multi_footnote_prefix",
           "named": true
@@ -2964,13 +2924,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "multi_macro_prefix",
           "named": true
@@ -3108,13 +3064,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "multi_variable_prefix",
           "named": true
@@ -3183,10 +3135,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "ordered_list1_prefix",
           "named": true
@@ -3296,10 +3244,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "ordered_list2_prefix",
           "named": true
         },
@@ -3400,10 +3344,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "ordered_list3_prefix",
           "named": true
         },
@@ -3496,10 +3436,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "ordered_list4_prefix",
           "named": true
         },
@@ -3584,10 +3520,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "ordered_list5_prefix",
           "named": true
         },
@@ -3660,13 +3592,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "ordered_list6_prefix",
           "named": true
@@ -4619,13 +4547,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "single_definition_prefix",
           "named": true
@@ -4697,13 +4621,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "single_drawer_prefix",
           "named": true
@@ -4775,13 +4695,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "single_footnote_prefix",
           "named": true
@@ -4853,13 +4769,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "single_macro_prefix",
           "named": true
@@ -4931,13 +4843,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "single_variable_prefix",
           "named": true
@@ -5467,10 +5375,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "ordered_list2",
           "named": true
         },
@@ -5579,10 +5483,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "ordered_list3",
           "named": true
         },
@@ -5683,10 +5583,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "ordered_list4",
           "named": true
         },
@@ -5779,10 +5675,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "ordered_list5",
           "named": true
         },
@@ -5867,10 +5759,6 @@
       "required": true,
       "types": [
         {
-          "type": "carryover_tag_set",
-          "named": true
-        },
-        {
           "type": "ordered_list6",
           "named": true
         },
@@ -5943,13 +5831,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "carryover_tag_set",
-          "named": true
-        },
         {
           "type": "unordered_list6_prefix",
           "named": true

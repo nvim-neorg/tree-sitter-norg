@@ -55,13 +55,6 @@ module.exports = grammar({
         //   requires right precedence
         // - so we end up with wanting to pull into two directions, which is...
         //   difficult :sadge:
-        [$.quote1],
-        [$.quote2],
-        [$.quote3],
-        [$.quote4],
-        [$.quote5],
-        [$.quote6],
-
         [$.ordered_list1],
         [$.ordered_list2],
         [$.ordered_list3],
@@ -586,6 +579,12 @@ module.exports = grammar({
             ),
         ),
 
+        _quote1_prefix: $ => gen_quote_prefix($, 1),
+        _quote2_prefix: $ => gen_quote_prefix($, 2),
+        _quote3_prefix: $ => gen_quote_prefix($, 3),
+        _quote4_prefix: $ => gen_quote_prefix($, 4),
+        _quote5_prefix: $ => gen_quote_prefix($, 5),
+        _quote6_prefix: $ => gen_quote_prefix($, 6),
         quote1: $ => gen_quote($, 1),
         quote2: $ => gen_quote($, 2),
         quote3: $ => gen_quote($, 3),
@@ -804,10 +803,6 @@ module.exports = grammar({
             ),
 
             $._tag_parameters,
-
-            repeat(
-                alias($.paragraph_break, "_paragraph_break"),
-            ),
         ),
 
         infecting_tag_set: $ =>
@@ -829,16 +824,12 @@ module.exports = grammar({
             ),
 
             $._tag_parameters,
-
-            repeat(
-                alias($.paragraph_break, "_paragraph_break"),
-            ),
         ),
 
         tag_name_element: _ =>
         seq(
-            token(/[a-z0-9_\-\+]+/),
-            token(/[a-zA-Z0-9_\-\+]*/),
+            token(/[a-z0-9_\-]/),
+            token(/[a-zA-Z0-9_\-]*/),
         ),
 
         tag_name: $ =>
@@ -1014,7 +1005,7 @@ module.exports = grammar({
 
 function gen_detached_modifier($, prefix, ...rest) {
     return seq(
-        optional($.carryover_tag_set),
+        // optional($.carryover_tag_set),
 
         prefix,
 
@@ -1115,33 +1106,46 @@ function gen_generic_list_item($, kind, level) {
     );
 }
 
+function gen_quote_prefix($, level) {
+    return prec.left(1,
+        seq(
+            optional($.carryover_tag_set),
+
+            $["quote" + level + "_prefix"],
+
+            optional(
+                field(
+                    "state",
+                    $.any_todo_state,
+                ),
+            ),
+        )
+    )
+}
+
 function gen_quote($, level) {
     lower_level_quotes = [];
 
-    if (level < 6) {
-        for (let i = 0; i + level < 6; i++) {
-            lower_level_quotes[i] = $["quote" + (i + 1 + level)]
-        }
+    for (let i = 0; i + level < 6; i++) {
+        lower_level_quotes[i] = $["quote" + (i + 1 + level)]
     }
 
-    return gen_detached_modifier(
-        $,
+    return prec.right(
+        seq(
+            $["_quote" + level + "_prefix"],
 
-        $["quote" + level + "_prefix"],
-
-        field(
-            "content",
-            choice(
-                $.paragraph,
-                $["indent_segment" + level],
+            field(
+                "content",
+                choice(
+                    $.paragraph,
+                    $["indent_segment" + level],
+                ),
             ),
-        ),
 
-        optional(prec(1, alias($.line_break, "_line_break"))),
-
-        repeat(
-            choice(
-                ...lower_level_quotes,
+            repeat(
+                choice(
+                    ...lower_level_quotes,
+                ),
             ),
         ),
     );
