@@ -1022,40 +1022,44 @@ function gen_heading($, level) {
     }
 
     return prec.right(0,
-        gen_detached_modifier(
-            $,
+        seq(
+            optional($.infecting_tag_set),
 
-            $["heading" + level + "_prefix"],
+            gen_detached_modifier(
+                $,
 
-            field(
-                "title",
-                $.paragraph_segment,
-            ),
+                $["heading" + level + "_prefix"],
 
-            repeat(prec(1, alias($.line_break, "_line_break"))),
+                field(
+                    "title",
+                    $.paragraph_segment,
+                ),
 
-            field(
-                "content",
+                repeat(prec(1, alias($.line_break, "_line_break"))),
 
-                repeat(
-                    choice(
-                        $.paragraph,
+                field(
+                    "content",
 
-                        alias($.paragraph_break, "_paragraph_break"),
-                        $.nestable_detached_modifier,
-                        $.rangeable_detached_modifier,
-                        $.tag,
-                        $.horizontal_line,
+                    repeat(
+                        choice(
+                            $.paragraph,
 
-                        ...lower_level_heading,
+                            alias($.paragraph_break, "_paragraph_break"),
+                            $.nestable_detached_modifier,
+                            $.rangeable_detached_modifier,
+                            $.tag,
+                            $.horizontal_line,
+
+                            ...lower_level_heading,
+                        )
                     )
-                )
-            ),
+                ),
 
-            optional(
-                $.weak_paragraph_delimiter,
-            )
-        )
+                optional(
+                    $.weak_paragraph_delimiter,
+                ),
+            ),
+        ),
     );
 }
 
@@ -1153,26 +1157,30 @@ function gen_attached_modifier($, kind, verbatim, ranged) {
 // TODO: add carryover/infecting tag
 function gen_single_rangeable_detached_modifier($, kind) {
     return prec.right(
-        gen_detached_modifier(
-            $,
+        seq(
+            optional($.infecting_tag_set),
 
-            $["single_" + kind + "_prefix"],
+            gen_detached_modifier(
+                $,
 
-            field(
-                "title",
-                $.paragraph_segment,
-            ),
+                $["single_" + kind + "_prefix"],
 
-            repeat(
-                prec(1, choice(
-                    alias($.line_break, "_line_break"),
-                    alias($.paragraph_break, "_paragraph_break"),
-                )),
-            ),
+                field(
+                    "title",
+                    $.paragraph_segment,
+                ),
 
-            field(
-                "content",
-                $.paragraph,
+                repeat(
+                    prec(1, choice(
+                        alias($.line_break, "_line_break"),
+                        alias($.paragraph_break, "_paragraph_break"),
+                    )),
+                ),
+
+                field(
+                    "content",
+                    $.paragraph,
+                ),
             ),
         ),
     );
@@ -1182,7 +1190,10 @@ function gen_single_rangeable_detached_modifier($, kind) {
 function gen_multi_rangeable_detached_modifier($, kind) {
     // NOTE: there used to be a choice rule with an optional standalone suffix
     // so if problems arise with standalone closing nodes, re-add that
-    return gen_detached_modifier(
+    return seq(
+        optional($.infecting_tag_set),
+
+        gen_detached_modifier(
             $,
 
             $["multi_" + kind + "_prefix"],
@@ -1214,7 +1225,8 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                 "end",
                 $["multi_" + kind + "_suffix"],
             ),
-        );
+        ),
+    );
 }
 
 function gen_indent_segment_contents($, level) {

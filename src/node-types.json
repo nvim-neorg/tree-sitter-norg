@@ -601,6 +601,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "weak_paragraph_delimiter",
           "named": true
         }
@@ -763,6 +767,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "weak_paragraph_delimiter",
           "named": true
         }
@@ -921,6 +929,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "weak_paragraph_delimiter",
           "named": true
         }
@@ -1075,6 +1087,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "weak_paragraph_delimiter",
           "named": true
         }
@@ -1225,6 +1241,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "weak_paragraph_delimiter",
           "named": true
         }
@@ -1368,6 +1388,10 @@
         },
         {
           "type": "heading6_prefix",
+          "named": true
+        },
+        {
+          "type": "infecting_tag_set",
           "named": true
         },
         {
@@ -2540,6 +2564,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "multi_definition_prefix",
           "named": true
         }
@@ -2681,6 +2709,10 @@
       "types": [
         {
           "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "infecting_tag_set",
           "named": true
         },
         {
@@ -2828,6 +2860,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "multi_footnote_prefix",
           "named": true
         }
@@ -2972,6 +3008,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "multi_macro_prefix",
           "named": true
         }
@@ -3113,6 +3153,10 @@
       "types": [
         {
           "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "infecting_tag_set",
           "named": true
         },
         {
@@ -4627,6 +4671,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "single_definition_prefix",
           "named": true
         }
@@ -4702,6 +4750,10 @@
       "types": [
         {
           "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "infecting_tag_set",
           "named": true
         },
         {
@@ -4783,6 +4835,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "single_footnote_prefix",
           "named": true
         }
@@ -4861,6 +4917,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "single_macro_prefix",
           "named": true
         }
@@ -4936,6 +4996,10 @@
       "types": [
         {
           "type": "carryover_tag_set",
+          "named": true
+        },
+        {
+          "type": "infecting_tag_set",
           "named": true
         },
         {
