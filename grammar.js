@@ -48,13 +48,13 @@ module.exports = grammar({
         [$.indent_segment5],
         [$.indent_segment6],
 
-        // TODO: refactor: we do not want these many conflicts. The problem:
-        // - carryover tag inclusion into the detached modifier wants left
-        //   precedence
-        // - but grouping of nested detached mods into the higher level mod
-        //   requires right precedence
-        // - so we end up with wanting to pull into two directions, which is...
-        //   difficult :sadge:
+        [$.quote1],
+        [$.quote2],
+        [$.quote3],
+        [$.quote4],
+        [$.quote5],
+        [$.quote6],
+
         [$.ordered_list1],
         [$.ordered_list2],
         [$.ordered_list3],
@@ -579,12 +579,6 @@ module.exports = grammar({
             ),
         ),
 
-        _quote1_prefix: $ => gen_quote_prefix($, 1),
-        _quote2_prefix: $ => gen_quote_prefix($, 2),
-        _quote3_prefix: $ => gen_quote_prefix($, 3),
-        _quote4_prefix: $ => gen_quote_prefix($, 4),
-        _quote5_prefix: $ => gen_quote_prefix($, 5),
-        _quote6_prefix: $ => gen_quote_prefix($, 6),
         quote1: $ => gen_quote($, 1),
         quote2: $ => gen_quote($, 2),
         quote3: $ => gen_quote($, 3),
@@ -1005,7 +999,7 @@ module.exports = grammar({
 
 function gen_detached_modifier($, prefix, ...rest) {
     return seq(
-        // optional($.carryover_tag_set),
+        optional($.carryover_tag_set),
 
         prefix,
 
@@ -1106,23 +1100,6 @@ function gen_generic_list_item($, kind, level) {
     );
 }
 
-function gen_quote_prefix($, level) {
-    return prec.left(1,
-        seq(
-            optional($.carryover_tag_set),
-
-            $["quote" + level + "_prefix"],
-
-            optional(
-                field(
-                    "state",
-                    $.any_todo_state,
-                ),
-            ),
-        )
-    )
-}
-
 function gen_quote($, level) {
     lower_level_quotes = [];
 
@@ -1130,22 +1107,22 @@ function gen_quote($, level) {
         lower_level_quotes[i] = $["quote" + (i + 1 + level)]
     }
 
-    return prec.right(
-        seq(
-            $["_quote" + level + "_prefix"],
+    return gen_detached_modifier(
+        $,
 
-            field(
-                "content",
-                choice(
-                    $.paragraph,
-                    $["indent_segment" + level],
-                ),
+        $["quote" + level + "_prefix"],
+
+        field(
+            "content",
+            choice(
+                $.paragraph,
+                $["indent_segment" + level],
             ),
+        ),
 
-            repeat(
-                choice(
-                    ...lower_level_quotes,
-                ),
+        repeat(
+            choice(
+                ...lower_level_quotes,
             ),
         ),
     );
