@@ -486,6 +486,10 @@
             "named": true
           },
           {
+            "type": "macro_tag",
+            "named": true
+          },
+          {
             "type": "multi_definition",
             "named": true
           },
@@ -652,6 +656,10 @@
             "named": true
           },
           {
+            "type": "macro_tag",
+            "named": true
+          },
+          {
             "type": "multi_definition",
             "named": true
           },
@@ -814,6 +822,10 @@
             "named": true
           },
           {
+            "type": "macro_tag",
+            "named": true
+          },
+          {
             "type": "multi_definition",
             "named": true
           },
@@ -972,6 +984,10 @@
             "named": true
           },
           {
+            "type": "macro_tag",
+            "named": true
+          },
+          {
             "type": "multi_definition",
             "named": true
           },
@@ -1126,6 +1142,10 @@
             "named": true
           },
           {
+            "type": "macro_tag",
+            "named": true
+          },
+          {
             "type": "multi_definition",
             "named": true
           },
@@ -1276,6 +1296,10 @@
             "named": true
           },
           {
+            "type": "macro_tag",
+            "named": true
+          },
+          {
             "type": "multi_definition",
             "named": true
           },
@@ -1418,6 +1442,10 @@
           "named": true
         },
         {
+          "type": "macro_tag",
+          "named": true
+        },
+        {
           "type": "multi_definition",
           "named": true
         },
@@ -1549,6 +1577,10 @@
           "named": true
         },
         {
+          "type": "macro_tag",
+          "named": true
+        },
+        {
           "type": "multi_definition",
           "named": true
         },
@@ -1668,6 +1700,10 @@
           "named": true
         },
         {
+          "type": "macro_tag",
+          "named": true
+        },
+        {
           "type": "multi_definition",
           "named": true
         },
@@ -1775,6 +1811,10 @@
           "named": true
         },
         {
+          "type": "macro_tag",
+          "named": true
+        },
+        {
           "type": "multi_definition",
           "named": true
         },
@@ -1870,6 +1910,10 @@
           "named": true
         },
         {
+          "type": "macro_tag",
+          "named": true
+        },
+        {
           "type": "multi_definition",
           "named": true
         },
@@ -1950,6 +1994,10 @@
       "types": [
         {
           "type": "indent_segment_begin",
+          "named": true
+        },
+        {
+          "type": "macro_tag",
           "named": true
         },
         {
@@ -2477,6 +2525,10 @@
             "named": false
           },
           {
+            "type": "macro_tag",
+            "named": true
+          },
+          {
             "type": "multi_definition",
             "named": true
           },
@@ -2623,6 +2675,10 @@
           {
             "type": "_paragraph_break",
             "named": false
+          },
+          {
+            "type": "macro_tag",
+            "named": true
           },
           {
             "type": "multi_definition",
@@ -2773,6 +2829,10 @@
             "named": false
           },
           {
+            "type": "macro_tag",
+            "named": true
+          },
+          {
             "type": "multi_definition",
             "named": true
           },
@@ -2921,6 +2981,10 @@
             "named": false
           },
           {
+            "type": "macro_tag",
+            "named": true
+          },
+          {
             "type": "multi_definition",
             "named": true
           },
@@ -3067,6 +3131,10 @@
           {
             "type": "_paragraph_break",
             "named": false
+          },
+          {
+            "type": "macro_tag",
+            "named": true
           },
           {
             "type": "multi_definition",

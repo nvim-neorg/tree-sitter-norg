@@ -48,10 +48,6 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "macro_tag"
-                },
-                {
-                  "type": "SYMBOL",
                   "name": "horizontal_line"
                 },
                 {
@@ -6117,6 +6113,10 @@
         {
           "type": "SYMBOL",
           "name": "ranged_verbatim_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "macro_tag"
         }
       ]
     },

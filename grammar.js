@@ -233,7 +233,6 @@ module.exports = grammar({
                         $.nestable_detached_modifier,
                         $.rangeable_detached_modifier,
                         $.tag,
-                        $.macro_tag,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
@@ -688,6 +687,13 @@ module.exports = grammar({
         ranged_tag_end: $ => gen_ranged_tag_end($, "ranged"),
 
         // TODO: add carryover/infecting tag
+        // FIXME: how do carryover tags affect a ranged vs. how do infecting
+        // tags do?
+        // NOTE: since detached mods can optionally take an infecting tag set
+        // (which affects the entire object) and also a carryover tag set (which
+        // affects only the first part of the object), they must strictly occur
+        // in this order. I would like to enforce this for ranged tags, too,
+        // simply to keep things consistent and predictable.
         ranged_tag: $ => gen_ranged_tag($, "ranged"),
 
         ranged_verbatim_tag_content: $ =>
@@ -727,6 +733,9 @@ module.exports = grammar({
 
         infecting_tag: $ => gen_single_tag($, "infecting"),
 
+        // TODO: why are tag name elements restricted like this?
+        // (I don't necessarily object to it, but I would like to understand it)
+        // NOTE: I removed the `+`-sign from being allowed
         tag_name_element: _ =>
         seq(
             token(/[a-z0-9_\-]/),
@@ -814,6 +823,7 @@ module.exports = grammar({
         choice(
             $.ranged_tag,
             $.ranged_verbatim_tag,
+            $.macro_tag,
         ),
 
         indent_segment1: $ => gen_indent_segment($, 1),
