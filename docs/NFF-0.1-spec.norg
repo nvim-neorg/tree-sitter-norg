@@ -56,9 +56,10 @@
 
 ** Characters
    A _Norg_ file is made up of /characters/.
-   A <character> is any Unicode [code point].
+   A <character> is any Unicode {^ code point}.
 
-   [code point]{https://en.wikipedia.org/wiki/Code_point}
+   ^ code point
+   {https://en.wikipedia.org/wiki/Code_point}
 
 *** Whitespace
     A {# character} is considered to be *whitespace* if it is any of the following:
@@ -66,7 +67,7 @@
     - A line feed `U+000A`
     - A form feed `U+000C`
     - A carriage return `U+000D`
-    - Any code point in the [Unicode Zs general category] (includes the normal space `U+0020`)
+    - Any code point in the {^ Unicode Zs general category} (includes the normal space `U+0020`)
 
     Any combination of the above is also considered whitespace.
 
@@ -79,10 +80,11 @@
     - A single carriage return
     - A carriage return immediately followed by a line feed
 
-    ^ Blank lines are irrelevant in _Norg_ because standalone whitespace has no semantic relevance.
+    ^ Blank lines...
+    ...are irrelevant in _Norg_ because standalone whitespace has no semantic relevance.
 
-    [Unicode Zs general category]{https://www.fileformat.info/info/unicode/category/Zs/list.htm}
-    %Here is a parser bug because this should not be part of the footnote%
+    ^ Unicode Zs general category
+    {https://www.fileformat.info/info/unicode/category/Zs/list.htm}
 
 *** Alphanumeric Characters
     An alphanumeric character is any character that *isn't* punctuation, nor is it any special
@@ -106,7 +108,7 @@
 
 ** Words
    The _Norg_ format is designed to be parsed on a word-by-word basis from left-to-right through
-   the entire document /in a single pass/. This is possible because the language is [free-form],
+   the entire document /in a single pass/. This is possible because the language is {^ free-form},
    meaning that whitespace has no semantic meaning, and because the markup follows strict rules
    which are outlined in the later sections of this document.
 
@@ -114,10 +116,10 @@
    {# punctuation} nor other {# special character}s.
 
 ** Paragraph Segments
-   {# Words} are first combined into {# paragraph segments}. A segment may contain any inline
-   element:
-   - Any of the {# attached modifiers}
-   - Any of the {# linkables}
+   {# Words} are first combined into {# paragraph segments}. A paragraph segment may then contain
+   any inline element of type:
+   - {# attached modifiers}
+   - {# linkables}
 
    A {# line ending} terminates the paragraph segment. This means that a paragraph segment is
    essentially just a line of text:
@@ -148,15 +150,15 @@
   The following list outlines all valid *detached* modifiers. The list also adds three possible
   properties to each category which will be explained in more detail below.
   - `*`: {# Headings} (structural, nestable)
-  - `%`: {# Markers} (structural)
+  - `%`: {# Markers}
   - `-`: {# Unordered Lists} (nestable)
   - `~`: {# Ordered Lists} (nestable)
   - `>`: {# Quotes} (nestable)
   - `$`: {# Definitions} (range-able)
   - `^`: {# Footnotes} (range-able)
-  - | | `/`: add drawers/details (range-able)
-  - | | `&`: add variables (range-able)
-  - | | `=`: add macros (range-able)
+  - | | `<`: add drawers/details (range-able)
+  - | | `&`: add variables (range-able, logical (?)) (logical cannot be linked to)
+  - | | `=`: add macros (range-able, logical (?)) (logical cannot be linked to)
 
 ** Standard Detached Modifiers
    The normal rules for the /standard/ detached modifiers are simple as outlined above. An
@@ -165,9 +167,16 @@
    They then affect the interpretation of the following `paragraph_segment` which generally means
    they extend up to the end of the current line.
 
+*** Markers
+    @code norg
+    % Marker
+    @end
+
+    %TODO: motivate use case of markers now that they are no longer structural%
+
 ** Nestable Detached Modifiers
    Nestable detached modifiers are a kind which may be repeated multiple times in order to produce a
-   _nested_ object of the given type. The nesting levels are capped at 6 in the [tree-sitter] parser
+   _nested_ object of the given type. The nesting levels are capped at 6 in the {^ tree-sitter} parser
    but longer repetitions of the same modifier are allowed, falling back to the sixth nesting level.
    Other parsers may choose to support higher nesting levels.
 
@@ -288,8 +297,8 @@
    %TODO: I'm not sure I fully understand this footnote. It would help to see an example here.%
 
 ** Structural Detached Modifiers
-   The `*` (headings) and `%` (marker) detached modifiers also have the _structural_ property,
-   meaning that these objects *structure* the _Norg_ document.
+   The `*` (headings) detached modifiers also have the _structural_ property, meaning that these
+   objects *structure* the _Norg_ document.
    This detached modifier type only affects the following `paragraph_segment` (just like the
    {# standard detached modifiers}).
 
@@ -307,14 +316,6 @@
     Although headings are both structural /and/ nestable, the former takes precedence over the
     latter, meaning that headings only affect a `paragraph_segment`. This is for user convenience as
     it does not require an empty line right below a heading.
-
-*** Markers
-    @code norg
-    % Marker
-    @end
-
-    Markers are purely structural elements which split the entire document right down to the root
-    node. They simply serve as a guide to splitting your document into several meta-sections.
 
 *** Delimiting Modifiers
     Although not technically a detached modifier, we would like to insert a note on
@@ -414,7 +415,7 @@
     @end
 
 *** | | Drawers/Details
-    The `/` char.
+    The `<` char.
 
 *** | | Variables
     The `&` char.
@@ -807,7 +808,7 @@
 
 ** Link Location
    The link location is defined through curly braces (`{}`) and contains the physical location
-   that the user would like to link to. Inside of these curly braces you can find one of four
+   that the user would like to link to. Inside of these curly braces you can find one of five
    types of data:
    - A {# file location}
    - A URL (most commonly to an external resource)
@@ -893,7 +894,7 @@
 **** The File Linkable (`/`)
      Sometimes you may want to link to an external file that is not a _Norg_ file.
      In that case you may use `{/ /path/to/my/file.txt}` (notice the mandatory space after the `/`
-     char, just like with the {**** detached modifier}s). Paths are relative to the _Norg_
+     char, just like with the {# detached modifier}s). Paths are relative to the _Norg_
      file that contains the link.
      %TODO: shouldn't we support the same kind of file path processing as we do within norg files?%
 
@@ -901,7 +902,7 @@
      %TODO%
 
 **** The Magic Char (`#`)
-     Sometimes you simply want to be lazy, or you want to link to an {**** inline linkables}[inline
+     Sometimes you simply want to be lazy, or you want to link to an {# inline linkables}[inline
      linkable] that does not have a dedicated modifier to denote it - in these scenarios you would
      use the magic char: `#`. It links to /any/ item type. The syntax is exactly the same as with
      the other modifiers: `{# My Location}`.
@@ -971,7 +972,7 @@
    Here we /declare/ the anchor twice, then /define/ the anchor at the very bottom.
    The `[Neorg]` declarations point to the definition, and then the definition points to the
    website.
-   %TODO: we should clarify that this is _not_ a two-step link but that clicking the [Neorg] link%
+   %TODO: we should clarify that this is _not_ a two-step link but that clicking the {^ Neorg} link%
    %should immediately open the link location%
    %I.e. we should make the difference to footnotes more clear%
 
@@ -1087,7 +1088,7 @@
 
   Is valid, however in this case:
   @code norg
-  *i am {bold?*}
+  *am I {* bold?} - No!
   @end
   The link takes precedence, and no bold is rendered.
 
