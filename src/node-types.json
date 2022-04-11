@@ -286,6 +286,10 @@
           "named": true
         },
         {
+          "type": "macro_tag",
+          "named": true
+        },
+        {
           "type": "marker",
           "named": true
         },
@@ -2356,6 +2360,32 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "macro_tag",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "tag_parameters",
+          "named": true
+        }
+      ]
     }
   },
   {

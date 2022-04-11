@@ -174,7 +174,7 @@ module.exports = grammar({
         $.ranged_verbatim_tag_prefix,
         $.ranged_verbatim_tag_end_prefix,
 
-        $.macro_invocation_prefix,
+        $.macro_tag_prefix,
         $.carryover_tag_prefix,
         $.infecting_tag_prefix,
 
@@ -233,6 +233,7 @@ module.exports = grammar({
                         $.nestable_detached_modifier,
                         $.rangeable_detached_modifier,
                         $.tag,
+                        $.macro_tag,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
@@ -684,46 +685,10 @@ module.exports = grammar({
             ),
         ),
 
-        ranged_tag_end: $ =>
-        seq(
-            alias(
-                $.ranged_tag_end_prefix,
-                "_prefix",
-            ),
-
-            alias(
-                token.immediate("end"),
-                "_name",
-            ),
-        ),
+        ranged_tag_end: $ => gen_ranged_tag_end($, "ranged"),
 
         // TODO: add carryover/infecting tag
-        // TODO: also: refactor me!
-        ranged_tag: $ =>
-        prec.right(0,
-            seq(
-                alias(
-                    $.ranged_tag_prefix,
-                    "_prefix"
-                ),
-
-                field(
-                    "name",
-                    $.tag_name,
-                ),
-
-                $._tag_parameters,
-
-                field(
-                    "content",
-                    optional(
-                        $.ranged_tag_content,
-                    ),
-                ),
-
-                optional($.ranged_tag_end),
-            ),
-        ),
+        ranged_tag: $ => gen_ranged_tag($, "ranged"),
 
         ranged_verbatim_tag_content: $ =>
         prec.right(0,
@@ -741,104 +706,26 @@ module.exports = grammar({
             ),
         ),
 
-        ranged_verbatim_tag_end: $ =>
-        seq(
-            alias(
-                $.ranged_verbatim_tag_end_prefix,
-                "_prefix",
-            ),
-
-            alias(
-                token.immediate("end"),
-                "_name",
-            ),
-        ),
+        ranged_verbatim_tag_end: $ => gen_ranged_tag_end($, "ranged_verbatim"),
 
         // TODO: add carryover/infecting tag
-        // TODO: also: refactor me!
-        ranged_verbatim_tag: $ =>
-        prec.right(0,
-            seq(
-                alias(
-                    $.ranged_verbatim_tag_prefix,
-                    "_prefix"
-                ),
+        ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim"),
 
-                field(
-                    "name",
-                    $.tag_name,
-                ),
-
-                $._tag_parameters,
-
-                field(
-                    "content",
-                    optional(
-                        $.ranged_verbatim_tag_content,
-                    ),
-                ),
-
-                optional($.ranged_verbatim_tag_end),
-            ),
-        ),
-
-        // TODO: refactor me!
-        macro_invocation: $ =>
-        seq(
-            alias(
-                $.macro_invocation_prefix,
-                "_prefix",
-            ),
-
-            field(
-                "name",
-                $.tag_name,
-            ),
-
-            $._tag_parameters,
-        ),
+        macro_tag: $ => gen_single_tag($, "macro"),
 
         carryover_tag_set: $ =>
         repeat1(
             $.carryover_tag,
         ),
 
-        // TODO: refactor me!
-        carryover_tag: $ =>
-        seq(
-            alias(
-                $.carryover_tag_prefix,
-                "_prefix",
-            ),
-
-            field(
-                "name",
-                $.tag_name,
-            ),
-
-            $._tag_parameters,
-        ),
+        carryover_tag: $ => gen_single_tag($, "carryover"),
 
         infecting_tag_set: $ =>
         repeat1(
             $.infecting_tag,
         ),
 
-        // TODO: refactor me!
-        infecting_tag: $ =>
-        seq(
-            alias(
-                $.infecting_tag_prefix,
-                "_prefix",
-            ),
-
-            field(
-                "name",
-                $.tag_name,
-            ),
-
-            $._tag_parameters,
-        ),
+        infecting_tag: $ => gen_single_tag($, "infecting"),
 
         tag_name_element: _ =>
         seq(
@@ -1017,6 +904,53 @@ module.exports = grammar({
     }
 });
 
+function gen_single_tag($, kind) {
+    return seq(
+        alias(
+            $[kind + "_tag_prefix"],
+            "_prefix",
+        ),
+
+        field(
+            "name",
+            $.tag_name,
+        ),
+
+        $._tag_parameters,
+    );
+}
+
+function gen_ranged_tag($, kind) {
+    return prec.right(0,
+        seq(
+            gen_single_tag($, kind),
+
+            field(
+                "content",
+                optional(
+                    $[kind + "_tag_content"],
+                ),
+            ),
+
+            optional($[kind + "_tag_end"]),
+        ),
+    );
+}
+
+function gen_ranged_tag_end($, kind) {
+    return seq(
+        alias(
+            $[kind + "_tag_end_prefix"],
+            "_prefix",
+        ),
+
+        alias(
+            token.immediate("end"),
+            "_name",
+        ),
+    );
+}
+
 function gen_detached_modifier($, prefix, ...rest) {
     return seq(
         optional($.carryover_tag_set),
@@ -1031,10 +965,9 @@ function gen_detached_modifier($, prefix, ...rest) {
         ),
 
         ...rest,
-    )
+    );
 }
 
-// TODO: add infecting tag
 function gen_heading($, level) {
     let lower_level_heading = []
     for (let i = 0; i + level < 6; i++) {
@@ -1174,7 +1107,6 @@ function gen_attached_modifier($, kind, verbatim, ranged) {
     );
 }
 
-// TODO: add carryover/infecting tag
 function gen_single_rangeable_detached_modifier($, kind) {
     return prec.right(
         seq(
@@ -1206,7 +1138,6 @@ function gen_single_rangeable_detached_modifier($, kind) {
     );
 }
 
-// TODO: add carryover/infecting tag
 function gen_multi_rangeable_detached_modifier($, kind) {
     // NOTE: there used to be a choice rule with an optional standalone suffix
     // so if problems arise with standalone closing nodes, re-add that

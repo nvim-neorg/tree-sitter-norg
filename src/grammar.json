@@ -48,6 +48,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "macro_tag"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "horizontal_line"
                 },
                 {
@@ -5602,25 +5606,30 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_tag_prefix"
-            },
-            "named": false,
-            "value": "_prefix"
-          },
-          {
-            "type": "FIELD",
-            "name": "name",
-            "content": {
-              "type": "SYMBOL",
-              "name": "tag_name"
-            }
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_tag_parameters"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "ranged_tag_prefix"
+                },
+                "named": false,
+                "value": "_prefix"
+              },
+              {
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "tag_name"
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_tag_parameters"
+              }
+            ]
           },
           {
             "type": "FIELD",
@@ -5730,25 +5739,30 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "ranged_verbatim_tag_prefix"
-            },
-            "named": false,
-            "value": "_prefix"
-          },
-          {
-            "type": "FIELD",
-            "name": "name",
-            "content": {
-              "type": "SYMBOL",
-              "name": "tag_name"
-            }
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_tag_parameters"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "ranged_verbatim_tag_prefix"
+                },
+                "named": false,
+                "value": "_prefix"
+              },
+              {
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "tag_name"
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_tag_parameters"
+              }
+            ]
           },
           {
             "type": "FIELD",
@@ -5781,14 +5795,14 @@
         ]
       }
     },
-    "macro_invocation": {
+    "macro_tag": {
       "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "macro_invocation_prefix"
+            "name": "macro_tag_prefix"
           },
           "named": false,
           "value": "_prefix"
@@ -7409,7 +7423,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "macro_invocation_prefix"
+      "name": "macro_tag_prefix"
     },
     {
       "type": "SYMBOL",
