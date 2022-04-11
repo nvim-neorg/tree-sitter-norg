@@ -211,7 +211,7 @@ class Scanner
         if (lexer->eof(lexer) || !lexer->lookahead)
         {
             advance(lexer);
-            reset_active_modifiers();
+            reset_ranged_active_modifiers();
             return false;
         }
 
@@ -238,7 +238,7 @@ class Scanner
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
-                reset_active_modifiers();
+                reset_ranged_active_modifiers();
             }
 
             return true;
@@ -546,7 +546,7 @@ class Scanner
 
                 if (lexer->eof(lexer))
                 {
-                    reset_active_modifiers();
+                    reset_ranged_active_modifiers();
                     return false;
                 }
 
@@ -782,7 +782,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = result;
 
-                reset_active_modifiers();
+                reset_ranged_active_modifiers();
                 return result;
             }
 
@@ -810,7 +810,7 @@ class Scanner
 
                 lexer->result_symbol = m_LastToken = result;
 
-                reset_active_modifiers();
+                reset_ranged_active_modifiers();
                 return result;
             }
         }
@@ -1184,6 +1184,12 @@ class Scanner
                     if (!m_RangedActiveModifiers[i])
                         m_ActiveModifiers.reset(i);
             }
+    }
+
+    void reset_ranged_active_modifiers()
+    {
+            m_ActiveModifiers.reset();
+            m_RangedActiveModifiers.reset();
     }
 
    private:
