@@ -5781,6 +5781,32 @@
         ]
       }
     },
+    "macro_invocation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "macro_invocation_prefix"
+          },
+          "named": false,
+          "value": "_prefix"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "tag_name"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_tag_parameters"
+        }
+      ]
+    },
     "carryover_tag_set": {
       "type": "REPEAT1",
       "content": {
@@ -7380,6 +7406,10 @@
     {
       "type": "SYMBOL",
       "name": "ranged_verbatim_tag_end_prefix"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "macro_invocation_prefix"
     },
     {
       "type": "SYMBOL",

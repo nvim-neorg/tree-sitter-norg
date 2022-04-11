@@ -174,6 +174,7 @@ module.exports = grammar({
         $.ranged_verbatim_tag_prefix,
         $.ranged_verbatim_tag_end_prefix,
 
+        $.macro_invocation_prefix,
         $.carryover_tag_prefix,
         $.infecting_tag_prefix,
 
@@ -779,6 +780,22 @@ module.exports = grammar({
 
                 optional($.ranged_verbatim_tag_end),
             ),
+        ),
+
+        // TODO: refactor me!
+        macro_invocation: $ =>
+        seq(
+            alias(
+                $.macro_invocation_prefix,
+                "_prefix",
+            ),
+
+            field(
+                "name",
+                $.tag_name,
+            ),
+
+            $._tag_parameters,
         ),
 
         carryover_tag_set: $ =>

@@ -118,6 +118,7 @@ enum TokenType : char
     RANGED_VERBATIM_TAG,
     RANGED_VERBATIM_TAG_END,
 
+    MACRO_INVOCATION,
     CARRYOVER_TAG,
     INFECTING_TAG,
 
@@ -504,6 +505,11 @@ class Scanner
                     lexer->result_symbol = m_LastToken = WORD;
                     return true;
                 }
+            }
+            else if (m_ParsedChars == 1 && !m_IsInVerbatimTag)
+            {
+                lexer->result_symbol = m_LastToken = MACRO_INVOCATION;
+                return true;
             }
 
             if (check_detached(lexer, SINGLE_VARIABLE | MULTI_VARIABLE | NONE, {'&'}) != NONE)
