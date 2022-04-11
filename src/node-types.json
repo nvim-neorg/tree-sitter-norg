@@ -2420,6 +2420,10 @@
           "named": true
         },
         {
+          "type": "infecting_tag_set",
+          "named": true
+        },
+        {
           "type": "marker_prefix",
           "named": true
         }

@@ -632,17 +632,20 @@ module.exports = grammar({
 
         // --------------------------------------------------
 
-        // TODO: add carryover/infecting tag
         marker: $ =>
         prec.right(0,
-            gen_detached_modifier(
-                $,
+            seq(
+                optional($.infecting_tag_set),
 
-                $.marker_prefix,
+                gen_detached_modifier(
+                    $,
 
-                field(
-                    "title",
-                    $.paragraph_segment
+                    $.marker_prefix,
+
+                    field(
+                        "title",
+                        $.paragraph_segment
+                    ),
                 ),
             ),
         ),

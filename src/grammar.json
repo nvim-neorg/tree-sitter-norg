@@ -4252,7 +4252,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "carryover_tag_set"
+                "name": "infecting_tag_set"
               },
               {
                 "type": "BLANK"
@@ -4260,32 +4260,49 @@
             ]
           },
           {
-            "type": "SYMBOL",
-            "name": "marker_prefix"
-          },
-          {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
-                "type": "FIELD",
-                "name": "state",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "any_todo_state"
-                }
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "carryover_tag_set"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
               },
               {
-                "type": "BLANK"
+                "type": "SYMBOL",
+                "name": "marker_prefix"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "FIELD",
+                    "name": "state",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "any_todo_state"
+                    }
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "FIELD",
+                "name": "title",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "paragraph_segment"
+                }
               }
             ]
-          },
-          {
-            "type": "FIELD",
-            "name": "title",
-            "content": {
-              "type": "SYMBOL",
-              "name": "paragraph_segment"
-            }
           }
         ]
       }
