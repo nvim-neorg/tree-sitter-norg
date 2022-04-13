@@ -612,6 +612,10 @@ class Scanner
             case '#':
                 // TODO: actually return a node for this case
                 break;
+            // We're dealing with a timestamp detached modifier extension (|@ <day>,? <day-of-month> <month> <year> <time> <timezone>|)
+            case '@':
+                // TODO: actually return a node for this case, too
+                break;
             default:
                 if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
                 {
@@ -619,10 +623,6 @@ class Scanner
                     lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
                     return m_LastToken;
                 }
-                // TODO: handle the timestamp extension case. Actually, we may
-                // need to rethink how we handle these extensions.. it may be
-                // necessary to handle the pipes as open and closing but then
-                // again we want to allow chaining, too.. (- |x|# A| ...)
                 lexer->mark_end(lexer);
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = WORD;
