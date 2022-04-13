@@ -885,6 +885,7 @@
     definition you would still use `{$ Text}`, there is no reason to make a distinction between a
     ranged and non-ranged detached modifier, as both have the same meaning, one just allows more
     content to exist within itself.
+    %TODO: fix this section to reflect that heading link targets are no longer differentiated by level%
 
 *** Custom Detached Modifiers
     Apart from linking to the detached modifiers outlined above, you can also link to a set of

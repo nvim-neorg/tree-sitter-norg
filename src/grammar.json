@@ -596,52 +596,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "link_target_heading1"
-          },
-          "named": false,
-          "value": "_word"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_target_heading2"
-          },
-          "named": false,
-          "value": "_word"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_target_heading3"
-          },
-          "named": false,
-          "value": "_word"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_target_heading4"
-          },
-          "named": false,
-          "value": "_word"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_target_heading5"
-          },
-          "named": false,
-          "value": "_word"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_target_heading6"
+            "name": "link_target_heading"
           },
           "named": false,
           "value": "_word"
@@ -1817,27 +1772,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "link_target_heading1"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "link_target_heading2"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "link_target_heading3"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "link_target_heading4"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "link_target_heading5"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "link_target_heading6"
+                "name": "link_target_heading"
               }
             ]
           }
@@ -7383,27 +7318,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "link_target_heading1"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "link_target_heading2"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "link_target_heading3"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "link_target_heading4"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "link_target_heading5"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "link_target_heading6"
+      "name": "link_target_heading"
     },
     {
       "type": "SYMBOL",

@@ -2371,27 +2371,7 @@
             "named": true
           },
           {
-            "type": "link_target_heading1",
-            "named": true
-          },
-          {
-            "type": "link_target_heading2",
-            "named": true
-          },
-          {
-            "type": "link_target_heading3",
-            "named": true
-          },
-          {
-            "type": "link_target_heading4",
-            "named": true
-          },
-          {
-            "type": "link_target_heading5",
-            "named": true
-          },
-          {
-            "type": "link_target_heading6",
+            "type": "link_target_heading",
             "named": true
           },
           {
@@ -6266,27 +6246,7 @@
     "named": true
   },
   {
-    "type": "link_target_heading1",
-    "named": true
-  },
-  {
-    "type": "link_target_heading2",
-    "named": true
-  },
-  {
-    "type": "link_target_heading3",
-    "named": true
-  },
-  {
-    "type": "link_target_heading4",
-    "named": true
-  },
-  {
-    "type": "link_target_heading5",
-    "named": true
-  },
-  {
-    "type": "link_target_heading6",
+    "type": "link_target_heading",
     "named": true
   },
   {

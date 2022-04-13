@@ -1,25 +1,13 @@
 ================================================================================
 Basic Links
 ================================================================================
-{* Heading 1}
-{** Heading 2}
-{*** Heading 3}
-{**** Heading 4}
-{***** Heading 5}
-{****** Heading 6}
-{******* Heading level above 6}
+{* Heading of any level}
 {# Generic}
 {% Marker}
 {$ Definition}
 {^ Footnote}
 {:norg_file:}
-{:norg_file:* Heading 1}
-{:norg_file:** Heading 2}
-{:norg_file:*** Heading 3}
-{:norg_file:**** Heading 4}
-{:norg_file:***** Heading 5}
-{:norg_file:****** Heading 6}
-{:norg_file:******* Heading level above 6}
+{:norg_file:* Heading of any level}
 {:norg_file:# Generic}
 {:norg_file:% Marker}
 {:norg_file:$ Definition}
@@ -38,37 +26,7 @@ Basic Links
     (paragraph_segment
       (link
         (link_location
-          type: (link_target_heading1)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading2)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading3)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading4)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading5)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading6)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading6)
+          type: (link_target_heading)
           text: (paragraph))))
     (paragraph_segment
       (link
@@ -98,43 +56,7 @@ Basic Links
       (link
         (link_location
           file: (link_file_text)
-          type: (link_target_heading1)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading2)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading3)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading4)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading5)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading6)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading6)
+          type: (link_target_heading)
           text: (paragraph))))
     (paragraph_segment
       (link
@@ -196,25 +118,13 @@ Basic Links
 ================================================================================
 Links with text
 ================================================================================
-{* Heading 1}[custom text]
-{** Heading 2}[custom text]
-{*** Heading 3}[custom text]
-{**** Heading 4}[custom text]
-{***** Heading 5}[custom text]
-{****** Heading 6}[custom text]
-{******* Heading level above 6}[custom text]
+{* Heading of any level}[custom text]
 {# Generic}[custom text]
 {% Marker}[custom text]
 {$ Definition}[custom text]
 {^ Footnote}[custom text]
 {:norg_file:}[custom text]
-{:norg_file:* Heading 1}[custom text]
-{:norg_file:** Heading 2}[custom text]
-{:norg_file:*** Heading 3}[custom text]
-{:norg_file:**** Heading 4}[custom text]
-{:norg_file:***** Heading 5}[custom text]
-{:norg_file:****** Heading 6}[custom text]
-{:norg_file:******* Heading level above 6}[custom text]
+{:norg_file:* Heading of any level}[custom text]
 {:norg_file:# Generic}[custom text]
 {:norg_file:% Marker}[custom text]
 {:norg_file:$ Definition}[custom text]
@@ -233,49 +143,7 @@ Links with text
     (paragraph_segment
       (link
         (link_location
-          type: (link_target_heading1)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading2)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading3)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading4)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading5)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading6)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_heading6)
+          type: (link_target_heading)
           text: (paragraph))
         (link_description
           text: (paragraph))))
@@ -317,55 +185,7 @@ Links with text
       (link
         (link_location
           file: (link_file_text)
-          type: (link_target_heading1)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading2)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading3)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading4)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading5)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading6)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading6)
+          type: (link_target_heading)
           text: (paragraph))
         (link_description
           text: (paragraph))))
@@ -449,24 +269,13 @@ Links with text
 ================================================================================
 Anchors
 ================================================================================
-[heading 1 anchor]
-[heading 2 anchor]
-[heading 3 anchor]
-[heading 4 anchor]
-[heading 5 anchor]
-[heading 6 anchor]
-[heading 6+ anchor]
+[heading anchor]
 [generic anchor]
 [marker anchor]
 [definition anchor]
 [footnote anchor]
 [norg file anchor]
-[external heading 1 anchor]
-[external heading 2 anchor]
-[external heading 3 anchor]
-[external heading 4 anchor]
-[external heading 5 anchor]
-[external heading 6 anchor]
+[external heading anchor]
 [external generic anchor]
 [external marker anchor]
 [external definition anchor]
@@ -477,24 +286,13 @@ Anchors
 [invalid external with file anchor]
 [invalid url with file anchor]
 
-[heading 1 anchor]{* Heading 1}
-[heading 2 anchor]{** Heading 2}
-[heading 3 anchor]{*** Heading 3}
-[heading 4 anchor]{**** Heading 4}
-[heading 5 anchor]{***** Heading 5}
-[heading 6 anchor]{****** Heading 6}
-[heading 6+ anchor]{******* Heading level above 6}
+[heading anchor]{* Heading of any level}
 [generic anchor]{# Generic}
 [marker anchor]{% Marker}
 [definition anchor]{$ Definition}
 [footnote anchor]{^ Footnote}
 [norg file anchor]{:norg_file:}
-[external heading 1 anchor]{:norg_file:* Heading 1}
-[external heading 2 anchor]{:norg_file:** Heading 2}
-[external heading 3 anchor]{:norg_file:*** Heading 3}
-[external heading 4 anchor]{:norg_file:**** Heading 4}
-[external heading 5 anchor]{:norg_file:***** Heading 5}
-[external heading 6 anchor]{:norg_file:****** Heading 6}
+[external heading anchor]{:norg_file:* Heading of any level}
 [external generic anchor]{:norg_file:# Generic}
 [external marker anchor]{:norg_file:% Marker}
 [external definition anchor]{:norg_file:$ Definition}
@@ -573,50 +371,6 @@ Anchors
     (paragraph_segment
       (anchor_declaration
         (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
           text: (paragraph)))))
   (paragraph
     (paragraph_segment
@@ -624,49 +378,7 @@ Anchors
         (link_description
           text: (paragraph))
         (link_location
-          type: (link_target_heading1)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          type: (link_target_heading2)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          type: (link_target_heading3)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          type: (link_target_heading4)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          type: (link_target_heading5)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          type: (link_target_heading6)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          type: (link_target_heading6)
+          type: (link_target_heading)
           text: (paragraph))))
     (paragraph_segment
       (anchor_definition
@@ -708,47 +420,7 @@ Anchors
           text: (paragraph))
         (link_location
           file: (link_file_text)
-          type: (link_target_heading1)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading2)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading3)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading4)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading5)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          file: (link_file_text)
-          type: (link_target_heading6)
+          type: (link_target_heading)
           text: (paragraph))))
     (paragraph_segment
       (anchor_definition

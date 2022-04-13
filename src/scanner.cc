@@ -106,12 +106,7 @@ enum TokenType : char
     LINK_TARGET_DEFINITION,
     LINK_TARGET_FOOTNOTE,
     LINK_TARGET_DRAWER,
-    LINK_TARGET_HEADING1,
-    LINK_TARGET_HEADING2,
-    LINK_TARGET_HEADING3,
-    LINK_TARGET_HEADING4,
-    LINK_TARGET_HEADING5,
-    LINK_TARGET_HEADING6,
+    LINK_TARGET_HEADING,
 
     RANGED_TAG,
     RANGED_TAG_END,
@@ -1044,24 +1039,8 @@ class Scanner
                 lexer->result_symbol = m_LastToken = LINK_TARGET_DRAWER;
                 break;
             case '*':
-                advance(lexer);
-
-                while (lexer->lookahead == '*')
-                {
-                    ++count;
-                    advance(lexer);
-                }
-
-                lexer->result_symbol = m_LastToken =
-                    static_cast<TokenType>(LINK_TARGET_HEADING1 + clamp(count, 0ull, 5ull));
-
-                if (!std::iswspace(lexer->lookahead))
-                    return false;
-
-                while (std::iswspace(lexer->lookahead))
-                    advance(lexer);
-
-                return true;
+                lexer->result_symbol = m_LastToken = LINK_TARGET_HEADING;
+                break;
             default:
                 lexer->result_symbol = m_LastToken = LINK_TARGET_URL;
                 return true;
