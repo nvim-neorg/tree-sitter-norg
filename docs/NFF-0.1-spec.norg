@@ -452,6 +452,13 @@
     Maybe we can discuss the full timestamp format specification here, too, and then refer back to
     it when discussing links to timestamps?
 
+    - Format: |`<day>,? <day-of-month> <month> <year> <time> <timezone>`|
+    - Example: |`Sat, 29 Oct 1994 19:43:31 GMT`|
+    - any of these elements can be dropped/ignored but the order may not change!
+
+*** | | Priority Extension
+    In the form of `|# A|`, etc.
+
 *** Indent Segment Extension
     Since {# nestable detached modifiers} can only contain a {# paragraph} this can cause severe
     limitations because the insertion of (for example) code blocks is not possible. To alleviate
