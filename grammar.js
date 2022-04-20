@@ -7,7 +7,7 @@ module.exports = grammar({
         $.nestable_detached_modifier,
         $.rangeable_detached_modifier,
         $.tag,
-        $.any_todo_state,
+        $.detached_modifier_extension,
 
         $._indent_segment_contents1,
         $._indent_segment_contents2,
@@ -84,6 +84,17 @@ module.exports = grammar({
 
         $.trailing_modifier,
 
+        $.priority,
+        $.timestamp,
+        $.todo_item_undone,
+        $.todo_item_pending,
+        $.todo_item_done,
+        $.todo_item_on_hold,
+        $.todo_item_cancelled,
+        $.todo_item_urgent,
+        $.todo_item_uncertain,
+        $.todo_item_recurring,
+
         $.heading1_prefix,
         $.heading2_prefix,
         $.heading3_prefix,
@@ -112,24 +123,7 @@ module.exports = grammar({
         $.ordered_list5_prefix,
         $.ordered_list6_prefix,
 
-        $.todo_item_undone,
-        $.todo_item_pending,
-        $.todo_item_done,
-        $.todo_item_on_hold,
-        $.todo_item_cancelled,
-        $.todo_item_urgent,
-        $.todo_item_uncertain,
-        $.todo_item_recurring,
-
         $.marker_prefix,
-
-        $.single_macro_prefix,
-        $.multi_macro_prefix,
-        $.multi_macro_suffix,
-
-        $.single_variable_prefix,
-        $.multi_variable_prefix,
-        $.multi_variable_suffix,
 
         $.single_definition_prefix,
         $.multi_definition_prefix,
@@ -142,6 +136,14 @@ module.exports = grammar({
         $.single_drawer_prefix,
         $.multi_drawer_prefix,
         $.multi_drawer_suffix,
+
+        $.single_macro_prefix,
+        $.multi_macro_prefix,
+        $.multi_macro_suffix,
+
+        $.single_variable_prefix,
+        $.multi_variable_prefix,
+        $.multi_variable_suffix,
 
         $.strong_paragraph_delimiter,
         $.weak_paragraph_delimiter,
@@ -604,8 +606,10 @@ module.exports = grammar({
         ordered_list5: $ => gen_generic_list_item($, "ordered", 5),
         ordered_list6: $ => gen_generic_list_item($, "ordered", 6),
 
-        any_todo_state: $ =>
+        detached_modifier_extension: $ =>
         choice(
+            $.priority,
+            $.timestamp,
             $.todo_item_undone,
             $.todo_item_pending,
             $.todo_item_done,
@@ -955,7 +959,7 @@ function gen_detached_modifier($, prefix, ...rest) {
         optional(
             field(
                 "state",
-                $.any_todo_state,
+                $.detached_modifier_extension,
             ),
         ),
 

@@ -28,6 +28,17 @@ enum TokenType : char
 
     TRAILING_MODIFIER,
 
+    PRIORITY,
+    TIMESTAMP,
+    TODO_ITEM_UNDONE,
+    TODO_ITEM_PENDING,
+    TODO_ITEM_DONE,
+    TODO_ITEM_ON_HOLD,
+    TODO_ITEM_CANCELLED,
+    TODO_ITEM_URGENT,
+    TODO_ITEM_UNCERTAIN,
+    TODO_ITEM_RECURRING,
+
     HEADING1,
     HEADING2,
     HEADING3,
@@ -56,24 +67,7 @@ enum TokenType : char
     ORDERED_LIST5,
     ORDERED_LIST6,
 
-    TODO_ITEM_UNDONE,
-    TODO_ITEM_PENDING,
-    TODO_ITEM_DONE,
-    TODO_ITEM_ON_HOLD,
-    TODO_ITEM_CANCELLED,
-    TODO_ITEM_URGENT,
-    TODO_ITEM_UNCERTAIN,
-    TODO_ITEM_RECURRING,
-
     MARKER,
-
-    SINGLE_MACRO,
-    MULTI_MACRO,
-    MULTI_MACRO_SUFFIX,
-
-    SINGLE_VARIABLE,
-    MULTI_VARIABLE,
-    MULTI_VARIABLE_SUFFIX,
 
     SINGLE_DEFINITION,
     MULTI_DEFINITION,
@@ -86,6 +80,14 @@ enum TokenType : char
     SINGLE_DRAWER,
     MULTI_DRAWER,
     MULTI_DRAWER_SUFFIX,
+
+    SINGLE_MACRO,
+    MULTI_MACRO,
+    MULTI_MACRO_SUFFIX,
+
+    SINGLE_VARIABLE,
+    MULTI_VARIABLE,
+    MULTI_VARIABLE_SUFFIX,
 
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
@@ -564,90 +566,37 @@ class Scanner
                 return false;
         }
         // If we are not in a tag and we have an opening pipe symbol then try
-        // matching either a todo item or beginning of a list
-        else if (m_LastToken >= HEADING1 && m_LastToken <= MULTI_DRAWER_SUFFIX &&
-                 lexer->lookahead == '|')
+        // matching a detached modifier extension
+        else if (lexer->lookahead == '|' && m_LastToken >= PRIORITY && m_LastToken <= MULTI_DRAWER_SUFFIX)
         {
             advance(lexer);
-
             lexer->mark_end(lexer);
 
             auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+            auto found_detached_modifier_extension = m_DetachedModifierExtensions.find(lexer->lookahead);
 
-            switch (lexer->lookahead)
+            if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
             {
-            // We're dealing with an undone item (| |)
-            case ' ':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
-                break;
-            // We're dealing with a pending item (|-|)
-            case '-':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_PENDING;
-                break;
-            // We're dealing with a done item (|x|)
-            case 'x':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
-                break;
-            // We're dealing with an item that has been put on hold (|=|)
-            case '=':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_ON_HOLD;
-                break;
-            // We're dealing with an item that has been cancelled (|_|)
-            case '_':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_CANCELLED;
-                break;
-            // We're dealing with an item that is urgent (|!|)
-            case '!':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_URGENT;
-                break;
-            // We're dealing with an item that is recurring (|+|)
-            case '+':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_RECURRING;
-                break;
-            // We're dealing with an item that needs further elaboration (|?|)
-            case '?':
-                lexer->result_symbol = m_LastToken = TODO_ITEM_UNCERTAIN;
-                break;
-            // We're dealing with a priority detached modifier extension (|# ...|)
-            case '#':
-                // TODO: actually return a node for this case
-                break;
-            // We're dealing with a timestamp detached modifier extension (|@ <day>,? <day-of-month> <month> <year> <time> <timezone>|)
-            case '@':
-                // TODO: actually return a node for this case, too
-                break;
-            default:
-                if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+                lexer->result_symbol = m_LastToken = found_detached_modifier_extension->second;
+
+                advance(lexer);
+
+                if (lexer->lookahead == '|')
                 {
-                    m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
-                    lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
+                    advance(lexer);
+                    lexer->mark_end(lexer);
                     return m_LastToken;
                 }
-                lexer->mark_end(lexer);
-                advance(lexer);
-                lexer->result_symbol = m_LastToken = WORD;
-                return true;
             }
 
-            advance(lexer);  // Move past the matched element (*/x/ )
-
-            if (lexer->lookahead == '|')
+            if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
             {
-                advance(lexer);
-                lexer->mark_end(lexer);
+                m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
+                return m_LastToken;
+            }
 
-                return true;
-            }
-            else
-            {
-                if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
-                {
-                    m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
-                    lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
-                    return m_LastToken;
-                }
-                return false;
-            }
+            return false;
         }
         else if (lexer->lookahead == '<')
         {
@@ -1196,6 +1145,18 @@ class Scanner
    private:
     const std::array<int32_t, 11> m_DetachedModifiers = {'*', '-', '>', '%', '=',
                                                         '~', '$', '_', '^', '&', '<'};
+    const std::unordered_map<int32_t, TokenType> m_DetachedModifierExtensions = {
+        {'#', PRIORITY},
+        {'@', TIMESTAMP},
+        {' ', TODO_ITEM_UNDONE},
+        {'-', TODO_ITEM_PENDING},
+        {'x', TODO_ITEM_DONE},
+        {'=', TODO_ITEM_ON_HOLD},
+        {'_', TODO_ITEM_CANCELLED},
+        {'!', TODO_ITEM_URGENT},
+        {'+', TODO_ITEM_RECURRING},
+        {'?', TODO_ITEM_UNCERTAIN},
+    };
     const std::unordered_map<int32_t, TokenType> m_AttachedModifiers = {
         {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
         {'_', UNDERLINE_OPEN},   {'!', SPOILER_OPEN},   {'`', VERBATIM_OPEN},

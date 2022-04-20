@@ -552,6 +552,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -722,6 +730,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -888,6 +904,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -1050,6 +1074,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -1208,6 +1240,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -1361,6 +1401,14 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
           {
             "type": "todo_item_cancelled",
             "named": true
@@ -2425,6 +2473,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -2576,6 +2632,14 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
           {
             "type": "todo_item_cancelled",
             "named": true
@@ -2729,6 +2793,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -2880,6 +2952,14 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
           {
             "type": "todo_item_cancelled",
             "named": true
@@ -3033,6 +3113,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -3185,6 +3273,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -3270,6 +3366,14 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
           {
             "type": "todo_item_cancelled",
             "named": true
@@ -3383,6 +3487,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -3487,6 +3599,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -3583,6 +3703,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -3671,6 +3799,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -3750,6 +3886,14 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
           {
             "type": "todo_item_cancelled",
             "named": true
@@ -4036,6 +4180,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -4128,6 +4280,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -4216,6 +4376,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -4300,6 +4468,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -4380,6 +4556,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -4455,6 +4639,14 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
           {
             "type": "todo_item_cancelled",
             "named": true
@@ -4700,6 +4892,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -4781,6 +4981,14 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
           {
             "type": "todo_item_cancelled",
             "named": true
@@ -4864,6 +5072,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -4946,6 +5162,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -5027,6 +5251,14 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
           {
             "type": "todo_item_cancelled",
             "named": true
@@ -5574,6 +5806,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -5686,6 +5926,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -5790,6 +6038,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -5886,6 +6142,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -5974,6 +6238,14 @@
         "required": false,
         "types": [
           {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
             "type": "todo_item_cancelled",
             "named": true
           },
@@ -6053,6 +6325,14 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
           {
             "type": "todo_item_cancelled",
             "named": true
@@ -6330,6 +6610,10 @@
     "named": true
   },
   {
+    "type": "priority",
+    "named": true
+  },
+  {
     "type": "quote1_prefix",
     "named": true
   },
@@ -6375,6 +6659,10 @@
   },
   {
     "type": "strong_paragraph_delimiter",
+    "named": true
+  },
+  {
+    "type": "timestamp",
     "named": true
   },
   {
