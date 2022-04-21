@@ -4140,47 +4140,52 @@
       ]
     },
     "detached_modifier_extension": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "priority"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "timestamp"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "todo_item_undone"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "todo_item_pending"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "todo_item_done"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "todo_item_on_hold"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "todo_item_cancelled"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "todo_item_urgent"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "todo_item_uncertain"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "todo_item_recurring"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "priority"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "timestamp"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_undone"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_pending"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_done"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_on_hold"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_cancelled"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_urgent"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_uncertain"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_recurring"
+            }
+          ]
         }
       ]
     },
@@ -7059,6 +7064,10 @@
     {
       "type": "SYMBOL",
       "name": "trailing_modifier"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "detached_mod_extension_delimiter"
     },
     {
       "type": "SYMBOL",

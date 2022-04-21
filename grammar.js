@@ -84,6 +84,7 @@ module.exports = grammar({
 
         $.trailing_modifier,
 
+        $.detached_mod_extension_delimiter,
         $.priority,
         $.timestamp,
         $.todo_item_undone,
@@ -607,17 +608,21 @@ module.exports = grammar({
         ordered_list6: $ => gen_generic_list_item($, "ordered", 6),
 
         detached_modifier_extension: $ =>
-        choice(
-            $.priority,
-            $.timestamp,
-            $.todo_item_undone,
-            $.todo_item_pending,
-            $.todo_item_done,
-            $.todo_item_on_hold,
-            $.todo_item_cancelled,
-            $.todo_item_urgent,
-            $.todo_item_uncertain,
-            $.todo_item_recurring,
+        seq(
+            // $.detached_mod_extension_delimiter,
+            choice(
+                $.priority,
+                $.timestamp,
+                $.todo_item_undone,
+                $.todo_item_pending,
+                $.todo_item_done,
+                $.todo_item_on_hold,
+                $.todo_item_cancelled,
+                $.todo_item_urgent,
+                $.todo_item_uncertain,
+                $.todo_item_recurring,
+            ),
+            // $.detached_mod_extension_delimiter,
         ),
 
         // --------------------------------------------------

@@ -28,6 +28,7 @@ enum TokenType : char
 
     TRAILING_MODIFIER,
 
+    DETACHED_MOD_EXTENSION_DELIMITER,
     PRIORITY,
     TIMESTAMP,
     TODO_ITEM_UNDONE,
@@ -526,12 +527,6 @@ class Scanner
             }
         }
 
-        if (m_LastToken >= TODO_ITEM_UNDONE && m_LastToken <= TODO_ITEM_RECURRING && std::iswspace(lexer->lookahead))
-        {
-            while (lexer->lookahead && std::iswspace(lexer->lookahead))
-                skip(lexer);
-        }
-
         if (lexer->lookahead == '~' && (m_LastToken == WORD || m_LastToken == CAPITALIZED_WORD))
         {
             advance(lexer);
@@ -565,39 +560,9 @@ class Scanner
             else
                 return false;
         }
-        // If we are not in a tag and we have an opening pipe symbol then try
-        // matching a detached modifier extension
-        else if (lexer->lookahead == '|' && m_LastToken >= PRIORITY && m_LastToken <= MULTI_DRAWER_SUFFIX)
-        {
-            advance(lexer);
-            lexer->mark_end(lexer);
-
-            auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
-            auto found_detached_modifier_extension = m_DetachedModifierExtensions.find(lexer->lookahead);
-
-            if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
-            {
-                lexer->result_symbol = m_LastToken = found_detached_modifier_extension->second;
-
-                advance(lexer);
-
-                if (lexer->lookahead == '|')
-                {
-                    advance(lexer);
-                    lexer->mark_end(lexer);
-                    return m_LastToken;
-                }
-            }
-
-            if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
-            {
-                m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
-                lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
-                return m_LastToken;
-            }
-
-            return false;
-        }
+        // If we are not in a tag and we have an opening pipe symbol then try matching a detached modifier extension
+        else if (lexer->lookahead == '|' && check_detached_mod_extension(lexer))
+            return true;
         else if (lexer->lookahead == '<')
         {
             advance(lexer);
@@ -1053,6 +1018,44 @@ class Scanner
         default:
             return false;
         }
+    }
+
+    /*
+     * Attempts to parse a detached modifier extension
+     */
+    bool check_detached_mod_extension(TSLexer* lexer)
+    {
+        if (m_LastToken >= DETACHED_MOD_EXTENSION_DELIMITER && m_LastToken <= MULTI_DRAWER_SUFFIX)
+        {
+            advance(lexer);
+            lexer->mark_end(lexer);
+
+            auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+            auto found_detached_modifier_extension = m_DetachedModifierExtensions.find(lexer->lookahead);
+
+            if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
+            {
+                lexer->result_symbol = m_LastToken = found_detached_modifier_extension->second;
+
+                advance(lexer);
+
+                if (lexer->lookahead == '|')
+                {
+                    advance(lexer);
+                    lexer->mark_end(lexer);
+                    return true;
+                }
+            }
+
+            if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+            {
+                m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /*
