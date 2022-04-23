@@ -607,9 +607,14 @@ module.exports = grammar({
         ordered_list5: $ => gen_generic_list_item($, "ordered", 5),
         ordered_list6: $ => gen_generic_list_item($, "ordered", 6),
 
+        // priority: $ => seq(
+        //     $._priority,
+        //     field("level", $.word),
+        // ),
+
         detached_modifier_extension: $ =>
         seq(
-            // $.detached_mod_extension_delimiter,
+            alias($.detached_mod_extension_delimiter, "_delimiter"),
             choice(
                 $.priority,
                 $.timestamp,
@@ -622,7 +627,7 @@ module.exports = grammar({
                 $.todo_item_uncertain,
                 $.todo_item_recurring,
             ),
-            // $.detached_mod_extension_delimiter,
+            alias($.detached_mod_extension_delimiter, "_delimiter"),
         ),
 
         // --------------------------------------------------

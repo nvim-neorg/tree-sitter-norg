@@ -560,8 +560,7 @@ class Scanner
             else
                 return false;
         }
-        // If we are not in a tag and we have an opening pipe symbol then try matching a detached modifier extension
-        else if (lexer->lookahead == '|' && check_detached_mod_extension(lexer))
+        else if (check_detached_mod_extension(lexer))
             return true;
         else if (lexer->lookahead == '<')
         {
@@ -1025,28 +1024,91 @@ class Scanner
      */
     bool check_detached_mod_extension(TSLexer* lexer)
     {
-        if (m_LastToken >= DETACHED_MOD_EXTENSION_DELIMITER && m_LastToken <= MULTI_DRAWER_SUFFIX)
+        if (lexer->lookahead == '|')
         {
-            advance(lexer);
-            lexer->mark_end(lexer);
+            if (
+                (m_LastToken >= HEADING1 && m_LastToken <= MULTI_DRAWER_SUFFIX) ||
+                (m_LastToken >= PRIORITY && m_LastToken <= TODO_ITEM_RECURRING)
+               )
+            {
+                // FIXME: handle edge case with ranged attached mod
+                lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
+                advance(lexer);
+                return true;
+            }
 
-            auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+            // auto found_attached_modifier = m_AttachedModifiers.find(m_Current);
+            // if (found_attached_modifier == m_AttachedModifiers.end())
+            // {
+            //     lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
+            //     advance(lexer);
+            //
+            //     auto found_detached_modifier_extension = m_DetachedModifierExtensions.find(lexer->lookahead);
+            //     if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
+            //         return true;
+            // }
+        }
+
+        switch (m_LastToken)
+        {
+        case DETACHED_MOD_EXTENSION_DELIMITER:
+        {
             auto found_detached_modifier_extension = m_DetachedModifierExtensions.find(lexer->lookahead);
 
             if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
             {
                 lexer->result_symbol = m_LastToken = found_detached_modifier_extension->second;
-
                 advance(lexer);
 
-                if (lexer->lookahead == '|')
+                if (found_detached_modifier_extension->second == TODO_ITEM_UNDONE)
                 {
-                    advance(lexer);
-                    lexer->mark_end(lexer);
+                    while (lexer->lookahead && std::iswspace(lexer->lookahead))
+                        skip(lexer);
+
+                    if (lexer->lookahead == '|')
+                        return true;
+                } else {
                     return true;
                 }
             }
+            break;
+        }
+        // case PRIORITY:
+        // case TIMESTAMP:
+        // {
+        //     while (lexer->lookahead && std::iswspace(lexer->lookahead))
+        //         skip(lexer);
+        //     return parse_text(lexer);
+        // }
+        case BOLD_CLOSE:
+        case ITALIC_CLOSE:
+        case STRIKETHROUGH_CLOSE:
+        case UNDERLINE_CLOSE:
+        case SPOILER_CLOSE:
+        case SUPERSCRIPT_CLOSE:
+        case SUBSCRIPT_CLOSE:
+        case VERBATIM_CLOSE:
+        case INLINE_COMMENT_CLOSE:
+        case INLINE_MATH_CLOSE:
+        case VARIABLE_CLOSE:
+        {
+            if (lexer->lookahead == '|')
+            {
+                auto found_attached_modifier = m_AttachedModifiers.find(m_Current);
+                advance(lexer);
+                m_RangedActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
+                lexer->result_symbol = m_LastToken = RANGED_MODIFIER_CLOSE;
+                return true;
+            }
+        }
+        default:
+            break;
+        }
 
+        if (lexer->lookahead == '|')
+        {
+            advance(lexer);
+            auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
             if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
             {
                 m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
@@ -1095,7 +1157,8 @@ class Scanner
 
         do
         {
-            if (lexer->lookahead == ':' || (lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
+            if (lexer->lookahead == ':' || lexer->lookahead == '|' ||
+                (lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
                 (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) ||
                 (lexer->lookahead == '<' || lexer->lookahead == '>' ||
                  lexer->lookahead == '[' || lexer->lookahead == ']' ||
