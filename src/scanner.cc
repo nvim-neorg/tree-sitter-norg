@@ -1031,22 +1031,40 @@ class Scanner
                 (m_LastToken >= PRIORITY && m_LastToken <= TODO_ITEM_RECURRING)
                )
             {
-                // FIXME: handle edge case with ranged attached mod
-                lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
                 advance(lexer);
-                return true;
-            }
 
-            // auto found_attached_modifier = m_AttachedModifiers.find(m_Current);
-            // if (found_attached_modifier == m_AttachedModifiers.end())
-            // {
-            //     lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
-            //     advance(lexer);
-            //
-            //     auto found_detached_modifier_extension = m_DetachedModifierExtensions.find(lexer->lookahead);
-            //     if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
-            //         return true;
-            // }
+                auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+                auto found_detached_modifier_extension = m_DetachedModifierExtensions.find(lexer->lookahead);
+
+                if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
+                {
+                    if (found_attached_modifier == m_AttachedModifiers.end())
+                    {
+                        lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
+                        return true;
+                    } else {
+                        lexer->mark_end(lexer);
+                        advance(lexer);
+                        if (lexer->lookahead == '|')
+                        {
+                            lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
+                            return true;
+                        }
+                        if (!m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+                        {
+                            m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                            lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
+                            return true;
+                        }
+                    }
+                }
+                if (found_attached_modifier != m_AttachedModifiers.end() && !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+                {
+                    m_RangedActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) / 2);
+                    lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
+                    return true;
+                }
+            }
         }
 
         switch (m_LastToken)
