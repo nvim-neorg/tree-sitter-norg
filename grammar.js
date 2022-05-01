@@ -85,8 +85,8 @@ module.exports = grammar({
         $.trailing_modifier,
 
         $.detached_mod_extension_delimiter,
-        $.priority,
-        $.timestamp,
+        $._priority,
+        $._timestamp,
         $.todo_item_undone,
         $.todo_item_pending,
         $.todo_item_done,
@@ -166,6 +166,8 @@ module.exports = grammar({
         $.link_target_footnote,
         $.link_target_drawer,
         $.link_target_heading,
+
+        $.timestamp_data,
 
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
@@ -607,10 +609,15 @@ module.exports = grammar({
         ordered_list5: $ => gen_generic_list_item($, "ordered", 5),
         ordered_list6: $ => gen_generic_list_item($, "ordered", 6),
 
-        // priority: $ => seq(
-        //     $._priority,
-        //     field("level", $.word),
-        // ),
+        priority: $ => seq(
+            $._priority,
+            field("level", $.word),
+        ),
+
+        timestamp: $ => seq(
+            $._timestamp,
+            field("timestamp", $.timestamp_data),
+        ),
 
         detached_modifier_extension: $ =>
         seq(

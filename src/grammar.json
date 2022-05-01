@@ -4139,6 +4139,40 @@
         }
       ]
     },
+    "priority": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_priority"
+        },
+        {
+          "type": "FIELD",
+          "name": "level",
+          "content": {
+            "type": "SYMBOL",
+            "name": "word"
+          }
+        }
+      ]
+    },
+    "timestamp": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_timestamp"
+        },
+        {
+          "type": "FIELD",
+          "name": "timestamp",
+          "content": {
+            "type": "SYMBOL",
+            "name": "timestamp_data"
+          }
+        }
+      ]
+    },
     "detached_modifier_extension": {
       "type": "SEQ",
       "members": [
@@ -7089,11 +7123,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "priority"
+      "name": "_priority"
     },
     {
       "type": "SYMBOL",
-      "name": "timestamp"
+      "name": "_timestamp"
     },
     {
       "type": "SYMBOL",
@@ -7362,6 +7396,10 @@
     {
       "type": "SYMBOL",
       "name": "link_target_heading"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "timestamp_data"
     },
     {
       "type": "SYMBOL",

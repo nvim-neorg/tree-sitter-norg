@@ -1,13 +1,14 @@
 ================================================================================
 Timestamps
 ================================================================================
-- |@| timestamp
+- |@ Sun, 1 May 2022 22:21 CEST| timestamp
 --------------------------------------------------------------------------------
 
 (document
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (timestamp)
+      (timestamp
+        (timestamp_data))
       (paragraph
         (paragraph_segment)))))

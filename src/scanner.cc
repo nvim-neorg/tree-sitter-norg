@@ -111,6 +111,8 @@ enum TokenType : char
     LINK_TARGET_DRAWER,
     LINK_TARGET_HEADING,
 
+    TIMESTAMP_DATA,
+
     RANGED_TAG,
     RANGED_TAG_END,
     RANGED_VERBATIM_TAG,
@@ -1091,13 +1093,27 @@ class Scanner
             }
             break;
         }
-        // case PRIORITY:
-        // case TIMESTAMP:
-        // {
-        //     while (lexer->lookahead && std::iswspace(lexer->lookahead))
-        //         skip(lexer);
-        //     return parse_text(lexer);
-        // }
+        case PRIORITY:
+        {
+            while (lexer->lookahead && std::iswspace(lexer->lookahead))
+                skip(lexer);
+            return parse_text(lexer);
+        }
+        case TIMESTAMP:
+        {
+            while (lexer->lookahead && lexer->lookahead != '|')
+                advance(lexer);
+            lexer->result_symbol = m_LastToken = TIMESTAMP_DATA;
+            return true;
+        }
+        case TIMESTAMP_DATA:
+        {
+            if (lexer->lookahead == '|')
+            {
+                lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
+                return true;
+            }
+        }
         case BOLD_CLOSE:
         case ITALIC_CLOSE:
         case STRIKETHROUGH_CLOSE:
@@ -1117,6 +1133,21 @@ class Scanner
                 m_RangedActiveModifiers.reset((found_attached_modifier->second - BOLD_OPEN) / 2);
                 lexer->result_symbol = m_LastToken = RANGED_MODIFIER_CLOSE;
                 return true;
+            }
+        }
+        case WORD:
+        case CAPITALIZED_WORD:
+        {
+            if (lexer->lookahead == '|')
+            {
+                auto found_attached_modifier = m_AttachedModifiers.find(m_Current);
+                advance(lexer);
+                auto found_another_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+                if (found_attached_modifier == m_AttachedModifiers.end() && found_another_attached_modifier == m_AttachedModifiers.end())
+                {
+                    lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
+                    return true;
+                }
             }
         }
         default:

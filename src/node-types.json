@@ -4191,6 +4191,22 @@
     }
   },
   {
+    "type": "priority",
+    "named": true,
+    "fields": {
+      "level": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "quote",
     "named": true,
     "fields": {},
@@ -5817,6 +5833,22 @@
     }
   },
   {
+    "type": "timestamp",
+    "named": true,
+    "fields": {
+      "timestamp": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "timestamp_data",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "underline",
     "named": true,
     "fields": {},
@@ -6534,6 +6566,11 @@
     "fields": {}
   },
   {
+    "type": "word",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\n",
     "named": false
   },
@@ -6750,10 +6787,6 @@
     "named": true
   },
   {
-    "type": "priority",
-    "named": true
-  },
-  {
     "type": "quote1_prefix",
     "named": true
   },
@@ -6802,7 +6835,7 @@
     "named": true
   },
   {
-    "type": "timestamp",
+    "type": "timestamp_data",
     "named": true
   },
   {
