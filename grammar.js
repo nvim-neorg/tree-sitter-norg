@@ -622,19 +622,23 @@ module.exports = grammar({
         detached_modifier_extension: $ =>
         seq(
             alias($.detached_mod_extension_delimiter, "_delimiter"),
-            choice(
-                $.priority,
-                $.timestamp,
-                $.todo_item_undone,
-                $.todo_item_pending,
-                $.todo_item_done,
-                $.todo_item_on_hold,
-                $.todo_item_cancelled,
-                $.todo_item_urgent,
-                $.todo_item_uncertain,
-                $.todo_item_recurring,
+            repeat1(
+                seq(
+                    choice(
+                        $.priority,
+                        $.timestamp,
+                        $.todo_item_undone,
+                        $.todo_item_pending,
+                        $.todo_item_done,
+                        $.todo_item_on_hold,
+                        $.todo_item_cancelled,
+                        $.todo_item_urgent,
+                        $.todo_item_uncertain,
+                        $.todo_item_recurring,
+                    ),
+                    alias($.detached_mod_extension_delimiter, "_delimiter"),
+                ),
             ),
-            alias($.detached_mod_extension_delimiter, "_delimiter"),
         ),
 
         // --------------------------------------------------

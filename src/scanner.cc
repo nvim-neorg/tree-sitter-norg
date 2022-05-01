@@ -1024,6 +1024,7 @@ class Scanner
     /*
      * Attempts to parse a detached modifier extension
      */
+    // TODO: control flow can probably be improved significantly
     bool check_detached_mod_extension(TSLexer* lexer)
     {
         if (lexer->lookahead == '|')
@@ -1110,9 +1111,11 @@ class Scanner
         {
             if (lexer->lookahead == '|')
             {
+                advance(lexer);
                 lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
                 return true;
             }
+            break;
         }
         case BOLD_CLOSE:
         case ITALIC_CLOSE:
@@ -1134,6 +1137,7 @@ class Scanner
                 lexer->result_symbol = m_LastToken = RANGED_MODIFIER_CLOSE;
                 return true;
             }
+            break;
         }
         case WORD:
         case CAPITALIZED_WORD:
@@ -1143,12 +1147,32 @@ class Scanner
                 auto found_attached_modifier = m_AttachedModifiers.find(m_Current);
                 advance(lexer);
                 auto found_another_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
-                if (found_attached_modifier == m_AttachedModifiers.end() && found_another_attached_modifier == m_AttachedModifiers.end())
+                auto found_detached_modifier_extension = m_DetachedModifierExtensions.find(lexer->lookahead);
+                if (found_attached_modifier == m_AttachedModifiers.end())
                 {
-                    lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
-                    return true;
+                    if (found_another_attached_modifier == m_AttachedModifiers.end())
+                    {
+                        lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
+                        return true;
+                    } else if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
+                    {
+                        lexer->mark_end(lexer);
+                        advance(lexer);
+                        if (lexer->lookahead == '|')
+                        {
+                            lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
+                            return true;
+                        }
+                        if (!m_ActiveModifiers[(found_another_attached_modifier->second - BOLD_OPEN) / 2])
+                        {
+                            m_RangedActiveModifiers.set((found_another_attached_modifier->second - BOLD_OPEN) / 2);
+                            lexer->result_symbol = m_LastToken = RANGED_MODIFIER_OPEN;
+                            return true;
+                        }
+                    }
                 }
             }
+            break;
         }
         default:
             break;
