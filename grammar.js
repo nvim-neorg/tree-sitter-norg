@@ -813,7 +813,7 @@ module.exports = grammar({
         _tag_parameters: $ =>
         choice(
             token.immediate(
-                /[\t\v ]*\n/,
+                /[\t\v ]*/,
             ),
 
             seq(
@@ -822,10 +822,6 @@ module.exports = grammar({
                 ),
 
                 $.tag_parameters,
-
-                token.immediate(
-                    '\n'
-                ),
             ),
         ),
 
@@ -937,6 +933,8 @@ function gen_single_tag($, kind) {
         ),
 
         $._tag_parameters,
+
+        alias($.line_break, "_line_break"),
     );
 }
 

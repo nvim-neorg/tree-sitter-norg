@@ -5632,6 +5632,15 @@
               {
                 "type": "SYMBOL",
                 "name": "_tag_parameters"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "line_break"
+                },
+                "named": false,
+                "value": "_line_break"
               }
             ]
           },
@@ -5765,6 +5774,15 @@
               {
                 "type": "SYMBOL",
                 "name": "_tag_parameters"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "line_break"
+                },
+                "named": false,
+                "value": "_line_break"
               }
             ]
           },
@@ -5822,6 +5840,15 @@
         {
           "type": "SYMBOL",
           "name": "_tag_parameters"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "line_break"
+          },
+          "named": false,
+          "value": "_line_break"
         }
       ]
     },
@@ -5855,6 +5882,15 @@
         {
           "type": "SYMBOL",
           "name": "_tag_parameters"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "line_break"
+          },
+          "named": false,
+          "value": "_line_break"
         }
       ]
     },
@@ -5888,6 +5924,15 @@
         {
           "type": "SYMBOL",
           "name": "_tag_parameters"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "line_break"
+          },
+          "named": false,
+          "value": "_line_break"
         }
       ]
     },
@@ -6083,7 +6128,7 @@
           "type": "IMMEDIATE_TOKEN",
           "content": {
             "type": "PATTERN",
-            "value": "[\\t\\v ]*\\n"
+            "value": "[\\t\\v ]*"
           }
         },
         {
@@ -6099,13 +6144,6 @@
             {
               "type": "SYMBOL",
               "name": "tag_parameters"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": "\n"
-              }
             }
           ]
         }
