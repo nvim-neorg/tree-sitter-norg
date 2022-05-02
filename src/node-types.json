@@ -5849,6 +5849,22 @@
     }
   },
   {
+    "type": "todo_item_recurring",
+    "named": true,
+    "fields": {
+      "recurrence": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "timestamp_data",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "underline",
     "named": true,
     "fields": {},
@@ -6848,10 +6864,6 @@
   },
   {
     "type": "todo_item_pending",
-    "named": true
-  },
-  {
-    "type": "todo_item_recurring",
     "named": true
   },
   {

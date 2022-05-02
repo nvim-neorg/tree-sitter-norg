@@ -4173,6 +4173,31 @@
         }
       ]
     },
+    "todo_item_recurring": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_todo_item_recurring"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "recurrence",
+              "content": {
+                "type": "SYMBOL",
+                "name": "timestamp_data"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "detached_modifier_extension": {
       "type": "SEQ",
       "members": [
@@ -7205,7 +7230,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "todo_item_recurring"
+      "name": "_todo_item_recurring"
     },
     {
       "type": "SYMBOL",

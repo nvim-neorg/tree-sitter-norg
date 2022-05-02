@@ -94,7 +94,7 @@ module.exports = grammar({
         $.todo_item_cancelled,
         $.todo_item_urgent,
         $.todo_item_uncertain,
-        $.todo_item_recurring,
+        $._todo_item_recurring,
 
         $.heading1_prefix,
         $.heading2_prefix,
@@ -617,6 +617,16 @@ module.exports = grammar({
         timestamp: $ => seq(
             $._timestamp,
             field("timestamp", $.timestamp_data),
+        ),
+
+        todo_item_recurring: $ => seq(
+            $._todo_item_recurring,
+            optional(
+                field(
+                    "recurrence",
+                    $.timestamp_data,
+                ),
+            ),
         ),
 
         detached_modifier_extension: $ =>

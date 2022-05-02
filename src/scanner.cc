@@ -1101,6 +1101,7 @@ class Scanner
             return parse_text(lexer);
         }
         case TIMESTAMP:
+        case TODO_ITEM_RECURRING:
         {
             while (lexer->lookahead && lexer->lookahead != '|')
                 advance(lexer);
