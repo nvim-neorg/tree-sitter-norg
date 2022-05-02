@@ -1,5 +1,3 @@
-// TODO: Allow all syntax within regular ranged tags
-
 #include <algorithm>
 #include <array>
 #include <bitset>

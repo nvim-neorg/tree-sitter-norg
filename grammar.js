@@ -37,6 +37,7 @@ module.exports = grammar({
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
 
+        [$.paragraph],
         [$.paragraph_segment, $.ranged_attached_modifier],
 
         [$._paragraph_element],
@@ -253,9 +254,7 @@ module.exports = grammar({
 
         // Any regular text. A paragraph is made up of `paragraph_segment`
         // objects and line breaks.
-        // TODO: add "inline" carryover tags
         paragraph: $ =>
-        prec.right(0,
             seq(
                 optional(
                     $.infecting_tag_set,
@@ -267,18 +266,22 @@ module.exports = grammar({
                     ),
                 ),
             ),
-        ),
 
         // A paragraph segment can contain any paragraph element.
+        // FIXME: paragraph nodes are no longer adhering to maximum length
+        // https://github.com/tree-sitter/tree-sitter/discussions/1562#discussioncomment-2676442
         paragraph_segment: $ =>
         prec.right(0,
-            repeat1(
-                choice(
-                    $._paragraph_element,
-                    alias($._conflict_open, "_word"),
-                    alias($.ranged_modifier_open, "_word"),
+            seq(
+                optional($.carryover_tag_set),
+                repeat1(
+                    choice(
+                        $._paragraph_element,
+                        alias($._conflict_open, "_word"),
+                        alias($.ranged_modifier_open, "_word"),
+                    ),
                 ),
-            )
+            ),
         ),
 
         // The attached modifiers cannot contain a `paragraph_segment` directly,

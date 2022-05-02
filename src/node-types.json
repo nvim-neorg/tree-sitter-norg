@@ -20,6 +20,10 @@
           "named": true
         },
         {
+          "type": "carryover_tag_set",
+          "named": true
+        },
+        {
           "type": "escape_sequence",
           "named": true
         },
@@ -4125,6 +4129,10 @@
         },
         {
           "type": "bold",
+          "named": true
+        },
+        {
+          "type": "carryover_tag_set",
           "named": true
         },
         {
