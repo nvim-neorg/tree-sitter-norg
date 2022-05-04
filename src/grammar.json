@@ -498,13 +498,17 @@
           "value": "_word"
         },
         {
-          "type": "ALIAS",
+          "type": "PREC",
+          "value": 1,
           "content": {
-            "type": "SYMBOL",
-            "name": "link_location_end"
-          },
-          "named": false,
-          "value": "_word"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "link_location_end"
+            },
+            "named": false,
+            "value": "_word"
+          }
         },
         {
           "type": "ALIAS",
@@ -1500,6 +1504,15 @@
           "content": {
             "type": "SYMBOL",
             "name": "variable_close"
+          },
+          "named": false,
+          "value": "_word"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "link_location_end"
           },
           "named": false,
           "value": "_word"

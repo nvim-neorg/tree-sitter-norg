@@ -354,7 +354,7 @@ module.exports = grammar({
             alias($.link_description_begin, "_word"),
             alias($.link_description_end, "_word"),
             alias($.link_location_begin, "_word"),
-            alias($.link_location_end, "_word"),
+            prec(1, alias($.link_location_end, "_word")),
             alias($.link_file_begin, "_word"),
             alias($.link_file_end, "_word"),
             alias($.link_file_text, "_word"),
@@ -422,6 +422,8 @@ module.exports = grammar({
             alias($.inline_comment_close, "_word"),
             alias($.inline_math_close, "_word"),
             alias($.variable_close, "_word"),
+
+            alias($.link_location_end, "_word"),
         ),
 
         // Well, any character

@@ -602,9 +602,16 @@ class Scanner
                 return true;
             }
         }
-        else if (lexer->lookahead == '}' && !std::iswspace(m_Current))
+        else if (lexer->lookahead == '}')
         {
             advance(lexer);
+
+            if (m_Previous == '\n' || m_Previous == '\r')
+            {
+                lexer->result_symbol = m_LastToken = NONE;
+                return true;
+            }
+
             lexer->result_symbol = m_LastToken = LINK_LOCATION_END;
             return true;
         }
@@ -640,6 +647,9 @@ class Scanner
     // in the final result
     void advance(TSLexer* lexer)
     {
+        if (!lexer->lookahead)
+            return;
+
         m_Previous = m_Current;
         m_Current = lexer->lookahead;
         return lexer->advance(lexer, false);
