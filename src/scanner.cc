@@ -1092,22 +1092,23 @@ class Scanner
                 if (found_detached_modifier_extension->second == TODO_ITEM_UNDONE)
                 {
                     while (lexer->lookahead && std::iswspace(lexer->lookahead))
-                        skip(lexer);
+                        advance(lexer);
 
                     if (lexer->lookahead == '|')
                         return true;
-                } else {
+                }
+                else
+                {
+                    while (lexer->lookahead && std::iswspace(lexer->lookahead))
+                        advance(lexer);
+
                     return true;
                 }
             }
             break;
         }
         case PRIORITY:
-        {
-            while (lexer->lookahead && std::iswspace(lexer->lookahead))
-                skip(lexer);
             return parse_text(lexer);
-        }
         case TIMESTAMP:
         case TODO_ITEM_RECURRING:
         {
