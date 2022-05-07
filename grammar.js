@@ -46,6 +46,13 @@ module.exports = grammar({
         [$.indent_segment5],
         [$.indent_segment6],
 
+        [$.quote1],
+        [$.quote2],
+        [$.quote3],
+        [$.quote4],
+        [$.quote5],
+        [$.quote6],
+
         [$.ordered_list1],
         [$.ordered_list2],
         [$.ordered_list3],
@@ -257,6 +264,16 @@ module.exports = grammar({
             ),
         ),
 
+        _non_infectable_paragraph: $ =>
+        prec.right(0,
+            repeat1(
+                choice(
+                    alias($._non_infectable_paragraph_segment, $.paragraph_segment),
+                    alias($.line_break, "_line_break"),
+                ),
+            ),
+        ),
+
         // A paragraph segment can contain any paragraph element.
         // FIXME: paragraph nodes are no longer adhering to maximum length
         // https://github.com/tree-sitter/tree-sitter/discussions/1562#discussioncomment-2676442
@@ -270,6 +287,17 @@ module.exports = grammar({
                         alias($._conflict_open, "_word"),
                         alias($.ranged_modifier_open, "_word"),
                     ),
+                ),
+            ),
+        ),
+
+        _non_infectable_paragraph_segment: $ =>
+        prec.right(0,
+            repeat1(
+                choice(
+                    $._paragraph_element,
+                    alias($._conflict_open, "_word"),
+                    alias($.ranged_modifier_open, "_word"),
                 ),
             ),
         ),
@@ -560,7 +588,7 @@ module.exports = grammar({
                         $.quote4,
                         $.quote5,
                         $.quote6,
-                    )
+                    ),
                 ),
             ),
         ),
@@ -915,7 +943,7 @@ module.exports = grammar({
         ),
 
         ranged_attached_modifier: $ =>
-        prec(1, 
+        prec(1,
             seq(
                 alias($.ranged_modifier_open, "_open"),
                 $._ranged_attached_modifier,
@@ -976,19 +1004,19 @@ function gen_ranged_tag_end($, kind) {
 
 function gen_detached_modifier($, prefix, ...rest) {
     return seq(
-            optional($.carryover_tag_set),
+        optional($.carryover_tag_set),
 
-            prefix,
+        prefix,
 
-            optional(
-                field(
-                    "state",
-                    $.detached_modifier_extension,
-                ),
+        optional(
+            field(
+                "state",
+                $.detached_modifier_extension,
             ),
+        ),
 
-            ...rest,
-        );
+        ...rest,
+    );
 }
 
 function gen_heading($, level) {
@@ -1067,7 +1095,7 @@ function gen_generic_list_item($, kind, level) {
         field(
             "content",
             choice(
-                $.paragraph,
+                alias($._non_infectable_paragraph, $.paragraph),
                 $["indent_segment" + level],
             ),
         ),
@@ -1087,7 +1115,7 @@ function gen_quote($, level) {
         lower_level_quotes[i] = $["quote" + (i + 1 + level)]
     }
 
-    return prec.right(gen_detached_modifier(
+    return gen_detached_modifier(
         $,
 
         $["quote" + level + "_prefix"],
@@ -1095,19 +1123,7 @@ function gen_quote($, level) {
         field(
             "content",
             choice(
-                prec.right(alias(repeat1(
-                    choice(
-                        prec.right(alias(
-                            repeat1(
-                                choice(
-                                    $._paragraph_element,
-                                    alias($._conflict_open, "_word"),
-                                    alias($.ranged_modifier_open, "_word"),
-                                ),
-                            ), $.paragraph_segment)),
-                        alias($.line_break, "_line_break"),
-                    ),
-                ), $.paragraph)),
+                alias($._non_infectable_paragraph, $.paragraph),
                 $["indent_segment" + level],
             ),
         ),
@@ -1117,7 +1133,7 @@ function gen_quote($, level) {
                 ...lower_level_quotes,
             ),
         ),
-    ));
+    );
 }
 
 function gen_attached_modifier($, kind, verbatim, ranged) {
