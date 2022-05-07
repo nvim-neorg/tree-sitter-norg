@@ -39,21 +39,12 @@ module.exports = grammar({
 
         [$._paragraph_element],
 
-        [$.paragraph],
-
         [$.indent_segment1],
         [$.indent_segment2],
         [$.indent_segment3],
         [$.indent_segment4],
         [$.indent_segment5],
         [$.indent_segment6],
-
-        [$.quote1],
-        [$.quote2],
-        [$.quote3],
-        [$.quote4],
-        [$.quote5],
-        [$.quote6],
 
         [$.ordered_list1],
         [$.ordered_list2],
@@ -255,16 +246,8 @@ module.exports = grammar({
         // objects and line breaks.
         paragraph: $ =>
         prec.right(0,
-            choice(
-                seq(
-                    $.infecting_tag_set,
-                    repeat1(
-                        choice(
-                            $.paragraph_segment,
-                            alias($.line_break, "_line_break"),
-                        ),
-                    ),
-                ),
+            seq(
+                optional($.infecting_tag_set),
                 repeat1(
                     choice(
                         $.paragraph_segment,
@@ -279,17 +262,8 @@ module.exports = grammar({
         // https://github.com/tree-sitter/tree-sitter/discussions/1562#discussioncomment-2676442
         paragraph_segment: $ =>
         prec.right(0,
-            choice(
-                seq(
-                    $.carryover_tag_set,
-                    repeat1(
-                        choice(
-                            $._paragraph_element,
-                            alias($._conflict_open, "_word"),
-                            alias($.ranged_modifier_open, "_word"),
-                        ),
-                    ),
-                ),
+            seq(
+                optional($.carryover_tag_set),
                 repeat1(
                     choice(
                         $._paragraph_element,
@@ -586,7 +560,7 @@ module.exports = grammar({
                         $.quote4,
                         $.quote5,
                         $.quote6,
-                    ),
+                    )
                 ),
             ),
         ),
@@ -1001,9 +975,8 @@ function gen_ranged_tag_end($, kind) {
 }
 
 function gen_detached_modifier($, prefix, ...rest) {
-    return choice(
-        seq(
-            $.carryover_tag_set,
+    return seq(
+            optional($.carryover_tag_set),
 
             prefix,
 
@@ -1015,20 +988,7 @@ function gen_detached_modifier($, prefix, ...rest) {
             ),
 
             ...rest,
-        ),
-        seq(
-            prefix,
-
-            optional(
-                field(
-                    "state",
-                    $.detached_modifier_extension,
-                ),
-            ),
-
-            ...rest,
-        ),
-    );
+        );
 }
 
 function gen_heading($, level) {
@@ -1127,7 +1087,7 @@ function gen_quote($, level) {
         lower_level_quotes[i] = $["quote" + (i + 1 + level)]
     }
 
-    return gen_detached_modifier(
+    return prec.right(gen_detached_modifier(
         $,
 
         $["quote" + level + "_prefix"],
@@ -1135,7 +1095,19 @@ function gen_quote($, level) {
         field(
             "content",
             choice(
-                $.paragraph,
+                prec.right(alias(repeat1(
+                    choice(
+                        prec.right(alias(
+                            repeat1(
+                                choice(
+                                    $._paragraph_element,
+                                    alias($._conflict_open, "_word"),
+                                    alias($.ranged_modifier_open, "_word"),
+                                ),
+                            ), $.paragraph_segment)),
+                        alias($.line_break, "_line_break"),
+                    ),
+                ), $.paragraph)),
                 $["indent_segment" + level],
             ),
         ),
@@ -1145,7 +1117,7 @@ function gen_quote($, level) {
                 ...lower_level_quotes,
             ),
         ),
-    );
+    ));
 }
 
 function gen_attached_modifier($, kind, verbatim, ranged) {
