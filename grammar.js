@@ -37,10 +37,9 @@ module.exports = grammar({
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
 
-        [$.paragraph],
-        [$.paragraph_segment, $.ranged_attached_modifier],
-
         [$._paragraph_element],
+
+        [$.paragraph],
 
         [$.indent_segment1],
         [$.indent_segment2],
@@ -255,25 +254,34 @@ module.exports = grammar({
         // Any regular text. A paragraph is made up of `paragraph_segment`
         // objects and line breaks.
         paragraph: $ =>
-            seq(
-                optional(
-                    $.infecting_tag_set,
-                ),
-                repeat1(
-                    choice(
-                        $.paragraph_segment,
-                        alias($.line_break, "_line_break"),
-                    ),
+        seq(
+            optional(
+                $.infecting_tag_set,
+            ),
+            repeat1(
+                choice(
+                    $.paragraph_segment,
+                    alias($.line_break, "_line_break"),
                 ),
             ),
+        ),
 
         // A paragraph segment can contain any paragraph element.
         // FIXME: paragraph nodes are no longer adhering to maximum length
         // https://github.com/tree-sitter/tree-sitter/discussions/1562#discussioncomment-2676442
         paragraph_segment: $ =>
-        prec.right(0,
-            seq(
-                optional($.carryover_tag_set),
+        prec.right(
+            choice(
+                seq(
+                    $.carryover_tag_set,
+                    repeat1(
+                        choice(
+                            $._paragraph_element,
+                            alias($._conflict_open, "_word"),
+                            alias($.ranged_modifier_open, "_word"),
+                        ),
+                    ),
+                ),
                 repeat1(
                     choice(
                         $._paragraph_element,
@@ -559,7 +567,7 @@ module.exports = grammar({
         // A quote:
         // > That's what she said
         quote: $ =>
-        prec.right(0,
+        prec.right(
             seq(
                 optional($.infecting_tag_set),
                 repeat1(
@@ -925,7 +933,7 @@ module.exports = grammar({
         ),
 
         ranged_attached_modifier: $ =>
-        prec.dynamic(1,
+        prec(1, 
             seq(
                 alias($.ranged_modifier_open, "_open"),
                 $._ranged_attached_modifier,

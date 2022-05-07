@@ -105,15 +105,12 @@ Basic Links
     (ERROR
       (link_file_text))
     (paragraph_segment)
-    (ERROR)
     (ERROR
       (link_file_text))
     (paragraph_segment)
-    (ERROR)
     (ERROR
       (link_file_text))
-    (paragraph_segment))
-  (ERROR))
+    (paragraph_segment)))
 
 ================================================================================
 Links with text
@@ -250,18 +247,15 @@ Links with text
     (ERROR
       (link_file_text))
     (paragraph_segment
-      (ERROR)
       (anchor_declaration
         (link_description
           text: (paragraph))))
     (ERROR
       (link_file_text))
     (paragraph_segment)
-    (ERROR)
     (ERROR
       (link_file_text))
     (paragraph_segment
-      (ERROR)
       (anchor_declaration
         (link_description
           text: (paragraph))))))
@@ -488,21 +482,18 @@ Anchors
           text: (paragraph)))
       (ERROR
         (link_file_text)))
-    (ERROR)
     (paragraph_segment
       (anchor_declaration
         (link_description
           text: (paragraph)))
       (ERROR
         (link_file_text)))
-    (ERROR)
     (paragraph_segment
       (anchor_declaration
         (link_description
           text: (paragraph)))
       (ERROR
-        (link_file_text))))
-  (ERROR))
+        (link_file_text)))))
 
 ================================================================================
 Verbatim links

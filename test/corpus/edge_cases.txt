@@ -1,7 +1,7 @@
 ==========================
 Link parts inside verbatim
 ==========================
-`[open` not verbati
+`[open` not verbatim
 ---
 (document
     (paragraph
@@ -69,9 +69,9 @@ Reset attached modifiers after detached modifier
 =========================================================
 Repeated attached modifiers should be treated as raw text
 =========================================================
-C++, text, C++
-++text++
-+++text+++
+^^, text, ^^
+%%text%%
+%%%text%%%
 *///example//*
 ---
 (document

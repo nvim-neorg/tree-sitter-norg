@@ -133,17 +133,44 @@
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
-        "type": "SEQ",
+        "type": "CHOICE",
         "members": [
           {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
                 "type": "SYMBOL",
                 "name": "carryover_tag_set"
               },
               {
-                "type": "BLANK"
+                "type": "REPEAT1",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_paragraph_element"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "_conflict_open"
+                      },
+                      "named": false,
+                      "value": "_word"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "ranged_modifier_open"
+                      },
+                      "named": false,
+                      "value": "_word"
+                    }
+                  ]
+                }
               }
             ]
           },
@@ -2774,7 +2801,7 @@
       }
     },
     "quote": {
-      "type": "PREC_RIGHT",
+      "type": "PREC_LEFT",
       "value": 0,
       "content": {
         "type": "SEQ",
@@ -7018,7 +7045,7 @@
       ]
     },
     "ranged_attached_modifier": {
-      "type": "PREC_DYNAMIC",
+      "type": "PREC",
       "value": 1,
       "content": {
         "type": "SEQ",
@@ -7101,14 +7128,10 @@
       "_conflict_open"
     ],
     [
-      "paragraph"
-    ],
-    [
-      "paragraph_segment",
-      "ranged_attached_modifier"
-    ],
-    [
       "_paragraph_element"
+    ],
+    [
+      "paragraph"
     ],
     [
       "indent_segment1"
