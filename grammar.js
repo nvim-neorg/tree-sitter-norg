@@ -254,14 +254,22 @@ module.exports = grammar({
         // Any regular text. A paragraph is made up of `paragraph_segment`
         // objects and line breaks.
         paragraph: $ =>
-        seq(
-            optional(
-                $.infecting_tag_set,
-            ),
-            repeat1(
-                choice(
-                    $.paragraph_segment,
-                    alias($.line_break, "_line_break"),
+        prec.right(0,
+            choice(
+                seq(
+                    $.infecting_tag_set,
+                    repeat1(
+                        choice(
+                            $.paragraph_segment,
+                            alias($.line_break, "_line_break"),
+                        ),
+                    ),
+                ),
+                repeat1(
+                    choice(
+                        $.paragraph_segment,
+                        alias($.line_break, "_line_break"),
+                    ),
                 ),
             ),
         ),
@@ -270,7 +278,7 @@ module.exports = grammar({
         // FIXME: paragraph nodes are no longer adhering to maximum length
         // https://github.com/tree-sitter/tree-sitter/discussions/1562#discussioncomment-2676442
         paragraph_segment: $ =>
-        prec.right(
+        prec.right(0,
             choice(
                 seq(
                     $.carryover_tag_set,
@@ -993,19 +1001,33 @@ function gen_ranged_tag_end($, kind) {
 }
 
 function gen_detached_modifier($, prefix, ...rest) {
-    return seq(
-        optional($.carryover_tag_set),
+    return choice(
+        seq(
+            $.carryover_tag_set,
 
-        prefix,
+            prefix,
 
-        optional(
-            field(
-                "state",
-                $.detached_modifier_extension,
+            optional(
+                field(
+                    "state",
+                    $.detached_modifier_extension,
+                ),
             ),
-        ),
 
-        ...rest,
+            ...rest,
+        ),
+        seq(
+            prefix,
+
+            optional(
+                field(
+                    "state",
+                    $.detached_modifier_extension,
+                ),
+            ),
+
+            ...rest,
+        ),
     );
 }
 
