@@ -647,9 +647,6 @@ class Scanner
     // in the final result
     void advance(TSLexer* lexer)
     {
-        if (!lexer->lookahead)
-            return;
-
         m_Previous = m_Current;
         m_Current = lexer->lookahead;
         return lexer->advance(lexer, false);
@@ -790,7 +787,7 @@ class Scanner
     {
         if (lexer->lookahead == ':')
         {
-            bool is_current_char_whitespace = std::iswspace(m_Current) || !m_Current;
+            bool is_current_char_whitespace = !m_Current || std::iswspace(m_Current);
 
             advance(lexer);
 
