@@ -277,8 +277,6 @@ module.exports = grammar({
         ),
 
         // A paragraph segment can contain any paragraph element.
-        // FIXME: paragraph nodes are no longer adhering to maximum length
-        // https://github.com/tree-sitter/tree-sitter/discussions/1562#discussioncomment-2676442
         paragraph_segment: $ =>
         prec.right(0,
             seq(
@@ -457,7 +455,7 @@ module.exports = grammar({
             field(
                 "token",
                 $.any_char,
-            )
+            ),
         ),
 
         _link_content: $ =>
@@ -552,20 +550,24 @@ module.exports = grammar({
         ),
 
         link: $ =>
-        prec.right(2, seq(
-            $.link_location,
-            optional(
-                $.link_description,
+        prec.right(2,
+            seq(
+                $.link_location,
+                optional(
+                    $.link_description,
+                ),
             ),
-        )),
+        ),
 
         anchor_declaration: $ => $.link_description,
 
         anchor_definition: $ =>
-        prec(2, seq(
-            $.link_description,
-            $.link_location,
-        )),
+        prec(2,
+            seq(
+                $.link_description,
+                $.link_location,
+            ),
+        ),
 
         // A first-level heading:
         // * Example
@@ -789,8 +791,8 @@ module.exports = grammar({
                     ),
 
                     $.tag_name_element,
-                )
-            )
+                ),
+            ),
         ),
 
         tag_param: _ => token.immediate(/[^\"]\S*/),
@@ -829,7 +831,7 @@ module.exports = grammar({
                             ),
                         ),
                     ),
-                )
+                ),
             ),
         ),
 
@@ -1183,8 +1185,6 @@ function gen_single_rangeable_detached_modifier($, kind) {
 }
 
 function gen_multi_rangeable_detached_modifier($, kind) {
-    // NOTE: there used to be a choice rule with an optional standalone suffix
-    // so if problems arise with standalone closing nodes, re-add that
     return seq(
         optional($.strong_attribute_set),
 
@@ -1233,56 +1233,68 @@ function gen_indent_segment_contents($, level) {
     ] : [];
 
     if (level < 6) {
-        return prec(1, choice(
-            $.rangeable_detached_modifier,
-            $.tag,
-            ...numbered_items.map(item => $[item + (level + 1)]),
-        ))
+        return prec(1,
+            choice(
+                $.rangeable_detached_modifier,
+                $.tag,
+                ...numbered_items.map(item => $[item + (level + 1)]),
+            ),
+        );
     } else {
-        return prec(1, choice(
-            $.rangeable_detached_modifier,
-            $.tag
-        ))
+        return prec(1,
+            choice(
+                $.rangeable_detached_modifier,
+                $.tag
+            ),
+        );
     }
 }
 
 function gen_indent_segment($, level) {
     if (level == 0) {
-        return prec.dynamic(1, seq(
-            optional($.strong_attribute_set),
-            optional($.weak_attribute_set),
+        return prec.dynamic(1,
+            seq(
+                optional($.strong_attribute_set),
+                optional($.weak_attribute_set),
 
+                $.indent_segment_begin,
+
+                repeat(
+                    prec(1,
+                        choice(
+                            $.paragraph,
+                            alias($.line_break, "_line_break"),
+                            alias($.paragraph_break, "_paragraph_break"),
+                            $["_indent_segment_contents" + level],
+                        ),
+                    ),
+                ),
+
+                optional(
+                    $.weak_paragraph_delimiter,
+                ),
+            ),
+        );
+    }
+
+    return prec.dynamic(1,
+        seq(
             $.indent_segment_begin,
 
             repeat(
-                prec(1, choice(
-                    $.paragraph,
-                    alias($.line_break, "_line_break"),
-                    alias($.paragraph_break, "_paragraph_break"),
-                    $["_indent_segment_contents" + level],
-                )),
+                prec(1,
+                    choice(
+                        $.paragraph,
+                        alias($.line_break, "_line_break"),
+                        alias($.paragraph_break, "_paragraph_break"),
+                        $["_indent_segment_contents" + level],
+                    ),
+                ),
             ),
 
             optional(
                 $.weak_paragraph_delimiter,
             ),
-        ));
-    }
-
-    return prec.dynamic(1, seq(
-        $.indent_segment_begin,
-
-        repeat(
-            prec(1, choice(
-                $.paragraph,
-                alias($.line_break, "_line_break"),
-                alias($.paragraph_break, "_paragraph_break"),
-                $["_indent_segment_contents" + level],
-            )),
         ),
-
-        optional(
-            $.weak_paragraph_delimiter,
-        ),
-    ));
+    );
 }
