@@ -4824,7 +4824,15 @@
           "named": true
         },
         {
+          "type": "strong_attribute_set",
+          "named": true
+        },
+        {
           "type": "tag_parameters",
+          "named": true
+        },
+        {
+          "type": "weak_attribute_set",
           "named": true
         }
       ]
@@ -4895,7 +4903,15 @@
           "named": true
         },
         {
+          "type": "strong_attribute_set",
+          "named": true
+        },
+        {
           "type": "tag_parameters",
+          "named": true
+        },
+        {
+          "type": "weak_attribute_set",
           "named": true
         }
       ]

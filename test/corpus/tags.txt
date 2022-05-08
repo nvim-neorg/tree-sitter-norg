@@ -98,3 +98,204 @@ public class MyClass {}
       (tag_param))
     (ranged_verbatim_tag_content)
     (ranged_verbatim_tag_end)))
+
+================================================================================
+Ranged Tag with strong attribute
+================================================================================
+|color blue
+#table
+*heading* | /heading/
+value | something else
+#end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_tag
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (tag_name_element))
+    (ranged_tag_content
+      (paragraph_segment
+        (bold)
+        (italic))
+      (paragraph_segment))
+    (ranged_tag_end)))
+
+================================================================================
+Ranged Verbatim Tag with strong attribute
+================================================================================
+|color blue
+@code java
+@MyAnnotation
+public class MyClass {}
+@end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_verbatim_tag
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (tag_name_element))
+    (tag_parameters
+      (tag_param))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end)))
+
+================================================================================
+Ranged Tag with weak attribute
+================================================================================
++color blue
+#table
+*heading* | /heading/
+value | something else
+#end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_tag
+    (weak_attribute_set
+      (weak_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (tag_name_element))
+    (ranged_tag_content
+      (paragraph_segment
+        (bold)
+        (italic))
+      (paragraph_segment))
+    (ranged_tag_end)))
+
+================================================================================
+Ranged Verbatim Tag with weak attribute
+================================================================================
++color blue
+@code java
+@MyAnnotation
+public class MyClass {}
+@end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_verbatim_tag
+    (weak_attribute_set
+      (weak_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (tag_name_element))
+    (tag_parameters
+      (tag_param))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end)))
+
+================================================================================
+Ranged Tag with strong and weak attribute
+================================================================================
+|name test
++color blue
+#table
+*heading* | /heading/
+value | something else
+#end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_tag
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (weak_attribute_set
+      (weak_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (tag_name_element))
+    (ranged_tag_content
+      (paragraph_segment
+        (bold)
+        (italic))
+      (paragraph_segment))
+    (ranged_tag_end)))
+
+================================================================================
+Ranged Verbatim Tag with strong and weak attribute
+================================================================================
+|name test
++color blue
+@code java
+@MyAnnotation
+public class MyClass {}
+@end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_verbatim_tag
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (weak_attribute_set
+      (weak_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (tag_name_element))
+    (tag_parameters
+      (tag_param))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end)))
+
+================================================================================
+Ranged Tag with wrong order of attributes
+================================================================================
++color blue
+|name test
+#table
+*heading* | /heading/
+value | something else
+#end
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (weak_attribute_set
+        (weak_attribute
+          (tag_name
+            (tag_name_element))
+          (tag_parameters
+            (tag_param))))
+      (ERROR)))
+  (ranged_tag
+    (tag_name
+      (tag_name_element))
+    (ranged_tag_content
+      (paragraph_segment
+        (bold)
+        (italic))
+      (paragraph_segment))
+    (ranged_tag_end)))

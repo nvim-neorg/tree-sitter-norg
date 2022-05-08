@@ -730,14 +730,6 @@ module.exports = grammar({
 
         ranged_tag_end: $ => gen_ranged_tag_end($, "ranged"),
 
-        // TODO: add carryover/infecting tag
-        // FIXME: how do carryover tags affect a ranged vs. how do infecting
-        // tags do?
-        // NOTE: since detached mods can optionally take an infecting tag set
-        // (which affects the entire object) and also a carryover tag set (which
-        // affects only the first part of the object), they must strictly occur
-        // in this order. I would like to enforce this for ranged tags, too,
-        // simply to keep things consistent and predictable.
         ranged_tag: $ => gen_ranged_tag($, "ranged_tag"),
 
         ranged_verbatim_tag_content: $ =>
@@ -758,7 +750,6 @@ module.exports = grammar({
 
         ranged_verbatim_tag_end: $ => gen_ranged_tag_end($, "ranged_verbatim"),
 
-        // TODO: add carryover/infecting tag
         ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim_tag"),
 
         macro: $ => gen_single_tag($, "macro"),
@@ -977,6 +968,10 @@ function gen_single_tag($, kind) {
 function gen_ranged_tag($, kind) {
     return prec.right(0,
         seq(
+            optional($.strong_attribute_set),
+
+            optional($.weak_attribute_set),
+
             gen_single_tag($, kind),
 
             field(
