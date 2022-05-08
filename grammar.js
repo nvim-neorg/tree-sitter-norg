@@ -211,8 +211,8 @@ module.exports = grammar({
         $.variable_open,
         $.variable_close,
 
-        $.ranged_modifier_open,
-        $.ranged_modifier_close,
+        $.free_form_modifier_open,
+        $.free_form_modifier_close,
 
         $.inline_link_target_open,
         $.inline_link_target_close,
@@ -285,7 +285,7 @@ module.exports = grammar({
                     choice(
                         $._paragraph_element,
                         alias($._conflict_open, "_word"),
-                        alias($.ranged_modifier_open, "_word"),
+                        alias($.free_form_modifier_open, "_word"),
                     ),
                 ),
             ),
@@ -297,7 +297,7 @@ module.exports = grammar({
                 choice(
                     $._paragraph_element,
                     alias($._conflict_open, "_word"),
-                    alias($.ranged_modifier_open, "_word"),
+                    alias($.free_form_modifier_open, "_word"),
                 ),
             ),
         ),
@@ -346,7 +346,7 @@ module.exports = grammar({
                 optional($.link_modifier),
                 choice(
                     $.attached_modifier,
-                    $.ranged_attached_modifier,
+                    $._free_form_attached_modifier,
                 ),
                 optional($.link_modifier),
             ),
@@ -363,8 +363,8 @@ module.exports = grammar({
             alias($.escape_sequence_prefix, "_word"),
             alias($.any_char, "_word"),
             alias($.link_modifier, "_word"),
-            alias($.ranged_modifier_open, "_word"),
-            alias($.ranged_modifier_close, "_word"),
+            alias($.free_form_modifier_open, "_word"),
+            alias($.free_form_modifier_close, "_word"),
             prec.dynamic(5, alias($._conflict_open, "_word")),
             prec.dynamic(5, alias($._conflict_close, "_word")),
             alias($.inline_link_target_open, "_word"),
@@ -400,18 +400,17 @@ module.exports = grammar({
         inline_math: $ => gen_attached_modifier($, "inline_math", true, false),
         variable: $ => gen_attached_modifier($, "variable", true, false),
 
-        // TODO: find better name than ranged
-        _ranged_bold: $ => gen_attached_modifier($, "bold", false, true),
-        _ranged_italic: $ => gen_attached_modifier($, "italic", false, true),
-        _ranged_strikethrough: $ => gen_attached_modifier($, "strikethrough", false, true),
-        _ranged_underline: $ => gen_attached_modifier($, "underline", false, true),
-        _ranged_spoiler: $ => gen_attached_modifier($, "spoiler", false, true),
-        _ranged_superscript: $ => gen_attached_modifier($, "superscript", false, true),
-        _ranged_subscript: $ => gen_attached_modifier($, "subscript", false, true),
-        _ranged_inline_comment: $ => gen_attached_modifier($, "inline_comment", false, true),
-        _ranged_verbatim: $ => gen_attached_modifier($, "verbatim", true, true),
-        _ranged_inline_math: $ => gen_attached_modifier($, "inline_math", true, true),
-        _ranged_variable: $ => gen_attached_modifier($, "variable", true, true),
+        _free_form_bold: $ => gen_attached_modifier($, "bold", false, true),
+        _free_form_italic: $ => gen_attached_modifier($, "italic", false, true),
+        _free_form_strikethrough: $ => gen_attached_modifier($, "strikethrough", false, true),
+        _free_form_underline: $ => gen_attached_modifier($, "underline", false, true),
+        _free_form_spoiler: $ => gen_attached_modifier($, "spoiler", false, true),
+        _free_form_superscript: $ => gen_attached_modifier($, "superscript", false, true),
+        _free_form_subscript: $ => gen_attached_modifier($, "subscript", false, true),
+        _free_form_inline_comment: $ => gen_attached_modifier($, "inline_comment", false, true),
+        _free_form_verbatim: $ => gen_attached_modifier($, "verbatim", true, true),
+        _free_form_inline_math: $ => gen_attached_modifier($, "inline_math", true, true),
+        _free_form_variable: $ => gen_attached_modifier($, "variable", true, true),
 
         _conflict_open: $ =>
         choice(
@@ -918,27 +917,24 @@ module.exports = grammar({
             $.variable,
         ),
 
-        _ranged_attached_modifier: $ =>
-        choice(
-            alias($._ranged_bold, $.bold),
-            alias($._ranged_italic, $.italic),
-            alias($._ranged_strikethrough, $.strikethrough),
-            alias($._ranged_underline, $.underline),
-            alias($._ranged_spoiler, $.spoiler),
-            alias($._ranged_superscript, $.superscript),
-            alias($._ranged_subscript, $.subscript),
-            alias($._ranged_verbatim, $.verbatim),
-            alias($._ranged_inline_comment, $.inline_comment),
-            alias($._ranged_inline_math, $.inline_math),
-            alias($._ranged_variable, $.variable),
-        ),
-
-        ranged_attached_modifier: $ =>
+        _free_form_attached_modifier: $ =>
         prec(1,
             seq(
-                alias($.ranged_modifier_open, "_open"),
-                $._ranged_attached_modifier,
-                alias($.ranged_modifier_close, "_close"),
+                alias($.free_form_modifier_open, "_open"),
+                choice(
+                    alias($._free_form_bold, $.bold),
+                    alias($._free_form_italic, $.italic),
+                    alias($._free_form_strikethrough, $.strikethrough),
+                    alias($._free_form_underline, $.underline),
+                    alias($._free_form_spoiler, $.spoiler),
+                    alias($._free_form_superscript, $.superscript),
+                    alias($._free_form_subscript, $.subscript),
+                    alias($._free_form_verbatim, $.verbatim),
+                    alias($._free_form_inline_comment, $.inline_comment),
+                    alias($._free_form_inline_math, $.inline_math),
+                    alias($._free_form_variable, $.variable),
+                ),
+                alias($.free_form_modifier_close, "_close"),
             ),
         ),
     }
@@ -1131,7 +1127,7 @@ function gen_quote($, level) {
     );
 }
 
-function gen_attached_modifier($, kind, verbatim, ranged) {
+function gen_attached_modifier($, kind, verbatim, free_form) {
     let content_rule = $._attached_modifier_content;
     let precedence = 3;
 
@@ -1140,7 +1136,7 @@ function gen_attached_modifier($, kind, verbatim, ranged) {
         precedence = 5;
     }
 
-    if (ranged) {
+    if (free_form) {
         precedence = precedence + 1;
     }
 

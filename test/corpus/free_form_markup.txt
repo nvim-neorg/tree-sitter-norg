@@ -1,0 +1,1019 @@
+================================================================================
+Free form Bold
+================================================================================
+Here is some |*free form bold*| markup.
+Here is some |* free form bold*| markup.
+Here is some |*free form bold *| markup.
+Here is some |* free form bold *| markup.
+Here is some |* free form
+bold *| markup.
+|* Extend as *far* as possible *|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (bold))
+    (paragraph_segment
+      (bold))
+    (paragraph_segment
+      (bold))
+    (paragraph_segment
+      (bold))
+    (paragraph_segment
+      (bold))
+    (paragraph_segment
+      (bold))))
+
+================================================================================
+Free form Italic
+================================================================================
+Here is some |/free form italic/| markup.
+Here is some |/ free form italic/| markup.
+Here is some |/free form italic /| markup.
+Here is some |/ free form italic /| markup.
+Here is some |/ free form
+italic /| markup.
+|/ Extend as /far/ as possible /|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (italic))
+    (paragraph_segment
+      (italic))
+    (paragraph_segment
+      (italic))
+    (paragraph_segment
+      (italic))
+    (paragraph_segment
+      (italic))
+    (paragraph_segment
+      (italic))))
+
+================================================================================
+Free form Strikethrough
+================================================================================
+Here is some |-free form strikethrough-| markup.
+Here is some |- free form strikethrough-| markup.
+Here is some |-free form strikethrough -| markup.
+Here is some |- free form strikethrough -| markup.
+Here is some |- free form
+strikethrough -| markup.
+|- Extend as -far- as possible -|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (strikethrough))
+    (paragraph_segment
+      (strikethrough))
+    (paragraph_segment
+      (strikethrough))
+    (paragraph_segment
+      (strikethrough))
+    (paragraph_segment
+      (strikethrough))
+    (paragraph_segment
+      (strikethrough))))
+
+================================================================================
+Free form Underline
+================================================================================
+Here is some |_free form underline_| markup.
+Here is some |_ free form underline_| markup.
+Here is some |_free form underline _| markup.
+Here is some |_ free form underline _| markup.
+Here is some |_ free form
+underline _| markup.
+|_ Extend as _far_ as possible _|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (underline))
+    (paragraph_segment
+      (underline))
+    (paragraph_segment
+      (underline))
+    (paragraph_segment
+      (underline))
+    (paragraph_segment
+      (underline))
+    (paragraph_segment
+      (underline))))
+
+================================================================================
+Free form Spoiler
+================================================================================
+Here is some |!free form spoiler!| markup.
+Here is some |! free form spoiler!| markup.
+Here is some |!free form spoiler !| markup.
+Here is some |! free form spoiler !| markup.
+Here is some |! free form
+spoiler !| markup.
+|! Extend as !far! as possible !|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (spoiler))
+    (paragraph_segment
+      (spoiler))
+    (paragraph_segment
+      (spoiler))
+    (paragraph_segment
+      (spoiler))
+    (paragraph_segment
+      (spoiler))
+    (paragraph_segment
+      (spoiler))))
+
+================================================================================
+Free form Superscript
+================================================================================
+Here is some |^free form superscript^| markup.
+Here is some |^ free form superscript^| markup.
+Here is some |^free form superscript ^| markup.
+Here is some |^ free form superscript ^| markup.
+Here is some |^ free form
+superscript ^| markup.
+|^ Extend as ^far^ as possible ^|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (superscript))
+    (paragraph_segment
+      (superscript))
+    (paragraph_segment
+      (superscript))
+    (paragraph_segment
+      (superscript))
+    (paragraph_segment
+      (superscript))
+    (paragraph_segment
+      (superscript))))
+
+================================================================================
+Free form Subscript
+================================================================================
+Here is some |,free form subscript,| markup.
+Here is some |, free form subscript,| markup.
+Here is some |,free form subscript ,| markup.
+Here is some |, free form subscript ,| markup.
+Here is some |, free form
+subscript ,| markup.
+|, Extend as ,far, as possible ,|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (subscript))
+    (paragraph_segment
+      (subscript))
+    (paragraph_segment
+      (subscript))
+    (paragraph_segment
+      (subscript))
+    (paragraph_segment
+      (subscript))
+    (paragraph_segment
+      (subscript))))
+
+================================================================================
+Free form Verbatim
+================================================================================
+Here is some |`free form verbatim`| markup.
+Here is some |` free form verbatim`| markup.
+Here is some |`free form verbatim `| markup.
+Here is some |` free form verbatim `| markup.
+Here is some |` free form
+verbatim `| markup.
+|` Extend as `far` as possible `|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))))
+
+================================================================================
+Free form Inline Comment
+================================================================================
+Here is some |%free form inline_comment%| markup.
+Here is some |% free form inline_comment%| markup.
+Here is some |%free form inline_comment %| markup.
+Here is some |% free form inline_comment %| markup.
+Here is some |% free form
+inline_comment %| markup.
+|% Extend as %far% as possible %|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (inline_comment))
+    (paragraph_segment
+      (inline_comment))
+    (paragraph_segment
+      (inline_comment))
+    (paragraph_segment
+      (inline_comment))
+    (paragraph_segment
+      (inline_comment))
+    (paragraph_segment
+      (inline_comment))))
+
+================================================================================
+Free form Inline Math
+================================================================================
+Here is some |$free form inline_math$| markup.
+Here is some |$ free form inline_math$| markup.
+Here is some |$free form inline_math $| markup.
+Here is some |$ free form inline_math $| markup.
+Here is some |$ free form
+inline_math $| markup.
+|$ Extend as $far$ as possible $|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))))
+
+================================================================================
+Free form Variable
+================================================================================
+Here is some |&free form variable&| markup.
+Here is some |& free form variable&| markup.
+Here is some |&free form variable &| markup.
+Here is some |& free form variable &| markup.
+Here is some |& free form
+variable &| markup.
+|& Extend as &far& as possible &|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))))
+
+================================================================================
+Nesting into Free form Bold
+================================================================================
+|*Bold and /italic/*|
+|*Bold and -struck through-*|
+|*Bold and _underlined_*|
+|*Bold and !spoiler!*|
+|*Bold and ^superscript^*|
+|*Bold and ,subscript,*|
+|*Bold and |/italic/|*|
+|*Bold and |-struck through-|*|
+|*Bold and |_underlined_|*|
+|*Bold and |!spoiler!|*|
+|*Bold and |^superscript^|*|
+|*Bold and |,subscript,|*|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (bold
+        (italic)))
+    (paragraph_segment
+      (bold
+        (strikethrough)))
+    (paragraph_segment
+      (bold
+        (underline)))
+    (paragraph_segment
+      (bold
+        (spoiler)))
+    (paragraph_segment
+      (bold
+        (superscript)))
+    (paragraph_segment
+      (bold
+        (subscript)))
+    (paragraph_segment
+      (bold
+        (italic)))
+    (paragraph_segment
+      (bold
+        (strikethrough)))
+    (paragraph_segment
+      (bold
+        (underline)))
+    (paragraph_segment
+      (bold
+        (spoiler)))
+    (paragraph_segment
+      (bold
+        (superscript)))
+    (paragraph_segment
+      (bold
+        (subscript)))))
+
+================================================================================
+Nesting into Free form Italic
+================================================================================
+|/Italic and *bold*/|
+|/Italic and -struck through-/|
+|/Italic and _underlined_/|
+|/Italic and !spoiler!/|
+|/Italic and ^superscript^/|
+|/Italic and ,subscript,/|
+|/Italic and |*bold*|/|
+|/Italic and |-struck through-|/|
+|/Italic and |_underlined_|/|
+|/Italic and |!spoiler!|/|
+|/Italic and |^superscript^|/|
+|/Italic and |,subscript,|/|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (italic
+        (bold)))
+    (paragraph_segment
+      (italic
+        (strikethrough)))
+    (paragraph_segment
+      (italic
+        (underline)))
+    (paragraph_segment
+      (italic
+        (spoiler)))
+    (paragraph_segment
+      (italic
+        (superscript)))
+    (paragraph_segment
+      (italic
+        (subscript)))
+    (paragraph_segment
+      (italic
+        (bold)))
+    (paragraph_segment
+      (italic
+        (strikethrough)))
+    (paragraph_segment
+      (italic
+        (underline)))
+    (paragraph_segment
+      (italic
+        (spoiler)))
+    (paragraph_segment
+      (italic
+        (superscript)))
+    (paragraph_segment
+      (italic
+        (subscript)))))
+
+================================================================================
+Nesting into Free form Strikethrough
+================================================================================
+|-Strikethrough and *bold*-|
+|-Strikethrough and /italic/-|
+|-Strikethrough and _underlined_-|
+|-Strikethrough and !spoiler!-|
+|-Strikethrough and ^superscript^-|
+|-Strikethrough and ,subscript,-|
+|-Strikethrough and |*bold*|-|
+|-Strikethrough and |/italic/|-|
+|-Strikethrough and |_underlined_|-|
+|-Strikethrough and |!spoiler!|-|
+|-Strikethrough and |^superscript^|-|
+|-Strikethrough and |,subscript,|-|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (strikethrough
+        (bold)))
+    (paragraph_segment
+      (strikethrough
+        (italic)))
+    (paragraph_segment
+      (strikethrough
+        (underline)))
+    (paragraph_segment
+      (strikethrough
+        (spoiler)))
+    (paragraph_segment
+      (strikethrough
+        (superscript)))
+    (paragraph_segment
+      (strikethrough
+        (subscript)))
+    (paragraph_segment
+      (strikethrough
+        (bold)))
+    (paragraph_segment
+      (strikethrough
+        (italic)))
+    (paragraph_segment
+      (strikethrough
+        (underline)))
+    (paragraph_segment
+      (strikethrough
+        (spoiler)))
+    (paragraph_segment
+      (strikethrough
+        (superscript)))
+    (paragraph_segment
+      (strikethrough
+        (subscript)))))
+
+================================================================================
+Nesting into Free form Underline
+================================================================================
+|_Underline and *bold*_|
+|_Underline and /italic/_|
+|_Underline and -struck through-_|
+|_Underline and !spoiler!_|
+|_Underline and ^superscript^_|
+|_Underline and ,subscript,_|
+|_Underline and |*bold*|_|
+|_Underline and |/italic/|_|
+|_Underline and |-strikethrough-|_|
+|_Underline and |!spoiler!|_|
+|_Underline and |^superscript^|_|
+|_Underline and |,subscript,|_|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (underline
+        (bold)))
+    (paragraph_segment
+      (underline
+        (italic)))
+    (paragraph_segment
+      (underline
+        (strikethrough)))
+    (paragraph_segment
+      (underline
+        (spoiler)))
+    (paragraph_segment
+      (underline
+        (superscript)))
+    (paragraph_segment
+      (underline
+        (subscript)))
+    (paragraph_segment
+      (underline
+        (bold)))
+    (paragraph_segment
+      (underline
+        (italic)))
+    (paragraph_segment
+      (underline
+        (strikethrough)))
+    (paragraph_segment
+      (underline
+        (spoiler)))
+    (paragraph_segment
+      (underline
+        (superscript)))
+    (paragraph_segment
+      (underline
+        (subscript)))))
+
+================================================================================
+Nesting into Free form Spoiler
+================================================================================
+|!Spoiler and *bold*!|
+|!Spoiler and /italic/!|
+|!Spoiler and -struck through-!|
+|!Spoiler and _underline_!|
+|!Spoiler and ^superscript^!|
+|!Spoiler and ,subscript,!|
+|!Spoiler and |*bold*|!|
+|!Spoiler and |/italic/|!|
+|!Spoiler and |-strikethrough-|!|
+|!Spoiler and |_underline_|!|
+|!Spoiler and |^superscript^|!|
+|!Spoiler and |,subscript,|!|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (spoiler
+        (bold)))
+    (paragraph_segment
+      (spoiler
+        (italic)))
+    (paragraph_segment
+      (spoiler
+        (strikethrough)))
+    (paragraph_segment
+      (spoiler
+        (underline)))
+    (paragraph_segment
+      (spoiler
+        (superscript)))
+    (paragraph_segment
+      (spoiler
+        (subscript)))
+    (paragraph_segment
+      (spoiler
+        (bold)))
+    (paragraph_segment
+      (spoiler
+        (italic)))
+    (paragraph_segment
+      (spoiler
+        (strikethrough)))
+    (paragraph_segment
+      (spoiler
+        (underline)))
+    (paragraph_segment
+      (spoiler
+        (superscript)))
+    (paragraph_segment
+      (spoiler
+        (subscript)))))
+
+================================================================================
+Nesting into Free form Superscript
+================================================================================
+|^Superscript and *bold*^|
+|^Superscript and /italic/^|
+|^Superscript and -struck through-^|
+|^Superscript and _underline_^|
+|^Superscript and !spoiler!^|
+|^Superscript and ,subscript,^|
+|^Superscript and |*bold*|^|
+|^Superscript and |/italic/|^|
+|^Superscript and |-strikethrough-|^|
+|^Superscript and |_underline_|^|
+|^Superscript and |!spoiler!|^|
+|^Superscript and |,subscript,|^|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (superscript
+        (bold)))
+    (paragraph_segment
+      (superscript
+        (italic)))
+    (paragraph_segment
+      (superscript
+        (strikethrough)))
+    (paragraph_segment
+      (superscript
+        (underline)))
+    (paragraph_segment
+      (superscript
+        (spoiler)))
+    (paragraph_segment
+      (superscript
+        (subscript)))
+    (paragraph_segment
+      (superscript
+        (bold)))
+    (paragraph_segment
+      (superscript
+        (italic)))
+    (paragraph_segment
+      (superscript
+        (strikethrough)))
+    (paragraph_segment
+      (superscript
+        (underline)))
+    (paragraph_segment
+      (superscript
+        (spoiler)))
+    (paragraph_segment
+      (superscript
+        (subscript)))))
+
+================================================================================
+Nesting into Free form Subscript
+================================================================================
+|,Subscript and *bold*,|
+|,Subscript and /italic/,|
+|,Subscript and -struck through-,|
+|,Subscript and _underline_,|
+|,Subscript and !spoiler!,|
+|,Subscript and ^superscript^,|
+|,Subscript and |*bold*|,|
+|,Subscript and |/italic/|,|
+|,Subscript and |-strikethrough-|,|
+|,Subscript and |_underline_|,|
+|,Subscript and |!spoiler!|,|
+|,Subscript and |^superscript^|,|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (subscript
+        (bold)))
+    (paragraph_segment
+      (subscript
+        (italic)))
+    (paragraph_segment
+      (subscript
+        (strikethrough)))
+    (paragraph_segment
+      (subscript
+        (underline)))
+    (paragraph_segment
+      (subscript
+        (spoiler)))
+    (paragraph_segment
+      (subscript
+        (superscript)))
+    (paragraph_segment
+      (subscript
+        (bold)))
+    (paragraph_segment
+      (subscript
+        (italic)))
+    (paragraph_segment
+      (subscript
+        (strikethrough)))
+    (paragraph_segment
+      (subscript
+        (underline)))
+    (paragraph_segment
+      (subscript
+        (spoiler)))
+    (paragraph_segment
+      (subscript
+        (superscript)))))
+
+================================================================================
+Nesting into Inline Comment
+================================================================================
+|%Inline comment and *bold*%|
+|%Inline comment and /italic/%|
+|%Inline comment and -struck through-%|
+|%Inline comment and _underline_%|
+|%Inline comment and !spoiler!%|
+|%Inline comment and ^superscript^%|
+|%Inline comment and ,subscript,%|
+|%Inline comment and |*bold*|%|
+|%Inline comment and |/italic/|%|
+|%Inline comment and |-strikethrough-|%|
+|%Inline comment and |_underline_|%|
+|%Inline comment and |!spoiler!|%|
+|%Inline comment and |^superscript^|%|
+|%Inline comment and |,subscript,|%|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (inline_comment
+        (bold)))
+    (paragraph_segment
+      (inline_comment
+        (italic)))
+    (paragraph_segment
+      (inline_comment
+        (strikethrough)))
+    (paragraph_segment
+      (inline_comment
+        (underline)))
+    (paragraph_segment
+      (inline_comment
+        (spoiler)))
+    (paragraph_segment
+      (inline_comment
+        (superscript)))
+    (paragraph_segment
+      (inline_comment
+        (subscript)))
+    (paragraph_segment
+      (inline_comment
+        (bold)))
+    (paragraph_segment
+      (inline_comment
+        (italic)))
+    (paragraph_segment
+      (inline_comment
+        (strikethrough)))
+    (paragraph_segment
+      (inline_comment
+        (underline)))
+    (paragraph_segment
+      (inline_comment
+        (spoiler)))
+    (paragraph_segment
+      (inline_comment
+        (superscript)))
+    (paragraph_segment
+      (inline_comment
+        (subscript)))))
+
+================================================================================
+Deep Nesting
+================================================================================
+|*Bold /italic _underlined -struck through-_/*|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (bold
+        (italic
+          (underline
+            (strikethrough)))))))
+
+================================================================================
+No nested markup inside free form verbatim
+================================================================================
+|`*not bold*`|
+|`/not italic/`|
+|`-not struck through-`|
+|`_not underlined_`|
+|`!not spoiler!`|
+|`^not superscripted^`|
+|`,not subscripted,`|
+|`+not inline comment+`|
+|`$not inline math$`|
+|`&not variable&`|
+|`no:*link modifier*`|
+|`hidden \*escaped char`|
+|`|*not free form bold*|`|
+|`|/not free form italic/|`|
+|`|-not free form struck through-|`|
+|`|_not free form underlined_|`|
+|`|!not free form spoiler!|`|
+|`|^not free form superscripted^|`|
+|`|,not free form subscripted,|`|
+|`|+not free form inline comment+|`|
+|`|$not free form inline math$|`|
+|`|&not free form variable&|`|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (verbatim))))
+
+================================================================================
+No nested markup inside free form inline math
+================================================================================
+|$*not bold*$|
+|$/not italic/$|
+|$-not struck through-$|
+|$_not underlined_$|
+|$!not spoiler!$|
+|$^not superscripted^$|
+|$,not subscripted,$|
+|$`not verbatim`$|
+|$+not inline comment+$|
+|$&not variable&$|
+|$no:*link modifier*$|
+|$hidden \*escaped char$|
+|$|*not free form bold*|$|
+|$|/not free form italic/|$|
+|$|-not free form struck through-|$|
+|$|_not free form underlined_|$|
+|$|!not free form spoiler!|$|
+|$|^not free form superscripted^|$|
+|$|,not free form subscripted,|$|
+|$|`not free form verbatim`|$|
+|$|+not free form inline comment+|$|
+|$|&not free form variable&|$|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))
+    (paragraph_segment
+      (inline_math))))
+
+================================================================================
+No nested markup inside free form variable
+================================================================================
+|&*not bold*&|
+|&/not italic/&|
+|&-not struck through-&|
+|&_not underlined_&|
+|&!no spoiler!&|
+|&^not superscripted^&|
+|&,not subscripted,&|
+|&`no verbatim`&|
+|&+no inline comment+&|
+|&$no inline math$&|
+|&no:*link modifier*&|
+|&hidden \*escaped char&|
+|&|*not free form bold*|&|
+|&|/not free form italic/|&|
+|&|-not free form struck through-|&|
+|&|_not free form underlined_|&|
+|&|!not free form spoiler!|&|
+|&|^not free form superscripted^|&|
+|&|,not free form subscripted,|&|
+|&|`not free form verbatim`|&|
+|&|+not free form inline comment+|&|
+|&|$not free form inline math$|&|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))
+    (paragraph_segment
+      (variable))))
+
+================================================================================
+Do not confuse with ToDo detached mod extension
+================================================================================
+- |*bold*|
+* |_underline_|
+> |-struck through-|
+** |! spoiler !|
+--------------------------------------------------------------------------------
+
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment
+          (bold)))))
+  (heading1
+    (heading1_prefix)
+    (paragraph_segment
+      (underline))
+    (quote
+      (quote1
+        (quote1_prefix)
+        (paragraph
+          (paragraph_segment
+            (strikethrough)))))
+    (heading2
+      (heading2_prefix)
+      (paragraph_segment
+        (spoiler)))))
