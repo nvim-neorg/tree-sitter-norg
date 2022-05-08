@@ -1,0 +1,19 @@
+================================================================================
+Basic indent segment
+================================================================================
+- \
+This is a paragraph.
+
+This is another paragraph inside of the same list item.
+--------------------------------------------------------------------------------
+
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (indent_segment1
+        (indent_segment_begin)
+        (paragraph
+          (paragraph_segment))
+        (paragraph
+          (paragraph_segment))))))

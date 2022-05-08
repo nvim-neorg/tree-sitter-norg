@@ -7414,10 +7414,6 @@
     },
     {
       "type": "SYMBOL",
-      "name": "detached_mod_extension_delimiter"
-    },
-    {
-      "type": "SYMBOL",
       "name": "_priority"
     },
     {
@@ -7455,6 +7451,10 @@
     {
       "type": "SYMBOL",
       "name": "_todo_item_recurring"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "detached_mod_extension_delimiter"
     },
     {
       "type": "SYMBOL",

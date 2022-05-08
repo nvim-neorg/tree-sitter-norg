@@ -82,7 +82,6 @@ module.exports = grammar({
 
         $.trailing_modifier,
 
-        $.detached_mod_extension_delimiter,
         $._priority,
         $._timestamp,
         $.todo_item_undone,
@@ -93,6 +92,7 @@ module.exports = grammar({
         $.todo_item_urgent,
         $.todo_item_uncertain,
         $._todo_item_recurring,
+        $.detached_mod_extension_delimiter,
 
         $.heading1_prefix,
         $.heading2_prefix,

@@ -26,7 +26,6 @@ enum TokenType : char
 
     TRAILING_MODIFIER,
 
-    DETACHED_MOD_EXTENSION_DELIMITER,
     PRIORITY,
     TIMESTAMP,
     TODO_ITEM_UNDONE,
@@ -37,6 +36,7 @@ enum TokenType : char
     TODO_ITEM_URGENT,
     TODO_ITEM_UNCERTAIN,
     TODO_ITEM_RECURRING,
+    DETACHED_MOD_EXTENSION_DELIMITER,
 
     HEADING1,
     HEADING2,
@@ -554,7 +554,7 @@ class Scanner
 
             if (lexer->lookahead)
             {
-                lexer->result_symbol = m_LastToken = (m_LastToken >= QUOTE1 && m_LastToken <= TODO_ITEM_RECURRING && (lexer->lookahead == '\n' || lexer->lookahead == '\r')) ? INDENT_SEGMENT : ESCAPE_SEQUENCE;
+                lexer->result_symbol = m_LastToken = (m_LastToken >= DETACHED_MOD_EXTENSION_DELIMITER && m_LastToken <= MARKER && (lexer->lookahead == '\n' || lexer->lookahead == '\r')) ? INDENT_SEGMENT : ESCAPE_SEQUENCE;
                 return true;
             }
             else
