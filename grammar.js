@@ -172,9 +172,9 @@ module.exports = grammar({
         $.ranged_verbatim_tag_prefix,
         $.ranged_verbatim_tag_end_prefix,
 
-        $.macro_tag_prefix,
-        $.carryover_tag_prefix,
-        $.infecting_tag_prefix,
+        $.macro_prefix,
+        $.weak_attribute_prefix,
+        $.strong_attribute_prefix,
 
         $.link_modifier,
 
@@ -254,7 +254,7 @@ module.exports = grammar({
         paragraph: $ =>
         prec.right(0,
             seq(
-                optional($.infecting_tag_set),
+                optional($.strong_attribute_set),
                 repeat1(
                     choice(
                         $.paragraph_segment,
@@ -280,7 +280,7 @@ module.exports = grammar({
         paragraph_segment: $ =>
         prec.right(0,
             seq(
-                optional($.carryover_tag_set),
+                optional($.weak_attribute_set),
                 repeat1(
                     choice(
                         $._paragraph_element,
@@ -400,6 +400,7 @@ module.exports = grammar({
         inline_math: $ => gen_attached_modifier($, "inline_math", true, false),
         variable: $ => gen_attached_modifier($, "variable", true, false),
 
+        // TODO: find better name than ranged
         _ranged_bold: $ => gen_attached_modifier($, "bold", false, true),
         _ranged_italic: $ => gen_attached_modifier($, "italic", false, true),
         _ranged_strikethrough: $ => gen_attached_modifier($, "strikethrough", false, true),
@@ -579,7 +580,7 @@ module.exports = grammar({
         quote: $ =>
         prec.right(
             seq(
-                optional($.infecting_tag_set),
+                optional($.strong_attribute_set),
                 repeat1(
                     choice(
                         $.quote1,
@@ -604,7 +605,7 @@ module.exports = grammar({
         generic_list: $ =>
         prec.right(0,
             seq(
-                optional($.infecting_tag_set),
+                optional($.strong_attribute_set),
                 repeat1(
                     $._any_list_item_level_1,
                 ),
@@ -679,7 +680,7 @@ module.exports = grammar({
         marker: $ =>
         prec.right(0,
             seq(
-                optional($.infecting_tag_set),
+                optional($.strong_attribute_set),
 
                 gen_detached_modifier(
                     $,
@@ -737,7 +738,7 @@ module.exports = grammar({
         // affects only the first part of the object), they must strictly occur
         // in this order. I would like to enforce this for ranged tags, too,
         // simply to keep things consistent and predictable.
-        ranged_tag: $ => gen_ranged_tag($, "ranged"),
+        ranged_tag: $ => gen_ranged_tag($, "ranged_tag"),
 
         ranged_verbatim_tag_content: $ =>
         prec.right(0,
@@ -758,23 +759,23 @@ module.exports = grammar({
         ranged_verbatim_tag_end: $ => gen_ranged_tag_end($, "ranged_verbatim"),
 
         // TODO: add carryover/infecting tag
-        ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim"),
+        ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim_tag"),
 
-        macro_tag: $ => gen_single_tag($, "macro"),
+        macro: $ => gen_single_tag($, "macro"),
 
-        carryover_tag_set: $ =>
+        weak_attribute_set: $ =>
         repeat1(
-            $.carryover_tag,
+            $.weak_attribute,
         ),
 
-        carryover_tag: $ => gen_single_tag($, "carryover"),
+        weak_attribute: $ => gen_single_tag($, "weak_attribute"),
 
-        infecting_tag_set: $ =>
+        strong_attribute_set: $ =>
         repeat1(
-            $.infecting_tag,
+            $.strong_attribute,
         ),
 
-        infecting_tag: $ => gen_single_tag($, "infecting"),
+        strong_attribute: $ => gen_single_tag($, "strong_attribute"),
 
         // TODO: why are tag name elements restricted like this?
         // (I don't necessarily object to it, but I would like to understand it)
@@ -862,9 +863,11 @@ module.exports = grammar({
         choice(
             $.ranged_tag,
             $.ranged_verbatim_tag,
-            $.macro_tag,
+            $.macro,
         ),
 
+        // TODO: support standalone/inline indent segment
+        // TODO: when doing the above, support infecting/carryover tags on said inline segment
         indent_segment1: $ => gen_indent_segment($, 1),
         indent_segment2: $ => gen_indent_segment($, 2),
         indent_segment3: $ => gen_indent_segment($, 3),
@@ -956,7 +959,7 @@ module.exports = grammar({
 function gen_single_tag($, kind) {
     return seq(
         alias(
-            $[kind + "_tag_prefix"],
+            $[kind + "_prefix"],
             "_prefix",
         ),
 
@@ -979,11 +982,11 @@ function gen_ranged_tag($, kind) {
             field(
                 "content",
                 optional(
-                    $[kind + "_tag_content"],
+                    $[kind + "_content"],
                 ),
             ),
 
-            optional($[kind + "_tag_end"]),
+            optional($[kind + "_end"]),
         ),
     );
 }
@@ -1004,7 +1007,7 @@ function gen_ranged_tag_end($, kind) {
 
 function gen_detached_modifier($, prefix, ...rest) {
     return seq(
-        optional($.carryover_tag_set),
+        optional($.weak_attribute_set),
 
         prefix,
 
@@ -1027,7 +1030,7 @@ function gen_heading($, level) {
 
     return prec.right(0,
         seq(
-            optional($.infecting_tag_set),
+            optional($.strong_attribute_set),
 
             gen_detached_modifier(
                 $,
@@ -1161,7 +1164,7 @@ function gen_attached_modifier($, kind, verbatim, ranged) {
 function gen_single_rangeable_detached_modifier($, kind) {
     return prec.right(
         seq(
-            optional($.infecting_tag_set),
+            optional($.strong_attribute_set),
 
             gen_detached_modifier(
                 $,
@@ -1193,7 +1196,7 @@ function gen_multi_rangeable_detached_modifier($, kind) {
     // NOTE: there used to be a choice rule with an optional standalone suffix
     // so if problems arise with standalone closing nodes, re-add that
     return seq(
-        optional($.infecting_tag_set),
+        optional($.strong_attribute_set),
 
         gen_detached_modifier(
             $,

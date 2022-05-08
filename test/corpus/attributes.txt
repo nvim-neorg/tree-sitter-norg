@@ -1,0 +1,164 @@
+================================================================================
+Strong Attribute on paragraph
+================================================================================
+|comment
+This is a comment.
+
+This is no longer part of the comment.
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (tag_name_element))))
+    (paragraph_segment))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
+Strong Attribute on generic list
+================================================================================
+|ordered
+- List item 1
+- List item 2
+
+This is no longer infected.
+--------------------------------------------------------------------------------
+
+(document
+  (generic_list
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (tag_name_element))))
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment))))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
+Strong Attribute on quote
+================================================================================
+|ordered
+> quote item 1
+> quote item 2
+
+This is no longer infected.
+--------------------------------------------------------------------------------
+
+(document
+  (quote
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (tag_name_element))))
+    (quote1
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (quote1
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment))))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
+Weak Attribute on generic list
+================================================================================
+- List item 1
++color blue
+- List item 2
+--------------------------------------------------------------------------------
+
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (unordered_list1
+      (weak_attribute_set
+        (weak_attribute
+          (tag_name
+            (tag_name_element))
+          (tag_parameters
+            (tag_param))))
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment)))))
+
+================================================================================
+Weak Attribute on quote
+================================================================================
+> quote item 1
++color blue
+> quote item 2
+--------------------------------------------------------------------------------
+
+(document
+  (quote
+    (quote1
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (quote1
+      (weak_attribute_set
+        (weak_attribute
+          (tag_name
+            (tag_name_element))
+          (tag_parameters
+            (tag_param))))
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment)))))
+
+================================================================================
+Strong Attribute with parameters
+================================================================================
+|name bob
+> Hi, my name is Bob.
+
+Lol
+--------------------------------------------------------------------------------
+
+(document
+  (quote
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (quote1
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment))))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
+Disallow Weak Attribute within Ranged Tag
+================================================================================
+@code python
++this is a python comment
+print("Hello World")
+@end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_verbatim_tag
+    (tag_name
+      (tag_name_element))
+    (tag_parameters
+      (tag_param))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end)))

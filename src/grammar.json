@@ -102,7 +102,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -174,7 +174,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "carryover_tag_set"
+                "name": "weak_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -1982,7 +1982,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -1997,7 +1997,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -2137,7 +2137,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -2152,7 +2152,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -2288,7 +2288,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -2303,7 +2303,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -2435,7 +2435,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -2450,7 +2450,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -2578,7 +2578,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -2593,7 +2593,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -2717,7 +2717,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -2732,7 +2732,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -2852,7 +2852,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -2902,7 +2902,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -2989,7 +2989,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3072,7 +3072,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3151,7 +3151,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3226,7 +3226,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3297,7 +3297,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3366,7 +3366,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -3489,7 +3489,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3560,7 +3560,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3631,7 +3631,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3702,7 +3702,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3773,7 +3773,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3844,7 +3844,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3910,7 +3910,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -3981,7 +3981,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -4052,7 +4052,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -4123,7 +4123,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -4194,7 +4194,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -4265,7 +4265,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "carryover_tag_set"
+              "name": "weak_attribute_set"
             },
             {
               "type": "BLANK"
@@ -4469,7 +4469,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -4484,7 +4484,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -4535,7 +4535,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -4550,7 +4550,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -4636,7 +4636,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "infecting_tag_set"
+              "name": "strong_attribute_set"
             },
             {
               "type": "BLANK"
@@ -4651,7 +4651,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "carryover_tag_set"
+                  "name": "weak_attribute_set"
                 },
                 {
                   "type": "BLANK"
@@ -4778,7 +4778,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -4793,7 +4793,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -4879,7 +4879,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "infecting_tag_set"
+              "name": "strong_attribute_set"
             },
             {
               "type": "BLANK"
@@ -4894,7 +4894,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "carryover_tag_set"
+                  "name": "weak_attribute_set"
                 },
                 {
                   "type": "BLANK"
@@ -5021,7 +5021,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -5036,7 +5036,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -5122,7 +5122,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "infecting_tag_set"
+              "name": "strong_attribute_set"
             },
             {
               "type": "BLANK"
@@ -5137,7 +5137,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "carryover_tag_set"
+                  "name": "weak_attribute_set"
                 },
                 {
                   "type": "BLANK"
@@ -5264,7 +5264,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -5279,7 +5279,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -5365,7 +5365,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "infecting_tag_set"
+              "name": "strong_attribute_set"
             },
             {
               "type": "BLANK"
@@ -5380,7 +5380,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "carryover_tag_set"
+                  "name": "weak_attribute_set"
                 },
                 {
                   "type": "BLANK"
@@ -5507,7 +5507,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "infecting_tag_set"
+                "name": "strong_attribute_set"
               },
               {
                 "type": "BLANK"
@@ -5522,7 +5522,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "carryover_tag_set"
+                    "name": "weak_attribute_set"
                   },
                   {
                     "type": "BLANK"
@@ -5608,7 +5608,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "infecting_tag_set"
+              "name": "strong_attribute_set"
             },
             {
               "type": "BLANK"
@@ -5623,7 +5623,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "carryover_tag_set"
+                  "name": "weak_attribute_set"
                 },
                 {
                   "type": "BLANK"
@@ -6026,14 +6026,14 @@
         ]
       }
     },
-    "macro_tag": {
+    "macro": {
       "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "macro_tag_prefix"
+            "name": "macro_prefix"
           },
           "named": false,
           "value": "_prefix"
@@ -6061,21 +6061,21 @@
         }
       ]
     },
-    "carryover_tag_set": {
+    "weak_attribute_set": {
       "type": "REPEAT1",
       "content": {
         "type": "SYMBOL",
-        "name": "carryover_tag"
+        "name": "weak_attribute"
       }
     },
-    "carryover_tag": {
+    "weak_attribute": {
       "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "carryover_tag_prefix"
+            "name": "weak_attribute_prefix"
           },
           "named": false,
           "value": "_prefix"
@@ -6103,21 +6103,21 @@
         }
       ]
     },
-    "infecting_tag_set": {
+    "strong_attribute_set": {
       "type": "REPEAT1",
       "content": {
         "type": "SYMBOL",
-        "name": "infecting_tag"
+        "name": "strong_attribute"
       }
     },
-    "infecting_tag": {
+    "strong_attribute": {
       "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "infecting_tag_prefix"
+            "name": "strong_attribute_prefix"
           },
           "named": false,
           "value": "_prefix"
@@ -6371,7 +6371,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "macro_tag"
+          "name": "macro"
         }
       ]
     },
@@ -7670,15 +7670,15 @@
     },
     {
       "type": "SYMBOL",
-      "name": "macro_tag_prefix"
+      "name": "macro_prefix"
     },
     {
       "type": "SYMBOL",
-      "name": "carryover_tag_prefix"
+      "name": "weak_attribute_prefix"
     },
     {
       "type": "SYMBOL",
-      "name": "infecting_tag_prefix"
+      "name": "strong_attribute_prefix"
     },
     {
       "type": "SYMBOL",

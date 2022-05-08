@@ -116,9 +116,9 @@ enum TokenType : char
     RANGED_VERBATIM_TAG,
     RANGED_VERBATIM_TAG_END,
 
-    MACRO_TAG,
-    CARRYOVER_TAG,
-    INFECTING_TAG,
+    MACRO,
+    WEAK_ATTRIBUTE,
+    STRONG_ATTRIBUTE,
 
     LINK_MODIFIER,
 
@@ -379,7 +379,7 @@ class Scanner
                     return m_LastToken;
                 }
 
-                lexer->result_symbol = m_LastToken = INFECTING_TAG;
+                lexer->result_symbol = m_LastToken = STRONG_ATTRIBUTE;
                 return true;
             }
             else if (lexer->lookahead == '+' && !m_IsInVerbatimTag)
@@ -387,7 +387,7 @@ class Scanner
                 advance(lexer);
                 if (lexer->lookahead != '+')
                 {
-                    lexer->result_symbol = m_LastToken = CARRYOVER_TAG;
+                    lexer->result_symbol = m_LastToken = WEAK_ATTRIBUTE;
                     return true;
                 }
             }
@@ -506,7 +506,7 @@ class Scanner
             }
             else if (m_ParsedChars == 1 && !m_IsInVerbatimTag)
             {
-                lexer->result_symbol = m_LastToken = MACRO_TAG;
+                lexer->result_symbol = m_LastToken = MACRO;
                 return true;
             }
 
