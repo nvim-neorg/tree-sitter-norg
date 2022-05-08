@@ -768,9 +768,6 @@ module.exports = grammar({
 
         strong_attribute: $ => gen_single_tag($, "strong_attribute"),
 
-        // TODO: why are tag name elements restricted like this?
-        // (I don't necessarily object to it, but I would like to understand it)
-        // NOTE: I removed the `+`-sign from being allowed
         tag_name_element: _ =>
         seq(
             token(/[a-z0-9_\-]/),
