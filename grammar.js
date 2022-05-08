@@ -39,6 +39,7 @@ module.exports = grammar({
 
         [$._paragraph_element],
 
+        [$.indent_segment],
         [$.indent_segment1],
         [$.indent_segment2],
         [$.indent_segment3],
@@ -231,6 +232,7 @@ module.exports = grammar({
                         $.nestable_detached_modifier,
                         $.rangeable_detached_modifier,
                         $.tag,
+                        $.indent_segment,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
@@ -853,8 +855,7 @@ module.exports = grammar({
             $.macro,
         ),
 
-        // TODO: support standalone/inline indent segment
-        // TODO: when doing the above, support infecting/carryover tags on said inline segment
+        indent_segment: $ => gen_indent_segment($, 0),
         indent_segment1: $ => gen_indent_segment($, 1),
         indent_segment2: $ => gen_indent_segment($, 2),
         indent_segment3: $ => gen_indent_segment($, 3),
@@ -862,6 +863,7 @@ module.exports = grammar({
         indent_segment5: $ => gen_indent_segment($, 5),
         indent_segment6: $ => gen_indent_segment($, 6),
 
+        _indent_segment_contents0: $ => gen_indent_segment_contents($, 0),
         _indent_segment_contents1: $ => gen_indent_segment_contents($, 1),
         _indent_segment_contents2: $ => gen_indent_segment_contents($, 2),
         _indent_segment_contents3: $ => gen_indent_segment_contents($, 3),
@@ -1245,6 +1247,28 @@ function gen_indent_segment_contents($, level) {
 }
 
 function gen_indent_segment($, level) {
+    if (level == 0) {
+        return prec.dynamic(1, seq(
+            optional($.strong_attribute_set),
+            optional($.weak_attribute_set),
+
+            $.indent_segment_begin,
+
+            repeat(
+                prec(1, choice(
+                    $.paragraph,
+                    alias($.line_break, "_line_break"),
+                    alias($.paragraph_break, "_paragraph_break"),
+                    $["_indent_segment_contents" + level],
+                )),
+            ),
+
+            optional(
+                $.weak_paragraph_delimiter,
+            ),
+        ));
+    }
+
     return prec.dynamic(1, seq(
         $.indent_segment_begin,
 

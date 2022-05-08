@@ -17,3 +17,53 @@ This is another paragraph inside of the same list item.
           (paragraph_segment))
         (paragraph
           (paragraph_segment))))))
+
+================================================================================
+Inline indent segment
+================================================================================
+\
+This is an indented paragraph.
+
+This is still part of the indent segment.
+--------------------------------------------------------------------------------
+
+(document
+  (indent_segment
+    (indent_segment_begin)
+    (paragraph
+      (paragraph_segment))
+    (paragraph
+      (paragraph_segment))))
+
+================================================================================
+Inline indent segment with attributes
+================================================================================
+|enumerate
++name enumeration
+\
+- first enumerated item
+
+- second enumerated item
+--------------------------------------------------------------------------------
+
+(document
+  (indent_segment
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (tag_name_element))))
+    (weak_attribute_set
+      (weak_attribute
+        (tag_name
+          (tag_name_element))
+        (tag_parameters
+          (tag_param))))
+    (indent_segment_begin)
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment)))))

@@ -554,7 +554,7 @@ class Scanner
 
             if (lexer->lookahead)
             {
-                lexer->result_symbol = m_LastToken = (m_LastToken >= DETACHED_MOD_EXTENSION_DELIMITER && m_LastToken <= MARKER && (lexer->lookahead == '\n' || lexer->lookahead == '\r')) ? INDENT_SEGMENT : ESCAPE_SEQUENCE;
+                lexer->result_symbol = m_LastToken = (lexer->lookahead == '\n' || lexer->lookahead == '\r') ? INDENT_SEGMENT : ESCAPE_SEQUENCE;
                 return true;
             }
             else

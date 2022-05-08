@@ -48,6 +48,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "indent_segment"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "horizontal_line"
                 },
                 {
@@ -6423,6 +6427,93 @@
         }
       ]
     },
+    "indent_segment": {
+      "type": "PREC_DYNAMIC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "strong_attribute_set"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "weak_attribute_set"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "indent_segment_begin"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "paragraph"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "line_break"
+                    },
+                    "named": false,
+                    "value": "_line_break"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "paragraph_break"
+                    },
+                    "named": false,
+                    "value": "_paragraph_break"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_indent_segment_contents0"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "weak_paragraph_delimiter"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "indent_segment1": {
       "type": "PREC_DYNAMIC",
       "value": 1,
@@ -6797,6 +6888,39 @@
                 "type": "BLANK"
               }
             ]
+          }
+        ]
+      }
+    },
+    "_indent_segment_contents0": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "rangeable_detached_modifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "unordered_list1"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "ordered_list1"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "quote1"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_indent_segment_contents1"
           }
         ]
       }
@@ -7304,6 +7428,9 @@
     ],
     [
       "_paragraph_element"
+    ],
+    [
+      "indent_segment"
     ],
     [
       "indent_segment1"
