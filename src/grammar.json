@@ -5356,7 +5356,15 @@
                   "name": "paragraph"
                 }
               }
-            ]
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "content",
+            "content": {
+              "type": "SYMBOL",
+              "name": "paragraph"
+            }
           }
         ]
       }
