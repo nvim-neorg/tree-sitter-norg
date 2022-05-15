@@ -4955,7 +4955,7 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "ranged_verbatim_tag_content",
