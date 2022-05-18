@@ -368,9 +368,9 @@ module.exports = grammar({
             prec.dynamic(5, alias($._conflict_open, "_word")),
             prec.dynamic(5, alias($._conflict_close, "_word")),
             alias($.inline_link_target_open, "_word"),
-            alias($.inline_link_target_close, "_word"),
+            prec(1, alias($.inline_link_target_close, "_word")),
             alias($.link_description_begin, "_word"),
-            alias($.link_description_end, "_word"),
+            prec(1, alias($.link_description_end, "_word")),
             alias($.link_location_begin, "_word"),
             prec(1, alias($.link_location_end, "_word")),
             alias($.link_file_begin, "_word"),
@@ -442,6 +442,8 @@ module.exports = grammar({
             alias($.variable_close, "_word"),
 
             alias($.link_location_end, "_word"),
+            alias($.link_description_end, "_word"),
+            alias($.inline_link_target_close, "_word"),
         ),
 
         // Well, any character

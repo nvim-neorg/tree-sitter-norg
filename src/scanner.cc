@@ -570,37 +570,44 @@ class Scanner
         else if (lexer->lookahead == '<')
         {
             advance(lexer);
+
             if (!std::iswspace(lexer->lookahead))
             {
                 lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_OPEN;
                 return true;
             }
         }
-        else if (lexer->lookahead == '>' && !std::iswspace(m_Current) &&
-                 m_LastToken != LINK_LOCATION_BEGIN && m_LastToken != LINK_FILE_END)
+        else if (lexer->lookahead == '>')
         {
             advance(lexer);
-            lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_CLOSE;
-            return true;
+
+            if (!std::iswspace(m_Previous) && m_LastToken != LINK_LOCATION_BEGIN && m_LastToken != LINK_FILE_END)
+            {
+                lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_CLOSE;
+                return true;
+            }
         }
         else if (lexer->lookahead == '[')
         {
             advance(lexer);
+
             if (!std::iswspace(lexer->lookahead))
             {
                 lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_BEGIN;
                 return true;
             }
         }
-        else if (lexer->lookahead == ']' && !std::iswspace(m_Current))
+        else if (lexer->lookahead == ']')
         {
             advance(lexer);
+                    
             lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_END;
             return true;
         }
         else if (lexer->lookahead == '{')
         {
             advance(lexer);
+
             if (!std::iswspace(lexer->lookahead))
             {
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_BEGIN;
@@ -1277,7 +1284,7 @@ class Scanner
         }
     }
 
-    void reset_free_form_active_modifiers()
+    inline void reset_free_form_active_modifiers()
     {
         m_ActiveModifiers.reset();
         m_FreeFormActiveModifiers.reset();
