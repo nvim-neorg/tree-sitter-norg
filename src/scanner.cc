@@ -220,7 +220,7 @@ class Scanner
             advance(lexer);
             return parse_text(lexer);
         }
-        else if (lexer->lookahead == '\n')
+        else if (is_newline(lexer->lookahead))
         {
             advance(lexer);
 
@@ -232,7 +232,7 @@ class Scanner
                 return false;
             }
 
-            if (lexer->lookahead == '\n')
+            if (is_newline(lexer->lookahead))
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = PARAGRAPH_BREAK;
@@ -272,7 +272,7 @@ class Scanner
                             if (!lexer->lookahead || std::iswspace(lexer->lookahead))
                             {
                                 while (std::iswspace(lexer->lookahead) &&
-                                       lexer->lookahead != '\n' && lexer->lookahead)
+                                       !is_newline(lexer->lookahead) && lexer->lookahead)
                                     advance(lexer);
 
                                 if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) &&
@@ -336,7 +336,7 @@ class Scanner
                             if (!lexer->lookahead || std::iswspace(lexer->lookahead))
                             {
                                 while (std::iswspace(lexer->lookahead) &&
-                                       lexer->lookahead != '\n' && lexer->lookahead)
+                                       !is_newline(lexer->lookahead) && lexer->lookahead)
                                     advance(lexer);
 
                                 if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) &&
@@ -444,7 +444,7 @@ class Scanner
             // newline, which makes sense considering the parser head:
             // ---
             //   ^ will be here, and lexer->lookahead will return '\n'
-            else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
+            else if (is_newline(lexer->lookahead) && m_ParsedChars >= 3)
             {
                 advance(lexer);
                 lexer->result_symbol = m_LastToken = WEAK_PARAGRAPH_DELIMITER;
@@ -463,7 +463,7 @@ class Scanner
 
             if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, {'$'}) != NONE)
                 return true;
-            else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+            else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
                 lexer->result_symbol = MULTI_DEFINITION_SUFFIX;
                 return true;
@@ -471,7 +471,7 @@ class Scanner
 
             if (check_detached(lexer, SINGLE_FOOTNOTE | MULTI_FOOTNOTE | NONE, {'^'}) != NONE)
                 return true;
-            else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+            else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
                 lexer->result_symbol = MULTI_FOOTNOTE_SUFFIX;
                 return true;
@@ -479,7 +479,7 @@ class Scanner
 
             if (check_detached(lexer, SINGLE_DRAWER | MULTI_DRAWER | NONE, {'<'}) != NONE)
                 return true;
-            else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+            else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
                 lexer->result_symbol = MULTI_DRAWER_SUFFIX;
                 return true;
@@ -487,12 +487,12 @@ class Scanner
 
             if (check_detached(lexer, SINGLE_MACRO | MULTI_MACRO | NONE, {'='}) != NONE)
                 return true;
-            else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+            else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
                 lexer->result_symbol = MULTI_MACRO_SUFFIX;
                 return true;
             }
-            else if (lexer->lookahead == '\n')
+            else if (is_newline(lexer->lookahead))
             {
                 if (m_ParsedChars >= 3)
                 {
@@ -515,7 +515,7 @@ class Scanner
 
             if (check_detached(lexer, SINGLE_VARIABLE | MULTI_VARIABLE | NONE, {'&'}) != NONE)
                 return true;
-            else if (lexer->lookahead == '\n' && m_ParsedChars == 2)
+            else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
                 lexer->result_symbol = MULTI_VARIABLE_SUFFIX;
                 return true;
@@ -523,7 +523,7 @@ class Scanner
 
             if (check_detached(lexer, NONE, {'_'}) != NONE)
                 return true;
-            else if (lexer->lookahead == '\n' && m_ParsedChars >= 3)
+            else if (is_newline(lexer->lookahead) && m_ParsedChars >= 3)
             {
                 lexer->result_symbol = m_LastToken = HORIZONTAL_LINE;
                 return true;
@@ -535,7 +535,7 @@ class Scanner
             advance(lexer);
             lexer->mark_end(lexer);
 
-            if (lexer->lookahead == '\n')
+            if (is_newline(lexer->lookahead))
             {
                 advance(lexer);
 
@@ -558,7 +558,7 @@ class Scanner
             if (lexer->lookahead)
             {
                 lexer->result_symbol = m_LastToken =
-                    (lexer->lookahead == '\n' || lexer->lookahead == '\r') ? INDENT_SEGMENT
+                    (is_newline(lexer->lookahead)) ? INDENT_SEGMENT
                                                                            : ESCAPE_SEQUENCE;
                 return true;
             }
@@ -731,7 +731,7 @@ class Scanner
 
             // If the next character is whitespace (which is the distinguishing
             // factor between an attached/detached modifier)
-            if (std::iswspace(lexer->lookahead) && (lexer->lookahead != '\n'))
+            if (std::iswspace(lexer->lookahead) && (!is_newline(lexer->lookahead)))
             {
                 // Retrieve the correct result from the list of provided results
                 // depending on how many characters were matched. If we've
@@ -1226,14 +1226,14 @@ class Scanner
     {
         if (m_IsInVerbatimTag)
         {
-            while (lexer->lookahead && lexer->lookahead != '\n')
+            while (lexer->lookahead && !is_newline(lexer->lookahead))
                 advance(lexer);
 
             lexer->result_symbol = m_LastToken = WORD;
             return true;
         }
 
-        if (lexer->lookahead == '\n' || lexer->lookahead == '\r' || !lexer->lookahead)
+        if (is_newline(lexer->lookahead) || !lexer->lookahead)
         {
             lexer->result_symbol = m_LastToken = WORD;
             return true;
@@ -1288,6 +1288,11 @@ class Scanner
     {
         m_ActiveModifiers.reset();
         m_FreeFormActiveModifiers.reset();
+    }
+
+    inline bool is_newline(int32_t c)
+    {
+        return c == '\n' || c == '\r';
     }
 
    private:
