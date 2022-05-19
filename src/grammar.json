@@ -2091,6 +2091,10 @@
                         "name": "paragraph"
                       },
                       {
+                        "type": "SYMBOL",
+                        "name": "indent_segment"
+                      },
+                      {
                         "type": "ALIAS",
                         "content": {
                           "type": "SYMBOL",
@@ -2246,6 +2250,10 @@
                         "name": "paragraph"
                       },
                       {
+                        "type": "SYMBOL",
+                        "name": "indent_segment"
+                      },
+                      {
                         "type": "ALIAS",
                         "content": {
                           "type": "SYMBOL",
@@ -2397,6 +2405,10 @@
                         "name": "paragraph"
                       },
                       {
+                        "type": "SYMBOL",
+                        "name": "indent_segment"
+                      },
+                      {
                         "type": "ALIAS",
                         "content": {
                           "type": "SYMBOL",
@@ -2544,6 +2556,10 @@
                         "name": "paragraph"
                       },
                       {
+                        "type": "SYMBOL",
+                        "name": "indent_segment"
+                      },
+                      {
                         "type": "ALIAS",
                         "content": {
                           "type": "SYMBOL",
@@ -2687,6 +2703,10 @@
                         "name": "paragraph"
                       },
                       {
+                        "type": "SYMBOL",
+                        "name": "indent_segment"
+                      },
+                      {
                         "type": "ALIAS",
                         "content": {
                           "type": "SYMBOL",
@@ -2824,6 +2844,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "paragraph"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "indent_segment"
                       },
                       {
                         "type": "ALIAS",

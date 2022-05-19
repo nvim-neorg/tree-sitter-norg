@@ -1044,6 +1044,7 @@ function gen_heading($, level) {
                     repeat(
                         choice(
                             $.paragraph,
+                            $.indent_segment,
 
                             alias($.paragraph_break, "_paragraph_break"),
                             $.nestable_detached_modifier,

@@ -445,6 +445,10 @@
             "named": true
           },
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "macro",
             "named": true
           },
@@ -627,6 +631,10 @@
             "named": true
           },
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "macro",
             "named": true
           },
@@ -805,6 +813,10 @@
             "named": true
           },
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "macro",
             "named": true
           },
@@ -979,6 +991,10 @@
             "named": true
           },
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "macro",
             "named": true
           },
@@ -1149,6 +1165,10 @@
             "named": true
           },
           {
+            "type": "indent_segment",
+            "named": true
+          },
+          {
             "type": "macro",
             "named": true
           },
@@ -1312,6 +1332,10 @@
           },
           {
             "type": "horizontal_line",
+            "named": true
+          },
+          {
+            "type": "indent_segment",
             "named": true
           },
           {

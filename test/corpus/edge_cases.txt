@@ -1,93 +1,79 @@
-==========================
+================================================================================
 Link parts inside verbatim
-==========================
+================================================================================
 `[open` not verbatim
----
-(document
-    (paragraph
-        (paragraph_segment
-            (verbatim)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-===============================================
+(document
+  (paragraph
+    (paragraph_segment
+      (verbatim))))
+
+================================================================================
 Plain text URL should not contain link modifier
-===============================================
+================================================================================
 https://github.com/nvim-neorg/neorg
----
-(document
-    (paragraph
-        (paragraph_segment)
-    )
-)
+--------------------------------------------------------------------------------
 
-================================================================
+(document
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
 Although the above is true, we still want to be able to do this:
-================================================================
+================================================================================
 You may want to stress the *begin*:ning of a word.
 Or the end in some:/thing/.
----
-(document
-    (paragraph
-        (paragraph_segment
-            (bold)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (italic)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-================================================
+(document
+  (paragraph
+    (paragraph_segment
+      (bold)
+      (link_modifier))
+    (paragraph_segment
+      (link_modifier)
+      (italic))))
+
+================================================================================
 Reset attached modifiers after detached modifier
-================================================
+================================================================================
 - _:
 - _x_
----
-(document
-    (generic_list
-        (unordered_list1
-            (unordered_list1_prefix)
-            (paragraph
-                (paragraph_segment)
-            )
-        )
-        (unordered_list1
-            (unordered_list1_prefix)
-            (paragraph
-                (paragraph_segment
-                    (underline)
-                )
-            )
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=========================================================
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment)))
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment
+          (underline))))))
+
+================================================================================
 Repeated attached modifiers should be treated as raw text
-=========================================================
+================================================================================
 ^^, text, ^^
 %%text%%
 %%%text%%%
 *///example//*
----
-(document
-    (paragraph
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment)
-        (paragraph_segment
-            (bold)
-        )
-    )
-)
+--------------------------------------------------------------------------------
 
-=====================================
+(document
+  (paragraph
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment
+      (bold))))
+
+================================================================================
 Link modifiers with incomplete markup
-=====================================
+================================================================================
 text:`verbatim`text
 
 text`verbatim`:text
@@ -95,45 +81,60 @@ text`verbatim`:text
 text `verbatim:text
 
 text verbatim`:text
----
-(document
-    (paragraph
-        (paragraph_segment)
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-)
+--------------------------------------------------------------------------------
 
-==========================================
+(document
+  (paragraph
+    (paragraph_segment))
+  (paragraph
+    (paragraph_segment))
+  (paragraph
+    (paragraph_segment))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
 Link modifiers with surrounding whitespace
-==========================================
+================================================================================
 :*text*:
 text:*more text*:text
 `some text`: text
 text :*more text*
----
+--------------------------------------------------------------------------------
+
 (document
-    (paragraph
-        (paragraph_segment
-            (bold)
-        )
-        (paragraph_segment
-            (link_modifier)
-            (bold)
-            (link_modifier)
-        )
-        (paragraph_segment
-            (verbatim)
-        )
-        (paragraph_segment
-            (bold)
-        )
-    )
-)
+  (paragraph
+    (paragraph_segment
+      (bold))
+    (paragraph_segment
+      (link_modifier)
+      (bold)
+      (link_modifier))
+    (paragraph_segment
+      (verbatim))
+    (paragraph_segment
+      (bold))))
+
+================================================================================
+Closing modifier of links/inline link anchors right after a detached modifier should not fail.
+================================================================================
+- ]Test
+> >Test
+* >Example]
+
+--------------------------------------------------------------------------------
+
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (paragraph
+        (paragraph_segment))))
+  (quote
+    (quote1
+      (quote1_prefix)
+      (paragraph
+        (paragraph_segment))))
+  (heading1
+    (heading1_prefix)
+    (paragraph_segment)))
