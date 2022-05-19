@@ -455,9 +455,19 @@ class Scanner
                                ORDERED_LIST1 | ORDERED_LIST2 | ORDERED_LIST3 | ORDERED_LIST4 |
                                    ORDERED_LIST5 | ORDERED_LIST6,
                                {'~'}) != NONE)
+                return true;
+            else if (is_newline(lexer->lookahead) && m_ParsedChars == 1)
             {
+                if (lexer->eof(lexer))
+                {
+                    reset_free_form_active_modifiers();
+                    return false;
+                }
+
+                lexer->result_symbol = m_LastToken = TRAILING_MODIFIER;
                 return true;
             }
+
             if (check_detached(lexer, MARKER | NONE, {'%'}) != NONE)
                 return true;
 
@@ -530,7 +540,7 @@ class Scanner
             }
         }
 
-        if (lexer->lookahead == '~' && (m_LastToken == WORD || m_LastToken == CAPITALIZED_WORD))
+        if (lexer->lookahead == '~')
         {
             advance(lexer);
             lexer->mark_end(lexer);
@@ -1255,7 +1265,7 @@ class Scanner
         do
         {
             if (lexer->lookahead == ':' || lexer->lookahead == '|' ||
-                (lexer->lookahead == '~' && !std::iswspace(m_Current)) ||
+                lexer->lookahead == '~' ||
                 (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) ||
                 (lexer->lookahead == '<' || lexer->lookahead == '>' || lexer->lookahead == '[' ||
                  lexer->lookahead == ']' || lexer->lookahead == '{' || lexer->lookahead == '}') ||
