@@ -54,7 +54,7 @@ jobs:
           git config user.email "<>"
           git add .
           git commit -m "[Action] Add new corpuses"
-          git push origin fuzz_corpuses
+          git push origin fuzz_corpuses -f
 
       - uses: actions/upload-artifact@v2
         if: failure()
