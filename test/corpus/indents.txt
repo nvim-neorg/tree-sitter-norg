@@ -67,3 +67,28 @@ Inline indent segment with attributes
       (unordered_list1_prefix)
       (paragraph
         (paragraph_segment)))))
+
+================================================================================
+Indent segment delimiter precedence
+================================================================================
+* Heading
+- \
+  Text
+  ---
+This should still be part of the heading.
+--------------------------------------------------------------------------------
+
+(document
+  (heading1
+    (heading1_prefix)
+    (paragraph_segment)
+    (generic_list
+      (unordered_list1
+        (unordered_list1_prefix)
+        (indent_segment1
+          (indent_segment_begin)
+          (paragraph
+            (paragraph_segment))
+          (weak_paragraph_delimiter))))
+    (paragraph
+      (paragraph_segment))))
