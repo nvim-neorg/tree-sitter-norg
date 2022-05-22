@@ -92,3 +92,38 @@ This should still be part of the heading.
           (weak_paragraph_delimiter))))
     (paragraph
       (paragraph_segment))))
+
+================================================================================
+Indent segment delimiter precedence with surrounding headings
+================================================================================
+* Heading One
+* Heading Two
+  - \
+      This is some content.
+      ---
+  The paragraph delimiter should belong to the indent segment,
+  not to the heading.
+* Heading Three
+--------------------------------------------------------------------------------
+
+(document
+  (heading1
+    (heading1_prefix)
+    (paragraph_segment))
+  (heading1
+    (heading1_prefix)
+    (paragraph_segment)
+    (generic_list
+      (unordered_list1
+        (unordered_list1_prefix)
+        (indent_segment1
+          (indent_segment_begin)
+          (paragraph
+            (paragraph_segment))
+          (weak_paragraph_delimiter))))
+    (paragraph
+      (paragraph_segment)
+      (paragraph_segment)))
+  (heading1
+    (heading1_prefix)
+    (paragraph_segment)))

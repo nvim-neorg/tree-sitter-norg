@@ -1274,7 +1274,7 @@ function gen_indent_segment($, level) {
                 ),
 
                 optional(
-                    $.weak_paragraph_delimiter,
+                    prec.dynamic(2, $.weak_paragraph_delimiter),
                 ),
             ),
         );
@@ -1296,7 +1296,9 @@ function gen_indent_segment($, level) {
             ),
 
             optional(
-                $.weak_paragraph_delimiter,
+                // Higher dynamic precedence here is required as clashes
+                // can occur with headings having paragraph delimiters.
+                prec.dynamic(2, $.weak_paragraph_delimiter),
             ),
         ),
     );
