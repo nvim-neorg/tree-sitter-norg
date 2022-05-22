@@ -1255,51 +1255,47 @@ function gen_indent_segment_contents($, level) {
 
 function gen_indent_segment($, level) {
     if (level == 0) {
-        return prec.dynamic(1,
-            seq(
-                optional($.strong_attribute_set),
-                optional($.weak_attribute_set),
+        return seq(
+            optional($.strong_attribute_set),
+            optional($.weak_attribute_set),
 
-                $.indent_segment_begin,
-
-                repeat(
-                    prec(1,
-                        choice(
-                            $.paragraph,
-                            alias($.line_break, "_line_break"),
-                            alias($.paragraph_break, "_paragraph_break"),
-                            $["_indent_segment_contents" + level],
-                        ),
-                    ),
-                ),
-
-                optional(
-                    prec.dynamic(2, $.weak_paragraph_delimiter),
-                ),
-            ),
-        );
-    }
-
-    return prec.dynamic(1,
-        seq(
             $.indent_segment_begin,
 
             repeat(
                 prec(1,
-                    choice(
+                    prec.dynamic(2, choice(
                         $.paragraph,
                         alias($.line_break, "_line_break"),
                         alias($.paragraph_break, "_paragraph_break"),
                         $["_indent_segment_contents" + level],
-                    ),
+                    )),
                 ),
             ),
 
             optional(
-                // Higher dynamic precedence here is required as clashes
-                // can occur with headings having paragraph delimiters.
                 prec.dynamic(2, $.weak_paragraph_delimiter),
             ),
+        );
+    }
+
+    return seq(
+        $.indent_segment_begin,
+
+        repeat(
+            prec(1,
+                prec.dynamic(2, choice(
+                    $.paragraph,
+                    alias($.line_break, "_line_break"),
+                    alias($.paragraph_break, "_paragraph_break"),
+                    $["_indent_segment_contents" + level],
+                )),
+            ),
+        ),
+
+        optional(
+            // Higher dynamic precedence here is required as clashes
+            // can occur with headings having paragraph delimiters.
+            prec.dynamic(2, $.weak_paragraph_delimiter),
         ),
     );
 }

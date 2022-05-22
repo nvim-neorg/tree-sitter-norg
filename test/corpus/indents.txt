@@ -127,3 +127,30 @@ Indent segment delimiter precedence with surrounding headings
   (heading1
     (heading1_prefix)
     (paragraph_segment)))
+
+================================================================================
+Indent segment with strong paragraph delimiter as terminator
+================================================================================
+* Heading
+  \
+    This is an indent segment.
+
+    This paragraph should also belong to the indent segment.
+    ===
+
+This is no longer part of the indent segment nor the heading.
+--------------------------------------------------------------------------------
+
+(document
+  (heading1
+    (heading1_prefix)
+    (paragraph_segment)
+    (indent_segment
+      (indent_segment_begin)
+      (paragraph
+        (paragraph_segment))
+      (paragraph
+        (paragraph_segment))))
+  (strong_paragraph_delimiter)
+  (paragraph
+    (paragraph_segment)))
