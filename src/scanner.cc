@@ -1048,50 +1048,48 @@ class Scanner
     // TODO: control flow can probably be improved significantly
     bool check_detached_mod_extension(TSLexer* lexer)
     {
-        if (lexer->lookahead == '|')
+        if (lexer->lookahead == '|' && ((m_LastToken >= HEADING1 && m_LastToken <= MULTI_DRAWER_SUFFIX) ||
+                (m_LastToken >= PRIORITY && m_LastToken <= TODO_ITEM_RECURRING)))
         {
-            if ((m_LastToken >= HEADING1 && m_LastToken <= MULTI_DRAWER_SUFFIX) ||
-                (m_LastToken >= PRIORITY && m_LastToken <= TODO_ITEM_RECURRING))
+            advance(lexer);
+
+            auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+            auto found_detached_modifier_extension =
+                m_DetachedModifierExtensions.find(lexer->lookahead);
+
+            if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
             {
-                advance(lexer);
-
-                auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
-                auto found_detached_modifier_extension =
-                    m_DetachedModifierExtensions.find(lexer->lookahead);
-
-                if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
+                if (found_attached_modifier == m_AttachedModifiers.end())
                 {
-                    if (found_attached_modifier == m_AttachedModifiers.end())
+                    lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
+                    return true;
+                }
+                else
+                {
+                    lexer->mark_end(lexer);
+                    advance(lexer);
+                    if (lexer->lookahead == '|')
                     {
                         lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
                         return true;
                     }
-                    else
+                    if (!m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
                     {
-                        lexer->mark_end(lexer);
-                        advance(lexer);
-                        if (lexer->lookahead == '|')
-                        {
-                            lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
-                            return true;
-                        }
-                        if (!m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
-                        {
-                            m_FreeFormActiveModifiers.set(
+                        m_FreeFormActiveModifiers.set(
                                 (found_attached_modifier->second - BOLD_OPEN) / 2);
-                            lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_OPEN;
-                            return true;
-                        }
+                        lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_OPEN;
+                        return true;
                     }
                 }
-                if (found_attached_modifier != m_AttachedModifiers.end() &&
-                    !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
-                {
-                    m_FreeFormActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) /
-                                                  2);
-                    lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_OPEN;
-                    return true;
-                }
+            }
+
+            if (found_attached_modifier != m_AttachedModifiers.end() &&
+                !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+            {
+                m_FreeFormActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) /
+                                              2);
+                lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_OPEN;
+                return true;
             }
         }
 
@@ -1177,6 +1175,7 @@ class Scanner
                 auto found_another_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
                 auto found_detached_modifier_extension =
                     m_DetachedModifierExtensions.find(lexer->lookahead);
+
                 if (found_attached_modifier == m_AttachedModifiers.end())
                 {
                     if (found_another_attached_modifier == m_AttachedModifiers.end())
@@ -1205,6 +1204,7 @@ class Scanner
                     }
                 }
             }
+
             break;
         }
         default:

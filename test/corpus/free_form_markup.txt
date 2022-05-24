@@ -1017,3 +1017,40 @@ Do not confuse with ToDo detached mod extension
       (heading2_prefix)
       (paragraph_segment
         (spoiler)))))
+
+================================================================================
+Unclosed free form markup
+================================================================================
+|* test one
+
+|/ test two
+|_ test three
+
+(the spacing is deliberate)
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment))
+  (paragraph
+    (paragraph_segment)
+    (paragraph_segment))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
+Closing free form modifier delimiter without surrounding attached modifier
+================================================================================
+|*some|text*|
+|/*some|* text /|
+|_ some text |_|
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (bold))
+    (paragraph_segment
+      (italic))
+    (paragraph_segment
+      (underline))))

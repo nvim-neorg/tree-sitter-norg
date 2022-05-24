@@ -25,6 +25,11 @@ module.exports = grammar({
     ],
 
     conflicts: $ => [
+        // Conflict arises when parsing unclosed markup
+        // Input could be:
+        //  *text*
+        // or
+        //  *text
         [$.bold, $._conflict_open],
         [$.italic, $._conflict_open],
         [$.strikethrough, $._conflict_open],
@@ -36,6 +41,13 @@ module.exports = grammar({
         [$.inline_comment, $._conflict_open],
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
+
+        // Conflict arises with unclosed free form attached modifiers
+        // Input could be:
+        //  |* text *|
+        // or
+        //  |* text
+        [$._conflict_open, $._free_form_attached_modifier],
 
         [$._paragraph_element],
 
@@ -285,7 +297,6 @@ module.exports = grammar({
                     choice(
                         $._paragraph_element,
                         alias($._conflict_open, "_word"),
-                        alias($.free_form_modifier_open, "_word"),
                     ),
                 ),
             ),
@@ -297,7 +308,6 @@ module.exports = grammar({
                 choice(
                     $._paragraph_element,
                     alias($._conflict_open, "_word"),
-                    alias($.free_form_modifier_open, "_word"),
                 ),
             ),
         ),
@@ -363,8 +373,6 @@ module.exports = grammar({
             alias($.escape_sequence_prefix, "_word"),
             alias($.any_char, "_word"),
             alias($.link_modifier, "_word"),
-            alias($.free_form_modifier_open, "_word"),
-            alias($.free_form_modifier_close, "_word"),
             prec.dynamic(5, alias($._conflict_open, "_word")),
             prec.dynamic(5, alias($._conflict_close, "_word")),
             alias($.inline_link_target_open, "_word"),
@@ -425,6 +433,8 @@ module.exports = grammar({
             alias($.inline_comment_open, "_word"),
             alias($.inline_math_open, "_word"),
             alias($.variable_open, "_word"),
+
+            alias($.free_form_modifier_open, "_word"),
         ),
 
         _conflict_close: $ =>
@@ -441,9 +451,13 @@ module.exports = grammar({
             alias($.inline_math_close, "_word"),
             alias($.variable_close, "_word"),
 
+            alias($.free_form_modifier_close, "_word"),
+
             alias($.link_location_end, "_word"),
             alias($.link_description_end, "_word"),
             alias($.inline_link_target_close, "_word"),
+
+            alias($.detached_mod_extension_delimiter, "_word"),
         ),
 
         // Well, any character
@@ -924,24 +938,22 @@ module.exports = grammar({
         ),
 
         _free_form_attached_modifier: $ =>
-        prec(1,
-            seq(
-                alias($.free_form_modifier_open, "_open"),
-                choice(
-                    alias($._free_form_bold, $.bold),
-                    alias($._free_form_italic, $.italic),
-                    alias($._free_form_strikethrough, $.strikethrough),
-                    alias($._free_form_underline, $.underline),
-                    alias($._free_form_spoiler, $.spoiler),
-                    alias($._free_form_superscript, $.superscript),
-                    alias($._free_form_subscript, $.subscript),
-                    alias($._free_form_verbatim, $.verbatim),
-                    alias($._free_form_inline_comment, $.inline_comment),
-                    alias($._free_form_inline_math, $.inline_math),
-                    alias($._free_form_variable, $.variable),
-                ),
-                alias($.free_form_modifier_close, "_close"),
+        seq(
+            alias($.free_form_modifier_open, "_open"),
+            choice(
+                alias($._free_form_bold, $.bold),
+                alias($._free_form_italic, $.italic),
+                alias($._free_form_strikethrough, $.strikethrough),
+                alias($._free_form_underline, $.underline),
+                alias($._free_form_spoiler, $.spoiler),
+                alias($._free_form_superscript, $.superscript),
+                alias($._free_form_subscript, $.subscript),
+                alias($._free_form_verbatim, $.verbatim),
+                alias($._free_form_inline_comment, $.inline_comment),
+                alias($._free_form_inline_math, $.inline_math),
+                alias($._free_form_variable, $.variable),
             ),
+            alias($.free_form_modifier_close, "_close"),
         ),
     }
 });
