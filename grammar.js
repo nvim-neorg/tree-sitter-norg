@@ -92,6 +92,7 @@ module.exports = grammar({
         $.paragraph_break,
 
         $.escape_sequence_prefix,
+        $.continuation,
 
         $.trailing_modifier,
 
@@ -245,6 +246,7 @@ module.exports = grammar({
                         $.rangeable_detached_modifier,
                         $.tag,
                         $.indent_segment,
+                        $.continuation,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
                         // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)

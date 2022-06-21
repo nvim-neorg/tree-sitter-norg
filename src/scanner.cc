@@ -23,6 +23,9 @@ enum TokenType : char
     PARAGRAPH_BREAK,
 
     ESCAPE_SEQUENCE,
+    // In reality this is just an escape char with a newline (\\\n),
+    // but it is important to distinguish it from a regular escape sequence
+    CONTINUATION,
 
     TRAILING_MODIFIER,
 
@@ -567,9 +570,14 @@ class Scanner
 
             if (lexer->lookahead)
             {
-                lexer->result_symbol = m_LastToken =
-                    (is_newline(lexer->lookahead)) ? INDENT_SEGMENT
-                                                                           : ESCAPE_SEQUENCE;
+                if (is_newline(lexer->lookahead))
+                {
+                    advance(lexer);
+                    lexer->result_symbol = m_LastToken = CONTINUATION;
+                }
+                else
+                    lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
+
                 return true;
             }
             else
