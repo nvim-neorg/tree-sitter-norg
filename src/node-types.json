@@ -1,5 +1,10 @@
 [
   {
+    "type": "_lowercase",
+    "named": false,
+    "fields": {}
+  },
+  {
     "type": "_segment",
     "named": false,
     "fields": {},
@@ -208,6 +213,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "continuation",
+          "named": true
+        },
         {
           "type": "generic_list",
           "named": true
@@ -5867,16 +5876,11 @@
       "required": true,
       "types": [
         {
-          "type": "tag_name_element",
+          "type": "word",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "tag_name_element",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "tag_param",
@@ -5886,21 +5890,16 @@
   {
     "type": "tag_parameters",
     "named": true,
-    "fields": {
-      "parameter": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "_tag_param_delimiter",
-            "named": false
-          },
-          {
-            "type": "tag_param",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "tag_param",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -6739,10 +6738,6 @@
     "named": false
   },
   {
-    "type": "_tag_param_delimiter",
-    "named": false
-  },
-  {
     "type": "_trailing_modifier",
     "named": false
   },
@@ -6756,6 +6751,10 @@
   },
   {
     "type": "any_char",
+    "named": true
+  },
+  {
+    "type": "continuation",
     "named": true
   },
   {

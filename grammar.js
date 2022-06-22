@@ -181,6 +181,8 @@ module.exports = grammar({
 
         $.timestamp_data,
 
+        $.tag_delimiter,
+
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
         $.ranged_verbatim_tag_prefix,
@@ -789,82 +791,37 @@ module.exports = grammar({
 
         strong_attribute: $ => gen_single_tag($, "strong_attribute"),
 
-        tag_name_element: _ =>
-        seq(
-            token(/[a-z0-9_\-]/),
-            token(/[a-zA-Z0-9_\-]*/),
-        ),
-
         tag_name: $ =>
         seq(
-            choice(
-                $.tag_name_element,
-            ),
+            $.word,
 
             repeat(
                 seq(
                     alias(
-                        token.immediate("."),
+                        $.tag_delimiter,
                         "_delimiter",
                     ),
 
-                    $.tag_name_element,
+                    $.word,
                 ),
             ),
         ),
 
-        tag_param: _ => token.immediate(/[^\"]\S*/),
-
-        _quoted_tag_contents: _ => seq(
-            token.immediate(/[^\n\r\"\s]+/),
-            repeat(
-                seq(
-                    token.immediate(/[\t\v ]+/),
-                    token.immediate(/[^\n\r\"\s]+/),
-                ),
-            ),
+        tag_param: $ =>
+        choice(
+            alias($.word, "_lowercase"),
+            // TODO: tag parameters with speech marks (make speech marks an attached mod so it can easily be added here?)
         ),
 
         tag_parameters: $ =>
         seq(
-            field(
-                "parameter",
-                $.tag_param,
-            ),
+            $.tag_param,
 
             repeat(
                 seq(
-                    token.immediate(/[\t\v ]+/),
-
-                    field(
-                        "parameter",
-                        optional(
-                            choice(
-                                $.tag_param,
-                                seq(
-                                    alias(token.immediate('"'), "_tag_param_delimiter"),
-                                    alias($._quoted_tag_contents, $.tag_param),
-                                    alias(token.immediate('"'), "_tag_param_delimiter"),
-                                ),
-                            ),
-                        ),
-                    ),
+                    alias($.space, "_space"),
+                    optional($.tag_param),
                 ),
-            ),
-        ),
-
-        _tag_parameters: $ =>
-        choice(
-            token.immediate(
-                /[\t\v ]*/,
-            ),
-
-            seq(
-                token.immediate(
-                    /[\t\v ]+/,
-                ),
-
-                $.tag_parameters,
             ),
         ),
 
@@ -972,7 +929,9 @@ function gen_single_tag($, kind) {
             $.tag_name,
         ),
 
-        $._tag_parameters,
+        optional(alias($.space, "_space")),
+
+        optional($.tag_parameters),
 
         alias($.line_break, "_line_break"),
     );

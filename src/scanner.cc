@@ -114,6 +114,8 @@ enum TokenType : char
 
     TIMESTAMP_DATA,
 
+    TAG_DELIMITER,
+
     RANGED_TAG,
     RANGED_TAG_END,
     RANGED_VERBATIM_TAG,
@@ -165,6 +167,17 @@ enum TokenType : char
     INLINE_LINK_TARGET_CLOSE,
 
     INDENT_SEGMENT,
+};
+
+enum class TagType : char
+{
+    NONE = 1,
+
+    ON_TAG,
+    IN_TAG,
+
+    ON_VERBATIM_TAG,
+    IN_VERBATIM_TAG,
 };
 
 // Operator overloads for TokenTypes (allows for their chaining)
@@ -235,6 +248,9 @@ class Scanner
                 return false;
             }
 
+            if (m_TagContext != TagType::NONE && ((char)m_TagContext % 2) == 0)
+                m_TagContext = (TagType)((char)m_TagContext + 1);
+
             if (is_newline(lexer->lookahead))
             {
                 advance(lexer);
@@ -279,10 +295,10 @@ class Scanner
                                     advance(lexer);
 
                                 if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) &&
-                                    m_IsInVerbatimTag)
+                                    m_TagContext == TagType::IN_VERBATIM_TAG)
                                 {
                                     lexer->result_symbol = m_LastToken = RANGED_VERBATIM_TAG_END;
-                                    m_IsInVerbatimTag = false;
+                                    m_TagContext = TagType::NONE;
                                     return true;
                                 }
 
@@ -295,7 +311,7 @@ class Scanner
 
                 // This is a fallback. If the tag ends up not being `@end`
                 // then...
-                if (m_LastToken == RANGED_VERBATIM_TAG || m_IsInVerbatimTag)
+                if (m_LastToken == RANGED_VERBATIM_TAG || m_TagContext == TagType::IN_VERBATIM_TAG)
                 {
                     // ignore the char if we are already inside of a ranged tag.
                     lexer->result_symbol = m_LastToken = WORD;
@@ -303,11 +319,11 @@ class Scanner
                 }
 
                 lexer->result_symbol = m_LastToken = RANGED_VERBATIM_TAG;
-                m_IsInVerbatimTag = true;
+                m_TagContext = TagType::ON_VERBATIM_TAG;
                 return true;
             }
 
-            if (m_IsInVerbatimTag)
+            if (m_TagContext == TagType::IN_VERBATIM_TAG)
                 return parse_text(lexer);
 
             // We are dealing with a ranged tag (#something)
@@ -371,7 +387,7 @@ class Scanner
                 ++m_TagLevel;
                 return true;
             }
-            else if (lexer->lookahead == '|' && !m_IsInVerbatimTag)
+            else if (lexer->lookahead == '|' && m_TagContext != TagType::IN_VERBATIM_TAG)
             {
                 advance(lexer);
 
@@ -389,7 +405,7 @@ class Scanner
                 lexer->result_symbol = m_LastToken = STRONG_ATTRIBUTE;
                 return true;
             }
-            else if (lexer->lookahead == '+' && !m_IsInVerbatimTag)
+            else if (lexer->lookahead == '+' && m_TagContext != TagType::IN_VERBATIM_TAG)
             {
                 advance(lexer);
                 if (lexer->lookahead != '+')
@@ -520,7 +536,7 @@ class Scanner
                     return true;
                 }
             }
-            else if (m_ParsedChars == 1 && !m_IsInVerbatimTag)
+            else if (m_ParsedChars == 1 && m_TagContext != TagType::IN_VERBATIM_TAG)
             {
                 lexer->result_symbol = m_LastToken = MACRO;
                 return true;
@@ -658,7 +674,7 @@ class Scanner
     }
 
     size_t& get_tag_level() noexcept { return m_TagLevel; }
-    bool& is_in_verbatim_tag() noexcept { return m_IsInVerbatimTag; }
+    TagType& get_tag_context() noexcept { return m_TagContext; }
     TokenType& get_last_token() noexcept { return m_LastToken; }
     int32_t& get_current_char() noexcept { return m_Current; }
     auto& get_active_modifiers() noexcept { return m_ActiveModifiers; }
@@ -1237,17 +1253,24 @@ class Scanner
 
     /*
      * Simply parses any word (segment containing consecutive non-whitespace
-     * characters). If in a tag (m_IsInVerbatimTag) parse_text parses
+     * characters). If in a tag parse_text parses
      * till a newline is encountered
      */
     bool parse_text(TSLexer* lexer)
     {
-        if (m_IsInVerbatimTag)
+        if (m_TagContext == TagType::IN_VERBATIM_TAG)
         {
             while (lexer->lookahead && !is_newline(lexer->lookahead))
                 advance(lexer);
 
             lexer->result_symbol = m_LastToken = WORD;
+            return true;
+        }
+
+        if (((char)m_TagContext % 2) == 0 && lexer->lookahead == '.')
+        {
+            advance(lexer);
+            lexer->result_symbol = m_LastToken = TAG_DELIMITER;
             return true;
         }
 
@@ -1277,7 +1300,7 @@ class Scanner
                 (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) ||
                 (lexer->lookahead == '<' || lexer->lookahead == '>' || lexer->lookahead == '[' ||
                  lexer->lookahead == ']' || lexer->lookahead == '{' || lexer->lookahead == '}') ||
-                lexer->lookahead == '\\')
+                lexer->lookahead == '\\' || (((char)m_TagContext % 2 == 0) ? (lexer->lookahead == '.') : false))
                 break;
             else
                 advance(lexer);
@@ -1317,7 +1340,7 @@ class Scanner
     // Stores the current char rather than the next char
     int32_t m_Previous = 0, m_Current = 0;
 
-    bool m_IsInVerbatimTag = false;
+    TagType m_TagContext = TagType::NONE;
     size_t m_TagLevel = 0;
 
     // The last matched token type (used to detect things like todo items
@@ -1374,7 +1397,7 @@ extern "C"
         Scanner* scanner = static_cast<Scanner*>(payload);
 
         const auto& tag_level = scanner->get_tag_level();
-        const auto& is_in_verbatim_tag = scanner->is_in_verbatim_tag();
+        const auto& tag_context = scanner->get_tag_context();
         const auto& last_token = scanner->get_last_token();
         const auto& current = scanner->get_current_char();
         const auto& active_modifiers = scanner->get_active_modifiers();
@@ -1386,7 +1409,7 @@ extern "C"
 
         buffer[0] = last_token;
         buffer[1] = tag_level;
-        buffer[2] = is_in_verbatim_tag;
+        buffer[2] = (char)tag_context;
 
         // Store `current` (which is an int32_t) in a char array by splitting it up
         buffer[3] = current & 0xFF;
@@ -1413,7 +1436,7 @@ extern "C"
         Scanner* scanner = static_cast<Scanner*>(payload);
 
         auto& tag_level = scanner->get_tag_level();
-        auto& is_in_verbatim_tag = scanner->is_in_verbatim_tag();
+        auto& tag_context = scanner->get_tag_context();
         auto& last_token = scanner->get_last_token();
         auto& current = scanner->get_current_char();
         auto& active_modifiers = scanner->get_active_modifiers();
@@ -1424,13 +1447,13 @@ extern "C"
             active_modifiers = 0;
             free_form_active_modifiers = 0;
             tag_level = 0;
-            is_in_verbatim_tag = false;
+            tag_context = TagType::NONE;
             return;
         }
 
         last_token = (TokenType)buffer[0];
-        is_in_verbatim_tag = (bool)buffer[2];
         tag_level = (size_t)buffer[1];
+        tag_context = (TagType)buffer[2];
         current = (uint32_t)buffer[6] << 24 | (uint32_t)buffer[5] << 16 | (uint32_t)buffer[4] << 8 |
                   (uint32_t)buffer[3];
 
