@@ -222,7 +222,7 @@ class Scanner
         lexer->result_symbol = NONE;
 
         // Are we at the end of file? If so, bail
-        if (lexer->eof(lexer))
+        if (lexer->eof(lexer) || !lexer->lookahead)
         {
             reset_free_form_active_modifiers();
             return false;
