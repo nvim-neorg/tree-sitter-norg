@@ -12,7 +12,7 @@ This is no longer part of the comment.
     (strong_attribute_set
       (strong_attribute
         (tag_name
-          (tag_name_element))))
+          (word))))
     (paragraph_segment))
   (paragraph
     (paragraph_segment)))
@@ -32,7 +32,7 @@ This is no longer infected.
     (strong_attribute_set
       (strong_attribute
         (tag_name
-          (tag_name_element))))
+          (word))))
     (unordered_list1
       (unordered_list1_prefix)
       (paragraph
@@ -59,7 +59,7 @@ This is no longer infected.
     (strong_attribute_set
       (strong_attribute
         (tag_name
-          (tag_name_element))))
+          (word))))
     (quote1
       (quote1_prefix)
       (paragraph
@@ -89,7 +89,7 @@ Weak Attribute on generic list
       (weak_attribute_set
         (weak_attribute
           (tag_name
-            (tag_name_element))
+            (word))
           (tag_parameters
             (tag_param))))
       (unordered_list1_prefix)
@@ -114,7 +114,7 @@ Weak Attribute on quote
       (weak_attribute_set
         (weak_attribute
           (tag_name
-            (tag_name_element))
+            (word))
           (tag_parameters
             (tag_param))))
       (quote1_prefix)
@@ -135,7 +135,7 @@ Lol
     (strong_attribute_set
       (strong_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (quote1
@@ -157,7 +157,7 @@ print("Hello World")
 (document
   (ranged_verbatim_tag
     (tag_name
-      (tag_name_element))
+      (word))
     (tag_parameters
       (tag_param))
     (ranged_verbatim_tag_content)

@@ -11,7 +11,7 @@ No longer part of the ranged tag.
 (document
   (ranged_tag
     (tag_name
-      (tag_name_element))
+      (word))
     (ranged_tag_content
       (paragraph_segment
         (bold)
@@ -33,7 +33,7 @@ No longer part of the ranged tag.
 (document
   (ranged_verbatim_tag
     (tag_name
-      (tag_name_element))
+      (word))
     (ranged_verbatim_tag_content)
     (ranged_verbatim_tag_end))
   (paragraph
@@ -51,7 +51,7 @@ No longer part of the ranged tag.
 (document
   (ranged_verbatim_tag
     (tag_name
-      (tag_name_element))
+      (word))
     (tag_parameters
       (tag_param))
     (ranged_verbatim_tag_content)
@@ -73,8 +73,8 @@ shouldn't be a closing tag.
 (document
   (ranged_verbatim_tag
     (tag_name
-      (tag_name_element)
-      (tag_name_element))
+      (word)
+      (word))
     (ranged_verbatim_tag_end))
   (paragraph
     (paragraph_segment)
@@ -93,7 +93,7 @@ public class MyClass {}
 (document
   (ranged_verbatim_tag
     (tag_name
-      (tag_name_element))
+      (word))
     (tag_parameters
       (tag_param))
     (ranged_verbatim_tag_content)
@@ -114,11 +114,11 @@ value | something else
     (strong_attribute_set
       (strong_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (tag_name
-      (tag_name_element))
+      (word))
     (ranged_tag_content
       (paragraph_segment
         (bold)
@@ -141,11 +141,11 @@ public class MyClass {}
     (strong_attribute_set
       (strong_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (tag_name
-      (tag_name_element))
+      (word))
     (tag_parameters
       (tag_param))
     (ranged_verbatim_tag_content)
@@ -166,11 +166,11 @@ value | something else
     (weak_attribute_set
       (weak_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (tag_name
-      (tag_name_element))
+      (word))
     (ranged_tag_content
       (paragraph_segment
         (bold)
@@ -193,11 +193,11 @@ public class MyClass {}
     (weak_attribute_set
       (weak_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (tag_name
-      (tag_name_element))
+      (word))
     (tag_parameters
       (tag_param))
     (ranged_verbatim_tag_content)
@@ -219,17 +219,17 @@ value | something else
     (strong_attribute_set
       (strong_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (weak_attribute_set
       (weak_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (tag_name
-      (tag_name_element))
+      (word))
     (ranged_tag_content
       (paragraph_segment
         (bold)
@@ -253,17 +253,17 @@ public class MyClass {}
     (strong_attribute_set
       (strong_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (weak_attribute_set
       (weak_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (tag_name
-      (tag_name_element))
+      (word))
     (tag_parameters
       (tag_param))
     (ranged_verbatim_tag_content)
@@ -286,13 +286,13 @@ value | something else
       (weak_attribute_set
         (weak_attribute
           (tag_name
-            (tag_name_element))
+            (word))
           (tag_parameters
             (tag_param))))
       (ERROR)))
   (ranged_tag
     (tag_name
-      (tag_name_element))
+      (word))
     (ranged_tag_content
       (paragraph_segment
         (bold)
