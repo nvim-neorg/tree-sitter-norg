@@ -222,9 +222,8 @@ class Scanner
         lexer->result_symbol = NONE;
 
         // Are we at the end of file? If so, bail
-        if (lexer->eof(lexer) || !lexer->lookahead)
+        if (lexer->eof(lexer))
         {
-            advance(lexer);
             reset_free_form_active_modifiers();
             return false;
         }
@@ -245,7 +244,7 @@ class Scanner
             if (lexer->eof(lexer) || !lexer->lookahead)
             {
                 reset_active_modifiers();
-                return false;
+                return true;
             }
 
             if (m_TagContext != TagType::NONE && ((char)m_TagContext % 2) == 0)
@@ -1444,10 +1443,12 @@ extern "C"
 
         if (length == 0)
         {
-            active_modifiers = 0;
-            free_form_active_modifiers = 0;
             tag_level = 0;
             tag_context = TagType::NONE;
+            last_token = NONE;
+            current = 0;
+            active_modifiers = 0;
+            free_form_active_modifiers = 0;
             return;
         }
 
