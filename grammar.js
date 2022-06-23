@@ -92,7 +92,7 @@ module.exports = grammar({
         $.paragraph_break,
 
         $.escape_sequence_prefix,
-        $.continuation,
+        $.slide,
 
         $.trailing_modifier,
 
@@ -248,10 +248,9 @@ module.exports = grammar({
                         $.rangeable_detached_modifier,
                         $.tag,
                         $.indent_segment,
-                        $.continuation,
+                        $.slide,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
-                        // Markers are separate from detached modifiers because they are the a l p h a modifier (consumes all elements)
                         $.marker,
                     )
                 ),
@@ -1117,7 +1116,7 @@ function gen_attached_modifier($, kind, verbatim, free_form) {
     }
 
     if (free_form) {
-        precedence = precedence + 1;
+        precedence += 1;
     }
 
     return prec.dynamic(precedence,

@@ -25,7 +25,7 @@ enum TokenType : char
     ESCAPE_SEQUENCE,
     // In reality this is just an escape char with a newline (\\\n),
     // but it is important to distinguish it from a regular escape sequence
-    CONTINUATION,
+    SLIDE,
 
     TRAILING_MODIFIER,
 
@@ -588,7 +588,7 @@ class Scanner
                 if (is_newline(lexer->lookahead))
                 {
                     advance(lexer);
-                    lexer->result_symbol = m_LastToken = CONTINUATION;
+                    lexer->result_symbol = m_LastToken = SLIDE;
                 }
                 else
                     lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
