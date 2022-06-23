@@ -259,6 +259,16 @@ class Scanner
 
             return true;
         }
+        else if (lexer->lookahead == '#' && (m_LastToken >= HEADING1 && m_LastToken <= ORDERED_LIST6))
+        {
+            advance(lexer);
+
+            if (is_newline(lexer->lookahead))
+            {
+                lexer->result_symbol = m_LastToken = INDENT_SEGMENT;
+                return true;
+            }
+        }
 
         // If we're at the beginning of a line check for all detached modifiers
         if (lexer->get_column(lexer) == 0)
@@ -332,7 +342,11 @@ class Scanner
 
                 if (!lexer->lookahead || std::iswspace(lexer->lookahead))
                 {
-                    lexer->result_symbol = m_LastToken = WORD;
+                    if (is_newline(lexer->lookahead))
+                        lexer->result_symbol = m_LastToken = INDENT_SEGMENT;
+                    else
+                        lexer->result_symbol = m_LastToken = WORD;
+
                     return true;
                 }
 

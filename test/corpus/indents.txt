@@ -1,7 +1,7 @@
 ================================================================================
 Basic indent segment
 ================================================================================
-- \
+- #
 This is a paragraph.
 
 This is another paragraph inside of the same list item.
@@ -21,7 +21,7 @@ This is another paragraph inside of the same list item.
 ================================================================================
 Inline indent segment
 ================================================================================
-\
+#
 This is an indented paragraph.
 
 This is still part of the indent segment.
@@ -40,7 +40,7 @@ Inline indent segment with attributes
 ================================================================================
 |enumerate
 +name enumeration
-\
+#
 - first enumerated item
 
 - second enumerated item
@@ -51,11 +51,11 @@ Inline indent segment with attributes
     (strong_attribute_set
       (strong_attribute
         (tag_name
-          (tag_name_element))))
+          (word))))
     (weak_attribute_set
       (weak_attribute
         (tag_name
-          (tag_name_element))
+          (word))
         (tag_parameters
           (tag_param))))
     (indent_segment_begin)
@@ -72,7 +72,7 @@ Inline indent segment with attributes
 Indent segment delimiter precedence
 ================================================================================
 * Heading
-- \
+- #
   Text
   ---
 This should still be part of the heading.
@@ -98,7 +98,7 @@ Indent segment delimiter precedence with surrounding headings
 ================================================================================
 * Heading One
 * Heading Two
-  - \
+  - #
       This is some content.
       ---
   The paragraph delimiter should belong to the indent segment,
@@ -132,7 +132,7 @@ Indent segment delimiter precedence with surrounding headings
 Indent segment with strong paragraph delimiter as terminator
 ================================================================================
 * Heading
-  \
+  #
     This is an indent segment.
 
     This paragraph should also belong to the indent segment.

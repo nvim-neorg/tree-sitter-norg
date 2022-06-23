@@ -214,10 +214,6 @@
       "required": false,
       "types": [
         {
-          "type": "continuation",
-          "named": true
-        },
-        {
           "type": "generic_list",
           "named": true
         },
@@ -315,6 +311,10 @@
         },
         {
           "type": "single_variable",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -6754,10 +6754,6 @@
     "named": true
   },
   {
-    "type": "continuation",
-    "named": true
-  },
-  {
     "type": "escape_sequence_prefix",
     "named": true
   },
@@ -6947,6 +6943,10 @@
   },
   {
     "type": "single_variable_prefix",
+    "named": true
+  },
+  {
+    "type": "slide",
     "named": true
   },
   {
