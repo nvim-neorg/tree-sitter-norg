@@ -1,6 +1,10 @@
 %Use many examples!%
 %And also provide counter-examples for cases which are not expected to work!%
-%Markup cannot be directly chained one after another, i.e. `*hello**world*` is disallowed%
+%Markup cannot be directly chained one after another, i.e. `*hello**world*` will produce
+`<b>hello**world</b>`%
+%The above is because any sequence of two or more consecutive characters are instantly treated as
+words%
+%Should speech marks ("") be attached modifiers? Imo it could be pretty useful to have them as that%
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
@@ -58,7 +62,7 @@
    {https://en.wikipedia.org/wiki/Code_point}
 
 *** Whitespace
-    A {# character} is considered to be *whitespace* if it is any of the following:
+    A {# character} is considered *whitespace* if it is any of the following:
     - A tab `U+0009`
     - A line feed `U+000A`
     - A form feed `U+000C`
@@ -76,9 +80,7 @@
     - A single carriage return
     - A carriage return immediately followed by a line feed
 
-    %TODO: This isn't linked to anywhere - perhaps a definition should be used here instead?%
-    ^ Blank lines...
-    ...are irrelevant in Norg because standalone whitespace has no semantic relevance.
+    Blank lines are irrelevant in Norg because standalone whitespace has no semantic relevance.
 
     ^ Unicode Zs general category
     {https://www.fileformat.info/info/unicode/category/Zs/list.htm}
@@ -144,32 +146,104 @@
     another detached modifier of the same type or by a {# detached modifier extensions}[detached
     modifier extension]
 
-  The following list outlines all valid *detached* modifiers. The list also adds three possible
+  The following list outlines all valid *detached* modifiers. The list also adds four possible
   properties to each category which will be explained in more detail below.
   - `*`: {# Headings} (structural, nestable)
-  - `%`: {# Markers}
+  - `%`: {# Markers} (structural)
   - `-`: {# Unordered Lists} (nestable)
   - `~`: {# Ordered Lists} (nestable)
   - `>`: {# Quotes} (nestable)
   - `$`: {# Definitions} (range-able)
   - `^`: {# Footnotes} (range-able)
   - | | `<`: add drawers/details (range-able)
-  - | | `&`: add variables (range-able, logical (?)) (logical cannot be linked to)
-  - | | `=`: add macros (range-able, logical (?)) (logical cannot be linked to)
+  - | | `&`: add variables (range-able, logical)
+  - | | `=`: add macros (range-able, logical)
 
-** Standard Detached Modifiers
-   The normal rules for the /standard/ detached modifiers are simple as outlined above. An
-   important differentiation is, that standard detached modifiers may _not_ be succeeded by another
-   detached modifier and instead require a whitespace immediately after them.
-   They then affect the interpretation of the following `paragraph_segment` which generally means
-   they extend up to the end of the current line.
+** Structural Detached Modifiers
+   The first detached modifier type is the /structural/ modifier type. As the name suggests,
+   modifiers under this category *structure* the Neorg document in some form or another.
+
+   After a /single/ occurence of a modifier (like `%`), at least one {# whitespace} character follows,
+   after which a {# paragraph segments}[paragraph segment] is consumed as the title of the modifier.
 
 *** Markers
     @code norg
-    % Marker
+    % Marker Name
     @end
 
-    %TODO: motivate use case of markers now that they are no longer structural%
+    Markers are purely structural elements that, well, create markers in your document. Markers are
+    not rendered as a physical element, but rather behave like virtual chapters of a book.
+    Useful for very large documents.
+
+*** Headings
+    @code norg
+    * Heading level 1
+    ** Heading level 2
+    *** Heading level 3
+    **** Heading level 4
+    ***** Heading level 5
+    ****** Heading level 6
+    ******* Heading level 7 (falls back to level 6 in the tree-sitter parser)
+    @end
+
+    Although headings are both structural /and/ nestable, the former takes precedence over the
+    latter, meaning that headings only affect a `paragraph_segment` as their title. This is for user
+    convenience as it does not require an empty line right below a heading.
+
+    Headings serve as a way to categorize and organize other elements into smaller chunks for better
+    readability. Ending a heading requires use of a {* Delimiting Modifiers}[delimiting modifier].
+
+*** Delimiting Modifiers
+    Although not a detached modifier, we would like to insert a note on {# delimiting modifiers}
+    because they are immediately related to structuring a Norg document.
+
+    This kind of modifier must abide by the following rules:
+    - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
+      (but nothing else!) may precede it)
+    - A delimiting modifier must consist of three or more consecutive modifiers of the same
+      type{^ disambiguating delimiting modifiers}
+    - It must be followed by an immediate {# line ending} (without any extra {# whitespace})
+
+    ^^ Disambiguating delimiting modifiers
+    (why 3?)
+    ^^
+
+**** Weak Delimiting Modifier
+     This modifier uses the `-` character and immediately closes the current heading level.
+     @code norg
+     * Heading level 1
+       Text under first level heading.
+
+     ** Heading level 2
+        Text under second level heading.
+        ---
+
+       Text under first level heading again.
+     @end
+
+**** Strong Delimiting Modifier
+     This modifier uses the `=` character and immediately closes all heading levels.
+     @code norg
+     * Heading level 1
+       Text under first level heading.
+
+     ** Heading level 2
+        Text under second level heading.
+        ===
+
+     Text belonging to no heading level (i.e. to the document's root).
+     @end
+
+**** Horizontal Rule
+     This modifier uses the `_` character and simply renders a horizontal line. It does _NOT_
+     affect the heading level but immediately terminates a {# paragraph}.
+     @code norg
+     * Heading level 1
+       Text under first level heading.
+       ___
+       This is a new paragraph separated from the previous one by a horizontal line.
+       This text still belongs to the first level heading.
+     @end
 
 ** Nestable Detached Modifiers
    Nestable detached modifiers are a kind which may be repeated multiple times in order to produce a
@@ -181,11 +255,14 @@
    /no/ title, and affects the following `paragraph` instead of only the next
    {# paragraph segments}[paragraph segment]. Said paragraph then becomes the modifier's /content/.
    This means that in order to terminate the detached modifier contents, you need two consecutive
-   line breaks (forming a {# paragraph break}){^ 1}.
+   line breaks (see {# paragraph break}){^ 1}.
 
    Here are some correct examples of nestable detached modifiers:
 
 *** Unordered Lists
+    Unordered lists provide an easy way to enumerate items in an unordered fashion. Useful for data
+    that's categorically similar but doesn't need to follow a strict order.
+
     @code norg
     - Unordered list level 1
     -- Unordered list level 2
@@ -212,6 +289,10 @@
     @end
 
 *** Ordered Lists
+    This list type is only useful for data that needs to be kept in sequence. In contrast to other
+    formats which may use a syntax like `1.`/`1)`, Norg counts the items automatically - this
+    reduces complexity and makes reordering items simple.
+
     @code norg
     ~ Ordered list level 1
     ~~ Ordered list level 2
@@ -271,96 +352,26 @@
    tags}.
 
 *** Invalid Examples
-    @code norg
-    >I am not a quote
+    - \
+        @code norg
+        >I am not a quote
 
-    some preceding text > I am also not a quote
+        some preceding text > I am also not a quote
 
-    >- I am not a valid detached modifier
+        >- I am not a valid detached modifier
 
-    > > I am only a level 1 quote
+        > > I am only a level 1 quote
 
-    *
-        I am not a valid heading title.
-    @end
-    ---
+        *
+            I am not a valid heading title.
+        @end
+    - Headings are also /nestable/ detached modifiers but will only be discussed later as part of the
+      {# structural detached modifiers} section.
 
-   Headings are also /nestable/ detached modifiers but will only be discussed later as part of the
-   {# structural detached modifiers}.
-
-   ^ 1
-   This isn't the case if the detached modifier is succeeded by the {# detached modifier
-   extensions}[`\` detached modifier extension].
-   %TODO: I'm not sure I fully understand this footnote. It would help to see an example here.%
-
-** Structural Detached Modifiers
-   The `*` (headings) detached modifiers also have the _structural_ property, meaning that these
-   objects *structure* the Norg document.
-   This detached modifier type only affects the following `paragraph_segment` (just like the
-   {# standard detached modifiers}).
-
-*** Headings
-    @code norg
-    * Heading level 1
-    ** Heading level 2
-    *** Heading level 3
-    **** Heading level 4
-    ***** Heading level 5
-    ****** Heading level 6
-    ******* Heading level 7 (falls back to level 6 in the tree-sitter parser)
-    @end
-
-    Although headings are both structural /and/ nestable, the former takes precedence over the
-    latter, meaning that headings only affect a `paragraph_segment`. This is for user convenience as
-    it does not require an empty line right below a heading.
-
-*** Delimiting Modifiers
-    Although not technically a detached modifier, we would like to insert a note on
-    {# delimiting modifiers} because they are immediately related to structuring a Norg document.
-
-    This kind of modifier must abide by the following rules:
-    - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
-      (but nothing else!) may precede it)
-    - A delimiting modifier must consist of three or more consecutive modifiers of the same type
-      %TODO: can we explain/argue, why 3 is the minimum? I.e. remove arbitrariness?%
-    - It must be followed by an immediate {# line ending} (without any extra {# whitespace})
-
-**** Weak Delimiting Modifier
-     This modifier uses the `-` character and immediately closes the current heading level.
-     @code norg
-     * Heading level 1
-       Text under first level heading.
-
-     ** Heading level 2
-        Text under second level heading.
-        ---
-
-       Text under first level heading again.
-     @end
-
-**** Strong Delimiting Modifier
-     This modifier uses the `=` character and immediately closes all heading levels.
-     @code norg
-     * Heading level 1
-       Text under first level heading.
-
-     ** Heading level 2
-        Text under second level heading.
-        ===
-
-     Text belonging to no heading level (i.e. to the document's root).
-     @end
-
-**** Horizontal Rule
-     This modifier uses the `_` character and simply renders a horizontal line. It does _NOT_
-     affect the heading level but immediately terminates a {# paragraph}.
-     @code norg
-     * Heading level 1
-       Text under first level heading.
-       ___
-       This is a new paragraph separated from the previous one by a horizontal line.
-       This text still belongs to the first level heading.
-     @end
+    ^ 1
+    This isn't the case if the detached modifier is succeeded by the {# detached modifier
+    extensions}[`\` detached modifier extension].
+    %TODO: I'm not sure I fully understand this footnote. It would help to see an example here.%
 
 ** Range-able Detached Modifiers
    Range-able detached modifiers can occur in two forms:
@@ -750,19 +761,14 @@
 ** Line Continuation
    The `~`-trailing modifier will concatenate the line which it ends with the following one.
    This allows you to do something like the following:
+
    @code norg
    * I am a very long heading title~
      which did not end here because of the trailing modifier
    @end
+
    Note, that the `~`-trailing modifier will concatenate the two lines with a single separating
    whitespace. In other words it transforms a line ending, `\n`, into a single white space, |` `|.
-
-   The `\`-trailing modifier on the other hand, will concatenate the two lines with:*out* separating
-   whitespace.
-   @code norg
-   * I am a very long heading title\
-     which will result in a weird word called "titlewhich"
-   @end
 
    It completely swallows the next line break, allowing for things like this:
    @code norg
@@ -1097,5 +1103,6 @@
   *am I {* bold?} - No!
   @end
   The link takes precedence, and no bold is rendered.
+  ===
 
 |% vim: set tw=100 :%|
