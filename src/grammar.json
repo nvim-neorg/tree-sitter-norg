@@ -627,6 +627,15 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
+            "name": "link_target_wiki"
+          },
+          "named": false,
+          "value": "_word"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
             "name": "link_target_generic"
           },
           "named": false,
@@ -1943,6 +1952,10 @@
           "content": {
             "type": "CHOICE",
             "members": [
+              {
+                "type": "SYMBOL",
+                "name": "link_target_wiki"
+              },
               {
                 "type": "SYMBOL",
                 "name": "link_target_generic"
@@ -7951,6 +7964,10 @@
     {
       "type": "SYMBOL",
       "name": "link_target_url"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "link_target_wiki"
     },
     {
       "type": "SYMBOL",

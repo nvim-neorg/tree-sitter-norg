@@ -103,6 +103,7 @@ enum TokenType : char
     LINK_FILE_END,
     LINK_FILE_TEXT,
     LINK_TARGET_URL,
+    LINK_TARGET_WIKI,
     LINK_TARGET_GENERIC,
     LINK_TARGET_EXTERNAL_FILE,
     LINK_TARGET_TIMESTAMP,
@@ -997,6 +998,9 @@ class Scanner
         case LINK_FILE_END:
             switch (lexer->lookahead)
             {
+            case '?':
+                lexer->result_symbol = m_LastToken = LINK_TARGET_WIKI;
+                break;
             case '#':
                 lexer->result_symbol = m_LastToken = LINK_TARGET_GENERIC;
                 break;

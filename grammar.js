@@ -170,6 +170,7 @@ module.exports = grammar({
         $.link_file_end,
         $.link_file_text,
         $.link_target_url,
+        $.link_target_wiki,
         $.link_target_generic,
         $.link_target_external_file,
         $.link_target_timestamp,
@@ -406,6 +407,7 @@ module.exports = grammar({
             alias($.link_file_end, "_word"),
             alias($.link_file_text, "_word"),
             alias($.link_target_url, "_word"),
+            alias($.link_target_wiki, "_word"),
             alias($.link_target_generic, "_word"),
             alias($.link_target_external_file, "_word"),
             alias($.link_target_timestamp, "_word"),
@@ -568,6 +570,7 @@ module.exports = grammar({
         seq(
             field("type",
                 choice(
+                    $.link_target_wiki,
                     $.link_target_generic,
                     $.link_target_marker,
                     $.link_target_definition,

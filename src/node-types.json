@@ -2585,6 +2585,10 @@
           {
             "type": "link_target_url",
             "named": true
+          },
+          {
+            "type": "link_target_wiki",
+            "named": true
           }
         ]
       }
@@ -6901,6 +6905,10 @@
   },
   {
     "type": "link_target_url",
+    "named": true
+  },
+  {
+    "type": "link_target_wiki",
     "named": true
   },
   {

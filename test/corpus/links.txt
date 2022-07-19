@@ -8,6 +8,7 @@ Basic Links
 {***** Heading level 5}
 {****** Heading level 6}
 {******* Heading level 7 and higher falls back to 6}
+{? Wiki}
 {# Generic}
 {% Marker}
 {$ Definition}
@@ -69,6 +70,11 @@ Basic Links
       (link
         (link_location
           type: (link_target_heading6)
+          text: (paragraph))))
+    (paragraph_segment
+      (link
+        (link_location
+          type: (link_target_wiki)
           text: (paragraph))))
     (paragraph_segment
       (link
@@ -200,6 +206,7 @@ Links with text
 {***** Heading level 5}[custom text]
 {****** Heading level 6}[custom text]
 {******* Heading level 7 and higher falls back to 6}[custom text]
+{? Wiki}[custom text]
 {# Generic}[custom text]
 {% Marker}[custom text]
 {$ Definition}[custom text]
@@ -273,6 +280,13 @@ Links with text
       (link
         (link_location
           type: (link_target_heading6)
+          text: (paragraph))
+        (link_description
+          text: (paragraph))))
+    (paragraph_segment
+      (link
+        (link_location
+          type: (link_target_wiki)
           text: (paragraph))
         (link_description
           text: (paragraph))))
@@ -444,6 +458,7 @@ Links with text
 Anchors
 ================================================================================
 [heading anchor]
+[wiki anchor]
 [generic anchor]
 [marker anchor]
 [definition anchor]
@@ -467,6 +482,7 @@ Anchors
 [heading anchor]{***** Heading level 5}
 [heading anchor]{****** Heading level 6}
 [heading anchor]{******* Heading level 7 and higher falls back to 6}
+[wiki anchor]{? Wiki}
 [generic anchor]{# Generic}
 [marker anchor]{% Marker}
 [definition anchor]{$ Definition}
@@ -494,6 +510,10 @@ Anchors
 
 (document
   (paragraph
+    (paragraph_segment
+      (anchor_declaration
+        (link_description
+          text: (paragraph))))
     (paragraph_segment
       (anchor_declaration
         (link_description
@@ -607,6 +627,13 @@ Anchors
           text: (paragraph))
         (link_location
           type: (link_target_heading6)
+          text: (paragraph))))
+    (paragraph_segment
+      (anchor_definition
+        (link_description
+          text: (paragraph))
+        (link_location
+          type: (link_target_wiki)
           text: (paragraph))))
     (paragraph_segment
       (anchor_definition

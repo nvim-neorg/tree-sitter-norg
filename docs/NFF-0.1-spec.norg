@@ -12,7 +12,7 @@ words%
 - | | explain differentation of verbatim and non-verbatim tags in spec
 - | | support and document line number in file links
 - |x| reverse heading links to be per-level
-- | | support `?`-linkable target (wiki link)
+- |x| support `?`-linkable target (wiki link)
 - | | add anonymous node for ellipsis (`...`)
 - | | refactor ranged attached mods to place `|` inside the attached mods
 - |x| raise precedence of escape character between standard and free-form verbatim markup
@@ -931,6 +931,9 @@ words%
      linkable] that does not have a dedicated modifier to denote it - in these scenarios you would
      use the magic char: `#`. It links to /any/ item type. The syntax is exactly the same as with
      the other modifiers: `{# My Location}`.
+
+**** | | Wiki Links (`?`)
+     %TODO%
 
 *** Inline Linkables
     Although most linkable items are either {# Structural Detached Modifiers}[structural] or
