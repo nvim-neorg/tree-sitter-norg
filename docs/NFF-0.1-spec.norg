@@ -11,7 +11,7 @@ words%
 - |x| swap strong attribute and non-verbatim ranged tag characters
 - | | explain differentation of verbatim and non-verbatim tags in spec
 - | | support and document line number in file links
-- | | reverse heading links to be per-level
+- |x| reverse heading links to be per-level
 - | | support `?`-linkable target (wiki link)
 - | | add anonymous node for ellipsis (`...`)
 - | | refactor ranged attached mods to place `|` inside the attached mods
