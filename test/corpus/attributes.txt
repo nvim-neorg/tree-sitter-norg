@@ -1,7 +1,7 @@
 ================================================================================
 Strong Attribute on paragraph
 ================================================================================
-|comment
+#comment
 This is a comment.
 
 This is no longer part of the comment.
@@ -20,7 +20,7 @@ This is no longer part of the comment.
 ================================================================================
 Strong Attribute on generic list
 ================================================================================
-|ordered
+#ordered
 - List item 1
 - List item 2
 
@@ -47,7 +47,7 @@ This is no longer infected.
 ================================================================================
 Strong Attribute on quote
 ================================================================================
-|ordered
+#ordered
 > quote item 1
 > quote item 2
 
@@ -124,7 +124,7 @@ Weak Attribute on quote
 ================================================================================
 Strong Attribute with parameters
 ================================================================================
-|name bob
+#name bob
 > Hi, my name is Bob.
 
 Lol

@@ -350,6 +350,24 @@ class Scanner
                     return true;
                 }
 
+                lexer->result_symbol = m_LastToken = STRONG_ATTRIBUTE;
+                return true;
+            }
+            else if (lexer->lookahead == '|' && m_TagContext != TagType::IN_VERBATIM_TAG)
+            {
+                advance(lexer);
+
+                auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+
+                if (found_attached_modifier != m_AttachedModifiers.end() &&
+                    !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
+                {
+                    m_FreeFormActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) /
+                                                  2);
+                    lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_OPEN;
+                    return m_LastToken;
+                }
+
                 // Mark the end of the token here
                 // We do this because we only want the returned token to be part
                 // of the `#` symbol, not the symbol + the name
@@ -398,24 +416,6 @@ class Scanner
                 // or push back the indentation level and return.
                 lexer->result_symbol = m_LastToken = RANGED_TAG;
                 ++m_TagLevel;
-                return true;
-            }
-            else if (lexer->lookahead == '|' && m_TagContext != TagType::IN_VERBATIM_TAG)
-            {
-                advance(lexer);
-
-                auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
-
-                if (found_attached_modifier != m_AttachedModifiers.end() &&
-                    !m_ActiveModifiers[(found_attached_modifier->second - BOLD_OPEN) / 2])
-                {
-                    m_FreeFormActiveModifiers.set((found_attached_modifier->second - BOLD_OPEN) /
-                                                  2);
-                    lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_OPEN;
-                    return m_LastToken;
-                }
-
-                lexer->result_symbol = m_LastToken = STRONG_ATTRIBUTE;
                 return true;
             }
             else if (lexer->lookahead == '+' && m_TagContext != TagType::IN_VERBATIM_TAG)

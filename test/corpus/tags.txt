@@ -1,10 +1,10 @@
 ================================================================================
 Regular Ranged Tag
 ================================================================================
-#table
+|table
 *heading* | /heading/
 value | something else
-#end
+|end
 No longer part of the ranged tag.
 --------------------------------------------------------------------------------
 
@@ -102,11 +102,11 @@ public class MyClass {}
 ================================================================================
 Ranged Tag with strong attribute
 ================================================================================
-|color blue
-#table
+#color blue
+|table
 *heading* | /heading/
 value | something else
-#end
+|end
 --------------------------------------------------------------------------------
 
 (document
@@ -129,7 +129,7 @@ value | something else
 ================================================================================
 Ranged Verbatim Tag with strong attribute
 ================================================================================
-|color blue
+#color blue
 @code java
 @MyAnnotation
 public class MyClass {}
@@ -155,10 +155,10 @@ public class MyClass {}
 Ranged Tag with weak attribute
 ================================================================================
 +color blue
-#table
+|table
 *heading* | /heading/
 value | something else
-#end
+|end
 --------------------------------------------------------------------------------
 
 (document
@@ -206,12 +206,12 @@ public class MyClass {}
 ================================================================================
 Ranged Tag with strong and weak attribute
 ================================================================================
-|name test
+#name test
 +color blue
-#table
+|table
 *heading* | /heading/
 value | something else
-#end
+|end
 --------------------------------------------------------------------------------
 
 (document
@@ -240,7 +240,7 @@ value | something else
 ================================================================================
 Ranged Verbatim Tag with strong and weak attribute
 ================================================================================
-|name test
+#name test
 +color blue
 @code java
 @MyAnnotation
@@ -273,11 +273,11 @@ public class MyClass {}
 Ranged Tag with wrong order of attributes
 ================================================================================
 +color blue
-|name test
-#table
+#name test
+|table
 *heading* | /heading/
 value | something else
-#end
+|end
 --------------------------------------------------------------------------------
 
 (document

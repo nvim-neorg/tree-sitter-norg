@@ -8,7 +8,7 @@ words%
 
 - | | add table syntax (cells)
 - | | make sure that no whitespace can appear at linkable boundaries
-- | | swap strong attribute and non-verbatim ranged tag characters
+- |x| swap strong attribute and non-verbatim ranged tag characters
 - | | explain differentation of verbatim and non-verbatim tags in spec
 - | | support and document line number in file links
 - | | reverse heading links to be per-level
@@ -551,7 +551,7 @@ words%
    The `=`-tag.
 
 ** Carryover Tags
-   %TODO: differentiate `|` and `+` carryover behavior%
+   %TODO: differentiate `#` and `+` carryover behavior%
    A carryover tag is a way to assign some data to the next element in the document.
    They are especially useful when you want to change the /properties/ of an item.
 
@@ -566,10 +566,10 @@ words%
 
    Examples:
    @code norg
-   |name my-custom-name
+   #name my-custom-name
    * Heading Title
 
-   |color red
+   #color red
    * Heading
      Content
    @end
@@ -580,7 +580,7 @@ words%
    @code norg
    Converts the following list into a multiple choice question:
 
-   |choice
+   #choice
    - |x| Correct answer
    - | | Wrong answer
    - | | Also wrong answer
@@ -593,22 +593,22 @@ words%
 
    The `end` statement has a simple ruleset:
    - Must be at the start of a line, may be preceded by any whitespace (but nothing else)
-   - Must use the same prefix as its parent (in the case of standard ranged tags: `#`; in the case
+   - Must use the same prefix as its parent (in the case of standard ranged tags: `|`; in the case
      of verbatim tags: `@`)
    - Must not be succeeded by anything other than a {# line break}.
 
 *** Standard Ranged Tags
     Sometimes you may want the freedom to have access to inline Norg structures, like {# attached
     modifiers} and/or {# links}. Ranged tags allow you to do exactly this. An example of a ranged
-    tag is Neorg's `#table` tag:
+    tag is Neorg's `|table` tag:
 
     %TODO: should we use a different example since we are not settled on the table format?%
     @code norg
-    #table
+    |table
     *heading* | /heading/ | _heading_
     first | second | third
     | 2 |
-    #end
+    |end
     @end
 
 *** Verbatim Ranged Tags

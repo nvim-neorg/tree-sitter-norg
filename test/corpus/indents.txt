@@ -38,7 +38,7 @@ This is still part of the indent segment.
 ================================================================================
 Inline indent segment with attributes
 ================================================================================
-|enumerate
+#enumerate
 +name enumeration
 #
 - first enumerated item
