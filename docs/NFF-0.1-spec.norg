@@ -15,7 +15,7 @@ words%
 - | | support `?`-linkable target (wiki link)
 - | | add anonymous node for ellipsis (`...`)
 - | | refactor ranged attached mods to place `|` inside the attached mods
-- | | raise precedence of escape character above ranged attached mods
+- |x| raise precedence of escape character between standard and free-form verbatim markup
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
@@ -1095,8 +1095,8 @@ words%
   ~ Detached modifier extensions
   ~ Linkables (`{}`, `[]`, `<>`)
   ~ Ranged verbatim attached modifiers (`|``|`, `|``|`)
-  ~ Verbatim attached modifiers
   ~ Escape character (`\`)
+  ~ Verbatim attached modifiers
   ~ Ranged attached modifiers (`|**|`, `|//|` etc.)
   ~ Standard attached modifers
 

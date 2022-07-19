@@ -584,7 +584,7 @@ No nested markup inside verbatim
 `&no variable&`
 `<no link target>`
 `no:*link modifier*`
-`hidden \*escaped char`
+`non-hidden \*escaped char`
 --------------------------------------------------------------------------------
 
 (document
@@ -614,7 +614,10 @@ No nested markup inside verbatim
     (paragraph_segment
       (verbatim))
     (paragraph_segment
-      (verbatim))))
+      (verbatim
+        (escape_sequence
+          (escape_sequence_prefix)
+          (any_char))))))
 
 ================================================================================
 Nesting into Inline Comment
@@ -679,7 +682,7 @@ $%no inline comment%$
 $&no variable&$
 $<no link target>$
 $no:*link modifier*$
-$hidden \*escaped char*$
+$non-hidden \*escaped char*$
 --------------------------------------------------------------------------------
 
 (document
@@ -709,7 +712,10 @@ $hidden \*escaped char*$
     (paragraph_segment
       (inline_math))
     (paragraph_segment
-      (inline_math))))
+      (inline_math
+        (escape_sequence
+          (escape_sequence_prefix)
+          (any_char))))))
 
 ================================================================================
 No nested markup inside variables
@@ -726,7 +732,7 @@ No nested markup inside variables
 &$no inline math$&
 &<no link target>&
 &no:*link modifier*&
-&hidden \*escaped char*&
+&non-hidden \*escaped char*&
 --------------------------------------------------------------------------------
 
 (document
@@ -756,7 +762,10 @@ No nested markup inside variables
     (paragraph_segment
       (variable))
     (paragraph_segment
-      (variable))))
+      (variable
+        (escape_sequence
+          (escape_sequence_prefix)
+          (any_char))))))
 
 ================================================================================
 Verbatim precedence

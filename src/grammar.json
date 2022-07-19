@@ -292,6 +292,44 @@
               },
               "named": false,
               "value": "_line_break"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "escape_sequence"
+            }
+          ]
+        }
+      }
+    },
+    "_free_form_verbatim_modifier_content": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_verbatim_paragraph_element"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "line_break"
+              },
+              "named": false,
+              "value": "_line_break"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "escape_sequence_prefix"
+              },
+              "named": false,
+              "value": "_word"
             }
           ]
         }
@@ -435,15 +473,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "trailing_modifier"
-          },
-          "named": false,
-          "value": "_word"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "escape_sequence_prefix"
           },
           "named": false,
           "value": "_word"
@@ -1319,7 +1348,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_verbatim_modifier_content"
+            "name": "_free_form_verbatim_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1350,7 +1379,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_verbatim_modifier_content"
+            "name": "_free_form_verbatim_modifier_content"
           },
           {
             "type": "ALIAS",
@@ -1381,7 +1410,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_verbatim_modifier_content"
+            "name": "_free_form_verbatim_modifier_content"
           },
           {
             "type": "ALIAS",

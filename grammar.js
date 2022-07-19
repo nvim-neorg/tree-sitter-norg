@@ -344,6 +344,18 @@ module.exports = grammar({
                 choice(
                     $._verbatim_paragraph_element,
                     alias($.line_break, "_line_break"),
+                    $.escape_sequence,
+                ),
+            ),
+        ),
+
+        _free_form_verbatim_modifier_content: $ =>
+        prec.right(1,
+            repeat1(
+                choice(
+                    $._verbatim_paragraph_element,
+                    alias($.line_break, "_line_break"),
+                    alias($.escape_sequence_prefix, "_word"),
                 ),
             ),
         ),
@@ -373,12 +385,13 @@ module.exports = grammar({
         ),
 
         // A verbatim paragraph element essentially ignores all inline markup.
+        // The escape sequence is handled outside of this in order to
+        // distinguish standard and free-form verbatim markup.
         _verbatim_paragraph_element: $ =>
         choice(
             alias($.word, "_word"),
             alias($.space, "_space"),
             alias($.trailing_modifier, "_word"),
-            alias($.escape_sequence_prefix, "_word"),
             alias($.any_char, "_word"),
             alias($.link_modifier, "_word"),
             prec.dynamic(5, alias($._conflict_open, "_word")),
@@ -1126,7 +1139,11 @@ function gen_attached_modifier($, kind, verbatim, free_form) {
     let precedence = 3;
 
     if (verbatim) {
-        content_rule = $._verbatim_modifier_content;
+        if (free_form) {
+            content_rule = $._free_form_verbatim_modifier_content;
+        } else {
+            content_rule = $._verbatim_modifier_content;
+        }
         precedence = 5;
     }
 
