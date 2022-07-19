@@ -1,10 +1,6 @@
 name: Parser fuzzing
 
-on:
-  push:
-    branches:
-      main
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   fuzz_parser:
@@ -49,7 +45,7 @@ jobs:
       - name: Run fuzzer
         run: |
           cd out/results
-          ../norg_fuzzer -dict=../norg.dict -max_total_time=7200 -timeout=2 ./corpus
+          ../norg_fuzzer -dict=../norg.dict -max_total_time=3600 -timeout=10 ./corpus
 
       - name: Check corpuses
         run: |
@@ -58,7 +54,7 @@ jobs:
           git config user.email "<>"
           git add .
           git commit -m "[Action] Add new corpuses"
-          git push origin fuzz_corpuses
+          git push origin fuzz_corpuses -f
 
       - uses: actions/upload-artifact@v2
         if: failure()

@@ -1,168 +1,301 @@
-==========
-Ranged Tag
-==========
+================================================================================
+Regular Ranged Tag
+================================================================================
+|table
+*heading* | /heading/
+value | something else
+|end
+No longer part of the ranged tag.
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_tag
+    (tag_name
+      (word))
+    (ranged_tag_content
+      (paragraph_segment
+        (bold)
+        (italic))
+      (paragraph_segment))
+    (ranged_tag_end))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
+Ranged Verbatim Tag
+================================================================================
 @math
 f(x) = \int
 @end
 No longer part of the ranged tag.
----
-(document
-    (ranged_tag
-        (tag_name
-            (tag_name_element)
-        )
-        (ranged_tag_content)
-        (ranged_tag_end)
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-)
+--------------------------------------------------------------------------------
 
-==========================
-Ranged Tag with Parameters
-==========================
+(document
+  (ranged_verbatim_tag
+    (tag_name
+      (word))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
+Ranged Verbatim Tag with Parameters
+================================================================================
 @code lua
 print("Hello world")
 @end
 No longer part of the ranged tag.
----
+--------------------------------------------------------------------------------
+
 (document
-    (ranged_tag
-        (tag_name
-            (tag_name_element)
-        )
-        (tag_parameters (tag_param))
-        (ranged_tag_content)
-        (ranged_tag_end)
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-)
+  (ranged_verbatim_tag
+    (tag_name
+      (word))
+    (tag_parameters
+      (tag_param))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end))
+  (paragraph
+    (paragraph_segment)))
 
-=============
-Carryover Tag
-=============
-#comment
-This is a comment.
+================================================================================
+@end Tag without Ranged Verbatim Tag
+================================================================================
+@my.tag
+@end
 
-This is no longer part of the comment.
----
+This
+@end
+shouldn't be a closing tag.
+--------------------------------------------------------------------------------
+
 (document
-    (carryover_tag_set
-        (carryover_tag
-            (tag_name
-                (tag_name_element)
-            )
-        )
-        (paragraph
-            (paragraph_segment)
-        )
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-)
+  (ranged_verbatim_tag
+    (tag_name
+      (word)
+      (word))
+    (ranged_verbatim_tag_end))
+  (paragraph
+    (paragraph_segment)
+    (paragraph_segment)
+    (paragraph_segment)))
 
-=======================
-Carryover Tag Infection
-=======================
-#ordered
-- List item 1
-- List item 2
-
-This is no longer infected.
----
-(document
-    (carryover_tag_set
-        (carryover_tag
-            (tag_name
-                (tag_name_element)
-            )
-        )
-        (generic_list
-            (unordered_list1
-                (unordered_list1_prefix)
-                (paragraph
-                    (paragraph_segment)
-                )
-            )
-            (unordered_list1
-                (unordered_list1_prefix)
-                (paragraph
-                    (paragraph_segment)
-                )
-            )
-        )
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
-=============================
-Carryover Tag with Parameters
-=============================
-#name bob
-> Hi, my name is Bob.
-
-Lol
----
-(document
-    (carryover_tag_set
-        (carryover_tag
-            (tag_name
-                (tag_name_element)
-            )
-            (tag_parameters (tag_param))
-        )
-        (quote
-            (quote1
-                (quote1_prefix)
-                (paragraph_segment)
-            )
-        )
-    )
-    (paragraph
-        (paragraph_segment)
-    )
-)
-
-=====================================
+================================================================================
 Disallow Ranged Tag within Ranged Tag
-=====================================
+================================================================================
 @code java
 @MyAnnotation
 public class MyClass {}
 @end
----
-(document
-    (ranged_tag
-        (tag_name
-            (tag_name_element)
-        )
-        (tag_parameters (tag_param))
-        (ranged_tag_content)
-        (ranged_tag_end)
-    )
-)
+--------------------------------------------------------------------------------
 
-========================================
-Disallow Carryover Tag within Ranged Tag
-========================================
-@code python
-#this is a python comment
-print("Hello World")
-@end
----
 (document
-    (ranged_tag
+  (ranged_verbatim_tag
+    (tag_name
+      (word))
+    (tag_parameters
+      (tag_param))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end)))
+
+================================================================================
+Ranged Tag with strong attribute
+================================================================================
+#color blue
+|table
+*heading* | /heading/
+value | something else
+|end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_tag
+    (strong_attribute_set
+      (strong_attribute
         (tag_name
-            (tag_name_element)
-        )
-        (tag_parameters (tag_param))
-        (ranged_tag_content)
-        (ranged_tag_end)
-    )
-)
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (word))
+    (ranged_tag_content
+      (paragraph_segment
+        (bold)
+        (italic))
+      (paragraph_segment))
+    (ranged_tag_end)))
+
+================================================================================
+Ranged Verbatim Tag with strong attribute
+================================================================================
+#color blue
+@code java
+@MyAnnotation
+public class MyClass {}
+@end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_verbatim_tag
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (word))
+    (tag_parameters
+      (tag_param))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end)))
+
+================================================================================
+Ranged Tag with weak attribute
+================================================================================
++color blue
+|table
+*heading* | /heading/
+value | something else
+|end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_tag
+    (weak_attribute_set
+      (weak_attribute
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (word))
+    (ranged_tag_content
+      (paragraph_segment
+        (bold)
+        (italic))
+      (paragraph_segment))
+    (ranged_tag_end)))
+
+================================================================================
+Ranged Verbatim Tag with weak attribute
+================================================================================
++color blue
+@code java
+@MyAnnotation
+public class MyClass {}
+@end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_verbatim_tag
+    (weak_attribute_set
+      (weak_attribute
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (word))
+    (tag_parameters
+      (tag_param))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end)))
+
+================================================================================
+Ranged Tag with strong and weak attribute
+================================================================================
+#name test
++color blue
+|table
+*heading* | /heading/
+value | something else
+|end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_tag
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (weak_attribute_set
+      (weak_attribute
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (word))
+    (ranged_tag_content
+      (paragraph_segment
+        (bold)
+        (italic))
+      (paragraph_segment))
+    (ranged_tag_end)))
+
+================================================================================
+Ranged Verbatim Tag with strong and weak attribute
+================================================================================
+#name test
++color blue
+@code java
+@MyAnnotation
+public class MyClass {}
+@end
+--------------------------------------------------------------------------------
+
+(document
+  (ranged_verbatim_tag
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (weak_attribute_set
+      (weak_attribute
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (word))
+    (tag_parameters
+      (tag_param))
+    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_end)))
+
+================================================================================
+Ranged Tag with wrong order of attributes
+================================================================================
++color blue
+#name test
+|table
+*heading* | /heading/
+value | something else
+|end
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (weak_attribute_set
+        (weak_attribute
+          (tag_name
+            (word))
+          (tag_parameters
+            (tag_param))))
+      (ERROR)))
+  (ranged_tag
+    (tag_name
+      (word))
+    (ranged_tag_content
+      (paragraph_segment
+        (bold)
+        (italic))
+      (paragraph_segment))
+    (ranged_tag_end)))
