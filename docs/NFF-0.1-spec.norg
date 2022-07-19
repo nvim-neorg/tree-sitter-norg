@@ -14,6 +14,8 @@ words%
 - | | reverse heading links to be per-level
 - | | support `?`-linkable target (wiki link)
 - | | add anonymous node for ellipsis (`...`)
+- | | refactor ranged attached mods to place `|` inside the attached mods
+- | | raise precedence of escape character above ranged attached mods
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
