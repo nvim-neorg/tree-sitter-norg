@@ -6,6 +6,15 @@
 words%
 %Should speech marks ("") be attached modifiers? Imo it could be pretty useful to have them as that%
 
+- | | add table syntax (cells)
+- | | make sure that no whitespace can appear at linkable boundaries
+- | | swap strong attribute and non-verbatim ranged tag characters
+- | | explain differentation of verbatim and non-verbatim tags in spec
+- | | support and document line number in file links
+- | | reverse heading links to be per-level
+- | | support `?`-linkable target (wiki link)
+- | | add anonymous node for ellipsis (`...`)
+
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
   This document is written in the Norg format in its original form and, thus, attempts to be
@@ -150,14 +159,17 @@ words%
   properties to each category which will be explained in more detail below.
   - `*`: {# Headings} (structural, nestable)
   - `%`: {# Markers} (structural)
-  - `-`: {# Unordered Lists} (nestable)
-  - `~`: {# Ordered Lists} (nestable)
-  - `>`: {# Quotes} (nestable)
+  - `-`: {# Unordered Lists} (nestable, grouping)
+  - `~`: {# Ordered Lists} (nestable, grouping)
+  - `>`: {# Quotes} (nestable, grouping)
   - `$`: {# Definitions} (range-able)
   - `^`: {# Footnotes} (range-able)
   - | | `<`: add drawers/details (range-able)
   - | | `&`: add variables (range-able, logical)
   - | | `=`: add macros (range-able, logical)
+  - | | `:`: add cells (range-able, logical, grouping)
+
+  %TODO: improve formatting of the above. As a table?%
 
 ** Structural Detached Modifiers
    The first detached modifier type is the /structural/ modifier type. As the name suggests,
