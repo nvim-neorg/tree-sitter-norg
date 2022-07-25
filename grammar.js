@@ -150,6 +150,10 @@ module.exports = grammar({
         $.multi_drawer_prefix,
         $.multi_drawer_suffix,
 
+        $.single_table_cell_prefix,
+        $.multi_table_cell_prefix,
+        $.multi_table_cell_suffix,
+
         $.single_macro_prefix,
         $.multi_macro_prefix,
         $.multi_macro_suffix,
@@ -252,6 +256,7 @@ module.exports = grammar({
                         $.heading,
                         $.nestable_detached_modifier,
                         $.rangeable_detached_modifier,
+                        $.table,
                         $.tag,
                         $.indent_segment,
                         $.slide,
@@ -763,6 +768,20 @@ module.exports = grammar({
         single_drawer: $ => gen_single_rangeable_detached_modifier($, "drawer"),
         multi_drawer: $ => gen_multi_rangeable_detached_modifier($, "drawer"),
 
+        single_table_cell: $ => gen_single_rangeable_detached_modifier($, "table_cell"),
+        multi_table_cell: $ => gen_multi_rangeable_detached_modifier($, "table_cell"),
+
+        // A table
+        table: $ =>
+        prec.right(1,
+                repeat1(
+                    choice(
+                        $.single_table_cell,
+                        $.multi_table_cell,
+                    ),
+            ),
+        ),
+
         ranged_tag_content: $ =>
         prec.right(0,
             repeat1(
@@ -1052,6 +1071,7 @@ function gen_heading($, level) {
                             alias($.paragraph_break, "_paragraph_break"),
                             $.nestable_detached_modifier,
                             $.rangeable_detached_modifier,
+                            $.table,
                             $.tag,
                             $.horizontal_line,
 
@@ -1221,6 +1241,7 @@ function gen_multi_rangeable_detached_modifier($, kind) {
                         prec(1, alias($.line_break, "_line_break")),
                         alias($.paragraph_break, "_paragraph_break"),
                         $.rangeable_detached_modifier,
+                        $.table,
                         $.tag,
                     ),
                 ),
@@ -1246,6 +1267,7 @@ function gen_indent_segment_contents($, level) {
         return prec(1,
             choice(
                 $.rangeable_detached_modifier,
+                $.table,
                 $.tag,
                 ...numbered_items.map(item => $[item + (level + 1)]),
             ),
@@ -1254,6 +1276,7 @@ function gen_indent_segment_contents($, level) {
         return prec(1,
             choice(
                 $.rangeable_detached_modifier,
+                $.table,
                 $.tag
             ),
         );

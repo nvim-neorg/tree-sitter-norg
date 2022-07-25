@@ -83,6 +83,10 @@ enum TokenType : char
     MULTI_DRAWER,
     MULTI_DRAWER_SUFFIX,
 
+    SINGLE_TABLE_CELL,
+    MULTI_TABLE_CELL,
+    MULTI_TABLE_CELL_SUFFIX,
+
     SINGLE_MACRO,
     MULTI_MACRO,
     MULTI_MACRO_SUFFIX,
@@ -530,6 +534,14 @@ class Scanner
             else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
                 lexer->result_symbol = MULTI_DRAWER_SUFFIX;
+                return true;
+            }
+
+            if (check_detached(lexer, SINGLE_TABLE_CELL | MULTI_TABLE_CELL | NONE, {':'}) != NONE)
+                return true;
+            else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
+            {
+                lexer->result_symbol = MULTI_TABLE_CELL_SUFFIX;
                 return true;
             }
 
@@ -1389,8 +1401,8 @@ class Scanner
     size_t m_ParsedChars = 0;
 
    private:
-    const std::array<int32_t, 11> m_DetachedModifiers = {'*', '-', '>', '%', '=', '~',
-                                                         '$', '_', '^', '&', '<'};
+    const std::array<int32_t, 12> m_DetachedModifiers = {'*', '-', '>', '%', '=', '~',
+                                                         '$', '_', '^', '&', '<', ':'};
     const std::unordered_map<int32_t, TokenType> m_DetachedModifierExtensions = {
         {'#', PRIORITY},
         {'@', TIMESTAMP},

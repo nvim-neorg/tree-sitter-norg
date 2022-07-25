@@ -320,6 +320,10 @@
         {
           "type": "strong_paragraph_delimiter",
           "named": true
+        },
+        {
+          "type": "table",
+          "named": true
         }
       ]
     }
@@ -516,6 +520,10 @@
           {
             "type": "single_variable",
             "named": true
+          },
+          {
+            "type": "table",
+            "named": true
           }
         ]
       },
@@ -702,6 +710,10 @@
           {
             "type": "single_variable",
             "named": true
+          },
+          {
+            "type": "table",
+            "named": true
           }
         ]
       },
@@ -884,6 +896,10 @@
           {
             "type": "single_variable",
             "named": true
+          },
+          {
+            "type": "table",
+            "named": true
           }
         ]
       },
@@ -1062,6 +1078,10 @@
           {
             "type": "single_variable",
             "named": true
+          },
+          {
+            "type": "table",
+            "named": true
           }
         ]
       },
@@ -1236,6 +1256,10 @@
           {
             "type": "single_variable",
             "named": true
+          },
+          {
+            "type": "table",
+            "named": true
           }
         ]
       },
@@ -1405,6 +1429,10 @@
           },
           {
             "type": "single_variable",
+            "named": true
+          },
+          {
+            "type": "table",
             "named": true
           }
         ]
@@ -1614,6 +1642,10 @@
           "named": true
         },
         {
+          "type": "table",
+          "named": true
+        },
+        {
           "type": "unordered_list1",
           "named": true
         },
@@ -1757,6 +1789,10 @@
           "named": true
         },
         {
+          "type": "table",
+          "named": true
+        },
+        {
           "type": "unordered_list2",
           "named": true
         },
@@ -1884,6 +1920,10 @@
           "named": true
         },
         {
+          "type": "table",
+          "named": true
+        },
+        {
           "type": "unordered_list3",
           "named": true
         },
@@ -1999,6 +2039,10 @@
           "named": true
         },
         {
+          "type": "table",
+          "named": true
+        },
+        {
           "type": "unordered_list4",
           "named": true
         },
@@ -2102,6 +2146,10 @@
           "named": true
         },
         {
+          "type": "table",
+          "named": true
+        },
+        {
           "type": "unordered_list5",
           "named": true
         },
@@ -2193,6 +2241,10 @@
           "named": true
         },
         {
+          "type": "table",
+          "named": true
+        },
+        {
           "type": "unordered_list6",
           "named": true
         },
@@ -2269,6 +2321,10 @@
         },
         {
           "type": "single_variable",
+          "named": true
+        },
+        {
+          "type": "table",
           "named": true
         },
         {
@@ -2775,6 +2831,10 @@
           {
             "type": "single_variable",
             "named": true
+          },
+          {
+            "type": "table",
+            "named": true
           }
         ]
       },
@@ -2938,6 +2998,10 @@
           },
           {
             "type": "single_variable",
+            "named": true
+          },
+          {
+            "type": "table",
             "named": true
           }
         ]
@@ -3103,6 +3167,10 @@
           {
             "type": "single_variable",
             "named": true
+          },
+          {
+            "type": "table",
+            "named": true
           }
         ]
       },
@@ -3267,6 +3335,10 @@
           {
             "type": "single_variable",
             "named": true
+          },
+          {
+            "type": "table",
+            "named": true
           }
         ]
       },
@@ -3361,6 +3433,174 @@
     }
   },
   {
+    "type": "multi_table_cell",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "_line_break",
+            "named": false
+          },
+          {
+            "type": "_paragraph_break",
+            "named": false
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "multi_definition",
+            "named": true
+          },
+          {
+            "type": "multi_drawer",
+            "named": true
+          },
+          {
+            "type": "multi_footnote",
+            "named": true
+          },
+          {
+            "type": "multi_macro",
+            "named": true
+          },
+          {
+            "type": "multi_variable",
+            "named": true
+          },
+          {
+            "type": "paragraph",
+            "named": true
+          },
+          {
+            "type": "ranged_tag",
+            "named": true
+          },
+          {
+            "type": "ranged_verbatim_tag",
+            "named": true
+          },
+          {
+            "type": "single_definition",
+            "named": true
+          },
+          {
+            "type": "single_drawer",
+            "named": true
+          },
+          {
+            "type": "single_footnote",
+            "named": true
+          },
+          {
+            "type": "single_macro",
+            "named": true
+          },
+          {
+            "type": "single_variable",
+            "named": true
+          },
+          {
+            "type": "table",
+            "named": true
+          }
+        ]
+      },
+      "end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "multi_table_cell_suffix",
+            "named": true
+          }
+        ]
+      },
+      "state": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "_delimiter",
+            "named": false
+          },
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
+            "type": "todo_item_cancelled",
+            "named": true
+          },
+          {
+            "type": "todo_item_done",
+            "named": true
+          },
+          {
+            "type": "todo_item_on_hold",
+            "named": true
+          },
+          {
+            "type": "todo_item_pending",
+            "named": true
+          },
+          {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
+            "named": true
+          },
+          {
+            "type": "todo_item_undone",
+            "named": true
+          },
+          {
+            "type": "todo_item_urgent",
+            "named": true
+          }
+        ]
+      },
+      "title": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "multi_table_cell_prefix",
+          "named": true
+        },
+        {
+          "type": "strong_attribute_set",
+          "named": true
+        },
+        {
+          "type": "weak_attribute_set",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "multi_variable",
     "named": true,
     "fields": {
@@ -3430,6 +3670,10 @@
           },
           {
             "type": "single_variable",
+            "named": true
+          },
+          {
+            "type": "table",
             "named": true
           }
         ]
@@ -5451,6 +5695,100 @@
     }
   },
   {
+    "type": "single_table_cell",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph",
+            "named": true
+          }
+        ]
+      },
+      "state": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "_delimiter",
+            "named": false
+          },
+          {
+            "type": "priority",
+            "named": true
+          },
+          {
+            "type": "timestamp",
+            "named": true
+          },
+          {
+            "type": "todo_item_cancelled",
+            "named": true
+          },
+          {
+            "type": "todo_item_done",
+            "named": true
+          },
+          {
+            "type": "todo_item_on_hold",
+            "named": true
+          },
+          {
+            "type": "todo_item_pending",
+            "named": true
+          },
+          {
+            "type": "todo_item_recurring",
+            "named": true
+          },
+          {
+            "type": "todo_item_uncertain",
+            "named": true
+          },
+          {
+            "type": "todo_item_undone",
+            "named": true
+          },
+          {
+            "type": "todo_item_urgent",
+            "named": true
+          }
+        ]
+      },
+      "title": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "paragraph_segment",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "single_table_cell_prefix",
+          "named": true
+        },
+        {
+          "type": "strong_attribute_set",
+          "named": true
+        },
+        {
+          "type": "weak_attribute_set",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "single_variable",
     "named": true,
     "fields": {
@@ -5896,6 +6234,25 @@
         },
         {
           "type": "verbatim",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "multi_table_cell",
+          "named": true
+        },
+        {
+          "type": "single_table_cell",
           "named": true
         }
       ]
@@ -6948,6 +7305,14 @@
     "named": true
   },
   {
+    "type": "multi_table_cell_prefix",
+    "named": true
+  },
+  {
+    "type": "multi_table_cell_suffix",
+    "named": true
+  },
+  {
     "type": "multi_variable_prefix",
     "named": true
   },
@@ -7017,6 +7382,10 @@
   },
   {
     "type": "single_macro_prefix",
+    "named": true
+  },
+  {
+    "type": "single_table_cell_prefix",
     "named": true
   },
   {

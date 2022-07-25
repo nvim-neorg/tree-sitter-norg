@@ -1,0 +1,42 @@
+================================================================================
+Single paragraph table cell
+================================================================================
+: Single-paragraph table cell
+This is the actual cell content.
+
+This is no longer part of the cell.
+--------------------------------------------------------------------------------
+
+(document
+  (table
+    (single_table_cell
+      (single_table_cell_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment))))
+  (paragraph
+    (paragraph_segment)))
+
+================================================================================
+Multi paragraph table cell
+================================================================================
+:: Multi-paragraph definition
+This is the actual cell content.
+
+This is also still part of the cell.
+::
+This is no longer part of the cell.
+--------------------------------------------------------------------------------
+
+(document
+  (table
+    (multi_table_cell
+      (multi_table_cell_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment))
+      (paragraph
+        (paragraph_segment))
+      (multi_table_cell_suffix)))
+  (paragraph
+    (paragraph_segment)))
