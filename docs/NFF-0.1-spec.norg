@@ -16,6 +16,7 @@ words%
 - | | add anonymous node for ellipsis (`...`)
 - | | refactor ranged attached mods to place `|` inside the attached mods
 - |x| raise precedence of escape character between standard and free-form verbatim markup
+- | | document newline linking modifier: |` : `|
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
