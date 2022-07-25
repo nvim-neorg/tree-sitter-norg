@@ -5950,18 +5950,6 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "strong_attribute_set"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          },
-          {
             "type": "SEQ",
             "members": [
               {
@@ -6050,18 +6038,6 @@
     "multi_table_cell": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "strong_attribute_set"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
         {
           "type": "SEQ",
           "members": [
@@ -6192,22 +6168,39 @@
     },
     "table": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 0,
       "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "single_table_cell"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "multi_table_cell"
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "strong_attribute_set"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "REPEAT1",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "single_table_cell"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "multi_table_cell"
+                }
+              ]
             }
-          ]
-        }
+          }
+        ]
       }
     },
     "ranged_tag_content": {

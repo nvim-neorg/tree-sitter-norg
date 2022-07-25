@@ -517,6 +517,7 @@ class Scanner
                 return true;
             else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
+                advance(lexer);
                 lexer->result_symbol = MULTI_DEFINITION_SUFFIX;
                 return true;
             }
@@ -525,6 +526,7 @@ class Scanner
                 return true;
             else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
+                advance(lexer);
                 lexer->result_symbol = MULTI_FOOTNOTE_SUFFIX;
                 return true;
             }
@@ -533,6 +535,7 @@ class Scanner
                 return true;
             else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
+                advance(lexer);
                 lexer->result_symbol = MULTI_DRAWER_SUFFIX;
                 return true;
             }
@@ -541,6 +544,7 @@ class Scanner
                 return true;
             else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
+                advance(lexer);
                 lexer->result_symbol = MULTI_TABLE_CELL_SUFFIX;
                 return true;
             }
@@ -549,6 +553,7 @@ class Scanner
                 return true;
             else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
+                advance(lexer);
                 lexer->result_symbol = MULTI_MACRO_SUFFIX;
                 return true;
             }
@@ -577,6 +582,7 @@ class Scanner
                 return true;
             else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
             {
+                advance(lexer);
                 lexer->result_symbol = MULTI_VARIABLE_SUFFIX;
                 return true;
             }

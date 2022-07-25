@@ -40,3 +40,34 @@ This is no longer part of the cell.
       (multi_table_cell_suffix)))
   (paragraph
     (paragraph_segment)))
+
+================================================================================
+Table grouping
+================================================================================
+: First cell
+Content
+:: Second cell
+Content
+::
+: Third cell
+Content
+--------------------------------------------------------------------------------
+
+(document
+  (table
+    (single_table_cell
+      (single_table_cell_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment)))
+    (multi_table_cell
+      (multi_table_cell_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment))
+      (multi_table_cell_suffix))
+    (single_table_cell
+      (single_table_cell_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment)))))

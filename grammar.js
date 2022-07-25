@@ -753,32 +753,35 @@ module.exports = grammar({
             ),
         ),
 
-        single_macro: $ => gen_single_rangeable_detached_modifier($, "macro"),
-        multi_macro: $ => gen_multi_rangeable_detached_modifier($, "macro"),
+        single_macro: $ => gen_single_rangeable_detached_modifier($, "macro", true),
+        multi_macro: $ => gen_multi_rangeable_detached_modifier($, "macro", true),
 
-        single_variable: $ => gen_single_rangeable_detached_modifier($, "variable"),
-        multi_variable: $ => gen_multi_rangeable_detached_modifier($, "variable"),
+        single_variable: $ => gen_single_rangeable_detached_modifier($, "variable", true),
+        multi_variable: $ => gen_multi_rangeable_detached_modifier($, "variable", true),
 
-        single_definition: $ => gen_single_rangeable_detached_modifier($, "definition"),
-        multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition"),
+        single_definition: $ => gen_single_rangeable_detached_modifier($, "definition", true),
+        multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition", true),
 
-        single_footnote: $ => gen_single_rangeable_detached_modifier($, "footnote"),
-        multi_footnote: $ => gen_multi_rangeable_detached_modifier($, "footnote"),
+        single_footnote: $ => gen_single_rangeable_detached_modifier($, "footnote", true),
+        multi_footnote: $ => gen_multi_rangeable_detached_modifier($, "footnote", true),
 
-        single_drawer: $ => gen_single_rangeable_detached_modifier($, "drawer"),
-        multi_drawer: $ => gen_multi_rangeable_detached_modifier($, "drawer"),
+        single_drawer: $ => gen_single_rangeable_detached_modifier($, "drawer", true),
+        multi_drawer: $ => gen_multi_rangeable_detached_modifier($, "drawer", true),
 
-        single_table_cell: $ => gen_single_rangeable_detached_modifier($, "table_cell"),
-        multi_table_cell: $ => gen_multi_rangeable_detached_modifier($, "table_cell"),
+        single_table_cell: $ => gen_single_rangeable_detached_modifier($, "table_cell", false),
+        multi_table_cell: $ => gen_multi_rangeable_detached_modifier($, "table_cell", false),
 
         // A table
         table: $ =>
-        prec.right(1,
+        prec.right(
+            seq(
+                optional($.strong_attribute_set),
                 repeat1(
                     choice(
                         $.single_table_cell,
                         $.multi_table_cell,
                     ),
+                ),
             ),
         ),
 
@@ -1183,10 +1186,14 @@ function gen_attached_modifier($, kind, verbatim, free_form) {
     );
 }
 
-function gen_single_rangeable_detached_modifier($, kind) {
+function gen_single_rangeable_detached_modifier($, kind, include_strong) {
+    const strong_attribute_set = include_strong ? [
+        optional($.strong_attribute_set),
+    ] : [];
+
     return prec.right(
         seq(
-            optional($.strong_attribute_set),
+            ...strong_attribute_set,
 
             gen_detached_modifier(
                 $,
@@ -1214,9 +1221,13 @@ function gen_single_rangeable_detached_modifier($, kind) {
     );
 }
 
-function gen_multi_rangeable_detached_modifier($, kind) {
-    return seq(
+function gen_multi_rangeable_detached_modifier($, kind, include_strong) {
+    const strong_attribute_set = include_strong ? [
         optional($.strong_attribute_set),
+    ] : [];
+
+    return seq(
+        ...strong_attribute_set,
 
         gen_detached_modifier(
             $,
