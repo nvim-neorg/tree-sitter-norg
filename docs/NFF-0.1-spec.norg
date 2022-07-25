@@ -7,7 +7,7 @@ words%
 %Should speech marks ("") be attached modifiers? Imo it could be pretty useful to have them as that%
 
 - | | add table syntax (cells)
-- | | make sure that no whitespace can appear at linkable boundaries
+- |x| make sure that no whitespace can appear at linkable boundaries
 - |x| swap strong attribute and non-verbatim ranged tag characters
 - | | explain differentation of verbatim and non-verbatim tags in spec
 - | | support and document line number in file links

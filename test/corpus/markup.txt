@@ -134,13 +134,15 @@ This sentence contains a &variable& reference.
 Inline Link Target
 ================================================================================
 This sentence contains an <inline link target>.
+And this is NOT a valid < link target > because it has whitespaces on the inside.
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
     (paragraph_segment
       (inline_link_target
-        (paragraph)))))
+        (paragraph)))
+    (paragraph_segment)))
 
 ================================================================================
 Nesting into Bold

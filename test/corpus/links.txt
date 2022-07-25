@@ -891,3 +891,15 @@ Anchors inside unordered list. Regression test against #28
         (link_location
           (link_target_url)
           (paragraph))))))
+
+================================================================================
+Whitespace rules of linkables
+================================================================================
+This is [ not a link ] description.
+This is { not a link } location.
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment)
+    (paragraph_segment)))

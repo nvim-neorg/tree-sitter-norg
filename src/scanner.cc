@@ -671,9 +671,12 @@ class Scanner
         else if (lexer->lookahead == ']')
         {
             advance(lexer);
-                    
-            lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_END;
-            return true;
+
+            if (!std::iswspace(m_Previous))
+            {
+                lexer->result_symbol = m_LastToken = LINK_DESCRIPTION_END;
+                return true;
+            }
         }
         else if (lexer->lookahead == '{')
         {
@@ -695,8 +698,11 @@ class Scanner
                 return true;
             }
 
-            lexer->result_symbol = m_LastToken = LINK_LOCATION_END;
-            return true;
+            if (!std::iswspace(m_Previous))
+            {
+                lexer->result_symbol = m_LastToken = LINK_LOCATION_END;
+                return true;
+            }
         }
         else if (check_link_location(lexer))
             return true;
