@@ -656,18 +656,33 @@ words%
    - Must not be succeeded by anything other than a {# line break}.
 
 *** Standard Ranged Tags
-    Sometimes you may want the freedom to have access to inline Norg structures, like {# attached
-    modifiers} and/or {# links}. Ranged tags allow you to do exactly this. An example of a ranged
-    tag is Neorg's `|table` tag:
+    There are times where you may want to create an isolated block of Norg markup.
+    To do this you may use the standard ranged tag, which uses the `|` character.
 
-    %TODO: should we use a different example since we are not settled on the table format?%
-    @code norg
-    |table
-    *heading* | /heading/ | _heading_
-    first | second | third
-    | 2 |
-    |end
-    @end
+    Currently it's only used for two tags, `comment` and `example`. The `comment` ranged tag is used
+    for long strings of comments (versus the `%` attached modifier, which is mostly used for short
+    comments), whereas the `example` tag is a simple way to show an example of some Norg markup
+    without it being rendered and treated as physical markup (most commonly used throughout this
+    very document to show unrendered examples of Norg syntax).
+
+**** Examples
+     `|example`:
+     @code norg
+     |example
+     * This is an example heading.
+     |end
+     @end
+
+     `|comment`:
+     @code norg
+     |comment
+     This is a very long comment with some content
+     and with some markup!
+
+     * Heading
+       /italic/ and *bold*.
+     |end
+     @end
 
 *** Verbatim Ranged Tags
     In other cases you may be more interested in a {# verbatim ranged tags}[verbatim ranged tag],
