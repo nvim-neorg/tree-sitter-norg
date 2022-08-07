@@ -101,8 +101,10 @@ words%
     An alphanumeric character is any character that *isn't* punctuation, nor is it any special
     character. In the English alphabet, an alphanumeric character means all letters from the
     alphabet (uppercase/lowercase) and all numbers: `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`.
+
+    It's important to note that {*** alphanumeric characters} do *not* include {*** whitespace}.
     %TODO: link punctuation and special characters%
-    %TODO: it's also not a whitespace%
+    %NOTE(vhyrro): why should we link punctuation and special characters here?%
 
 *** Punctuation
     A {# character} is considered to be *punctuation* if it is any of the following:
@@ -112,7 +114,9 @@ words%
 *** Escaping
     A single {# character} can be escaped if it is immediately preceded by a backslash, `\`
     (`U+005C`). Any {# character} may be escaped /apart from/ {# character}s within verbatim
-    segments and {# line ending}s. %TODO: Add link to verbatim segments%
+    segments. For more info about precedence take a look at the {* precedence} section.
+
+    %TODO: Add link to verbatim segments%
 
 *** Special Characters
     %TODO: how do non-latin characters work? If they go in here, they do not form words as below...%
@@ -140,12 +144,13 @@ words%
    And together we form a paragraph.
    @end
 
-** Paragraph
+** Paragraphs
    Paragraphs are then formed of consecutive {# paragraph segments}. A paragraph is terminated by:
    - A <paragraph break> (which equals two consecutive {# line endings})
    - Any of the {# detached modifiers}
    - Any of the {# delimiting modifiers}
-   - Any of the {# ranged tags}  %TODO: also differentiate the various carryover tag kinds%
+   - Any of the /non-logical/ {# ranged tags} (see link for more info)
+     %TODO: also differentiate the various carryover tag kinds%
 
 * Detached Modifiers
   Norg has several detached modifiers. The name originates from their differentiation to the
@@ -178,17 +183,24 @@ words%
    The first detached modifier type is the /structural/ modifier type. As the name suggests,
    modifiers under this category *structure* the Neorg document in some form or another.
 
-   After a /single/ occurence of a modifier (like `%`), at least one {# whitespace} character follows,
-   after which a {# paragraph segments}[paragraph segment] is consumed as the title of the modifier.
+   Structural modifiers can only consist of a single character, like `%`. After a single occurence
+   of such a modifier, at least one {# whitespace} character follows (excluding whitespace).
+
+   After this a {# paragraph segments}[paragraph segment] is consumed as the title of the modifier.
+
+   A property of {** structural detached modifiers} is that they consume *all* other non-structural
+   detached modifiers, inline markup and {# paragraphs}; they are the most important detached
+   modifier in the hierarchy of modifiers.
+
+   To terminate a structural detached modifier (like a heading or marker) you must use a
+   {** delimiting modifiers}[delimiting modifier].
 
 *** Markers
     @code norg
     % Marker Name
     @end
 
-    Markers are purely structural elements that, well, create markers in your document. Markers are
-    not rendered as a physical element, but rather behave like virtual chapters of a book.
-    Useful for very large documents.
+    %TODO: rediscuss%.
 
 *** Headings
     @code norg
@@ -202,63 +214,11 @@ words%
     @end
 
     Although headings are both structural /and/ nestable, the former takes precedence over the
-    latter, meaning that headings only affect a `paragraph_segment` as their title. This is for user
-    convenience as it does not require an empty line right below a heading.
+    latter, meaning that headings only affect a {# paragraph segments}[paragraph segment] as their
+    title. This is for user convenience as it does not require an empty line right below a heading.
 
     Headings serve as a way to categorize and organize other elements into smaller chunks for better
-    readability. Ending a heading requires use of a {* Delimiting Modifiers}[delimiting modifier].
-
-*** Delimiting Modifiers
-    Although not a detached modifier, we would like to insert a note on {# delimiting modifiers}
-    because they are immediately related to structuring a Norg document.
-
-    This kind of modifier must abide by the following rules:
-    - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
-      (but nothing else!) may precede it)
-    - A delimiting modifier must consist of three or more consecutive modifiers of the same
-      type{^ disambiguating delimiting modifiers}
-    - It must be followed by an immediate {# line ending} (without any extra {# whitespace})
-
-    ^^ Disambiguating delimiting modifiers
-    (why 3?)
-    ^^
-
-**** Weak Delimiting Modifier
-     This modifier uses the `-` character and immediately closes the current heading level.
-     @code norg
-     * Heading level 1
-       Text under first level heading.
-
-     ** Heading level 2
-        Text under second level heading.
-        ---
-
-       Text under first level heading again.
-     @end
-
-**** Strong Delimiting Modifier
-     This modifier uses the `=` character and immediately closes all heading levels.
-     @code norg
-     * Heading level 1
-       Text under first level heading.
-
-     ** Heading level 2
-        Text under second level heading.
-        ===
-
-     Text belonging to no heading level (i.e. to the document's root).
-     @end
-
-**** Horizontal Rule
-     This modifier uses the `_` character and simply renders a horizontal line. It does _NOT_
-     affect the heading level but immediately terminates a {# paragraph}.
-     @code norg
-     * Heading level 1
-       Text under first level heading.
-       ___
-       This is a new paragraph separated from the previous one by a horizontal line.
-       This text still belongs to the first level heading.
-     @end
+    readability.
 
 ** Nestable Detached Modifiers
    Nestable detached modifiers are a kind which may be repeated multiple times in order to produce a
@@ -446,6 +406,62 @@ words%
 *** | | Macros
     The `=` char.
 
+** Delimiting Modifiers
+   In Norg, headings (and other {** structural detached modifiers}) must be terminated by a {**
+   delimiting modifiers}[delimiting modifier]. This kind of modifier must abide by the following
+   rules:
+   - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
+     (but nothing else!) may precede it)
+   - A delimiting modifier must consist of three or more consecutive modifiers of the same
+     type{^ disambiguating delimiting modifiers}
+   - It must be followed by an immediate {# line ending} (without any extra {# whitespace})
+
+   ^^ Disambiguating delimiting modifiers
+   In order to make delimiting modifiers unambiguous the three char rule/no succeeding whitespace
+   rules were put into place:
+   - Using three modifiers helps to disambiguate the endings of {** range-able detached modifiers}
+     (e.g. `==`).
+   - If succeeding whitespace were allowed ambiguity would arise between nested unordered list items
+     and the `---` delimiting modifier.
+   ^^
+
+*** Weak Delimiting Modifier
+    This modifier uses the `-` character and immediately closes the current heading level.
+    @code norg
+    * Heading level 1
+      Text under first level heading.
+
+    ** Heading level 2
+       Text under second level heading.
+       ---
+
+      Text under first level heading again.
+    @end
+
+*** Strong Delimiting Modifier
+    This modifier uses the `=` character and immediately closes all heading levels.
+    @code norg
+    * Heading level 1
+      Text under first level heading.
+
+    ** Heading level 2
+       Text under second level heading.
+       ===
+
+    Text belonging to no heading level (i.e. to the document's root).
+    @end
+
+*** Horizontal Rule
+    This modifier uses the `_` character and simply renders a horizontal line. It does _NOT_
+    affect the heading level but immediately terminates a {# paragraphs}[paragraph].
+    @code norg
+    * Heading level 1
+      Text under first level heading.
+      ___
+      This is a new paragraph separated from the previous one by a horizontal line.
+      This text still belongs to the first level heading.
+    @end
+
 ** Detached Modifier Extensions
    {# Detached modifiers} support extensions which must immediately follow the detached modifier
    (or another extension).
@@ -483,7 +499,7 @@ words%
     In the form of `|# A|`, etc.
 
 *** Indent Segment Extension
-    Since {# nestable detached modifiers} can only contain a {# paragraph} this can cause severe
+    Since {# nestable detached modifiers} can only contain a {# paragraphs}[paragraph] this can cause severe
     limitations because the insertion of (for example) code blocks is not possible. To alleviate
     this deficiency, the {# indent segment extension} exists, which increases the indentation of the
     tree by one level allowing nesting of more complex elements to occur. The syntax is the
@@ -641,7 +657,7 @@ words%
   - A closing modifier may _NOT_ be preceded by {# whitespace}
   - A closing modifier may only be succeeded by {# whitespace} or {# punctuation}
   - \
-     {# Attached modifiers} can only span at maximum a single {# paragraph}, i.e. they get
+     {# Attached modifiers} can only span at maximum a single {# paragraphs}[paragraph], i.e. they get
      terminated as soon as they encounter a {# paragraph break}.
 
      This means that this:
@@ -723,23 +739,32 @@ words%
 
 ** Link Modifier
    The link modifier, `:`, is a special modifier type called an _intersecting_ modifier. It puts a
-   twist on the original attached modifier rules - in fact, they're the polar opposite.
+   twist on the original attached modifier rules - in fact, it's the polar opposite.
 
-   There can be both an opening and closing link modifier in scenarios like this:
+   As described in the {# attached modifiers} section, attached modifier types may not exist
+   inbetween words like so:
    @code norg
-   Ex:*am*:ple text
+   abso/freaking/lutely!
    @end
-   Without the `:`-link modifier, the above example would not result in a bold segment.
 
-   However, it is important to note that link modifiers do not need to occur in pairs. This:
+   It's entirely plausible to want to do this however, which is why the {** link modifier}[link
+   modifier] was devised. With it, you can bridge attached modifiers and regular text together:
+   @code norg
+   abso:/freaking/:lutely!
+   @end
+
+   It is important to note that link modifiers do not need to occur in pairs. This:
    @code norg
    Ex:*ample* text
    @end
-   Will also result in `ample` becoming *bold*.
+   Will also result in `ample` becoming *bold*. In fact, using a link modifier at the end will not
+   give the desired result (it will be rendered as a regular `:` char). To understand why keep
+   reading.
 
-   With this knowledge, it is evident that there are two link modifier types: one where the link
-   modifier is an /opening/ link modifier (i.e. it appears before an opening attached modifier) and
-   one where it's a /closing/ link modifier (i.e. it appears after a closing attached modifier).
+   Through the examples above it is evident that there are two link modifier types: one where the
+   link modifier is an /opening/ link modifier (i.e. it appears before an opening attached modifier)
+   and one where it's a /closing/ link modifier (i.e. it appears after a closing attached modifier).
+   This distinction is visible even when they don't occur in pairs.
 
    In the case that the link modifier is opening (the attached modifier appears on the right):
    - The link modifier may only be preceded by an {# alphanumeric characters}[alphanumeric character]
@@ -748,25 +773,32 @@ words%
    - The link modifier may only be succeeded by an opening attached modifier.
 
    In the case that the link modifier is closing (the attached modifier appears on the left):
+   - The link modifier may only be preceded by a closing attached modifier.
    - The link modifier may only be succeeded by an
      {# alphanumeric characters}[alphanumeric character].
-   - The link modifier may only be preceded by a closing attached modifier.
+
+   If the above conditions are not met, then the character should be treated as a literal `:`.
 
 ** Ranged Attached Modifiers
-   Ranged attached modifiers can be used to:
-   - Allow arbitrary {# whitespace} within {# attached modifiers}. (except for a {# paragraph break})
-   - Allow to represent verbatim attached modifier chars within the corresponding verbatim blocks.
+   Even with all the rules described in the above sections there are still some evident limitations
+   with attached modifiers, namely:
+   - Arbitrary {# whitespace} within {# attached modifiers} is not permitted: `*  bold  *` is
+     invalid.
+   - Representing verbatim attached modifier chars within the corresponding verbatim blocks is not
+     possible: \`I cannot place a (\`) char inside here without accidentally terminating the
+     block.\`.
+     %TODO: fix formatting%.
 
-   For example:
+   Ranged attached modifiers fix this with a special (and unambiguous) syntax to specify the
+   beginning and end of a ranged block. For example:
    @code norg
-   Here, I can write |`  leading and trailing whitespace  `| within a verbatim block.
+   Here, I can write `| leading and trailing whitespace (with a ` char)  |` within a verbatim block
+   without accidentally terminating it.
    @end
 
    @code norg
-   Here, I can use a literal `$` inside of inline math: |$ 10$ + 10$ = 20$ $|.
+   Here, I can use a literal `$` inside of inline math: $| 10$ + 10$ = 20$ |$.
    @end
-
-   %TODO: I think we need to extend this a bit%
 
 * Trailing Modifier
   Trailing modifiers are another separate kind of modifiers in the Norg syntax. They have one very
@@ -1123,4 +1155,4 @@ words%
   The link takes precedence, and no bold is rendered.
   ===
 
-|% vim: set tw=100 :%|
+%| vim: set tw=100 :|%
