@@ -320,11 +320,11 @@ words%
     @end
     ---
 
-   |name objects
+   #name objects
    Nestable detached modifiers have a unique quality - when several consecutive /nestable/ modifiers
    are encountered (by consecutive we mean _NOT_ separated via a {# paragraph break}), they are
    treated as one whole /object/. This is important to note as it plays a role with {# carryover
-   tags}.
+   tags}. %TODO: change now that we have the `groupable` attribute for modifiers%.
 
 *** Invalid Examples
     - \
@@ -426,7 +426,8 @@ words%
    ^^
 
 *** Weak Delimiting Modifier
-    This modifier uses the `-` character and immediately closes the current heading level.
+    This modifier uses the `-` character and immediately closes the /current/ heading level
+    (decreases the current nesting level by one).
     @code norg
     * Heading level 1
       Text under first level heading.
@@ -500,7 +501,7 @@ words%
 
 *** Indent Segment Extension
     Since {# nestable detached modifiers} can only contain a {# paragraphs}[paragraph] this can cause severe
-    limitations because the insertion of (for example) code blocks is not possible. To alleviate
+    limitations because the insertion of e.g. code blocks is not possible. To alleviate
     this deficiency, the {# indent segment extension} exists, which increases the indentation of the
     tree by one level allowing nesting of more complex elements to occur. The syntax is the
     following:
@@ -538,13 +539,11 @@ words%
   Tags are Norg's official way of extending its own syntax. It's the /only/ way that extensions
   may be made to the format.
 
-  There are 3 different tag types, each with their own way of changing the way text in Norg is
-  %TODO: we have actually added more by now... I lost count :kek:... Is it 5?%
+  There are 5 different tag types, each with their own way of changing the way text in Norg is
   interpreted. Before we discuss those, however, we should discuss the syntax rules for tags:
   - A tag is similar to a {# detached modifiers}[detached modifier] in the sense that it must begin
-    at the beginning of a line with optional whitespace (but nothing else) preceding it.
-  - After that you will encounter the special tag character (`|`, `@` or `#`), /none/ of which are
-    %TODO: update set of allowed tag chars%
+    at the beginning of a line with optional {# whitespace} (but nothing else) preceding it.
+  - After that you will encounter the special tag character (`@`, `|`, `+`, `#` and `=`), /none/ of which are
     attached modifiers - if those chars were attached modifiers then we would have ambiguity on our
     hands. The special tag character is then /immediately/ followed by text, which becomes the /tag
     name/. Said tag name can consist of any {# alphanumeric characters}[alphanumeric character]
@@ -552,11 +551,16 @@ words%
   - Tags can have their names delimited by a `.` in order to create a "hierarchy", e.g.
     `document.meta`.
   - \
-    After a whitespace character any number of parameters on the same line may follow:
+    After a {# whitespace} character any number of parameters on the same line may follow:
     @code norg
-    |tag-name.subtag parameter1 parameter2
+    #tag-name.subtag parameter1 parameter2
     @end
-    %TODO: we should already discuss multi-word parameters, too%
+
+    By default parameters are space-separated. In order to create multi-word parameters, you may
+    escape the space character with a backslash (`\`).
+    @code norg
+    #tag-name.subtag parameter1\ with\ spaces parameter2
+    @end
 
     Parameters may consist of any character (apart from a {# line break}, of course).
     ---
@@ -567,43 +571,78 @@ words%
    (unless they don't adhere to the above rules regarding tag names).
 
 ** Macro Tags
-   The `=`-tag.
+   Macros are explained further in detail {** Macros}[in their own section].
+
+   The `=` tag invokes a macro and injects its result into the location that the macro tag was invoked.
+
+   Example: `=MyMacro myparameter`.
 
 ** Carryover Tags
-   %TODO: differentiate `#` and `+` carryover behavior%
-   A carryover tag is a way to assign some data to the next element in the document.
-   They are especially useful when you want to change the /properties/ of an item.
+   Carryover tags are a construct used to assign certain properties to the next item or whole object.
+   In reality, they are a type of {** macro tags}[macro tag], where the next element is given as the
+   last parameter to the macro. For more info see the {:semantics:} document %TODO: create semantics
+   document%.
 
-   The syntax is as follows:
-   @code norg
-   |carryover-tag param1 param2
-   some item
-   @end
+   There are two types of carryover tag, the {*** weak carryover tags}[weak carryover tag] and the
+   {*** strong carryover tags}[strong variant].
 
-   Carryover tags can apply to any non-inline element that occurs right after the carryover tag.
-   %TODO: careful with new differentation%
+*** Weak Carryover Tags
+    The weak carryover tag affects the next element and next element /only/. It does not work with
+    whole collections of elements (see {*** strong carryover tags}).
 
-   Examples:
-   @code norg
-   #name my-custom-name
-   * Heading Title
+    Weak carryover tags only apply to the next element; they behave this way in the following
+    contexts: %TODO: discuss%
+    - When the element has children, the weak carryover tag only applies to the single item (it does
+      not carry over to its children).
+    - When the element is part of an {# objects}[object], no other items other than the item below
+      the weak carryover tag is affected.
 
-   #color red
-   * Heading
-     Content
-   @end
+**** Examples
+    Only the second item is affected:
+    @code norg
+    - List item 1
+    +color red
+    - List item 2
+    - List item 3
+    @end
 
-   When dealing with a range of objects (see {# objects}) the carryover tag affects the entire
-   object, i.e.:
-   %TODO: careful with new differentation%
-   @code norg
-   Converts the following list into a multiple choice question:
+    Only the `This is some content` text is highlighted:
+    @code norg
+    +color red
+    * Heading 1
+      This is some content.
+    ** Heading 2
+       This is also some content.
+    @end
 
-   #choice
-   - |x| Correct answer
-   - | | Wrong answer
-   - | | Also wrong answer
-   @end
+*** Strong Carryover Tags
+    Contrary to its weak variant, the strong carryover tag exists to annotate an entire
+    {# objects}[object] versus just a single item. Its behaviour is opposite to its weak
+    counterpart, namely:
+    - When the element has children, the strong carryover tag applies to both the whole item and all
+      of its children.
+    - When the element is part of an {# objects}[object], all items in the object are affected.
+
+**** Examples
+     A nice use case is the `#choice` carryover tag, which converts all items in a list into a
+     single-choice question with right/wrong answers:
+     @code norg
+     What is your favourite activity? Hint: there's only one correct answer :)
+     #choice
+     - | | Sleeping
+     - | | Learning
+     - |x| Writing `.norg` documents
+     @end
+
+     Here, both the level 1 heading and the level 2 heading along with their contents will be
+     coloured red:
+     @code norg
+     #color red
+     * Heading 1
+       This is some content.
+     ** Heading 2
+        This is also some content.
+     @end
 
 ** Ranged Tags
    Ranged tags are a way to express custom information within a range.
