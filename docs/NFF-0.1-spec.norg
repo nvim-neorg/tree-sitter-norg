@@ -686,21 +686,14 @@ words%
 
 *** Verbatim Ranged Tags
     In other cases you may be more interested in a {# verbatim ranged tags}[verbatim ranged tag],
-    which disallows any Norg markup to exist inside of itself. A prime example of this is
-    `@code`, which creates a code block - you obviously don't want nested Norg syntax within
-    that!
+    which disallows any Norg markup to exist inside of itself. A prime example of this is `@code`,
+    which creates a code block - you obviously don't want nested Norg syntax within that!
     @code java
     @MyAnnotation(name="someName", value="Hello World")
     public class TheClass {
       // ...
     }
     @end
-    ---
-
-   Verbatim vs standard ranged tags is mostly a matter of what your "custom syntax" looks like and
-   how it works. Think of it this way: in a standard and undefined {# ranged tags}[ranged tag] /all/
-   Norg markup is readily available and usable, whereas by default in a
-   {# verbatim ranged tags}[verbatim ranged tag] all markup is completely disabled and unusable.
 
 * Attached Modifiers
   We can now discuss attached modifiers (which originally gave rise to the name of
