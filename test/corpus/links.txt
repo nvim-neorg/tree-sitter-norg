@@ -10,7 +10,6 @@ Basic Links
 {******* Heading level 7 and higher falls back to 6}
 {? Wiki}
 {# Generic}
-{% Marker}
 {$ Definition}
 {^ Footnote}
 {:norg_file:}
@@ -22,7 +21,6 @@ Basic Links
 {:norg_file:****** Heading level 6}
 {:norg_file:******* Heading level 7 and higher falls back to 6}
 {:norg_file:# Generic}
-{:norg_file:% Marker}
 {:norg_file:$ Definition}
 {:norg_file:^ Footnote}
 {https://github.com/}
@@ -80,11 +78,6 @@ Basic Links
       (link
         (link_location
           type: (link_target_generic)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_marker)
           text: (paragraph))))
     (paragraph_segment
       (link
@@ -152,12 +145,6 @@ Basic Links
       (link
         (link_location
           file: (link_file_text)
-          type: (link_target_marker)
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
           type: (link_target_definition)
           text: (paragraph))))
     (paragraph_segment
@@ -208,7 +195,6 @@ Links with text
 {******* Heading level 7 and higher falls back to 6}[custom text]
 {? Wiki}[custom text]
 {# Generic}[custom text]
-{% Marker}[custom text]
 {$ Definition}[custom text]
 {^ Footnote}[custom text]
 {:norg_file:}[custom text]
@@ -220,7 +206,6 @@ Links with text
 {:norg_file:****** Heading level 6}[custom text]
 {:norg_file:******* Heading level 7 and higher falls back to 6}[custom text]
 {:norg_file:# Generic}[custom text]
-{:norg_file:% Marker}[custom text]
 {:norg_file:$ Definition}[custom text]
 {:norg_file:^ Footnote}[custom text]
 {https://github.com/}[custom text]
@@ -294,13 +279,6 @@ Links with text
       (link
         (link_location
           type: (link_target_generic)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          type: (link_target_marker)
           text: (paragraph))
         (link_description
           text: (paragraph))))
@@ -392,14 +370,6 @@ Links with text
       (link
         (link_location
           file: (link_file_text)
-          type: (link_target_marker)
-          text: (paragraph))
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (link
-        (link_location
-          file: (link_file_text)
           type: (link_target_definition)
           text: (paragraph))
         (link_description
@@ -460,13 +430,11 @@ Anchors
 [heading anchor]
 [wiki anchor]
 [generic anchor]
-[marker anchor]
 [definition anchor]
 [footnote anchor]
 [norg file anchor]
 [external heading anchor]
 [external generic anchor]
-[external marker anchor]
 [external definition anchor]
 [external footnote anchor]
 [non-norg file anchor]
@@ -484,7 +452,6 @@ Anchors
 [heading anchor]{******* Heading level 7 and higher falls back to 6}
 [wiki anchor]{? Wiki}
 [generic anchor]{# Generic}
-[marker anchor]{% Marker}
 [definition anchor]{$ Definition}
 [footnote anchor]{^ Footnote}
 [norg file anchor]{:norg_file:}
@@ -496,7 +463,6 @@ Anchors
 [external heading anchor]{:norg_file:****** Heading level 6}
 [external heading anchor]{:norg_file:******* Heading level 7 and higher falls back to 6}
 [external generic anchor]{:norg_file:# Generic}
-[external marker anchor]{:norg_file:% Marker}
 [external definition anchor]{:norg_file:$ Definition}
 [external footnote anchor]{:norg_file:^ Footnote}
 [non-norg file anchor]{/ external_file.txt}
@@ -510,14 +476,6 @@ Anchors
 
 (document
   (paragraph
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_declaration
-        (link_description
-          text: (paragraph))))
     (paragraph_segment
       (anchor_declaration
         (link_description
@@ -647,13 +605,6 @@ Anchors
         (link_description
           text: (paragraph))
         (link_location
-          type: (link_target_marker)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
           type: (link_target_definition)
           text: (paragraph))))
     (paragraph_segment
@@ -732,14 +683,6 @@ Anchors
         (link_location
           file: (link_file_text)
           type: (link_target_generic)
-          text: (paragraph))))
-    (paragraph_segment
-      (anchor_definition
-        (link_description
-          text: (paragraph))
-        (link_location
-          file: (link_file_text)
-          type: (link_target_marker)
           text: (paragraph))))
     (paragraph_segment
       (anchor_definition

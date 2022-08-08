@@ -136,8 +136,6 @@ module.exports = grammar({
         $.ordered_list5_prefix,
         $.ordered_list6_prefix,
 
-        $.marker_prefix,
-
         $.single_definition_prefix,
         $.multi_definition_prefix,
         $.multi_definition_suffix,
@@ -178,7 +176,6 @@ module.exports = grammar({
         $.link_target_generic,
         $.link_target_external_file,
         $.link_target_timestamp,
-        $.link_target_marker,
         $.link_target_definition,
         $.link_target_footnote,
         $.link_target_drawer,
@@ -262,7 +259,6 @@ module.exports = grammar({
                         $.slide,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
-                        $.marker,
                     )
                 ),
 
@@ -416,7 +412,6 @@ module.exports = grammar({
             alias($.link_target_generic, "_word"),
             alias($.link_target_external_file, "_word"),
             alias($.link_target_timestamp, "_word"),
-            alias($.link_target_marker, "_word"),
             alias($.link_target_definition, "_word"),
             alias($.link_target_footnote, "_word"),
             alias($.link_target_drawer, "_word"),
@@ -577,7 +572,6 @@ module.exports = grammar({
                 choice(
                     $.link_target_wiki,
                     $.link_target_generic,
-                    $.link_target_marker,
                     $.link_target_definition,
                     $.link_target_footnote,
                     $.link_target_drawer,
@@ -734,24 +728,6 @@ module.exports = grammar({
         ),
 
         // --------------------------------------------------
-
-        marker: $ =>
-        prec.right(0,
-            seq(
-                optional($.strong_attribute_set),
-
-                gen_detached_modifier(
-                    $,
-
-                    $.marker_prefix,
-
-                    field(
-                        "title",
-                        $.paragraph_segment
-                    ),
-                ),
-            ),
-        ),
 
         single_macro: $ => gen_single_rangeable_detached_modifier($, "macro", true),
         multi_macro: $ => gen_multi_rangeable_detached_modifier($, "macro", true),

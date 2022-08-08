@@ -69,8 +69,6 @@ enum TokenType : char
     ORDERED_LIST5,
     ORDERED_LIST6,
 
-    MARKER,
-
     SINGLE_DEFINITION,
     MULTI_DEFINITION,
     MULTI_DEFINITION_SUFFIX,
@@ -111,7 +109,6 @@ enum TokenType : char
     LINK_TARGET_GENERIC,
     LINK_TARGET_EXTERNAL_FILE,
     LINK_TARGET_TIMESTAMP,
-    LINK_TARGET_MARKER,
     LINK_TARGET_DEFINITION,
     LINK_TARGET_FOOTNOTE,
     LINK_TARGET_DRAWER,
@@ -510,8 +507,9 @@ class Scanner
                 return true;
             }
 
-            if (check_detached(lexer, MARKER | NONE, {'%'}) != NONE)
-                return true;
+            // TODO: re-use to return ATTRIBUTE detached modifier
+            // if (check_detached(lexer, MARKER | NONE, {'%'}) != NONE)
+            //     return true;
 
             if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, {'$'}) != NONE)
                 return true;
@@ -1039,9 +1037,6 @@ class Scanner
                     return false;
 
                 lexer->result_symbol = m_LastToken = LINK_TARGET_TIMESTAMP;
-                break;
-            case '%':
-                lexer->result_symbol = m_LastToken = LINK_TARGET_MARKER;
                 break;
             case '$':
                 lexer->result_symbol = m_LastToken = LINK_TARGET_DEFINITION;

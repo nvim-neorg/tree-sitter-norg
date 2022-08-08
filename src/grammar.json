@@ -65,10 +65,6 @@
                 {
                   "type": "SYMBOL",
                   "name": "strong_paragraph_delimiter"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "marker"
                 }
               ]
             }
@@ -659,15 +655,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "link_target_timestamp"
-          },
-          "named": false,
-          "value": "_word"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "link_target_marker"
           },
           "named": false,
           "value": "_word"
@@ -1963,10 +1950,6 @@
               {
                 "type": "SYMBOL",
                 "name": "link_target_generic"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "link_target_marker"
               },
               {
                 "type": "SYMBOL",
@@ -4641,72 +4624,6 @@
           }
         }
       ]
-    },
-    "marker": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "strong_attribute_set"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "weak_attribute_set"
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
-              },
-              {
-                "type": "SYMBOL",
-                "name": "marker_prefix"
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "FIELD",
-                    "name": "state",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "detached_modifier_extension"
-                    }
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
-              },
-              {
-                "type": "FIELD",
-                "name": "title",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "paragraph_segment"
-                }
-              }
-            ]
-          }
-        ]
-      }
     },
     "single_macro": {
       "type": "PREC_RIGHT",
@@ -8195,10 +8112,6 @@
     },
     {
       "type": "SYMBOL",
-      "name": "marker_prefix"
-    },
-    {
-      "type": "SYMBOL",
       "name": "single_definition_prefix"
     },
     {
@@ -8328,10 +8241,6 @@
     {
       "type": "SYMBOL",
       "name": "link_target_timestamp"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "link_target_marker"
     },
     {
       "type": "SYMBOL",

@@ -254,10 +254,6 @@
           "named": true
         },
         {
-          "type": "marker",
-          "named": true
-        },
-        {
           "type": "multi_definition",
           "named": true
         },
@@ -2631,10 +2627,6 @@
             "named": true
           },
           {
-            "type": "link_target_marker",
-            "named": true
-          },
-          {
             "type": "link_target_timestamp",
             "named": true
           },
@@ -2671,90 +2663,6 @@
       "types": [
         {
           "type": "tag_parameters",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "marker",
-    "named": true,
-    "fields": {
-      "state": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
-            "named": true
-          }
-        ]
-      },
-      "title": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "marker_prefix",
-          "named": true
-        },
-        {
-          "type": "strong_attribute_set",
-          "named": true
-        },
-        {
-          "type": "weak_attribute_set",
           "named": true
         }
       ]
@@ -7249,10 +7157,6 @@
     "named": true
   },
   {
-    "type": "link_target_marker",
-    "named": true
-  },
-  {
     "type": "link_target_timestamp",
     "named": true
   },
@@ -7262,10 +7166,6 @@
   },
   {
     "type": "link_target_wiki",
-    "named": true
-  },
-  {
-    "type": "marker_prefix",
     "named": true
   },
   {
