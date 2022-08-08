@@ -6,17 +6,22 @@
 words%
 %Should speech marks ("") be attached modifiers? Imo it could be pretty useful to have them as that%
 
-- | | add table syntax (cells)
+- | | add table syntax (cells) (`:`-detached modifier)
 - |x| make sure that no whitespace can appear at linkable boundaries
 - |x| swap strong attribute and non-verbatim ranged tag characters
-- | | explain differentation of verbatim and non-verbatim tags in spec
+- |x| explain differentation of verbatim and non-verbatim tags in spec
 - | | support and document line number in file links
 - |x| reverse heading links to be per-level
 - |x| support `?`-linkable target (wiki link)
-- | | add anonymous node for ellipsis (`...`)
+- |_| add anonymous node for ellipsis (`...`)
 - | | refactor ranged attached mods to place `|` inside the attached mods
 - |x| raise precedence of escape character between standard and free-form verbatim markup
-- | | document newline linking modifier: |` : `|
+- | | document intersection modifiers: `<space><char><space>`
+-- | | document and support paragraph_segment delimiter: |` : `|
+-- | | document and support notice modifier: |` ! `|
+- | | add attached modifier extensions (attributes: `*bold*|attribute|`)
+- | | remove markers
+- | | document and add attribute detached modifier `%` (standard but logical (cannot be linked to))
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
