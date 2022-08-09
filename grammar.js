@@ -1125,6 +1125,11 @@ function gen_attached_modifier($, kind, verbatim) {
                 //     alias($.free_form_open, "_word"),
                 //     free_form_content,
                 // ),
+                // TODO: we also need to gracefully handle the following:
+                // `|*|not free form bold|*|`
+                // This currently fails once the presumably bold_close is
+                // encountered, because the previous free_form_close already
+                // suggested, that the list of choices here is now exhausted
                 content,
             ),
             alias($[kind + "_close"], "_close"),
