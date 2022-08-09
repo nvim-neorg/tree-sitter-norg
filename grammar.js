@@ -1119,6 +1119,12 @@ function gen_attached_modifier($, kind, verbatim) {
                     free_form_content,
                     $.free_form_close,
                 )),
+                // TODO: re-introduce the below in order to fix:
+                // *|not free form but still bold*
+                // seq(
+                //     alias($.free_form_open, "_word"),
+                //     free_form_content,
+                // ),
                 content,
             ),
             alias($[kind + "_close"], "_close"),
