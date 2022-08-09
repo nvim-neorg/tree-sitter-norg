@@ -773,19 +773,6 @@
                 }
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_attached_modifier_content"
-                  }
-                ]
-              },
-              {
                 "type": "SYMBOL",
                 "name": "_attached_modifier_content"
               }
@@ -841,19 +828,6 @@
                     }
                   ]
                 }
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_attached_modifier_content"
-                  }
-                ]
               },
               {
                 "type": "SYMBOL",
@@ -913,19 +887,6 @@
                 }
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_attached_modifier_content"
-                  }
-                ]
-              },
-              {
                 "type": "SYMBOL",
                 "name": "_attached_modifier_content"
               }
@@ -981,19 +942,6 @@
                     }
                   ]
                 }
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_attached_modifier_content"
-                  }
-                ]
               },
               {
                 "type": "SYMBOL",
@@ -1053,19 +1001,6 @@
                 }
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_attached_modifier_content"
-                  }
-                ]
-              },
-              {
                 "type": "SYMBOL",
                 "name": "_attached_modifier_content"
               }
@@ -1121,19 +1056,6 @@
                     }
                   ]
                 }
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_attached_modifier_content"
-                  }
-                ]
               },
               {
                 "type": "SYMBOL",
@@ -1193,19 +1115,6 @@
                 }
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_attached_modifier_content"
-                  }
-                ]
-              },
-              {
                 "type": "SYMBOL",
                 "name": "_attached_modifier_content"
               }
@@ -1261,19 +1170,6 @@
                     }
                   ]
                 }
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_attached_modifier_content"
-                  }
-                ]
               },
               {
                 "type": "SYMBOL",
@@ -1333,19 +1229,6 @@
                 }
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_free_form_verbatim_modifier_content"
-                  }
-                ]
-              },
-              {
                 "type": "SYMBOL",
                 "name": "_verbatim_modifier_content"
               }
@@ -1403,19 +1286,6 @@
                 }
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_free_form_verbatim_modifier_content"
-                  }
-                ]
-              },
-              {
                 "type": "SYMBOL",
                 "name": "_verbatim_modifier_content"
               }
@@ -1471,19 +1341,6 @@
                     }
                   ]
                 }
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "free_form_open"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_free_form_verbatim_modifier_content"
-                  }
-                ]
               },
               {
                 "type": "SYMBOL",

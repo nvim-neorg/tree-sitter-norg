@@ -875,7 +875,7 @@ class Scanner
             return NONE;
 
         // First check for the existence of an opening attached modifier
-        if (std::iswspace(m_Current) || std::iswpunct(m_Current) || !m_Current)
+        if (std::iswspace(m_Current) || std::iswpunct(m_Current) && m_LastToken != FREE_FORM_MODIFIER_CLOSE || !m_Current)
         {
             advance(lexer);
 
