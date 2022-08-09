@@ -1,1 +1,62 @@
+================================================================================
+Free Form Markup
+================================================================================
+*|This is some free form markup|*
+/|This is some free form markup|/
+-|This is some free form markup|-
+_|This is some free form markup|_
+!|This is some free form markup|!
+`|This is some free form markup|`
+^|This is some free form markup|^
+,|This is some free form markup|,
+%|This is some free form markup|%
+$|This is some free form markup|$
+&|This is some free form markup|&
+--------------------------------------------------------------------------------
 
+(document
+  (paragraph
+    (paragraph_segment
+      (bold
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (italic
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (strikethrough
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (underline
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (spoiler
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (verbatim
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (superscript
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (subscript
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (inline_comment
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (inline_math
+        (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (variable
+        (free_form_open)
+        (free_form_close)))))
