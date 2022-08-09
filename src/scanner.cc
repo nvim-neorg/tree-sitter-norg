@@ -855,14 +855,14 @@ class Scanner
         {
             advance(lexer);
 
-            if (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end())
-            {
-                lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_CLOSE;
-                return m_LastToken;
-            }
-            else if (m_LastToken >= BOLD_OPEN && m_LastToken <= VARIABLE_CLOSE)
+            if (m_LastToken >= BOLD_OPEN && m_LastToken <= VARIABLE_CLOSE && (m_LastToken % 2) == (BOLD_OPEN % 2))
             {
                 lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_OPEN;
+                return m_LastToken;
+            }
+            else if (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end())
+            {
+                lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_CLOSE;
                 return m_LastToken;
             }
 
