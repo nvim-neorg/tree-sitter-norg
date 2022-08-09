@@ -42,13 +42,6 @@ module.exports = grammar({
         [$.inline_math, $._conflict_open],
         [$.variable, $._conflict_open],
 
-        // Conflict arises with unclosed free form attached modifiers
-        // Input could be:
-        //  |* text *|
-        // or
-        //  |* text
-        [$._conflict_open, $._free_form_attached_modifier],
-
         [$._paragraph_element],
 
         [$.indent_segment],
@@ -376,10 +369,7 @@ module.exports = grammar({
             $.escape_sequence,
             seq(
                 optional($.link_modifier),
-                choice(
-                    $.attached_modifier,
-                    $._free_form_attached_modifier,
-                ),
+                $.attached_modifier,
                 optional($.link_modifier),
             ),
             alias($.link_modifier, "_word"),
@@ -424,29 +414,17 @@ module.exports = grammar({
         ),
 
         // ---- ATTACHED MODIFIERS ----
-        bold: $ => gen_attached_modifier($, "bold", false, false),
-        italic: $ => gen_attached_modifier($, "italic", false, false),
-        strikethrough: $ => gen_attached_modifier($, "strikethrough", false, false),
-        underline: $ => gen_attached_modifier($, "underline", false, false),
-        spoiler: $ => gen_attached_modifier($, "spoiler", false, false),
-        superscript: $ => gen_attached_modifier($, "superscript", false, false),
-        subscript: $ => gen_attached_modifier($, "subscript", false, false),
-        inline_comment: $ => gen_attached_modifier($, "inline_comment", false, false),
-        verbatim: $ => gen_attached_modifier($, "verbatim", true, false),
-        inline_math: $ => gen_attached_modifier($, "inline_math", true, false),
-        variable: $ => gen_attached_modifier($, "variable", true, false),
-
-        _free_form_bold: $ => gen_attached_modifier($, "bold", false, true),
-        _free_form_italic: $ => gen_attached_modifier($, "italic", false, true),
-        _free_form_strikethrough: $ => gen_attached_modifier($, "strikethrough", false, true),
-        _free_form_underline: $ => gen_attached_modifier($, "underline", false, true),
-        _free_form_spoiler: $ => gen_attached_modifier($, "spoiler", false, true),
-        _free_form_superscript: $ => gen_attached_modifier($, "superscript", false, true),
-        _free_form_subscript: $ => gen_attached_modifier($, "subscript", false, true),
-        _free_form_inline_comment: $ => gen_attached_modifier($, "inline_comment", false, true),
-        _free_form_verbatim: $ => gen_attached_modifier($, "verbatim", true, true),
-        _free_form_inline_math: $ => gen_attached_modifier($, "inline_math", true, true),
-        _free_form_variable: $ => gen_attached_modifier($, "variable", true, true),
+        bold: $ => gen_attached_modifier($, "bold", false),
+        italic: $ => gen_attached_modifier($, "italic", false),
+        strikethrough: $ => gen_attached_modifier($, "strikethrough", false),
+        underline: $ => gen_attached_modifier($, "underline", false),
+        spoiler: $ => gen_attached_modifier($, "spoiler", false),
+        superscript: $ => gen_attached_modifier($, "superscript", false),
+        subscript: $ => gen_attached_modifier($, "subscript", false),
+        inline_comment: $ => gen_attached_modifier($, "inline_comment", false),
+        verbatim: $ => gen_attached_modifier($, "verbatim", true),
+        inline_math: $ => gen_attached_modifier($, "inline_math", true),
+        variable: $ => gen_attached_modifier($, "variable", true),
 
         _conflict_open: $ =>
         choice(
@@ -923,25 +901,6 @@ module.exports = grammar({
             $.inline_math,
             $.variable,
         ),
-
-        _free_form_attached_modifier: $ =>
-        seq(
-            alias($.free_form_modifier_open, "_open"),
-            choice(
-                alias($._free_form_bold, $.bold),
-                alias($._free_form_italic, $.italic),
-                alias($._free_form_strikethrough, $.strikethrough),
-                alias($._free_form_underline, $.underline),
-                alias($._free_form_spoiler, $.spoiler),
-                alias($._free_form_superscript, $.superscript),
-                alias($._free_form_subscript, $.subscript),
-                alias($._free_form_verbatim, $.verbatim),
-                alias($._free_form_inline_comment, $.inline_comment),
-                alias($._free_form_inline_math, $.inline_math),
-                alias($._free_form_variable, $.variable),
-            ),
-            alias($.free_form_modifier_close, "_close"),
-        ),
     }
 });
 
@@ -1136,27 +1095,28 @@ function gen_quote($, level) {
     );
 }
 
-function gen_attached_modifier($, kind, verbatim, free_form) {
-    let content_rule = $._attached_modifier_content;
+function gen_attached_modifier($, kind, verbatim) {
     let precedence = 3;
+    let content = $._attached_modifier_content;
+    let free_form_content = $._attached_modifier_content;
 
     if (verbatim) {
-        if (free_form) {
-            content_rule = $._free_form_verbatim_modifier_content;
-        } else {
-            content_rule = $._verbatim_modifier_content;
-        }
+        content = $._verbatim_modifier_content;
+        free_form_content = $._free_form_verbatim_modifier_content;
         precedence = 5;
-    }
-
-    if (free_form) {
-        precedence += 1;
     }
 
     return prec.dynamic(precedence,
         seq(
             alias($[kind + "_open"], "_open"),
-            content_rule,
+            choice(
+                seq(
+                    alias($.free_form_modifier_open, "_free_form_open"),
+                    free_form_content,
+                    alias($.free_form_modifier_close, "_free_form_close"),
+                ),
+                content,
+            ),
             alias($[kind + "_close"], "_close"),
         ),
     );

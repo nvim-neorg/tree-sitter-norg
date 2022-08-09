@@ -7025,6 +7025,14 @@
     "named": false
   },
   {
+    "type": "_free_form_close",
+    "named": false
+  },
+  {
+    "type": "_free_form_open",
+    "named": false
+  },
+  {
     "type": "_line_break",
     "named": false
   },
