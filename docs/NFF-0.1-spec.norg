@@ -16,7 +16,8 @@ words%
 - |x| reverse heading links to be per-level
 - |x| support `?`-linkable target (wiki link)
 - |_| add anonymous node for ellipsis (`...`)
-- | | refactor ranged attached mods to place `|` inside the attached mods
+- |x| refactor ranged attached mods to place `|` inside the attached mods
+-- | | TODO: tests
 - |x| raise precedence of escape character between standard and free-form verbatim markup
 - | | document intersection modifiers: `<space><char><space>`
 -- | | document and support paragraph_segment delimiter: |` : `|
