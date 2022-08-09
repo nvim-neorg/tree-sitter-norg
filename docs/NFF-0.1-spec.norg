@@ -25,6 +25,8 @@ words%
 - | | add attached modifier extensions (attributes: `*bold*|attribute|`)
 - |x| remove markers
 - | | document and add attribute detached modifier `%` (standard but logical (cannot be linked to))
+- | | Add `>`, `<` detached modifier extensions (GTD-based)
+- | | Add timestamp ranges (`Tue 3rd Jul - Thu 5th Jul`)
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
