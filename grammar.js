@@ -227,8 +227,8 @@ module.exports = grammar({
         $.variable_open,
         $.variable_close,
 
-        $.free_form_modifier_open,
-        $.free_form_modifier_close,
+        $.free_form_open,
+        $.free_form_close,
 
         $.inline_link_target_open,
         $.inline_link_target_close,
@@ -440,7 +440,7 @@ module.exports = grammar({
             alias($.inline_math_open, "_word"),
             alias($.variable_open, "_word"),
 
-            alias($.free_form_modifier_open, "_word"),
+            alias($.free_form_open, "_word"),
         ),
 
         _conflict_close: $ =>
@@ -457,7 +457,7 @@ module.exports = grammar({
             alias($.inline_math_close, "_word"),
             alias($.variable_close, "_word"),
 
-            alias($.free_form_modifier_close, "_word"),
+            alias($.free_form_close, "_word"),
 
             alias($.link_location_end, "_word"),
             alias($.link_description_end, "_word"),
@@ -1110,10 +1110,18 @@ function gen_attached_modifier($, kind, verbatim) {
         seq(
             alias($[kind + "_open"], "_open"),
             choice(
-                seq(
-                    alias($.free_form_modifier_open, "_free_form_open"),
+                // NOTE(vhyrro): This is required to make the parser behave as
+                // expected. By default, the parser will look for both an
+                // opening and closing pair (hence the higher precedence), but
+                // if it does not find one it should mask it as a word instead.
+                prec(1, seq(
+                    $.free_form_open,
                     free_form_content,
-                    alias($.free_form_modifier_close, "_free_form_close"),
+                    $.free_form_close,
+                )),
+                seq(
+                    alias($.free_form_open, "_word"),
+                    free_form_content,
                 ),
                 content,
             ),
