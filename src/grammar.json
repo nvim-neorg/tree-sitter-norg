@@ -323,13 +323,17 @@
               "value": "_line_break"
             },
             {
-              "type": "ALIAS",
+              "type": "PREC",
+              "value": 1,
               "content": {
-                "type": "SYMBOL",
-                "name": "escape_sequence_prefix"
-              },
-              "named": false,
-              "value": "_word"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "escape_sequence_prefix"
+                },
+                "named": false,
+                "value": "_word"
+              }
             }
           ]
         }

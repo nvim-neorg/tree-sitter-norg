@@ -350,7 +350,7 @@ module.exports = grammar({
                 choice(
                     $._verbatim_paragraph_element,
                     alias($.line_break, "_line_break"),
-                    alias($.escape_sequence_prefix, "_word"),
+                    prec(1, alias($.escape_sequence_prefix, "_word")),
                 ),
             ),
         ),
@@ -1110,26 +1110,11 @@ function gen_attached_modifier($, kind, verbatim) {
         seq(
             alias($[kind + "_open"], "_open"),
             choice(
-                // NOTE(vhyrro): This is required to make the parser behave as
-                // expected. By default, the parser will look for both an
-                // opening and closing pair (hence the higher precedence), but
-                // if it does not find one it should mask it as a word instead.
                 prec(1, seq(
                     $.free_form_open,
                     free_form_content,
                     $.free_form_close,
                 )),
-                // TODO: re-introduce the below in order to fix:
-                // *|not free form but still bold*
-                // seq(
-                //     alias($.free_form_open, "_word"),
-                //     free_form_content,
-                // ),
-                // TODO: we also need to gracefully handle the following:
-                // `|*|not free form bold|*|`
-                // This currently fails once the presumably bold_close is
-                // encountered, because the previous free_form_close already
-                // suggested, that the list of choices here is now exhausted
                 content,
             ),
             alias($[kind + "_close"], "_close"),
