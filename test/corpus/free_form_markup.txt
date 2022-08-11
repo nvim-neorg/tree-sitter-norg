@@ -1305,6 +1305,10 @@ No nested markup inside free form verbatim
     (paragraph_segment
       (verbatim
         (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (verbatim
+        (free_form_open)
         (free_form_close)))))
 
 ================================================================================
@@ -1419,6 +1423,10 @@ $|&|not free form variable|&|$
     (paragraph_segment
       (inline_math
         (free_form_open)
+        (free_form_close)))
+    (paragraph_segment
+      (inline_math
+        (free_form_open)
         (free_form_close)))))
 
 ================================================================================
@@ -1450,6 +1458,10 @@ No nested markup inside free form variable
 
 (document
   (paragraph
+    (paragraph_segment
+      (variable
+        (free_form_open)
+        (free_form_close)))
     (paragraph_segment
       (variable
         (free_form_open)

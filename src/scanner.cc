@@ -1175,12 +1175,13 @@ class Scanner
 
                 if (found_another_attached_modifier != m_AttachedModifiers.end() &&
                     m_ActiveModifiers.any() &&
-                    ((found_another_attached_modifier->second == VERBATIM_OPEN ||
-                      found_another_attached_modifier->second == INLINE_MATH_OPEN ||
-                      found_another_attached_modifier->second == VARIABLE_OPEN) ||
+                    (((found_another_attached_modifier->second == VERBATIM_OPEN ||
+                       found_another_attached_modifier->second == INLINE_MATH_OPEN ||
+                       found_another_attached_modifier->second == VARIABLE_OPEN)) ||
                      (!m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] &&
                       !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2] &&
-                      !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2])))
+                      !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2])) &&
+                    m_ActiveModifiers[(found_another_attached_modifier->second - BOLD_OPEN) / 2])
                 {
                     lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_CLOSE;
                     return true;
