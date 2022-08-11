@@ -194,6 +194,9 @@ module.exports = grammar({
 
         $.link_modifier,
 
+        $.attribute_begin,
+        $.attribute_end,
+
         $.bold_open,
         $.bold_close,
 
@@ -392,6 +395,8 @@ module.exports = grammar({
             prec(1, alias($.inline_link_target_close, "_word")),
             alias($.link_description_begin, "_word"),
             prec(1, alias($.link_description_end, "_word")),
+            alias($.attribute_begin, "_word"),
+            prec(1, alias($.attribute_end, "_word")),
             alias($.link_location_begin, "_word"),
             prec(1, alias($.link_location_end, "_word")),
             alias($.link_file_begin, "_word"),
@@ -459,6 +464,7 @@ module.exports = grammar({
 
             alias($.free_form_close, "_word"),
 
+            alias($.attribute_end, "_word"),
             alias($.link_location_end, "_word"),
             alias($.link_description_end, "_word"),
             alias($.inline_link_target_close, "_word"),
@@ -583,17 +589,38 @@ module.exports = grammar({
                 optional(
                     $.link_description,
                 ),
+                optional(
+                    $.attribute,
+                ),
             ),
         ),
 
-        anchor_declaration: $ => $.link_description,
+        anchor_declaration: $ =>
+        prec(1,
+            seq(
+                $.link_description,
+                optional(
+                    $.attribute,
+                ),
+            ),
+        ),
 
         anchor_definition: $ =>
         prec(2,
             seq(
                 $.link_description,
                 $.link_location,
+                optional(
+                    $.attribute,
+                ),
             ),
+        ),
+
+        // Attached modifier extension: attributes
+        attribute: $ => seq(
+            alias($.attribute_begin, "_begin"),
+            field("value", $.word),
+            alias($.attribute_end, "_end"),
         ),
 
         // A first-level heading:
@@ -1118,6 +1145,7 @@ function gen_attached_modifier($, kind, verbatim) {
                 content,
             ),
             alias($[kind + "_close"], "_close"),
+            optional($.attribute),
         ),
     );
 }

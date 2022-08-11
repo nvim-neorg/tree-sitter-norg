@@ -1,0 +1,92 @@
+================================================================================
+Bold attribute
+================================================================================
+*bold*(attribute)
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (bold
+        (attribute
+          (word))))))
+
+================================================================================
+Verbatim attribute
+================================================================================
+`print("hello world")`(python)
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (verbatim
+        (attribute
+          (word))))))
+
+================================================================================
+Link location attribute
+================================================================================
+{* link}(attribute)
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (link
+        (link_location
+          (link_target_heading1)
+          (paragraph))
+        (attribute
+          (word))))))
+
+================================================================================
+Link location with description attribute
+================================================================================
+{* link}[description](attribute)
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (link
+        (link_location
+          (link_target_heading1)
+          (paragraph))
+        (link_description
+          (paragraph))
+        (attribute
+          (word))))))
+
+================================================================================
+Anchor declaration attribute
+================================================================================
+[anchor](attribute)
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (anchor_declaration
+        (link_description
+          (paragraph))
+        (attribute
+          (word))))))
+
+================================================================================
+Anchor definition attribute
+================================================================================
+[anchor]{* link}(attribute)
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (anchor_definition
+        (link_description
+          (paragraph))
+        (link_location
+          (link_target_heading1)
+          (paragraph))
+        (attribute
+          (word))))))

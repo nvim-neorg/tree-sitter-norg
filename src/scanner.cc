@@ -134,6 +134,9 @@ enum TokenType : char
 
     LINK_MODIFIER,
 
+    ATTRIBUTE_BEGIN,
+    ATTRIBUTE_END,
+
     BOLD_OPEN,
     BOLD_CLOSE,
 
@@ -644,6 +647,35 @@ class Scanner
                 m_LastToken != LINK_FILE_END)
             {
                 lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_CLOSE;
+                return true;
+            }
+        }
+        else if (lexer->lookahead == '(')
+        {
+            advance(lexer);
+
+            if (!std::iswspace(lexer->lookahead) && m_LastToken != NONE &&
+                ((m_LastToken >= BOLD_OPEN && m_LastToken <= VARIABLE_CLOSE &&
+                  (m_LastToken % 2) == (BOLD_CLOSE % 2)) ||
+                 m_LastToken == LINK_DESCRIPTION_END || m_LastToken == LINK_LOCATION_END ||
+                 m_LastToken == INLINE_LINK_TARGET_CLOSE))
+            {
+                lexer->result_symbol = m_LastToken = ATTRIBUTE_BEGIN;
+                return true;
+            }
+            else
+            {
+                lexer->result_symbol = m_LastToken = WORD;
+                return true;
+            }
+        }
+        else if (lexer->lookahead == ')')
+        {
+            advance(lexer);
+
+            if (!std::iswspace(m_Previous))
+            {
+                lexer->result_symbol = m_LastToken = ATTRIBUTE_END;
                 return true;
             }
         }
@@ -1267,7 +1299,7 @@ class Scanner
                 (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) ||
                 (lexer->lookahead == '<' || lexer->lookahead == '>' || lexer->lookahead == '[' ||
                  lexer->lookahead == ']' || lexer->lookahead == '{' || lexer->lookahead == '}') ||
-                lexer->lookahead == '\\' ||
+                lexer->lookahead == '\\' || lexer->lookahead == '(' || lexer->lookahead == ')' ||
                 (((char)m_TagContext % 2 == 0) ? (lexer->lookahead == '.') : false))
                 break;
             else

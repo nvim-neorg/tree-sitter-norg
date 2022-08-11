@@ -17,12 +17,15 @@ words%
 - |x| support `?`-linkable target (wiki link)
 - |_| add anonymous node for ellipsis (`...`)
 - |x| refactor ranged attached mods to place `|` inside the attached mods
--- | | TODO: tests
+-- |x| TODO: tests
 - |x| raise precedence of escape character between standard and free-form verbatim markup
 - | | document intersection modifiers: `<space><char><space>`
 -- | | document and support paragraph_segment delimiter: |` : `|
 -- | | document and support notice modifier: |` ! `|
-- | | add attached modifier extensions (attributes: `*bold*|attribute|`)
+- |-| add attached modifier extensions (attributes: `*bold*(attribute)`)
+-- |x| grammar
+-- |-| tests (TODO: add more)
+-- | | documentation
 - |x| remove markers
 - | | document and add attribute detached modifier `%` (standard but logical (cannot be linked to))
 - | | Add `>`, `<` detached modifier extensions (GTD-based)
