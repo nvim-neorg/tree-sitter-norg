@@ -1186,6 +1186,9 @@ class Scanner
                     return true;
                 }
 
+                if (m_ActiveModifiers.any())
+                    return false;
+
                 auto found_detached_modifier_extension =
                     m_DetachedModifierExtensions.find(lexer->lookahead);
 
