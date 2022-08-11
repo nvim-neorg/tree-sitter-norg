@@ -1080,7 +1080,7 @@ class Scanner
     {
         if (lexer->lookahead == '|' &&
             ((m_LastToken >= HEADING1 && m_LastToken <= MULTI_DRAWER_SUFFIX) ||
-             (m_LastToken >= PRIORITY && m_LastToken <= TODO_ITEM_RECURRING)) && m_ActiveModifiers.none())
+             (m_LastToken >= PRIORITY && m_LastToken <= TODO_ITEM_RECURRING)))
         {
             advance(lexer);
 
@@ -1187,14 +1187,14 @@ class Scanner
                 // TODO(vhyrro): This falls through with the priority syntax for some reason
                 if (found_another_attached_modifier != m_AttachedModifiers.end() &&
                         m_ActiveModifiers.any() &&
-                        (found_another_attached_modifier->second == VERBATIM_OPEN &&
-                         found_another_attached_modifier->second == INLINE_MATH_OPEN &&
+                        (found_another_attached_modifier->second == VERBATIM_OPEN ||
+                         found_another_attached_modifier->second == INLINE_MATH_OPEN ||
                          found_another_attached_modifier->second == VARIABLE_OPEN) ||
                     (!m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] &&
                      !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2] &&
                      !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2]))
                 {
-                    std::cout << "oops";
+                    std::cout << (char)m_Previous << std::endl;;
                     lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_CLOSE;
                     return true;
                 }
