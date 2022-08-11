@@ -1158,17 +1158,6 @@ class Scanner
             }
             break;
         }
-        case BOLD_CLOSE:
-        case ITALIC_CLOSE:
-        case STRIKETHROUGH_CLOSE:
-        case UNDERLINE_CLOSE:
-        case SPOILER_CLOSE:
-        case SUPERSCRIPT_CLOSE:
-        case SUBSCRIPT_CLOSE:
-        case VERBATIM_CLOSE:
-        case INLINE_COMMENT_CLOSE:
-        case INLINE_MATH_CLOSE:
-        case VARIABLE_CLOSE:
         case WORD:
         case CAPITALIZED_WORD:
         {
