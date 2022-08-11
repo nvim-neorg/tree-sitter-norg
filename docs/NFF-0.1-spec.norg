@@ -891,19 +891,21 @@ words%
    - And I am still the same list
    @end
 
-   Another important use case is disabling Neorg syntax temporarily, consider this example:
-   @code norg
-   That's when she opened the box
-   - she couldn't believe what she saw.
-   @end
-
-   In this case the second line of the example will be treated as a list item - but what if we don't
-   want that? You can use the trailing modifier to prevent that, of course:
+   Be aware however, that detached modifiers take {# Precedence} over trailing modifiers. So in the
+   following, you will still be obtaining the list item, despite of the trailing modifer ending the
+   previous paragraph:
    @code norg
    That's when she opened the box~
    - she couldn't believe what she saw.
    @end
-   %TODO: test that this actually works%
+
+   If you want to change this, you need to escape the detached modifier in order to make it part of
+   the paragraph, treating this specific example like a sentence with a hyphen between its two
+   parts:
+   @code norg
+   That's when she opened the box~
+   \- she couldn't believe what she saw.
+   @end
 
 * Linkables
   Finally, there is one more kind of in-line syntax which is the {# linkables} kind.
@@ -1183,11 +1185,13 @@ words%
     can overlap)
   ~ Detached modifier extensions
   ~ Linkables (`{}`, `[]`, `<>`)
-  ~ Ranged verbatim attached modifiers (`|``|`, `|``|`)
+  ~ Free-form verbatim attached modifiers (`|``|`, `|``|`)
   ~ Escape character (`\`)
-  ~ Verbatim attached modifiers
+  ~ Free-form attached modifiers
   ~ Ranged attached modifiers (`|**|`, `|//|` etc.)
   ~ Standard attached modifers
+
+  - | | clarify trailing modifier precedence
 
   Should any extra precedence problems arise (let us know if you find any) they can be disambiguated
   through a simple left-to-right precedence approach.

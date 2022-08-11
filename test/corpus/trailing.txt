@@ -9,3 +9,16 @@ This is still part of the heading.
   (heading1
     (heading1_prefix)
     (paragraph_segment)))
+
+=====
+Trailing modifier overwrites following detached modifier
+=====
+This is some text~
+\- and this is not a list item, but a sentence being continued after a Gedankenstrich
+---
+(document
+      (paragraph
+        (paragraph_segment
+          (escape_sequence
+            (escape_sequence_prefix)
+            (any_char)))))
