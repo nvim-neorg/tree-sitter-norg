@@ -30,6 +30,7 @@ words%
 - | | document and add attribute detached modifier `%` (standard but logical (cannot be linked to))
 - | | Add `>`, `<` detached modifier extensions (GTD-based)
 - | | Add timestamp ranges (`Tue 3rd Jul - Thu 5th Jul`)
+- |?| Document standard library macros/attributes?
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
@@ -976,14 +977,13 @@ words%
     @code norg
     {https://github.com/nvim-neorg/neorg}
     @end
-    %TODO: mention that other schema are also possible and should be handled by the OS%
+    Actions related to schemas like `https://`, `ftp://` etc. (when attempting to open the link) are
+    handled by a lower level component running Norg, e.g. {^ Neorg} or the underlying Operating
+    System.
 
 *** Detached Modifier
     Norg allows you to link to any {# Structural Detached Modifiers}[structural] or
     {# Range-able Detached Modifiers}[range-able] detached modifier:
-    %TODO: careful: this will include variables and macros if we keep it like this...%
-    %Maybe we should give those an additional detached modifier attribute to differentiate them.%
-    %Something which indicates that these are tied to some logic/processing?%
 
     @code norg
     * I am a level 1 heading
@@ -1000,7 +1000,9 @@ words%
     definition you would still use `{$ Text}`, there is no reason to make a distinction between a
     ranged and non-ranged detached modifier, as both have the same meaning, one just allows more
     content to exist within itself.
-    %TODO: fix this section to reflect that heading link targets are no longer differentiated by level%
+
+    NOTE ! You /cannot/ link to a logical %TODO: link% modifier using {* linkables}. Things like
+    {*** macros} and {*** variables} are out of the equation.
 
 *** Custom Detached Modifiers
     Apart from linking to the detached modifiers outlined above, you can also link to a set of
@@ -1127,7 +1129,7 @@ words%
     {:link:}
 
     {# link
-       text   }
+       text}
 
     {* a link
     to a heading}
@@ -1155,6 +1157,9 @@ words%
     {
     * text}
 
+    {* some
+    text   } %TODO: whitespace is no longer around at linkable boundaries%
+
     {
         * text
     }
@@ -1175,6 +1180,11 @@ words%
     text]
     @end
 
+* Standard Library
+  Norg comes loaded with a predetermined set of {*** attributes} and {*** macros} for different
+  {:layers:} of the syntax. These will eventually be described here, or within the layers document
+  itself.
+
 * Precedence
   Precedence in Norg is rather simple and intuitive. All non-inline elements have direct
   precedence over all inline elements. Inline elements with a deterministic start and end have
@@ -1182,13 +1192,13 @@ words%
   elements.
 
   Here's the full list:
-  ~ Tags (`|infecting`, `+carryover`, `#standard`, `@verbatim` and `=macro`)
+  ~ Tags (`#infecting`, `+carryover`, `|standard`, `@verbatim` and `=macro`)
   ~ Structural detached modifiers
   ~ Nestable detached modifiers and range-able detached modifiers (there isn't a case where these
     can overlap)
   ~ Detached modifier extensions
   ~ Linkables (`{}`, `[]`, `<>`)
-  ~ Free-form verbatim attached modifiers (`|``|`, `|``|`)
+  ~ Free-form verbatim attached modifiers (`\|``|`, `\|``|`)
   ~ Escape character (`\`)
   ~ Free-form attached modifiers
   ~ Ranged attached modifiers (`|**|`, `|//|` etc.)
