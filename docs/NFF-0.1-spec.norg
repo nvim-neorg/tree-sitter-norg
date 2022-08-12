@@ -852,10 +852,17 @@ words%
    Here, I can write `| leading and trailing whitespace (with a ` char)  |` within a verbatim block
    without accidentally terminating it.
    @end
-
    @code norg
    Here, I can use a literal `$` inside of inline math: $| 10$ + 10$ = 20$ |$.
    @end
+** Attached Modifier Extensions
+   Similarly to {** detached modifier extensions}, {** attached modifier extensions} serve as a way
+   to attach metadata to {* attached modifiers}.
+   The metadata that you can attach however differs from {** detached modifier extensions}, as they
+   serve different usecases.
+
+   The content of {** attached modifier extensions} consists of a /single/ reference to an
+   {*** Attribute}[attribute]. 
 
 * Trailing Modifier
   Trailing modifiers are another separate kind of modifiers in the Norg syntax. They have one very
