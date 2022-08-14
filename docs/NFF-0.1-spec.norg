@@ -1007,7 +1007,7 @@ words%
     detached modifier, /except/ "ranged" versions of said modifiers - those are *disallowed* within
     the link syntax. By this we mean that syntax like `{$$ Text}` is _invalid_. To link to a ranged
     definition you would still use `{$ Text}`, there is no reason to make a distinction between a
-    ranged and non-ranged detached modifier, as both have the same meaning, one just allows more
+    ranged and non-ranged detached modifier as both have the same meaning, one just allows more
     content to exist within itself.
 
     NOTE ! You /cannot/ link to a logical %TODO: link% modifier using {* linkables}. Things like
@@ -1015,8 +1015,8 @@ words%
 
 *** Custom Detached Modifiers
     Apart from linking to the detached modifiers outlined above, you can also link to a set of
-    custom modifiers specifically designed for links. These are the `#` (magic) and `@` (file)
-    linkable locations.
+    custom modifiers specifically designed for links. These are the `#` (magic), `/` (file), `@`
+    (timestamp) and `?` (wiki link) linkable locations.
 
 **** The File Linkable (`/`)
      Sometimes you may want to link to an external file that is not a Norg file.
@@ -1040,7 +1040,7 @@ words%
 *** Inline Linkables
     Although most linkable items are either {# Structural Detached Modifiers}[structural] or
     {# Range-able Detached Modifiers}[range-able], there are also syntax elements in Norg that
-    are inline - these are the `|name` {# Carryover Tags}[carryover tag] and the
+    are inline - these are the `#name` {# Carryover Tags}[carryover tag] and the
     {# Inline Link Target}[inline link target]. Both of these can be linked to through the
     {# The Magic Char (`#`)}[the magic char].
 
@@ -1050,15 +1050,15 @@ words%
     - `{/ my/file.norg}`
     - `{file://my/file.norg}`
 
-    Why are there this many? Let's explain:
-    - `{:my/file:}` is strictly to access `.norg` files and nothing else. More specifically, it's
+    Why are there this many?
+    ~ `{:my/file:}` is strictly to access `.norg` files and nothing else. More specifically, it's
        designed to access a resource /within/ a file (`{:my/file:* Heading}`), with the side effect
        of being able to also exist in a standalone fashion (`{:my/file:}`).
-    - `{/ my/file.norg}` is used to link to a file and a file /only/ (vs `{:my/file:* Heading}`
+    ~ `{/ my/file.norg}` is used to link to a file and a file /only/ (vs `{:my/file:* Heading}`
        which links to an element within a file). Although it /can/ link to `.norg` files, its main
        use is to link to non-`.norg` files instead. Using the `/` syntax also disallows you from
        accessing items within the file.
-    - `{file://my/file.norg}` is simply utilizing the `file://` schema to access a file. This
+    ~ `{file://my/file.norg}` is simply utilizing the `file://` schema to access a file. This
        isn't /the/ recommended way to link to files, but it exists simply because of URI schemas.
 
 ** Link Description
@@ -1076,39 +1076,37 @@ words%
    @end
 
    When a custom description is required, it must be placed *_after_* the link location. This makes
-   sense in terms of writing as you first define where you link to, and then describe it further:
+   sense in terms of writing as you first define where you link to, and then annotate it afterwards:
 
    @code norg
-   {* I am a link}[with a description]
+   Click {* I am a link}[here] to find out more.
    @end
-   %TODO: this example does not really make sense because the link location text will be concealed%
-
 ** Anchors
    Norg also has a concept called {# anchors}. These allow you to place a standalone
    {# link description} inside of text (referred to as an <anchor declaration>).
    The target which this anchor links to can then be _defined_ at another place in the document
-   with an <anchor definition> which is an initial {# link description} followed by a
-   {# link location}. This is especially useful when you want to link to the same target very
+   with an <anchor definition> which is an initial {** link description} followed by a
+   {** link location}. This is especially useful when you want to link to the same target very
    often, like for example a specific website.
 
    Few usage examples:
-   %TODO(vhyrro): Update this%
    @code norg
    [Neorg] is a fancy organizational tool for everyone.
 
-   I like shilling [Neorg] sorry :(
-
-   [Neorg]{https://github.com/nvim-neorg/neorg}
+   I like shilling [Neorg]{https://github.com/nvim-neorg/neorg} sorry :(
    @end
-   Here we /declare/ the anchor twice, then /define/ the anchor at the very bottom.
-   The `[Neorg]` declarations point to the definition, and then the definition points to the
-   website.
-   %TODO: we should clarify that this is _not_ a two-step link but that clicking the Neorg{^ neorg}
-   %link% should immediately open the link location% I.e. we should make the difference to footnotes
-   %more clear%
+   Here we /declare/ the anchor once at the top, then /define/ the anchor at the very bottom. The
+   `[Neorg]` declaration points directly to the website, just like the definition does. It's like a
+   copy + paste of the link location without needing to type it out.
+
+   Other than the declaration behaviour described above anchors have no other special meaning and/or
+   semantics, and behave just like regular {** links} do. This means they can be used as a
+   substitute for regular {** links} should the user prefer the "description + location" syntax
+   versus the "location + description" syntax.
 
    Anchors (like {# links}) may also be described by using `[...]`, in which case the syntax looks
    like this: `[anchor name][anchor description]`.
+   %TODO(vhyrro): Discuss `[anchor name]{# Location}[description]`%
 
 ** Inline Link Targets
    Finally, Norg also has the possibility of placing link targets at arbitrary in-line positions
