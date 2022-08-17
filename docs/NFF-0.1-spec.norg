@@ -485,28 +485,54 @@
     - A TODO status extension starts with a `|` char
     - Immediately a single status indicator character must follow. The following statuses are
       supported:
-   -- |` `|: undone (a literal space)
-   -- `x`: done
-   -- `?`: needs further input/clarification
-   -- `!`: urgent
-   -- `+`: recurring
-   -- `-`: in-progress/pending
-   -- `=`: on hold
-   -- `_`: put down/cancelled
-   - Finally another `|` char closes the todo status extension.
+    -- |` `|: undone (a literal space)
+    -- `x`: done
+    -- `?`: needs further input/clarification
+    -- `!`: urgent
+    -- `+`: recurring (with an optional {**** timestamp extension}[timestamp])
+    -- `-`: in-progress/pending
+    -- `=`: on hold
+    -- `_`: put down/cancelled
+    - Finally another `|` char closes the todo status extension.
 
    NOTE: The TODO status extension /must/ be followed by whitespace (excluding {# line ending}s).
 
-*** | | Timestamp Extension
-    Maybe we can discuss the full timestamp format specification here, too, and then refer back to
-    it when discussing links to timestamps?
+*** Advanced Detached Modifier Extensions
+    Apart from just being able to assign a TODO state it is also possible to apply more complex
+    states with parameters to certain indicators. Such examples are the {**** timestamp extension}
+    or the {**** priority extension}.
+    The syntax is very simple - an indicator char (e.g. the `+` indicator described above) may be
+    succeeded by a single {# whitespace} character and then a set of {** words} (without newlines)
+    follow. This set of {** words} then becomes the parameters for the indicator.
 
-    - Format: |`<day>,? <day-of-month> <month> <year> <time> <timezone>`|
-    - Example: |`Sat, 29 Oct 1994 19:43:31 GMT`|
-    - any of these elements can be dropped/ignored but the order may not change!
+    For example:
+    @code norg
+    - |+ 5th July| This task recurs every 5th of July.
+    - |# A|@ 3rd feb| This task has a priority `A` and is assigned to the 3rd of February.
+    @end
 
-*** | | Priority Extension
-    In the form of `|# A|`, etc.
+    Not all {** detached modifier extensions} support parameters and for good reason. There is no
+    need to attach extra metadata to a done or undone state for instance.
+
+    Below are a few other extensions that may be used:
+
+**** | | Timestamp Extension
+     Maybe we can discuss the full timestamp format specification here, too, and then refer back to
+     it when discussing links to timestamps?
+
+     - Format: |`<day>,? <day-of-month> <month> <year> <time> <timezone>`|
+     - Example: |`Sat, 29 Oct 1994 19:43:31 GMT`|
+     - any of these elements can be dropped/ignored but the order may not change!
+
+**** | | Priority Extension
+     This extension allows for you to specify a priority of your detached modifier extension. Note
+     that Norg does not specify strict semantics for this detached modifer extension, and as such
+     there is no set-in-stone way to specify priorities. The most common (and recommended) way to
+     specify priorities is to go from `A-Z`, but many also prefer `0-9` or even named priorities
+     like `LOW`\/`MEDIUM`\/`HIGH`.
+
+     Neorg's{^ Neorg} GTD implementation even repurposes the priority for use as contexts, so yes,
+     this detached modifier extension is very vertasile.
 
 *** Indent Segment Extension
     Since {# nestable detached modifiers} can only contain a {# paragraphs}[paragraph] this can cause severe
