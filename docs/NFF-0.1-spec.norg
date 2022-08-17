@@ -877,8 +877,19 @@ words%
    The metadata that you can attach however differs from {** detached modifier extensions}, as they
    serve different usecases.
 
-   The content of {** attached modifier extensions} consists of a /single/ reference to an
-   {*** Attribute}[attribute]. 
+   The content of {** attached modifier extensions} consists of a set of references to many
+   {*** Attribute}[attributes]. These attributes are delimited by the contextual delimiter `|`.
+   %TODO: Make a custom section for the `|` char%.
+
+*** Examples
+    @code norg
+    `print("This is some python")`(python) <- The python attribute highlights the text as python
+    *print("This is some python too")*(python) <- Yes, this is Norg markup highlighted as python.
+                                                  Don't know why you'd do it but hey you do you.
+
+    {* Link location}[this is an important link](important|red) <- Highlights the link as big, bold
+                                                                   and red.
+    @end
 
 * Trailing Modifier
   Trailing modifiers are another separate kind of modifiers in the Norg syntax. They have one very
