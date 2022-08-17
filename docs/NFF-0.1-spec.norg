@@ -1,9 +1,5 @@
 %Use many examples!%
 %And also provide counter-examples for cases which are not expected to work!%
-%Markup cannot be directly chained one after another, i.e. `*hello**world*` will produce
-`<b>hello**world</b>`%
-%The above is because any sequence of two or more consecutive characters are instantly treated as
-words%
 %Should speech marks ("") be attached modifiers? Imo it could be pretty useful to have them as that%
 
 - |-| add table syntax (cells) (`:`-detached modifier)
@@ -12,7 +8,8 @@ words%
 - |x| make sure that no whitespace can appear at linkable boundaries
 - |x| swap strong attribute and non-verbatim ranged tag characters
 - |x| explain differentation of verbatim and non-verbatim tags in spec
-- | | support and document line number in file links
+- |-| support and document line number in file links
+-- | | support line numbers in `{:file:123}` links?
 - |x| reverse heading links to be per-level
 - |x| support `?`-linkable target (wiki link)
 - |_| add anonymous node for ellipsis (`...`)
@@ -22,7 +19,7 @@ words%
 - | | document intersection modifiers: `<space><char><space>`
 -- | | document and support paragraph_segment delimiter: |` : `|
 -- | | document and support notice modifier: |` ! `|
-- |-| add attached modifier extensions (attributes: `*bold*(attribute)`)
+- |x| add attached modifier extensions (attributes: `*bold*(attribute)`)
 -- |x| grammar
 -- |-| tests (TODO: add more)
 -- | | documentation
@@ -1048,6 +1045,12 @@ words%
      In that case you may use `{/ /path/to/my/file.txt}` (notice the mandatory space after the `/`
      char, just like with the {# detached modifier}s). Paths are relative to the Norg
      file that contains the link.
+
+     In addition to just providing a path, you may also specify a line number at the end via a colon `:`.
+     Example:
+     @code norg
+     {/ my-file.txt:123} <- This is a link to `my-file.txt` at line 123
+     @end
      %TODO: shouldn't we support the same kind of file path processing as we do within norg files?%
 
 **** | | Timestamps (`@`)
