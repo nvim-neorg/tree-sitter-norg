@@ -16,7 +16,7 @@ words%
 - |x| reverse heading links to be per-level
 - |x| support `?`-linkable target (wiki link)
 - |_| add anonymous node for ellipsis (`...`)
-- |x| refactor ranged attached mods to place `|` inside the attached mods
+- |x| refactor free-form attached mods to place `|` inside the attached mods
 -- |x| TODO: tests
 - |x| raise precedence of escape character between standard and free-form verbatim markup
 - | | document intersection modifiers: `<space><char><space>`
@@ -715,6 +715,7 @@ words%
   - An opening modifier may _NOT_ be succeeded by {# whitespace}
   - A closing modifier may _NOT_ be preceded by {# whitespace}
   - A closing modifier may only be succeeded by {# whitespace} or {# punctuation}
+  +name attached modifier range
   - \
      {# Attached modifiers} can only span at maximum a single {# paragraphs}[paragraph], i.e. they get
      terminated as soon as they encounter a {# paragraph break}.
@@ -733,8 +734,10 @@ words%
      text*
      @end
      Is fine, and will result in *`this text`* being bold.
-     %TODO: I think this is currently not working as expected on the dev branch of TS%
   - Nested {# attached modifiers} should be closed in the opposite order they were opened.
+  - Two or more consecutive attached modifiers of the same type (i.e. `**`, `//` etc.) should be
+    instantly "disqualified" and parsed as raw text in /all/ circumstances and without any
+    exceptions.
 
   Their name should be rather self explanatory - both the opening and closing modifier are attached
   to one another.
@@ -796,6 +799,36 @@ words%
    */Bold and italic* and only italic/
    @end
 
+** Free-form Attached Modifiers
+   Even with all the rules described in the above sections there are still some evident limitations
+   with attached modifiers, namely:
+   - Arbitrary {# whitespace} within {# attached modifiers} is not permitted: `*  bold  *` is
+     invalid.
+   - Representing verbatim attached modifier chars within the corresponding verbatim blocks is not
+     possible: \`I cannot place a (\`) char inside here without accidentally terminating the
+     block.\`.
+     %TODO: fix formatting%.
+
+   Free-form modifiers fix this with a special syntax to specify the
+   beginning and end of a ranged block. For example:
+   @code norg
+   Here, I can write `| leading and trailing whitespace (with a ` char)  |` within a verbatim block
+   without accidentally terminating it.
+   @end
+   @code norg
+   Here, I can use a literal `$` inside of inline math: $| 10$ + 10$ = 20$ |$.
+   @end
+
+   The use of pipes is special because the position of the pipe (i.e. whether it's before or after the
+   attached modifier) can unambiguously tell us whether that symbol is an opening attached modifier
+   or a closing one. It's thanks to this that whitespace is freely allowed within its content.
+
+   Aside from the details described above, free-form attached modifiers have the following properties:
+   - Backslashes (`\`) are treated as verbatim and do not mean an {*** escaping}[escape sequence]
+     (see {* precedence}).
+   - Despite being called "free-form" they can still only span a single paragraph (see {# attached
+     modifier range}).
+
 ** Link Modifier
    The link modifier, `:`, is a special modifier type called an _intersecting_ modifier. It puts a
    twist on the original attached modifier rules - in fact, it's the polar opposite.
@@ -838,25 +871,6 @@ words%
 
    If the above conditions are not met, then the character should be treated as a literal `:`.
 
-** Ranged Attached Modifiers
-   Even with all the rules described in the above sections there are still some evident limitations
-   with attached modifiers, namely:
-   - Arbitrary {# whitespace} within {# attached modifiers} is not permitted: `*  bold  *` is
-     invalid.
-   - Representing verbatim attached modifier chars within the corresponding verbatim blocks is not
-     possible: \`I cannot place a (\`) char inside here without accidentally terminating the
-     block.\`.
-     %TODO: fix formatting%.
-
-   Ranged attached modifiers fix this with a special (and unambiguous) syntax to specify the
-   beginning and end of a ranged block. For example:
-   @code norg
-   Here, I can write `| leading and trailing whitespace (with a ` char)  |` within a verbatim block
-   without accidentally terminating it.
-   @end
-   @code norg
-   Here, I can use a literal `$` inside of inline math: $| 10$ + 10$ = 20$ |$.
-   @end
 ** Attached Modifier Extensions
    Similarly to {** detached modifier extensions}, {** attached modifier extensions} serve as a way
    to attach metadata to {* attached modifiers}.
@@ -1209,7 +1223,7 @@ words%
   ~ Free-form verbatim attached modifiers (`\|``|`, `\|``|`)
   ~ Escape character (`\`)
   ~ Free-form attached modifiers
-  ~ Ranged attached modifiers (`|**|`, `|//|` etc.)
+  ~ Free-form modifiers (`|**|`, `|//|` etc.)
   ~ Standard attached modifers
 
   - | | clarify trailing modifier precedence
