@@ -126,9 +126,9 @@
 *** Escaping
     A single {# character} can be escaped if it is immediately preceded by a backslash, `\`
     (`U+005C`). Any {# character} may be escaped /apart from/ {# character}s within verbatim
-    segments. For more info about precedence take a look at the {* precedence} section.
-
-    %TODO: Add link to verbatim segments%
+    segments (present in e.g. {*** verbatim ranged tags} and {** free-form attached
+    modifiers}[free-form attached modifier] contents). For more info about precedence take a look at
+    the {* precedence} section.
 
 *** Special Characters
     %TODO: how do non-latin characters work? If they go in here, they do not form words as below...%
@@ -161,8 +161,8 @@
    - A <paragraph break> (which equals two consecutive {# line endings})
    - Any of the {# detached modifiers}
    - Any of the {# delimiting modifiers}
-   - Any of the /non-logical/ {# ranged tags} (see link for more info)
-     %TODO: also differentiate the various carryover tag kinds%
+   - Any of the {# ranged tags} (see link for more info)
+   - The {*** strong carryover tags}[strong carryover tag]
 
 * Detached Modifiers
   Norg has several detached modifiers. The name originates from their differentiation to the
@@ -178,18 +178,40 @@
   The following list outlines all valid *detached* modifiers. The list also adds four possible
   properties to each category which will be explained in more detail below.
   - `*`: {# Headings} (structural, nestable)
-  - `-`: {# Unordered Lists} (nestable, grouping)
-  - `~`: {# Ordered Lists} (nestable, grouping)
-  - `>`: {# Quotes} (nestable, grouping)
+  - `-`: {# Unordered Lists} (nestable)
+  - `~`: {# Ordered Lists} (nestable)
+  - `>`: {# Quotes} (nestable)
   - `$`: {# Definitions} (range-able)
   - `^`: {# Footnotes} (range-able)
   - | | `<`: add drawers/details (range-able)
   - | | `&`: add variables (range-able, logical)
   - | | `=`: add macros (range-able, logical)
-  - | | `:`: add cells (range-able, logical, grouping)
+  - | | `:`: add cells (range-able, logical)
   - | |`%`: add attribute (logical)
 
   %TODO: improve formatting of the above. As a table?%
+
+** Grouping
+   Both nestable and range-able detached modifiers have a unique quality - when several consecutive
+   modifiers /of the same type/ are encountered (by consecutive we mean _NOT_ separated via a
+   {# paragraph break}), they are treated as one whole <object>. This is crucial to understand as
+   it's required for the many {# carryover tags}[carryover tag] types to function.
+
+*** Examples
+    @code norg
+    These naturally group because they are range-able, forming
+    a definition list:
+    $ Term 1
+      Definition 1!
+    $ Term 2
+      Definition 2!
+    @end
+   
+    @code norg
+    Together these form one whole unordered list:
+    - List item 1
+    - List item 2
+    @end
 
 ** Structural Detached Modifiers
    The first detached modifier type is the /structural/ modifier type. As the name suggests,
@@ -221,6 +243,7 @@
     Although headings are both structural /and/ nestable, the former takes precedence over the
     latter, meaning that headings only affect a {# paragraph segments}[paragraph segment] as their
     title. This is for user convenience as it does not require an empty line right below a heading.
+    Because of this precedence headings are also non-{** grouping}.
 
     Headings serve as a way to categorize and organize other elements into smaller chunks for better
     readability.
@@ -324,13 +347,6 @@
     >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
             This text is still part of the level 7 quote.
     @end
-    ---
-
-   #name objects
-   Nestable detached modifiers have a unique quality - when several consecutive /nestable/ modifiers
-   are encountered (by consecutive we mean _NOT_ separated via a {# paragraph break}), they are
-   treated as one whole /object/. This is important to note as it plays a role with {# carryover
-   tags}. %TODO: change now that we have the `groupable` attribute for modifiers%.
 
 *** Invalid Examples
     - \
@@ -655,7 +671,7 @@
     contexts: %TODO: discuss%
     - When the element has children, the weak carryover tag only applies to the single item (it does
       not carry over to its children).
-    - When the element is part of an {# objects}[object], no other items other than the item below
+    - When the element is part of an {# object}, no other items other than the item below
       the weak carryover tag is affected.
 
 **** Examples
@@ -678,11 +694,11 @@
 
 *** Strong Carryover Tags
     Contrary to its weak variant, the strong carryover tag exists to annotate an entire
-    {# objects}[object] versus just a single item. Its behaviour is opposite to its weak
+    {# object} versus just a single item. Its behaviour is opposite to its weak
     counterpart, namely:
     - When the element has children, the strong carryover tag applies to both the whole item and all
       of its children.
-    - When the element is part of an {# objects}[object], all items in the object are affected.
+    - When the element is part of an {# object}, all items in the object are affected.
 
 **** Examples
      A nice use case is the `#choice` carryover tag, which converts all items in a list into a
