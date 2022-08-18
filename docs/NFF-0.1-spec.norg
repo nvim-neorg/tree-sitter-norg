@@ -259,7 +259,7 @@
    /no/ title, and affects the following `paragraph` instead of only the next
    {# paragraph segments}[paragraph segment]. Said paragraph then becomes the modifier's /content/.
    This means that in order to terminate the detached modifier contents, you need two consecutive
-   line breaks (see {# paragraph break}){^ 1}.
+   line breaks (see {# paragraph break}).
 
    Here are some correct examples of nestable detached modifiers:
 
@@ -364,11 +364,6 @@
         @end
     - Headings are also /nestable/ detached modifiers but will only be discussed later as part of the
       {# structural detached modifiers} section.
-
-    ^ 1
-    This isn't the case if the detached modifier is succeeded by the {# detached modifier
-    extensions}[`\` detached modifier extension].
-    %TODO: I'm not sure I fully understand this footnote. It would help to see an example here.%
 
 ** Range-able Detached Modifiers
    Range-able detached modifiers can occur in two forms:
@@ -551,12 +546,15 @@
      to specify priorities is to go from `A-Z`, but many also prefer `0-9` or even named priorities
      like `LOW`\/`MEDIUM`\/`HIGH`.
 
-     Neorg's{^ Neorg} GTD implementation even repurposes the priority for use as contexts, so yes,
+     Neorg's{^ Neorg} GTD{^ GTD} implementation even repurposes the priority for use as contexts, so yes,
      this detached modifier extension is very vertasile.
+
+     ^ GTD
+     {https://hamberg.no/gtd}
 
 **** Due Date Extension
      As the name suggests, this extension marks something as "due before x", where x is a
-     {**** timestamp extension}[timestamp]. Especially useful in GTD and other forms of note taking
+     {**** timestamp extension}[timestamp]. Especially useful in GTD{^ GTD} and other forms of note taking
      and time management applications.
 
      Syntax:
@@ -566,7 +564,7 @@
 
 **** Start Date Extension
      A counterpart to the {**** due date extension} - defines when a task *begins*. Also useful in
-     GTD %TODO: give all GTD references a footnote with a link to the GTD website%.
+     GTD{^ GTD}.
 
      Syntax:
      @code norg
