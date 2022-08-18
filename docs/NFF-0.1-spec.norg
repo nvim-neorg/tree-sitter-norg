@@ -681,7 +681,7 @@
      - List item 3
      @end
 
-     Only the `This is some content` text is highlighted %TODO: is this correct?%:
+     Only the `Heading 1` and `This is some content` text is highlighted:
      @code norg
      +color red
      * Heading 1
@@ -1203,7 +1203,6 @@
 
    Anchors (like {# links}) may also be described by using `[...]`, in which case the syntax looks
    like this: `[anchor name][anchor description]`.
-   %TODO(vhyrro): Discuss `[anchor name]{# Location}[description]`%
 
 ** Inline Link Targets
    Finally, Norg also has the possibility of placing link targets at arbitrary in-line positions
