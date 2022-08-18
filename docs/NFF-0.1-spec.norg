@@ -523,15 +523,39 @@
      - Example: |`Sat, 29 Oct 1994 19:43:31 GMT`|
      - any of these elements can be dropped/ignored but the order may not change!
 
-**** | | Priority Extension
-     This extension allows for you to specify a priority of your detached modifier extension. Note
-     that Norg does not specify strict semantics for this detached modifer extension, and as such
-     there is no set-in-stone way to specify priorities. The most common (and recommended) way to
-     specify priorities is to go from `A-Z`, but many also prefer `0-9` or even named priorities
+**** Priority Extension
+     This extension allows for you to specify a priority of your detached modifier extension.
+
+     The syntax is as follows:
+     @code norg
+     * |# A| This heading has priority A (highest priority)
+     @end
+     Note that Norg does not specify strict semantics for this detached modifer extension, and as
+     such there is no set-in-stone way to specify priorities. The most common (and recommended) way
+     to specify priorities is to go from `A-Z`, but many also prefer `0-9` or even named priorities
      like `LOW`\/`MEDIUM`\/`HIGH`.
 
      Neorg's{^ Neorg} GTD implementation even repurposes the priority for use as contexts, so yes,
      this detached modifier extension is very vertasile.
+
+**** Due Date Extension
+     As the name suggests, this extension marks something as "due before x", where x is a
+     {**** timestamp extension}[timestamp]. Especially useful in GTD and other forms of note taking
+     and time management applications.
+
+     Syntax:
+     @code norg
+     - |< Tue 5th Feb| Do this before the 5th february.
+     @end
+
+**** Start Date Extension
+     A counterpart to the {**** due date extension} - defines when a task *begins*. Also useful in
+     GTD %TODO: give all GTD references a footnote with a link to the GTD website%.
+
+     Syntax:
+     @code norg
+     - |> Tue 5th Feb| This task starts after the 5th february.
+     @end
 
 *** Indent Segment Extension
     Since {# nestable detached modifiers} can only contain a {# paragraphs}[paragraph] this can cause severe
@@ -594,13 +618,11 @@
     @code norg
     #tag-name.subtag parameter1 parameter2
     @end
-
     By default parameters are space-separated. In order to create multi-word parameters, you may
     escape the space character with a backslash (`\`).
     @code norg
     #tag-name.subtag parameter1\ with\ spaces parameter2
     @end
-
     Parameters may consist of any character (apart from a {# line break}, of course).
     ---
 
@@ -637,22 +659,22 @@
       the weak carryover tag is affected.
 
 **** Examples
-    Only the second item is affected:
-    @code norg
-    - List item 1
-    +color red
-    - List item 2
-    - List item 3
-    @end
+     Only the second item is affected:
+     @code norg
+     - List item 1
+     +color red
+     - List item 2
+     - List item 3
+     @end
 
-    Only the `This is some content` text is highlighted:
-    @code norg
-    +color red
-    * Heading 1
-      This is some content.
-    ** Heading 2
-       This is also some content.
-    @end
+     Only the `This is some content` text is highlighted %TODO: is this correct?%:
+     @code norg
+     +color red
+     * Heading 1
+       This is some content.
+     ** Heading 2
+        This is also some content.
+     @end
 
 *** Strong Carryover Tags
     Contrary to its weak variant, the strong carryover tag exists to annotate an entire
@@ -686,7 +708,6 @@
 ** Ranged Tags
    Ranged tags are a way to express custom information within a range.
    They begin with the traditional tag declaration and are ended with an `end` statement.
-   They allow you to create your own completely custom syntax within a determined boundary.
 
    The `end` statement has a simple ruleset:
    - Must be at the start of a line, may be preceded by any whitespace (but nothing else)
@@ -726,13 +747,17 @@
 *** Verbatim Ranged Tags
     In other cases you may be more interested in a {# verbatim ranged tags}[verbatim ranged tag],
     which disallows any Norg markup to exist inside of itself. A prime example of this is `@code`,
-    which creates a code block - you obviously don't want nested Norg syntax within that!
+    which creates a code block - you obviously don't want nested Norg syntax within that! Note how
+    in the following example the `@MyAnnotation` would clash with Norg's verbatim ranged tag syntax.
     @code java
     @MyAnnotation(name="someName", value="Hello World")
     public class TheClass {
       // ...
     }
     @end
+    This ranged tag type is the most commonly used one as it has the widest range of applications.
+    The {*** standard ranged tags}[standard ranged tag] is a much more niche syntax element targeted
+    at specific use cases.
 
 * Attached Modifiers
   We can now discuss attached modifiers (which originally gave rise to the name of
@@ -1184,8 +1209,7 @@
    directly linked to with a dedicated char in the link syntax.
    To link to these syntax elements you can /only/ use {# The Magic Char (`#`)}[the magic char].
 
-   An important thing to note is that unlike {# links} and {# anchors} {# inline link targets} may
-   /not/ have a description.
+   Unlike {# links} and {# anchors}, {# inline link targets} may /not/ have a description.
 
 ** Valid/Invalid Examples
 *** Valid Examples
