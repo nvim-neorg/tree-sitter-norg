@@ -510,11 +510,10 @@
     - |+ 5th July| This task recurs every 5th of July.
     - |# A|@ 3rd feb| This task has a priority `A` and is assigned to the 3rd of February.
     @end
-
     Not all {** detached modifier extensions} support parameters and for good reason. There is no
     need to attach extra metadata to a done or undone state for instance.
 
-    Below are a few other extensions that may be used:
+    Below are descriptions for a few other extensions that may be used.
 
 **** | | Timestamp Extension
      Maybe we can discuss the full timestamp format specification here, too, and then refer back to
@@ -571,6 +570,10 @@
     %TODO: we need to convert all example ranged tags, right?%
 
 * Tags
+  The main differentiator from simple markup formats and more complex ones is the ability to define
+  data and extensions for the format. Norg allows for you to extend its syntax and define data
+  within clear boundaries - it does this using tags.
+
   Tags are Norg's official way of extending its own syntax. It's the /only/ way that extensions
   may be made to the format.
 
@@ -578,11 +581,12 @@
   interpreted. Before we discuss those, however, we should discuss the syntax rules for tags:
   - A tag is similar to a {# detached modifiers}[detached modifier] in the sense that it must begin
     at the beginning of a line with optional {# whitespace} (but nothing else) preceding it.
-  - After that you will encounter the special tag character (`@`, `|`, `+`, `#` and `=`), /none/ of which are
-    attached modifiers - if those chars were attached modifiers then we would have ambiguity on our
-    hands. The special tag character is then /immediately/ followed by text, which becomes the /tag
-    name/. Said tag name can consist of any {# alphanumeric characters}[alphanumeric character]
-    and/or `-`, `_` and `.`.
+  - After that you will encounter the special tag character (`@`, `|`, `+`, `#` and `=`), /none/ of
+    which are attached modifiers (if those characters were attached modifiers then we wouldn't know
+    whether or not the character is an attached modifier opener or a tag opener until we would have
+    parsed the whole line; in other words, we would be dealing with ambiguity). The special tag
+    character is then /immediately/ followed by text, which becomes the /tag name/. Said tag name
+    can consist of any {# alphanumeric characters}[alphanumeric character] and/or `-`, `_` and `.`.
   - Tags can have their names delimited by a `.` in order to create a "hierarchy", e.g.
     `document.meta`.
   - \
