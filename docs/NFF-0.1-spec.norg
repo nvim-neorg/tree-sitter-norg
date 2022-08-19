@@ -1123,8 +1123,14 @@
      As with the {# file location} syntax, the file linkable also supports the special `$` character
      to denote the root of the current workspace.
 
-**** | | Timestamps (`@`)
-     %TODO%
+**** Timestamps (`@`)
+     The syntax for timestamps within links is the same as the syntax used in the
+     {**** timestamp extension}.
+
+     Example:
+     @code norg
+     Frank's birthday is on {@ Mon 5th May 2023}.
+     @end
 
 **** The Magic Char (`#`)
      Sometimes you simply want to be lazy, or you want to link to an {# inline linkables}[inline
@@ -1132,7 +1138,7 @@
      use the magic char: `#`. It links to /any/ item type. The syntax is exactly the same as with
      the other modifiers: `{# My Location}`.
 
-**** | | Wiki Links (`?`)
+**** Wiki Links (`?`)
      When building large knowledge bases it's sensible to want to quickly create links between files
      without worrying about the location of said file. The *wiki link* allows you to link to any
      heading in any file in the current workspace. You don't specify any filepaths within the link,
