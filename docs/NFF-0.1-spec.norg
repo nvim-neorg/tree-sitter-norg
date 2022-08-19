@@ -1120,7 +1120,8 @@
      @code norg
      {/ my-file.txt:123} <- This is a link to `my-file.txt` at line 123
      @end
-     %TODO: shouldn't we support the same kind of file path processing as we do within norg files?%
+     As with the {# file location} syntax, the file linkable also supports the special `$` character
+     to denote the root of the current workspace.
 
 **** | | Timestamps (`@`)
      %TODO%
@@ -1132,7 +1133,10 @@
      the other modifiers: `{# My Location}`.
 
 **** | | Wiki Links (`?`)
-     %TODO%
+     When building large knowledge bases it's sensible to want to quickly create links between files
+     without worrying about the location of said file. The *wiki link* allows you to link to any
+     heading in any file in the current workspace.
+
 
 *** Inline Linkables
     Although most linkable items are either {# Structural Detached Modifiers}[structural] or
