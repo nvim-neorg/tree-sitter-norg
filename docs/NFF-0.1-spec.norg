@@ -1135,8 +1135,20 @@
 **** | | Wiki Links (`?`)
      When building large knowledge bases it's sensible to want to quickly create links between files
      without worrying about the location of said file. The *wiki link* allows you to link to any
-     heading in any file in the current workspace.
+     heading in any file in the current workspace. You don't specify any filepaths within the link,
+     just the title of the heading you want to search for.
 
+     Syntax:
+     @code norg
+     Cats are {? mammals}, they make for great {? house pets} too!
+     @end
+     For developers implementing this behaviour: there are no restrictions in which order you parse
+     your files to hop between wiki links, as long as the following coniditions are met:
+     - The current file is the first file that is searched (this allows for `?` to also work as a
+       generic catchall link for all heading levels)
+     - All files in the current workspace are parsed/enumerated (including subdirectories)
+
+     %TODO: does the `{:file:}` syntax work with wiki links?%
 
 *** Inline Linkables
     Although most linkable items are either {# Structural Detached Modifiers}[structural] or
@@ -1256,7 +1268,8 @@
     {*text}
 
     {:file:https://github.com}
-    {:file:@ file.txt}
+    {:file:/ file.txt}
+    {:file:@ Wednesday 30th Jan}
 
     {* 
     text}
