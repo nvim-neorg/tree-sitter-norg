@@ -526,13 +526,17 @@
 
     Below are descriptions for a few other extensions that may be used.
 
-**** | | Timestamp Extension
-     Maybe we can discuss the full timestamp format specification here, too, and then refer back to
-     it when discussing links to timestamps?
+**** Timestamp Extension
+     The timestamp extension allows you to associate a {* detached modifiers}[detached modifier]
+     with a date/time.
+     The syntax for a timestamp is as follows: `<day>,? <day-of-month> <month> <year> <time> <timezone>`
 
-     - Format: |`<day>,? <day-of-month> <month> <year> <time> <timezone>`|
-     - Example: |`Sat, 29 Oct 1994 19:43:31 GMT`|
-     - any of these elements can be dropped/ignored but the order may not change!
+     Example: `Sat, 29 Oct 1994 19:43:31 GMT`
+
+     Obviously, you're not required to type the whole syntax out very time. Any of the elements in
+     angled brackets (`<>`) can be dropped/ignored, but the order of those values may not change!
+
+     Here is a detailed index of all possible alterations for each value:
 
 **** Priority Extension
      This extension allows for you to specify a priority of your detached modifier extension.
