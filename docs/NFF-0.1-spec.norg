@@ -155,23 +155,22 @@
 
 * Detached Modifiers
   Norg has several detached modifiers. The name originates from their differentiation to the
-  {# Attached Modifiers}, which will be discussed later.
+  {* Attached Modifiers}, which will be discussed later.
 
   All detached modifiers must abide by the following rules:
-  - A detached modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
+  - A detached modifier can _only_ occur at the beginning of the line (arbitrary {*** whitespace}
     (but nothing else!) may precede it)
-  - A detached modifier must be immediately followed by {# whitespace} (excl. {# line ending}s!),
-    another detached modifier of the same type or by a {# detached modifier extensions}[detached
-    modifier extension]
+  - A detached modifier must be immediately followed by {*** whitespace} (excl. {# line ending}s!),
+    another detached modifier of the same type or by any of the {# detached modifier extensions}
 
-  The following list outlines all valid *detached* modifiers. The list also adds four possible
+  The following list outlines all valid *detached* modifiers. The list also adds various possible
   properties to each category which will be explained in more detail below.
-  - `*`: {# Headings} (structural, nestable)
-  - `-`: {# Unordered Lists} (nestable)
-  - `~`: {# Ordered Lists} (nestable)
-  - `>`: {# Quotes} (nestable)
-  - `$`: {# Definitions} (range-able)
-  - `^`: {# Footnotes} (range-able)
+  - `*`: {*** Headings} (structural, nestable)
+  - `-`: {*** Unordered Lists} (nestable)
+  - `~`: {*** Ordered Lists} (nestable)
+  - `>`: {*** Quotes} (nestable)
+  - `$`: {*** Definitions} (range-able)
+  - `^`: {*** Footnotes} (range-able)
   - | | `<`: add drawers/details (range-able)
   - | | `&`: add variables (range-able, logical)
   - | | `=`: add macros (range-able, logical)
@@ -184,39 +183,44 @@
    Both nestable and range-able detached modifiers have a unique quality - when several consecutive
    modifiers /of the same type/ are encountered (by consecutive we mean _NOT_ separated via a
    {# paragraph break}), they are treated as one whole <object>. This is crucial to understand as
-   it's required for the many {# carryover tags}[carryover tag] types to function.
+   it is required for the many types of {** carryover tags} to function.
 
 *** Examples
     @code norg
-    These naturally group because they are range-able, forming
+    The following items naturally group because they are range-able, forming
     a definition list:
     $ Term 1
       Definition 1!
     $ Term 2
       Definition 2!
     @end
-   
+
     @code norg
-    Together these form one whole unordered list:
+    Together, these form one whole unordered list:
     - List item 1
     - List item 2
+    @end
+
+    @code norg
+    - List item in one list
+
+    - This item is in another list, because we used a {# paragraph break} to split these items
     @end
 
 ** Structural Detached Modifiers
    The first detached modifier type is the /structural/ modifier type. As the name suggests,
    modifiers under this category *structure* the Neorg document in some form or another.
 
-   Structural modifiers can only consist of a single character, like `%`. After a single occurence
-   of such a modifier, at least one {# whitespace} character follows (excluding whitespace).
-
-   After this a {# paragraph segments}[paragraph segment] is consumed as the title of the modifier.
+   After a structural modifier, one {# paragraph segments}[paragraph segment] is consumed as the
+   /title/ of the modifier.
 
    A property of {** structural detached modifiers} is that they consume *all* other non-structural
-   detached modifiers, inline markup and {# paragraphs}; they are the most important detached
-   modifier in the hierarchy of modifiers.
+   detached modifiers, lower-level structual modifiers, inline markup and {** paragraphs};
+   they are the most important detached modifier in the hierarchy of modifiers.
 
-   To terminate a structural detached modifier (like a heading) you must use a
-   {** delimiting modifiers}[delimiting modifier].
+   To manually terminate a structural detached modifier (like a heading) you must use a
+   {** delimiting modifiers}[delimiting modifier], or you simply use another structural modifier of
+   the same level.
 
 *** Headings
     @code norg
@@ -229,10 +233,11 @@
     ******* Heading level 7 (falls back to level 6 in the tree-sitter parser)
     @end
 
-    Although headings are both structural /and/ nestable, the former takes precedence over the
-    latter, meaning that headings only affect a {# paragraph segments}[paragraph segment] as their
-    title. This is for user convenience as it does not require an empty line right below a heading.
-    Because of this precedence headings are also non-{** grouping}.
+    Although headings are both structural /and/ nestable (see next section), the former takes
+    precedence over the latter, meaning that headings only affect a single
+    {** paragraph segments}[paragraph segment] as their title. This is for user convenience as it
+    does not require an empty line right below a heading. Because of this precedence headings are
+    also non-{** grouping}.
 
     Headings serve as a way to categorize and organize other elements into smaller chunks for better
     readability.
