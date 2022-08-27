@@ -39,13 +39,10 @@
 
 * Introduction
   Before diving into the details we will start with an introduction. The Norg file format was
-  designed as part of the Neorg{^ neorg} plugin for Neovim which was started by /Vhyrro (@vhyrro)/
-  in April of 2021. Soon after starting this work, /Max Rossmannek (@mrossinek)/ joined the
-  development team, and, with the help of the Neorg{^ neorg} community, the two have shaped the Norg
-  syntax to what it has become today.
-
-  ^ neorg
-  {https://github.com/nvim-neorg/neorg}
+  designed as part of the [Neorg]{https://github.com/nvim-neorg/neorg} plugin for Neovim which was
+  started by /Vhyrro (@vhyrro)/ in April of 2021. Soon after starting this work, /Max Rossmannek
+  (@mrossinek)/ joined the development team, and, with the help of the [Neorg] community, the two
+  have shaped the Norg syntax to what it has become today.
 
 ** What is Norg?
    The Norg syntax is a /structured/ plain-text file format which aims to be human readable when
@@ -56,21 +53,16 @@
    ~ *Consistency:* the syntax should be consistent. Even if you know only a part of the syntax,
      learning new parts should not be surprising and rather feel predictable and intuitive.
    ~ *Unambiguity:* the syntax should leave _no_ room for ambiguity. This is especially motivated by
-     the use of tree-sitter{^ tree-sitter} for the original syntax parser which takes a strict
-     left-to-right parsing approach and only has single-character look-ahead.
-   ~ *Free-form{^ Free-form}:* whitespace is _only_ used to delimit tokens but has no other significance!
-     This is probably the most contrasting feature to other plain-text formats which often adhere to
-     the off-side rule{^ off-side rule}, meaning that the syntax relies on whitespace-indentation to
-     carry meaning.
+     the use of [tree-sitter]{https://tree-sitter.github.io/tree-sitter/} for the original syntax
+     parser which takes a strict left-to-right parsing approach and only has single-character
+     look-ahead.
+   ~ *[Free-form]{https://en.wikipedia.org/wiki/Free-form_language}:* whitespace is _only_ used to
+     delimit tokens but has no other significance! This is probably the most contrasting feature to
+     other plain-text formats which often adhere to the
+     [off-side rule]{https://en.wikipedia.org/wiki/Off-side_rule}, meaning that the syntax relies on
+     whitespace-indentation to carry meaning.
 
-   ^ tree-sitter
-   {https://tree-sitter.github.io/tree-sitter/}
-   ^ free-form
-   {https://en.wikipedia.org/wiki/Free-form_language}
-   ^ off-side rule
-   {https://en.wikipedia.org/wiki/Off-side_rule}
-
-   Although built with Neorg{^ neorg} in mind, Norg can be utilized in a wide range of applications,
+   Although built with [Neorg] in mind, Norg can be utilized in a wide range of applications,
    from external note taking plugins to even messaging applications. Thanks to its {:layers:}[layer]
    system you can choose the feature set you want to support, and can ignore the higher levels.
    %TODO: should we move the layers into this document?%
@@ -80,10 +72,7 @@
 
 ** Characters
    A Norg file is made up of /characters/.
-   A <character> is any Unicode code point{^ code point}.
-
-   ^ code point
-   {https://en.wikipedia.org/wiki/Code_point}
+   A <character> is any Unicode [code point]{https://en.wikipedia.org/wiki/Code_point}.
 
 *** Whitespace
     A {# character} is considered *whitespace* if it is any of the following:
@@ -91,7 +80,9 @@
     - A line feed `U+000A`
     - A form feed `U+000C`
     - A carriage return `U+000D`
-    - Any code point in the Unicode Zs general category{^ uni-zs} (includes the normal space `U+0020`)
+    - Any code point in the
+      [Unicode Zs general category]{https://www.fileformat.info/info/unicode/category/Zs/list.htm}
+      (includes the normal space `U+0020`)
 
     Any combination of the above is also considered whitespace.
 
@@ -105,9 +96,6 @@
     - A carriage return immediately followed by a line feed
 
     Blank lines are irrelevant in Norg because standalone whitespace has no semantic relevance.
-
-    ^ uni-zs
-    {https://www.fileformat.info/info/unicode/category/Zs/list.htm}
 
 *** Alphanumeric Characters
     An alphanumeric character is any character that *isn't* punctuation, nor is it any special
@@ -135,9 +123,9 @@
 
 ** Words
    The Norg format is designed to be parsed on a word-by-word basis from left-to-right through the
-   entire document /in a single pass/. This is possible because the language is
-   free-form{^ free-form}, meaning that whitespace has no semantic meaning, and because the markup follows
-   strict rules which are outlined in the later sections of this document.
+   entire document /in a single pass/. This is possible because the language is [free-form], meaning
+   that whitespace has no semantic meaning, and because the markup follows strict rules which are
+   outlined in the later sections of this document.
 
    A *word* is considered to be any combination of {# character}s which are neither {# whitespace},
    {# punctuation} nor other {# special character}s.
@@ -250,10 +238,9 @@
 
 ** Nestable Detached Modifiers
    Nestable detached modifiers are a kind which may be repeated multiple times in order to produce a
-   _nested_ object of the given type. The nesting levels are capped at 6 in the
-   tree-sitter{^ tree-sitter} parser but longer repetitions of the same modifier are allowed,
-   falling back to the sixth nesting level. Other parsers may choose to support higher nesting
-   levels.
+   _nested_ object of the given type. The nesting levels are capped at 6 in the [tree-sitter] parser
+   but longer repetitions of the same modifier are allowed, falling back to the sixth nesting level.
+   Other parsers may choose to support higher nesting levels.
 
    Furthermore, in contrast to the {# standard detached modifiers} this detached modifier type has
    /no/ title, and affects the following `paragraph` instead of only the next
@@ -433,7 +420,7 @@
    - A delimiting modifier can _only_ occur at the beginning of the line (arbitrary {# whitespace}
      (but nothing else!) may precede it)
    - A delimiting modifier must consist of three or more consecutive modifiers of the same
-     type{^ disambiguating delimiting modifiers}
+     type (see also {^ disambiguating delimiting modifiers})
    - It must be followed by an immediate {# line ending} (without any extra {# whitespace})
 
    ^^ Disambiguating delimiting modifiers
@@ -550,16 +537,13 @@
      to specify priorities is to go from `A-Z`, but many also prefer `0-9` or even named priorities
      like `LOW`\/`MEDIUM`\/`HIGH`.
 
-     Neorg's{^ Neorg} GTD{^ GTD} implementation even repurposes the priority for use as contexts, so yes,
-     this detached modifier extension is very vertasile.
-
-     ^ GTD
-     {https://hamberg.no/gtd}
+     [Neorg]'s [GTD]{https://hamberg.no/gtd} implementation even repurposes the priority for use as
+     contexts, so yes, this detached modifier extension is very vertasile.
 
 **** Due Date Extension
      As the name suggests, this extension marks something as "due before x", where x is a
-     {**** timestamp extension}[timestamp]. Especially useful in GTD{^ GTD} and other forms of note taking
-     and time management applications.
+     {**** timestamp extension}[timestamp]. Especially useful in [GTD] and other forms of note
+     taking and time management applications.
 
      Syntax:
      @code norg
@@ -568,7 +552,7 @@
 
 **** Start Date Extension
      A counterpart to the {**** due date extension} - defines when a task *begins*. Also useful in
-     GTD{^ GTD}.
+     [GTD].
 
      Syntax:
      @code norg
@@ -1050,11 +1034,11 @@
     @end
 
     Note that you do *not* provide the `.norg` extension within the path.
-    You can use traditional modifiers in your path, like `/` (in e.g. `/my/file`) to signify
-    the root of your filesystem, `~` (in e.g. `~/Documents/my-file`) to signify the current
-    user's home directory, /or/ you can use the Neorg{^ neorg}-specific `$` (in e.g. `$/my/file`) to
-    signify the _root_ of the Neorg{^ neorg} workspace.
-    Since not all Norg files will be used strictly by Neorg{^ neorg}, the workspace root can be
+    You can use traditional modifiers in your path, like `/` (in e.g. `/my/file`) to signify the
+    root of your filesystem, `~` (in e.g. `~/Documents/my-file`) to signify the current user's home
+    directory, /or/ you can use the [Neorg]-specific `$` (in e.g. `$/my/file`) to signify the _root_
+    of the [Neorg] workspace.
+    Since not all Norg files will be used strictly by [Neorg], the workspace root can be
     implementation-specific - for git repos the workspace root could be simply the root of the
     repository, and for other note taking apps it could simply be the root of the directory where
     all the notes are stored.
@@ -1082,7 +1066,7 @@
     {https://github.com/nvim-neorg/neorg}
     @end
     Actions related to schemas like `https://`, `ftp://` etc. (when attempting to open the link) are
-    handled by a lower level component running Norg, e.g. Neorg{^ neorg} or the underlying Operating
+    handled by a lower level component running Norg, e.g. [Neorg] or the underlying Operating
     System.
 
 *** Detached Modifier
