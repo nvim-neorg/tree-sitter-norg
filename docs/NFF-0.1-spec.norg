@@ -66,6 +66,7 @@
    from external note taking plugins to even messaging applications. Thanks to its {:layers:}[layer]
    system you can choose the feature set you want to support, and can ignore the higher levels.
    %TODO: should we move the layers into this document?%
+   %I would argue so, but we would need to re-evaluate their validity and find a good location here%
 
 * Preliminaries
   First, we define some basic concepts which will be used in this specification.
@@ -75,7 +76,7 @@
    A <character> is any Unicode [code point]{https://en.wikipedia.org/wiki/Code_point}.
 
 *** Whitespace
-    A {# character} is considered *whitespace* if it is any of the following:
+    A {** characters}[character] is considered *whitespace* if it is any of the following:
     - A tab `U+0009`
     - A line feed `U+000A`
     - A form feed `U+000C`
@@ -98,28 +99,28 @@
     Blank lines are irrelevant in Norg because standalone whitespace has no semantic relevance.
 
 *** Alphanumeric Characters
-    An alphanumeric character is any character that *isn't* punctuation, nor is it any special
-    character. In the English alphabet, an alphanumeric character means all letters from the
-    alphabet (uppercase/lowercase) and all numbers: `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`.
+    An alphanumeric character is any character that is *not* {*** punctuation}, nor is it any
+    {*** special characters}[special character]. In the English alphabet, an alphanumeric character
+    means all letters from the alphabet (uppercase/lowercase) and all numbers:
+    `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`.
 
-    It's important to note that {*** alphanumeric characters} do *not* include {*** whitespace}.
-    %TODO: link punctuation and special characters%
-    %NOTE(vhyrro): why should we link punctuation and special characters here?%
+    It is important to note that {*** alphanumeric characters} do *not* include {*** whitespace}.
 
 *** Punctuation
-    A {# character} is considered to be *punctuation* if it is any of the following:
-    - A standard ASCII punctuation character: |`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`|
+    A {** characters}[character] is considered to be *punctuation* if it is any of the following:
+    - A standard ASCII punctuation character: `| !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~ |`
       %TODO: check whether we want to support every punctuation mark from the `en_US.utf8` locale%
 
 *** Escaping
-    A single {# character} can be escaped if it is immediately preceded by a backslash, `\`
-    (`U+005C`). Any {# character} may be escaped /apart from/ {# character}s within verbatim
-    segments (present in e.g. {*** verbatim ranged tags} and {** free-form attached
-    modifiers}[free-form attached modifier] contents). For more info about precedence take a look at
-    the {* precedence} section.
+    A single {** characters}[character] can be escaped if it is immediately preceded by a backslash,
+    `|\|` (`U+005C`). Any {** characters}[character] may be escaped /apart from/ {** characters}
+    within free-form verbatim segments (see {** free-form attached modifiers}).
+    For more information about precedence, take a look at the {* precedence} section.
 
 *** Special Characters
     %TODO: how do non-latin characters work? If they go in here, they do not form words as below...%
+    %I suggest, that by default we treat any non-covered case the same as alphanumeric characters.%
+    %We could even go as far as to not define those in the first place as their own category...%
 
 ** Words
    The Norg format is designed to be parsed on a word-by-word basis from left-to-right through the
@@ -127,14 +128,14 @@
    that whitespace has no semantic meaning, and because the markup follows strict rules which are
    outlined in the later sections of this document.
 
-   A *word* is considered to be any combination of {# character}s which are neither {# whitespace},
-   {# punctuation} nor other {# special character}s.
+   A *word* is considered to be any combination of {** characters} which are neither
+   {*** whitespace}, {*** punctuation} nor other {*** special characters}.
 
 ** Paragraph Segments
-   {# Words} are first combined into {# paragraph segments}. A paragraph segment may then contain
-   any inline element of type:
-   - {# attached modifiers}
-   - {# linkables}
+   {** Words} are first combined into *paragraph segments*. A paragraph segment may then contain any
+   inline element of type:
+   - {* attached modifiers}
+   - {* linkables}
 
    A {# line ending} terminates the paragraph segment. This means that a paragraph segment is
    essentially just a line of text:
@@ -145,12 +146,12 @@
    @end
 
 ** Paragraphs
-   Paragraphs are then formed of consecutive {# paragraph segments}. A paragraph is terminated by:
-   - A <paragraph break> (which equals two consecutive {# line endings})
-   - Any of the {# detached modifiers}
-   - Any of the {# delimiting modifiers}
-   - Any of the {# ranged tags} (see link for more info)
-   - The {*** strong carryover tags}[strong carryover tag]
+   Paragraphs are then formed of consecutive {** paragraph segments}. A paragraph is terminated by:
+   - A <paragraph break> (which equals two consecutive {# line ending}s)
+   - Any of the {* detached modifiers}
+   - Any of the {* delimiting modifiers}
+   - Any of the {** ranged tags}
+   - Any of the {*** strong carryover tags}
 
 * Detached Modifiers
   Norg has several detached modifiers. The name originates from their differentiation to the
