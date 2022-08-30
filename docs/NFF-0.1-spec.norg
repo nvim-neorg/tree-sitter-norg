@@ -524,12 +524,27 @@
      with a date/time.
      The syntax for a timestamp is as follows: `<day>,? <day-of-month> <month> <year> <time> <timezone>`
 
-     Example: `Sat, 29 Oct 1994 19:43:31 GMT`
+     Examples:
+     - `Sat, 29 Oct 1994 19:43:31 GMT`
+     - `Thu 12th Jan 2022`
 
      Obviously, you're not required to type the whole syntax out very time. Any of the elements in
      angled brackets (`<>`) can be dropped/ignored, but the order of those values may not change!
 
      Here is a detailed index of all possible alterations for each value:
+
+     $$ <day>
+     The `<day>` value is reliant on the current locale, but the following alterations of that
+     value are permitted:
+     - Full version (e.g. `Tuesday`, `Wednesday`)
+     - Shorthand, three letter version (e.g. `Tue`, `Wed`)
+     - Shorthand, more-than-three letter version (`e.g. `Thur`, `Frida`) (useful when very quickly jotting
+       down dates)
+
+     %TODO: When releasing the first release candidate ask people to add ideas here%
+     $$
+
+     %TODO: finish this%
 
 **** Priority Extension
      This extension allows for you to specify a priority of your detached modifier extension.
@@ -939,17 +954,20 @@
 
    The content of {** attached modifier extensions} consists of a set of references to many
    {*** Attribute}[attributes]. These attributes are delimited by the contextual delimiter `|`.
-   %TODO: Make a custom section for the `|` char%.
 
 *** Examples
     @code norg
     `print("This is some python")`(python) <- The python attribute highlights the text as python
     *print("This is some python too")*(python) <- Yes, this is Norg markup highlighted as python.
                                                   Don't know why you'd do it but hey you do you.
+                                                  %TODO: can attributes impose limits?%
 
-    {* Link location}[this is an important link](important|red) <- Highlights the link as big, bold
+    {* Link location}[this is an important link](important|red) <- Highlights the link as big & bold
                                                                    and red.
     @end
+
+* Multifunctional `|` Delimiter
+  %TODO%
 
 * Trailing Modifier
   Trailing modifiers are another separate kind of modifiers in the Norg syntax. They have one very
