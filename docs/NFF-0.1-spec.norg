@@ -98,14 +98,6 @@
 
     Blank lines are irrelevant in Norg because standalone whitespace has no semantic relevance.
 
-*** Alphanumeric Characters
-    An alphanumeric character is any character that is *not* {*** punctuation}, nor is it any
-    {*** special characters}[special character]. In the English alphabet, an alphanumeric character
-    means all letters from the alphabet (uppercase/lowercase) and all numbers:
-    `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`.
-
-    It is important to note that {*** alphanumeric characters} do *not* include {*** whitespace}.
-
 *** Punctuation
     A {** characters}[character] is considered to be *punctuation* if it is any of the following:
     - A standard ASCII punctuation character: `| !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~ |`
@@ -117,6 +109,9 @@
     `|\|` (`U+005C`). Any {** characters}[character] may be escaped /apart from/ {** characters}
     within free-form verbatim segments (see {** free-form attached modifiers}).
     For more information about precedence, take a look at the {* precedence} section.
+
+*** Other Characters
+    Any other character not described by the previous sections is treated as a generic code point.
 
 *** Special Characters
     %TODO: how do non-latin characters work? If they go in here, they do not form words as below...%
@@ -634,7 +629,7 @@
     whether or not the character is an attached modifier opener or a tag opener until we would have
     parsed the whole line; in other words, we would be dealing with ambiguity). The special tag
     character is then /immediately/ followed by text, which becomes the /tag name/. Said tag name
-    can consist of any {# alphanumeric characters}[alphanumeric character] and/or `-`, `_` and `.`.
+    can consist of any {# other characters}[alphanumeric character] and/or `-`, `_` and `.`.
   - Tags can have their names delimited by a `.` in order to create a "hierarchy", e.g.
     `document.meta`.
   - \
