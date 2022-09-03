@@ -113,11 +113,6 @@
 *** Other Characters
     Any other character not described by the previous sections is treated as a generic code point.
 
-*** Special Characters
-    %TODO: how do non-latin characters work? If they go in here, they do not form words as below...%
-    %I suggest, that by default we treat any non-covered case the same as alphanumeric characters.%
-    %We could even go as far as to not define those in the first place as their own category...%
-
 ** Words
    The Norg format is designed to be parsed on a word-by-word basis from left-to-right through the
    entire document /in a single pass/. This is possible because the language is [free-form], meaning
@@ -671,11 +666,14 @@
     whole collections of elements (see {*** strong carryover tags}).
 
     Weak carryover tags only apply to the next element; they behave this way in the following
-    contexts: %TODO: discuss%
+    contexts:
     - When the element has children, the weak carryover tag only applies to the single item (it does
       not carry over to its children).
     - When the element is part of an {# object}, no other items other than the item below
       the weak carryover tag is affected.
+
+    *NOTE*: When a weak carryover tag is applied to an {# indent segment}, the whole indent segment
+    (including its children) are affected.
 
 **** Examples
      Only the second item is affected:
@@ -694,6 +692,22 @@
      ** Heading 2
         This is also some content.
      @end
+
+     Special behaviour for indent segments:
+    @code norg
+    - List item 1
+    +color red
+    - List item 2
+    -- This isn't red
+    -- Neither is this
+    +color green
+    - # %TODO: rediscuss `#` char%
+      This is green.
+
+      -- This is also green
+      -- And so is this.
+      ---
+    @end
 
 *** Strong Carryover Tags
     Contrary to its weak variant, the strong carryover tag exists to annotate an entire
