@@ -31,6 +31,34 @@
 - | | Document slides
 - | | Convert slide to `:`, convert indent segment to `::`.
 - | | Convert `\| |` to `( )`
+- | | Allow for nested attributes (`color:red`) (rangeable detached modifier)
+
+Table syntax:
+- | | New motions: `>`, `v`, `^`, `<`
+- | | Floor motion (go fully left and down): `_`
+- | | Ceiling motion (go fully up and right): `/`
+- | | Root of table (A1): `.`
+- | | Allow the combination of motions with numerical values (`13>`/`2_`)
+- | | Allow underflowing via `<` (B1 -> A3 if A has 3 occupied cells)
+- ::
+  Example:
+@code norg
+  : . : Char
+  : > : Name/Type
+  : > : Categories
+  : _ : `*`
+  : > : Headings
+  : > : structural, nestable
+  : _ : `-`
+  
+  : . : Char
+  : v : `*`
+  : v : `-`
+  : v :
+  : / : Name/Type
+  : v : Headings
+  @end
+  ---
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
