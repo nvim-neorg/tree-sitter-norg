@@ -30,6 +30,7 @@
 - |?| Document standard library macros/attributes?
 - | | Document slides
 - | | Convert slide to `:`, convert indent segment to `::`.
+- | | Convert `\| |` to `( )`
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
@@ -703,7 +704,7 @@
     -- This isn't red
     -- Neither is this
     +color green
-    - # %TODO: rediscuss `#` char%
+    - ::
       This is green.
 
       -- This is also green
@@ -1178,6 +1179,7 @@
      - All files in the current workspace are parsed/enumerated (including subdirectories)
 
      %TODO: does the `{:file:}` syntax work with wiki links?%
+     %NOTE: YES%
 
 *** Inline Linkables
     Although most linkable items are either {# Structural Detached Modifiers}[structural] or
