@@ -28,6 +28,7 @@
 - | | Add `>`, `<` detached modifier extensions (GTD-based)
 - | | Add timestamp ranges (`Tue 3rd Jul - Thu 5th Jul`)
 - |?| Document standard library macros/attributes?
+- | | Document slides
 
 * Norg File Format Specification
   This file contains the formal file format specification of the Norg syntax version 0.1.
