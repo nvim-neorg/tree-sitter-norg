@@ -892,9 +892,8 @@
    - Arbitrary {# whitespace} within {# attached modifiers} is not permitted: `*  bold  *` is
      invalid.
    - Representing verbatim attached modifier chars within the corresponding verbatim blocks is not
-     possible: \`I cannot place a (\`) char inside here without accidentally terminating the
-     block.\`.
-     %TODO: fix formatting%.
+     possible: `|I cannot place a (\`) char inside here without accidentally terminating the
+     block.|`.
 
    Free-form modifiers fix this with a special syntax to specify the
    beginning and end of a ranged block. For example:
