@@ -109,7 +109,8 @@
 *** Punctuation
     A {** characters}[character] is considered to be *punctuation* if it is any of the following:
     - A standard ASCII punctuation character: `| !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~ |`
-      %TODO: check whether we want to support every punctuation mark from the `en_US.utf8` locale%
+    - A Unicode punctuation character is an ASCII punctuation character or anything in the general
+      Unicode categories `Pc`, `Pd`, `Pe`, `Pf`, `Pi`, `Po`, or `Ps`.
 
 *** Escaping
     A single {** characters}[character] can be escaped if it is immediately preceded by a backslash,
