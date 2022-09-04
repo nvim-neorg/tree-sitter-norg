@@ -187,17 +187,46 @@ Table syntax:
 
   The following list outlines all valid *detached* modifiers. The list also adds various possible
   properties to each category which will be explained in more detail below.
-  - `*`: {*** Headings} (structural, nestable)
-  - `-`: {*** Unordered Lists} (nestable)
-  - `~`: {*** Ordered Lists} (nestable)
-  - `>`: {*** Quotes} (nestable)
-  - `$`: {*** Definitions} (range-able)
-  - `^`: {*** Footnotes} (range-able)
+  : . : Character
+  : > : Name
+  : > : Categories
+  : _ : `*`
+  : > : Headings
+  :: >
+     - Structural
+     - Nestable
+  ::
+  : _ : `-`
+  : > : Unordered Lists
+  :: >
+     - Nestable
+  ::
+  : _ : `~`
+  : > : Ordered Lists
+  :: >
+     - Nestable
+  ::
+  : _ : `>`
+  : > : Quotes
+  :: >
+     - Nestable
+  ::
+  : _ : `$`
+  : > : Definitions
+  :: >
+     - Range-able
+  ::
+  : _ : `^`
+  : > : Footnotes
+  :: >
+     - Range-able
+  ::
+
   - | | `<`: add drawers/details (range-able)
   - | | `&`: add variables (range-able, logical)
   - | | `=`: add macros (range-able, logical)
   - | | `:`: add cells (range-able, logical)
-  - | |`%`: add attribute (logical)
+  - | | `%`: add attribute (nestable, logical)
 
   %TODO: improve formatting of the above. As a table?%
 
