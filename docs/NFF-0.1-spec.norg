@@ -235,10 +235,7 @@ Table syntax:
 
   - |-| `<`: add drawers/details (range-able)
   - | | `=`: add macros (range-able, logical)
-  - | | `:`: add cells (range-able, logical)
   - | | `%`: add attribute (nestable, logical)
-
-  %TODO: improve formatting of the above. As a table?%
 
 ** Grouping
    Both nestable and range-able detached modifiers have a unique quality - when several consecutive
