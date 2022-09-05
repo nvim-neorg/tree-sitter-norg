@@ -221,9 +221,19 @@ Table syntax:
   :: >
      - Range-able
   ::
+  : _ : `&`
+  : > : Variables
+  :: >
+     - Range-able
+     - Logical
+  ::
+  : _ : `:`
+  : > : Table cells
+  :: >
+     - Range-able
+  ::
 
-  - | | `<`: add drawers/details (range-able)
-  - | | `&`: add variables (range-able, logical)
+  - |-| `<`: add drawers/details (range-able)
   - | | `=`: add macros (range-able, logical)
   - | | `:`: add cells (range-able, logical)
   - | | `%`: add attribute (nestable, logical)
@@ -391,9 +401,8 @@ Table syntax:
     >>>>>>> Quote level 7 (falls back to level 6 in the tree-sitter parser)
             This text is still part of the level 7 quote.
     @end
-
 *** Invalid Examples
-    - \
+    - ::
         @code norg
         >I am not a quote
 
@@ -439,7 +448,6 @@ Table syntax:
     Which scans up to the closing modifier.
     $$
     @end
-
 *** Footnotes
     Footnotes allow the user to give supplementary information related to some text without
     polluting the paragraph itself. Footnotes can be linked to using {# linkables}.
@@ -457,19 +465,54 @@ Table syntax:
     Which scans up to the closing modifier.
     ^^
     @end
+*** Drawers/Details
+    The `<` char. %TODO: Perhaps convert to regular ranged tag%.
 
-*** | | Drawers/Details
-    The `<` char.
+*** Variables
+    Variables are bits of information that can be dynamically inserted into the document.
+    @code norg
+    & Variable Name
+    Variable value
+    @end
+    @code norg
+    && Variable Name
+    *this* is some /content/.
+    &&
+    @end
 
-*** | | Variables
-    The `&` char.
-
+    After being defined a single time, it can be inserted into paragraphs using the `&` attached
+    modifier:
+    @code norg
+    The content of the above variable is: &variable name&.
+    @end
+    After the logical detached modifiers are evaluated, the above example would expand to:
+    @code norg
+    The content of the above variable is: *this* is some /content/.
+    @end
 *** | | Macros
     The `=` char.
 
 *** | | Attribute
      The `%` char.
 
+*** Table Cells
+    Table cells are used to, well, build up a table. Here are a few examples of table cells:
+    @code norg
+    : A1
+      Content of table cell at `A1`.
+    :: A2
+    > Content of table cell at `A2` (in a quote).
+    ::
+    @end
+    Their semantics are described in more detail in the {:semantics:* Tables}[semantics] document,
+    which we recommend reading if you are interested in the behaviour of objects as opposed to how
+    they are defined.
+
+    *NOTE*: In order to make tables more aesthetically pleasing, they're commonly mixed with the
+    intersecting modifier %TODO: link% syntax to produce the following:
+    @code norg
+    : A1 : Content of table cell at `A1`.
+    @end
 ** Delimiting Modifiers
    In Norg, headings (and other {** structural detached modifiers}) must be terminated by a {**
    delimiting modifiers}[delimiting modifier]. This kind of modifier must abide by the following
@@ -650,7 +693,7 @@ Table syntax:
     -- When a {# structural detached modifiers}[structural detached modifier] is encountered
 
     @code norg
-    - \
+    - ::
       The indent segment extension has started.
 
       I can now include multiple paragraphs within this list item.
@@ -687,7 +730,7 @@ Table syntax:
     can consist of any {# other characters}[alphanumeric character] and/or `-`, `_` and `.`.
   - Tags can have their names delimited by a `.` in order to create a "hierarchy", e.g.
     `document.meta`.
-  - \
+  - ::
     After a {# whitespace} character any number of parameters on the same line may follow:
     @code norg
     #tag-name.subtag parameter1 parameter2
@@ -861,7 +904,7 @@ Table syntax:
   - A closing modifier may _NOT_ be preceded by {# whitespace}
   - A closing modifier may only be succeeded by {# whitespace} or {# punctuation}
   +name attached modifier range
-  - \
+  - ::
      {# Attached modifiers} can only span at maximum a single {# paragraphs}[paragraph], i.e. they get
      terminated as soon as they encounter a {# paragraph break}.
 
