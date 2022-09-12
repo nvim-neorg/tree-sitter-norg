@@ -44,14 +44,6 @@ module.exports = grammar({
 
         [$._paragraph_element],
 
-        [$.indent_segment],
-        [$.indent_segment1],
-        [$.indent_segment2],
-        [$.indent_segment3],
-        [$.indent_segment4],
-        [$.indent_segment5],
-        [$.indent_segment6],
-
         [$.quote1],
         [$.quote2],
         [$.quote3],
@@ -85,7 +77,6 @@ module.exports = grammar({
         $.paragraph_break,
 
         $.escape_sequence_prefix,
-        $.slide,
 
         $.trailing_modifier,
 
@@ -236,6 +227,7 @@ module.exports = grammar({
         $.inline_link_target_open,
         $.inline_link_target_close,
 
+        $.slide,
         $.indent_segment_begin,
     ],
 
@@ -251,7 +243,6 @@ module.exports = grammar({
                         $.rangeable_detached_modifier,
                         $.table,
                         $.tag,
-                        $.indent_segment,
                         $.slide,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
@@ -865,7 +856,6 @@ module.exports = grammar({
             $.macro,
         ),
 
-        indent_segment: $ => gen_indent_segment($, 0),
         indent_segment1: $ => gen_indent_segment($, 1),
         indent_segment2: $ => gen_indent_segment($, 2),
         indent_segment3: $ => gen_indent_segment($, 3),
@@ -873,7 +863,6 @@ module.exports = grammar({
         indent_segment5: $ => gen_indent_segment($, 5),
         indent_segment6: $ => gen_indent_segment($, 6),
 
-        _indent_segment_contents0: $ => gen_indent_segment_contents($, 0),
         _indent_segment_contents1: $ => gen_indent_segment_contents($, 1),
         _indent_segment_contents2: $ => gen_indent_segment_contents($, 2),
         _indent_segment_contents3: $ => gen_indent_segment_contents($, 3),
@@ -999,6 +988,7 @@ function gen_detached_modifier($, prefix, ...rest) {
             ),
         ),
 
+        // TODO: Make all detached modifiers allow an indent segment or slide
         ...rest,
     );
 }
@@ -1031,7 +1021,6 @@ function gen_heading($, level) {
                     repeat(
                         choice(
                             $.paragraph,
-                            $.indent_segment,
 
                             alias($.paragraph_break, "_paragraph_break"),
                             $.nestable_detached_modifier,
@@ -1259,31 +1248,7 @@ function gen_indent_segment_contents($, level) {
 }
 
 function gen_indent_segment($, level) {
-    if (level == 0) {
-        return seq(
-            optional($.strong_attribute_set),
-            optional($.weak_attribute_set),
-
-            $.indent_segment_begin,
-
-            repeat(
-                prec(1,
-                    prec.dynamic(2, choice(
-                        $.paragraph,
-                        alias($.line_break, "_line_break"),
-                        alias($.paragraph_break, "_paragraph_break"),
-                        $["_indent_segment_contents" + level],
-                    )),
-                ),
-            ),
-
-            optional(
-                prec.dynamic(2, $.weak_paragraph_delimiter),
-            ),
-        );
-    }
-
-    return seq(
+    return prec.right(seq(
         $.indent_segment_begin,
 
         repeat(
@@ -1302,5 +1267,5 @@ function gen_indent_segment($, level) {
             // can occur with headings having paragraph delimiters.
             prec.dynamic(2, $.weak_paragraph_delimiter),
         ),
-    );
+    ));
 }

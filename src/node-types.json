@@ -282,10 +282,6 @@
           "named": true
         },
         {
-          "type": "indent_segment",
-          "named": true
-        },
-        {
           "type": "macro",
           "named": true
         },
@@ -490,10 +486,6 @@
             "named": true
           },
           {
-            "type": "indent_segment",
-            "named": true
-          },
-          {
             "type": "macro",
             "named": true
           },
@@ -680,10 +672,6 @@
             "named": true
           },
           {
-            "type": "indent_segment",
-            "named": true
-          },
-          {
             "type": "macro",
             "named": true
           },
@@ -866,10 +854,6 @@
             "named": true
           },
           {
-            "type": "indent_segment",
-            "named": true
-          },
-          {
             "type": "macro",
             "named": true
           },
@@ -1048,10 +1032,6 @@
             "named": true
           },
           {
-            "type": "indent_segment",
-            "named": true
-          },
-          {
             "type": "macro",
             "named": true
           },
@@ -1226,10 +1206,6 @@
             "named": true
           },
           {
-            "type": "indent_segment",
-            "named": true
-          },
-          {
             "type": "macro",
             "named": true
           },
@@ -1400,10 +1376,6 @@
             "named": true
           },
           {
-            "type": "indent_segment",
-            "named": true
-          },
-          {
             "type": "macro",
             "named": true
           },
@@ -1540,165 +1512,6 @@
         },
         {
           "type": "strong_attribute_set",
-          "named": true
-        },
-        {
-          "type": "weak_attribute_set",
-          "named": true
-        },
-        {
-          "type": "weak_paragraph_delimiter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "indent_segment",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "indent_segment_begin",
-          "named": true
-        },
-        {
-          "type": "macro",
-          "named": true
-        },
-        {
-          "type": "multi_definition",
-          "named": true
-        },
-        {
-          "type": "multi_drawer",
-          "named": true
-        },
-        {
-          "type": "multi_footnote",
-          "named": true
-        },
-        {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
-          "type": "ordered_list1",
-          "named": true
-        },
-        {
-          "type": "ordered_list2",
-          "named": true
-        },
-        {
-          "type": "ordered_list3",
-          "named": true
-        },
-        {
-          "type": "ordered_list4",
-          "named": true
-        },
-        {
-          "type": "ordered_list5",
-          "named": true
-        },
-        {
-          "type": "ordered_list6",
-          "named": true
-        },
-        {
-          "type": "paragraph",
-          "named": true
-        },
-        {
-          "type": "quote1",
-          "named": true
-        },
-        {
-          "type": "quote2",
-          "named": true
-        },
-        {
-          "type": "quote3",
-          "named": true
-        },
-        {
-          "type": "quote4",
-          "named": true
-        },
-        {
-          "type": "quote5",
-          "named": true
-        },
-        {
-          "type": "quote6",
-          "named": true
-        },
-        {
-          "type": "ranged_tag",
-          "named": true
-        },
-        {
-          "type": "ranged_verbatim_tag",
-          "named": true
-        },
-        {
-          "type": "single_definition",
-          "named": true
-        },
-        {
-          "type": "single_drawer",
-          "named": true
-        },
-        {
-          "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
-          "named": true
-        },
-        {
-          "type": "strong_attribute_set",
-          "named": true
-        },
-        {
-          "type": "table",
-          "named": true
-        },
-        {
-          "type": "unordered_list1",
-          "named": true
-        },
-        {
-          "type": "unordered_list2",
-          "named": true
-        },
-        {
-          "type": "unordered_list3",
-          "named": true
-        },
-        {
-          "type": "unordered_list4",
-          "named": true
-        },
-        {
-          "type": "unordered_list5",
-          "named": true
-        },
-        {
-          "type": "unordered_list6",
           "named": true
         },
         {

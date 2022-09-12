@@ -23,9 +23,6 @@ enum TokenType : char
     PARAGRAPH_BREAK,
 
     ESCAPE_SEQUENCE,
-    // In reality this is just an escape char with a newline (\\\n),
-    // but it is important to distinguish it from a regular escape sequence
-    SLIDE,
 
     TRAILING_MODIFIER,
 
@@ -176,6 +173,7 @@ enum TokenType : char
     INLINE_LINK_TARGET_OPEN,
     INLINE_LINK_TARGET_CLOSE,
 
+    SLIDE,
     INDENT_SEGMENT,
 };
 
@@ -614,21 +612,34 @@ class Scanner
 
             if (lexer->lookahead)
             {
-                if (is_newline(lexer->lookahead))
-                {
-                    advance(lexer);
-                    lexer->result_symbol = m_LastToken = SLIDE;
-                }
-                else
-                    lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
-
+                lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
                 return true;
             }
             else
                 return false;
         }
-        else if (check_detached_mod_extension(lexer))
+        else if (check_detached_mod_extension(lexer)) // TODO: Update
             return true;
+        else if (((m_LastToken >= HEADING1 && m_LastToken <= MULTI_VARIABLE_SUFFIX) || m_LastToken == DETACHED_MOD_EXTENSION_DELIMITER) && lexer->lookahead == ':')
+        {
+            advance(lexer);
+            bool slide = false;
+
+            if (lexer->lookahead == ':')
+            {
+                advance(lexer);
+                slide = true;
+            }
+
+            if (lexer->lookahead != '\r' && lexer->lookahead != '\n')
+            {
+                lexer->result_symbol = m_LastToken = WORD;
+                return true;
+            }
+
+            lexer->result_symbol = m_LastToken = (TokenType)(SLIDE + slide);
+            return true;
+        }
         else if (lexer->lookahead == '<')
         {
             advance(lexer);
@@ -1111,7 +1122,7 @@ class Scanner
     bool check_detached_mod_extension(TSLexer* lexer)
     {
         if (lexer->lookahead == '|' &&
-            ((m_LastToken >= HEADING1 && m_LastToken <= MULTI_DRAWER_SUFFIX) ||
+            ((m_LastToken >= HEADING1 && m_LastToken <= MULTI_VARIABLE_SUFFIX) ||
              (m_LastToken >= PRIORITY && m_LastToken <= TODO_ITEM_RECURRING)))
         {
             advance(lexer);
