@@ -289,8 +289,14 @@ value | something else
             (word))
           (tag_parameters
             (tag_param))))
-      (ERROR)))
+      (MISSING "_space")))
   (ranged_tag
+    (strong_attribute_set
+      (strong_attribute
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
     (tag_name
       (word))
     (ranged_tag_content
