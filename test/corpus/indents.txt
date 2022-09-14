@@ -124,9 +124,9 @@ This is not a part of any indent segment.
   (paragraph
     (paragraph_segment)))
 
-==============
+================================================================================
 Slide
-==============
+================================================================================
 - :
   @code lua
   print("This is a slide")
@@ -134,5 +134,26 @@ Slide
 - :
   $ Term
     Definition
----
-(document)
+--------------------------------------------------------------------------------
+
+(document
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (slide
+        (ranged_verbatim_tag
+          (tag_name
+            (word))
+          (tag_parameters
+            (tag_param))
+          (ranged_verbatim_tag_content)
+          (ranged_verbatim_tag_end)))))
+  (generic_list
+    (unordered_list1
+      (unordered_list1_prefix)
+      (slide
+        (single_definition
+          (single_definition_prefix)
+          (paragraph_segment)
+          (paragraph
+            (paragraph_segment)))))))
