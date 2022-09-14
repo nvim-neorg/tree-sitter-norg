@@ -342,10 +342,6 @@
           "named": true
         },
         {
-          "type": "slide",
-          "named": true
-        },
-        {
           "type": "strong_paragraph_delimiter",
           "named": true
         },
@@ -603,7 +599,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -618,6 +614,14 @@
       "types": [
         {
           "type": "heading1_prefix",
+          "named": true
+        },
+        {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -789,7 +793,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -804,6 +808,14 @@
       "types": [
         {
           "type": "heading2_prefix",
+          "named": true
+        },
+        {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -971,7 +983,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -986,6 +998,14 @@
       "types": [
         {
           "type": "heading3_prefix",
+          "named": true
+        },
+        {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -1149,7 +1169,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -1164,6 +1184,14 @@
       "types": [
         {
           "type": "heading4_prefix",
+          "named": true
+        },
+        {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -1323,7 +1351,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -1338,6 +1366,14 @@
       "types": [
         {
           "type": "heading5_prefix",
+          "named": true
+        },
+        {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -1493,7 +1529,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -1508,6 +1544,14 @@
       "types": [
         {
           "type": "heading6_prefix",
+          "named": true
+        },
+        {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -2697,7 +2741,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -2711,7 +2755,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "multi_definition_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -2865,7 +2917,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -2879,7 +2931,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "multi_drawer_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -3033,7 +3093,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -3047,7 +3107,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "multi_footnote_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -3201,7 +3269,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -3215,7 +3283,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "multi_macro_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -3369,7 +3445,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -3383,7 +3459,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "multi_table_cell_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -3533,7 +3617,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -3547,7 +3631,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "multi_variable_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -3567,12 +3659,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment1",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -3635,6 +3723,10 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "ordered_list1_prefix",
           "named": true
         },
@@ -3656,6 +3748,10 @@
         },
         {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -3691,12 +3787,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment2",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -3759,6 +3851,10 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment2",
+          "named": true
+        },
+        {
           "type": "ordered_list2_prefix",
           "named": true
         },
@@ -3776,6 +3872,10 @@
         },
         {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -3807,12 +3907,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment3",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -3875,6 +3971,10 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment3",
+          "named": true
+        },
+        {
           "type": "ordered_list3_prefix",
           "named": true
         },
@@ -3888,6 +3988,10 @@
         },
         {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -3915,12 +4019,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment4",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -3983,6 +4083,10 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment4",
+          "named": true
+        },
+        {
           "type": "ordered_list4_prefix",
           "named": true
         },
@@ -3992,6 +4096,10 @@
         },
         {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -4015,12 +4123,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment5",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -4083,11 +4187,19 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment5",
+          "named": true
+        },
+        {
           "type": "ordered_list5_prefix",
           "named": true
         },
         {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -4107,12 +4219,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment6",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -4175,7 +4283,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment6",
+          "named": true
+        },
+        {
           "type": "ordered_list6_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -4416,12 +4532,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment1",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -4483,6 +4595,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "indent_segment1",
+          "named": true
+        },
         {
           "type": "quote1_prefix",
           "named": true
@@ -4508,6 +4624,10 @@
           "named": true
         },
         {
+          "type": "slide",
+          "named": true
+        },
+        {
           "type": "weak_attribute_set",
           "named": true
         }
@@ -4520,12 +4640,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment2",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -4587,6 +4703,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "indent_segment2",
+          "named": true
+        },
         {
           "type": "quote2_prefix",
           "named": true
@@ -4608,6 +4728,10 @@
           "named": true
         },
         {
+          "type": "slide",
+          "named": true
+        },
+        {
           "type": "weak_attribute_set",
           "named": true
         }
@@ -4620,12 +4744,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment3",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -4687,6 +4807,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "indent_segment3",
+          "named": true
+        },
         {
           "type": "quote3_prefix",
           "named": true
@@ -4704,6 +4828,10 @@
           "named": true
         },
         {
+          "type": "slide",
+          "named": true
+        },
+        {
           "type": "weak_attribute_set",
           "named": true
         }
@@ -4716,12 +4844,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment4",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -4784,6 +4908,10 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment4",
+          "named": true
+        },
+        {
           "type": "quote4_prefix",
           "named": true
         },
@@ -4793,6 +4921,10 @@
         },
         {
           "type": "quote6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -4808,12 +4940,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment5",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -4876,11 +5004,19 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment5",
+          "named": true
+        },
+        {
           "type": "quote5_prefix",
           "named": true
         },
         {
           "type": "quote6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -4896,12 +5032,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment6",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -4964,7 +5096,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment6",
+          "named": true
+        },
+        {
           "type": "quote6_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -5177,7 +5317,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -5191,7 +5331,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "single_definition_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -5271,7 +5419,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -5285,7 +5433,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "single_drawer_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -5365,7 +5521,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -5379,7 +5535,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "single_footnote_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -5459,7 +5623,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -5473,7 +5637,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "single_macro_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -5553,7 +5725,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -5567,7 +5739,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "single_table_cell_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -5643,7 +5823,7 @@
       },
       "title": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "paragraph_segment",
@@ -5657,7 +5837,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "single_variable_prefix",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -5666,6 +5854,69 @@
         },
         {
           "type": "weak_attribute_set",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "slide",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "macro",
+          "named": true
+        },
+        {
+          "type": "multi_definition",
+          "named": true
+        },
+        {
+          "type": "multi_drawer",
+          "named": true
+        },
+        {
+          "type": "multi_footnote",
+          "named": true
+        },
+        {
+          "type": "multi_macro",
+          "named": true
+        },
+        {
+          "type": "multi_variable",
+          "named": true
+        },
+        {
+          "type": "ranged_tag",
+          "named": true
+        },
+        {
+          "type": "ranged_verbatim_tag",
+          "named": true
+        },
+        {
+          "type": "single_definition",
+          "named": true
+        },
+        {
+          "type": "single_drawer",
+          "named": true
+        },
+        {
+          "type": "single_footnote",
+          "named": true
+        },
+        {
+          "type": "single_macro",
+          "named": true
+        },
+        {
+          "type": "single_variable",
           "named": true
         }
       ]
@@ -6263,12 +6514,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment1",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -6331,6 +6578,10 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment1",
+          "named": true
+        },
+        {
           "type": "ordered_list2",
           "named": true
         },
@@ -6348,6 +6599,10 @@
         },
         {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -6387,12 +6642,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment2",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -6455,6 +6706,10 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment2",
+          "named": true
+        },
+        {
           "type": "ordered_list3",
           "named": true
         },
@@ -6468,6 +6723,10 @@
         },
         {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -6503,12 +6762,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment3",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -6571,6 +6826,10 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment3",
+          "named": true
+        },
+        {
           "type": "ordered_list4",
           "named": true
         },
@@ -6580,6 +6839,10 @@
         },
         {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -6611,12 +6874,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment4",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -6679,11 +6938,19 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment4",
+          "named": true
+        },
+        {
           "type": "ordered_list5",
           "named": true
         },
         {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -6711,12 +6978,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment5",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -6779,7 +7042,15 @@
       "required": true,
       "types": [
         {
+          "type": "indent_segment5",
+          "named": true
+        },
+        {
           "type": "ordered_list6",
+          "named": true
+        },
+        {
+          "type": "slide",
           "named": true
         },
         {
@@ -6803,12 +7074,8 @@
     "fields": {
       "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
-          {
-            "type": "indent_segment6",
-            "named": true
-          },
           {
             "type": "paragraph",
             "named": true
@@ -6870,6 +7137,14 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "indent_segment6",
+          "named": true
+        },
+        {
+          "type": "slide",
+          "named": true
+        },
         {
           "type": "unordered_list6_prefix",
           "named": true
@@ -7019,6 +7294,10 @@
   },
   {
     "type": "_prefix",
+    "named": false
+  },
+  {
+    "type": "_slide",
     "named": false
   },
   {
@@ -7267,10 +7546,6 @@
   },
   {
     "type": "single_variable_prefix",
-    "named": true
-  },
-  {
-    "type": "slide",
     "named": true
   },
   {

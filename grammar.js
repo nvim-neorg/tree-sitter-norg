@@ -227,7 +227,7 @@ module.exports = grammar({
         $.inline_link_target_open,
         $.inline_link_target_close,
 
-        $.slide,
+        $.slide_begin,
         $.indent_segment_begin,
     ],
 
@@ -243,7 +243,6 @@ module.exports = grammar({
                         $.rangeable_detached_modifier,
                         $.table,
                         $.tag,
-                        $.slide,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
                     )
@@ -856,6 +855,16 @@ module.exports = grammar({
             $.macro,
         ),
 
+        slide: $ => seq(
+            alias($.slide_begin, "_slide"),
+            choice(
+                $.tag,
+                $.rangeable_detached_modifier,
+                // TODO: Add nestable detached modifiers
+                // Currently they cause the parser to become absolutely massive.
+            ),
+        ),
+
         indent_segment1: $ => gen_indent_segment($, 1),
         indent_segment2: $ => gen_indent_segment($, 2),
         indent_segment3: $ => gen_indent_segment($, 3),
@@ -988,7 +997,6 @@ function gen_detached_modifier($, prefix, ...rest) {
             ),
         ),
 
-        // TODO: Make all detached modifiers allow an indent segment or slide
         ...rest,
     );
 }
@@ -1008,12 +1016,14 @@ function gen_heading($, level) {
 
                 $["heading" + level + "_prefix"],
 
-                field(
-                    "title",
-                    $.paragraph_segment,
-                ),
+                indent_segment_or($, 1,
+                    field(
+                        "title",
+                        $.paragraph_segment,
+                    ),
 
-                repeat(prec(1, alias($.line_break, "_line_break"))),
+                    repeat(prec(1, alias($.line_break, "_line_break"))),
+                ),
 
                 field(
                     "content",
@@ -1067,13 +1077,10 @@ function gen_generic_list_item($, kind, level) {
 
         $[kind + "_list" + level + "_prefix"],
 
-        field(
+        indent_segment_or($, level, field(
             "content",
-            choice(
-                alias($._non_infectable_paragraph, $.paragraph),
-                $["indent_segment" + level],
-            ),
-        ),
+            alias($._non_infectable_paragraph, $.paragraph),
+        )),
 
         repeat(
             choice(
@@ -1095,13 +1102,10 @@ function gen_quote($, level) {
 
         $["quote" + level + "_prefix"],
 
-        field(
+        indent_segment_or($, level, field(
             "content",
-            choice(
-                alias($._non_infectable_paragraph, $.paragraph),
-                $["indent_segment" + level],
-            ),
-        ),
+            alias($._non_infectable_paragraph, $.paragraph),
+        )),
 
         repeat(
             choice(
@@ -1153,10 +1157,10 @@ function gen_single_rangeable_detached_modifier($, kind, include_strong) {
 
                 $["single_" + kind + "_prefix"],
 
-                field(
+                indent_segment_or($, 1, field(
                     "title",
                     $.paragraph_segment,
-                ),
+                )),
 
                 repeat(
                     prec(1, choice(
@@ -1187,10 +1191,10 @@ function gen_multi_rangeable_detached_modifier($, kind, include_strong) {
 
             $["multi_" + kind + "_prefix"],
 
-            field(
+            indent_segment_or($, 1, field(
                 "title",
                 $.paragraph_segment,
-            ),
+            )),
 
             choice(
                 alias($.line_break, "_line_break"),
@@ -1268,4 +1272,12 @@ function gen_indent_segment($, level) {
             prec.dynamic(2, $.weak_paragraph_delimiter),
         ),
     ));
+}
+
+function indent_segment_or($, level, ...other) {
+    return choice(
+        $["indent_segment" + (level ? level : 1)],
+        $.slide,
+        seq(...other),
+    );
 }

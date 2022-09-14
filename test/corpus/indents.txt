@@ -123,3 +123,16 @@ This is not a part of any indent segment.
   (strong_paragraph_delimiter)
   (paragraph
     (paragraph_segment)))
+
+==============
+Slide
+==============
+- :
+  @code lua
+  print("This is a slide")
+  @end
+- :
+  $ Term
+    Definition
+---
+(document)

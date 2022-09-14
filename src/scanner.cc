@@ -623,12 +623,12 @@ class Scanner
         else if (((m_LastToken >= HEADING1 && m_LastToken <= MULTI_VARIABLE_SUFFIX) || m_LastToken == DETACHED_MOD_EXTENSION_DELIMITER) && lexer->lookahead == ':')
         {
             advance(lexer);
-            bool slide = false;
+            bool is_indent_segment = false;
 
             if (lexer->lookahead == ':')
             {
                 advance(lexer);
-                slide = true;
+                is_indent_segment = true;
             }
 
             if (lexer->lookahead != '\r' && lexer->lookahead != '\n')
@@ -637,7 +637,10 @@ class Scanner
                 return true;
             }
 
-            lexer->result_symbol = m_LastToken = (TokenType)(SLIDE + slide);
+            // Move past the newline character as well
+            advance(lexer);
+
+            lexer->result_symbol = m_LastToken = (TokenType)(SLIDE + is_indent_segment);
             return true;
         }
         else if (lexer->lookahead == '<')
