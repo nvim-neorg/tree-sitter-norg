@@ -23,7 +23,9 @@ Basic Links
 {:norg_file:# Generic}
 {:norg_file:$ Definition}
 {:norg_file:^ Footnote}
+{:norg_file:100}
 {https://github.com/}
+{100}
 {file:///dev/null}
 {/ external_file.txt}
 {@ Tue 3rd November 2022 8:30 GMT}
@@ -156,7 +158,18 @@ Basic Links
     (paragraph_segment
       (link
         (link_location
+          file: (link_file_text)
+          type: (link_target_line_number)
+          text: (paragraph))))
+    (paragraph_segment
+      (link
+        (link_location
           type: (link_target_url)
+          text: (paragraph))))
+    (paragraph_segment
+      (link
+        (link_location
+          type: (link_target_line_number)
           text: (paragraph))))
     (paragraph_segment
       (link
@@ -208,10 +221,12 @@ Links with text
 {:norg_file:# Generic}[custom text]
 {:norg_file:$ Definition}[custom text]
 {:norg_file:^ Footnote}[custom text]
+{:norg_file:100}[custom text]
 {https://github.com/}[custom text]
+{100}[custom text]
 {file:///dev/null}[custom text]
 {/ external_file.txt}[custom text]
-{@ Tue 3rd November 2022 8:30 GMT}
+{@ Tue 3rd November 2022 8:30 GMT}[custom text]
 {:norg_file:/ external_file.txt}[custom text]
 {:norg_file:@ Tue 3rd November 2022 8:30 GMT}
 {:norg_file:https://github.com/}[custom text]
@@ -385,7 +400,22 @@ Links with text
     (paragraph_segment
       (link
         (link_location
+          file: (link_file_text)
+          type: (link_target_line_number)
+          text: (paragraph))
+        (link_description
+          text: (paragraph))))
+    (paragraph_segment
+      (link
+        (link_location
           type: (link_target_url)
+          text: (paragraph))
+        (link_description
+          text: (paragraph))))
+    (paragraph_segment
+      (link
+        (link_location
+          type: (link_target_line_number)
           text: (paragraph))
         (link_description
           text: (paragraph))))
@@ -407,6 +437,8 @@ Links with text
       (link
         (link_location
           type: (link_target_timestamp)
+          text: (paragraph))
+        (link_description
           text: (paragraph))))
     (ERROR
       (link_file_text))
@@ -433,6 +465,7 @@ Anchors
 [definition anchor]
 [footnote anchor]
 [norg file anchor]
+[line number anchor]
 [external heading anchor]
 [external generic anchor]
 [external definition anchor]
@@ -455,6 +488,8 @@ Anchors
 [definition anchor]{$ Definition}
 [footnote anchor]{^ Footnote}
 [norg file anchor]{:norg_file:}
+[line number anchor]{123}
+[line number anchor]{:norg_file:123}
 [external heading anchor]{:norg_file:* Heading level 1}
 [external heading anchor]{:norg_file:** Heading level 2}
 [external heading anchor]{:norg_file:*** Heading level 3}
@@ -476,6 +511,10 @@ Anchors
 
 (document
   (paragraph
+    (paragraph_segment
+      (anchor_declaration
+        (link_description
+          text: (paragraph))))
     (paragraph_segment
       (anchor_declaration
         (link_description
@@ -620,6 +659,21 @@ Anchors
           text: (paragraph))
         (link_location
           file: (link_file_text))))
+    (paragraph_segment
+      (anchor_definition
+        (link_description
+          text: (paragraph))
+        (link_location
+          type: (link_target_line_number)
+          text: (paragraph))))
+    (paragraph_segment
+      (anchor_definition
+        (link_description
+          text: (paragraph))
+        (link_location
+          file: (link_file_text)
+          type: (link_target_line_number)
+          text: (paragraph))))
     (paragraph_segment
       (anchor_definition
         (link_description

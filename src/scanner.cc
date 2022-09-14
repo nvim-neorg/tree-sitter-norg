@@ -74,10 +74,6 @@ enum TokenType : char
     MULTI_FOOTNOTE,
     MULTI_FOOTNOTE_SUFFIX,
 
-    SINGLE_DRAWER,
-    MULTI_DRAWER,
-    MULTI_DRAWER_SUFFIX,
-
     SINGLE_TABLE_CELL,
     MULTI_TABLE_CELL,
     MULTI_TABLE_CELL_SUFFIX,
@@ -102,13 +98,13 @@ enum TokenType : char
     LINK_FILE_END,
     LINK_FILE_TEXT,
     LINK_TARGET_URL,
+    LINK_TARGET_LINE_NUMBER,
     LINK_TARGET_WIKI,
     LINK_TARGET_GENERIC,
     LINK_TARGET_EXTERNAL_FILE,
     LINK_TARGET_TIMESTAMP,
     LINK_TARGET_DEFINITION,
     LINK_TARGET_FOOTNOTE,
-    LINK_TARGET_DRAWER,
     LINK_TARGET_HEADING1,
     LINK_TARGET_HEADING2,
     LINK_TARGET_HEADING3,
@@ -517,15 +513,6 @@ class Scanner
             {
                 advance(lexer);
                 lexer->result_symbol = MULTI_FOOTNOTE_SUFFIX;
-                return true;
-            }
-
-            if (check_detached(lexer, SINGLE_DRAWER | MULTI_DRAWER | NONE, {'<'}) != NONE)
-                return true;
-            else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
-            {
-                advance(lexer);
-                lexer->result_symbol = MULTI_DRAWER_SUFFIX;
                 return true;
             }
 
@@ -1039,9 +1026,6 @@ class Scanner
             case '^':
                 lexer->result_symbol = m_LastToken = LINK_TARGET_FOOTNOTE;
                 break;
-            case '<':
-                lexer->result_symbol = m_LastToken = LINK_TARGET_DRAWER;
-                break;
             case '*':
                 advance(lexer);
 
@@ -1062,7 +1046,7 @@ class Scanner
 
                 return true;
             default:
-                lexer->result_symbol = m_LastToken = LINK_TARGET_URL;
+                lexer->result_symbol = m_LastToken = std::iswdigit(lexer->lookahead) ? LINK_TARGET_LINE_NUMBER : LINK_TARGET_URL;
                 return true;
             }
 
@@ -1111,7 +1095,7 @@ class Scanner
                 advance(lexer);
                 return (lexer->lookahead == '}' || lexer->lookahead == '#' ||
                         lexer->lookahead == '%' || lexer->lookahead == '$' ||
-                        lexer->lookahead == '^' || lexer->lookahead == '*');
+                        lexer->lookahead == '^' || lexer->lookahead == '*' || std::iswdigit(lexer->lookahead));
             }
         default:
             return false;
