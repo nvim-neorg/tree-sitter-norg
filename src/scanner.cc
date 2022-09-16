@@ -26,6 +26,9 @@ enum TokenType : char
 
     TRAILING_MODIFIER,
 
+    DETACHED_MODIFIER_EXTENSION_BEGIN,
+    MODIFIER_EXTENSION_DELIMITER,
+    DETACHED_MODIFIER_EXTENSION_END,
     PRIORITY,
     TIMESTAMP,
     TODO_ITEM_UNDONE,
@@ -36,7 +39,6 @@ enum TokenType : char
     TODO_ITEM_URGENT,
     TODO_ITEM_UNCERTAIN,
     TODO_ITEM_RECURRING,
-    DETACHED_MOD_EXTENSION_DELIMITER,
 
     HEADING1,
     HEADING2,
@@ -113,6 +115,7 @@ enum TokenType : char
     LINK_TARGET_HEADING6,
 
     TIMESTAMP_DATA,
+    PRIORITY_DATA,
 
     TAG_DELIMITER,
 
@@ -127,8 +130,8 @@ enum TokenType : char
 
     LINK_MODIFIER,
 
-    ATTRIBUTE_BEGIN,
-    ATTRIBUTE_END,
+    ATTACHED_MODIFIER_BEGIN,
+    ATTACHED_MODIFIER_END,
 
     BOLD_OPEN,
     BOLD_CLOSE,
@@ -232,8 +235,6 @@ class Scanner
             return false;
         }
 
-        // Otherwise just check whether or not we're dealing with a newline and
-        // return STANDALONE_BREAK if we are
         if (m_LastToken == TRAILING_MODIFIER)
         {
             advance(lexer);
@@ -262,17 +263,6 @@ class Scanner
             }
 
             return true;
-        }
-        else if (lexer->lookahead == '#' &&
-                 (m_LastToken >= HEADING1 && m_LastToken <= ORDERED_LIST6))
-        {
-            advance(lexer);
-
-            if (is_newline(lexer->lookahead))
-            {
-                lexer->result_symbol = m_LastToken = INDENT_SEGMENT;
-                return true;
-            }
         }
 
         // If we're at the beginning of a line check for all detached modifiers
@@ -605,9 +595,9 @@ class Scanner
             else
                 return false;
         }
-        else if (check_detached_mod_extension(lexer)) // TODO: Update
+        else if (check_detached_mod_extension(lexer))
             return true;
-        else if (((m_LastToken >= HEADING1 && m_LastToken <= MULTI_VARIABLE_SUFFIX) || m_LastToken == DETACHED_MOD_EXTENSION_DELIMITER) && lexer->lookahead == ':')
+        else if (((m_LastToken >= HEADING1 && m_LastToken <= MULTI_VARIABLE_SUFFIX) || m_LastToken == DETACHED_MODIFIER_EXTENSION_END) && lexer->lookahead == ':')
         {
             advance(lexer);
             bool is_indent_segment = false;
@@ -661,7 +651,7 @@ class Scanner
                  m_LastToken == LINK_DESCRIPTION_END || m_LastToken == LINK_LOCATION_END ||
                  m_LastToken == INLINE_LINK_TARGET_CLOSE))
             {
-                lexer->result_symbol = m_LastToken = ATTRIBUTE_BEGIN;
+                lexer->result_symbol = m_LastToken = ATTACHED_MODIFIER_BEGIN;
                 return true;
             }
             else
@@ -676,7 +666,7 @@ class Scanner
 
             if (!std::iswspace(m_Previous))
             {
-                lexer->result_symbol = m_LastToken = ATTRIBUTE_END;
+                lexer->result_symbol = m_LastToken = ATTACHED_MODIFIER_END;
                 return true;
             }
         }
@@ -1105,145 +1095,117 @@ class Scanner
     /*
      * Attempts to parse a detached modifier extension
      */
-    // TODO: control flow can probably be improved significantly
     bool check_detached_mod_extension(TSLexer* lexer)
     {
-        if (lexer->lookahead == '|' &&
-            ((m_LastToken >= HEADING1 && m_LastToken <= MULTI_VARIABLE_SUFFIX) ||
-             (m_LastToken >= PRIORITY && m_LastToken <= TODO_ITEM_RECURRING)))
-        {
-            advance(lexer);
-
-            auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
-            auto found_detached_modifier_extension =
-                m_DetachedModifierExtensions.find(lexer->lookahead);
-
-            if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
-            {
-                if (found_attached_modifier == m_AttachedModifiers.end())
-                {
-                    lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
-                    return true;
+        switch (m_LastToken) {
+            case DETACHED_MODIFIER_EXTENSION_BEGIN:
+            case MODIFIER_EXTENSION_DELIMITER:
+                switch (lexer->lookahead) {
+                    case '#':
+                        lexer->result_symbol = m_LastToken = PRIORITY;
+                        break;
+                    case '@':
+                        lexer->result_symbol = m_LastToken = TIMESTAMP;
+                        break;
+                    case ' ':
+                    case '\t':
+                    case '\v':
+                        lexer->result_symbol = m_LastToken = TODO_ITEM_UNDONE;
+                        break;
+                    case '-':
+                        lexer->result_symbol = m_LastToken = TODO_ITEM_PENDING;
+                        break;
+                    case 'x':
+                        lexer->result_symbol = m_LastToken = TODO_ITEM_DONE;
+                        break;
+                    case '=':
+                        lexer->result_symbol = m_LastToken = TODO_ITEM_ON_HOLD;
+                        break;
+                    case '_':
+                        lexer->result_symbol = m_LastToken = TODO_ITEM_CANCELLED;
+                        break;
+                    case '!':
+                        lexer->result_symbol = m_LastToken = TODO_ITEM_URGENT;
+                        break;
+                    case '?':
+                        lexer->result_symbol = m_LastToken = TODO_ITEM_UNCERTAIN;
+                        break;
+                    case '+':
+                        lexer->result_symbol = m_LastToken = TODO_ITEM_RECURRING;
+                        break;
+                    default:
+                        advance(lexer);
+                        return false;
                 }
-                else
-                {
-                    lexer->mark_end(lexer);
+
+                advance(lexer);
+
+                while (std::iswspace(lexer->lookahead))
                     advance(lexer);
-                    if (lexer->lookahead == '|')
-                    {
-                        lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
-                        return true;
-                    }
-                }
-            }
-        }
 
-        switch (m_LastToken)
-        {
-        case DETACHED_MOD_EXTENSION_DELIMITER:
-        {
-            auto found_detached_modifier_extension =
-                m_DetachedModifierExtensions.find(lexer->lookahead);
-
-            if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
-            {
-                lexer->result_symbol = m_LastToken = found_detached_modifier_extension->second;
-                advance(lexer);
-
-                if (found_detached_modifier_extension->second == TODO_ITEM_UNDONE)
-                {
-                    while (lexer->lookahead && std::iswspace(lexer->lookahead))
-                        advance(lexer);
-
-                    if (lexer->lookahead == '|')
-                        return true;
-                }
-                else
-                {
-                    while (lexer->lookahead && std::iswspace(lexer->lookahead))
-                        advance(lexer);
-
-                    return true;
-                }
-            }
-            break;
-        }
-        case PRIORITY:
-            return parse_text(lexer);
-        case TIMESTAMP:
-        case TODO_ITEM_RECURRING:
-        {
-            while (lexer->lookahead && lexer->lookahead != '|')
-                advance(lexer);
-            lexer->result_symbol = m_LastToken = TIMESTAMP_DATA;
-            return true;
-        }
-        case TIMESTAMP_DATA:
-        {
-            if (lexer->lookahead == '|')
-            {
-                advance(lexer);
-                lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
                 return true;
-            }
-            break;
-        }
-        case WORD:
-        case CAPITALIZED_WORD:
-        {
-            if (lexer->lookahead == '|')
-            {
-                auto found_attached_modifier = m_AttachedModifiers.find(m_Current);
-
-                // We are looking for a detached modifier extension, if we have any active attached
-                // modifiers then we aren't in the right context. Bail.
-                if (found_attached_modifier != m_AttachedModifiers.end() && m_ActiveModifiers.any())
-                    return false;
-
-                advance(lexer);
-                auto found_another_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
-
-                if (found_another_attached_modifier != m_AttachedModifiers.end() &&
-                    m_ActiveModifiers.any() &&
-                    ((found_another_attached_modifier->second == VERBATIM_OPEN ||
-                      found_another_attached_modifier->second == INLINE_MATH_OPEN ||
-                      found_another_attached_modifier->second == VARIABLE_OPEN) ||
-                     (!m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] &&
-                      !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2] &&
-                      !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2])) &&
-                    m_ActiveModifiers[(found_another_attached_modifier->second - BOLD_OPEN) / 2])
+            case TIMESTAMP:
+            case PRIORITY:
+            case TODO_ITEM_RECURRING:
+                if (lexer->lookahead == ')')
                 {
-                    lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_CLOSE;
-                    return true;
-                }
-
-                if (m_ActiveModifiers.any())
-                    return false;
-
-                auto found_detached_modifier_extension =
-                    m_DetachedModifierExtensions.find(lexer->lookahead);
-
-                if (found_another_attached_modifier == m_AttachedModifiers.end())
-                {
-                    lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
-                    return true;
-                }
-                else if (found_detached_modifier_extension != m_DetachedModifierExtensions.end())
-                {
-                    lexer->mark_end(lexer);
                     advance(lexer);
-                    if (lexer->lookahead == '|')
-                    {
-                        lexer->result_symbol = m_LastToken = DETACHED_MOD_EXTENSION_DELIMITER;
-                        return true;
-                    }
+                    lexer->result_symbol = m_LastToken = DETACHED_MODIFIER_EXTENSION_END;
+                    return true;
                 }
-            }
+                else if (lexer->lookahead == '|')
+                {
+                    advance(lexer);
+                    lexer->result_symbol = m_LastToken = MODIFIER_EXTENSION_DELIMITER;
+                    return true;
+                }
 
-            break;
-        }
-        default:
-            break;
+                while (lexer->lookahead && lexer->lookahead != '|' && lexer->lookahead != ')')
+                    advance(lexer);
+
+                lexer->result_symbol = m_LastToken = (m_LastToken == TIMESTAMP || m_LastToken == TODO_ITEM_RECURRING) ? TIMESTAMP_DATA : PRIORITY_DATA;
+                return true;
+            case TODO_ITEM_UNDONE:
+            case TODO_ITEM_PENDING:
+            case TODO_ITEM_DONE:
+            case TODO_ITEM_ON_HOLD:
+            case TODO_ITEM_CANCELLED:
+            case TODO_ITEM_URGENT:
+            case TODO_ITEM_UNCERTAIN:
+            case TIMESTAMP_DATA:
+            case PRIORITY_DATA:
+                if (lexer->lookahead == ')')
+                {
+                    advance(lexer);
+                    lexer->result_symbol = m_LastToken = DETACHED_MODIFIER_EXTENSION_END;
+                    return true;
+                }
+                else if (lexer->lookahead == '|' && m_AttachedModifiers.find(m_Current) == m_AttachedModifiers.end())
+                {
+                    advance(lexer);
+
+                    lexer->result_symbol = m_LastToken = MODIFIER_EXTENSION_DELIMITER;
+                    return true;
+                }
+
+                return false;
+            default:
+                if (m_LastToken < HEADING1 || m_LastToken > MULTI_VARIABLE_SUFFIX)
+                    return false;
+
+                if (lexer->lookahead == '(')
+                {
+                    advance(lexer);
+                    lexer->result_symbol = m_LastToken = DETACHED_MODIFIER_EXTENSION_BEGIN;
+                    return true;
+                }
+                else if (lexer->lookahead == ')')
+                {
+                    advance(lexer);
+                    lexer->result_symbol = m_LastToken = DETACHED_MODIFIER_EXTENSION_END;
+                    return true;
+                }
+                break;
         }
 
         return false;

@@ -7,7 +7,6 @@ module.exports = grammar({
         $.nestable_detached_modifier,
         $.rangeable_detached_modifier,
         $.tag,
-        $.detached_modifier_extension,
 
         $._indent_segment_contents1,
         $._indent_segment_contents2,
@@ -80,6 +79,10 @@ module.exports = grammar({
 
         $.trailing_modifier,
 
+        $.detached_modifier_extension_begin,
+        $.mod_extension_delimiter,
+        $.detached_modifier_extension_end,
+
         $._priority,
         $._timestamp,
         $.todo_item_undone,
@@ -90,7 +93,6 @@ module.exports = grammar({
         $.todo_item_urgent,
         $.todo_item_uncertain,
         $._todo_item_recurring,
-        $.detached_mod_extension_delimiter,
 
         $.heading1_prefix,
         $.heading2_prefix,
@@ -167,6 +169,7 @@ module.exports = grammar({
         $.link_target_heading6,
 
         $.timestamp_data,
+        $.priority_data,
 
         $.tag_delimiter,
 
@@ -181,8 +184,8 @@ module.exports = grammar({
 
         $.link_modifier,
 
-        $.attribute_begin,
-        $.attribute_end,
+        $.attached_mod_extension_begin,
+        $.attached_mod_extension_end,
 
         $.bold_open,
         $.bold_close,
@@ -381,8 +384,8 @@ module.exports = grammar({
             prec(1, alias($.inline_link_target_close, "_word")),
             alias($.link_description_begin, "_word"),
             prec(1, alias($.link_description_end, "_word")),
-            alias($.attribute_begin, "_word"),
-            prec(1, alias($.attribute_end, "_word")),
+            alias($.attached_mod_extension_begin, "_word"),
+            prec(1, alias($.attached_mod_extension_end, "_word")),
             alias($.link_location_begin, "_word"),
             prec(1, alias($.link_location_end, "_word")),
             alias($.link_file_begin, "_word"),
@@ -450,12 +453,13 @@ module.exports = grammar({
 
             alias($.free_form_close, "_word"),
 
-            alias($.attribute_end, "_word"),
+            alias($.attached_mod_extension_end, "_word"),
             alias($.link_location_end, "_word"),
             alias($.link_description_end, "_word"),
             alias($.inline_link_target_close, "_word"),
 
-            alias($.detached_mod_extension_delimiter, "_word"),
+            alias($.mod_extension_delimiter, "_word"),
+            alias($.detached_modifier_extension_end, "_word"),
         ),
 
         // Well, any character
@@ -604,9 +608,9 @@ module.exports = grammar({
 
         // Attached modifier extension: attributes
         attribute: $ => seq(
-            alias($.attribute_begin, "_begin"),
+            alias($.attached_mod_extension_begin, "_begin"),
             field("value", $.word),
-            alias($.attribute_end, "_end"),
+            alias($.attached_mod_extension_end, "_end"),
         ),
 
         // A first-level heading:
@@ -678,7 +682,7 @@ module.exports = grammar({
 
         priority: $ => seq(
             $._priority,
-            field("level", $.word),
+            field("level", $.priority_data),
         ),
 
         timestamp: $ => seq(
@@ -698,9 +702,22 @@ module.exports = grammar({
 
         detached_modifier_extension: $ =>
         seq(
-            alias($.detached_mod_extension_delimiter, "_delimiter"),
-            repeat1(
+            alias($.detached_modifier_extension_begin, "_begin"),
+            choice(
+                $.priority,
+                $.timestamp,
+                $.todo_item_undone,
+                $.todo_item_pending,
+                $.todo_item_done,
+                $.todo_item_on_hold,
+                $.todo_item_cancelled,
+                $.todo_item_urgent,
+                $.todo_item_uncertain,
+                $.todo_item_recurring,
+            ),
+            repeat(
                 seq(
+                    alias($.mod_extension_delimiter, "_delimiter"),
                     choice(
                         $.priority,
                         $.timestamp,
@@ -713,9 +730,9 @@ module.exports = grammar({
                         $.todo_item_uncertain,
                         $.todo_item_recurring,
                     ),
-                    alias($.detached_mod_extension_delimiter, "_delimiter"),
                 ),
             ),
+            alias($.detached_modifier_extension_end, "_end"),
         ),
 
         // --------------------------------------------------

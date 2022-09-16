@@ -1548,45 +1548,6 @@ No nested markup inside free form variable
         (free_form_close)))))
 
 ================================================================================
-Do not confuse with ToDo detached mod extension
-================================================================================
-- *|bold|*
-* _|underline|_
-> -|struck through|-
-** !| spoiler |!
---------------------------------------------------------------------------------
-
-(document
-  (generic_list
-    (unordered_list1
-      (unordered_list1_prefix)
-      (paragraph
-        (paragraph_segment
-          (bold
-            (free_form_open)
-            (free_form_close))))))
-  (heading1
-    (heading1_prefix)
-    (paragraph_segment
-      (underline
-        (free_form_open)
-        (free_form_close)))
-    (quote
-      (quote1
-        (quote1_prefix)
-        (paragraph
-          (paragraph_segment
-            (strikethrough
-              (free_form_open)
-              (free_form_close))))))
-    (heading2
-      (heading2_prefix)
-      (paragraph_segment
-        (spoiler
-          (free_form_open)
-          (free_form_close))))))
-
-================================================================================
 Unclosed free form markup
 ================================================================================
 *| test one

@@ -242,6 +242,57 @@
     }
   },
   {
+    "type": "detached_modifier_extension",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "priority",
+          "named": true
+        },
+        {
+          "type": "timestamp",
+          "named": true
+        },
+        {
+          "type": "todo_item_cancelled",
+          "named": true
+        },
+        {
+          "type": "todo_item_done",
+          "named": true
+        },
+        {
+          "type": "todo_item_on_hold",
+          "named": true
+        },
+        {
+          "type": "todo_item_pending",
+          "named": true
+        },
+        {
+          "type": "todo_item_recurring",
+          "named": true
+        },
+        {
+          "type": "todo_item_uncertain",
+          "named": true
+        },
+        {
+          "type": "todo_item_undone",
+          "named": true
+        },
+        {
+          "type": "todo_item_urgent",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "document",
     "named": true,
     "fields": {},
@@ -532,51 +583,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -718,51 +729,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -900,51 +871,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -1078,51 +1009,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -1252,51 +1143,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -1422,51 +1273,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -2578,51 +2389,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -2746,51 +2517,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -2914,51 +2645,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -3082,51 +2773,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -3246,51 +2897,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -3348,51 +2959,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -3476,51 +3047,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -3596,51 +3127,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -3708,51 +3199,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -3812,51 +3263,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -3908,51 +3319,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -4160,7 +3531,7 @@
         "required": true,
         "types": [
           {
-            "type": "word",
+            "type": "priority_data",
             "named": true
           }
         ]
@@ -4221,51 +3592,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -4329,51 +3660,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -4433,51 +3724,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -4533,51 +3784,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -4629,51 +3840,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -4721,51 +3892,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -4946,51 +4077,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -5048,51 +4139,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -5150,51 +4201,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -5252,51 +4263,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -5350,51 +4321,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -6093,51 +5024,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -6221,51 +5112,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -6341,51 +5192,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -6453,51 +5264,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -6557,51 +5328,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -6653,51 +5384,11 @@
         ]
       },
       "state": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "_delimiter",
-            "named": false
-          },
-          {
-            "type": "priority",
-            "named": true
-          },
-          {
-            "type": "timestamp",
-            "named": true
-          },
-          {
-            "type": "todo_item_cancelled",
-            "named": true
-          },
-          {
-            "type": "todo_item_done",
-            "named": true
-          },
-          {
-            "type": "todo_item_on_hold",
-            "named": true
-          },
-          {
-            "type": "todo_item_pending",
-            "named": true
-          },
-          {
-            "type": "todo_item_recurring",
-            "named": true
-          },
-          {
-            "type": "todo_item_uncertain",
-            "named": true
-          },
-          {
-            "type": "todo_item_undone",
-            "named": true
-          },
-          {
-            "type": "todo_item_urgent",
+            "type": "detached_modifier_extension",
             "named": true
           }
         ]
@@ -7060,6 +5751,10 @@
   },
   {
     "type": "ordered_list6_prefix",
+    "named": true
+  },
+  {
+    "type": "priority_data",
     "named": true
   },
   {

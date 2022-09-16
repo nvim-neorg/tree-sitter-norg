@@ -1,115 +1,122 @@
 ================================================================================
 Todo Item + priority
 ================================================================================
-- | |# A| todo item + priority
+- ( |# A) todo item + priority
 --------------------------------------------------------------------------------
 
 (document
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (todo_item_undone)
-      (priority
-        (word))
+      (detached_modifier_extension
+        (todo_item_undone)
+        (priority
+          (priority_data)))
       (paragraph
         (paragraph_segment)))))
 
 ================================================================================
 Priority + Todo Item
 ================================================================================
-- |# B|_| priority + todo item
+- (# B|_) priority + todo item
 --------------------------------------------------------------------------------
 
 (document
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (priority
-        (word))
-      (todo_item_cancelled)
+      (detached_modifier_extension
+        (priority
+          (priority_data))
+        (todo_item_cancelled))
       (paragraph
         (paragraph_segment)))))
 
 ================================================================================
 Todo Item + Timestamp
 ================================================================================
-- | |@ Sun| todo item + timestamp
+- ( |@ Sun) todo item + timestamp
 --------------------------------------------------------------------------------
 
 (document
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (todo_item_undone)
-      (timestamp
-        (timestamp_data))
+      (detached_modifier_extension
+        (todo_item_undone)
+        (timestamp
+          (timestamp_data)))
       (paragraph
         (paragraph_segment)))))
 
 ================================================================================
 Timestamp + Todo Item
 ================================================================================
-- |@ Mon|+| timestamp + todo item
+- (@ Mon|+) timestamp + todo item
 --------------------------------------------------------------------------------
 
 (document
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (timestamp
-        (timestamp_data))
-      (todo_item_recurring)
+      (detached_modifier_extension
+        (timestamp
+          (timestamp_data))
+        (todo_item_recurring))
       (paragraph
         (paragraph_segment)))))
 
 ================================================================================
 Priority + Timestamp
 ================================================================================
-- |# C|@ 2021| priority + timestamp
+- (# C|@ 2021) priority + timestamp
 --------------------------------------------------------------------------------
 
 (document
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (priority
-        (word))
-      (timestamp
-        (timestamp_data))
+      (detached_modifier_extension
+        (priority
+          (priority_data))
+        (timestamp
+          (timestamp_data)))
       (paragraph
         (paragraph_segment)))))
 
 ================================================================================
 Timestmap + Priority
 ================================================================================
-- |@ 2022|# E| timestamp + priority
+- (@ 2022|# E) timestamp + priority
 --------------------------------------------------------------------------------
 
 (document
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (timestamp
-        (timestamp_data))
-      (priority
-        (word))
+      (detached_modifier_extension
+        (timestamp
+          (timestamp_data))
+        (priority
+          (priority_data)))
       (paragraph
         (paragraph_segment)))))
 
 ================================================================================
 Todo Item + Priority + Timestamp
 ================================================================================
-- |x|# F|@ 1 May| todo item + priority + timestamp
+- (x|# F|@ 1 May) todo item + priority + timestamp
 --------------------------------------------------------------------------------
 
 (document
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (todo_item_done)
-      (priority
-        (word))
-      (timestamp
-        (timestamp_data))
+      (detached_modifier_extension
+        (todo_item_done)
+        (priority
+          (priority_data))
+        (timestamp
+          (timestamp_data)))
       (paragraph
         (paragraph_segment)))))

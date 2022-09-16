@@ -1,14 +1,15 @@
 ================================================================================
 Priority
 ================================================================================
-- |# A| priority
+- (# A) priority
 --------------------------------------------------------------------------------
 
 (document
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (priority
-        (word))
+      (detached_modifier_extension
+        (priority
+          (priority_data)))
       (paragraph
         (paragraph_segment)))))

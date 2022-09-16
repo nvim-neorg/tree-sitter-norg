@@ -556,7 +556,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_begin"
+            "name": "attached_mod_extension_begin"
           },
           "named": false,
           "value": "_word"
@@ -568,7 +568,7 @@
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
-              "name": "attribute_end"
+              "name": "attached_mod_extension_end"
             },
             "named": false,
             "value": "_word"
@@ -591,6 +591,19 @@
             "content": {
               "type": "SYMBOL",
               "name": "link_location_end"
+            },
+            "named": false,
+            "value": "_word"
+          }
+        },
+        {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "mod_extension_delimiter"
             },
             "named": false,
             "value": "_word"
@@ -1738,7 +1751,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_end"
+            "name": "attached_mod_extension_end"
           },
           "named": false,
           "value": "_word"
@@ -1774,7 +1787,16 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "detached_mod_extension_delimiter"
+            "name": "mod_extension_delimiter"
+          },
+          "named": false,
+          "value": "_word"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "detached_modifier_extension_end"
           },
           "named": false,
           "value": "_word"
@@ -2237,7 +2259,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_begin"
+            "name": "attached_mod_extension_begin"
           },
           "named": false,
           "value": "_begin"
@@ -2254,7 +2276,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "attribute_end"
+            "name": "attached_mod_extension_end"
           },
           "named": false,
           "value": "_end"
@@ -4919,7 +4941,7 @@
           "name": "level",
           "content": {
             "type": "SYMBOL",
-            "name": "word"
+            "name": "priority_data"
           }
         }
       ]
@@ -4973,16 +4995,70 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "detached_mod_extension_delimiter"
+            "name": "detached_modifier_extension_begin"
           },
           "named": false,
-          "value": "_delimiter"
+          "value": "_begin"
         },
         {
-          "type": "REPEAT1",
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "priority"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "timestamp"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_undone"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_pending"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_done"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_on_hold"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_cancelled"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_urgent"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_uncertain"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "todo_item_recurring"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
           "content": {
             "type": "SEQ",
             "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "mod_extension_delimiter"
+                },
+                "named": false,
+                "value": "_delimiter"
+              },
               {
                 "type": "CHOICE",
                 "members": [
@@ -5027,18 +5103,18 @@
                     "name": "todo_item_recurring"
                   }
                 ]
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "detached_mod_extension_delimiter"
-                },
-                "named": false,
-                "value": "_delimiter"
               }
             ]
           }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "detached_modifier_extension_end"
+          },
+          "named": false,
+          "value": "_end"
         }
       ]
     },
@@ -8081,6 +8157,18 @@
     },
     {
       "type": "SYMBOL",
+      "name": "detached_modifier_extension_begin"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "mod_extension_delimiter"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "detached_modifier_extension_end"
+    },
+    {
+      "type": "SYMBOL",
       "name": "_priority"
     },
     {
@@ -8118,10 +8206,6 @@
     {
       "type": "SYMBOL",
       "name": "_todo_item_recurring"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "detached_mod_extension_delimiter"
     },
     {
       "type": "SYMBOL",
@@ -8381,6 +8465,10 @@
     },
     {
       "type": "SYMBOL",
+      "name": "priority_data"
+    },
+    {
+      "type": "SYMBOL",
       "name": "tag_delimiter"
     },
     {
@@ -8417,11 +8505,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "attribute_begin"
+      "name": "attached_mod_extension_begin"
     },
     {
       "type": "SYMBOL",
-      "name": "attribute_end"
+      "name": "attached_mod_extension_end"
     },
     {
       "type": "SYMBOL",
@@ -8542,7 +8630,6 @@
     "nestable_detached_modifier",
     "rangeable_detached_modifier",
     "tag",
-    "detached_modifier_extension",
     "_indent_segment_contents1",
     "_indent_segment_contents2",
     "_indent_segment_contents3",
