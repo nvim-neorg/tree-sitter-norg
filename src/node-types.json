@@ -2722,7 +2722,7 @@
     "type": "single_definition",
     "named": true,
     "fields": {
-      "definition": {
+      "content": {
         "multiple": false,
         "required": true,
         "types": [

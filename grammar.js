@@ -1702,7 +1702,7 @@ module.exports = grammar({
             ),
 
             field(
-                "definition",
+                "content",
                 $.paragraph
             ),
         )),
