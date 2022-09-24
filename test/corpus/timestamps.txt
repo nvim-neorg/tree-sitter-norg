@@ -8,7 +8,7 @@ Timestamps
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (detached_odifier_extension (timestamp
+      (detached_modifier_extension (timestamp
         (timestamp_data)))
       (paragraph
         (paragraph_segment)))))
