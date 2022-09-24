@@ -888,6 +888,9 @@ class Scanner
         {
             advance(lexer);
 
+
+            auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
+
             if (m_LastToken >= BOLD_OPEN && m_LastToken <= VARIABLE_CLOSE &&
                 (m_LastToken % 2) == (BOLD_OPEN % 2))
             {
@@ -898,8 +901,15 @@ class Scanner
                 lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_OPEN;
                 return m_LastToken;
             }
-            else if (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end())
+            else if (found_attached_modifier != m_AttachedModifiers.end())
             {
+                if (
+                        !can_have_modifier() &&
+                        !(found_attached_modifier->second == VERBATIM_OPEN && m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2]) &&
+                        !(found_attached_modifier->second == VARIABLE_OPEN && m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2]) &&
+                        !(found_attached_modifier->second == INLINE_MATH_OPEN && m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2])
+                    )
+                        return NONE;
                 lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_CLOSE;
                 return m_LastToken;
             }
@@ -968,6 +978,7 @@ class Scanner
                 static_cast<TokenType>(found_attached_modifier->second + 1);
             return m_LastToken;
         }
+
         return NONE;
     }
 

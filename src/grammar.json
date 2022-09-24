@@ -597,19 +597,6 @@
           }
         },
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "mod_extension_delimiter"
-            },
-            "named": false,
-            "value": "_word"
-          }
-        },
-        {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
