@@ -3389,6 +3389,10 @@
           "named": true
         },
         {
+          "type": "intersecting_modifier",
+          "named": true
+        },
+        {
           "type": "italic",
           "named": true
         },
@@ -5534,6 +5538,10 @@
     "named": false
   },
   {
+    "type": "_intersecting_modifier",
+    "named": false
+  },
+  {
     "type": "_line_break",
     "named": false
   },
@@ -5623,6 +5631,10 @@
   },
   {
     "type": "indent_segment_begin",
+    "named": true
+  },
+  {
+    "type": "intersecting_modifier",
     "named": true
   },
   {

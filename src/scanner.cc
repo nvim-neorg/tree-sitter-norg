@@ -129,6 +129,7 @@ enum TokenType : char
     STRONG_ATTRIBUTE,
 
     LINK_MODIFIER,
+    INTERSECTING_MODIFIER,
 
     ATTACHED_MODIFIER_BEGIN,
     ATTACHED_MODIFIER_END,
@@ -1256,6 +1257,20 @@ class Scanner
             do
                 advance(lexer);
             while (lexer->lookahead && std::iswblank(lexer->lookahead));
+
+            if (lexer->lookahead == ':')
+            {
+                advance(lexer);
+                if (lexer->lookahead && std::iswblank(lexer->lookahead))
+                {
+                    advance(lexer);
+                    lexer->result_symbol = m_LastToken = INTERSECTING_MODIFIER;
+                    return true;
+                } else {
+                    lexer->result_symbol = m_LastToken = WORD;
+                    return true;
+                }
+            }
 
             lexer->result_symbol = m_LastToken = SPACE;
             return true;

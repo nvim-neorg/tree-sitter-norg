@@ -183,6 +183,7 @@ module.exports = grammar({
         $.strong_attribute_prefix,
 
         $.link_modifier,
+        $.intersecting_modifier,
 
         $.attached_mod_extension_begin,
         $.attached_mod_extension_end,
@@ -267,6 +268,7 @@ module.exports = grammar({
                 repeat1(
                     choice(
                         $.paragraph_segment,
+                        $.intersecting_modifier,
                         alias($.line_break, "_line_break"),
                     ),
                 ),
@@ -1172,6 +1174,7 @@ function gen_single_rangeable_detached_modifier($, kind, include_strong) {
 
                 repeat(
                     prec(1, choice(
+                        alias($.intersecting_modifier, "_intersecting_modifier"),
                         alias($.line_break, "_line_break"),
                         alias($.paragraph_break, "_paragraph_break"),
                     )),
@@ -1205,6 +1208,7 @@ function gen_multi_rangeable_detached_modifier($, kind, include_strong) {
             )),
 
             choice(
+                alias($.intersecting_modifier, "_intersecting_modifier"),
                 alias($.line_break, "_line_break"),
                 alias($.paragraph_break, "_paragraph_break"),
             ),

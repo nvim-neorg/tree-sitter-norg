@@ -1,0 +1,37 @@
+================================================================================
+Useless intersecting modifier
+================================================================================
+segment : segment
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment)
+    (intersecting_modifier)
+    (paragraph_segment)))
+
+================================================================================
+Intersecting modifier main motivation: nice tables
+================================================================================
+: A1 : 1
+: A2 : 2
+: A3 : 3
+--------------------------------------------------------------------------------
+
+(document
+  (table
+    (single_table_cell
+      (single_table_cell_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment)))
+    (single_table_cell
+      (single_table_cell_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment)))
+    (single_table_cell
+      (single_table_cell_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment)))))
