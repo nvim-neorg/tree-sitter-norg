@@ -165,12 +165,14 @@ module.exports = grammar({
 
         $.tag_delimiter,
 
+        $.macro_tag_prefix,
+        $.macro_tag_end_prefix,
         $.ranged_tag_prefix,
         $.ranged_tag_end_prefix,
         $.ranged_verbatim_tag_prefix,
         $.ranged_verbatim_tag_end_prefix,
 
-        $.macro_prefix,
+        $.infirm_tag,
         $.weak_attribute_prefix,
         $.strong_attribute_prefix,
 
@@ -754,6 +756,28 @@ module.exports = grammar({
             ),
         ),
 
+        macro_tag_content: $ =>
+        prec.right(0,
+            repeat1(
+                choice(
+                    choice(
+                        $.paragraph_segment,
+                        alias($.line_break, "_line_break"),
+                        alias($.paragraph_break, "_paragraph_break"),
+                    ),
+
+                    field(
+                        "nested_tag",
+                        $.ranged_tag
+                    ),
+                ),
+            ),
+        ),
+
+        macro_tag_end: $ => gen_ranged_tag_end($, "ranged"),
+
+        macro_tag: $ => gen_ranged_tag($, "macro_tag"),
+
         ranged_tag_content: $ =>
         prec.right(0,
             repeat1(
@@ -795,8 +819,6 @@ module.exports = grammar({
         ranged_verbatim_tag_end: $ => gen_ranged_tag_end($, "ranged_verbatim"),
 
         ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim_tag"),
-
-        macro: $ => gen_single_tag($, "macro"),
 
         weak_attribute_set: $ =>
         repeat1(
@@ -848,9 +870,9 @@ module.exports = grammar({
 
         tag: $ =>
         choice(
+            $.macro_tag,
             $.ranged_tag,
             $.ranged_verbatim_tag,
-            $.macro,
         ),
 
         slide: $ => seq(

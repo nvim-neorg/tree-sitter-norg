@@ -333,7 +333,7 @@
           "named": true
         },
         {
-          "type": "macro",
+          "type": "macro_tag",
           "named": true
         },
         {
@@ -509,7 +509,7 @@
             "named": true
           },
           {
-            "type": "macro",
+            "type": "macro_tag",
             "named": true
           },
           {
@@ -639,7 +639,7 @@
             "named": true
           },
           {
-            "type": "macro",
+            "type": "macro_tag",
             "named": true
           },
           {
@@ -765,7 +765,7 @@
             "named": true
           },
           {
-            "type": "macro",
+            "type": "macro_tag",
             "named": true
           },
           {
@@ -887,7 +887,7 @@
             "named": true
           },
           {
-            "type": "macro",
+            "type": "macro_tag",
             "named": true
           },
           {
@@ -1005,7 +1005,7 @@
             "named": true
           },
           {
-            "type": "macro",
+            "type": "macro_tag",
             "named": true
           },
           {
@@ -1119,7 +1119,7 @@
             "named": true
           },
           {
-            "type": "macro",
+            "type": "macro_tag",
             "named": true
           },
           {
@@ -1225,7 +1225,7 @@
           "named": true
         },
         {
-          "type": "macro",
+          "type": "macro_tag",
           "named": true
         },
         {
@@ -1340,7 +1340,7 @@
           "named": true
         },
         {
-          "type": "macro",
+          "type": "macro_tag",
           "named": true
         },
         {
@@ -1443,7 +1443,7 @@
           "named": true
         },
         {
-          "type": "macro",
+          "type": "macro_tag",
           "named": true
         },
         {
@@ -1534,7 +1534,7 @@
           "named": true
         },
         {
-          "type": "macro",
+          "type": "macro_tag",
           "named": true
         },
         {
@@ -1613,7 +1613,7 @@
           "named": true
         },
         {
-          "type": "macro",
+          "type": "macro_tag",
           "named": true
         },
         {
@@ -1680,7 +1680,7 @@
           "named": true
         },
         {
-          "type": "macro",
+          "type": "macro_tag",
           "named": true
         },
         {
@@ -2102,9 +2102,19 @@
     }
   },
   {
-    "type": "macro",
+    "type": "macro_tag",
     "named": true,
     "fields": {
+      "content": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "macro_tag_content",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -2117,15 +2127,58 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
+          "type": "macro_tag_end",
+          "named": true
+        },
+        {
+          "type": "strong_attribute_set",
+          "named": true
+        },
+        {
           "type": "tag_parameters",
+          "named": true
+        },
+        {
+          "type": "weak_attribute_set",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "macro_tag_content",
+    "named": true,
+    "fields": {
+      "nested_tag": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "ranged_tag",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "paragraph_segment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "macro_tag_end",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "multi_definition",
@@ -2144,7 +2197,7 @@
             "named": false
           },
           {
-            "type": "macro",
+            "type": "macro_tag",
             "named": true
           },
           {
@@ -2256,7 +2309,7 @@
             "named": false
           },
           {
-            "type": "macro",
+            "type": "macro_tag",
             "named": true
           },
           {
@@ -2368,7 +2421,7 @@
             "named": false
           },
           {
-            "type": "macro",
+            "type": "macro_tag",
             "named": true
           },
           {
@@ -3772,7 +3825,7 @@
       "required": true,
       "types": [
         {
-          "type": "macro",
+          "type": "macro_tag",
           "named": true
         },
         {

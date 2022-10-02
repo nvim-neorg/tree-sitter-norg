@@ -111,12 +111,14 @@ enum TokenType : char
 
     TAG_DELIMITER,
 
+    MACRO_TAG,
+    MACRO_TAG_END,
     RANGED_TAG,
     RANGED_TAG_END,
     RANGED_VERBATIM_TAG,
     RANGED_VERBATIM_TAG_END,
 
-    MACRO,
+    INFIRM_TAG,
     WEAK_ATTRIBUTE,
     STRONG_ATTRIBUTE,
 
@@ -291,6 +293,9 @@ class Scanner
                                        !is_newline(lexer->lookahead) && lexer->lookahead)
                                     advance(lexer);
 
+                                // reset the marked end
+                                lexer->mark_end(lexer);
+
                                 if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) &&
                                     m_TagContext == TagType::IN_VERBATIM_TAG)
                                 {
@@ -323,34 +328,103 @@ class Scanner
             if (m_TagContext == TagType::IN_VERBATIM_TAG)
                 return parse_text(lexer);
 
-            // We are dealing with a ranged tag (#something)
-            if (lexer->lookahead == '#')
+            // We are dealing with a macro tag (=something)
+            if (lexer->lookahead == '=' && m_TagContext != TagType::IN_VERBATIM_TAG)
             {
                 advance(lexer);
 
-                if (!lexer->lookahead || std::iswspace(lexer->lookahead))
-                {
-                    if (is_newline(lexer->lookahead))
-                        lexer->result_symbol = m_LastToken = INDENT_SEGMENT;
-                    else
-                        lexer->result_symbol = m_LastToken = WORD;
+                // Mark the end of the token here
+                // We do this because we only want the returned token to be part
+                // of the `=` symbol, not the symbol + the name
+                lexer->mark_end(lexer);
 
+                // These sets of checks check whether the tag is `=end`
+                if (lexer->lookahead == 'e')
+                {
+                    advance(lexer);
+                    if (lexer->lookahead == 'n')
+                    {
+                        advance(lexer);
+                        if (lexer->lookahead == 'd')
+                        {
+                            advance(lexer);
+                            if (!lexer->lookahead || std::iswspace(lexer->lookahead))
+                            {
+                                while (std::iswspace(lexer->lookahead) &&
+                                       !is_newline(lexer->lookahead) && lexer->lookahead)
+                                    advance(lexer);
+
+                                // reset the marked end
+                                lexer->mark_end(lexer);
+
+                                if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) &&
+                                    m_TagLevel)
+                                {
+                                    lexer->result_symbol = m_LastToken = MACRO_TAG_END;
+                                    --m_TagLevel;
+                                    return true;
+                                }
+
+                                lexer->result_symbol = m_LastToken = WORD;
+                                return true;
+                            }
+                        }
+                    }
+                }
+                else if (lexer->lookahead == '=')
+                {
+                    advance(lexer);
+                    if (lexer->lookahead == '=')
+                    {
+                        // we are now three-characters in
+                        do
+                            advance(lexer);
+                        while (lexer->lookahead == '=');
+
+                        if (is_newline(lexer->lookahead))
+                        {
+                            // reset the marked end
+                            lexer->mark_end(lexer);
+                            advance(lexer);
+                            lexer->result_symbol = m_LastToken = STRONG_PARAGRAPH_DELIMITER;
+                            return true;
+                        }
+                        else
+                        {
+                            // reset the marked end
+                            lexer->mark_end(lexer);
+                            advance(lexer);
+                            lexer->result_symbol = m_LastToken = WORD;
+                            return true;
+                        }
+                    }
+                }
+
+                // This is a fallback. If the tag ends up not being `=end`
+                // then...
+                if (m_LastToken == MACRO_TAG)
+                {
+                    // ignore the char if we are already inside of a ranged tag.
+                    lexer->result_symbol = m_LastToken = WORD;
                     return true;
                 }
 
-                lexer->result_symbol = m_LastToken = STRONG_ATTRIBUTE;
+                // or push back the indentation level and return.
+                lexer->result_symbol = m_LastToken = MACRO_TAG;
+                ++m_TagLevel;
                 return true;
             }
+            // We are dealing with a ranged tag (|something)
             else if (lexer->lookahead == '|' && m_TagContext != TagType::IN_VERBATIM_TAG)
             {
                 advance(lexer);
 
                 // Mark the end of the token here
                 // We do this because we only want the returned token to be part
-                // of the `#` symbol, not the symbol + the name
+                // of the `|` symbol, not the symbol + the name
                 lexer->mark_end(lexer);
 
-                // These sets of checks check whether the tag is `#end`
+                // These sets of checks check whether the tag is `|end`
                 if (lexer->lookahead == 'e')
                 {
                     advance(lexer);
@@ -381,7 +455,7 @@ class Scanner
                     }
                 }
 
-                // This is a fallback. If the tag ends up not being `#end`
+                // This is a fallback. If the tag ends up not being `|end`
                 // then...
                 if (m_LastToken == RANGED_TAG)
                 {
@@ -395,6 +469,25 @@ class Scanner
                 ++m_TagLevel;
                 return true;
             }
+            // we are dealing with a strong attribute (#something)
+            else if (lexer->lookahead == '#' && m_TagContext != TagType::IN_VERBATIM_TAG)
+            {
+                advance(lexer);
+
+                if (!lexer->lookahead || std::iswspace(lexer->lookahead))
+                {
+                    if (is_newline(lexer->lookahead))
+                        lexer->result_symbol = m_LastToken = INDENT_SEGMENT;
+                    else
+                        lexer->result_symbol = m_LastToken = WORD;
+
+                    return true;
+                }
+
+                lexer->result_symbol = m_LastToken = STRONG_ATTRIBUTE;
+                return true;
+            }
+            // we are dealing with a weak attribute (+something)
             else if (lexer->lookahead == '+' && m_TagContext != TagType::IN_VERBATIM_TAG)
             {
                 advance(lexer);
@@ -404,6 +497,7 @@ class Scanner
                     return true;
                 }
             }
+            // TODO: add infirm-tag (.something)
 
             // The idea of the check_detached function is as follows:
             // We check for the '*' character and depending on how many we
@@ -505,29 +599,6 @@ class Scanner
             {
                 advance(lexer);
                 lexer->result_symbol = MULTI_TABLE_CELL_SUFFIX;
-                return true;
-            }
-
-            if (check_detached(lexer, NONE, {'='}) != NONE)
-                return true;
-            else if (is_newline(lexer->lookahead))
-            {
-                if (m_ParsedChars >= 3)
-                {
-                    advance(lexer);
-                    lexer->result_symbol = m_LastToken = STRONG_PARAGRAPH_DELIMITER;
-                    return true;
-                }
-                else
-                {
-                    advance(lexer);
-                    lexer->result_symbol = m_LastToken = WORD;
-                    return true;
-                }
-            }
-            else if (m_ParsedChars == 1 && m_TagContext != TagType::IN_VERBATIM_TAG)
-            {
-                lexer->result_symbol = m_LastToken = MACRO;
                 return true;
             }
 
