@@ -39,7 +39,7 @@ module.exports = grammar({
         [$.subscript, $._conflict_open],
         [$.inline_comment, $._conflict_open],
         [$.inline_math, $._conflict_open],
-        [$.variable, $._conflict_open],
+        [$.inline_macro, $._conflict_open],
 
         [$._paragraph_element],
 
@@ -134,14 +134,6 @@ module.exports = grammar({
         $.multi_table_cell_prefix,
         $.multi_table_cell_suffix,
 
-        $.single_macro_prefix,
-        $.multi_macro_prefix,
-        $.multi_macro_suffix,
-
-        $.single_variable_prefix,
-        $.multi_variable_prefix,
-        $.multi_variable_suffix,
-
         $.strong_paragraph_delimiter,
         $.weak_paragraph_delimiter,
         $.horizontal_line,
@@ -218,8 +210,8 @@ module.exports = grammar({
         $.inline_math_open,
         $.inline_math_close,
 
-        $.variable_open,
-        $.variable_close,
+        $.inline_macro_open,
+        $.inline_macro_close,
 
         $.free_form_open,
         $.free_form_close,
@@ -420,7 +412,7 @@ module.exports = grammar({
         inline_comment: $ => gen_attached_modifier($, "inline_comment", false),
         verbatim: $ => gen_attached_modifier($, "verbatim", true),
         inline_math: $ => gen_attached_modifier($, "inline_math", true),
-        variable: $ => gen_attached_modifier($, "variable", true),
+        inline_macro: $ => gen_attached_modifier($, "inline_macro", true),
 
         _conflict_open: $ =>
         choice(
@@ -434,7 +426,7 @@ module.exports = grammar({
             alias($.subscript_open, "_word"),
             alias($.inline_comment_open, "_word"),
             alias($.inline_math_open, "_word"),
-            alias($.variable_open, "_word"),
+            alias($.inline_macro_open, "_word"),
 
             alias($.free_form_open, "_word"),
         ),
@@ -451,7 +443,7 @@ module.exports = grammar({
             alias($.subscript_close, "_word"),
             alias($.inline_comment_close, "_word"),
             alias($.inline_math_close, "_word"),
-            alias($.variable_close, "_word"),
+            alias($.inline_macro_close, "_word"),
 
             alias($.free_form_close, "_word"),
 
@@ -739,12 +731,6 @@ module.exports = grammar({
 
         // --------------------------------------------------
 
-        single_macro: $ => gen_single_rangeable_detached_modifier($, "macro", true),
-        multi_macro: $ => gen_multi_rangeable_detached_modifier($, "macro", true),
-
-        single_variable: $ => gen_single_rangeable_detached_modifier($, "variable", true),
-        multi_variable: $ => gen_multi_rangeable_detached_modifier($, "variable", true),
-
         single_definition: $ => gen_single_rangeable_detached_modifier($, "definition", true),
         multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition", true),
 
@@ -916,10 +902,6 @@ module.exports = grammar({
             $.multi_definition,
             $.single_footnote,
             $.multi_footnote,
-            $.single_macro,
-            $.multi_macro,
-            $.single_variable,
-            $.multi_variable,
         ),
 
         attached_modifier: $ =>
@@ -934,7 +916,7 @@ module.exports = grammar({
             $.verbatim,
             $.inline_comment,
             $.inline_math,
-            $.variable,
+            $.inline_macro,
         ),
     }
 });

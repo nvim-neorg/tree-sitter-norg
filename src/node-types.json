@@ -37,6 +37,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -70,10 +74,6 @@
         },
         {
           "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         },
         {
@@ -195,6 +195,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -228,10 +232,6 @@
         },
         {
           "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         },
         {
@@ -345,14 +345,6 @@
           "named": true
         },
         {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "paragraph",
           "named": true
         },
@@ -374,14 +366,6 @@
         },
         {
           "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -537,14 +521,6 @@
             "named": true
           },
           {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -566,14 +542,6 @@
           },
           {
             "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           },
           {
@@ -683,14 +651,6 @@
             "named": true
           },
           {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -712,14 +672,6 @@
           },
           {
             "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           },
           {
@@ -825,14 +777,6 @@
             "named": true
           },
           {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -854,14 +798,6 @@
           },
           {
             "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           },
           {
@@ -963,14 +899,6 @@
             "named": true
           },
           {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -992,14 +920,6 @@
           },
           {
             "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           },
           {
@@ -1097,14 +1017,6 @@
             "named": true
           },
           {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -1126,14 +1038,6 @@
           },
           {
             "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           },
           {
@@ -1227,14 +1131,6 @@
             "named": true
           },
           {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -1256,14 +1152,6 @@
           },
           {
             "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           },
           {
@@ -1349,14 +1237,6 @@
           "named": true
         },
         {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ordered_list2",
           "named": true
         },
@@ -1417,14 +1297,6 @@
           "named": true
         },
         {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
-          "named": true
-        },
-        {
           "type": "table",
           "named": true
         },
@@ -1480,14 +1352,6 @@
           "named": true
         },
         {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ordered_list3",
           "named": true
         },
@@ -1537,14 +1401,6 @@
         },
         {
           "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -1599,14 +1455,6 @@
           "named": true
         },
         {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ordered_list4",
           "named": true
         },
@@ -1648,14 +1496,6 @@
         },
         {
           "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -1706,14 +1546,6 @@
           "named": true
         },
         {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ordered_list5",
           "named": true
         },
@@ -1747,14 +1579,6 @@
         },
         {
           "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -1801,14 +1625,6 @@
           "named": true
         },
         {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ordered_list6",
           "named": true
         },
@@ -1834,14 +1650,6 @@
         },
         {
           "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -1884,14 +1692,6 @@
           "named": true
         },
         {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "paragraph",
           "named": true
         },
@@ -1909,14 +1709,6 @@
         },
         {
           "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         },
         {
@@ -1975,6 +1767,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -2011,10 +1807,6 @@
           "named": true
         },
         {
-          "type": "variable",
-          "named": true
-        },
-        {
           "type": "verbatim",
           "named": true
         }
@@ -2035,6 +1827,33 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "inline_macro",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "free_form_close",
+          "named": true
+        },
+        {
+          "type": "free_form_open",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2109,6 +1928,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -2142,10 +1965,6 @@
         },
         {
           "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         },
         {
@@ -2337,14 +2156,6 @@
             "named": true
           },
           {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -2362,14 +2173,6 @@
           },
           {
             "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           },
           {
@@ -2465,14 +2268,6 @@
             "named": true
           },
           {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -2490,14 +2285,6 @@
           },
           {
             "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           },
           {
@@ -2565,134 +2352,6 @@
     }
   },
   {
-    "type": "multi_macro",
-    "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "_line_break",
-            "named": false
-          },
-          {
-            "type": "_paragraph_break",
-            "named": false
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
-            "type": "paragraph",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "ranged_verbatim_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
-            "named": true
-          },
-          {
-            "type": "table",
-            "named": true
-          }
-        ]
-      },
-      "end": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "multi_macro_suffix",
-            "named": true
-          }
-        ]
-      },
-      "state": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "detached_modifier_extension",
-            "named": true
-          }
-        ]
-      },
-      "title": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "indent_segment1",
-          "named": true
-        },
-        {
-          "type": "multi_macro_prefix",
-          "named": true
-        },
-        {
-          "type": "slide",
-          "named": true
-        },
-        {
-          "type": "strong_attribute_set",
-          "named": true
-        },
-        {
-          "type": "weak_attribute_set",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "multi_table_cell",
     "named": true,
     "fields": {
@@ -2721,14 +2380,6 @@
             "named": true
           },
           {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
             "type": "paragraph",
             "named": true
           },
@@ -2746,14 +2397,6 @@
           },
           {
             "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
             "named": true
           },
           {
@@ -2807,134 +2450,6 @@
         },
         {
           "type": "slide",
-          "named": true
-        },
-        {
-          "type": "weak_attribute_set",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "multi_variable",
-    "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "_line_break",
-            "named": false
-          },
-          {
-            "type": "_paragraph_break",
-            "named": false
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "multi_definition",
-            "named": true
-          },
-          {
-            "type": "multi_footnote",
-            "named": true
-          },
-          {
-            "type": "multi_macro",
-            "named": true
-          },
-          {
-            "type": "multi_variable",
-            "named": true
-          },
-          {
-            "type": "paragraph",
-            "named": true
-          },
-          {
-            "type": "ranged_tag",
-            "named": true
-          },
-          {
-            "type": "ranged_verbatim_tag",
-            "named": true
-          },
-          {
-            "type": "single_definition",
-            "named": true
-          },
-          {
-            "type": "single_footnote",
-            "named": true
-          },
-          {
-            "type": "single_macro",
-            "named": true
-          },
-          {
-            "type": "single_variable",
-            "named": true
-          },
-          {
-            "type": "table",
-            "named": true
-          }
-        ]
-      },
-      "end": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "multi_variable_suffix",
-            "named": true
-          }
-        ]
-      },
-      "state": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "detached_modifier_extension",
-            "named": true
-          }
-        ]
-      },
-      "title": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "indent_segment1",
-          "named": true
-        },
-        {
-          "type": "multi_variable_prefix",
-          "named": true
-        },
-        {
-          "type": "slide",
-          "named": true
-        },
-        {
-          "type": "strong_attribute_set",
           "named": true
         },
         {
@@ -3385,6 +2900,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -3433,10 +2952,6 @@
           "named": true
         },
         {
-          "type": "variable",
-          "named": true
-        },
-        {
           "type": "verbatim",
           "named": true
         }
@@ -3476,6 +2991,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -3509,10 +3028,6 @@
         },
         {
           "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         },
         {
@@ -4191,68 +3706,6 @@
     }
   },
   {
-    "type": "single_macro",
-    "named": true,
-    "fields": {
-      "content": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "paragraph",
-            "named": true
-          }
-        ]
-      },
-      "state": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "detached_modifier_extension",
-            "named": true
-          }
-        ]
-      },
-      "title": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "indent_segment1",
-          "named": true
-        },
-        {
-          "type": "single_macro_prefix",
-          "named": true
-        },
-        {
-          "type": "slide",
-          "named": true
-        },
-        {
-          "type": "strong_attribute_set",
-          "named": true
-        },
-        {
-          "type": "weak_attribute_set",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "single_table_cell",
     "named": true,
     "fields": {
@@ -4311,68 +3764,6 @@
     }
   },
   {
-    "type": "single_variable",
-    "named": true,
-    "fields": {
-      "content": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "paragraph",
-            "named": true
-          }
-        ]
-      },
-      "state": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "detached_modifier_extension",
-            "named": true
-          }
-        ]
-      },
-      "title": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph_segment",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "indent_segment1",
-          "named": true
-        },
-        {
-          "type": "single_variable_prefix",
-          "named": true
-        },
-        {
-          "type": "slide",
-          "named": true
-        },
-        {
-          "type": "strong_attribute_set",
-          "named": true
-        },
-        {
-          "type": "weak_attribute_set",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "slide",
     "named": true,
     "fields": {},
@@ -4393,14 +3784,6 @@
           "named": true
         },
         {
-          "type": "multi_macro",
-          "named": true
-        },
-        {
-          "type": "multi_variable",
-          "named": true
-        },
-        {
           "type": "ranged_tag",
           "named": true
         },
@@ -4414,14 +3797,6 @@
         },
         {
           "type": "single_footnote",
-          "named": true
-        },
-        {
-          "type": "single_macro",
-          "named": true
-        },
-        {
-          "type": "single_variable",
           "named": true
         }
       ]
@@ -4472,6 +3847,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -4505,10 +3884,6 @@
         },
         {
           "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         },
         {
@@ -4563,6 +3938,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -4596,10 +3975,6 @@
         },
         {
           "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         },
         {
@@ -4695,6 +4070,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -4728,10 +4107,6 @@
         },
         {
           "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         },
         {
@@ -4786,6 +4161,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -4819,10 +4198,6 @@
         },
         {
           "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         },
         {
@@ -4967,6 +4342,10 @@
           "named": true
         },
         {
+          "type": "inline_macro",
+          "named": true
+        },
+        {
           "type": "inline_math",
           "named": true
         },
@@ -5000,10 +4379,6 @@
         },
         {
           "type": "underline",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         },
         {
@@ -5422,33 +4797,6 @@
     }
   },
   {
-    "type": "variable",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "escape_sequence",
-          "named": true
-        },
-        {
-          "type": "free_form_close",
-          "named": true
-        },
-        {
-          "type": "free_form_open",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "verbatim",
     "named": true,
     "fields": {},
@@ -5718,27 +5066,11 @@
     "named": true
   },
   {
-    "type": "multi_macro_prefix",
-    "named": true
-  },
-  {
-    "type": "multi_macro_suffix",
-    "named": true
-  },
-  {
     "type": "multi_table_cell_prefix",
     "named": true
   },
   {
     "type": "multi_table_cell_suffix",
-    "named": true
-  },
-  {
-    "type": "multi_variable_prefix",
-    "named": true
-  },
-  {
-    "type": "multi_variable_suffix",
     "named": true
   },
   {
@@ -5802,15 +5134,7 @@
     "named": true
   },
   {
-    "type": "single_macro_prefix",
-    "named": true
-  },
-  {
     "type": "single_table_cell_prefix",
-    "named": true
-  },
-  {
-    "type": "single_variable_prefix",
     "named": true
   },
   {

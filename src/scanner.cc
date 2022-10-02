@@ -80,14 +80,6 @@ enum TokenType : char
     MULTI_TABLE_CELL,
     MULTI_TABLE_CELL_SUFFIX,
 
-    SINGLE_MACRO,
-    MULTI_MACRO,
-    MULTI_MACRO_SUFFIX,
-
-    SINGLE_VARIABLE,
-    MULTI_VARIABLE,
-    MULTI_VARIABLE_SUFFIX,
-
     STRONG_PARAGRAPH_DELIMITER,
     WEAK_PARAGRAPH_DELIMITER,
     HORIZONTAL_LINE,
@@ -164,8 +156,8 @@ enum TokenType : char
     INLINE_MATH_OPEN,
     INLINE_MATH_CLOSE,
 
-    VARIABLE_OPEN,
-    VARIABLE_CLOSE,
+    INLINE_MACRO_OPEN,
+    INLINE_MACRO_CLOSE,
 
     FREE_FORM_MODIFIER_OPEN,
     FREE_FORM_MODIFIER_CLOSE,
@@ -516,14 +508,8 @@ class Scanner
                 return true;
             }
 
-            if (check_detached(lexer, SINGLE_MACRO | MULTI_MACRO | NONE, {'='}) != NONE)
+            if (check_detached(lexer, NONE, {'='}) != NONE)
                 return true;
-            else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
-            {
-                advance(lexer);
-                lexer->result_symbol = MULTI_MACRO_SUFFIX;
-                return true;
-            }
             else if (is_newline(lexer->lookahead))
             {
                 if (m_ParsedChars >= 3)
@@ -542,15 +528,6 @@ class Scanner
             else if (m_ParsedChars == 1 && m_TagContext != TagType::IN_VERBATIM_TAG)
             {
                 lexer->result_symbol = m_LastToken = MACRO;
-                return true;
-            }
-
-            if (check_detached(lexer, SINGLE_VARIABLE | MULTI_VARIABLE | NONE, {'&'}) != NONE)
-                return true;
-            else if (is_newline(lexer->lookahead) && m_ParsedChars == 2)
-            {
-                advance(lexer);
-                lexer->result_symbol = MULTI_VARIABLE_SUFFIX;
                 return true;
             }
 
@@ -598,7 +575,7 @@ class Scanner
         }
         else if (check_detached_mod_extension(lexer))
             return true;
-        else if (((m_LastToken >= HEADING1 && m_LastToken <= MULTI_VARIABLE_SUFFIX) || m_LastToken == DETACHED_MODIFIER_EXTENSION_END) && lexer->lookahead == ':')
+        else if (((m_LastToken >= HEADING1 && m_LastToken <= MULTI_TABLE_CELL_SUFFIX) || m_LastToken == DETACHED_MODIFIER_EXTENSION_END) && lexer->lookahead == ':')
         {
             advance(lexer);
             bool is_indent_segment = false;
@@ -647,7 +624,7 @@ class Scanner
             advance(lexer);
 
             if (!std::iswspace(lexer->lookahead) && m_LastToken != NONE &&
-                ((m_LastToken >= BOLD_OPEN && m_LastToken <= VARIABLE_CLOSE &&
+                ((m_LastToken >= BOLD_OPEN && m_LastToken <= INLINE_MACRO_CLOSE &&
                   (m_LastToken % 2) == (BOLD_CLOSE % 2)) ||
                  m_LastToken == LINK_DESCRIPTION_END || m_LastToken == LINK_LOCATION_END ||
                  m_LastToken == INLINE_LINK_TARGET_CLOSE))
@@ -882,7 +859,7 @@ class Scanner
         {
             return (!m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2] &&
                     !m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2] &&
-                    !m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2]);
+                    !m_ActiveModifiers[(INLINE_MACRO_OPEN - BOLD_OPEN) / 2]);
         };
 
         if (lexer->lookahead == '|')
@@ -892,10 +869,10 @@ class Scanner
 
             auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
 
-            if (m_LastToken >= BOLD_OPEN && m_LastToken <= VARIABLE_CLOSE &&
+            if (m_LastToken >= BOLD_OPEN && m_LastToken <= INLINE_MACRO_CLOSE &&
                 (m_LastToken % 2) == (BOLD_OPEN % 2))
             {
-                if (m_LastToken != VERBATIM_OPEN && m_LastToken != VARIABLE_OPEN &&
+                if (m_LastToken != VERBATIM_OPEN && m_LastToken != INLINE_MACRO_OPEN &&
                     m_LastToken != INLINE_MATH_OPEN && !can_have_modifier())
                     return NONE;
 
@@ -907,8 +884,8 @@ class Scanner
                 if (
                         !can_have_modifier() &&
                         !(found_attached_modifier->second == VERBATIM_OPEN && m_ActiveModifiers[(VERBATIM_OPEN - BOLD_OPEN) / 2]) &&
-                        !(found_attached_modifier->second == VARIABLE_OPEN && m_ActiveModifiers[(VARIABLE_OPEN - BOLD_OPEN) / 2]) &&
-                        !(found_attached_modifier->second == INLINE_MATH_OPEN && m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2])
+                        !(found_attached_modifier->second == INLINE_MATH_OPEN && m_ActiveModifiers[(INLINE_MATH_OPEN - BOLD_OPEN) / 2]) &&
+                        !(found_attached_modifier->second == INLINE_MACRO_OPEN && m_ActiveModifiers[(INLINE_MACRO_OPEN - BOLD_OPEN) / 2])
                     )
                         return NONE;
                 lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_CLOSE;
@@ -1072,11 +1049,11 @@ class Scanner
                     return false;
 
                 // bail when potentially dealing with inline comments
-                if (lexer->lookahead == '+')
+                if (lexer->lookahead == '%')
                     return false;
 
-                // bail when potentially dealing with inline variables
-                if (lexer->lookahead == '=')
+                // bail when potentially dealing with inline macro invocations
+                if (lexer->lookahead == '&')
                     return false;
 
                 // bail when potentially dealing with inline math
@@ -1202,7 +1179,7 @@ class Scanner
 
                 return false;
             default:
-                if (m_LastToken < HEADING1 || m_LastToken > MULTI_VARIABLE_SUFFIX)
+                if (m_LastToken < HEADING1 || m_LastToken > MULTI_TABLE_CELL_SUFFIX)
                     return false;
 
                 if (lexer->lookahead == '(')
@@ -1339,10 +1316,10 @@ class Scanner
         {'*', BOLD_OPEN},        {'/', ITALIC_OPEN},    {'-', STRIKETHROUGH_OPEN},
         {'_', UNDERLINE_OPEN},   {'!', SPOILER_OPEN},   {'`', VERBATIM_OPEN},
         {'^', SUPERSCRIPT_OPEN}, {',', SUBSCRIPT_OPEN}, {'%', INLINE_COMMENT_OPEN},
-        {'$', INLINE_MATH_OPEN}, {'&', VARIABLE_OPEN},
+        {'$', INLINE_MATH_OPEN}, {'&', INLINE_MACRO_OPEN},
     };
 
-    std::bitset<((VARIABLE_OPEN - BOLD_OPEN) / 2) + 1> m_ActiveModifiers;
+    std::bitset<((INLINE_MACRO_OPEN - BOLD_OPEN) / 2) + 1> m_ActiveModifiers;
 };
 
 extern "C"

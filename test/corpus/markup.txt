@@ -120,15 +120,15 @@ This sentence contains some $inline math$.
       (inline_math))))
 
 ================================================================================
-Variable
+Inline Macro
 ================================================================================
-This sentence contains a &variable& reference.
+This sentence contains a &inline macro& reference.
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
     (paragraph_segment
-      (variable))))
+      (inline_macro))))
 
 ================================================================================
 Inline Link Target
@@ -387,7 +387,7 @@ This is not ^^ superscript.
 This is not ,, subscript.
 This is not %% an inline comment.
 This is not $$ inline math.
-This is not && a variable reference.
+This is not && an inline macro reference.
 --------------------------------------------------------------------------------
 
 (document
@@ -417,7 +417,7 @@ This is not \^superscript\^
 This is not \,subscript\,
 This is not \%an inline comment\%
 This is not \$inline math\$
-This is not \&variable reference\&
+This is not \&inline macro reference\&
 This is not \<an inline link target\>
 --------------------------------------------------------------------------------
 
@@ -521,7 +521,7 @@ Intra:,word,:subscript
 Intra:`word`:verbatim
 Intra:%word%:comment
 Intra:$word$:math
-Intra:&word&:variable
+Intra:&word&:macro
 --------------------------------------------------------------------------------
 
 (document
@@ -568,7 +568,7 @@ Intra:&word&:variable
       (link_modifier))
     (paragraph_segment
       (link_modifier)
-      (variable)
+      (inline_macro)
       (link_modifier))))
 
 ================================================================================
@@ -583,7 +583,7 @@ No nested markup inside verbatim
 `,not subscripted,`
 `%no inline comment%`
 `$no inline math$`
-`&no variable&`
+`&no inline macro&`
 `<no link target>`
 `no:*link modifier*`
 `non-hidden \*escaped char`
@@ -633,7 +633,7 @@ Nesting into Inline Comment
 %,not subscripted,%
 %`no verbatim`%
 %$no inline math$%
-%&no variable&%
+%&no inline macro&%
 --------------------------------------------------------------------------------
 
 (document
@@ -667,7 +667,7 @@ Nesting into Inline Comment
         (inline_math)))
     (paragraph_segment
       (inline_comment
-        (variable)))))
+        (inline_macro)))))
 
 ================================================================================
 No nested markup inside inline math
@@ -681,7 +681,7 @@ $^not superscripted^$
 $,not subscripted,$
 $`no verbatim`$
 $%no inline comment%$
-$&no variable&$
+$&no inline macro&$
 $<no link target>$
 $no:*link modifier*$
 $non-hidden \*escaped char*$
@@ -720,7 +720,7 @@ $non-hidden \*escaped char*$
           (any_char))))))
 
 ================================================================================
-No nested markup inside variables
+No nested markup inside inline macros
 ================================================================================
 &*not bold*&
 &/not italic/&
@@ -740,31 +740,31 @@ No nested markup inside variables
 (document
   (paragraph
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable
+      (inline_macro
         (escape_sequence
           (escape_sequence_prefix)
           (any_char))))))

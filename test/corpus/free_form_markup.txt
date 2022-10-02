@@ -389,41 +389,41 @@ $| Extend as $far$ as possible |$
         (free_form_close)))))
 
 ================================================================================
-Free form Variable
+Free form Inline Macro
 ================================================================================
-Here is some &|free form variable|& markup.
-Here is some &| free form variable|& markup.
-Here is some &|free form variable |& markup.
-Here is some &| free form variable |& markup.
+Here is some &|free form inline macro|& markup.
+Here is some &| free form inline macro|& markup.
+Here is some &|free form inline macro |& markup.
+Here is some &| free form inline macro |& markup.
 Here is some &| free form
-variable |& markup.
+inline macro |& markup.
 &| Extend as &far& as possible |&
 --------------------------------------------------------------------------------
 
 (document
   (paragraph
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))))
 
@@ -1205,7 +1205,7 @@ No nested markup inside free form verbatim
 `|,not subscripted,|`
 `|+not inline comment+|`
 `|$not inline math$|`
-`|&not variable&|`
+`|&not inline macro&|`
 `|no:*link modifier*|`
 `|hidden \*escaped char|`
 `|*|not free form bold|*|`
@@ -1217,7 +1217,7 @@ No nested markup inside free form verbatim
 `|,|not free form subscripted|,|`
 `|+|not free form inline comment|+|`
 `|$|not free form inline math|$|`
-`|&|not free form variable|&|`
+`|&|not free form inline macro|&|`
 --------------------------------------------------------------------------------
 
 (document
@@ -1323,7 +1323,7 @@ $|^not superscripted^|$
 $|,not subscripted,|$
 $|`not verbatim`|$
 $|+not inline comment+|$
-$|&not variable&|$
+$|&not inline macro&|$
 $|no:*link modifier*|$
 $|hidden \*escaped char|$
 $|*|not free form bold|*|$
@@ -1335,7 +1335,7 @@ $|^|not free form superscripted|^|$
 $|,|not free form subscripted|,|$
 $|`|not free form verbatim|`|$
 $|+|not free form inline comment|+|$
-$|&|not free form variable|&|$
+$|&|not free form inline macro|&|$
 --------------------------------------------------------------------------------
 
 (document
@@ -1430,7 +1430,7 @@ $|&|not free form variable|&|$
         (free_form_close)))))
 
 ================================================================================
-No nested markup inside free form variable
+No nested markup inside free form inline macro
 ================================================================================
 &|*not bold*|&
 &|/not italic/|&
@@ -1459,91 +1459,91 @@ No nested markup inside free form variable
 (document
   (paragraph
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))
     (paragraph_segment
-      (variable
+      (inline_macro
         (free_form_open)
         (free_form_close)))))
 

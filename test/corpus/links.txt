@@ -851,17 +851,17 @@ $[not an anchor]{* not a link}$
     (paragraph_segment
       (inline_math))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))
+      (inline_macro))
     (paragraph_segment
-      (variable))))
+      (inline_macro))))
 
 ================================================================================
 Anchors inside unordered list. Regression test against #28
