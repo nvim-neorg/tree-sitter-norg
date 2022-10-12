@@ -818,6 +818,8 @@ module.exports = grammar({
 
         ranged_verbatim_tag_end: $ => gen_ranged_tag_end($, "ranged_verbatim"),
 
+        // TODO: Fix broken parsing with these things
+        // Ranged tags with only newlines as content are treated as errors
         ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim_tag"),
 
         weak_attribute_set: $ =>
@@ -853,7 +855,9 @@ module.exports = grammar({
         tag_param: $ =>
         choice(
             alias($.word, "_lowercase"),
-            // TODO: tag parameters with speech marks (make speech marks an attached mod so it can easily be added here?)
+            // TODO:
+            // or backslash
+            // or variable
         ),
 
         tag_parameters: $ =>
