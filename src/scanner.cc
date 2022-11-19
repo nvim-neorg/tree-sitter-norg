@@ -7,6 +7,7 @@
 #include <regex>
 #include <string>
 #include <unordered_map>
+#include <cstring>
 
 #include "tree_sitter/parser.h"
 
@@ -1437,11 +1438,8 @@ extern "C"
         buffer[2] = (char)tag_context;
         buffer[3] = in_link_location;
 
-        // Store `current` (which is an int32_t) in a char array by splitting it up
-        buffer[4] = current & 0xFF;
-        buffer[5] = (current >> 8) & 0xFF;
-        buffer[6] = (current >> 16) & 0xFF;
-        buffer[7] = (current >> 24) & 0xFF;
+        // Copy 4 bytes from int32_t to buffer 2 to 6 positions.
+        std::memcpy(buffer + 4, &current, 4);
 
         // Serialize the attached modifier bitset into the char array
         // We cast it down to a uint32_t because we genuinely won't be using any
@@ -1480,8 +1478,8 @@ extern "C"
         tag_level = (size_t)buffer[1];
         tag_context = (TagType)buffer[2];
         in_link_location = (bool)buffer[3];
-        current = (uint32_t)buffer[7] << 24 | (uint32_t)buffer[6] << 16 | (uint32_t)buffer[5] << 8 |
-                  (uint32_t)buffer[4];
+
+        std::memcpy(&current, buffer + 4, 4);
 
         for (int i = 0; i < active_modifiers.size(); i++)
             active_modifiers[i] = buffer[8 + i];
