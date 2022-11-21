@@ -152,8 +152,9 @@ Slide
     (unordered_list1
       (unordered_list1_prefix)
       (slide
-        (single_definition
-          (single_definition_prefix)
-          (paragraph_segment)
-          (paragraph
-            (paragraph_segment)))))))
+        (definition_list
+          (single_definition
+            (single_definition_prefix)
+            (paragraph_segment)
+            (paragraph
+              (paragraph_segment))))))))
