@@ -2111,7 +2111,7 @@
       "required": false,
       "types": [
         {
-          "type": "paragraph",
+          "type": "paragraph_segment",
           "named": true
         }
       ]

@@ -11,5 +11,5 @@ This is some macro text.
     (tag_name
       (word))
     (macro_tag_content
-      (paragraph))
-    (macro_tag_end_prefix)))
+      (paragraph_segment))
+    (macro_tag_end)))

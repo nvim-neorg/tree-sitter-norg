@@ -6014,7 +6014,16 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "paragraph"
+                  "name": "paragraph_segment"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "line_break"
+                  },
+                  "named": false,
+                  "value": "_line_break"
                 },
                 {
                   "type": "ALIAS",
@@ -6046,7 +6055,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "ranged_tag_end_prefix"
+            "name": "macro_tag_end_prefix"
           },
           "named": false,
           "value": "_prefix"

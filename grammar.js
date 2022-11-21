@@ -784,7 +784,8 @@ module.exports = grammar({
             repeat1(
                 choice(
                     choice(
-                        $.paragraph,
+                        $.paragraph_segment,
+                        alias($.line_break, "_line_break"),
                         alias($.paragraph_break, "_paragraph_break"),
                     ),
 
@@ -796,7 +797,7 @@ module.exports = grammar({
             ),
         ),
 
-        macro_tag_end: $ => gen_ranged_tag_end($, "ranged"),
+        macro_tag_end: $ => gen_ranged_tag_end($, "macro"),
 
         macro_tag: $ => gen_ranged_tag($, "macro_tag"),
 
