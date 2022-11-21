@@ -2070,7 +2070,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "macro_tag_end",
@@ -2111,7 +2111,7 @@
       "required": false,
       "types": [
         {
-          "type": "paragraph_segment",
+          "type": "paragraph",
           "named": true
         }
       ]
@@ -3434,7 +3434,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "ranged_tag_end",
@@ -3513,7 +3513,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "ranged_verbatim_tag_end",

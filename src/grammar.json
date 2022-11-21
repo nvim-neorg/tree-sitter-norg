@@ -6014,16 +6014,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "paragraph_segment"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "line_break"
-                  },
-                  "named": false,
-                  "value": "_line_break"
+                  "name": "paragraph"
                 },
                 {
                   "type": "ALIAS",
@@ -6181,16 +6172,8 @@
             }
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "macro_tag_end"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "macro_tag_end"
           }
         ]
       }
@@ -6375,16 +6358,8 @@
             }
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "ranged_tag_end"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "ranged_tag_end"
           }
         ]
       }
@@ -6566,16 +6541,8 @@
             }
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "ranged_verbatim_tag_end"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "ranged_verbatim_tag_end"
           }
         ]
       }

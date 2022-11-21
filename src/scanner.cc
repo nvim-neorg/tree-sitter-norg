@@ -293,9 +293,6 @@ class Scanner
                                        !is_newline(lexer->lookahead) && lexer->lookahead)
                                     advance(lexer);
 
-                                // reset the marked end
-                                lexer->mark_end(lexer);
-
                                 if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) &&
                                     m_TagContext == TagType::IN_VERBATIM_TAG)
                                 {
@@ -353,9 +350,6 @@ class Scanner
                                 while (std::iswspace(lexer->lookahead) &&
                                        !is_newline(lexer->lookahead) && lexer->lookahead)
                                     advance(lexer);
-
-                                // reset the marked end
-                                lexer->mark_end(lexer);
 
                                 if ((!lexer->lookahead || std::iswspace(lexer->lookahead)) &&
                                     m_TagLevel)
@@ -1319,7 +1313,7 @@ class Scanner
 
         do
         {
-            if (lexer->lookahead == ':' || lexer->lookahead == '|' || lexer->lookahead == '~' ||
+            if (lexer->lookahead == ':' || lexer->lookahead == '|' || lexer->lookahead == '=' || lexer->lookahead == '~' ||
                 (m_AttachedModifiers.find(lexer->lookahead) != m_AttachedModifiers.end()) ||
                 (lexer->lookahead == '<' || lexer->lookahead == '>' || lexer->lookahead == '[' ||
                  lexer->lookahead == ']' || lexer->lookahead == '{' || lexer->lookahead == '}') ||

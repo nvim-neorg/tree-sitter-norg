@@ -784,8 +784,7 @@ module.exports = grammar({
             repeat1(
                 choice(
                     choice(
-                        $.paragraph_segment,
-                        alias($.line_break, "_line_break"),
+                        $.paragraph,
                         alias($.paragraph_break, "_paragraph_break"),
                     ),
 
@@ -1004,7 +1003,7 @@ function gen_ranged_tag($, kind) {
                 ),
             ),
 
-            optional($[kind + "_end"]),
+            $[kind + "_end"],
         ),
     );
 }
