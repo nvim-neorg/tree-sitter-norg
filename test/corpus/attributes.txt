@@ -160,5 +160,7 @@ print("Hello World")
       (word))
     (tag_parameters
       (tag_param))
-    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_content
+      (paragraph_segment)
+      (paragraph_segment))
     (ranged_verbatim_tag_end)))

@@ -11,7 +11,8 @@ This is some macro text.
     (tag_name
       (word))
     (macro_tag_content
-      (paragraph_segment))
+      (paragraph
+        (paragraph_segment)))
     (macro_tag_end)))
 
 ================================================================================
@@ -26,5 +27,6 @@ Empty macro tag
   (macro_tag
     (tag_name
       (word))
-    (macro_tag_content)
+    (macro_tag_content
+      (paragraph))
     (macro_tag_end)))

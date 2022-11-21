@@ -6014,16 +6014,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "paragraph_segment"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "line_break"
-                  },
-                  "named": false,
-                  "value": "_line_break"
+                  "name": "paragraph"
                 },
                 {
                   "type": "ALIAS",
@@ -6200,16 +6191,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "paragraph_segment"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "line_break"
-                  },
-                  "named": false,
-                  "value": "_line_break"
+                  "name": "paragraph"
                 },
                 {
                   "type": "ALIAS",
@@ -6388,16 +6370,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "paragraph_segment"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "line_break"
-                    },
-                    "named": false,
-                    "value": "_line_break"
+                    "name": "paragraph"
                   },
                   {
                     "type": "ALIAS",

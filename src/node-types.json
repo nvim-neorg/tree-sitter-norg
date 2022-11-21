@@ -13,75 +13,15 @@
       "required": false,
       "types": [
         {
-          "type": "anchor_declaration",
+          "type": "intersecting_modifier",
           "named": true
         },
         {
-          "type": "anchor_definition",
+          "type": "paragraph_segment",
           "named": true
         },
         {
-          "type": "bold",
-          "named": true
-        },
-        {
-          "type": "escape_sequence",
-          "named": true
-        },
-        {
-          "type": "inline_comment",
-          "named": true
-        },
-        {
-          "type": "inline_link_target",
-          "named": true
-        },
-        {
-          "type": "inline_macro",
-          "named": true
-        },
-        {
-          "type": "inline_math",
-          "named": true
-        },
-        {
-          "type": "italic",
-          "named": true
-        },
-        {
-          "type": "link",
-          "named": true
-        },
-        {
-          "type": "link_modifier",
-          "named": true
-        },
-        {
-          "type": "spoiler",
-          "named": true
-        },
-        {
-          "type": "strikethrough",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        },
-        {
-          "type": "superscript",
-          "named": true
-        },
-        {
-          "type": "underline",
-          "named": true
-        },
-        {
-          "type": "verbatim",
-          "named": true
-        },
-        {
-          "type": "weak_carryover_set",
+          "type": "strong_carryover_set",
           "named": true
         }
       ]
@@ -2111,7 +2051,7 @@
       "required": false,
       "types": [
         {
-          "type": "paragraph_segment",
+          "type": "paragraph",
           "named": true
         }
       ]
@@ -3475,7 +3415,7 @@
       "required": false,
       "types": [
         {
-          "type": "paragraph_segment",
+          "type": "paragraph",
           "named": true
         }
       ]

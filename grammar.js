@@ -784,8 +784,7 @@ module.exports = grammar({
             repeat1(
                 choice(
                     choice(
-                        $.paragraph_segment,
-                        alias($.line_break, "_line_break"),
+                        $.paragraph,
                         alias($.paragraph_break, "_paragraph_break"),
                     ),
 
@@ -806,8 +805,7 @@ module.exports = grammar({
             repeat1(
                 choice(
                     choice(
-                        $.paragraph_segment,
-                        alias($.line_break, "_line_break"),
+                        $.paragraph,
                         alias($.paragraph_break, "_paragraph_break"),
                     ),
 
@@ -829,8 +827,7 @@ module.exports = grammar({
                 choice(
                     alias(
                         choice(
-                            $.paragraph_segment,
-                            alias($.line_break, "_line_break"),
+                            $.paragraph,
                             alias($.paragraph_break, "_paragraph_break"),
                         ),
                         "_segment",

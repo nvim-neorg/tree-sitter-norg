@@ -13,10 +13,11 @@ No longer part of the ranged tag.
     (tag_name
       (word))
     (ranged_tag_content
-      (paragraph_segment
-        (bold)
-        (italic))
-      (paragraph_segment))
+      (paragraph
+        (paragraph_segment
+          (bold)
+          (italic))
+        (paragraph_segment)))
     (ranged_tag_end))
   (paragraph
     (paragraph_segment)))
@@ -34,7 +35,8 @@ No longer part of the ranged tag.
   (ranged_verbatim_tag
     (tag_name
       (word))
-    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_content
+      (paragraph_segment))
     (ranged_verbatim_tag_end))
   (paragraph
     (paragraph_segment)))
@@ -54,7 +56,8 @@ No longer part of the ranged tag.
       (word))
     (tag_parameters
       (tag_param))
-    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_content
+      (paragraph_segment))
     (ranged_verbatim_tag_end))
   (paragraph
     (paragraph_segment)))
@@ -96,7 +99,9 @@ public class MyClass {}
       (word))
     (tag_parameters
       (tag_param))
-    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_content
+      (paragraph_segment)
+      (paragraph_segment))
     (ranged_verbatim_tag_end)))
 
 ================================================================================
@@ -120,10 +125,11 @@ value | something else
     (tag_name
       (word))
     (ranged_tag_content
-      (paragraph_segment
-        (bold)
-        (italic))
-      (paragraph_segment))
+      (paragraph
+        (paragraph_segment
+          (bold)
+          (italic))
+        (paragraph_segment)))
     (ranged_tag_end)))
 
 ================================================================================
@@ -148,7 +154,9 @@ public class MyClass {}
       (word))
     (tag_parameters
       (tag_param))
-    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_content
+      (paragraph_segment)
+      (paragraph_segment))
     (ranged_verbatim_tag_end)))
 
 ================================================================================
@@ -172,10 +180,11 @@ value | something else
     (tag_name
       (word))
     (ranged_tag_content
-      (paragraph_segment
-        (bold)
-        (italic))
-      (paragraph_segment))
+      (paragraph
+        (paragraph_segment
+          (bold)
+          (italic))
+        (paragraph_segment)))
     (ranged_tag_end)))
 
 ================================================================================
@@ -200,7 +209,9 @@ public class MyClass {}
       (word))
     (tag_parameters
       (tag_param))
-    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_content
+      (paragraph_segment)
+      (paragraph_segment))
     (ranged_verbatim_tag_end)))
 
 ================================================================================
@@ -231,10 +242,11 @@ value | something else
     (tag_name
       (word))
     (ranged_tag_content
-      (paragraph_segment
-        (bold)
-        (italic))
-      (paragraph_segment))
+      (paragraph
+        (paragraph_segment
+          (bold)
+          (italic))
+        (paragraph_segment)))
     (ranged_tag_end)))
 
 ================================================================================
@@ -266,7 +278,9 @@ public class MyClass {}
       (word))
     (tag_parameters
       (tag_param))
-    (ranged_verbatim_tag_content)
+    (ranged_verbatim_tag_content
+      (paragraph_segment)
+      (paragraph_segment))
     (ranged_verbatim_tag_end)))
 
 ================================================================================
@@ -300,10 +314,11 @@ value | something else
     (tag_name
       (word))
     (ranged_tag_content
-      (paragraph_segment
-        (bold)
-        (italic))
-      (paragraph_segment))
+      (paragraph
+        (paragraph_segment
+          (bold)
+          (italic))
+        (paragraph_segment)))
     (ranged_tag_end)))
 
 ================================================================================
@@ -318,7 +333,8 @@ Empty ranged tag
   (ranged_tag
     (tag_name
       (word))
-    (ranged_tag_content)
+    (ranged_tag_content
+      (paragraph))
     (ranged_tag_end)))
 
 ================================================================================

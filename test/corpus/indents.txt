@@ -118,7 +118,8 @@ This is not a part of any indent segment.
                 (word))
               (tag_parameters
                 (tag_param))
-              (ranged_verbatim_tag_content)
+              (ranged_verbatim_tag_content
+                (paragraph_segment))
               (ranged_verbatim_tag_end)))))))
   (strong_paragraph_delimiter)
   (paragraph
@@ -146,7 +147,8 @@ Slide
             (word))
           (tag_parameters
             (tag_param))
-          (ranged_verbatim_tag_content)
+          (ranged_verbatim_tag_content
+            (paragraph_segment))
           (ranged_verbatim_tag_end)))))
   (generic_list
     (unordered_list1
