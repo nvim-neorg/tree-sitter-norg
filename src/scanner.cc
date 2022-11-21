@@ -248,7 +248,10 @@ class Scanner
             }
 
             if (m_TagContext != TagType::NONE && ((char)m_TagContext % 2) == 0)
+            {
                 m_TagContext = (TagType)((char)m_TagContext + 1);
+                return true;
+            }
 
             if (is_newline(lexer->lookahead))
             {
@@ -405,6 +408,7 @@ class Scanner
 
                 // or push back the indentation level and return.
                 lexer->result_symbol = m_LastToken = MACRO_TAG;
+                m_TagContext = TagType::ON_TAG;
                 ++m_TagLevel;
                 return true;
             }
@@ -460,6 +464,7 @@ class Scanner
 
                 // or push back the indentation level and return.
                 lexer->result_symbol = m_LastToken = RANGED_TAG;
+                m_TagContext = TagType::ON_TAG;
                 ++m_TagLevel;
                 return true;
             }

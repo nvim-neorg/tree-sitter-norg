@@ -13,3 +13,18 @@ This is some macro text.
     (macro_tag_content
       (paragraph_segment))
     (macro_tag_end)))
+
+================================================================================
+Empty macro tag
+================================================================================
+=empty
+
+=end
+--------------------------------------------------------------------------------
+
+(document
+  (macro_tag
+    (tag_name
+      (word))
+    (macro_tag_content)
+    (macro_tag_end)))

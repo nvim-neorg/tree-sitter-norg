@@ -841,8 +841,6 @@ module.exports = grammar({
 
         ranged_verbatim_tag_end: $ => gen_ranged_tag_end($, "ranged_verbatim"),
 
-        // TODO: Fix broken parsing with these things
-        // Ranged tags with only newlines as content are treated as errors
         ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim_tag"),
 
         weak_carryover_set: $ =>
