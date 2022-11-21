@@ -173,8 +173,8 @@ module.exports = grammar({
         $.ranged_verbatim_tag_end_prefix,
 
         $.infirm_tag,
-        $.weak_attribute_prefix,
-        $.strong_attribute_prefix,
+        $.weak_carryover_prefix,
+        $.strong_carryover_prefix,
 
         $.link_modifier,
         $.intersecting_modifier,
@@ -258,7 +258,7 @@ module.exports = grammar({
         paragraph: $ =>
         prec.right(0,
             seq(
-                optional($.strong_attribute_set),
+                optional($.strong_carryover_set),
                 repeat1(
                     choice(
                         $.paragraph_segment,
@@ -283,7 +283,7 @@ module.exports = grammar({
         paragraph_segment: $ =>
         prec.right(0,
             seq(
-                optional($.weak_attribute_set),
+                optional($.weak_carryover_set),
                 repeat1(
                     choice(
                         $._paragraph_element,
@@ -620,7 +620,7 @@ module.exports = grammar({
         quote: $ =>
         prec.right(
             seq(
-                optional($.strong_attribute_set),
+                optional($.strong_carryover_set),
                 repeat1(
                     choice(
                         $.quote1,
@@ -645,7 +645,7 @@ module.exports = grammar({
         generic_list: $ =>
         prec.right(0,
             seq(
-                optional($.strong_attribute_set),
+                optional($.strong_carryover_set),
                 repeat1(
                     $._any_list_item_level_1,
                 ),
@@ -743,7 +743,7 @@ module.exports = grammar({
         table: $ =>
         prec.right(
             seq(
-                optional($.strong_attribute_set),
+                optional($.strong_carryover_set),
                 repeat1(
                     choice(
                         $.single_table_cell,
@@ -819,19 +819,19 @@ module.exports = grammar({
         // Ranged tags with only newlines as content are treated as errors
         ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim_tag"),
 
-        weak_attribute_set: $ =>
+        weak_carryover_set: $ =>
         repeat1(
-            $.weak_attribute,
+            $.weak_carryover,
         ),
 
-        weak_attribute: $ => gen_single_tag($, "weak_attribute"),
+        weak_carryover: $ => gen_single_tag($, "weak_carryover"),
 
-        strong_attribute_set: $ =>
+        strong_carryover_set: $ =>
         repeat1(
-            $.strong_attribute,
+            $.strong_carryover,
         ),
 
-        strong_attribute: $ => gen_single_tag($, "strong_attribute"),
+        strong_carryover: $ => gen_single_tag($, "strong_carryover"),
 
         tag_name: $ =>
         seq(
@@ -967,9 +967,9 @@ function gen_single_tag($, kind) {
 function gen_ranged_tag($, kind) {
     return prec.right(0,
         seq(
-            optional($.strong_attribute_set),
+            optional($.strong_carryover_set),
 
-            optional($.weak_attribute_set),
+            optional($.weak_carryover_set),
 
             gen_single_tag($, kind),
 
@@ -1001,7 +1001,7 @@ function gen_ranged_tag_end($, kind) {
 
 function gen_detached_modifier($, prefix, ...rest) {
     return seq(
-        optional($.weak_attribute_set),
+        optional($.weak_carryover_set),
 
         prefix,
 
@@ -1024,7 +1024,7 @@ function gen_heading($, level) {
 
     return prec.right(0,
         seq(
-            optional($.strong_attribute_set),
+            optional($.strong_carryover_set),
 
             gen_detached_modifier(
                 $,
@@ -1159,13 +1159,13 @@ function gen_attached_modifier($, kind, verbatim) {
 }
 
 function gen_single_rangeable_detached_modifier($, kind, include_strong) {
-    const strong_attribute_set = include_strong ? [
-        optional($.strong_attribute_set),
+    const strong_carryover_set = include_strong ? [
+        optional($.strong_carryover_set),
     ] : [];
 
     return prec.right(
         seq(
-            ...strong_attribute_set,
+            ...strong_carryover_set,
 
             gen_detached_modifier(
                 $,
@@ -1195,12 +1195,12 @@ function gen_single_rangeable_detached_modifier($, kind, include_strong) {
 }
 
 function gen_multi_rangeable_detached_modifier($, kind, include_strong) {
-    const strong_attribute_set = include_strong ? [
-        optional($.strong_attribute_set),
+    const strong_carryover_set = include_strong ? [
+        optional($.strong_carryover_set),
     ] : [];
 
     return seq(
-        ...strong_attribute_set,
+        ...strong_carryover_set,
 
         gen_detached_modifier(
             $,

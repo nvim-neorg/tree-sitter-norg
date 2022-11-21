@@ -81,7 +81,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -438,7 +438,7 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
@@ -588,11 +588,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         },
         {
@@ -718,11 +718,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         },
         {
@@ -844,11 +844,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         },
         {
@@ -966,11 +966,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         },
         {
@@ -1084,11 +1084,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         },
         {
@@ -1198,11 +1198,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         },
         {
@@ -2135,7 +2135,7 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
@@ -2143,7 +2143,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2282,11 +2282,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2394,11 +2394,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2506,7 +2506,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2594,7 +2594,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2674,7 +2674,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2746,7 +2746,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2810,7 +2810,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2866,7 +2866,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2914,7 +2914,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -2989,7 +2989,7 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
@@ -3088,7 +3088,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3143,7 +3143,7 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         }
       ]
@@ -3211,7 +3211,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3275,7 +3275,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3335,7 +3335,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3391,7 +3391,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3443,7 +3443,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3491,7 +3491,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3531,7 +3531,7 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
@@ -3539,7 +3539,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3610,7 +3610,7 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
@@ -3618,7 +3618,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3686,11 +3686,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3748,11 +3748,11 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -3810,7 +3810,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -4038,7 +4038,7 @@
     }
   },
   {
-    "type": "strong_attribute",
+    "type": "strong_carryover",
     "named": true,
     "fields": {
       "name": {
@@ -4064,7 +4064,7 @@
     }
   },
   {
-    "type": "strong_attribute_set",
+    "type": "strong_carryover_set",
     "named": true,
     "fields": {},
     "children": {
@@ -4072,7 +4072,7 @@
       "required": true,
       "types": [
         {
-          "type": "strong_attribute",
+          "type": "strong_carryover",
           "named": true
         }
       ]
@@ -4277,7 +4277,7 @@
           "named": true
         },
         {
-          "type": "strong_attribute_set",
+          "type": "strong_carryover_set",
           "named": true
         }
       ]
@@ -4523,7 +4523,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -4603,7 +4603,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -4675,7 +4675,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -4739,7 +4739,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -4795,7 +4795,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -4843,7 +4843,7 @@
           "named": true
         },
         {
-          "type": "weak_attribute_set",
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
@@ -4877,7 +4877,7 @@
     }
   },
   {
-    "type": "weak_attribute",
+    "type": "weak_carryover",
     "named": true,
     "fields": {
       "name": {
@@ -4903,7 +4903,7 @@
     }
   },
   {
-    "type": "weak_attribute_set",
+    "type": "weak_carryover_set",
     "named": true,
     "fields": {},
     "children": {
@@ -4911,7 +4911,7 @@
       "required": true,
       "types": [
         {
-          "type": "weak_attribute",
+          "type": "weak_carryover",
           "named": true
         }
       ]

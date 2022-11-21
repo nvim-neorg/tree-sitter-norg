@@ -102,7 +102,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -178,7 +178,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "weak_attribute_set"
+                "name": "weak_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -2277,7 +2277,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -2292,7 +2292,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "weak_attribute_set"
+                    "name": "weak_carryover_set"
                   },
                   {
                     "type": "BLANK"
@@ -2454,7 +2454,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -2469,7 +2469,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "weak_attribute_set"
+                    "name": "weak_carryover_set"
                   },
                   {
                     "type": "BLANK"
@@ -2627,7 +2627,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -2642,7 +2642,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "weak_attribute_set"
+                    "name": "weak_carryover_set"
                   },
                   {
                     "type": "BLANK"
@@ -2796,7 +2796,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -2811,7 +2811,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "weak_attribute_set"
+                    "name": "weak_carryover_set"
                   },
                   {
                     "type": "BLANK"
@@ -2961,7 +2961,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -2976,7 +2976,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "weak_attribute_set"
+                    "name": "weak_carryover_set"
                   },
                   {
                     "type": "BLANK"
@@ -3122,7 +3122,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -3137,7 +3137,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "weak_attribute_set"
+                    "name": "weak_carryover_set"
                   },
                   {
                     "type": "BLANK"
@@ -3279,7 +3279,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -3329,7 +3329,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -3425,7 +3425,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -3517,7 +3517,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -3605,7 +3605,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -3689,7 +3689,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -3769,7 +3769,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -3847,7 +3847,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -3970,7 +3970,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4050,7 +4050,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4130,7 +4130,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4210,7 +4210,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4290,7 +4290,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4370,7 +4370,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4445,7 +4445,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4525,7 +4525,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4605,7 +4605,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4685,7 +4685,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4765,7 +4765,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -4845,7 +4845,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "weak_attribute_set"
+              "name": "weak_carryover_set"
             },
             {
               "type": "BLANK"
@@ -5112,7 +5112,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -5127,7 +5127,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "weak_attribute_set"
+                    "name": "weak_carryover_set"
                   },
                   {
                     "type": "BLANK"
@@ -5240,7 +5240,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "strong_attribute_set"
+              "name": "strong_carryover_set"
             },
             {
               "type": "BLANK"
@@ -5255,7 +5255,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "weak_attribute_set"
+                  "name": "weak_carryover_set"
                 },
                 {
                   "type": "BLANK"
@@ -5413,7 +5413,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -5428,7 +5428,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "weak_attribute_set"
+                    "name": "weak_carryover_set"
                   },
                   {
                     "type": "BLANK"
@@ -5541,7 +5541,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "strong_attribute_set"
+              "name": "strong_carryover_set"
             },
             {
               "type": "BLANK"
@@ -5556,7 +5556,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "weak_attribute_set"
+                  "name": "weak_carryover_set"
                 },
                 {
                   "type": "BLANK"
@@ -5717,7 +5717,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "weak_attribute_set"
+                    "name": "weak_carryover_set"
                   },
                   {
                     "type": "BLANK"
@@ -5833,7 +5833,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "weak_attribute_set"
+                  "name": "weak_carryover_set"
                 },
                 {
                   "type": "BLANK"
@@ -5991,7 +5991,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -6101,7 +6101,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -6113,7 +6113,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "weak_attribute_set"
+                "name": "weak_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -6295,7 +6295,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -6307,7 +6307,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "weak_attribute_set"
+                "name": "weak_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -6486,7 +6486,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "strong_attribute_set"
+                "name": "strong_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -6498,7 +6498,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "weak_attribute_set"
+                "name": "weak_carryover_set"
               },
               {
                 "type": "BLANK"
@@ -6596,21 +6596,21 @@
         ]
       }
     },
-    "weak_attribute_set": {
+    "weak_carryover_set": {
       "type": "REPEAT1",
       "content": {
         "type": "SYMBOL",
-        "name": "weak_attribute"
+        "name": "weak_carryover"
       }
     },
-    "weak_attribute": {
+    "weak_carryover": {
       "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "weak_attribute_prefix"
+            "name": "weak_carryover_prefix"
           },
           "named": false,
           "value": "_prefix"
@@ -6663,21 +6663,21 @@
         }
       ]
     },
-    "strong_attribute_set": {
+    "strong_carryover_set": {
       "type": "REPEAT1",
       "content": {
         "type": "SYMBOL",
-        "name": "strong_attribute"
+        "name": "strong_carryover"
       }
     },
-    "strong_attribute": {
+    "strong_carryover": {
       "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "strong_attribute_prefix"
+            "name": "strong_carryover_prefix"
           },
           "named": false,
           "value": "_prefix"
@@ -8066,11 +8066,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "weak_attribute_prefix"
+      "name": "weak_carryover_prefix"
     },
     {
       "type": "SYMBOL",
-      "name": "strong_attribute_prefix"
+      "name": "strong_carryover_prefix"
     },
     {
       "type": "SYMBOL",

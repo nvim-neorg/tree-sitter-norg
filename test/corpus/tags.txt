@@ -100,7 +100,7 @@ public class MyClass {}
     (ranged_verbatim_tag_end)))
 
 ================================================================================
-Ranged Tag with strong attribute
+Ranged Tag with strong carryover
 ================================================================================
 #color blue
 |table
@@ -111,8 +111,8 @@ value | something else
 
 (document
   (ranged_tag
-    (strong_attribute_set
-      (strong_attribute
+    (strong_carryover_set
+      (strong_carryover
         (tag_name
           (word))
         (tag_parameters
@@ -127,7 +127,7 @@ value | something else
     (ranged_tag_end)))
 
 ================================================================================
-Ranged Verbatim Tag with strong attribute
+Ranged Verbatim Tag with strong carryover
 ================================================================================
 #color blue
 @code java
@@ -138,8 +138,8 @@ public class MyClass {}
 
 (document
   (ranged_verbatim_tag
-    (strong_attribute_set
-      (strong_attribute
+    (strong_carryover_set
+      (strong_carryover
         (tag_name
           (word))
         (tag_parameters
@@ -152,7 +152,7 @@ public class MyClass {}
     (ranged_verbatim_tag_end)))
 
 ================================================================================
-Ranged Tag with weak attribute
+Ranged Tag with weak carryover
 ================================================================================
 +color blue
 |table
@@ -163,8 +163,8 @@ value | something else
 
 (document
   (ranged_tag
-    (weak_attribute_set
-      (weak_attribute
+    (weak_carryover_set
+      (weak_carryover
         (tag_name
           (word))
         (tag_parameters
@@ -179,7 +179,7 @@ value | something else
     (ranged_tag_end)))
 
 ================================================================================
-Ranged Verbatim Tag with weak attribute
+Ranged Verbatim Tag with weak carryover
 ================================================================================
 +color blue
 @code java
@@ -190,8 +190,8 @@ public class MyClass {}
 
 (document
   (ranged_verbatim_tag
-    (weak_attribute_set
-      (weak_attribute
+    (weak_carryover_set
+      (weak_carryover
         (tag_name
           (word))
         (tag_parameters
@@ -204,7 +204,7 @@ public class MyClass {}
     (ranged_verbatim_tag_end)))
 
 ================================================================================
-Ranged Tag with strong and weak attribute
+Ranged Tag with strong and weak carryover
 ================================================================================
 #name test
 +color blue
@@ -216,14 +216,14 @@ value | something else
 
 (document
   (ranged_tag
-    (strong_attribute_set
-      (strong_attribute
+    (strong_carryover_set
+      (strong_carryover
         (tag_name
           (word))
         (tag_parameters
           (tag_param))))
-    (weak_attribute_set
-      (weak_attribute
+    (weak_carryover_set
+      (weak_carryover
         (tag_name
           (word))
         (tag_parameters
@@ -238,7 +238,7 @@ value | something else
     (ranged_tag_end)))
 
 ================================================================================
-Ranged Verbatim Tag with strong and weak attribute
+Ranged Verbatim Tag with strong and weak carryover
 ================================================================================
 #name test
 +color blue
@@ -250,14 +250,14 @@ public class MyClass {}
 
 (document
   (ranged_verbatim_tag
-    (strong_attribute_set
-      (strong_attribute
+    (strong_carryover_set
+      (strong_carryover
         (tag_name
           (word))
         (tag_parameters
           (tag_param))))
-    (weak_attribute_set
-      (weak_attribute
+    (weak_carryover_set
+      (weak_carryover
         (tag_name
           (word))
         (tag_parameters
@@ -270,7 +270,7 @@ public class MyClass {}
     (ranged_verbatim_tag_end)))
 
 ================================================================================
-Ranged Tag with wrong order of attributes
+Ranged Tag with wrong order of carryovers
 ================================================================================
 +color blue
 #name test
@@ -283,16 +283,16 @@ value | something else
 (document
   (paragraph
     (paragraph_segment
-      (weak_attribute_set
-        (weak_attribute
+      (weak_carryover_set
+        (weak_carryover
           (tag_name
             (word))
           (tag_parameters
             (tag_param))))
       (MISSING "_space")))
   (ranged_tag
-    (strong_attribute_set
-      (strong_attribute
+    (strong_carryover_set
+      (strong_carryover
         (tag_name
           (word))
         (tag_parameters

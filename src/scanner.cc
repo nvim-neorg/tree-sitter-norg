@@ -119,8 +119,8 @@ enum TokenType : char
     RANGED_VERBATIM_TAG_END,
 
     INFIRM_TAG,
-    WEAK_ATTRIBUTE,
-    STRONG_ATTRIBUTE,
+    WEAK_CARRYOVER,
+    STRONG_CARRYOVER,
 
     LINK_MODIFIER,
     INTERSECTING_MODIFIER,
@@ -469,7 +469,7 @@ class Scanner
                 ++m_TagLevel;
                 return true;
             }
-            // we are dealing with a strong attribute (#something)
+            // we are dealing with a strong carryover (#something)
             else if (lexer->lookahead == '#' && m_TagContext != TagType::IN_VERBATIM_TAG)
             {
                 advance(lexer);
@@ -484,16 +484,16 @@ class Scanner
                     return true;
                 }
 
-                lexer->result_symbol = m_LastToken = STRONG_ATTRIBUTE;
+                lexer->result_symbol = m_LastToken = STRONG_CARRYOVER;
                 return true;
             }
-            // we are dealing with a weak attribute (+something)
+            // we are dealing with a weak carryover (+something)
             else if (lexer->lookahead == '+' && m_TagContext != TagType::IN_VERBATIM_TAG)
             {
                 advance(lexer);
                 if (lexer->lookahead != '+')
                 {
-                    lexer->result_symbol = m_LastToken = WEAK_ATTRIBUTE;
+                    lexer->result_symbol = m_LastToken = WEAK_CARRYOVER;
                     return true;
                 }
             }
@@ -570,10 +570,6 @@ class Scanner
                 lexer->result_symbol = m_LastToken = TRAILING_MODIFIER;
                 return true;
             }
-
-            // TODO: re-use to return ATTRIBUTE detached modifier
-            // if (check_detached(lexer, MARKER | NONE, {'%'}) != NONE)
-            //     return true;
 
             if (check_detached(lexer, SINGLE_DEFINITION | MULTI_DEFINITION | NONE, {'$'}) != NONE)
                 return true;

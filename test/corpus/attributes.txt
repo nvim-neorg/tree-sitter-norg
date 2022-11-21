@@ -1,5 +1,5 @@
 ================================================================================
-Strong Attribute on paragraph
+Strong Carryover on paragraph
 ================================================================================
 #comment
 This is a comment.
@@ -9,8 +9,8 @@ This is no longer part of the comment.
 
 (document
   (paragraph
-    (strong_attribute_set
-      (strong_attribute
+    (strong_carryover_set
+      (strong_carryover
         (tag_name
           (word))))
     (paragraph_segment))
@@ -18,7 +18,7 @@ This is no longer part of the comment.
     (paragraph_segment)))
 
 ================================================================================
-Strong Attribute on generic list
+Strong Carryover on generic list
 ================================================================================
 #ordered
 - List item 1
@@ -29,8 +29,8 @@ This is no longer infected.
 
 (document
   (generic_list
-    (strong_attribute_set
-      (strong_attribute
+    (strong_carryover_set
+      (strong_carryover
         (tag_name
           (word))))
     (unordered_list1
@@ -45,7 +45,7 @@ This is no longer infected.
     (paragraph_segment)))
 
 ================================================================================
-Strong Attribute on quote
+Strong Carryover on quote
 ================================================================================
 #ordered
 > quote item 1
@@ -56,8 +56,8 @@ This is no longer infected.
 
 (document
   (quote
-    (strong_attribute_set
-      (strong_attribute
+    (strong_carryover_set
+      (strong_carryover
         (tag_name
           (word))))
     (quote1
@@ -72,7 +72,7 @@ This is no longer infected.
     (paragraph_segment)))
 
 ================================================================================
-Weak Attribute on generic list
+Weak Carryover on generic list
 ================================================================================
 - List item 1
 +color blue
@@ -86,8 +86,8 @@ Weak Attribute on generic list
       (paragraph
         (paragraph_segment)))
     (unordered_list1
-      (weak_attribute_set
-        (weak_attribute
+      (weak_carryover_set
+        (weak_carryover
           (tag_name
             (word))
           (tag_parameters
@@ -97,7 +97,7 @@ Weak Attribute on generic list
         (paragraph_segment)))))
 
 ================================================================================
-Weak Attribute on quote
+Weak Carryover on quote
 ================================================================================
 > quote item 1
 +color blue
@@ -111,8 +111,8 @@ Weak Attribute on quote
       (paragraph
         (paragraph_segment)))
     (quote1
-      (weak_attribute_set
-        (weak_attribute
+      (weak_carryover_set
+        (weak_carryover
           (tag_name
             (word))
           (tag_parameters
@@ -122,7 +122,7 @@ Weak Attribute on quote
         (paragraph_segment)))))
 
 ================================================================================
-Strong Attribute with parameters
+Strong Carryover with parameters
 ================================================================================
 #name bob
 > Hi, my name is Bob.
@@ -132,8 +132,8 @@ Lol
 
 (document
   (quote
-    (strong_attribute_set
-      (strong_attribute
+    (strong_carryover_set
+      (strong_carryover
         (tag_name
           (word))
         (tag_parameters
@@ -146,7 +146,7 @@ Lol
     (paragraph_segment)))
 
 ================================================================================
-Disallow Weak Attribute within Ranged Tag
+Disallow Weak Carryover within Ranged Tag
 ================================================================================
 @code python
 +this is a python comment
