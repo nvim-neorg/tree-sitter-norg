@@ -472,15 +472,6 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "any_char"
-          },
-          "named": false,
-          "value": "_word"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
             "name": "link_modifier"
           },
           "named": false,
@@ -1794,13 +1785,6 @@
         }
       ]
     },
-    "any_char": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "."
-      }
-    },
     "escape_sequence": {
       "type": "SEQ",
       "members": [
@@ -1812,8 +1796,16 @@
           "type": "FIELD",
           "name": "token",
           "content": {
-            "type": "SYMBOL",
-            "name": "any_char"
+            "type": "ALIAS",
+            "content": {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": ".|\\n"
+              }
+            },
+            "named": true,
+            "value": "any_char"
           }
         }
       ]

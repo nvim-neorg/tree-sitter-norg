@@ -372,7 +372,6 @@ module.exports = grammar({
             alias($.word, "_word"),
             alias($.space, "_space"),
             alias($.trailing_modifier, "_word"),
-            alias($.any_char, "_word"),
             alias($.link_modifier, "_word"),
             prec.dynamic(5, alias($._conflict_open, "_word")),
             prec.dynamic(5, alias($._conflict_close, "_word")),
@@ -458,9 +457,6 @@ module.exports = grammar({
             alias($.detached_modifier_extension_end, "_word"),
         ),
 
-        // Well, any character
-        any_char: _ => token.immediate(/./),
-
         // A backslash followed by the escape token (e.g. \*)
         escape_sequence: $ =>
         seq(
@@ -468,7 +464,8 @@ module.exports = grammar({
 
             field(
                 "token",
-                $.any_char,
+                // TODO: why does this work but [.\n] does not?!
+                alias(token.immediate(/.|\n/), $.any_char),
             ),
         ),
 

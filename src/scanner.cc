@@ -635,14 +635,8 @@ class Scanner
         else if (lexer->lookahead == '\\')  // Check for an escape seqence (e.g. "\*")
         {
             advance(lexer);
-
-            if (lexer->lookahead)
-            {
-                lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
-                return true;
-            }
-            else
-                return false;
+            lexer->result_symbol = m_LastToken = ESCAPE_SEQUENCE;
+            return true;
         }
         else if (check_detached_mod_extension(lexer))
             return true;
