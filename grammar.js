@@ -730,14 +730,14 @@ module.exports = grammar({
 
         // --------------------------------------------------
 
-        single_definition: $ => gen_single_rangeable_detached_modifier($, "definition", true),
-        multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition", true),
+        single_definition: $ => gen_single_rangeable_detached_modifier($, "definition"),
+        multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition"),
 
-        single_footnote: $ => gen_single_rangeable_detached_modifier($, "footnote", true),
-        multi_footnote: $ => gen_multi_rangeable_detached_modifier($, "footnote", true),
+        single_footnote: $ => gen_single_rangeable_detached_modifier($, "footnote"),
+        multi_footnote: $ => gen_multi_rangeable_detached_modifier($, "footnote"),
 
-        single_table_cell: $ => gen_single_rangeable_detached_modifier($, "table_cell", false),
-        multi_table_cell: $ => gen_multi_rangeable_detached_modifier($, "table_cell", false),
+        single_table_cell: $ => gen_single_rangeable_detached_modifier($, "table_cell"),
+        multi_table_cell: $ => gen_multi_rangeable_detached_modifier($, "table_cell"),
 
         // A table
         table: $ =>
@@ -748,6 +748,32 @@ module.exports = grammar({
                     choice(
                         $.single_table_cell,
                         $.multi_table_cell,
+                    ),
+                ),
+            ),
+        ),
+
+        definition_list: $ =>
+        prec.right(
+            seq(
+                optional($.strong_carryover_set),
+                repeat1(
+                    choice(
+                        $.single_definition,
+                        $.multi_definition,
+                    ),
+                ),
+            ),
+        ),
+
+        footnote_list: $ =>
+        prec.right(
+            seq(
+                optional($.strong_carryover_set),
+                repeat1(
+                    choice(
+                        $.single_footnote,
+                        $.multi_footnote,
                     ),
                 ),
             ),
@@ -921,10 +947,8 @@ module.exports = grammar({
 
         rangeable_detached_modifier: $ =>
         choice(
-            $.single_definition,
-            $.multi_definition,
-            $.single_footnote,
-            $.multi_footnote,
+            $.definition_list,
+            $.footnote_list,
         ),
 
         attached_modifier: $ =>
@@ -1158,84 +1182,66 @@ function gen_attached_modifier($, kind, verbatim) {
     );
 }
 
-function gen_single_rangeable_detached_modifier($, kind, include_strong) {
-    const strong_carryover_set = include_strong ? [
-        optional($.strong_carryover_set),
-    ] : [];
+function gen_single_rangeable_detached_modifier($, kind) {
+    return gen_detached_modifier(
+        $,
 
-    return prec.right(
-        seq(
-            ...strong_carryover_set,
+        $["single_" + kind + "_prefix"],
 
-            gen_detached_modifier(
-                $,
+        indent_segment_or($, 1, field(
+            "title",
+            $.paragraph_segment,
+        )),
 
-                $["single_" + kind + "_prefix"],
+        repeat(
+            prec(1, choice(
+                alias($.intersecting_modifier, "_intersecting_modifier"),
+                alias($.line_break, "_line_break"),
+                alias($.paragraph_break, "_paragraph_break"),
+            )),
+        ),
 
-                indent_segment_or($, 1, field(
-                    "title",
-                    $.paragraph_segment,
-                )),
-
-                repeat(
-                    prec(1, choice(
-                        alias($.intersecting_modifier, "_intersecting_modifier"),
-                        alias($.line_break, "_line_break"),
-                        alias($.paragraph_break, "_paragraph_break"),
-                    )),
-                ),
-
-                field(
-                    "content",
-                    $.paragraph,
-                ),
-            ),
+        field(
+            "content",
+            $.paragraph,
         ),
     );
 }
 
 function gen_multi_rangeable_detached_modifier($, kind, include_strong) {
-    const strong_carryover_set = include_strong ? [
-        optional($.strong_carryover_set),
-    ] : [];
+    return gen_detached_modifier(
+        $,
 
-    return seq(
-        ...strong_carryover_set,
+        $["multi_" + kind + "_prefix"],
 
-        gen_detached_modifier(
-            $,
+        indent_segment_or($, 1, field(
+            "title",
+            $.paragraph_segment,
+        )),
 
-            $["multi_" + kind + "_prefix"],
+        choice(
+            alias($.intersecting_modifier, "_intersecting_modifier"),
+            alias($.line_break, "_line_break"),
+            alias($.paragraph_break, "_paragraph_break"),
+        ),
 
-            indent_segment_or($, 1, field(
-                "title",
-                $.paragraph_segment,
-            )),
-
-            choice(
-                alias($.intersecting_modifier, "_intersecting_modifier"),
-                alias($.line_break, "_line_break"),
-                alias($.paragraph_break, "_paragraph_break"),
-            ),
-
-            field(
-                "content",
-                repeat(
-                    choice(
-                        $.paragraph,
-                        prec(1, alias($.line_break, "_line_break")),
-                        alias($.paragraph_break, "_paragraph_break"),
-                        $.rangeable_detached_modifier,
-                        $.table,
-                        $.tag,
-                    ),
+        field(
+            "content",
+            repeat(
+                choice(
+                    $.paragraph,
+                    prec(1, alias($.line_break, "_line_break")),
+                    alias($.paragraph_break, "_paragraph_break"),
+                    $.rangeable_detached_modifier,
+                    $.table,
+                    $.tag,
                 ),
             ),
+        ),
 
-            field(
-                "end",
-                $["multi_" + kind + "_suffix"],
-            ),
+        field(
+            "end",
+            $["multi_" + kind + "_suffix"],
         ),
     );
 }

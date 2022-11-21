@@ -8,11 +8,12 @@ This is no longer part of the definition.
 --------------------------------------------------------------------------------
 
 (document
-  (single_definition
-    (single_definition_prefix)
-    (paragraph_segment)
-    (paragraph
-      (paragraph_segment)))
+  (definition_list
+    (single_definition
+      (single_definition_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment))))
   (paragraph
     (paragraph_segment)))
 
@@ -28,13 +29,14 @@ This is no longer part of the definition.
 --------------------------------------------------------------------------------
 
 (document
-  (multi_definition
-    (multi_definition_prefix)
-    (paragraph_segment)
-    (paragraph
-      (paragraph_segment))
-    (paragraph
-      (paragraph_segment))
-    (multi_definition_suffix))
+  (definition_list
+    (multi_definition
+      (multi_definition_prefix)
+      (paragraph_segment)
+      (paragraph
+        (paragraph_segment))
+      (paragraph
+        (paragraph_segment))
+      (multi_definition_suffix)))
   (paragraph
     (paragraph_segment)))
