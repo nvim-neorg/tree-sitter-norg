@@ -172,7 +172,7 @@ module.exports = grammar({
         $.ranged_verbatim_tag_prefix,
         $.ranged_verbatim_tag_end_prefix,
 
-        $.infirm_tag,
+        $.infirm_tag_prefix,
         $.weak_carryover_prefix,
         $.strong_carryover_prefix,
 
@@ -857,6 +857,8 @@ module.exports = grammar({
 
         strong_carryover: $ => gen_single_tag($, "strong_carryover"),
 
+        infirm_tag: $ => gen_single_tag($, "infirm_tag"),
+
         tag_name: $ =>
         seq(
             $.word,
@@ -895,6 +897,7 @@ module.exports = grammar({
 
         tag: $ =>
         choice(
+            $.infirm_tag,
             $.macro_tag,
             $.ranged_tag,
             $.ranged_verbatim_tag,

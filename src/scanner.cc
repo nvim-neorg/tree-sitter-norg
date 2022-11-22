@@ -496,7 +496,16 @@ class Scanner
                     return true;
                 }
             }
-            // TODO: add infirm-tag (.something)
+            // we are dealing with a infirm tag (.something)
+            else if (lexer->lookahead == '.' && m_TagContext != TagType::IN_VERBATIM_TAG)
+            {
+                advance(lexer);
+                if (lexer->lookahead != '.')
+                {
+                    lexer->result_symbol = m_LastToken = INFIRM_TAG;
+                    return true;
+                }
+            }
 
             // The idea of the check_detached function is as follows:
             // We check for the '*' character and depending on how many we

@@ -304,6 +304,10 @@
           "named": true
         },
         {
+          "type": "infirm_tag",
+          "named": true
+        },
+        {
           "type": "macro_tag",
           "named": true
         },
@@ -495,6 +499,10 @@
             "named": true
           },
           {
+            "type": "infirm_tag",
+            "named": true
+          },
+          {
             "type": "macro_tag",
             "named": true
           },
@@ -617,6 +625,10 @@
             "named": true
           },
           {
+            "type": "infirm_tag",
+            "named": true
+          },
+          {
             "type": "macro_tag",
             "named": true
           },
@@ -735,6 +747,10 @@
             "named": true
           },
           {
+            "type": "infirm_tag",
+            "named": true
+          },
+          {
             "type": "macro_tag",
             "named": true
           },
@@ -849,6 +865,10 @@
             "named": true
           },
           {
+            "type": "infirm_tag",
+            "named": true
+          },
+          {
             "type": "macro_tag",
             "named": true
           },
@@ -959,6 +979,10 @@
             "named": true
           },
           {
+            "type": "infirm_tag",
+            "named": true
+          },
+          {
             "type": "macro_tag",
             "named": true
           },
@@ -1065,6 +1089,10 @@
             "named": true
           },
           {
+            "type": "infirm_tag",
+            "named": true
+          },
+          {
             "type": "macro_tag",
             "named": true
           },
@@ -1160,6 +1188,10 @@
         },
         {
           "type": "indent_segment_begin",
+          "named": true
+        },
+        {
+          "type": "infirm_tag",
           "named": true
         },
         {
@@ -1270,6 +1302,10 @@
           "named": true
         },
         {
+          "type": "infirm_tag",
+          "named": true
+        },
+        {
           "type": "macro_tag",
           "named": true
         },
@@ -1365,6 +1401,10 @@
           "named": true
         },
         {
+          "type": "infirm_tag",
+          "named": true
+        },
+        {
           "type": "macro_tag",
           "named": true
         },
@@ -1448,6 +1488,10 @@
           "named": true
         },
         {
+          "type": "infirm_tag",
+          "named": true
+        },
+        {
           "type": "macro_tag",
           "named": true
         },
@@ -1519,6 +1563,10 @@
           "named": true
         },
         {
+          "type": "infirm_tag",
+          "named": true
+        },
+        {
           "type": "macro_tag",
           "named": true
         },
@@ -1578,6 +1626,10 @@
           "named": true
         },
         {
+          "type": "infirm_tag",
+          "named": true
+        },
+        {
           "type": "macro_tag",
           "named": true
         },
@@ -1599,6 +1651,32 @@
         },
         {
           "type": "weak_paragraph_delimiter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "infirm_tag",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "tag_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "tag_parameters",
           "named": true
         }
       ]
@@ -2087,6 +2165,10 @@
             "named": true
           },
           {
+            "type": "infirm_tag",
+            "named": true
+          },
+          {
             "type": "macro_tag",
             "named": true
           },
@@ -2187,6 +2269,10 @@
             "named": true
           },
           {
+            "type": "infirm_tag",
+            "named": true
+          },
+          {
             "type": "macro_tag",
             "named": true
           },
@@ -2284,6 +2370,10 @@
           },
           {
             "type": "footnote_list",
+            "named": true
+          },
+          {
+            "type": "infirm_tag",
             "named": true
           },
           {
@@ -3672,6 +3762,10 @@
         },
         {
           "type": "footnote_list",
+          "named": true
+        },
+        {
+          "type": "infirm_tag",
           "named": true
         },
         {
