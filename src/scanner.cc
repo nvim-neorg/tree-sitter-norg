@@ -674,6 +674,7 @@ class Scanner
             if (!std::iswspace(lexer->lookahead))
             {
                 lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_OPEN;
+                m_InLinkLocation = true;
                 return true;
             }
         }
@@ -685,6 +686,7 @@ class Scanner
                 m_LastToken != LINK_FILE_END)
             {
                 lexer->result_symbol = m_LastToken = INLINE_LINK_TARGET_CLOSE;
+                m_InLinkLocation = false;
                 return true;
             }
         }
@@ -744,6 +746,7 @@ class Scanner
             if (!std::iswspace(lexer->lookahead))
             {
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_BEGIN;
+                m_InLinkLocation = true;
                 return true;
             }
         }
@@ -760,10 +763,11 @@ class Scanner
             if (!std::iswspace(m_Previous))
             {
                 lexer->result_symbol = m_LastToken = LINK_LOCATION_END;
+                m_InLinkLocation = false;
                 return true;
             }
         }
-        else if (check_link_location(lexer))
+        else if (m_InLinkLocation && check_link_location(lexer))
             return true;
 
         // If we are not in a ranged tag then we should also check for potential
@@ -777,6 +781,7 @@ class Scanner
 
     size_t& get_tag_level() noexcept { return m_TagLevel; }
     TagType& get_tag_context() noexcept { return m_TagContext; }
+    bool& get_in_link_location() noexcept { return m_InLinkLocation; }
     TokenType& get_last_token() noexcept { return m_LastToken; }
     int32_t& get_current_char() noexcept { return m_Current; }
     auto& get_active_modifiers() noexcept { return m_ActiveModifiers; }
@@ -1047,6 +1052,7 @@ class Scanner
             }
             // since we have no break here, if we do not detect a beginning of a
             // file segment we fall through into this next case statement
+        case INTERSECTING_MODIFIER:
         case LINK_FILE_END:
             switch (lexer->lookahead)
             {
@@ -1359,6 +1365,8 @@ class Scanner
     TagType m_TagContext = TagType::NONE;
     size_t m_TagLevel = 0;
 
+    bool m_InLinkLocation = false;
+
     // The last matched token type (used to detect things like todo items
     // which require an unordered list prefix beforehand)
     TokenType m_LastToken = NONE;
@@ -1416,30 +1424,32 @@ extern "C"
 
         const auto& tag_level = scanner->get_tag_level();
         const auto& tag_context = scanner->get_tag_context();
+        const auto& in_link_location = scanner->get_in_link_location();
         const auto& last_token = scanner->get_last_token();
         const auto& current = scanner->get_current_char();
         const auto& active_modifiers = scanner->get_active_modifiers();
 
-        if (7 + active_modifiers.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
+        if (8 + active_modifiers.size() >= TREE_SITTER_SERIALIZATION_BUFFER_SIZE)
             return 0;
 
         buffer[0] = last_token;
         buffer[1] = tag_level;
         buffer[2] = (char)tag_context;
+        buffer[3] = in_link_location;
 
         // Store `current` (which is an int32_t) in a char array by splitting it up
-        buffer[3] = current & 0xFF;
-        buffer[4] = (current >> 8) & 0xFF;
-        buffer[5] = (current >> 16) & 0xFF;
-        buffer[6] = (current >> 24) & 0xFF;
+        buffer[4] = current & 0xFF;
+        buffer[5] = (current >> 8) & 0xFF;
+        buffer[6] = (current >> 16) & 0xFF;
+        buffer[7] = (current >> 24) & 0xFF;
 
         // Serialize the attached modifier bitset into the char array
         // We cast it down to a uint32_t because we genuinely won't be using any
         // more than that.
         for (int i = 0; i < active_modifiers.size(); i++)
-            buffer[7 + i] = active_modifiers[i];
+            buffer[8 + i] = active_modifiers[i];
 
-        return 7 + active_modifiers.size();
+        return 8 + active_modifiers.size();
     }
 
     void tree_sitter_norg_external_scanner_deserialize(void* payload,
@@ -1450,6 +1460,7 @@ extern "C"
 
         auto& tag_level = scanner->get_tag_level();
         auto& tag_context = scanner->get_tag_context();
+        auto& in_link_location = scanner->get_in_link_location();
         auto& last_token = scanner->get_last_token();
         auto& current = scanner->get_current_char();
         auto& active_modifiers = scanner->get_active_modifiers();
@@ -1458,6 +1469,7 @@ extern "C"
         {
             tag_level = 0;
             tag_context = TagType::NONE;
+            in_link_location = false;
             last_token = NONE;
             current = 0;
             active_modifiers = 0;
@@ -1467,10 +1479,11 @@ extern "C"
         last_token = (TokenType)buffer[0];
         tag_level = (size_t)buffer[1];
         tag_context = (TagType)buffer[2];
-        current = (uint32_t)buffer[6] << 24 | (uint32_t)buffer[5] << 16 | (uint32_t)buffer[4] << 8 |
-                  (uint32_t)buffer[3];
+        in_link_location = (bool)buffer[3];
+        current = (uint32_t)buffer[7] << 24 | (uint32_t)buffer[6] << 16 | (uint32_t)buffer[5] << 8 |
+                  (uint32_t)buffer[4];
 
         for (int i = 0; i < active_modifiers.size(); i++)
-            active_modifiers[i] = buffer[7 + i];
+            active_modifiers[i] = buffer[8 + i];
     }
 }

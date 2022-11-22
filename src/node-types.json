@@ -1988,7 +1988,7 @@
         ]
       },
       "text": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -1998,7 +1998,7 @@
         ]
       },
       "type": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -2059,6 +2059,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "link_target_scope",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -5016,6 +5026,10 @@
   },
   {
     "type": "link_target_line_number",
+    "named": true
+  },
+  {
+    "type": "link_target_scope",
     "named": true
   },
   {

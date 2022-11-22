@@ -2025,8 +2025,38 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_link_target_markup"
+          "type": "PREC_RIGHT",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_link_target_markup"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "intersecting_modifier"
+                      },
+                      "named": true,
+                      "value": "link_target_scope"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "_link_target_markup"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         },
         {
           "type": "SYMBOL",

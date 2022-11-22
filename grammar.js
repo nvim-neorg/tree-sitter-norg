@@ -529,7 +529,17 @@ module.exports = grammar({
 
         _link_target: $ =>
         choice(
-            $._link_target_markup,
+            prec.right(1,
+                seq(
+                    $._link_target_markup,
+                    repeat(
+                        seq(
+                            alias($.intersecting_modifier, $.link_target_scope),
+                            $._link_target_markup,
+                        ),
+                    ),
+                ),
+            ),
             $._link_target_verbatim,
         ),
 
