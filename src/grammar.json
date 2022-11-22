@@ -2182,7 +2182,7 @@
       }
     },
     "anchor_declaration": {
-      "type": "PREC",
+      "type": "PREC_RIGHT",
       "value": 1,
       "content": {
         "type": "SEQ",
@@ -2190,6 +2190,18 @@
           {
             "type": "SYMBOL",
             "name": "link_description"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "link_description"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           },
           {
             "type": "CHOICE",

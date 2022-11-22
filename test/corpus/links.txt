@@ -900,3 +900,28 @@ This is { not a link } location.
   (paragraph
     (paragraph_segment)
     (paragraph_segment)))
+
+================================================================================
+Anchor with custom description
+================================================================================
+[heading anchor][with custom description]
+
+[heading anchor]{* Heading level 1}
+--------------------------------------------------------------------------------
+
+(document
+  (paragraph
+    (paragraph_segment
+      (anchor_declaration
+        (link_description
+          (paragraph))
+        (link_description
+          (paragraph)))))
+  (paragraph
+    (paragraph_segment
+      (anchor_definition
+        (link_description
+          (paragraph))
+        (link_location
+          (link_target_heading1)
+          (paragraph))))))

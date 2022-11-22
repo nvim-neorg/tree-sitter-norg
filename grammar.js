@@ -579,9 +579,12 @@ module.exports = grammar({
         ),
 
         anchor_declaration: $ =>
-        prec(1,
+        prec.right(1,
             seq(
                 $.link_description,
+                optional(
+                    $.link_description,
+                ),
                 optional(
                     $.attribute,
                 ),
