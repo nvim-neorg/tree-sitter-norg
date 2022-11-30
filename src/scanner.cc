@@ -915,8 +915,11 @@ struct Scanner
                 lexer->result_symbol = m_LastToken = FREE_FORM_MODIFIER_CLOSE;
                 return true;
             }
-
-            return false;
+            else
+            {
+                lexer->result_symbol = m_LastToken = WORD;
+                return true;
+            }
         }
 
         auto found_attached_modifier = m_AttachedModifiers.find(lexer->lookahead);
@@ -1281,7 +1284,7 @@ struct Scanner
         {
             bool _break = false;
             switch (lexer->lookahead)
-            case ':': case '|': case '=': case '~': case '\\':
+            case ':': case '|': case '~': case '\\':
             case '<': case '>':
             case '[': case ']':
             case '{': case '}':
