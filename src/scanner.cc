@@ -784,7 +784,7 @@ struct Scanner
         lexer->advance(lexer, false);
     }
 
-    bool token(string str)
+    bool token(const string str)
     {
         for (int32_t c : str)
         {
