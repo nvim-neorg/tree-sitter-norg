@@ -411,6 +411,12 @@ struct Scanner
                             return true;
                         }
                     }
+                    else
+                    {
+                        lexer->mark_end(lexer);
+                        lexer->result_symbol = m_LastToken = WORD;
+                        return true;
+                    }
                 }
 
                 // This is a fallback. If the tag ends up not being `=end` then...
