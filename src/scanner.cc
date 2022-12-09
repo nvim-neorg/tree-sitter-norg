@@ -386,34 +386,24 @@ struct Scanner
                 }
                 else if (lexer->lookahead == '=')
                 {
-                    advance();
-                    if (lexer->lookahead == '=')
-                    {
-                        // we are now three-characters in
-                        do
-                            advance();
-                        while (lexer->lookahead == '=');
+                    // we are now two-characters in
+                    do
+                        advance();
+                    while (lexer->lookahead == '=');
 
-                        if (is_newline(lexer->lookahead))
-                        {
-                            // reset the marked end
-                            lexer->mark_end(lexer);
-                            advance();
-                            lexer->result_symbol = m_LastToken = STRONG_PARAGRAPH_DELIMITER;
-                            return true;
-                        }
-                        else
-                        {
-                            // reset the marked end
-                            lexer->mark_end(lexer);
-                            advance();
-                            lexer->result_symbol = m_LastToken = WORD;
-                            return true;
-                        }
+                    if (is_newline(lexer->lookahead))
+                    {
+                        // reset the marked end
+                        lexer->mark_end(lexer);
+                        advance();
+                        lexer->result_symbol = m_LastToken = STRONG_PARAGRAPH_DELIMITER;
+                        return true;
                     }
                     else
                     {
+                        // reset the marked end
                         lexer->mark_end(lexer);
+                        advance();
                         lexer->result_symbol = m_LastToken = WORD;
                         return true;
                     }
@@ -544,18 +534,18 @@ struct Scanner
             // we differentiate between the two. m_ParsedChars is
             // incremented every time `check_detached` successfully parses a
             // character. We can use this to our advantage! The parser will
-            // encounter 3 consecutive '-' chars and will parse all the way
+            // encounter 2 consecutive '-' chars and will parse all the way
             // up until the end. It will then try to return UNORDERED_LIST3
             // but will fail because there won't be any whitespace after the
-            // 3 chars. It will then return NONE. Even though it may have
+            // 2 chars. It will then return NONE. Even though it may have
             // failed the m_ParsedChars value has still been modified! If
-            // m_ParsedChars is 3 then that means we have parsed '---' and
+            // m_ParsedChars is 2 then that means we have parsed '--' and
             // hence we return a WEAK_PARAGRAPH_DELIMITER. This check is
             // even further enforced by checking if the next char is a
             // newline, which makes sense considering the parser head:
-            // ---
-            //   ^ will be here, and lexer->lookahead will return '\n'
-            else if (is_newline(lexer->lookahead) && m_ParsedChars >= 3)
+            // --
+            //  ^ will be here, and lexer->lookahead will return '\n'
+            else if (is_newline(lexer->lookahead) && m_ParsedChars >= 2)
             {
                 advance();
                 lexer->result_symbol = m_LastToken = WEAK_PARAGRAPH_DELIMITER;
@@ -606,7 +596,7 @@ struct Scanner
 
             if (check_detached({NONE, NONE}, '_'))
                 return true;
-            else if (is_newline(lexer->lookahead) && m_ParsedChars >= 3)
+            else if (is_newline(lexer->lookahead) && m_ParsedChars >= 2)
             {
                 lexer->result_symbol = m_LastToken = HORIZONTAL_LINE;
                 return true;
