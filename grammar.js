@@ -867,7 +867,15 @@ module.exports = grammar({
 
         strong_carryover: $ => gen_single_tag($, "strong_carryover"),
 
-        infirm_tag: $ => gen_single_tag($, "infirm_tag"),
+        infirm_tag: $ => prec.right(0,
+            seq(
+                optional($.strong_carryover_set),
+
+                optional($.weak_carryover_set),
+
+                gen_single_tag($, "infirm_tag"),
+            ),
+        ),
 
         tag_name: $ =>
         seq(

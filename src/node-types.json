@@ -1672,11 +1672,19 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
+          "type": "strong_carryover_set",
+          "named": true
+        },
+        {
           "type": "tag_parameters",
+          "named": true
+        },
+        {
+          "type": "weak_carryover_set",
           "named": true
         }
       ]
