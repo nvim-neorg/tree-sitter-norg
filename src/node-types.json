@@ -3769,32 +3769,15 @@
   {
     "type": "slide1",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph",
-            "named": true
-          }
-        ]
-      },
-      "state": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "detached_modifier_extension",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "any_list_item_level_1",
+          "named": true
+        },
         {
           "type": "infirm_tag",
           "named": true
@@ -3816,43 +3799,7 @@
           "named": true
         },
         {
-          "type": "ordered_list2_prefix",
-          "named": true
-        },
-        {
-          "type": "ordered_list3",
-          "named": true
-        },
-        {
-          "type": "ordered_list4",
-          "named": true
-        },
-        {
-          "type": "ordered_list5",
-          "named": true
-        },
-        {
-          "type": "ordered_list6",
-          "named": true
-        },
-        {
-          "type": "quote2_prefix",
-          "named": true
-        },
-        {
-          "type": "quote3",
-          "named": true
-        },
-        {
-          "type": "quote4",
-          "named": true
-        },
-        {
-          "type": "quote5",
-          "named": true
-        },
-        {
-          "type": "quote6",
+          "type": "quote1",
           "named": true
         },
         {
@@ -3873,26 +3820,6 @@
         },
         {
           "type": "single_table_cell",
-          "named": true
-        },
-        {
-          "type": "unordered_list2_prefix",
-          "named": true
-        },
-        {
-          "type": "unordered_list3",
-          "named": true
-        },
-        {
-          "type": "unordered_list4",
-          "named": true
-        },
-        {
-          "type": "unordered_list5",
-          "named": true
-        },
-        {
-          "type": "unordered_list6",
           "named": true
         }
       ]
@@ -3901,32 +3828,15 @@
   {
     "type": "slide2",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph",
-            "named": true
-          }
-        ]
-      },
-      "state": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "detached_modifier_extension",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "any_list_item_level_2",
+          "named": true
+        },
         {
           "type": "infirm_tag",
           "named": true
@@ -3948,35 +3858,7 @@
           "named": true
         },
         {
-          "type": "ordered_list3_prefix",
-          "named": true
-        },
-        {
-          "type": "ordered_list4",
-          "named": true
-        },
-        {
-          "type": "ordered_list5",
-          "named": true
-        },
-        {
-          "type": "ordered_list6",
-          "named": true
-        },
-        {
-          "type": "quote3_prefix",
-          "named": true
-        },
-        {
-          "type": "quote4",
-          "named": true
-        },
-        {
-          "type": "quote5",
-          "named": true
-        },
-        {
-          "type": "quote6",
+          "type": "quote2",
           "named": true
         },
         {
@@ -3997,22 +3879,6 @@
         },
         {
           "type": "single_table_cell",
-          "named": true
-        },
-        {
-          "type": "unordered_list3_prefix",
-          "named": true
-        },
-        {
-          "type": "unordered_list4",
-          "named": true
-        },
-        {
-          "type": "unordered_list5",
-          "named": true
-        },
-        {
-          "type": "unordered_list6",
           "named": true
         }
       ]
@@ -4021,32 +3887,15 @@
   {
     "type": "slide3",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph",
-            "named": true
-          }
-        ]
-      },
-      "state": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "detached_modifier_extension",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "any_list_item_level_3",
+          "named": true
+        },
         {
           "type": "infirm_tag",
           "named": true
@@ -4068,27 +3917,7 @@
           "named": true
         },
         {
-          "type": "ordered_list4_prefix",
-          "named": true
-        },
-        {
-          "type": "ordered_list5",
-          "named": true
-        },
-        {
-          "type": "ordered_list6",
-          "named": true
-        },
-        {
-          "type": "quote4_prefix",
-          "named": true
-        },
-        {
-          "type": "quote5",
-          "named": true
-        },
-        {
-          "type": "quote6",
+          "type": "quote3",
           "named": true
         },
         {
@@ -4109,18 +3938,6 @@
         },
         {
           "type": "single_table_cell",
-          "named": true
-        },
-        {
-          "type": "unordered_list4_prefix",
-          "named": true
-        },
-        {
-          "type": "unordered_list5",
-          "named": true
-        },
-        {
-          "type": "unordered_list6",
           "named": true
         }
       ]
@@ -4129,32 +3946,15 @@
   {
     "type": "slide4",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph",
-            "named": true
-          }
-        ]
-      },
-      "state": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "detached_modifier_extension",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "any_list_item_level_4",
+          "named": true
+        },
         {
           "type": "infirm_tag",
           "named": true
@@ -4176,19 +3976,7 @@
           "named": true
         },
         {
-          "type": "ordered_list5_prefix",
-          "named": true
-        },
-        {
-          "type": "ordered_list6",
-          "named": true
-        },
-        {
-          "type": "quote5_prefix",
-          "named": true
-        },
-        {
-          "type": "quote6",
+          "type": "quote4",
           "named": true
         },
         {
@@ -4209,14 +3997,6 @@
         },
         {
           "type": "single_table_cell",
-          "named": true
-        },
-        {
-          "type": "unordered_list5_prefix",
-          "named": true
-        },
-        {
-          "type": "unordered_list6",
           "named": true
         }
       ]
@@ -4225,32 +4005,15 @@
   {
     "type": "slide5",
     "named": true,
-    "fields": {
-      "content": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "paragraph",
-            "named": true
-          }
-        ]
-      },
-      "state": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "detached_modifier_extension",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "any_list_item_level_5",
+          "named": true
+        },
         {
           "type": "infirm_tag",
           "named": true
@@ -4272,11 +4035,7 @@
           "named": true
         },
         {
-          "type": "ordered_list6_prefix",
-          "named": true
-        },
-        {
-          "type": "quote6_prefix",
+          "type": "quote5",
           "named": true
         },
         {
@@ -4297,10 +4056,6 @@
         },
         {
           "type": "single_table_cell",
-          "named": true
-        },
-        {
-          "type": "unordered_list6_prefix",
           "named": true
         }
       ]
