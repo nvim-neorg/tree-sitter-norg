@@ -225,21 +225,6 @@ struct Scanner
     // Used for lookback
     size_t m_ParsedChars = 0;
 
-    const array<int32_t, 12> m_DetachedModifiers = {
-        '*',  // Headings
-        '-',  // Unordered Lists
-        '>',  // Quotes
-        '%',  // Attributes
-        '=',
-        '~',  // Ordered Lists
-        '$',  // Definitions
-        '_',
-        '^',  // Footnotes
-        '&',
-        '<',
-        ':',  // Table cells
-    };
-
     const unordered_map<int32_t, TokenType> m_DetachedModifierExtensions = {
         {'#', PRIORITY},
         {'@', TIMESTAMP},
@@ -801,14 +786,9 @@ struct Scanner
     [[nodiscard]]
     bool check_detached(const vector<TokenType>& results, const int32_t expected)
     {
-        size_t i = m_ParsedChars = 0;
-        auto detached_modifier = find(m_DetachedModifiers.begin(), m_DetachedModifiers.end(),
-                                      lexer->lookahead);
-        do {
-            // If the next character is not one we expect then break.
-            if (lexer->lookahead != expected)
-                break;
+        m_ParsedChars = 0;
 
+        while (lexer->lookahead == expected) {
             advance();
 
             // If the next character is whitespace (which is the distinguishing
@@ -819,7 +799,7 @@ struct Scanner
                 // depending on how many characters were matched. If we have
                 // exceeded the number of results then fall back to the last element.
                 size_t max = results.size() - 1;
-                TokenType result = results[i <= max ? i : max];
+                TokenType result = results[m_ParsedChars <= max ? m_ParsedChars : max];
 
                 // Skip all whitespaces.
                 while (is_blank(lexer->lookahead))
@@ -830,11 +810,8 @@ struct Scanner
                 return true;
             }
 
-            detached_modifier = find(m_DetachedModifiers.begin(), m_DetachedModifiers.end(),
-                                     lexer->lookahead);
-            ++i;
             ++m_ParsedChars;
-        } while (detached_modifier != m_DetachedModifiers.end());
+        }
 
         // If we've only parsed one character and instantly failed then we might
         // be dealing with an attached modifier!
