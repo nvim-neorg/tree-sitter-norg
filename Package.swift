@@ -12,7 +12,6 @@ let package = Package(
                 path: ".",
                 exclude: [
                     "binding.gyp",
-                    "bindings",
                     "Cargo.toml",
                     "default.nix",
                     "flake.nix",
@@ -23,6 +22,7 @@ let package = Package(
                     "README.md",
                     "src/grammar.json",
                     "src/node-types.json",
+                    "test",
                 ],
                 sources: [
                     "src/parser.c",
