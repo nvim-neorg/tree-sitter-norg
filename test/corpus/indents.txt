@@ -141,7 +141,7 @@ Slide
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (slide
+      (slide1
         (ranged_verbatim_tag
           (tag_name
             (word))
@@ -153,10 +153,9 @@ Slide
   (generic_list
     (unordered_list1
       (unordered_list1_prefix)
-      (slide
-        (definition_list
+      (slide1
           (single_definition
             (single_definition_prefix)
             (paragraph_segment)
             (paragraph
-              (paragraph_segment))))))))
+              (paragraph_segment)))))))

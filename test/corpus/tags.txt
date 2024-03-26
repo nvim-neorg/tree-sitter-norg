@@ -405,3 +405,67 @@ Infirm tag with dot separated name and parameters
     (tag_parameters
       (tag_param)
       (tag_param))))
+
+================================================================================
+Infirm tag with weak carryover
+================================================================================
++color blue
+.macro
+
+--------------------------------------------------------------------------------
+
+(document
+  (infirm_tag
+    (weak_carryover_set
+      (weak_carryover
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (word))))
+
+================================================================================
+Infirm tag with strong carryover
+================================================================================
+#color blue
+.macro
+
+--------------------------------------------------------------------------------
+
+(document
+  (infirm_tag
+    (strong_carryover_set
+      (strong_carryover
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (word))))
+
+================================================================================
+Infirm tag with weak and strong carryover
+================================================================================
+#color blue
++name hello
+.macro
+
+--------------------------------------------------------------------------------
+
+(document
+  (infirm_tag
+    (strong_carryover_set
+      (strong_carryover
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (weak_carryover_set
+      (weak_carryover
+        (tag_name
+          (word))
+        (tag_parameters
+          (tag_param))))
+    (tag_name
+      (word))))

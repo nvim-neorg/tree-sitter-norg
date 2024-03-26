@@ -3,7 +3,7 @@ Level 1 Headings
 ================================================================================
 * This is a heading
   In this heading there is some text
-  ===
+  ==
 
 This is no longer part of the heading.
 
@@ -63,7 +63,7 @@ Level 3 Headings
      And some content
      *** Then a level 3 heading
          With more content
-         ===
+         ====
 
 And here is some more text that has broken out of the matrix.
 
@@ -105,7 +105,7 @@ Level 4 Headings
          With more content
          **** And a level 4 heading
               With a lil content
-              ===
+              ====
 
 And here is some more text that has broken out of the matrix.
 
@@ -152,7 +152,7 @@ Level 5 Headings
          With more content
          **** And a level 4 heading
               ***** And then a level 5 heading
-              ===
+                    ===
 
 And here is some more text that has broken out of the matrix.
 
@@ -202,7 +202,7 @@ Level 6 Headings
               ***** And then a level 5 heading
                     Content
                     ****** And finally a level 6 heading
-              ===
+                           ===
 
 And here is some more text that has broken out of the matrix.
 
@@ -250,15 +250,15 @@ Time to test indentation reversion.
 * This is a heading
   ** It contains a level 2 heading
      Which in turn contains some text.
-     ---
+     -----
   This should reverse the indentation and
   it should be part of the first-level
   heading now
   *** This is now a third-level heading
-      ---
+      ----
   And it has reversed too
   *** Another third-level heading
-  ===
+      ===
 
 This should no longer be part of the heading.
 
@@ -298,14 +298,14 @@ Malformed indentation reversion
 ================================================================================
 * Heading
   A paragraph
-  --- 
+  -- 
   This should not be reverted since the previous element
   has whitespace afterwards.
   It should instead be treated as an unordered list element.
 
-  This --- should also not revert the heading.
+  This -- should also not revert the heading.
   --neither- should this
-  ---
+  --
 
 This should though.
 
@@ -318,8 +318,8 @@ This should though.
     content: (paragraph
       (paragraph_segment))
     content: (generic_list
-      (unordered_list3
-        (unordered_list3_prefix)
+      (unordered_list2
+        (unordered_list2_prefix)
         content: (paragraph
           (paragraph_segment)
           (paragraph_segment)
@@ -335,7 +335,7 @@ This should though.
 Horizontal Line
 ================================================================================
 This is some text.
-___
+__
 Separated by a horizontal line.
 --------------------------------------------------------------------------------
 
