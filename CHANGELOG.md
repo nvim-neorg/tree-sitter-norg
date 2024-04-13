@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.1.0...v0.2.0) (2024-04-13)
+
+
+### Features
+
+* properly build on MacOS machines ([a533135](https://github.com/nvim-neorg/tree-sitter-norg/commit/a53313574fdc34bf336101c94ef2ed7fe98d4991))
+
 ## 0.1.0 (2024-04-13)
 
 
