@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.0...v0.2.1) (2024-04-14)
+
+
+### Bug Fixes
+
+* put variables declaration in the right place ([3bf15f3](https://github.com/nvim-neorg/tree-sitter-norg/commit/3bf15f3cc904420631959d09065810c28353ffa1))
+
 ## [0.2.0](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.1.0...v0.2.0) (2024-04-13)
 
 
