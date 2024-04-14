@@ -24,12 +24,11 @@ source = {
   dir = '$repo_name-' .. '$archive_dir_suffix',
 }
 
-variables = {
-    LIBFLAG = "-std=c++11",
-}
-
 build = {
   type = "treesitter-parser",
   lang = "norg",
   sources = { "src/parser.c", "src/scanner.cc" },
+  variables = {
+      LIBFLAG = "-std=c++11",
+  },
 }
