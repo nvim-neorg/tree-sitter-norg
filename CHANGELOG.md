@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.1...v0.2.2) (2024-04-16)
+
+
+### Bug Fixes
+
+* use new libflags feature ([280a833](https://github.com/nvim-neorg/tree-sitter-norg/commit/280a833b360d323226378e0dd68de2e8230cdc83))
+
 ## [0.2.1](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.0...v0.2.1) (2024-04-14)
 
 
