@@ -16,7 +16,7 @@ description = {
 }
 
 build_dependencies = {
-  'luarocks-build-treesitter-parser >= 1.3.0',
+  'luarocks-build-treesitter-parser >= 1.5.0',
 }
 
 source = {
@@ -27,16 +27,5 @@ source = {
 build = {
   type = "treesitter-parser",
   lang = "norg",
-  platforms = {
-      macosx = {
-          libflags = {
-              "-bundle",
-              "-undefined",
-              "dynamic_lookup",
-              "-all_load",
-              "-std=c++11",
-          },
-      },
-  },
   sources = { "src/parser.c", "src/scanner.cc" },
 }
