@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.2...v0.2.3) (2024-04-17)
+
+
+### Bug Fixes
+
+* revert old rockspec, should behave properly now with latest luarocks-build-treesitter-parser build step ([526ed02](https://github.com/nvim-neorg/tree-sitter-norg/commit/526ed02786fffde48391e2b5a0c747f6121d8afb))
+
 ## [0.2.2](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.1...v0.2.2) (2024-04-16)
 
 
