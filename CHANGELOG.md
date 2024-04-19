@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.3...v0.2.4) (2024-04-19)
+
+
+### Bug Fixes
+
+* use std=c++11 for macos users ([5e2495f](https://github.com/nvim-neorg/tree-sitter-norg/commit/5e2495f427d417b8aac5b47e296809cb36668761))
+
 ## [0.2.3](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.2...v0.2.3) (2024-04-17)
 
 
