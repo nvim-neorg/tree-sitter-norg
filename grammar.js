@@ -7,6 +7,8 @@ module.exports = grammar({
         $.nestable_detached_modifier,
         $.rangeable_detached_modifier,
         $.tag,
+        $._non_infectable_tag,
+        $._non_infectable_rangeable_detached_modifier,
 
         $._indent_segment_contents1,
         $._indent_segment_contents2,
@@ -15,12 +17,68 @@ module.exports = grammar({
         $._indent_segment_contents5,
         $._indent_segment_contents6,
 
+        $._slide_contents1,
+        $._slide_contents2,
+        $._slide_contents3,
+        $._slide_contents4,
+        $._slide_contents5,
+        $._slide_contents6,
+
+        $._slide_contents_quote1,
+        $._slide_contents_quote2,
+        $._slide_contents_quote3,
+        $._slide_contents_quote4,
+        $._slide_contents_quote5,
+        $._slide_contents_quote6,
+
+        $._slide_contents_anylist1,
+        $._slide_contents_anylist2,
+        $._slide_contents_anylist3,
+        $._slide_contents_anylist4,
+        $._slide_contents_anylist5,
+        $._slide_contents_anylist6,
+
+        $._non_infectable_quote1,
+        $._non_infectable_quote2,
+        $._non_infectable_quote3,
+        $._non_infectable_quote4,
+        $._non_infectable_quote5,
+        $._non_infectable_quote6,
+
+        $._non_infectable_ordered_list1,
+        $._non_infectable_ordered_list2,
+        $._non_infectable_ordered_list3,
+        $._non_infectable_ordered_list4,
+        $._non_infectable_ordered_list5,
+        $._non_infectable_ordered_list6,
+
+        $._non_infectable_unordered_list1,
+        $._non_infectable_unordered_list2,
+        $._non_infectable_unordered_list3,
+        $._non_infectable_unordered_list4,
+        $._non_infectable_unordered_list5,
+        $._non_infectable_unordered_list6,
+
+        $._non_infectable_single_footnote,
+        $._non_infectable_multi_footnote,
+        $._non_infectable_single_definition,
+        $._non_infectable_multi_definition,
+        $._non_infectable_single_table_cell,
+        $._non_infectable_multi_table_cell,
+
         $._any_list_item_level_1,
         $._any_list_item_level_2,
         $._any_list_item_level_3,
         $._any_list_item_level_4,
         $._any_list_item_level_5,
         $._any_list_item_level_6,
+
+        $._non_infectable_any_list_item_level_1,
+        $._non_infectable_any_list_item_level_2,
+        $._non_infectable_any_list_item_level_3,
+        $._non_infectable_any_list_item_level_4,
+        $._non_infectable_any_list_item_level_5,
+        $._non_infectable_any_list_item_level_6,
     ],
 
     conflicts: $ => [
@@ -42,6 +100,13 @@ module.exports = grammar({
         [$.inline_macro, $._conflict_open],
 
         [$._paragraph_element],
+
+        [$.slide1],
+        [$.slide2],
+        [$.slide3],
+        [$.slide4],
+        [$.slide5],
+        [$.slide6],
 
         [$.quote1],
         [$.quote2],
@@ -235,7 +300,6 @@ module.exports = grammar({
                         $.heading,
                         $.nestable_detached_modifier,
                         $.rangeable_detached_modifier,
-                        $.table,
                         $.tag,
                         $.horizontal_line,
                         $.strong_paragraph_delimiter,
@@ -274,6 +338,7 @@ module.exports = grammar({
             repeat1(
                 choice(
                     alias($._non_infectable_paragraph_segment, $.paragraph_segment),
+                    $.intersecting_modifier,
                     alias($.line_break, "_line_break"),
                 ),
             ),
@@ -647,12 +712,19 @@ module.exports = grammar({
             ),
         ),
 
-        quote1: $ => gen_quote($, 1),
-        quote2: $ => gen_quote($, 2),
-        quote3: $ => gen_quote($, 3),
-        quote4: $ => gen_quote($, 4),
-        quote5: $ => gen_quote($, 5),
-        quote6: $ => gen_quote($, 6),
+        quote1: $ => gen_quote($, 1, true),
+        quote2: $ => gen_quote($, 2, true),
+        quote3: $ => gen_quote($, 3, true),
+        quote4: $ => gen_quote($, 4, true),
+        quote5: $ => gen_quote($, 5, true),
+        quote6: $ => gen_quote($, 6, true),
+
+        _non_infectable_quote1: $ => gen_quote($, 1, false),
+        _non_infectable_quote2: $ => gen_quote($, 2, false),
+        _non_infectable_quote3: $ => gen_quote($, 3, false),
+        _non_infectable_quote4: $ => gen_quote($, 4, false),
+        _non_infectable_quote5: $ => gen_quote($, 5, false),
+        _non_infectable_quote6: $ => gen_quote($, 6, false),
 
         // generic list
         generic_list: $ =>
@@ -665,26 +737,47 @@ module.exports = grammar({
             ),
         ),
 
-        _any_list_item_level_1: $ => gen_any_list_item($, 1),
-        _any_list_item_level_2: $ => gen_any_list_item($, 2),
-        _any_list_item_level_3: $ => gen_any_list_item($, 3),
-        _any_list_item_level_4: $ => gen_any_list_item($, 4),
-        _any_list_item_level_5: $ => gen_any_list_item($, 5),
-        _any_list_item_level_6: $ => gen_any_list_item($, 6),
+        _any_list_item_level_1: $ => gen_any_list_item($, 1, true),
+        _any_list_item_level_2: $ => gen_any_list_item($, 2, true),
+        _any_list_item_level_3: $ => gen_any_list_item($, 3, true),
+        _any_list_item_level_4: $ => gen_any_list_item($, 4, true),
+        _any_list_item_level_5: $ => gen_any_list_item($, 5, true),
+        _any_list_item_level_6: $ => gen_any_list_item($, 6, true),
 
-        unordered_list1: $ => gen_generic_list_item($, "unordered", 1),
-        unordered_list2: $ => gen_generic_list_item($, "unordered", 2),
-        unordered_list3: $ => gen_generic_list_item($, "unordered", 3),
-        unordered_list4: $ => gen_generic_list_item($, "unordered", 4),
-        unordered_list5: $ => gen_generic_list_item($, "unordered", 5),
-        unordered_list6: $ => gen_generic_list_item($, "unordered", 6),
+        _non_infectable_any_list_item_level_1: $ => gen_any_list_item($, 1, false),
+        _non_infectable_any_list_item_level_2: $ => gen_any_list_item($, 2, false),
+        _non_infectable_any_list_item_level_3: $ => gen_any_list_item($, 3, false),
+        _non_infectable_any_list_item_level_4: $ => gen_any_list_item($, 4, false),
+        _non_infectable_any_list_item_level_5: $ => gen_any_list_item($, 5, false),
+        _non_infectable_any_list_item_level_6: $ => gen_any_list_item($, 6, false),
 
-        ordered_list1: $ => gen_generic_list_item($, "ordered", 1),
-        ordered_list2: $ => gen_generic_list_item($, "ordered", 2),
-        ordered_list3: $ => gen_generic_list_item($, "ordered", 3),
-        ordered_list4: $ => gen_generic_list_item($, "ordered", 4),
-        ordered_list5: $ => gen_generic_list_item($, "ordered", 5),
-        ordered_list6: $ => gen_generic_list_item($, "ordered", 6),
+        unordered_list1: $ => gen_generic_list_item($, "unordered", 1, true),
+        unordered_list2: $ => gen_generic_list_item($, "unordered", 2, true),
+        unordered_list3: $ => gen_generic_list_item($, "unordered", 3, true),
+        unordered_list4: $ => gen_generic_list_item($, "unordered", 4, true),
+        unordered_list5: $ => gen_generic_list_item($, "unordered", 5, true),
+        unordered_list6: $ => gen_generic_list_item($, "unordered", 6, true),
+
+        _non_infectable_unordered_list1: $ => gen_generic_list_item($, "unordered", 1, false),
+        _non_infectable_unordered_list2: $ => gen_generic_list_item($, "unordered", 2, false),
+        _non_infectable_unordered_list3: $ => gen_generic_list_item($, "unordered", 3, false),
+        _non_infectable_unordered_list4: $ => gen_generic_list_item($, "unordered", 4, false),
+        _non_infectable_unordered_list5: $ => gen_generic_list_item($, "unordered", 5, false),
+        _non_infectable_unordered_list6: $ => gen_generic_list_item($, "unordered", 6, false),
+
+        ordered_list1: $ => gen_generic_list_item($, "ordered", 1, true),
+        ordered_list2: $ => gen_generic_list_item($, "ordered", 2, true),
+        ordered_list3: $ => gen_generic_list_item($, "ordered", 3, true),
+        ordered_list4: $ => gen_generic_list_item($, "ordered", 4, true),
+        ordered_list5: $ => gen_generic_list_item($, "ordered", 5, true),
+        ordered_list6: $ => gen_generic_list_item($, "ordered", 6, true),
+
+        _non_infectable_ordered_list1: $ => gen_generic_list_item($, "ordered", 1, false),
+        _non_infectable_ordered_list2: $ => gen_generic_list_item($, "ordered", 2, false),
+        _non_infectable_ordered_list3: $ => gen_generic_list_item($, "ordered", 3, false),
+        _non_infectable_ordered_list4: $ => gen_generic_list_item($, "ordered", 4, false),
+        _non_infectable_ordered_list5: $ => gen_generic_list_item($, "ordered", 5, false),
+        _non_infectable_ordered_list6: $ => gen_generic_list_item($, "ordered", 6, false),
 
         priority: $ => seq(
             $._priority,
@@ -743,14 +836,23 @@ module.exports = grammar({
 
         // --------------------------------------------------
 
-        single_definition: $ => gen_single_rangeable_detached_modifier($, "definition"),
-        multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition"),
+        single_definition: $ => gen_single_rangeable_detached_modifier($, "definition", true),
+        multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition", true),
 
-        single_footnote: $ => gen_single_rangeable_detached_modifier($, "footnote"),
-        multi_footnote: $ => gen_multi_rangeable_detached_modifier($, "footnote"),
+        _non_infectable_single_definition: $ => gen_single_rangeable_detached_modifier($, "definition", false),
+        _non_infectable_multi_definition: $ => gen_multi_rangeable_detached_modifier($, "definition", false),
 
-        single_table_cell: $ => gen_single_rangeable_detached_modifier($, "table_cell"),
-        multi_table_cell: $ => gen_multi_rangeable_detached_modifier($, "table_cell"),
+        single_footnote: $ => gen_single_rangeable_detached_modifier($, "footnote", true),
+        multi_footnote: $ => gen_multi_rangeable_detached_modifier($, "footnote", true),
+
+        _non_infectable_single_footnote: $ => gen_single_rangeable_detached_modifier($, "footnote", false),
+        _non_infectable_multi_footnote: $ => gen_multi_rangeable_detached_modifier($, "footnote", false),
+
+        single_table_cell: $ => gen_single_rangeable_detached_modifier($, "table_cell", true),
+        multi_table_cell: $ => gen_multi_rangeable_detached_modifier($, "table_cell", true),
+
+        _non_infectable_single_table_cell: $ => gen_single_rangeable_detached_modifier($, "table_cell", false),
+        _non_infectable_multi_table_cell: $ => gen_multi_rangeable_detached_modifier($, "table_cell", false),
 
         // A table
         table: $ =>
@@ -811,7 +913,8 @@ module.exports = grammar({
 
         macro_tag_end: $ => gen_ranged_tag_end($, "macro"),
 
-        macro_tag: $ => gen_ranged_tag($, "macro_tag"),
+        macro_tag: $ => gen_ranged_tag($, "macro_tag", true),
+        _non_infectable_macro_tag: $ => gen_ranged_tag($, "macro_tag", false),
 
         ranged_tag_content: $ =>
         prec.right(0,
@@ -832,7 +935,8 @@ module.exports = grammar({
 
         ranged_tag_end: $ => gen_ranged_tag_end($, "ranged"),
 
-        ranged_tag: $ => gen_ranged_tag($, "ranged_tag"),
+        ranged_tag: $ => gen_ranged_tag($, "ranged_tag", true),
+        _non_infectable_ranged_tag: $ => gen_ranged_tag($, "ranged_tag", false),
 
         ranged_verbatim_tag_content: $ =>
         prec.right(0,
@@ -851,7 +955,8 @@ module.exports = grammar({
 
         ranged_verbatim_tag_end: $ => gen_ranged_tag_end($, "ranged_verbatim"),
 
-        ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim_tag"),
+        ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim_tag", true),
+        _non_infectable_ranged_verbatim_tag: $ => gen_ranged_tag($, "ranged_verbatim_tag", false),
 
         weak_carryover_set: $ =>
         repeat1(
@@ -867,7 +972,16 @@ module.exports = grammar({
 
         strong_carryover: $ => gen_single_tag($, "strong_carryover"),
 
-        infirm_tag: $ => gen_single_tag($, "infirm_tag"),
+        _non_infectable_infirm_tag: $ => gen_single_tag($, "infirm_tag"),
+        infirm_tag: $ => prec.right(0,
+            seq(
+                optional($.strong_carryover_set),
+
+                optional($.weak_carryover_set),
+
+                $._non_infectable_infirm_tag,
+            ),
+        ),
 
         tag_name: $ =>
         seq(
@@ -913,15 +1027,55 @@ module.exports = grammar({
             $.ranged_verbatim_tag,
         ),
 
-        slide: $ => seq(
-            alias($.slide_begin, "_slide"),
-            choice(
-                $.tag,
-                $.rangeable_detached_modifier,
-                // TODO: Add nestable detached modifiers
-                // Currently they cause the parser to become absolutely massive.
-            ),
+        _non_infectable_tag: $ =>
+        choice(
+            alias($._non_infectable_infirm_tag, $.infirm_tag),
+            alias($._non_infectable_macro_tag, $.macro_tag),
+            alias($._non_infectable_ranged_tag, $.ranged_tag),
+            alias($._non_infectable_ranged_verbatim_tag, $.ranged_verbatim_tag),
         ),
+
+        slide1: $ => gen_slide($, 1, "_slide_contents"),
+        slide2: $ => gen_slide($, 2, "_slide_contents"),
+        slide3: $ => gen_slide($, 3, "_slide_contents"),
+        slide4: $ => gen_slide($, 4, "_slide_contents"),
+        slide5: $ => gen_slide($, 5, "_slide_contents"),
+        slide6: $ => gen_slide($, 6, "_slide_contents"),
+
+        _slide_contents1: $ => gen_slide_contents($, 1, true, true),
+        _slide_contents2: $ => gen_slide_contents($, 2, true, true),
+        _slide_contents3: $ => gen_slide_contents($, 3, true, true),
+        _slide_contents4: $ => gen_slide_contents($, 4, true, true),
+        _slide_contents5: $ => gen_slide_contents($, 5, true, true),
+        _slide_contents6: $ => gen_slide_contents($, 6, true, true),
+
+        _slide_quote1: $ => gen_slide($, 1, "_slide_contents_quote"),
+        _slide_quote2: $ => gen_slide($, 2, "_slide_contents_quote"),
+        _slide_quote3: $ => gen_slide($, 3, "_slide_contents_quote"),
+        _slide_quote4: $ => gen_slide($, 4, "_slide_contents_quote"),
+        _slide_quote5: $ => gen_slide($, 5, "_slide_contents_quote"),
+        _slide_quote6: $ => gen_slide($, 6, "_slide_contents_quote"),
+
+        _slide_contents_quote1: $ => gen_slide_contents($, 1, false, true),
+        _slide_contents_quote2: $ => gen_slide_contents($, 2, false, true),
+        _slide_contents_quote3: $ => gen_slide_contents($, 3, false, true),
+        _slide_contents_quote4: $ => gen_slide_contents($, 4, false, true),
+        _slide_contents_quote5: $ => gen_slide_contents($, 5, false, true),
+        _slide_contents_quote6: $ => gen_slide_contents($, 6, false, true),
+
+        _slide_anylist1: $ => gen_slide($, 1, "_slide_contents_anylist"),
+        _slide_anylist2: $ => gen_slide($, 2, "_slide_contents_anylist"),
+        _slide_anylist3: $ => gen_slide($, 3, "_slide_contents_anylist"),
+        _slide_anylist4: $ => gen_slide($, 4, "_slide_contents_anylist"),
+        _slide_anylist5: $ => gen_slide($, 5, "_slide_contents_anylist"),
+        _slide_anylist6: $ => gen_slide($, 6, "_slide_contents_anylist"),
+
+        _slide_contents_anylist1: $ => gen_slide_contents($, 1, true, false),
+        _slide_contents_anylist2: $ => gen_slide_contents($, 2, true, false),
+        _slide_contents_anylist3: $ => gen_slide_contents($, 3, true, false),
+        _slide_contents_anylist4: $ => gen_slide_contents($, 4, true, false),
+        _slide_contents_anylist5: $ => gen_slide_contents($, 5, true, false),
+        _slide_contents_anylist6: $ => gen_slide_contents($, 6, true, false),
 
         indent_segment1: $ => gen_indent_segment($, 1),
         indent_segment2: $ => gen_indent_segment($, 2),
@@ -960,6 +1114,17 @@ module.exports = grammar({
         choice(
             $.definition_list,
             $.footnote_list,
+            $.table,
+        ),
+
+        _non_infectable_rangeable_detached_modifier: $ =>
+        choice(
+            alias($._non_infectable_single_table_cell, $.single_table_cell),
+            alias($._non_infectable_multi_table_cell, $.multi_table_cell),
+            alias($._non_infectable_single_definition, $.single_definition),
+            alias($._non_infectable_multi_definition, $.multi_definition),
+            alias($._non_infectable_single_footnote, $.single_footnote),
+            alias($._non_infectable_multi_footnote, $.multi_footnote),
         ),
 
         attached_modifier: $ =>
@@ -999,12 +1164,16 @@ function gen_single_tag($, kind) {
     );
 }
 
-function gen_ranged_tag($, kind) {
+function gen_ranged_tag($, kind, infectable) {
+    carryover_sets = [];
+    if (infectable) {
+        carryover_sets[0] = optional($.strong_carryover_set);
+        carryover_sets[1] = optional($.weak_carryover_set);
+    }
+
     return prec.right(0,
         seq(
-            optional($.strong_carryover_set),
-
-            optional($.weak_carryover_set),
+            ...carryover_sets,
 
             gen_single_tag($, kind),
 
@@ -1034,9 +1203,14 @@ function gen_ranged_tag_end($, kind) {
     );
 }
 
-function gen_detached_modifier($, prefix, ...rest) {
+function gen_detached_modifier($, prefix, infectable, ...rest) {
+    carryover_sets = [];
+    if (infectable) {
+        carryover_sets[0] = optional($.weak_carryover_set);
+    }
+
     return seq(
-        optional($.weak_carryover_set),
+        ...carryover_sets,
 
         prefix,
 
@@ -1066,7 +1240,9 @@ function gen_heading($, level) {
 
                 $["heading" + level + "_prefix"],
 
-                indent_segment_or($, 1,
+                true,  // infectable
+
+                indent_segment_or($, 1, true, "slide",
                     field(
                         "title",
                         $.paragraph_segment,
@@ -1085,7 +1261,6 @@ function gen_heading($, level) {
                             alias($.paragraph_break, "_paragraph_break"),
                             $.nestable_detached_modifier,
                             $.rangeable_detached_modifier,
-                            $.table,
                             $.tag,
                             $.horizontal_line,
 
@@ -1102,24 +1277,42 @@ function gen_heading($, level) {
     );
 }
 
-function gen_any_list_item($, level) {
-    if (level == 6) {
+function gen_any_list_item($, level, infectable) {
+    if (infectable) {
+        if (level == 6) {
+            return choice(
+                $["unordered_list" + level],
+                $["ordered_list" + level],
+            );
+        }
         return choice(
             $["unordered_list" + level],
             $["ordered_list" + level],
+            $["_any_list_item_level_" + (level + 1)],
+        );
+    } else {
+        if (level == 6) {
+            return choice(
+                alias($["_non_infectable_unordered_list" + level], $["unordered_list" + level]),
+                alias($["_non_infectable_ordered_list" + level], $["ordered_list" + level]),
+            );
+        }
+        return choice(
+            alias($["_non_infectable_unordered_list" + level], $["unordered_list" + level]),
+            alias($["_non_infectable_ordered_list" + level], $["ordered_list" + level]),
+            // NOTE: adding the following is basically impossible within a
+            // reasonable parser size...
+            // $["_non_infectable_any_list_item_level_" + level],
         );
     }
-    return choice(
-        $["unordered_list" + level],
-        $["ordered_list" + level],
-        $["_any_list_item_level_" + (level + 1)],
-    );
 }
 
-function gen_generic_list_item($, kind, level) {
+function gen_generic_list_item($, kind, level, infectable) {
     lower_level_list_items = [];
     if (level < 6) {
-        lower_level_list_items[0] = $["_any_list_item_level_" + (level + 1)]
+        if (infectable) {
+            lower_level_list_items[0] = $["_any_list_item_level_" + (level + 1)]
+        }
     }
 
     return gen_detached_modifier(
@@ -1127,7 +1320,9 @@ function gen_generic_list_item($, kind, level) {
 
         $[kind + "_list" + level + "_prefix"],
 
-        indent_segment_or($, level, field(
+        infectable,
+
+        indent_segment_or($, level, infectable, "_slide_anylist", field(
             "content",
             alias($._non_infectable_paragraph, $.paragraph),
         )),
@@ -1140,11 +1335,13 @@ function gen_generic_list_item($, kind, level) {
     );
 }
 
-function gen_quote($, level) {
+function gen_quote($, level, infectable) {
     lower_level_quotes = [];
 
     for (let i = 0; i + level < 6; i++) {
-        lower_level_quotes[i] = $["quote" + (i + 1 + level)]
+        if (infectable) {
+            lower_level_quotes[i] = $["quote" + (i + 1 + level)]
+        }
     }
 
     return gen_detached_modifier(
@@ -1152,7 +1349,9 @@ function gen_quote($, level) {
 
         $["quote" + level + "_prefix"],
 
-        indent_segment_or($, level, field(
+        infectable,
+
+        indent_segment_or($, level, infectable, "_slide_quote", field(
             "content",
             alias($._non_infectable_paragraph, $.paragraph),
         )),
@@ -1193,13 +1392,15 @@ function gen_attached_modifier($, kind, verbatim) {
     );
 }
 
-function gen_single_rangeable_detached_modifier($, kind) {
+function gen_single_rangeable_detached_modifier($, kind, infectable) {
     return gen_detached_modifier(
         $,
 
         $["single_" + kind + "_prefix"],
 
-        indent_segment_or($, 1, field(
+        infectable,
+
+        indent_segment_or($, 1, infectable, "slide", field(
             "title",
             $.paragraph_segment,
         )),
@@ -1219,13 +1420,15 @@ function gen_single_rangeable_detached_modifier($, kind) {
     );
 }
 
-function gen_multi_rangeable_detached_modifier($, kind, include_strong) {
+function gen_multi_rangeable_detached_modifier($, kind, infectable) {
     return gen_detached_modifier(
         $,
 
         $["multi_" + kind + "_prefix"],
 
-        indent_segment_or($, 1, field(
+        infectable,
+
+        indent_segment_or($, 1, infectable, "slide", field(
             "title",
             $.paragraph_segment,
         )),
@@ -1244,7 +1447,6 @@ function gen_multi_rangeable_detached_modifier($, kind, include_strong) {
                     prec(1, alias($.line_break, "_line_break")),
                     alias($.paragraph_break, "_paragraph_break"),
                     $.rangeable_detached_modifier,
-                    $.table,
                     $.tag,
                 ),
             ),
@@ -1269,7 +1471,6 @@ function gen_indent_segment_contents($, level) {
         return prec(1,
             choice(
                 $.rangeable_detached_modifier,
-                $.table,
                 $.tag,
                 ...numbered_items.map(item => $[item + (level + 1)]),
             ),
@@ -1278,7 +1479,6 @@ function gen_indent_segment_contents($, level) {
         return prec(1,
             choice(
                 $.rangeable_detached_modifier,
-                $.table,
                 $.tag
             ),
         );
@@ -1308,10 +1508,54 @@ function gen_indent_segment($, level) {
     ));
 }
 
-function indent_segment_or($, level, ...other) {
-    return choice(
-        $["indent_segment" + (level ? level : 1)],
-        $.slide,
-        seq(...other),
+function gen_slide($, level, slide_name) {
+    return seq(
+        alias($.slide_begin, "_slide"),
+        $[slide_name + level],
     );
+}
+
+function gen_slide_contents($, level, include_quote, include_anylist) {
+    numbered_items = []
+    if (level < 6) {
+        if (include_quote) {
+            numbered_items[0] = alias($["_non_infectable_quote" + level], $["quote" + level])
+            if (include_anylist) {
+                numbered_items[1] = alias($["_non_infectable_any_list_item_level_" + level], $["any_list_item_level_" + level])
+            }
+        } else {
+            if (include_anylist) {
+                numbered_items[0] = alias($["_non_infectable_any_list_item_level_" + level], $["any_list_item_level_" + level])
+            }
+        }
+    }
+
+    if (level < 6) {
+        return prec(1,
+            choice(
+                $._non_infectable_tag,
+                $._non_infectable_rangeable_detached_modifier,
+                ...numbered_items,
+            ),
+        );
+    } else {
+        return prec(1,
+            choice(
+                $._non_infectable_tag,
+                $._non_infectable_rangeable_detached_modifier,
+            ),
+        );
+    }
+}
+
+function indent_segment_or($, level, infectable, slide_name, ...other) {
+    if (infectable)
+    {
+        return choice(
+            $["indent_segment" + (level ? level : 1)],
+            alias($[slide_name + (level ? level : 1)], $["slide" + (level ? level : 1)]),
+            seq(...other),
+        );
+    }
+        return seq(...other);
 }
