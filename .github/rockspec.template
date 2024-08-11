@@ -20,6 +20,10 @@ dependencies = $dependencies
 
 test_dependencies = $test_dependencies
 
+build_dependencies = {
+  'luarocks-build-treesitter-parser-cpp',
+}
+
 source = {
   url = repo_url .. '/archive/' .. git_ref .. '.zip',
   dir = '$repo_name-' .. '$archive_dir_suffix',
@@ -32,7 +36,7 @@ if modrev == 'scm' or modrev == 'dev' then
 end
 
 build = {
-  type = "treesitter-parser",
+  type = "treesitter-parser-cpp",
   lang = "norg",
   sources = { "src/parser.c", "src/scanner.cc" },
   copy_directories = $copy_directories,

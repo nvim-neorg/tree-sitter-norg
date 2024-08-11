@@ -6,6 +6,7 @@ Cargo.lock
 package-lock.json
 yarn.lock
 *.log
-result/
+result*
 *.wasm
 *.o
+.direnv
