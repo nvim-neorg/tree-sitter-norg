@@ -1,31 +1,48 @@
 {
+  description = "tree-sitter parser for Neorg";
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
-    let
-      defaultPackage = pkgs: pkgs.callPackage (nixpkgs + "/pkgs/development/tools/parsing/tree-sitter/grammar.nix") { } {
-        language = "norg";
-        source = ./.;
-        inherit (pkgs.tree-sitter) version;
+
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = [
+        "x86_64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+      perSystem = {system, ...}: let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            self.overlays.default
+          ];
+        };
+      in {
+        devShells.default = pkgs.mkShell {
+          name = "tree-sitter-norg devShell";
+          buildInputs = with pkgs;
+          with pkgs; [
+            nil
+            alejandra
+            clang
+            tree-sitter
+          ];
+        };
+        packages = rec {
+          default = tree-sitter-norg;
+          inherit (pkgs.lua51Packages) tree-sitter-norg;
+        };
       };
-    in
-    (flake-utils.lib.eachDefaultSystem
-      (system:
-        let pkgs = import nixpkgs { inherit system; }; in
-        {
-          defaultPackage = defaultPackage pkgs;
-          devShell = pkgs.mkShell {
-            nativeBuildInputs = with pkgs; [
-              nodejs
-              nodePackages.node-gyp
-              tree-sitter
-            ];
-          };
-        })) // (let pkgs = import nixpkgs { }; in { defaultPackage = defaultPackage pkgs; });
+      flake = {
+        overlays.default = import ./nix/overlay.nix {inherit self;};
+      };
+    };
 }

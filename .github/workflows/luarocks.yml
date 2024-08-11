@@ -1,10 +1,10 @@
 name: Push to Luarocks
 
 on:
+  release:
+    types:
+      - created
   push:
-    release:
-      types:
-        - created
     tags:
       - '*'
   workflow_dispatch:
@@ -28,11 +28,11 @@ jobs:
           luaVersion: "5.1"
       - name: Install Luarocks
         uses: hishamhm/gh-actions-luarocks@master
-      - name: Install `luarocks-build-treesitter-parser` Package
+      - name: Install `luarocks-build-treesitter-parser-cpp` Package
         run: |
-          luarocks --verbose --local --lua-version=5.1 install luarocks-build-treesitter-parser
+          luarocks --verbose --local --lua-version=5.1 install luarocks-build-treesitter-parser-cpp
       - name: LuaRocks Upload
-        uses: nvim-neorocks/luarocks-tag-release@v5
+        uses: nvim-neorocks/luarocks-tag-release@v7
         env:
           LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
         with:
