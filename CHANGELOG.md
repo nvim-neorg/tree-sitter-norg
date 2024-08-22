@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.6](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.5...v0.2.6) (2024-08-22)
+
+
+### Bug Fixes
+
+* supply `CXX` variable properly ([1aab69c](https://github.com/nvim-neorg/tree-sitter-norg/commit/1aab69c95bd9d5e7c0e172ecbe5d29bcf5834612))
+
 ## [0.2.5](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.4...v0.2.5) (2024-08-22)
 
 
