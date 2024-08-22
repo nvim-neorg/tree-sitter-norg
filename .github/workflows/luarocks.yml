@@ -35,6 +35,7 @@ jobs:
         uses: nvim-neorocks/luarocks-tag-release@v7
         env:
           LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
+          CXX: "clang++"
         with:
           name: tree-sitter-norg
           version: ${{ env.LUAROCKS_VERSION }}
