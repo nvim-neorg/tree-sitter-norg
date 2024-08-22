@@ -25,7 +25,7 @@ source = {
 }
 
 build = {
-  type = "treesitter-parser",
+  type = "treesitter-parser-cpp",
   lang = "norg",
   sources = { "src/parser.c", "src/scanner.cc" },
 }
