@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.5](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.4...v0.2.5) (2024-08-22)
+
+
+### Bug Fixes
+
+* use luarocks-build-treesitter-parser-cpp build backend ([2cdc4db](https://github.com/nvim-neorg/tree-sitter-norg/commit/2cdc4db1d29a992345b4525f880531ab8f1d5981))
+
 ## [0.2.4](https://github.com/nvim-neorg/tree-sitter-norg/compare/v0.2.3...v0.2.4) (2024-04-19)
 
 
