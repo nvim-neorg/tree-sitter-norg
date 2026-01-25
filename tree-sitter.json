@@ -1,0 +1,41 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "norg",
+      "camelcase": "norg",
+      "title": "Norg",
+      "scope": "source.norg",
+      "file-types": [
+        "norg"
+      ],
+      "injection-regex": "^norg$",
+      "class-name": "TreeSitterNorg",
+      "external-files": [
+          "src/scanner.cc"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.2.6",
+    "license": "MIT",
+    "description": "Norg grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "nvim-neorg"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/nvim-neorg/tree-sitter-norrg"
+    }
+  },
+  "bindings": {
+    "c": false,
+    "go": false,
+    "node": true,
+    "python": false,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
