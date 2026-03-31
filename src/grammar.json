@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "norg",
   "rules": {
     "document": {
@@ -8251,6 +8252,6 @@
     "_any_list_item_level_5",
     "_any_list_item_level_6"
   ],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }
-

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "norg",
+      "camelcase": "Norg",
+      "title": "Norg",
+      "scope": "source.norg",
+      "file-types": [
+        "norg"
+      ],
+      "injection-regex": "^norg$",
+      "class-name": "TreeSitterNorg"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Norg grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "vhyrro",
+        "email": "vhyrro@gmail.com",
+        "url": "https://vhyrro.neorg.org/"
+      },
+      {
+        "name": "mrossinek",
+        "email": "max.rossmannek@uzh.ch",
+        "url": "http://max.rossmannek.com/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/nvim-neorg/tree-sitter-norg"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
