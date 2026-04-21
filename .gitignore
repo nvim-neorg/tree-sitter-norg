@@ -10,3 +10,4 @@ result*
 *.wasm
 *.o
 .direnv
+test.norg
