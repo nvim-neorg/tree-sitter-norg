@@ -26,4 +26,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: tree-sitter/setup-action@v2
-      - uses: tree-sitter/parser-test-action@v2
+      - run: |
+          tree-sitter generate
+          tree-sitter test
