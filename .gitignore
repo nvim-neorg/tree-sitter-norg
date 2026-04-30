@@ -9,4 +9,5 @@ yarn.lock
 result*
 *.wasm
 *.o
+*.so
 .direnv
