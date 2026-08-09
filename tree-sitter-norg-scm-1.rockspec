@@ -19,11 +19,11 @@ dependencies = {
 }
 
 build_dependencies = {
-  "luarocks-build-treesitter-parser-cpp ~> 2",
+  "luarocks-build-treesitter-parser ~> 6",
 }
 
 build = {
-  type = "treesitter-parser-cpp",
+  type = "treesitter-parser-c",
   lang = "norg",
-  sources = { "src/parser.c", "src/scanner.cc" },
+  sources = { "src/parser.c", "src/scanner.c" },
 }

@@ -26,10 +26,10 @@ let package = Package(
                 ],
                 sources: [
                     "src/parser.c",
-                    "src/scanner.cc"
+                    "src/scanner.c"
                 ],
                 publicHeadersPath: "bindings/swift",
                 cSettings: [.headerSearchPath("src")]),
     ],
-    cxxLanguageStandard: .cxx14
+    CLanguageStandard: .c99
 )
